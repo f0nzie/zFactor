@@ -467,16 +467,25 @@ z <- c(
 mx <- matrix(z, nrow = 4, ncol = 7, byrow = TRUE)
 rownames(mx) <- tpr
 colnames(mx) <- ppr
-mx
+print(mx)
+
+library(ggplot2)
+plot(x = ppr, y = mx[1,], type = "l", main = "z SK @ Tpr = 1.3", ylab = "z")
+lines(x = ppr, y = tbl[1,], col = "red")
+plot(x = ppr, y = mx[2,], type = "l", main = "z SK @ Tpr = 1.5", ylab = "z")
+lines(x = ppr, y = tbl[2,], col = "red")
+plot(x = ppr, y = mx[3,], type = "l", main = "z SK @ Tpr = 1.7", ylab = "z")
+lines(x = ppr, y = tbl[3,], col = "red")
+plot(x = ppr, y = mx[4,], type = "l", main = "z SK @ Tpr = 2.0", ylab = "z")
+lines(x = ppr, y = tbl[4,], col = "red")
 ```
 
 We will compare the two tables:
 
 ```{r}
-(tbl - mx) / tbl
+# calculate the error in percentage
+(tbl - mx) / tbl * 100
 ```
-
-
 
 
 
