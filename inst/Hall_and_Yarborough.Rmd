@@ -470,6 +470,11 @@ colnames(mx) <- ppr
 mx
 ```
 
+We will compare the two tables:
+
+```{r}
+(tbl - mx) / tbl
+```
 
 
 
