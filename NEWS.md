@@ -1,3 +1,6 @@
+## 20171413, 0.0.0.9006
+* add comparison plots between Hall-Yarborough and values read from Standing-Katz charts.
+
 ## 20171413, 0.0.0.9005
 * 9004 aborted. will try again wih 9005.
 
