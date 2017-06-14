@@ -1,0 +1,277 @@
+---
+title: "friction factor"
+output: html_notebook
+---
+
+```{r setup, include=F, error=T, message=F, warning=F}
+knitr::opts_chunk$set(echo=T, comment=NA, error=T, warning=F, message = F, fig.align = 'center')
+```
+
+```{r}
+# source("moody.R")
+library(rNodal)
+
+# calculate `f` for various Reynolds numbers
+re <- c(5000, 10000, 50000, 100000, 500000)
+sapply(re, rNodal:::friction.factor, ED = 0.005, f1 = rNodal:::blasius.0)
+```
+
+```{r}
+# THis chunk giving error. REVISE!
+# calculate `f` for various Reynolds numbers
+re <- c(5000, 10000, 50000, 100000, 500000)
+sapply(re, function(x) rNodal:::friction.factor(x, ED = 0.002))
+```
+
+
+```{r}
+# calculate `f` for various relative roughness values
+ed <- c(0.05, 0.03, 0.01, 0.005, 0.002)
+sapply(ed, rNodal:::friction.factor, REY = 1E5, f1 = rNodal:::blasius.0)
+
+```
+
+```{r}
+# calculate `f` for various Blasius equations
+blasius <- list(bla0 = rNodal:::blasius.0, 
+                bla1 = rNodal:::blasius.1, 
+                bla2 = rNodal:::blasius.2)
+
+sapply(blasius, rNodal:::friction.factor, REY = 1E5, ED = 0.005)
+
+```
+
+
+
+```{r}
+# using apply
+
+# http://stackoverflow.com/questions/17685866/apply-function-using-multiple-changing-arguments-in-r
+
+myfunc <- function(var1, var2, var3){
+  result <- var1*var2*var3
+  return(result)
+}
+
+data <-data.frame(a=c(1,2,3), b=c(4,5,6),c= c(7,8,9))
+apply(data, 1, function(x, y, z) myfunc(data$a, data$b, data$c))
+
+```
+
+```{r}
+# using a list and sapply
+myfunc <- function(var1, var2, var3){
+  result <- var1*var2*var3
+  return(result)
+}
+
+data <- list(a=c(1,2,3), b=c(4,5,6),c= c(7,8,9))
+sapply(data, function(x, y, z) myfunc(data$a, data$b, data$c))
+
+```
+
+```{r}
+a<- 1:5
+b<-sapply(a, function(x) 
+    sapply(a, function(y) x+y))
+b
+```
+
+```{r}
+sapply(a, identity)
+
+sapply(a, function(x) a)
+sapply(a, function(x) c(a, a*a))
+sapply(a, function(x) a*a)
+```
+
+
+```{r}
+foo <- function(bar) { return( 2 + bar ) }
+foo2 <- function(bar) { return( 2 * bar ) }
+df <- data.frame(c('foo', 'foo2'), stringsAsFactors = FALSE)
+
+do.call(df[1, 1], list(4))
+do.call(df[2, 1], list(4))
+```
+
+## Reading from a dataframe
+
+```{r}
+# source("moody.R")
+
+ed <- c(0.05, 0.03, 0.01, 0.005, 0.002)
+re <- c(5000, 10000, 50000, 100000, 500000)
+
+# calculate `f` for various Blasius equations
+blasius <- list(bla0 = rNodal:::blasius.0, 
+                bla1 = rNodal:::blasius.1, 
+                bla2 = rNodal:::blasius.2)
+
+#blasius <- c(blasius.0, blasius.1, blasius.2, blasius.0, blasius.1)
+blasius <- list(rNodal:::blasius.0, 
+                rNodal:::blasius.1, 
+                rNodal:::blasius.2, 
+                rNodal:::blasius.0, 
+                rNodal:::blasius.1)
+
+# data <- list(re = re, ed = ed, fun = blasius)
+data <- data.frame(re = re, ed = ed)
+sapply(data, function(x) 
+    sapply(data$re, function(y) rNodal:::friction.factor(y, ED=0.005, 
+                                                  f1 = rNodal:::blasius.0)$FF))
+```
+
+```{r}
+ed <- c(0.05, 0.03, 0.01, 0.005, 0.002)
+re <- c(5000, 10000, 50000, 100000, 500000)
+blasius <- list(rNodal:::blasius.0, 
+                rNodal:::blasius.1, 
+                rNodal:::blasius.2, 
+                rNodal:::blasius.0, 
+                rNodal:::blasius.1)
+
+mapply(rNodal:::friction.factor, re, ed, blasius)
+# this will not work as intended because is not nested
+# only the first values of each vector will be taken
+```
+
+```{r}
+# nested sapply
+cols <- 1:4
+rows <- 1:10
+sapply(cols, function(x) sapply(rows, function(y) y))
+```
+
+```{r}
+re <- c(5000, 10000, 50000, 100000, 500000)
+sapply(re, function(x) rNodal:::friction.factor(x, ED = 0.005))
+```
+
+```{r}
+################################### this gives ERROR
+# the condition has length > 1 and only the first element will be used
+re <- c(5000, 10000, 50000, 100000, 500000)
+sapply(re, function(x, y) rNodal:::friction.factor(x, y), y = c(0.005, 0.002))
+```
+
+
+```{r}
+# nested `sapply`. find FRiction Factors for different combinations
+# of Reynolds and Relative Roughness
+# source("moody.R")
+
+re <- c(5000, 10000, 50000, 100000, 500000)
+ed <- c(0.1, 0.01, 0.005, 0.002)
+
+# Reynolds as columns
+# Relative Roughness as rows
+res <- sapply(re, function(x) 
+  sapply(ed, function(y) rNodal:::friction.factor(x, y)$FF))
+
+rownames(res) <- as.character(ed)
+colnames(res) <- as.character(re)
+res
+```
+
+### friction.factor returns a list
+
+```{r}
+# The friction_factor function returns 3 values:
+#   fgi: initial guess 
+#   FF: friction factor
+#   iter: number of iterations run
+rNodal:::friction.factor(REY = 5000, f1 = rNodal:::blasius.0, ED = 0.005)
+```
+
+## Friction factors for different Blasius equations and Reynolds
+
+If we are looking only for the friction factor:
+
+```{r}
+# Get only the friction factor
+rNodal:::friction.factor(REY = 5000, f1 = rNodal:::blasius.0, ED = 0.005)$FF
+```
+
+
+```{r}
+# Friction factors for different Blasius equations and Reynolds
+
+blasius <- list(bla0 = rNodal:::blasius.0, 
+                bla1 = rNodal:::blasius.1, 
+                bla2 = rNodal:::blasius.2)
+re <- c(5000, 10000, 50000, 100000, 500000)
+
+# Reynolds as columns
+# Relative Roughness as rows
+# get only the friction factor
+res <- sapply(blasius, function(x) 
+  sapply(re, function(y) rNodal:::friction.factor(y, ED = 0.005, x)$FF)) # get only FF
+
+rownames(res) <- as.character(re)  # error
+res
+```
+
+### Nested `sapply` to find best initial guess
+
+```{r}
+# Sets of Friction Factors for different values of:
+  # Blasius equation
+  # Reynolds number
+  # Relative Roughness
+
+
+blasius <- list(bla0 = rNodal:::blasius.0, 
+                bla1 = rNodal:::blasius.1, 
+                bla2 = rNodal:::blasius.2)
+re <- c(5000, 10000, 50000, 100000, 500000)
+ed <- c(0.01, 0.005, 0.002)
+
+# Reynolds as columns
+# Relative Roughness as rows
+lapply(blasius, function(x) 
+  sapply(re, function(y) 
+    sapply(ed, function(z) rNodal:::friction.factor(y, z, x)$iter)))
+
+```
+
+The third `Blasius` equation takes less iterations.
+
+
+```{r}
+# source("moody.R")
+rNodal:::moody.ff(5000, 0.005)
+```
+
+
+
+
+### Matrix table with nested sapply
+
+Get the relative roughness at various Reynolds right first.
+
+```{r}
+# source("moody.R")
+re <- c(5000, 10000, 50000, 100000, 500000)
+
+sapply(re, function(x) rNodal:::moody.ff(x, ed = 0.005))
+# [1] 0.04261593 0.03761856 0.03214568 0.03127366 0.03052475
+```
+
+Make the nested sapply:
+
+```{r}
+# source("moody.R")
+# table of Reynolds vs. Relative Roughness
+
+re <- c(2000, 7000, 10000, 50000, 100000, 500000)                  # Reynolds values
+ed <- c(0.05, 0.04, 0.03, 0.02, 0.015, 0.01, 0.005, 0.002, 0.001)  # Relative roughness
+
+res <- sapply(re, function(x) 
+  sapply(ed, function(y) rNodal:::moody.ff(x, y)))   # res is a matrix
+
+rownames(res) <- as.character(ed)    # row names
+colnames(res) <- as.character(re)    # column names
+res
+```
+

@@ -1,0 +1,11 @@
+Package: zFactor
+Type: Package
+Title: Calculate the compressibility factor, Z, for hydrocarbons
+Version: 0.0.0.9004
+Author: Alfonso R. Reyes <alfonso.reyes@oilgainsanalytics.com>
+Maintainer: Alfonso R. Reyes <alfonso.reyes@oilgainsanalytics.com>
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+License: GPL-2
+Encoding: UTF-8
+LazyData: true

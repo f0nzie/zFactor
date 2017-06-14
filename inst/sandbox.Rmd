@@ -1,0 +1,22 @@
+---
+title: "sandbox"
+output: html_notebook
+---
+
+
+
+
+## Making a function work with multiple variable parameters
+
+```{r}
+fMulti <- function(a, b, c, d) {
+    if (missing(d)) {
+        d <- 1
+        e <- a * b *c
+        print(match.call())
+    }
+    return(e)
+}
+
+fMulti(1,2,3)
+```

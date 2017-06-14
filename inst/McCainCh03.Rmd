@@ -1,0 +1,50 @@
+---
+title: "McCain Ch 03"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Example 3-4
+Calculate the aparent molecular weight of air given the components and mole fraction of each.
+
+```{r}
+load(file = "../data/mc-ch3.rda")
+names(ex35)
+ex34["Ma"] <- ex34["mole_fraction"] * ex34["molecular_weight"]
+M.a <- sum(ex34["Ma"])
+print(M.a)
+```
+
+
+
+
+## Example 3-5
+Calculate the specific gravity of a gas of the following composition:
+
+```{r}
+load(file = "../data/mc-ch3.rda")
+```
+
+
+
+![](./images/eq_3-35_MC103.jpg)
+
+### Calculate the aparent molecular weight
+
+Using equation 3-35.
+
+```{r}
+names(ex35)
+ex35["Ma"] <- ex35["mole_fraction"] * ex35["molecular_weight"]
+M.a <- sum(ex35["Ma"])
+```
+
+```{r}
+M.air <- 29
+gas.sg <- M.a / M.air
+print(gas.sg)
+```
+

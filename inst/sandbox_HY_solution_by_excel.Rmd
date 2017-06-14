@@ -1,0 +1,11 @@
+---
+title: "HY solution by Excel"
+output: html_notebook
+---
+
+Link to spreadsheet: https://www.scribd.com/document/167889265/Hall-Yarborough-Z
+
+This spreadsheet was downloaded from Scribd.
+It shows numbers very close to Standing and Katz chart. 
+
+![](./images/HY_solution_by_excel_scribd.jpg)

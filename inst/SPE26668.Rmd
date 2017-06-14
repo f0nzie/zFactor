@@ -1,0 +1,25 @@
+---
+title: "Calculating compressibility factor"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+DAK: Dranchuk and Abou-Kassem representation of SK chart\
+SK: Standing and Katz chart\
+KSCP: Kay's pseudocritical point\
+SBV: Stewart, Burkhardt and Voo\
+
+> Kay's rules: if composition of gas is known.
+
+## Sutton method
+Calculate $P_{pc}$ and $T_{pc}$ when composition is known, based on SBV equations.
+
+Sutton's **gas specific gravity** correlation for estimating $P_{pc}$ and $T_{pc}$ when composition is known, based on 634 composition for 275 PVT reports.
+
+## Kay's mixture rules
+For multicomponent mixtures.
+
+![](./images/kays_mixture_rules-MC111.jpg)

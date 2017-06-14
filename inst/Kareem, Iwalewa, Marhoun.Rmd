@@ -1,0 +1,18 @@
+---
+title: "Kareem, Iwalewa, Marhoun"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+![](./images/eq_3_LIM482.jpg)
+
+
+
+
+
+![](./images/eq_5_6_LIM482.jpg)
+
+
