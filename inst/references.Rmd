@@ -1,6 +1,9 @@
 ---
 title: "References"
-output: html_notebook
+output:
+  html_document: default
+  html_notebook: default
+bibliography: bibliography.bib  
 ---
 
 
@@ -10,6 +13,12 @@ output: html_notebook
 
 ![](./images/ranges_applicability_correlations.jpg)
 
+[@Encyclopedia2001, pp. 10]
+
+
+### Crossplot of measured and calculated z-factor
+[see @Elsharkawy2001, pp. 727]
+![](./images/plot_measured_calculated_zfactor.jpg)
 
 
 
