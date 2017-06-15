@@ -1,7 +1,14 @@
-# Sources
+---
+title: "Sources"
+output:
+  html_document: default
+  html_notebook: default
+bibliography: bibliography.bib    
+---
 
 ## Encyclopedia of Chemical Engineering
-* Encyclopedia of Chemical Processing and Design: Volume 68 - Z-Factor (Gas ...
+* Encyclopedia of Chemical Processing and Design: Volume 68 - Z-Factor
+[see @Encyclopedia2001, pp. 10]
 
 ![](./images/encyclopedia_chemical_processing_and_design_68.jpg)
 
@@ -10,4 +17,3 @@
 ![](./images/references_in_encyclopedia.jpg)
 
 
-![](./images/ranges_applicability_correlations.jpg)
