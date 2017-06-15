@@ -1,13 +1,25 @@
 ---
 title: "Dranchuk-Purvis-Robinson"
-output: html_notebook
+output:
+  html_document: default
+  html_notebook: default
 ---
+
+```{r setup, include=F, error=T, message=F, warning=F}
+knitr::opts_chunk$set(echo=T, comment=NA, error=T, warning=F, message = F, fig.align = 'center')
+```
+
+The correlation was put in comptational form using two sources: the book "Equations of State and PVT Analysis" by Tarek Ahmed and the paper "New explicit correlation for the compressibility factor of natural gas" by Kareem, Iwalewa and Al-Marhoun.
+
+We found an error in the constants in one of the sources and use the other one to reconstruct the right equation. Errors are found by comparing the results against the original data points in the Standing-Katz chart (1500 points). Usually errors are evident because the equation will not converge, give infinite values or results are just way off the real z values.
+
+![](./images/DPR_error_constants_tarek_ahmed.jpg)
 
 ```{r}
 # Dranchuk, Purvis, and Robinson (1974) developed a correlation based on the 
 # Benedict-Webb-Rubin type of equation of state. Fitting the equation to 1500 
 # data points from the Standing and Katz Z-factor chart optimized the eight 
-# coefficients of the proposed equations. 
+# coefficients of the proposed equations. From Traker Ahmed's book.
 
 pres.pr <- 6.5
 temp.pr <- 1.3
