@@ -3,34 +3,6 @@ title: "Read digitized data"
 output: html_notebook
 ---
 
-```{r}
-isNear <- function(n) abs(n - round(n, 1)) < 0.01
-```
-
-
-```{r}
-save <- TRUE
-dfile <- "tpr_105.txt"
-    .tpr <- tools::file_path_sans_ext(dfile)
-    data_file <- paste("../inst/extdata", dfile, sep = "/")
-    assign(.tpr, read.table(data_file, header = TRUE))  # name same as file name
-    tpr <- get(.tpr) 
-    colnames(tpr)<- c("Ppr", "z")
-        tpr <- tpr[order(tpr$Ppr),]            # sort Ppr
-    tpr$Ppr_near <- round(tpr$Ppr/.1)*.1   # round to nearest Ppr
-    tpr$diff <- tpr$Ppr - tpr$Ppr_near     # find the difference to nearest
-    assign(.tpr, tpr)
-        if (save) {
-        rda_file <- paste(tools::file_path_sans_ext(dfile), "rda", sep = ".")
-        rda_file <- paste("../data", rda_file, sep = "/")
-        save(list = .tpr, file = rda_file)     # save with same name as string
-    }
-    plot(x=tpr$Ppr, y=tpr$z)                      # as rad from SK chart
-    lines(x=tpr$Ppr_near, y=tpr$z, col = "blue")  # nearest rounded points
-
-```
-
-
 
 
 ```{r}
@@ -95,8 +67,53 @@ getZcurve2("tpr_20.txt")
 getZcurve2("tpr_105.txt")
 ```
 
+### $T_{pr} = 2.4$
+
+```{r}
+getZcurve2("tpr_240.txt")
+```
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Code use to build more complete function
+```{r}
+isNear <- function(n) abs(n - round(n, 1)) < 0.01
+```
+
+
+```{r}
+save <- TRUE
+dfile <- "tpr_105.txt"
+    .tpr <- tools::file_path_sans_ext(dfile)
+    data_file <- paste("../inst/extdata", dfile, sep = "/")
+    assign(.tpr, read.table(data_file, header = TRUE))  # name same as file name
+    tpr <- get(.tpr) 
+    colnames(tpr)<- c("Ppr", "z")
+        tpr <- tpr[order(tpr$Ppr),]            # sort Ppr
+    tpr$Ppr_near <- round(tpr$Ppr/.1)*.1   # round to nearest Ppr
+    tpr$diff <- tpr$Ppr - tpr$Ppr_near     # find the difference to nearest
+    assign(.tpr, tpr)
+        if (save) {
+        rda_file <- paste(tools::file_path_sans_ext(dfile), "rda", sep = ".")
+        rda_file <- paste("../data", rda_file, sep = "/")
+        save(list = .tpr, file = rda_file)     # save with same name as string
+    }
+    plot(x=tpr$Ppr, y=tpr$z)                      # as rad from SK chart
+    lines(x=tpr$Ppr_near, y=tpr$z, col = "blue")  # nearest rounded points
+
+```
 
 
 
