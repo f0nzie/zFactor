@@ -47,7 +47,11 @@ getZcurve2("tpr_17.txt")
 ```
 
 
+### $T_{pr} = 2.0$
 
+```{r}
+getZcurve2("tpr_20.txt")
+```
 
 
 
