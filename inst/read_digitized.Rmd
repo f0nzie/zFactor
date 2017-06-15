@@ -1,7 +1,67 @@
 ---
-title: "R Notebook"
+title: "Read digitized data"
 output: html_notebook
 ---
+
+```{r}
+getZcurve2 <- function(dfile, save = TRUE) {
+    # Read digitized data from Standing-Katz chart, plot it 
+    # and put it in a .rda file
+    # x: Ppr
+    # y: z
+    .tpr <- tools::file_path_sans_ext(dfile)
+    data_file <- paste("../inst/extdata", dfile, sep = "/")
+    assign(.tpr, read.table(data_file, header = TRUE))  # name same as file name
+    tpr <- get(.tpr)               # get the object
+    colnames(tpr)<- c("Ppr", "z")
+    tpr <- tpr[order(tpr$Ppr),]            # sort Ppr
+    tpr$Ppr_near <- round(tpr$Ppr/.1)*.1   # round to nearest Ppr
+    tpr$diff <- tpr$Ppr - tpr$Ppr_near     # find the difference to nearest
+    if (save) {
+        rda_file <- paste(tools::file_path_sans_ext(dfile), "rda", sep = ".")
+        rda_file <- paste("../data", rda_file, sep = "/")
+        save(list = c(.tpr), file = rda_file)  # save variable with name as string
+    }
+    plot(x=tpr$Ppr, y=tpr$z)                      # as rad from SK chart
+    lines(x=tpr$Ppr_near, y=tpr$z, col = "blue")  # nearest rounded points
+}
+```
+
+```{r}
+getZcurve2("tpr_15.txt")
+```
+
+
+```{r}
+getZcurve <- function(dfile, save = TRUE) {
+    # read txt data at Tpr=13 
+    # axis
+    # x: Ppr
+    # y: z
+    data_file <- paste("../inst/extdata", dfile, sep = "/")
+    tpr <- read.table(data_file, header = TRUE)
+    # change name of variables
+    colnames(tpr) <- c("Ppr", "z")
+    tpr <- tpr[order(tpr$Ppr),]    # sort Ppr
+    
+    tpr$Ppr_near <- round(tpr$Ppr/.1)*.1
+    tpr$diff <- tpr$Ppr - tpr$Ppr_near
+    if (save) {
+        rda_file <- paste(tools::file_path_sans_ext(dfile), "rda", sep = ".")
+        rda_file <- paste("../data", rda_file, sep = "/")
+        save(tpr, file = rda_file)
+    }
+    plot(x=tpr$Ppr, y=tpr$z)
+    lines(x=tpr$Ppr_near, y=tpr$z, col = "blue")       
+}
+```
+
+
+```{r}
+getZcurve("tpr_15.txt")
+```
+
+
 
 ```{r }
 # read txt data at Tpr=13 
@@ -11,7 +71,7 @@ output: html_notebook
 tpr13 <- read.table("../inst/extdata/tpr_13.txt", header = TRUE)
 # change name of variables
 colnames(tpr13) <- c("Ppr", "z")
-tpr13
+tpr13 <- tpr13[order(tpr13$Ppr),]    # sort Ppr
 ```
 
 ```{r}
@@ -23,5 +83,10 @@ ggplot(tpr13, aes(x=Ppr, y=z)) + geom_line()
 tpr13$Ppr_near <- round(tpr13$Ppr/.1)*.1
 tpr13$diff <- tpr13$Ppr - tpr13$Ppr_near
 save(tpr13, file = "../data/tpr13.rda")
+```
+
+```{r}
+plot(x=tpr13$Ppr, y=tpr13$z)
+lines(x=tpr13$Ppr_near, y=tpr13$z, col = "blue")
 ```
 
