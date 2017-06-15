@@ -1,0 +1,27 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r }
+# read txt data at Tpr=13 
+# axis
+# x: Ppr
+# y: z
+tpr13 <- read.table("../inst/extdata/tpr_13.txt", header = TRUE)
+# change name of variables
+colnames(tpr13) <- c("Ppr", "z")
+tpr13
+```
+
+```{r}
+library(ggplot2)
+ggplot(tpr13, aes(x=Ppr, y=z)) + geom_line()
+```
+
+```{r}
+tpr13$Ppr_near <- round(tpr13$Ppr/.1)*.1
+tpr13$diff <- tpr13$Ppr - tpr13$Ppr_near
+save(tpr13, file = "../data/tpr13.rda")
+```
+
