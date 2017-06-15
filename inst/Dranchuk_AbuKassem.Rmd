@@ -3,6 +3,9 @@ title: "z from Dranchun-AbuKassem"
 output: html_notebook
 ---
 
+
+### Function for Dranchuk-AbuKassem
+
 ```{r}
 
 z.DranchukAbuKassem <- function(pres.pr, temp.pr, tolerance = 1E-13, 
@@ -57,6 +60,8 @@ z.DranchukAbuKassem <- function(pres.pr, temp.pr, tolerance = 1E-13,
 z.DranchukAbuKassem(0.5, 1.3)
 ```
 
+### Plotting only Dranchuk-AbuKassem solution
+
 ```{r}
 # test DAK with  using the values from paper
 
@@ -76,6 +81,9 @@ plot(x = ppr, y = tbl[2,], type = "l", main = "z @ Tpr = 1.5", ylab = "z")
 plot(x = ppr, y = tbl[3,], type = "l", main = "z @ Tpr = 1.7", ylab = "z")
 plot(x = ppr, y = tbl[4,], type = "l", main = "z @ Tpr = 2.0", ylab = "z")
 ```
+
+
+### Comparative plotting against Standing-Katz chart values
 
 
 ```{r}
@@ -111,19 +119,10 @@ legend("topright", c("F(Y)", "chart"), lty = c(1,1), col = c("black", "red"))
 ```
 
 
+## Initial computations
+Started here.
 
-
-
-## Values from Standing and Katz chart
-
-
-    (0.5, 1.3) = 0.92
-    (1.5, 1.3) = 0.76
-    (2.5, 1.3) = 0.64
-    (3.5, 1.3) = 0.63
-    (4.5, 1.3) = 0.68
-    (5.5, 1.3) = 0.76
-    (6.5, 1.3) = 0.84
+### Raw code. No function.
 
 ```{r}
 pres.pr <- 0.5
@@ -178,3 +177,13 @@ z <- 0.27 * pres.pr / (rhork * temp.pr)
 z
 ```
 
+### Values from Standing and Katz chart
+
+
+    (0.5, 1.3) = 0.92
+    (1.5, 1.3) = 0.76
+    (2.5, 1.3) = 0.64
+    (3.5, 1.3) = 0.63
+    (4.5, 1.3) = 0.68
+    (5.5, 1.3) = 0.76
+    (6.5, 1.3) = 0.84
