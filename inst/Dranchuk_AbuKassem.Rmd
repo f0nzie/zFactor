@@ -82,9 +82,7 @@ plot(x = ppr, y = tbl[3,], type = "l", main = "z @ Tpr = 1.7", ylab = "z")
 plot(x = ppr, y = tbl[4,], type = "l", main = "z @ Tpr = 2.0", ylab = "z")
 ```
 
-
 ### Comparative plotting against Standing-Katz chart values
-
 
 ```{r}
 # DAK vs z read from SK chart
