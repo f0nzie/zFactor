@@ -1,0 +1,183 @@
+---
+title: "Read digitized data"
+output: html_notebook
+---
+
+
+
+```{r}
+# add modification "assign(.tpr, tpr)" to store modified dataframe
+# add parameter "tolerance" to allow flexibility in deciding point closeness
+getZcurve2 <- function(dfile, tolerance = 0.01, save = TRUE) {
+    # Read digitized data from Standing-Katz chart, plot it 
+    # and put it in a .rda file
+    # x: Ppr
+    # y: z
+    isNear <- function(n) abs(n - round(n, 1)) <= tolerance
+    
+    .tpr <- tools::file_path_sans_ext(dfile)
+    data_file <- paste("../inst/extdata", dfile, sep = "/")
+    assign(.tpr, read.table(data_file, header = TRUE))  # name same as file name
+    tpr <- get(.tpr)               # get the object
+    colnames(tpr)<- c("Ppr", "z")
+    tpr <- tpr[order(tpr$Ppr),]            # sort Ppr
+    tpr$isNear <- isNear(tpr$Ppr)# round to nearest Ppr
+    tpr$Ppr_near <- ifelse(tpr$isNear, round(tpr$Ppr/.1)*.1, tpr$Ppr)
+    tpr$diff <- tpr$Ppr - tpr$Ppr_near     # find the difference to nearest
+    assign(.tpr, tpr)
+    if (save) {
+        rda_file <- paste(tools::file_path_sans_ext(dfile), "rda", sep = ".")
+        rda_file <- paste("../data", rda_file, sep = "/")
+        save(list = .tpr, file = rda_file)     # save with same name as string
+    }
+    plot(x = tpr$Ppr, y = tpr$z)                      # as rad from SK chart
+    lines(x = tpr$Ppr_near, y = tpr$z, col = "blue")  # nearest rounded points
+}
+```
+
+
+### $T_{pr} = 1.3$
+
+```{r}
+getZcurve2("tpr_13.txt")
+```
+
+### $T_{pr} = 1.5$
+
+```{r}
+getZcurve2("tpr_15.txt")
+```
+
+### $T_{pr} = 1.7$
+
+```{r}
+getZcurve2("tpr_17.txt")
+```
+
+
+### $T_{pr} = 2.0$
+
+```{r}
+getZcurve2("tpr_20.txt")
+```
+
+### $T_{pr} = 1.05$
+
+```{r}
+getZcurve2("tpr_105.txt")
+```
+
+### $T_{pr} = 2.4$
+
+```{r}
+getZcurve2("tpr_240.txt")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Code use to build more complete function
+```{r}
+isNear <- function(n) abs(n - round(n, 1)) < 0.01
+```
+
+
+```{r}
+save <- TRUE
+dfile <- "tpr_105.txt"
+    .tpr <- tools::file_path_sans_ext(dfile)
+    data_file <- paste("../inst/extdata", dfile, sep = "/")
+    assign(.tpr, read.table(data_file, header = TRUE))  # name same as file name
+    tpr <- get(.tpr) 
+    colnames(tpr)<- c("Ppr", "z")
+        tpr <- tpr[order(tpr$Ppr),]            # sort Ppr
+    tpr$Ppr_near <- round(tpr$Ppr/.1)*.1   # round to nearest Ppr
+    tpr$diff <- tpr$Ppr - tpr$Ppr_near     # find the difference to nearest
+    assign(.tpr, tpr)
+        if (save) {
+        rda_file <- paste(tools::file_path_sans_ext(dfile), "rda", sep = ".")
+        rda_file <- paste("../data", rda_file, sep = "/")
+        save(list = .tpr, file = rda_file)     # save with same name as string
+    }
+    plot(x=tpr$Ppr, y=tpr$z)                      # as rad from SK chart
+    lines(x=tpr$Ppr_near, y=tpr$z, col = "blue")  # nearest rounded points
+
+```
+
+
+
+
+
+
+
+## Original code (do not use. Reference only)
+
+```{r}
+getZcurve <- function(dfile, save = TRUE) {
+    # read txt data at Tpr=13 
+    # axis
+    # x: Ppr
+    # y: z
+    data_file <- paste("../inst/extdata", dfile, sep = "/")
+    tpr <- read.table(data_file, header = TRUE)
+    # change name of variables
+    colnames(tpr) <- c("Ppr", "z")
+    tpr <- tpr[order(tpr$Ppr),]    # sort Ppr
+    
+    tpr$Ppr_near <- round(tpr$Ppr/.1)*.1
+    tpr$diff <- tpr$Ppr - tpr$Ppr_near
+    if (save) {
+        rda_file <- paste(tools::file_path_sans_ext(dfile), "rda", sep = ".")
+        rda_file <- paste("../data", rda_file, sep = "/")
+        save(tpr, file = rda_file)
+    }
+    plot(x=tpr$Ppr, y=tpr$z)
+    lines(x=tpr$Ppr_near, y=tpr$z, col = "blue")       
+}
+```
+
+
+```{r}
+getZcurve("tpr_15.txt")
+```
+
+
+
+```{r }
+# read txt data at Tpr=13 
+# axis
+# x: Ppr
+# y: z
+tpr13 <- read.table("../inst/extdata/tpr_13.txt", header = TRUE)
+# change name of variables
+colnames(tpr13) <- c("Ppr", "z")
+tpr13 <- tpr13[order(tpr13$Ppr),]    # sort Ppr
+```
+
+```{r}
+library(ggplot2)
+ggplot(tpr13, aes(x=Ppr, y=z)) + geom_line()
+```
+
+```{r}
+tpr13$Ppr_near <- round(tpr13$Ppr/.1)*.1
+tpr13$diff <- tpr13$Ppr - tpr13$Ppr_near
+save(tpr13, file = "../data/tpr13.rda")
+```
+
+```{r}
+plot(x=tpr13$Ppr, y=tpr13$z)
+lines(x=tpr13$Ppr_near, y=tpr13$z, col = "blue")
+```
+

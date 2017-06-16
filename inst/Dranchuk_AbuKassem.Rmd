@@ -1,0 +1,187 @@
+---
+title: "z from Dranchun-AbuKassem"
+output: html_notebook
+---
+
+
+### Function for Dranchuk-AbuKassem
+
+```{r}
+
+z.DranchukAbuKassem <- function(pres.pr, temp.pr, tolerance = 1E-13, 
+                                verbose = FALSE) {
+    F <- function(rhor) 
+    {
+        R1 * rhor - R2 / rhor + R3 * rhor^2 - R4 * rhor^5 +     # equation 3-41 
+        R5  * rhor^2 * (1 +  A11 * rhor^2) * exp(-A11 * rhor^2) + 1  
+    }
+    
+    Fprime <- function(rhor) {
+        R1 + R2 / rhor^2 + 2 * R3 * rhor - 5 * R4 * rhor^4 + 
+            2 * R5 * rhor * exp(-A11 * rhor^2) * 
+            ((1 +  2 * A11 * rhor^3) - A11 * rhor^2 * (1 +  A11 * rhor^2))
+    }    
+
+    
+    A1  <- 0.3265; A2 <- -1.0700; A3 <- -0.5339; A4 <- 0.01569; A5 <- -0.05165
+    A6  <- 0.5475; A7 <- -0.7361; A8 <-  0.1844; A9 <- 0.1056; A10 <- 0.6134; 
+    A11 <- 0.7210
+    
+    R1 <-  A1 + A2 / temp.pr + A3 / temp.pr^3 + A4 / temp.pr^4 + A5 / temp.pr^5
+    R2 <- 0.27 * pres.pr / temp.pr
+    R3 <- A6 + A7 / temp.pr + A8 / temp.pr^2
+    R4 <- A9 * (A7 / temp.pr + A8 / temp.pr^2)
+    R5 <- A10 / temp.pr^3
+    
+    # step 1: find first guess
+    rhork0 <- 0.27 * pres.pr / temp.pr
+    rhork <- rhork0
+    i <- 1
+    while (TRUE) {
+        # step 2: if it is lower than tolerance, exit and calc z
+        #         otherwise, calculate a better rho with the derivative
+        if (abs(F(rhork)) < tolerance)  break
+        rhork1 <- rhork - F(rhork) / Fprime(rhork)
+        delta <- abs(rhork - rhork1)
+        if (delta < tolerance) break
+        if (verbose) 
+            cat(sprintf("%3d %11f %11f %11f \n", i, rhork, rhork1, delta))
+        rhork <- rhork1
+        i <- i + 1
+    }
+    z <- 0.27 * pres.pr / (rhork * temp.pr)
+    return(z)
+}    
+```
+
+
+```{r}
+# test only one point
+z.DranchukAbuKassem(0.5, 1.3)
+```
+
+### Plotting only Dranchuk-AbuKassem solution
+
+```{r}
+# test DAK with  using the values from paper
+
+ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5)
+tpr <- c(1.3, 1.5, 1.7, 2)
+
+tbl <- sapply(ppr, function(x) 
+    sapply(tpr, function(y) z.DranchukAbuKassem(pres.pr = x, temp.pr = y)))
+
+rownames(tbl) <- tpr
+colnames(tbl) <- ppr
+print(tbl)
+
+library(ggplot2)
+plot(x = ppr, y = tbl[1,], type = "l", main = "z @ Tpr = 1.3", ylab = "z")
+plot(x = ppr, y = tbl[2,], type = "l", main = "z @ Tpr = 1.5", ylab = "z")
+plot(x = ppr, y = tbl[3,], type = "l", main = "z @ Tpr = 1.7", ylab = "z")
+plot(x = ppr, y = tbl[4,], type = "l", main = "z @ Tpr = 2.0", ylab = "z")
+```
+
+### Comparative plotting against Standing-Katz chart values
+
+```{r}
+# DAK vs z read from SK chart
+ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5)
+tpr <- c(1.3, 1.5, 1.7, 2)
+
+z <- c(
+    c(0.92, 0.76, 0.64, 0.63, 0.68, 0.76, 0.84),
+    c(0.94, 0.86, 0.79, 0.77, 0.79, 0.84, 0.89),
+    c(0.97, 0.92, 0.87, 0.86, 0.865, 0.895, 0.94),
+    c(0.985, 0.957, 0.941, 0.938, 0.945, 0.97, 1.01)
+    )
+
+mx <- matrix(z, nrow = 4, ncol = 7, byrow = TRUE)
+rownames(mx) <- tpr
+colnames(mx) <- ppr
+print(mx)
+
+library(ggplot2)
+plot(x = ppr, y = mx[1,], type = "l", main = "z SK @ Tpr = 1.3", ylab = "z")
+lines(x = ppr, y = tbl[1,], col = "red")
+legend("topright", c("F(Y)", "chart"), lty = c(1,1), col = c("black", "red"))
+plot(x = ppr, y = mx[2,], type = "l", main = "z SK @ Tpr = 1.5", ylab = "z")
+lines(x = ppr, y = tbl[2,], col = "red")
+legend("topright", c("F(Y)", "chart"), lty = c(1,1), col = c("black", "red"))
+plot(x = ppr, y = mx[3,], type = "l", main = "z SK @ Tpr = 1.7", ylab = "z")
+lines(x = ppr, y = tbl[3,], col = "red")
+legend("topright", c("F(Y)", "chart"), lty = c(1,1), col = c("black", "red"))
+plot(x = ppr, y = mx[4,], type = "l", main = "z SK @ Tpr = 2.0", ylab = "z")
+lines(x = ppr, y = tbl[4,], col = "red")
+legend("topright", c("F(Y)", "chart"), lty = c(1,1), col = c("black", "red"))
+```
+
+
+## Initial computations
+Started here.
+
+### Raw code. No function.
+
+```{r}
+pres.pr <- 0.5
+temp.pr <- 1.3
+
+
+tol <- 1E-13
+
+A1  <- 0.3265; A2 <- -1.0700; A3 <- -0.5339; A4 <- 0.01569; A5 <- -0.05165
+A6  <- 0.5475; A7 <- -0.7361; A8 <-  0.1844; A9 <- 0.1056; A10 <- 0.6134; 
+A11 <- 0.7210
+
+
+R1 <-  A1 + A2 / temp.pr + A3 / temp.pr^3 + A4 / temp.pr^4 + A5 / temp.pr^5
+R2 <- 0.27 * pres.pr / temp.pr
+R3 <- A6 + A7 / temp.pr + A8 / temp.pr^2
+R4 <- A9 * (A7 / temp.pr + A8 / temp.pr^2)
+R5 <- A10 / temp.pr^3
+
+
+F <- function(rhor) 
+{
+    R1 * rhor - R2 / rhor + R3 * rhor^2 - R4 * rhor^5 + 
+    R5  * rhor^2 * (1 +  A11 * rhor^2) * exp(-A11 * rhor^2) + 1   # equation 3-41
+}
+
+Fprime <- function(rhor) {
+    R1 + R2 / rhor^2 + 2 * R3 * rhor - 5 * R4 * rhor^4 + 
+        2 * R5 * rhor * exp(-A11 * rhor^2) * 
+        ((1 +  2 * A11 * rhor^3) - A11 * rhor^2 * (1 +  A11 * rhor^2))
+}
+
+# step 1
+rhork0 <- 0.27 * pres.pr / temp.pr
+rhork <- rhork0
+i <- 1
+while (TRUE) {
+    # step 2
+    if (abs(F(rhork)) < tol)  break
+    
+    rhork1 <- rhork - F(rhork) / Fprime(rhork)
+    
+    delta <- abs(rhork - rhork1)
+
+    if (delta < tol) break
+    cat(sprintf("%3d %11f %11f %11f \n", i, rhork, rhork1, delta))
+    rhork <- rhork1
+    i <- i + 1
+}
+
+z <- 0.27 * pres.pr / (rhork * temp.pr)
+z
+```
+
+### Values from Standing and Katz chart
+
+
+    (0.5, 1.3) = 0.92
+    (1.5, 1.3) = 0.76
+    (2.5, 1.3) = 0.64
+    (3.5, 1.3) = 0.63
+    (4.5, 1.3) = 0.68
+    (5.5, 1.3) = 0.76
+    (6.5, 1.3) = 0.84

@@ -1,5 +1,5 @@
 ---
-title: "R Notebook"
+title: "HY solving emthod from Tarek Ahmed"
 output: html_notebook
 ---
 
