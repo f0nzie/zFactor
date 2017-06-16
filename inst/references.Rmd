@@ -1,0 +1,24 @@
+---
+title: "References"
+output:
+  html_document: default
+  html_notebook: default
+bibliography: bibliography.bib  
+---
+
+
+![](./images/error_analysis_encyclopedia.jpg)
+
+
+
+![](./images/ranges_applicability_correlations.jpg)
+
+[@Encyclopedia2001, pp. 10]
+
+
+### Crossplot of measured and calculated z-factor
+[see @Elsharkawy2001, pp. 727]
+![](./images/plot_measured_calculated_zfactor.jpg)
+
+
+
