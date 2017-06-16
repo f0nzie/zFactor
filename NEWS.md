@@ -1,7 +1,15 @@
-## 20171413, 0.0.0.9006
+## 20170616, 0.0.0.9006
+* add notebook `read_digitized.Rmd` to correct data of digitized SK chart. Do not round data points that are not close to the frid lines. The function saves the data in a file corresponding to the name supplied to the CSV file to red. Uses assign and get.
+* create rda files for various values of Tpr in Standing-Katz chart.
+* add bibliography file
+* add notebook with references
+* add notebook with sources
+
+
+## 20170615, 0.0.0.9006
 * add comparison plots between Hall-Yarborough and values read from Standing-Katz charts.
 
-## 20171413, 0.0.0.9005
+## 20170614, 0.0.0.9005
 * 9004 aborted. will try again wih 9005.
 
 ## 20171413, 0.0.0.9004
