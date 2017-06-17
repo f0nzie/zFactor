@@ -511,6 +511,44 @@ mx
 ```{r}
 plot(x = tbl[1, ], y = mx[1, ])
 ```
+```{r}
+x = tbl[1, ]
+y = mx[1, ]
+pvalues <- data.frame(x = x, y = y)
+```
+
+
+```{r}
+plot(   # If this is a 2-column matrix, then first column pvalues[,1] will be by default the x-axis and second column pvalue[,2] the y-axis
+    # Can be a matrix with 2 columns or a data.frame with 2 columns
+    x = pvalues,
+    # x = tbl[1, ], y = mx[1, ],
+    # Analogous if you have two separated vectors instead of two columns, change to something like:
+    # x = pvalues[,1], # x-axis observation values
+    # y = pvalues[,2], # y-axis observation values
+    # x- and y-axis ranges [0,1]
+    # xlim=c(0, 1), 
+    # ylim=c(0, 1), 
+    xlim = c(0.6, 0.95),
+    ylim = c(0.6, 0.95),
+    # Select filled dots as the symbols
+    pch=16, 
+    # Conditional color vector based on where the observation is located
+    col=apply(pvalues, MARGIN=1, 
+              FUN = function(x) {ifelse(1*x[1] + 0.001 > x[2] & 1*x[1] - 0.001 < x[2], 
+        # Color for dots inside the area (semi-transparent black)
+        "#00000075", 
+        # Color for dots outside the area (semi-transparent blue)
+        "#0000FF75") 
+        } ),
+    # Axis labels
+    xlab="p values in differences condition 1", 
+    ylab="p values in differences condition 2"
+    )
+```
+
+
+
 
 ```{r}
 library(ggplot2)
