@@ -1,5 +1,5 @@
 ---
-title: "HY solving emthod from Tarek Ahmed"
+title: "HY solving method from Tarek Ahmed"
 output: html_notebook
 ---
 
