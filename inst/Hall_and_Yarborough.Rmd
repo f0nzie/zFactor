@@ -547,6 +547,14 @@ plot(   # If this is a 2-column matrix, then first column pvalues[,1] will be by
     )
 ```
 
+```{r}
+x <- ppr
+y1 <- tbl[1,]
+y2 <- mx[1,]
+plot( seq_along(y1), y1, type="l", col="red" )
+par(new=TRUE)
+plot( seq_along(y2), y2, type="l", col="green" )
+```
 
 
 
@@ -566,5 +574,15 @@ library(ggplot2)
 
 ```{r}
  qplot(y=tbl[1,],x=tbl[1,], geom_point(y =mx[1,], x=mx[1,], col = "green"))
+```
+
+```{r}
+library(astrochron)
+# random numbers from a normal distribution
+ex1<-rnorm(1000)
+# random numbers from an exponential distribution
+ex2<-rexp(1000)
+
+xplot(ex1,ex2)
 ```
 
