@@ -1,0 +1,58 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+# load the z data from HY derivative and z read from Sk chart
+load(file = "../data/z_hy.rda")
+
+df <- data.frame(z.calc = z_hy_deriv[1, ], z.actual = z_sk_chart[1,])
+df$dif <- df$z.actual - df$z.calc
+```
+
+```{r}
+z_sk_chart <- cbind(as.double(rownames(z_sk_chart)), z_sk_chart)
+rownames(z_sk_chart) <- NULL
+
+```
+
+```{r}
+load(file = "../data/z_hy.rda")
+```
+
+```{r}
+# convert to tidy table for z values calculated by HY and read from SK chart
+library(tidyr)
+
+# load both tables (matrices)
+load(file = "../data/z_hy.rda")
+
+z_sk_chart <- cbind(as.double(rownames(z_sk_chart)), z_sk_chart)  # new column for Tpr
+rownames(z_sk_chart) <- NULL           # reset row names
+colnames(z_sk_chart)[1] <- "Tpr"       # add column name
+.z_chart <- as.data.frame(z_sk_chart)  # dataframe
+
+z_hy_deriv <- cbind(as.double(rownames(z_hy_deriv)), z_hy_deriv)
+rownames(z_hy_deriv) <- NULL
+colnames(z_hy_deriv)[1] <- "Tpr"
+.z_calcs <- as.data.frame(z_hy_deriv)
+
+
+z_chart <- gather(.z_chart, "ppr", "z.chart", 2:8)
+z_calcs <- gather(.z_calcs, "ppr", "z.calcs", 2:8)
+
+zcombined <- cbind(z_chart, z.calc = z_calcs$z.calcs)
+zcombined$dif <- zcombined$z.chart  - zcombined$z.calc
+```
+
+```{r}
+ggplot(zcombined, aes(x = ppr, y = z.chart, size = dif)) +
+    geom_point() + facet_grid(. ~Tpr)
+
+```
+
+```{r}
+
+```
+
