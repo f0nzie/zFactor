@@ -16,6 +16,7 @@ df$dif <- df$z.actual - df$z.calc
 ```{r}
 # convert to tidy table for z values calculated by HY and read from SK chart
 library(tidyr)
+library(ggplot2)
 
 # load both tables (matrices)
 load(file = "../data/z_hy.rda")
