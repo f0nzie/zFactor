@@ -1,0 +1,140 @@
+---
+title: "Plot actual vs predicted"
+output: html_notebook
+---
+
+## Residual Plot
+
+The `residual` data of the simple linear regression model is the difference between the observed data of the dependent variable y and the `fitted` values ŷ.
+
+$$Residual = y- \hat y$$
+
+
+```{r}
+eruption.lm = lm(eruptions ~ waiting, data=faithful) 
+eruption.res = resid(eruption.lm)
+```
+
+We now plot the residual against the observed values of the variable waiting.
+
+```{r}
+plot(faithful$waiting, eruption.res, 
+     ylab="Residuals", xlab="Waiting Time", 
+     main="Old Faithful Eruptions") 
+abline(0, 0)                  # the horizon
+```
+
+### apply to z factors from HY
+
+```{r}
+# load the z data from HY derivative and z read from Sk chart
+load(file = "../data/z_hy.rda")
+
+df <- data.frame(z.calc = z_hy_deriv[1, ], z.actual = z_sk_chart[1,])
+df$dif <- df$z.actual - df$z.calc
+
+plot(df$z.actual, df$dif, 
+     ylab="Residuals", xlab="z chart", 
+     main="z chart vs calculated HY, Tpr = 1.3") 
+abline(0, 0)                  # the horizon
+
+```
+
+```{r}
+# from book "Hitchikers guide to ggplot2, pp. 82"
+library(ggplot2)
+library(ggthemes)
+library(scales)
+
+xp <- as.double(rownames(df))
+
+p6 <- ggplot(df, aes(x = xp, y = z.calc, size = dif)) + 
+    geom_point(shape = 21, colour = "mediumvioletred", fill = "mediumvioletred") +
+ ggtitle("Tpr = 1.3") +
+ labs(x = "Ppr", y = "z(calc)") +
+ scale_x_continuous(breaks = seq(1, 6, 0.5)) 
+p6
+```
+
+```{r}
+
+p6 <- ggplot(df, aes(x = xp, y = z.calc, size = dif, fill = dif)) + 
+    geom_point(shape = 21) +
+ ggtitle("Tpr = 1.3") +
+ labs(x = "Ppr", y = "z(calc)") +
+ scale_x_continuous(breaks = seq(1, 6, 0.5)) 
+
+p6 <-  p6 + scale_fill_continuous(low = "plum1", high = "purple4")
+p6
+
+```
+
+
+
+
+
+```{r fig.asp=1}
+# Generate an artificial dataset
+library(MASS)
+set.seed(1)
+
+# Suitably chosen covariance matrix
+covariancematrix <- matrix(c(0.02,0.019,0.019,0.02), nrow=2)
+#> print(cov2cor(covariancematrix))
+#     [,1] [,2]
+#[1,] 1.00 0.95
+#[2,] 0.95 1.00
+
+# Randomize 20,000 observations and constraint them to a p-value like range
+pvalues <- mvrnorm(20000, mu=c(0.5,0.5), Sigma=covariancematrix)
+colnames(pvalues) <- c("p value condition 1", "p value condition 2")
+rownames(pvalues) <- paste("Probe/gene id", 1:20000)
+# p-values should be within range [0,1]
+pvalues[pvalues<0] <- 0
+pvalues[pvalues>1] <- 1
+
+#> str(pvalues)
+# num [1:20000, 1:2] 0.461 0.54 0.52 0.518 0.61 ...
+# - attr(*, "dimnames")=List of 2
+#  ..$ : chr [1:20000] "Probe/gene id 1" "Probe/gene id 2" "Probe/gene id 3" "Probe/gene id 4" ...
+#  ..$ : chr [1:2] "p value condition 1" "p value condition 2"
+#> head(pvalues)
+#                p value condition 1 p value condition 2
+#Probe/gene id 1           0.4614707           0.4767356
+#Probe/gene id 2           0.5398754           0.5583752
+#Probe/gene id 3           0.5196980           0.5251556
+#Probe/gene id 4           0.5182167           0.4471374
+#Probe/gene id 5           0.6097540           0.5745387
+#Probe/gene id 6           0.4652409           0.3940416
+
+# The plotting call itself
+plot(   # If this is a 2-column matrix, then first column pvalues[,1] will be by default the x-axis and second column pvalue[,2] the y-axis
+    # Can be a matrix with 2 columns or a data.frame with 2 columns
+    x = pvalues, 
+    # Analogous if you have two separated vectors instead of two columns, change to something like:
+    # x = pvalues[,1], # x-axis observation values
+    # y = pvalues[,2], # y-axis observation values
+    # x- and y-axis ranges [0,1]
+    xlim=c(0,1), 
+    ylim=c(0,1), 
+    # Select filled dots as the symbols
+    pch=16, 
+    # Conditional color vector based on where the observation is located
+    col=apply(pvalues, MARGIN=1, 
+              FUN = function(x) { ifelse(1*x[1] +0.05 > x[2] & 1*x[1] -0.05 < x[2], 
+        # Color for dots inside the area (semi-transparent black)
+        "#00000075", 
+        # Color for dots outside the area (semi-transparent blue)
+        "#0000FF75") 
+        } ),
+    # Axis labels
+    xlab="p values in differences condition 1", 
+    ylab="p values in differences condition 2"
+    )
+# Draw the lines, formula:
+# y = 1*x + 0.05
+abline(a=0.05, b=1, col="red", lwd=2)
+# y = 1*x - 0.05
+abline(a=-0.05, b=1, col="red", lwd=2)
+```
+
