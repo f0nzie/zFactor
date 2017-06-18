@@ -408,6 +408,9 @@ rownames(tbl) <- tpr
 colnames(tbl) <- ppr
 print(tbl)
 
+z_hy_deriv <- tbl
+
+
 library(ggplot2)
 plot(x = ppr, y = tbl[1,], type = "l", main = "z @ Tpr = 1.3", ylab = "z")
 plot(x = ppr, y = tbl[2,], type = "l", main = "z @ Tpr = 1.5", ylab = "z")
@@ -466,11 +469,17 @@ z <- c(
     c(0.985, 0.957, 0.941, 0.938, 0.945, 0.97, 1.01)
     )
 
+
+
+
 # create a matrix of SK chart points
 mx <- matrix(z, nrow = 4, ncol = 7, byrow = TRUE)
 rownames(mx) <- tpr
 colnames(mx) <- ppr
 print(mx)
+
+z_sk_chart <- mx
+save(z_hy_deriv, z_sk_chart, file = "../data/z_hy.rda")
 
 library(ggplot2)
 plot(x = ppr, y = mx[1,], type = "l", main = "z SK @ Tpr = 1.3", ylab = "z")
