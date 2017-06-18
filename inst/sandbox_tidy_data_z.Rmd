@@ -11,15 +11,7 @@ df <- data.frame(z.calc = z_hy_deriv[1, ], z.actual = z_sk_chart[1,])
 df$dif <- df$z.actual - df$z.calc
 ```
 
-```{r}
-z_sk_chart <- cbind(as.double(rownames(z_sk_chart)), z_sk_chart)
-rownames(z_sk_chart) <- NULL
 
-```
-
-```{r}
-load(file = "../data/z_hy.rda")
-```
 
 ```{r}
 # convert to tidy table for z values calculated by HY and read from SK chart
@@ -48,11 +40,14 @@ zcombined$dif <- zcombined$z.chart  - zcombined$z.calc
 
 ```{r}
 ggplot(zcombined, aes(x = ppr, y = z.chart, size = dif)) +
-    geom_point() + facet_grid(. ~Tpr)
+    geom_point(shape = 21)  +
+    facet_grid(. ~Tpr)
 
 ```
 
-```{r}
 
+```{r}
+z_HY <- zcombined
+save(z_HY, file = "../data/z_HallYarborough.rda")
 ```
 
