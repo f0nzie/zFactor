@@ -1,8 +1,6 @@
 ---
 title: "Hall and Yarborough"
-output: 
-  html_document: 
-    fig_caption: yes
+output: html_notebook
 ---
 
 
@@ -585,13 +583,4 @@ library(ggplot2)
  qplot(y=tbl[1,],x=tbl[1,], geom_point(y =mx[1,], x=mx[1,], col = "green"))
 ```
 
-```{r}
-library(astrochron)
-# random numbers from a normal distribution
-ex1<-rnorm(1000)
-# random numbers from an exponential distribution
-ex2<-rexp(1000)
-
-xplot(ex1,ex2)
-```
 
