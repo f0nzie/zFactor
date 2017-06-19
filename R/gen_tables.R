@@ -96,12 +96,12 @@ HY.genDatasetDif <- function() {
     # create tidy data for z from SK chart
     sk_short <- cbind(as.double(rownames(sk_short)), sk_short)  # new column for Tpr
     rownames(sk_short) <- NULL           # reset row names
-    colnames(sk_short)[1] <- "Tpr"       # add column name
+    # colnames(sk_short)[1] <- "Tpr"       # add column name
     .z_chart <- as.data.frame(sk_short)  # dataframe
 
     hy_short <- cbind(as.double(rownames(hy_short)), hy_short)
     rownames(hy_short) <- NULL
-    colnames(hy_short)[1] <- "Tpr"
+    # colnames(hy_short)[1] <- "Tpr"
     .z_calcs <- as.data.frame(hy_short)
 
     z_chart <- tidyr::gather(.z_chart, "ppr", "z.chart", 2:8)
@@ -109,6 +109,8 @@ HY.genDatasetDif <- function() {
 
     hy_dif <- cbind(z_chart, z.calc = z_calcs$z.calcs)
     hy_dif$dif <- hy_dif$z.chart  - hy_dif$z.calc
+
+    colnames(hy_dif)[1:2] <- c("Tpr", "Ppr")
 
     save(hy_dif, file = "./data/hy_dif.rda")
 
