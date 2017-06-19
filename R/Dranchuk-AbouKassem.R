@@ -1,3 +1,10 @@
+#' Dranchuk- correlation
+#'
+#' @param pres.pr pseudo-reduced pressure
+#' @param temp.pr pseudo-reduced temperature
+#' @param tolerance controls the iteration accuracy
+#' @param verbose print internal calclulations
+#' @rdname Dranchuk-AbouKassem
 z.DranchukAbuKassem <- function(pres.pr, temp.pr, tolerance = 1E-13,
                                 verbose = FALSE) {
     F <- function(rhor)

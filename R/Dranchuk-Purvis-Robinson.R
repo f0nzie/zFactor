@@ -3,6 +3,13 @@
 # data points from the Standing and Katz Z-factor chart optimized the eight
 # coefficients of the proposed equations. From Traker Ahmed's book.
 
+#' Dranchuk-Purvis-Robinson correlation
+#'
+#' @param pres.pr pseudo-reduced pressure
+#' @param temp.pr pseudo-reduced temperature
+#' @param tolerance controls the iteration accuracy
+#' @param verbose print internal
+#' @rdname Dranchuk-Purvis-Robinson
 z.DranchukPurvisRobinson <- function(pres.pr, temp.pr, tolerance = 1E-13,
                                      verbose = FALSE) {
     F <- function(rhor) {

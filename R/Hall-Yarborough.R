@@ -1,8 +1,14 @@
-
-z.HallYarborough <- function(pres.pr, temp.pr, verbose = FALSE) {
+#' Hall-Yarborough correlation
+#'
+#' @rdname Hall-Yarborough
+#' @param pres.pr pseudo-reduced pressure
+#' @param temp.pr pseudo-reduced temperature
+#' @param tolerance controls the iteration accuracy
+#' @param verbose print internal
+z.HallYarborough <- function(pres.pr, temp.pr, tolerance = 1E-13,
+                             verbose = FALSE) {
     # Hall-Yarborough correlation modified to use the Newton-Raphson method
 
-    tol <- 1E-13
 
     f <- function(y) {
         - A * pres.pr + (y + y^2 + y^3 - y^4) / (1 - y)^3  - B * y^2 + C * y^D
@@ -22,9 +28,9 @@ z.HallYarborough <- function(pres.pr, temp.pr, verbose = FALSE) {
     yk <- 0.0125 * pres.pr * t * exp(-1.2 * (1 - t)^2)
     delta <- 1
     i <- 1    # itertations
-    while (delta >= tol) {
+    while (delta >= tolerance) {
         fyk <- f(yk)
-        if (abs(fyk) < tol) break
+        if (abs(fyk) < tolerance) break
         yk1 <- yk - f(yk) / fdot(yk)
         delta <- abs(yk - yk1)
         if (verbose) cat(sprintf("%3d %10f %10f %10f \n", i, delta, yk, fyk))
