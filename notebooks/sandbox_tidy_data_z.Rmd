@@ -3,13 +3,6 @@ title: "R Notebook"
 output: html_notebook
 ---
 
-```{r}
-# load the z data from HY derivative and z read from Sk chart
-load(file = "../data/z_hy.rda")
-
-df <- data.frame(z.calc = z_hy_deriv[1, ], z.actual = z_sk_chart[1,])
-df$dif <- df$z.actual - df$z.calc
-```
 
 
 

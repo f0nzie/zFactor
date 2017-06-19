@@ -7,6 +7,10 @@ Maintainer: Alfonso R. Reyes <alfonso.reyes@oilgainsanalytics.com>
 Description: Computational algorithms to solve equations and find the
     compresibility factor (z). Equations available: Hall-Yarborough, 
     Dranchuk-AbuKassem and Dranchuk-Purvis-Robinson.
+Imports: rootSolve
+Suggests: knitr,
+    rmarkdown, testthat
 License: GPL-2
 Encoding: UTF-8
 LazyData: true
+RoxygenNote: 6.0.1

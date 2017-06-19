@@ -343,8 +343,9 @@ The interval (-20, 20) seems safe but (-20, 100) is not.
 testIntervals(c(-20, 20))
 ```
 
-## Using the 1st derivative method instead
 
+
+## Using the 1st derivative method instead
 
 ```{r}
 
