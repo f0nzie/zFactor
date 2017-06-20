@@ -8,7 +8,9 @@
 #' high pressure
 #' @param tolerance rounding tolerance to avoid rounding readings that are in
 #' the middle of the grid. "tolerance" adds flexibility in deciding point closeness.
-#' @param save flag to indicate if the .rda file will be saved to disk
+#' @param toSave set to FALSE to indicate if the .rda file will not be saved to disk
+#' @param toPlot set to FALSE to indicate the dataset will not be plotted
+#' @param toView set to FALSE to prevent visualizing the dataframe
 #' @importFrom graphics lines plot mtext
 #' @export
 getStandingKatzCurve <- function(tpr = 1.3, pprRange = "lp", tolerance = 0.01,
