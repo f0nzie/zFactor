@@ -10,6 +10,8 @@ Description: Computational algorithms to solve equations and find the
 Imports: rootSolve, tidyr
 Suggests: knitr,
     rmarkdown, testthat
+Depends:
+    R (>= 2.10)    
 License: GPL-2
 Encoding: UTF-8
 LazyData: true
