@@ -51,13 +51,13 @@
 #' @docType data
 "tpr_240"
 
-#' Hal;l-Yarborough tidy dataset
+#' Hall-Yarborough tidy dataset
 #'
 #' @keywords datasets
 #' @docType data
 "z_hy_deriv"
 
-#' Hal;l-Yarborough tidy dataset
+#' Hall-Yarborough tidy dataset
 #'
 #' @keywords datasets
 #' @docType data
@@ -70,3 +70,30 @@
 #' @keywords datasets
 #' @docType data
 "z_HY"
+
+#' Hall-Yarborough tidy dataset
+#'
+#' @keywords datasets
+#' @docType data
+"hy_short"
+
+
+
+#' Hall-Yarborough tidy dataset
+#'
+#' @keywords datasets
+#' @docType data
+"dak_short"
+
+#' Hall-Yarborough tidy dataset
+#'
+#' @keywords datasets
+#' @docType data
+"dpr_short"
+
+#' Hall-Yarborough tidy dataset
+#'
+#' @keywords datasets
+#' @docType data
+"sk_short"
+
