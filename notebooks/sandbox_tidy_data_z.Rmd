@@ -3,19 +3,13 @@ title: "R Notebook"
 output: html_notebook
 ---
 
-```{r}
-# load the z data from HY derivative and z read from Sk chart
-load(file = "../data/z_hy.rda")
-
-df <- data.frame(z.calc = z_hy_deriv[1, ], z.actual = z_sk_chart[1,])
-df$dif <- df$z.actual - df$z.calc
-```
 
 
 
 ```{r}
 # convert to tidy table for z values calculated by HY and read from SK chart
 library(tidyr)
+library(ggplot2)
 
 # load both tables (matrices)
 load(file = "../data/z_hy.rda")
@@ -51,3 +45,11 @@ z_HY <- zcombined
 save(z_HY, file = "../data/z_HallYarborough.rda")
 ```
 
+
+```{r}
+# in this case, th evariable name "ppr" has been changed to "Ppr"
+ggplot(hy_dif, aes(x = Ppr, y = z.chart, size = dif)) +
+    geom_point(shape = 21)  +
+    facet_grid(. ~Tpr)
+
+```
