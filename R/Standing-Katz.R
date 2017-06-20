@@ -28,6 +28,7 @@ getStandingKatzCurve <- function(tpr = 1.3, pprRange = "lp",
         stop("Range unknown. It can be 'lp' or 'hp'")
 
     extdata <- system.file("extdata", package = "zFactor")  # files are in extdata
+    this_tpr <- tpr
     tpr_str <- format(round(tpr*100, 2), nsmall = 0)    # two decimals as string
     dfile <- paste(paste("sk", pprRange, "tpr", tpr_str, sep = "_"),
                    "txt", sep = ".")
@@ -50,14 +51,21 @@ getStandingKatzCurve <- function(tpr = 1.3, pprRange = "lp",
     ds_name <- tools::file_path_sans_ext(dfile)
     ds_file <- paste(ds_name, "rda", sep = ".")
     if (save) {
-        # rda_file <- paste(getwd(), rda_file, sep = "/")
         save(list = .tpr, file = ds_file)     # save with same name as input
     }
-    plot(x = tpr$Ppr, y = tpr$z)                      # as read from SK chart
+    # # as read from SK chart
+    title <- paste0("Tpr = ", as.character(this_tpr))
+    plot(x = tpr$Ppr, y = tpr$z,
+         main = title, xlab = "Ppr", ylab = "z")
     lines(x = tpr$Ppr_near, y = tpr$z, col = "blue")  # nearest rounded points
+    mtext("z vs Ppr from Standing-Katz chart")
     assign(ds_name, get(load(ds_file)), envir = .GlobalEnv)
-    View(get(ds_name), title = ds_name)
+    ds_obj <- get(ds_name)
+    View(ds_obj, title = ds_name)
+    invisible(ds_obj)
 }
+
+
 
 #' List all Standing-Katz curves available at Low and High pressures
 #'
