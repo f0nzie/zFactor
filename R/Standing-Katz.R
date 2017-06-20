@@ -89,5 +89,4 @@ listStandingKatzCurves <- function(pprRange = "lp") {
     if (pprRange == "all") pat <- "sk_[lh]p_tpr_[1,2,3][0-7][0,5].*\\.txt"
 
     list.files(path = extdata, pattern = pat)
-
 }
