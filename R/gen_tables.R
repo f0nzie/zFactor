@@ -115,3 +115,40 @@ HY.genDatasetDif <- function() {
     save(hy_dif, file = "./data/hy_dif.rda")
 
 }
+
+genDatasetDif <- function(correlation = "HY") {
+    # generic function
+    # convert to tidy table for z values calculated by HY and read from SK chart
+    pkg_data_path <- system.file("data", package = "zFactor")
+
+    corr <- tolower(correlation)
+    rda_name <- paste(paste("z", corr, "7p4t", sep = "_"), "rda", sep = ".")
+    # ds_name <- paste(pkg_data_path, rda_name, sep = "/")
+    corr_rda_file <- paste(pkg_data_path, rda_name, sep = "/")
+
+    # load both tables (matrices)
+    load(file = "./data/z_sk_chart_7p4t.rda")
+    load(file = corr_rda_file)
+
+    # create tidy data for z from SK chart
+    sk_short <- cbind(as.double(rownames(sk_short)), sk_short)  # new column for Tpr
+    rownames(sk_short) <- NULL           # reset row names
+    .z_chart <- as.data.frame(sk_short)  # dataframe
+
+    hy_short <- cbind(as.double(rownames(hy_short)), hy_short)
+    rownames(hy_short) <- NULL
+    .z_calcs <- as.data.frame(hy_short)
+
+    z_chart <- tidyr::gather(.z_chart, "ppr", "z.chart", 2:8)
+    z_calcs <- tidyr::gather(.z_calcs, "ppr", "z.calcs", 2:8)
+
+    hy_dif <- cbind(z_chart, z.calc = z_calcs$z.calcs)
+    hy_dif$dif <- hy_dif$z.chart  - hy_dif$z.calc
+
+    colnames(hy_dif)[1:2] <- c("Tpr", "Ppr")
+
+    dif_name <- paste(paste(corr, "dif", sep = "_"), "rda", sep = ".")
+    dif_file <- paste(pkg_data_path, dif_name, sep = "/")
+    save(hy_dif, file = dif_file)
+
+}
