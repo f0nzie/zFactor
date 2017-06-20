@@ -36,38 +36,63 @@ getZcurve2 <- function(dfile, tolerance = 0.01, save = TRUE) {
 ```
 
 
-### $T_{pr} = 1.3$
-
-```{r}
-getZcurve2("tpr_13.txt")
-```
-
-### $T_{pr} = 1.5$
-
-```{r}
-getZcurve2("tpr_15.txt")
-```
-
-### $T_{pr} = 1.7$
-
-```{r}
-getZcurve2("tpr_17.txt")
-```
-
-
-### $T_{pr} = 2.0$
-
-```{r}
-getZcurve2("tpr_20.txt")
-```
-
 ### $T_{pr} = 1.05$
 
 ```{r}
 getZcurve2("tpr_105.txt")
 ```
 
-### $T_{pr} = 2.4$
+
+### $T_{pr} = 1.10$
+
+```{r}
+getZcurve2("tpr_110.txt")
+```
+
+
+
+### $T_{pr} = 1.20$
+
+```{r}
+getZcurve2("tpr_120.txt")
+```
+
+
+### $T_{pr} = 1.30$
+
+```{r}
+getZcurve2("tpr_130.txt")
+```
+
+### $T_{pr} = 1.40$
+
+```{r}
+getZcurve2("tpr_140.txt")
+```
+
+### $T_{pr} = 1.50$
+
+```{r}
+getZcurve2("tpr_150.txt")
+```
+
+### $T_{pr} = 1.70$
+
+```{r}
+getZcurve2("tpr_170.txt")
+```
+
+
+
+
+### $T_{pr} = 2.0$
+
+```{r}
+getZcurve2("tpr_200.txt")
+```
+
+
+### $T_{pr} = 2.40$
 
 ```{r}
 getZcurve2("tpr_240.txt")
