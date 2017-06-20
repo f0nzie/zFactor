@@ -9,10 +9,10 @@
 #' @param tolerance rounding tolerance to avoid rounding readings that are in
 #' the middle of the grid. "tolerance" adds flexibility in deciding point closeness.
 #' @param save flag to indicate if the .rda file will be saved to disk
-#' @importFrom graphics lines plot
+#' @importFrom graphics lines plot mtext
 #' @export
-getStandingKatzCurve <- function(tpr = 1.3, pprRange = "lp",
-                                 tolerance = 0.01, save = TRUE) {
+getStandingKatzCurve <- function(tpr = 1.3, pprRange = "lp", tolerance = 0.01,
+                                 toView = TRUE, toSave = TRUE, toPlot = TRUE) {
     # Read digitized data from Standing-Katz chart, plot it
     # and put it in a .rda file
     # x: Ppr
@@ -33,6 +33,9 @@ getStandingKatzCurve <- function(tpr = 1.3, pprRange = "lp",
     dfile <- paste(paste("sk", pprRange, "tpr", tpr_str, sep = "_"),
                    "txt", sep = ".")
 
+    ds_name <- tools::file_path_sans_ext(dfile)
+    ds_file <- paste(ds_name, "rda", sep = ".")
+
     .tpr <- tools::file_path_sans_ext(dfile)            # remove the extension
 
     # stop if no file is found
@@ -48,21 +51,24 @@ getStandingKatzCurve <- function(tpr = 1.3, pprRange = "lp",
     tpr$Ppr_near <- ifelse(tpr$isNear, round(tpr$Ppr/.1)*.1, tpr$Ppr)
     tpr$diff <- tpr$Ppr - tpr$Ppr_near     # find the difference to nearest
     assign(.tpr, tpr)
-    ds_name <- tools::file_path_sans_ext(dfile)
-    ds_file <- paste(ds_name, "rda", sep = ".")
-    if (save) {
+
+    if (toSave) {
         save(list = .tpr, file = ds_file)     # save with same name as input
     }
     # # as read from SK chart
-    title <- paste0("Tpr = ", as.character(this_tpr))
-    plot(x = tpr$Ppr, y = tpr$z,
-         main = title, xlab = "Ppr", ylab = "z")
-    lines(x = tpr$Ppr_near, y = tpr$z, col = "blue")  # nearest rounded points
-    mtext("z vs Ppr from Standing-Katz chart")
-    assign(ds_name, get(load(ds_file)), envir = .GlobalEnv)
-    ds_obj <- get(ds_name)
-    View(ds_obj, title = ds_name)
-    invisible(ds_obj)
+    if (toPlot) {
+        title <- paste0("Tpr = ", as.character(this_tpr))
+        plot(x = tpr$Ppr, y = tpr$z,
+             main = title, xlab = "Ppr", ylab = "z")
+        lines(x = tpr$Ppr_near, y = tpr$z, col = "blue")  # nearest rounded points
+        mtext("z vs Ppr from Standing-Katz chart")        # subtitle
+    }
+    # assign(ds_name, get(load(ds_file)), envir = .GlobalEnv)
+    # ds_obj <- get(ds_name)
+    # View(ds_obj, title = ds_name)
+    # invisible(ds_obj)
+    if (toView) utils::View(tpr, title = .tpr)
+    invisible(tpr)
 }
 
 
