@@ -96,6 +96,16 @@ getStandingKatzCurve(tpr = 1.3, pprRange = 'hp', toView = FALSE, toSave = FALSE)
 ```
 
 
+## At `Tpr = 1.05`
+
+```{r fig.width=5, fig.height=5}
+library(zFactor)
+
+getStandingKatzCurve(tpr = 1.05, pprRange = "lp", toView = FALSE, toSave = FALSE)
+```
+
+
+
 ## More Examples
 
 ```{r}
@@ -132,6 +142,16 @@ tpr_li
 ```
 
 > Note that we have just retrieved the z vs. Ppr data for three Tpr curves with one command. That the power of the `apply` functions family.
+
+## Select a table for a given `Tpr` curve
+Since the function `getStandingKatzData` returns a list of dataframes if we supply a vector of `Tpr` curves, we could select one of those tables by specifying the `Tpr`.
+In this example, we will retrieve the table for `Tpr = `1.3` and show the first 10 rows:
+
+```{r}
+head(tpr_li[["1.3"]], 10)
+```
+
+
 
 ## Get a table/matrix of `z` values for various Ppr and Tpr
 Let's say we want to take a look at the `z` values Standing-Katz chart at specific sets of pseudo-reduced pressure $P_{pr}$ and pseudo-reduced temperatures $T_{pr}$.
