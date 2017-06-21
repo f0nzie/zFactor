@@ -9,9 +9,48 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+## Get `z` at selected `Ppr` and `Tpr`
+
+```{r}
+library(zFactor)
+
+z.HallYarborough(pres.pr = 1.5, temp.pr = 2.0)
+```
+
+From the Standing-Katz chart we obtain a digitized point:
+
+```{r}
+library(zFactor)
+
+tpr_vec <- c(2.0)
+getStandingKatzMatrix(tpr_vector = tpr_vec, 
+                      pprRange = "lp")[1, "1.5"]
+```
 
 
-## 
+
+## Get `z` at selected `Ppr` and `Tpr`
+
+```{r}
+library(zFactor)
+
+z.HallYarborough(pres.pr = 1.5, temp.pr = 1.1)
+```
+
+From the Standing-Katz chart we obtain a digitized point:
+
+```{r}
+library(zFactor)
+
+tpr_vec <- c(1.1)
+getStandingKatzMatrix(tpr_vector = tpr_vec, 
+                      pprRange = "lp")[1, "1.5"]
+```
+
+> We perceve noticeable difference between the values of z from the HY calculation and the value read from the Standing-Katz chart.
+
+
+## Get values of `z` for several `Ppr` and `Tpr`
 
 ```{r}
 # test HY with 1st-derivative using the values from paper 
