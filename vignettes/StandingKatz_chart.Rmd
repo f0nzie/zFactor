@@ -145,26 +145,25 @@ ppr_vec <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5)
 
 # get list of dataframes at given Tpr
 res_li <- lapply(tpr_vec, getStandingKatzData, pprRange = 'lp')
-names(res_li) <- format(round(tpr_vec, 2))    # add Tpr to the rows
+tpr_vec_str <- format(round(tpr_vec, 2), nsmall = 2)
+names(res_li) <- tpr_vec_str   # add Tpr to the rows
 
 # initialize matrix with `Tpr` rows and 0 columns
 tbl_mx <- matrix(nrow = length(tpr_vec), ncol = 0)
 for (p in ppr_vec) {               # iterate through Ppr
     z_vec <- vector("numeric")     # initialize `z` vector
-    for (t in tpr_vec) {           # iterate through Tpr
-        t_str <- as.character(t)   # convert numeric to string    
+    for (t_str in tpr_vec_str) {           # iterate through Tpr
+        # t_str <- as.character(t)   # convert numeric to string    
         df <- res_li[[t_str]]      # extract a dataframe for a Tpr
         # get the `z` value for the Ppr
         z <- df[which(res_li[[t_str]]["Ppr_near"] == p), "z"]
         z_vec <- c(z_vec, z)     # add a new `z` row to the bottom of vector `z_vec`
         z_mx <- matrix(z_vec)    # convert the vector to a matrix
         colnames(z_mx) <- p      # add the column name to the column-vector
-        # print(z_mx)
     }
     tbl_mx <- cbind(tbl_mx, z_mx) # add a clumn-vector to the matrix
 }
-rownames(tbl_mx) <- tpr_vec
-# tbl_mx <-  tbl_mx[, c(2:8)]
+rownames(tbl_mx) <- tpr_vec_str
 tbl_mx
 ```
 
