@@ -1,4 +1,14 @@
+## 20170621, 0.0.0.9009
+
+* add vignette to show how to get data from Standing-Katz chart.
+*  create scripts to generate datasets of z vs. Ppr
+* add function getStandingKatzCurve() that plots, saves and view a Tpr curve
+* add function listStandingKatzCurves() that shows what Tpr curves have been digitized
+* add function getStandingKatzMatrix() to get a table of z -values for Ppr vs Tpr table.
+* add function getCurvesDigitized() that returns a numeric vector of Tpr curves avaialable.
+
 ## 20170620, 0.0.0.9008
+
 * add first vignette to explain the plotting and saving of the SK chart digitized data 
 * add script StandingKatz.R to process raw digitized data from SK chart
 * remove most of the .rda files under ./data It was too crowded and unnecessary. It is bter that the users generates the data bt their own.
