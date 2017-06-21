@@ -74,6 +74,20 @@ getStandingKatzCurve <- function(tpr = 1.3, pprRange = "lp", tolerance = 0.01,
 }
 
 
+#' Read file with readings from Standing-Katz chart. Get only the data
+#'
+#' Read a .txt file that was created from readings of the Standing-Katz chart
+#' and retrieve the points
+#' @param tpr Pseudo-reduced temperature curve in SK chart
+#' @param pprRange Takes one of two values: "lp": low pressure, or "hp" for
+#' high pressure
+#' @export
+getStandingKatzData <- function(tpr = 1.3, pprRange = "lp") {
+    getStandingKatzCurve(tpr = tpr, pprRange = pprRange,
+                         toView = FALSE, toSave = FALSE, toPlot = FALSE)
+
+}
+
 
 #' List all Standing-Katz curves available at Low and High pressures
 #'

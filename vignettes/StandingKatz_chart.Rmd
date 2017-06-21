@@ -11,6 +11,10 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+```{r setup, include=F, error=T, message=F, warning=F}
+knitr::opts_chunk$set(echo=T, comment=NA, error=T, warning=F, message = F, fig.align = 'center')
+```
+
 Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
 
 - Never uses retina figures
@@ -107,4 +111,20 @@ The table show us few rows of the dataset at $T_{pr}$ = 1.3 but also some column
     isNear:   how close is the digitized point to the grid
     Ppr_near: what is the value of the nearest grid value to the point
     diff:     the difference between the Ppr of the point read and the grid
+    
+    
+## Getting tables for multiple pseudo-reduced pressures (Tpr)    
+We will choose not to plot, save ot view any of the results at this time. We limit to obtain the z vs. Ppr data at given $T_{pr}$ values in a vector.
+
+
+```{r}
+library(zFactor)
+
+tpr <- c(1.05, 1.3, 1.5)
+
+lapply(tpr, getStandingKatzData, pprRange = 'lp')
+```
+
+> Note that we have just retrieved the z vs. Ppr data for three Tpr curves with one sentence.
+
 
