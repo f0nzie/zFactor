@@ -33,9 +33,10 @@ getCurvesDigitized <- function(pprRange) {
 
 }
 
-getCurvesDigitized(pprRange = "hp")
+getCurvesDigitized(pprRange = "all")
 
 ```
+
 
 
 ```{r}
