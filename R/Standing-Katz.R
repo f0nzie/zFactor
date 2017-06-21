@@ -117,9 +117,9 @@ getStandingKatzMatrix <- function(ppr_vector, tpr_vector, pprRange = "lp") {
     # create a `z` table (matrix) for a set of Tpr and Ppr
     if (missing(ppr_vector) || missing(tpr_vector))
         stop("You must supply vectors for PPr and Tpr")
-    # tpr_vec <- c(1.3, 1.5, 1.7, 2.0)
-    # ppr_vec <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5)
-
+    if (length(ppr_vector) == 0 || length(tpr_vector) == 0) {
+        stop("Ppr or Tpr vectors must have at least one element")
+    }
     # get a list of dataframes at all given Tpr
     res_li <- lapply(tpr_vector, getStandingKatzData, pprRange)
     tpr_vec_str <- format(round(tpr_vector, 2), nsmall = 2)   # all Tpr with 2 decimals
