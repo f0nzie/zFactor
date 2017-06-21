@@ -144,6 +144,7 @@ ppr_vec <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5)
 getStandingKatzMatrix(ppr_vector = ppr_vec, tpr_vector = tpr_vec)
 ```
 
+> Note that these values are not interpolated; they are raw values read from the Standing-Katz chart.
 
 
 ## Get one `z` point for a `Ppr` at a curve `Tpr`

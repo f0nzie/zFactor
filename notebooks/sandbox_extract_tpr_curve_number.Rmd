@@ -1,0 +1,113 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(zFactor)
+
+# get a number with two decimals
+extractCurveNumber <- function(str) {
+    # numbers WITHOUT including the dot and comma
+    ul <- unlist(regmatches(str, gregexpr('\\(?[0-9]+', str)))
+    curv_num <- as.numeric(ul) / 100
+    curv_num
+}
+
+getCurvesDigitized <- function(pprRange) {
+    range_valid <- c("lp", "hp", "all", "common")
+    if (!pprRange %in% range_valid) stop("Ppr range keyword not valid")
+    
+    if (pprRange == "common") {
+        lp_digit <- listStandingKatzCurves(pprRange = "lp")
+        hp_digit <- listStandingKatzCurves(pprRange = "hp")
+        lp_vec <- sapply(lp_digit, extractCurveNumber)
+        hp_vec <- sapply(hp_digit, extractCurveNumber)
+        intersect(lp_vec, hp_vec)
+    } else {
+        curves_digitized <- listStandingKatzCurves(pprRange = pprRange)
+        curves_vec <- sapply(curves_digitized, extractCurveNumber)
+        names(curves_vec) <- NULL
+        unique(curves_vec)   # only unique values if `all`. intersection of lp and hp
+    }
+
+}
+
+getCurvesDigitized(pprRange = "hp")
+
+```
+
+
+```{r}
+library(zFactor)
+
+# get a number with two decimals
+extractCurveNumber <- function(str) {
+    # numbers WITHOUT including the dot and comma
+    ul <- unlist(regmatches(str, gregexpr('\\(?[0-9]+', str)))
+    curv_num <- as.numeric(ul) / 100
+    curv_num
+}
+
+low_pres <- listStandingKatzCurves(pprRange = 'lp')
+
+res <- sapply(low_pres, extractCurveNumber)
+names(res) <- NULL
+res
+```
+
+
+```{r}
+# get a number with two decimals
+extractCurveNumber <- function(str) {
+    # numbers WITHOUT including the dot and comma
+    ul <- unlist(regmatches(str, gregexpr('\\(?[0-9]+', str)))
+    curv_num <- as.numeric(ul) / 100
+    curv_num
+}
+
+curve <- c("sk_lp_tpr_105.txt")
+extractCurveNumber(curve)
+
+
+```
+
+
+
+
+
+
+
+```{r}
+years<-c("20 years old", "1 years old")
+# pattern is by finding a set of numbers in the start and capturing them
+as.numeric(gsub("([0-9]+).*$", "\\1", years))
+```
+
+```{r}
+curve <- c("sk_lp_tpr_105.txt")
+as.numeric(gsub("([0-9]+).*$", "\\1", curve))
+```
+
+```{r}
+as.numeric(gsub("[[:alpha:]]", "", curve))
+```
+
+```{r}
+x <- gregexpr("^[0-9]+", curve)  # Numbers with any number of digits
+x2 <- as.numeric(unlist(regmatches(curve, x)))
+```
+
+```{r}
+# numbers including the dot and comma
+regmatches(curve, gregexpr('\\(?[0-9,.]+', curve))
+```
+
+```{r}
+# numbers WITHOUT including the dot and comma
+unlist(regmatches(curve, gregexpr('\\(?[0-9]+', curve)))
+```
+
+
+
+

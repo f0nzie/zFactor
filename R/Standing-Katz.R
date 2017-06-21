@@ -112,6 +112,8 @@ listStandingKatzCurves <- function(pprRange = "lp") {
 #'
 #' @param ppr_vector a vector of pseudo-reduced pressure
 #' @param tpr_vector a vector of pseudo-reduced temperatures
+#' @param pprRange Takes one of two values: "lp": low pressure, or "hp" for
+#' high pressure
 #' @export
 getStandingKatzMatrix <- function(ppr_vector, tpr_vector, pprRange = "lp") {
     # create a `z` table (matrix) for a set of Tpr and Ppr
@@ -141,4 +143,39 @@ getStandingKatzMatrix <- function(ppr_vector, tpr_vector, pprRange = "lp") {
     }
     rownames(tbl_mx) <- tpr_vec_str   # add Tpr names to the matrix
     tbl_mx
+}
+
+
+# get a number with two decimals
+extractCurveNumber <- function(str) {
+    # numbers WITHOUT including the dot and comma
+    ul <- unlist(regmatches(str, gregexpr('\\(?[0-9]+', str)))
+    curv_num <- as.numeric(ul) / 100
+    curv_num
+}
+
+
+#' Get a numeric vector of digitized curves available
+#'
+#' @param pprRange Takes one of 4 values: "lp": low pressure, or "hp" for
+#' high pressure; "all": all curves; "common": only curves that are common to hp
+#' and lp
+#' @export
+getCurvesDigitized <- function(pprRange) {
+    range_valid <- c("lp", "hp", "all", "common")
+    if (!pprRange %in% range_valid) stop("Ppr range keyword not valid")
+
+    if (pprRange == "common") {
+        lp_digit <- listStandingKatzCurves(pprRange = "lp")
+        hp_digit <- listStandingKatzCurves(pprRange = "hp")
+        lp_vec <- sapply(lp_digit, extractCurveNumber)
+        hp_vec <- sapply(hp_digit, extractCurveNumber)
+        intersect(lp_vec, hp_vec)
+    } else {
+        curves_digitized <- listStandingKatzCurves(pprRange = pprRange)
+        curves_vec <- sapply(curves_digitized, extractCurveNumber)
+        names(curves_vec) <- NULL
+        unique(curves_vec)   # only unique values if `all`. intersection of lp and hp
+    }
+
 }
