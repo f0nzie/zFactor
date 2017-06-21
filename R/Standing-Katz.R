@@ -106,3 +106,37 @@ listStandingKatzCurves <- function(pprRange = "lp") {
 
     list.files(path = extdata, pattern = pat)
 }
+
+
+#' Generate a matrix of Standing-Katz pseudo-reduced pressure and tenperarture
+#'
+#' @param ppr_vector a vector of pseudo-reduced pressure
+#' @param tpr_vector a vector of pseudo-reduced temperatures
+#' @export
+getStandingKatzMatrix <- function(ppr_vector, tpr_vector, pprRange = "lp") {
+    # create a `z` table (matrix) for a set of Tpr and Ppr
+    # tpr_vec <- c(1.3, 1.5, 1.7, 2.0)
+    # ppr_vec <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5)
+
+    # get a list of dataframes at all given Tpr
+    res_li <- lapply(tpr_vector, getStandingKatzData, pprRange)
+    tpr_vec_str <- format(round(tpr_vector, 2), nsmall = 2)   # all Tpr with 2 decimals
+    # add Tpr names to the dataframes in the list
+    names(res_li) <- tpr_vec_str
+
+    # initialize matrix with `Tpr` rows and 0 columns
+    tbl_mx <- matrix(nrow = length(tpr_vector), ncol = 0)
+    for (p in ppr_vector) {               # iterate through Ppr numeric vector
+        z_vec <- vector("numeric")     # initialize `z` vector
+        for (t_str in tpr_vec_str) {   # iterate through Tpr string vector
+            df <- res_li[[t_str]]      # extract a dataframe from the Tpr list
+            z <- df[which(df["Ppr_near"] == p), "z"] # get `z` value for the Ppr
+            z_vec <- c(z_vec, z)     # add a new `z` row to the bottom of vector `z_vec`
+            z_mx <- matrix(z_vec)    # convert the vector to a matrix
+        }
+        colnames(z_mx) <- p           # add the column name to the column-vector Ppr
+        tbl_mx <- cbind(tbl_mx, z_mx) # add the Ppr column-vector to the matrix
+    }
+    rownames(tbl_mx) <- tpr_vec_str   # add Tpr names to the matrix
+    tbl_mx
+}
