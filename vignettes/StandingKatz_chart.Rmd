@@ -126,7 +126,9 @@ library(zFactor)
 
 tpr <- c(1.05, 1.3, 1.5)
 
-lapply(tpr, getStandingKatzData, pprRange = 'lp')
+tpr_li <- lapply(tpr, getStandingKatzData, pprRange = 'lp')
+names(tpr_li) <- tpr
+tpr_li
 ```
 
 > Note that we have just retrieved the z vs. Ppr data for three Tpr curves with one command. That the power of the `apply` functions family.
@@ -147,10 +149,10 @@ getStandingKatzMatrix(ppr_vector = ppr_vec, tpr_vector = tpr_vec)
 
 > Note that these values are not interpolated; they are raw values read from the Standing-Katz chart.
 
-**NOTE** \\
+**NOTE** \
 In this case we could form a pretty nice matrix of `z` values because we know beforehand that the values of Ppr are common to the given Tpr curves. What does this mean?
 
-This means that we digitized points at exactly these Ppr values `0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5` for these Tpr curves `1.3, 1.5, 1.7, 2.0`. We may not so lucky in creating such a pretty nice looking matrix unless we take care of digitizing the `Tpr` curves at common `Ppr` values. It will always be better to digitized points that are over the 1/10th division of the Standing-Katz grid.
+This means that we digitized points at exactly these Ppr values `0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5` for these Tpr curves `1.3, 1.5, 1.7, 2.0`. We may not be so lucky in creating such a pretty nice looking matrix unless we take care of digitizing the `Tpr` curves at common `Ppr` values. It will always be better to digitized points that are over the 1/10th division of the Standing-Katz grid.
 
 
 ## Smaller sample of z
@@ -182,7 +184,7 @@ getStandingKatzMatrix(ppr_vector = ppr_vec, tpr_vector = tpr_vec,
 ```
 
 ## Getting all Ppr digitized values for a Tpr
-If we don't know what Ppr values have been exactly digitized for a Tpr curve, then we just pull all the Pppr points:
+If we don't know what `Ppr` values have been exactly digitized for a `Tpr` curve, then we just pull all the `Ppr` points:
 
 ```{r}
 library(zFactor)
@@ -192,7 +194,7 @@ getStandingKatzMatrix(tpr_vector = tpr_vec,
                       pprRange = "hp")
 ```
 
-> You can see why were getting the error above; there is no digitized point at Ppr = 8.3 or Ppr = 10. Now, let's try at 8.6 and 15.
+> You can see why were getting the error above; there is no digitized point at `Ppr = 8.3` or `Ppr = 10`. Now, let's try at 8.6 and 15.
 
 ```{r}
 library(zFactor)
@@ -204,30 +206,6 @@ getStandingKatzMatrix(ppr_vector = ppr_vec, tpr_vector = tpr_vec,
 ```
 
 
-```{r}
-library(zFactor)
-
-tpr_vec <- c(1.1)
-df <- getStandingKatzMatrix(tpr_vector = tpr_vec, 
-                      pprRange = "lp")
-df
-
-library(tidyr)
-sp <- spread(df, key = Tpr, value = z)
-am <- as.matrix(sp)
-rownames(am) <- am[, "Ppr_near"]
-am <- am[, c(2:ncol(am))]
-t(am)
-```
-
-```{r}
-library(tidyr)
-sp <- spread(df, key = Tpr, value = z)
-am <- as.matrix(sp)
-rownames(am) <- am[, "Ppr_near"]
-am <- am[, c(2:3)]
-t(am)
-```
 
 
 
