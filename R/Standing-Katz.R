@@ -95,8 +95,9 @@ getStandingKatzData <- function(tpr = 1.3, pprRange = "lp") {
 #' high pressure, or 'all' for all the curve files
 #' @export
 listStandingKatzCurves <- function(pprRange = "lp") {
+    range_valid <- c("lp", "hp", "all")
     # stop if it is not 'lp' or 'hp' or 'all'
-    if (!pprRange %in% c("lp", "hp", "all"))
+    if (!pprRange %in% range_valid)
         stop("Ppr range unknown. It can be 'lp' or 'hp' or 'all'")
 
     extdata <- system.file("extdata", package = "zFactor")  # files are in extdata
