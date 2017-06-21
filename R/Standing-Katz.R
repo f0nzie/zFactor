@@ -152,8 +152,7 @@ getStandingKatzMatrix <- function(ppr_vector, tpr_vector, pprRange = "lp") {
         am <- am[, c(2:ncol(am))]
         t(am)
     } else {
-
-        for (ppr in ppr_vector) {               # iterate through Ppr numeric vector
+        for (ppr in ppr_vector) {          # iterate through Ppr numeric vector
             z_vec <- vector("numeric")     # initialize `z` vector
             for (tpr_str in tpr_vec_str) {   # iterate through Tpr string vector
                 df <- res_li[[tpr_str]]      # extract a dataframe from the Tpr list
@@ -171,7 +170,7 @@ getStandingKatzMatrix <- function(ppr_vector, tpr_vector, pprRange = "lp") {
 }
 
 
-# get a number with two decimals
+# extract the curve number from a digitized file
 extractCurveNumber <- function(str) {
     # numbers WITHOUT including the dot and comma
     ul <- unlist(regmatches(str, gregexpr('\\(?[0-9]+', str)))
@@ -180,7 +179,7 @@ extractCurveNumber <- function(str) {
 }
 
 
-#' Get a numeric vector of digitized curves available
+#' Get a numeric vector of digitized curves available by Tpr
 #'
 #' @param pprRange Takes one of 4 values: "lp": low pressure, or "hp" for
 #' high pressure; "all": all curves; "common": only curves that are common to hp
