@@ -118,11 +118,16 @@ listStandingKatzCurves <- function(pprRange = "lp") {
 #' @export
 getStandingKatzMatrix <- function(ppr_vector, tpr_vector, pprRange = "lp") {
     # create a `z` table (matrix) for a set of Tpr and Ppr
-    if (missing(ppr_vector) || missing(tpr_vector))
-        stop("You must supply vectors for PPr and Tpr")
-    if (length(ppr_vector) == 0 || length(tpr_vector) == 0) {
-        stop("Ppr or Tpr vectors must have at least one element")
-    }
+    range_valid <- c("lp", "hp")
+    if (!pprRange %in% range_valid)
+        stop("Ppr range keyword not valid")
+    if (!all(tpr_vector %in% getCurvesDigitized(pprRange)))
+        stop("One of the Tpr curves is not available")
+    # if (missing(ppr_vector) || missing(tpr_vector))
+    #     stop("You must supply vectors for PPr and Tpr")
+    # if (length(ppr_vector) == 0 || length(tpr_vector) == 0) {
+    #     stop("Ppr or Tpr vectors must have at least one element")}
+
     # get a list of dataframes at all given Tpr
     res_li <- lapply(tpr_vector, getStandingKatzData, pprRange)
     tpr_vec_str <- format(round(tpr_vector, 2), nsmall = 2)   # all Tpr with 2 decimals
@@ -131,19 +136,38 @@ getStandingKatzMatrix <- function(ppr_vector, tpr_vector, pprRange = "lp") {
 
     # initialize matrix with `Tpr` rows and 0 columns
     tbl_mx <- matrix(nrow = length(tpr_vector), ncol = 0)
-    for (ppr in ppr_vector) {               # iterate through Ppr numeric vector
+
+    if (missing(ppr_vector)) {
+        tbl <- data.frame()
         z_vec <- vector("numeric")     # initialize `z` vector
         for (tpr_str in tpr_vec_str) {   # iterate through Tpr string vector
             df <- res_li[[tpr_str]]      # extract a dataframe from the Tpr list
-            z <- df[which(df["Ppr_near"] == ppr), "z"] # get `z` value for the Ppr
-            z_vec <- c(z_vec, z)     # add a new `z` row to the bottom of vector `z_vec`
-            z_mx <- matrix(z_vec)    # convert the vector to a matrix
+            cols2 <- df[c("z", "Ppr_near")]
+            cols2$Tpr <- tpr_str
+            tbl <- rbind(tbl, cols2) # add the Ppr column-vector to the matrix
         }
-        colnames(z_mx) <- ppr           # add the column name to the column-vector Ppr
-        tbl_mx <- cbind(tbl_mx, z_mx) # add the Ppr column-vector to the matrix
+        sp <- tidyr::spread(tbl, key = Tpr, value = z)
+        am <- as.matrix(sp)
+        rownames(am) <- am[, "Ppr_near"]
+        am <- am[, c(2:ncol(am))]
+        t(am)
+    } else {
+
+        for (ppr in ppr_vector) {               # iterate through Ppr numeric vector
+            z_vec <- vector("numeric")     # initialize `z` vector
+            for (tpr_str in tpr_vec_str) {   # iterate through Tpr string vector
+                df <- res_li[[tpr_str]]      # extract a dataframe from the Tpr list
+                z <- df[which(df["Ppr_near"] == ppr), "z"] # get `z` value for the Ppr
+                z_vec <- c(z_vec, z)     # add a new `z` row to the bottom of vector `z_vec`
+                z_mx <- matrix(z_vec)    # convert the vector to a matrix
+            }
+            colnames(z_mx) <- ppr           # add the column name to the column-vector Ppr
+            if (dim(z_mx) == c(0, 1)) stop("Ppr values may not be digitized at this Tpr")
+            tbl_mx <- cbind(tbl_mx, z_mx) # add the Ppr column-vector to the matrix
+        }
+        rownames(tbl_mx) <- tpr_vec_str   # add Tpr names to the matrix
+        tbl_mx
     }
-    rownames(tbl_mx) <- tpr_vec_str   # add Tpr names to the matrix
-    tbl_mx
 }
 
 
