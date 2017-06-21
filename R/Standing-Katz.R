@@ -146,7 +146,7 @@ getStandingKatzMatrix <- function(ppr_vector, tpr_vector, pprRange = "lp") {
             cols2$Tpr <- tpr_str
             tbl <- rbind(tbl, cols2) # add the Ppr column-vector to the matrix
         }
-        sp <- tidyr::spread(tbl, key = Tpr, value = z)
+        sp <- tidyr::spread(tbl, key = "Tpr", value = z)
         am <- as.matrix(sp)
         rownames(am) <- am[, "Ppr_near"]
         am <- am[, c(2:ncol(am))]
