@@ -17,7 +17,7 @@ test_that("test DAK with  using the values from paper", {
 
     rownames(tbl) <- tpr
     colnames(tbl) <- ppr
-    print(tbl)
+    # print(tbl)
     # DPR74 <- tbl; save(DPR74, file = "dpr74.rda")
     load(file = "dpr74.rda")
     expect_equal(tbl, DPR74)

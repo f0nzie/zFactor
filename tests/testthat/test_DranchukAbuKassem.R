@@ -17,7 +17,7 @@ test_that("test DAK between 7 Ppr values and 4 Tpr", {
 
     rownames(tbl) <- tpr
     colnames(tbl) <- ppr
-    print(tbl)
+    # print(tbl)
     # DAK74 <- tbl
     # save(DAK74, file = "dak74.rda")
     load(file = "dak74.rda")
