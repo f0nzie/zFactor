@@ -206,16 +206,6 @@ getStandingKatzMatrix(ppr_vector = ppr_vec, tpr_vector = tpr_vec,
 ```
 
 
-
-
-
-```{r}
-hp_110 <- getStandingKatzData(tpr = 1.2, pprRange = "hp")
-hp_110
-```
-
-
-
 ## Get one `z` point for a `Ppr` at a curve `Tpr`
 
 ```{r}
