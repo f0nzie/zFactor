@@ -127,4 +127,65 @@ lapply(tpr, getStandingKatzData, pprRange = 'lp')
 
 > Note that we have just retrieved the z vs. Ppr data for three Tpr curves with one sentence.
 
+## Get one `z` point for a `Ppr` at a curve `Tpr`
+
+```{r}
+library(zFactor)
+
+tpr_vec <- c(1.3, 1.5, 1.7, 2.0)
+res_li <- lapply(tpr_vec, getStandingKatzData, pprRange = 'lp')
+names(res_li) <- tpr_vec
+res_li
+```
+
+```{r}
+# create z table (matrix) for a set of Tpr and Ppr
+tpr_vec <- c(1.3, 1.5, 1.7, 2.0)
+ppr_vec <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5)
+
+res_li <- lapply(tpr_vec, getStandingKatzData, pprRange = 'lp')
+names(res_li) <- tpr_vec
+
+tbl_mx <- matrix(nrow = length(tpr_vec))
+# tbl_mx <- matrix(byrow = TRUE)
+for (p in ppr_vec) {
+    z_vec <- vector("numeric")
+    for (t in tpr_vec) {
+        t_str <- as.character(t)
+        df <- res_li[[t_str]]
+        z_vec <- c(df[which(res_li[[t_str]]["Ppr_near"] == p), "z"], z_vec)
+        z_mx <- matrix(z_vec)
+        colnames(z_mx) <- p
+    }
+    tbl_mx <- cbind(tbl_mx, z_mx)
+}
+rownames(tbl_mx) <- tpr_vec
+tbl_mx <-  tbl_mx[, c(2:8)]
+tbl_mx
+```
+
+
+```{r}
+library(zFactor)
+
+f <- function(res_li, asked_tpr) {
+    asked_tpr_str <- as.character(asked_tpr)
+    df <- res_li[[asked_tpr_str]]
+    df[which(res_li[[asked_tpr_str]]["Ppr_near"] == asked_ppr), "z"]
+}
+    
+    
+asked_tpr <- 1.5
+asked_ppr <- 2.0
+
+tpr_vec <- c(1.3, 1.5, 1.7, 2.0)
+res_li <- lapply(tpr_vec, getStandingKatzData, pprRange = 'lp')
+names(res_li) <- tpr_vec
+
+
+f(res_li, asked_tpr)
+
+```
+
+
 
