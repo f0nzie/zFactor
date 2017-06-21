@@ -1,14 +1,13 @@
 ---
 title: "Standing-Katz chart data"
 author: "Vignette Author"
-date: "`r Sys.Date()`"
-output: 
-    rmarkdown::html_vignette:
-    fig_caption: yes
-vignette: >
-  %\VignetteIndexEntry{Standing-Katz chart data}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+date: '`r Sys.Date()`'
+output:
+  html_document: default
+  fig_caption: yes
+  rmarkdown::html_vignette: null
+vignette: |
+  %\VignetteIndexEntry{Standing-Katz chart data} %\VignetteEngine{knitr::rmarkdown} %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include=F, error=T, message=F, warning=F}
