@@ -1,3 +1,9 @@
+## 20170620, 0.0.0.9008
+* add first vignette to explain the plotting and saving of the SK chart digitized data 
+* add script StandingKatz.R to process raw digitized data from SK chart
+* remove most of the .rda files under ./data It was too crowded and unnecessary. It is bter that the users generates the data bt their own.
+* renaming digitized data files .txt that follows a convention: sk_lp_tpr_105.txt for low pressure curve at Tpr=1.05, and sk_hp_tpr_150.txt for low pressure curve at Tpr=1.50.
+
 ## 20170616, 0.0.0.9006
 * add notebook `read_digitized.Rmd` to correct data of digitized SK chart. Do not round data points that are not close to the frid lines. The function saves the data in a file corresponding to the name supplied to the CSV file to red. Uses assign and get.
 * create rda files for various values of Tpr in Standing-Katz chart.
