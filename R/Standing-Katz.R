@@ -66,10 +66,6 @@ getStandingKatzCurve <- function(tpr = 1.3, pprRange = "lp", tolerance = 0.01,
         lines(x = tpr$Ppr_near, y = tpr$z, col = "blue")  # nearest rounded points
         mtext("z vs Ppr, Standing-Katz chart")        # subtitle
     }
-    # assign(ds_name, get(load(ds_file)), envir = .GlobalEnv)
-    # ds_obj <- get(ds_name)
-    # View(ds_obj, title = ds_name)
-    # invisible(ds_obj)
     if (toView) utils::View(tpr, title = .tpr)
     invisible(tpr)
 }
