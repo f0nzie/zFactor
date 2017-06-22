@@ -47,27 +47,33 @@ getStandingKatzCurve <- function(tpr = 1.3, pprRange = "lp", tolerance = 0.01,
 
     # add modification "assign(.tpr, tpr)" to store modified dataframe
     assign(.tpr, utils::read.table(data_file, header = TRUE))  # name same as file name
-    tpr <- get(.tpr)               # get the object
-    colnames(tpr)<- c("Ppr", "z")
-    tpr <- tpr[order(tpr$Ppr),]            # sort Ppr
-    tpr$isNear <- isNear(tpr$Ppr)          # round to nearest Ppr
-    tpr$Ppr_near <- ifelse(tpr$isNear, round(tpr$Ppr/.1)*.1, tpr$Ppr)
-    tpr$diff <- tpr$Ppr - tpr$Ppr_near     # find the difference to nearest
-    assign(.tpr, tpr)
+    tpr_obj <- get(.tpr)               # get the object
+    colnames(tpr_obj)<- c("Ppr", "z")
+    tpr_obj <- tpr_obj[order(tpr_obj$Ppr),]            # sort Ppr
+    tpr_obj$isNear <- isNear(tpr_obj$Ppr)          # round to nearest Ppr
+    tpr_obj$Ppr_near <- ifelse(tpr_obj$isNear, round(tpr_obj$Ppr/.1)*.1, tpr_obj$Ppr)
+    tpr_obj$diff <- tpr_obj$Ppr - tpr_obj$Ppr_near     # find the difference to nearest
+    assign(.tpr, tpr_obj)
 
     if (toSave) {
         save(list = .tpr, file = ds_file)     # save with same name as input
     }
     # # as read from SK chart
     if (toPlot) {
-        title <- paste0("Tpr = ", as.character(this_tpr))
-        plot(x = tpr$Ppr, y = tpr$z, ylim = c(0.2, 1.2),
-             main = title, xlab = "Ppr", ylab = "z")
-        lines(x = tpr$Ppr_near, y = tpr$z, col = "blue")  # nearest rounded points
-        mtext("z vs Ppr, Standing-Katz chart")        # subtitle
+        .plotStandingKatzSimple(tpr_obj, tpr)
+
     }
-    if (toView) utils::View(tpr, title = .tpr)
-    invisible(tpr)
+    if (toView) utils::View(tpr_obj, title = .tpr)
+    invisible(tpr_obj)
+}
+
+.plotStandingKatzSimple <- function(tpr_obj, tpr) {
+    this_tpr <- tpr
+    title <- paste0("Tpr = ", as.character(tpr))
+    plot(x = tpr_obj$Ppr, y = tpr_obj$z, ylim = c(0.2, 1.2),
+         main = title, xlab = "Ppr", ylab = "z")
+    lines(x = tpr_obj$Ppr_near, y = tpr_obj$z, col = "blue")  # nearest rounded points
+    mtext("z vs Ppr, Standing-Katz chart")        # subtitle
 }
 
 
