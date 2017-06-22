@@ -17,59 +17,53 @@ getStandingKatzCurve <- function(tpr = 1.3, pprRange = "lp", tolerance = 0.01,
                                  toView = TRUE, toSave = TRUE, toPlot = TRUE) {
     # Read digitized data from Standing-Katz chart, plot it
     # and put it in a .rda file
-    # x: Ppr
-    # y: z
+      #       x: Ppr
+      #       y: z
+    # digitized data files (.txt) are under `extdata`
+    extdata <- system.file("extdata", package = "zFactor")
+
+    # isNear detect if the digitized Ppr is closed the 0.1 grid
     isNear <- function(n) abs(n - round(n, 1)) <= tolerance
 
     # stop if Tpr curve has not been recorded
-    # if (!tpr %in% c(1.05, 1.1, 1.2, 1.3, 1.4, 1.5, 1.7, 2.0, 2.2, 2.4, 2.6, 3.0))
     if (!tpr %in% getCurvesDigitized(pprRange = "all"))
         stop(sprintf("Curve not available at Tpr =%5.2f", tpr))
 
-    # stop if it is not lp or hp PPr
+    # stop if it is not `lp`` or `hp`` Ppr
     if (!pprRange %in% c("lp", "hp"))
         stop("Range unknown. It can be 'lp' or 'hp'")
 
-    extdata <- system.file("extdata", package = "zFactor")  # files are in extdata
-    this_tpr <- tpr
-    tpr_str <- format(round(tpr*100, 2), nsmall = 0)    # two decimals as string
-    dfile <- paste(paste("sk", pprRange, "tpr", tpr_str, sep = "_"),
+    tpr_3dig <- format(round(tpr*100, 2), nsmall = 0)    # two decimals as string
+    dfile <- paste(paste("sk", pprRange, "tpr", tpr_3dig, sep = "_"),
                    "txt", sep = ".")
 
     ds_name <- tools::file_path_sans_ext(dfile)
     ds_file <- paste(ds_name, "rda", sep = ".")
-
     .tpr <- tools::file_path_sans_ext(dfile)            # remove the extension
 
     # stop if no file is found
     data_file <- paste(extdata, dfile, sep = "/")
     if (!file.exists(data_file)) stop(sprintf("File %s does not exist", data_file))
 
-    # add modification "assign(.tpr, tpr)" to store modified dataframe
+    # "assign(.tpr, tpr_obj)" to store modified dataframe
     assign(.tpr, utils::read.table(data_file, header = TRUE))  # name same as file name
-    tpr_obj <- get(.tpr)               # get the object
-    colnames(tpr_obj)<- c("Ppr", "z")
-    tpr_obj <- tpr_obj[order(tpr_obj$Ppr),]            # sort Ppr
+    tpr_obj <- get(.tpr)               # get the object from the string
+    colnames(tpr_obj)<- c("Ppr", "z")              # assign column names
+    tpr_obj <- tpr_obj[order(tpr_obj$Ppr),]        # sort Ppr
     tpr_obj$isNear <- isNear(tpr_obj$Ppr)          # round to nearest Ppr
     tpr_obj$Ppr_near <- ifelse(tpr_obj$isNear, round(tpr_obj$Ppr/.1)*.1, tpr_obj$Ppr)
     tpr_obj$diff <- tpr_obj$Ppr - tpr_obj$Ppr_near     # find the difference to nearest
     assign(.tpr, tpr_obj)
 
-    if (toSave) {
-        save(list = .tpr, file = ds_file)     # save with same name as input
-    }
-    # # as read from SK chart
-    if (toPlot) {
-        .plotStandingKatzSimple(tpr_obj, tpr)
-
-    }
-    if (toView) utils::View(tpr_obj, title = .tpr)
+    if (toSave)  save(list = .tpr, file = ds_file) # save .rda with same name
+    if (toPlot)  .plotStandingKatzSimple(tpr_obj, tpr)  # plot the object
+    if (toView)  utils::View(tpr_obj, title = .tpr)     # view the object
     invisible(tpr_obj)
 }
 
 .plotStandingKatzSimple <- function(tpr_obj, tpr) {
-    this_tpr <- tpr
-    title <- paste0("Tpr = ", as.character(tpr))
+    tpr_s2d <- format(round(tpr, 2), nsmall = 2)
+    title <- paste0("Tpr = ", tpr_s2d)
     plot(x = tpr_obj$Ppr, y = tpr_obj$z, ylim = c(0.2, 1.2),
          main = title, xlab = "Ppr", ylab = "z")
     lines(x = tpr_obj$Ppr_near, y = tpr_obj$z, col = "blue")  # nearest rounded points
