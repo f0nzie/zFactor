@@ -102,9 +102,10 @@ listStandingKatzCurves <- function(pprRange = "lp") {
         stop("Ppr range unknown. It can be 'lp' or 'hp' or 'all'")
 
     extdata <- system.file("extdata", package = "zFactor")  # files are in extdata
-    if (pprRange == "lp") pat  <- "sk_[l]p_tpr_[1,2,3][0-7][0,5].*\\.txt"
+    # regex patterns that identify Tpr curves
+    if (pprRange == "lp") pat  <- "sk_[l]p_tpr_[1,2,3][0-8][0,5].*\\.txt"
     if (pprRange == "hp") pat  <- "sk_[h]p_tpr_[1,2,3][0-7][0,5].*\\.txt"
-    if (pprRange == "all") pat <- "sk_[lh]p_tpr_[1,2,3][0-7][0,5].*\\.txt"
+    if (pprRange == "all") pat <- "sk_[lh]p_tpr_[1,2,3][0-8][0,5].*\\.txt"
 
     list.files(path = extdata, pattern = pat)
 }
