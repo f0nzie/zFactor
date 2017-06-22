@@ -243,5 +243,22 @@ df[which(res_li[[asked_tpr_str]]["Ppr_near"] == asked_ppr), "z"]
 
 ```
 
+## Concatenating Tpr tables
+
+```{r}
+library(zFactor)
+
+tpr <- c(1.05, 1.1, 1.2)
+
+tpr_li <- lapply(tpr, getStandingKatzData, pprRange = 'lp')
+names(tpr_li) <- tpr
+tpr_li
+```
+
+```{r}
+library(data.table)
+rbindlist(tpr_li)
+```
+
 
 
