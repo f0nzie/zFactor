@@ -16,6 +16,7 @@ vignette: >
 ## Get `z` at selected `Ppr` and `Tpr`
 
 ```{r}
+# get a z value using HY
 library(zFactor)
 
 z.HallYarborough(pres.pr = 1.5, temp.pr = 2.0)
@@ -24,6 +25,7 @@ z.HallYarborough(pres.pr = 1.5, temp.pr = 2.0)
 From the Standing-Katz chart we obtain a digitized point:
 
 ```{r}
+# get a z value from the SK chart at the same Ppr and Tpr
 library(zFactor)
 
 tpr_vec <- c(2.0)
@@ -51,7 +53,7 @@ getStandingKatzMatrix(tpr_vector = tpr_vec,
                       pprRange = "lp")[1, "1.5"]
 ```
 
-> We perceve noticeable difference between the values of z from the HY calculation and the value read from the Standing-Katz chart.
+> We perceive a noticeable difference between the values of z from the HY calculation and the value read from the Standing-Katz chart.
 
 
 ## Get values of `z` for several `Ppr` and `Tpr`
@@ -75,14 +77,14 @@ With the same ppr and tpr vector, we do the same for the Standing-Katz chart:
 ```{r}
 library(zFactor)
 
-sk <- getStandingKatzMatrix(ppr_vector = ppr_vec, tpr_vector = tpr_vec)
+sk <- getStandingKatzMatrix(ppr_vector = ppr, tpr_vector = tpr)
 sk
 ```
 
 Subtract and find the difference:
 
 ```{r}
-err <- (sk - hy) / sk * 100
+err <- round((sk - hy) / sk * 100, 2)
 err
 ```
 
@@ -96,7 +98,7 @@ print(colSums(err))
 print(rowSums(err))
 ```
 
-## Analyze the error for smaller values of Tpr
+## Analyze the error for smaller values of `Tpr`
 
 ```{r}
 library(zFactor)
@@ -117,6 +119,7 @@ getStandingKatzMatrix(tpr_vector = c(1.05))
 We do the same with the HY correlation:
 
 ```{r}
+# calculate z values at lower values of Tpr
 library(zFactor)
 
 ppr2 <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5) 
@@ -131,7 +134,7 @@ print(hy2)
 ```
 
 ```{r}
-err2 <- (sk2 - hy2) / sk2 * 100
+err2 <- round((sk2 - hy2) / sk2 * 100, 2)
 err2
 ```
 
