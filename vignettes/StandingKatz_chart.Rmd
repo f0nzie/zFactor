@@ -156,11 +156,13 @@ We use the function `getStandingKatzMatrix()` and provide the Ppr and Tpr vector
 ```{r}
 library(zFactor)
 
-tpr_vec <- c(1.3, 1.5, 1.7, 2.0)
+tpr_vec <- c(1.4, 1.5, 1.6, 1.7, 2.0)
 ppr_vec <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5)
 
 getStandingKatzMatrix(ppr_vector = ppr_vec, tpr_vector = tpr_vec)
 ```
+
+
 
 > Note that these values are not interpolated; they are raw values read from the Standing-Katz chart.
 
