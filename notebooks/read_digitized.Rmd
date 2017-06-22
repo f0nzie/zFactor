@@ -8,7 +8,7 @@ output: html_notebook
 ```{r}
 # add modification "assign(.tpr, tpr)" to store modified dataframe
 # add parameter "tolerance" to allow flexibility in deciding point closeness
-getZcurve2 <- function(dfile, tolerance = 0.01, save = TRUE) {
+getZcurve2 <- function(dfile, tolerance = 0.01, save = FALSE) {
     # Read digitized data from Standing-Katz chart, plot it 
     # and put it in a .rda file
     # x: Ppr
