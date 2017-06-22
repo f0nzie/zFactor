@@ -103,9 +103,9 @@ print(rowSums(err))
 ```{r}
 library(zFactor)
 
+tpr2 <- c(1.05, 1.1) 
+ppr2 <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5) 
 
-ppr2 <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
-tpr2 <- c(1.2) 
 
 sk2 <- getStandingKatzMatrix(ppr_vector = ppr2, tpr_vector = tpr2, pprRange = "lp")
 sk2
@@ -122,9 +122,6 @@ We do the same with the HY correlation:
 # calculate z values at lower values of Tpr
 library(zFactor)
 
-ppr2 <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5) 
-tpr2 <- c(1.05, 1.1) 
-
 hy2 <- sapply(ppr2, function(x)  
     sapply(tpr2, function(y) z.HallYarborough(pres.pr = x, temp.pr = y))) 
  
@@ -138,4 +135,17 @@ err2 <- round((sk2 - hy2) / sk2 * 100, 2)
 err2
 ```
 
-We can see that using Hall-Yarborough correlation shows a very high error at values of Tpr lower or equal than 1.1 being Tpr=1.05 the worst curve to extract z values from.
+We can see that using Hall-Yarborough correlation shows a very high error at values of `Tpr` lower or equal than `1.1` being `Tpr=1.05` the worst curve to extract z values from.
+
+```{r}
+t_err2 <- t(err2)
+t_err2
+```
+
+
+```{r}
+sum_t_err2 <- summary(t_err2)
+sum_t_err2
+```
+
+We can see that the errors in `z` are considerable with a `r sum_t_err2[1,1]`% and `r sum_t_err2[6,1]`% for `Tpr=1.05`, and a `r sum_t_err2[1,2]`% and `r sum_t_err2[6,2]`% for `Tpr=1.10`
