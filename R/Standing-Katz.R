@@ -61,10 +61,10 @@ getStandingKatzCurve <- function(tpr = 1.3, pprRange = "lp", tolerance = 0.01,
     # # as read from SK chart
     if (toPlot) {
         title <- paste0("Tpr = ", as.character(this_tpr))
-        plot(x = tpr$Ppr, y = tpr$z,
+        plot(x = tpr$Ppr, y = tpr$z, ylim = c(0.2, 1.2),
              main = title, xlab = "Ppr", ylab = "z")
         lines(x = tpr$Ppr_near, y = tpr$z, col = "blue")  # nearest rounded points
-        mtext("z vs Ppr from Standing-Katz chart")        # subtitle
+        mtext("z vs Ppr, Standing-Katz chart")        # subtitle
     }
     # assign(ds_name, get(load(ds_file)), envir = .GlobalEnv)
     # ds_obj <- get(ds_name)
