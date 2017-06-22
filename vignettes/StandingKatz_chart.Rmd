@@ -245,20 +245,47 @@ df[which(res_li[[asked_tpr_str]]["Ppr_near"] == asked_ppr), "z"]
 
 ## Concatenating Tpr tables
 
+
 ```{r}
 library(zFactor)
+library(data.table)
 
 tpr <- c(1.05, 1.1, 1.2)
 
 tpr_li <- lapply(tpr, getStandingKatzData, pprRange = 'lp')
 names(tpr_li) <- tpr
-tpr_li
+
+common <- rbindlist(tpr_li, idcol = TRUE)
+common
+```
+
+
+```{r}
+intersect(common$Ppr_near)
 ```
 
 ```{r}
-library(data.table)
-rbindlist(tpr_li)
+unique(common$.id)
+common[common$.id == "1.05", c(".id", "Ppr_near")]$Ppr_near
 ```
 
+```{r}
+# finding the intesected values for the three vectors
+# "1.05" "1.1"  "1.2" 
+intersect(intersect(common[common$.id == "1.05", c(".id", "Ppr_near")]$Ppr_near, common[common$.id == "1.1", c(".id", "Ppr_near")]$Ppr_near), common[common$.id == "1.2", c(".id", "Ppr_near")]$Ppr_near)
+```
 
+```{r}
+# common values of Ppr for Tpr=1.05 and Tpr=1.1
+intersect(common[common$.id == "1.05", c(".id", "Ppr_near")]$Ppr_near, common[common$.id == "1.1", c(".id", "Ppr_near")]$Ppr_near)
+```
+
+```{r}
+intersect(common[common$.id == "1.1", c(".id", "Ppr_near")]$Ppr_near, common[common$.id == "1.2", c(".id", "Ppr_near")]$Ppr_near)
+```
+
+```{r}
+intersect(common[common$.id == "1.05", c(".id", "Ppr_near")]$Ppr_near, common[common$.id == "1.2", c(".id", "Ppr_near")]$Ppr_near)
+```
+```
 
