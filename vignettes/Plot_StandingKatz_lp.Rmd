@@ -17,6 +17,6 @@ getStandingKatzCurve(tpr = 1.05, toSave = FALSE, toView = FALSE)
 
 ```{r}
 tpr_vec <- getCurvesDigitized(pprRange = "lp")
-sapply(tpr_vec, function(x) getStandingKatzCurve(tpr = x, toSave = FALSE, toView = FALSE))
+invisible(sapply(tpr_vec, function(x) getStandingKatzCurve(tpr = x, toSave = FALSE, toView = FALSE)))
 ```
 
