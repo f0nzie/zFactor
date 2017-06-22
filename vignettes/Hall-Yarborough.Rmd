@@ -9,6 +9,10 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+## How do we find the limits of accuracy in the HY correlation
+
+
+
 ## Get `z` at selected `Ppr` and `Tpr`
 
 ```{r}
