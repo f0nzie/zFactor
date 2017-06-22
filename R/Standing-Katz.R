@@ -196,12 +196,12 @@ getCurvesDigitized <- function(pprRange) {
         hp_digit <- listStandingKatzCurves(pprRange = "hp")
         lp_vec <- sapply(lp_digit, extractCurveNumber)
         hp_vec <- sapply(hp_digit, extractCurveNumber)
-        intersect(lp_vec, hp_vec)
+        sort(intersect(lp_vec, hp_vec))
     } else {
         curves_digitized <- listStandingKatzCurves(pprRange = pprRange)
         curves_vec <- sapply(curves_digitized, extractCurveNumber)
         names(curves_vec) <- NULL
-        unique(curves_vec)   # only unique values if `all`. intersection of lp and hp
+        sort(unique(curves_vec))   # only unique values if `all`. intersection of lp and hp
     }
 
 }
