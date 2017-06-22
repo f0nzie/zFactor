@@ -22,7 +22,8 @@ getStandingKatzCurve <- function(tpr = 1.3, pprRange = "lp", tolerance = 0.01,
     isNear <- function(n) abs(n - round(n, 1)) <= tolerance
 
     # stop if Tpr curve has not been recorded
-    if (!tpr %in% c(1.05, 1.1, 1.2, 1.3, 1.4, 1.5, 1.7, 2.0, 2.2, 2.4, 2.6, 3.0))
+    # if (!tpr %in% c(1.05, 1.1, 1.2, 1.3, 1.4, 1.5, 1.7, 2.0, 2.2, 2.4, 2.6, 3.0))
+    if (!tpr %in% getCurvesDigitized(pprRange = "all"))
         stop(sprintf("Curve not available at Tpr =%5.2f", tpr))
 
     # stop if it is not lp or hp PPr
