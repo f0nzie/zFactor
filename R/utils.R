@@ -15,7 +15,7 @@ matrixToDataframe <- function(mat) {
     # convert a Ppr/Tpr matrix do a dataframe
     mat <- cbind(as.double(rownames(mat)), mat)  # new column for Tpr
     rownames(mat) <- NULL           # reset row names
-    df <- as.data.frame(mat)     # dataframe
+    df <- as.data.frame(mat)        # dataframe
     names(df)[1] <- "Tpr"
     df
 }
@@ -38,6 +38,8 @@ combineCorrWithSK <- function(sk_df, co_df) {
     sk_co_tidy <- cbind(sk_tidy, z.calc = co_tidy$z.calcs)
     sk_co_tidy$dif <- sk_co_tidy$z.chart  - sk_co_tidy$z.calc
     colnames(sk_co_tidy)[1:2] <- c("Tpr", "Ppr")
+    sk_co_tidy$Tpr <- as.character(sk_co_tidy$Tpr)
+    sk_co_tidy$Ppr <- as.numeric(sk_co_tidy$Ppr)
     sk_co_tidy
 }
 
@@ -49,6 +51,11 @@ combineCorrWithSK <- function(sk_df, co_df) {
 #' @param correlation a z-factor correlation
 #' @export
 createTidyFromMatrix <- function(ppr_vector, tpr_vector, correlation) {
+    valid_choices <- c("HY", "DAK", "DPR")
+    msg_missing <- "You have to provide a z-factor correlation: 'HY' 'DAK' or 'DPR'."
+    if (missing(correlation)) stop(msg_missing)
+    if (!correlation %in% valid_choices) stop("Not a valid correlation.")
+
     if (correlation == "HY")  zFunction <- z.HallYarborough
     if (correlation == "DAK") zFunction <- z.DranchukAbuKassem
     if (correlation == "DPR") zFunction <- z.DranchukPurvisRobinson
