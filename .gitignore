@@ -1,7 +1,8 @@
 
-*.html
+# *.html
 .Rproj.user
 \.Rhistory
-man/
-NAMESPACE
+#man/
+#NAMESPACE
 inst/doc
+notebooks/*.html
