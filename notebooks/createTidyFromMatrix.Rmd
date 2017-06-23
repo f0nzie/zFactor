@@ -3,8 +3,66 @@ title: "R Notebook"
 output: html_notebook
 ---
 
+
 ```{r}
+matrixToDataframe <- function(mat) {
+    # convert a Ppr/Tpr matrix do a dataframe
+    mat <- cbind(as.double(rownames(mat)), mat)  # new column for Tpr
+    rownames(mat) <- NULL           # reset row names
+    df <- as.data.frame(mat)     # dataframe
+    names(df)[1] <- "Tpr"
+    df
+}
+
+matrixWithCorrelation <- function(ppr_vector, tpr_vector, corr.Function) {
+    # create a matrix using a z-factor correlation function and sapply
+    corr_matrix <- sapply(ppr_vector, function(x)  
+      sapply(tpr_vector, function(y) corr.Function(pres.pr = x, temp.pr = y))) 
+  
+    rownames(corr_matrix) <- tpr_vector
+    colnames(corr_matrix) <- ppr_vector
+    corr_matrix
+}
+
+combineCorrWithSK <- function(sk_df, co_df) {
+    # combine correlation tidy DF with Standing-Katz tidy DF
+    sk_tidy <- tidyr::gather(sk_df, "ppr", "z.chart", 2:ncol(sk_df))
+    co_tidy <- tidyr::gather(co_df, "ppr", "z.calcs", 2:ncol(co_df))
+    
+    sk_co_tidy <- cbind(sk_tidy, z.calc = co_tidy$z.calcs)
+    sk_co_tidy$dif <- sk_co_tidy$z.chart  - sk_co_tidy$z.calc
+    colnames(sk_co_tidy)[1:2] <- c("Tpr", "Ppr")
+    sk_co_tidy
+}
+```
+
+
+```{r}
+
 createTidyFromMatrix <- function(ppr_vector, tpr_vector, correlation = "HY") {
+    sk_matrix <- getStandingKatzMatrix(ppr_vector = ppr2, tpr_vector = tpr2, 
+                                       pprRange = "lp")
+    hy_matrix <- matrixWithCorrelation(ppr2, tpr2, corr.Function = z.HallYarborough)
+    
+    sk_df <- matrixToDataframe(sk_matrix)
+    hy_df <- matrixToDataframe(hy_matrix)
+    
+    sk_hy_tidy <- combineCorrWithSK(sk_df, hy_df)
+    sk_hy_tidy
+}
+
+
+tpr2 <- c(1.05, 1.1, 1.2, 1.4, 1.5, 1.7, 1.8, 1.9, 2.0) 
+ppr2 <- c(0.5, 1.0, 1.5) 
+
+createTidyFromMatrix(ppr2, tpr2)
+
+```
+
+
+
+```{r}
+createTidyFromMatrix2 <- function(ppr_vector, tpr_vector, correlation = "HY") {
     # generic function
     # convert to tidy table for z values calculated by HY and read from SK chart
     corr <- tolower(correlation)
@@ -41,7 +99,7 @@ createTidyFromMatrix <- function(ppr_vector, tpr_vector, correlation = "HY") {
 tpr2 <- c(1.05, 1.1, 1.2, 1.4, 1.5, 1.7, 1.8, 1.9, 2.0) 
 ppr2 <- c(0.5, 1.0, 1.5) 
 
-createTidyFromMatrix(ppr2, tpr2)
+createTidyFromMatrix2(ppr2, tpr2)
 
 ```
 
@@ -50,40 +108,11 @@ createTidyFromMatrix(ppr2, tpr2)
 ```{r}
 library(zFactor)
 
-matrixToDataframe <- function(mat) {
-    # convert a Ppr/Tpr matrix do a dataframe
-    mat <- cbind(as.double(rownames(mat)), mat)  # new column for Tpr
-    rownames(mat) <- NULL           # reset row names
-    df <- as.data.frame(mat)     # dataframe
-    names(df)[1] <- "Tpr"
-    df
-}
 
-matrixWithCorrelation <- function(ppr_vector, tpr_vector, corr.Function) {
-    # create a matrix using a z-factor correlation and sapply
-    corr_matrix <- sapply(ppr_vector, function(x)  
-      sapply(tpr_vector, function(y) corr.Function(pres.pr = x, temp.pr = y))) 
-  
-    rownames(corr_matrix) <- tpr_vector
-    colnames(corr_matrix) <- ppr_vector
-    corr_matrix
-}
-
-combineCorrWithSK <- function(sk_df, co_df) {
-    # combine correlation tidy DF with Standing-Katz tidy DF
-    sk_tidy <- tidyr::gather(sk_df, "ppr", "z.chart", 2:ncol(sk_df))
-    co_tidy <- tidyr::gather(co_df, "ppr", "z.calcs", 2:ncol(co_df))
-    
-    sk_co_tidy <- cbind(sk_tidy, z.calc = co_tidy$z.calcs)
-    sk_co_tidy$dif <- sk_co_tidy$z.chart  - sk_co_tidy$z.calc
-    colnames(sk_co_tidy)[1:2] <- c("Tpr", "Ppr")
-    sk_co_tidy
-}
 
 # generic function
 # convert to tidy table for z values calculated by HY and read from SK chart
 correlation = "HY"
-
 corr <- tolower(correlation)
 
 tpr2 <- c(1.05, 1.1, 1.2, 1.4, 1.5) 
