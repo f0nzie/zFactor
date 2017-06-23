@@ -1,3 +1,6 @@
+## 20170623, 0.0.0.9012
+* disable inst/doc in .gitignore (comment)
+
 ## 20170623, 0.0.0.9011
 * add vignettes for correlations DAK and DPR.
 * perform error analysis on DAK and DPR
