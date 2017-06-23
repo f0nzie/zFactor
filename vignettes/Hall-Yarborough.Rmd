@@ -200,6 +200,8 @@ p <- ggplot(sk_hy_all, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
 print(p)
 ```
 
+> The greatest errors are localized in two of the Tpr curves: 1.05 and 1.1
+
 ## Looking numerically at the errors
 
 ```{r}
