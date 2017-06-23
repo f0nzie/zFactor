@@ -1,0 +1,73 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+## Convert a list of data frames into one data frame
+
+https://stackoverflow.com/q/2851327/5270873
+
+```{r}
+listOfDataFrames <- vector(mode = "list", length = 100)
+
+for (i in 1:100) {
+    listOfDataFrames[[i]] <- data.frame(a=sample(letters, 500, rep=T),
+                             b=rnorm(500), c=rnorm(500))
+}
+
+ df <- do.call("rbind", listOfDataFrames)
+```
+
+
+```{r}
+df_id <- data.table::rbindlist(listOfDataFrames, idcol = TRUE)
+head(df_id)
+```
+
+## merging several data frames into a single expanded frame
+
+https://stackoverflow.com/a/4748770/5270873
+
+```{r}
+data_list <- list()
+data_list[["system1"]] <- read.table(tc <- textConnection("file    cumSize     cumloadTime     query1
+1  ../data/data1.dat    100000      158.1000        0.4333333
+2  ../data/data2.dat    200000      394.9000        0.5000000
+3  ../data/data3.dat    250000      561.8667        0.6666667"), header = TRUE); close(tc)
+
+data_list[["system2"]] <- read.table(tc <- textConnection("file    cumSize     cumloadTime     query1
+1  ../data/data1.dat    100000      120.1000        0.4333333
+2  ../data/data2.dat    200000      244.9000        0.4500000
+3  ../data/data3.dat    250000      261.8667        0.2666667"), header = TRUE); close(tc)
+
+
+for(n in names(data_list)) 
+    data_list[[n]]$system <- n
+
+all_data <- do.call(rbind, data_list)
+```
+
+
+```{r}
+p1 <- ggplot(all_data, aes(cumSize, cumloadTime, color = system)) + geom_line(); p1
+p2 <- ggplot(all_data, aes(cumSize, query1, color = system)) + geom_line(); p2
+```
+
+https://stackoverflow.com/a/4749030/5270873
+
+```{r}
+library(plyr)
+library(reshape)
+d2 <- ldply(data_list)
+cast(d2, cumSize~.id, value_var="cumloadTime")
+cast(d2, cumSize~.id, value_var="query1")
+matplot(d2$cumSize, type="l")
+matplot(d2$cumloadTime, type="l")
+```
+
+```{r}
+d3 <- melt(d2, measure=c("cumloadTime", "query1"))
+ggplot(d3, aes(cumSize, value, colour=.id)) + geom_line() + 
+  facet_wrap(~variable, nrow=2, scale="free_y")
+```
+

@@ -5,6 +5,7 @@
 #' @param temp.pr pseudo-reduced temperature
 #' @param tolerance controls the iteration accuracy
 #' @param verbose print internal
+#' @export
 z.HallYarborough <- function(pres.pr, temp.pr, tolerance = 1E-13,
                              verbose = FALSE) {
     # Hall-Yarborough correlation modified to use the Newton-Raphson method

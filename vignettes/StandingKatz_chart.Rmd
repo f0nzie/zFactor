@@ -1,14 +1,13 @@
 ---
 title: "Standing-Katz chart data"
 author: "Vignette Author"
-date: "`r Sys.Date()`"
-output: 
-    rmarkdown::html_vignette:
-    fig_caption: yes
-vignette: >
-  %\VignetteIndexEntry{Standing-Katz chart data}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+date: '`r Sys.Date()`'
+output:
+  html_document: default
+  fig_caption: yes
+  rmarkdown::html_vignette: null
+vignette: |
+  %\VignetteIndexEntry{Standing-Katz chart data} %\VignetteEngine{knitr::rmarkdown} %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include=F, error=T, message=F, warning=F}
@@ -57,7 +56,7 @@ library(zFactor)
 listStandingKatzCurves(pprRange = 'hp')
 ```
 
-For the low-pressure PPr range:
+For the low-pressure `Ppr` range:
 
 ```{r}
 library(zFactor)
@@ -108,15 +107,11 @@ getStandingKatzCurve(tpr = 1.05, pprRange = "lp", toView = FALSE, toSave = FALSE
 
 ## More Examples
 
-```{r}
+```{r, echo=FALSE, results='asis'}
 library(zFactor)
 
 ds <- getStandingKatzCurve(tpr = 1.3, pprRange = 'hp', 
                            toView = FALSE, toSave = FALSE, toPlot = FALSE)
-```
-
-
-```{r, echo=FALSE, results='asis'}
 knitr::kable(head(ds, 10))
 ```
 
@@ -127,7 +122,7 @@ The table show us few rows of the dataset at $T_{pr}$ = 1.3 but also some column
     diff:     the difference between the Ppr of the point read and the grid
     
     
-## Getting tables for multiple pseudo-reduced pressures (Tpr)    
+## Getting tables for multiple pseudo-reduced pressures (`Tpr`)    
 We will choose not to plot, save ot view any of the results at this time. We limit to obtain the z vs. Ppr data at given $T_{pr}$ values in a vector.
 
 
@@ -153,19 +148,22 @@ head(tpr_li[["1.3"]], 10)
 
 
 
-## Get a table/matrix of `z` values for various Ppr and Tpr
+## Get a table/matrix of `z` values for medium range of Tpr curves
 Let's say we want to take a look at the `z` values Standing-Katz chart at specific sets of pseudo-reduced pressure $P_{pr}$ and pseudo-reduced temperatures $T_{pr}$.
 We use the function `getStandingKatzMatrix()` and provide the Ppr and Tpr vectors.
 
+## `z` values for the medium range of `Tpr` curves
 
 ```{r}
 library(zFactor)
 
-tpr_vec <- c(1.3, 1.5, 1.7, 2.0)
+tpr_vec <- c(1.4, 1.5, 1.6, 1.7, 1.8, 1.9)
 ppr_vec <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5)
 
 getStandingKatzMatrix(ppr_vector = ppr_vec, tpr_vector = tpr_vec)
 ```
+
+
 
 > Note that these values are not interpolated; they are raw values read from the Standing-Katz chart.
 
@@ -174,18 +172,40 @@ In this case we could form a pretty nice matrix of `z` values because we know be
 
 This means that we digitized points at exactly these Ppr values `0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5` for these Tpr curves `1.3, 1.5, 1.7, 2.0`. We may not be so lucky in creating such a pretty nice looking matrix unless we take care of digitizing the `Tpr` curves at common `Ppr` values. It will always be better to digitized points that are over the 1/10th division of the Standing-Katz grid.
 
+## What about the low range `Tpr`?
 
-## Smaller sample of z
+```{r}
+library(zFactor)
+
+tpr_vec <- c(1.05, 1.1, 1.2, 1.3)
+ppr_vec <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5)
+
+getStandingKatzMatrix(ppr_vector = ppr_vec, tpr_vector = tpr_vec)
+```
+
+## Or the high range region of `Tpr`
+
+```{r}
+library(zFactor)
+
+tpr_vec <- c(2.0, 2.2, 2.4, 2.6, 2.8, 3.0)
+ppr_vec <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.0)
+
+getStandingKatzMatrix(ppr_vector = ppr_vec, tpr_vector = tpr_vec)
+```
+
+
+## Smaller sample of `z`
 
 If a smaller sample is required, change the vectors:
 
 ```{r}
 library(zFactor)
 
-tpr_vec <- c(1.1)
-ppr_vec <- c(8.3, 10)
+tpr_vec <- c(1.1, 1.2)
+ppr_vec <- c(1, 2, 3, 4, 5, 6)
 getStandingKatzMatrix(ppr_vector = ppr_vec, tpr_vector = tpr_vec, 
-                      pprRange = "hp")
+                      pprRange = "lp")
 ```
 
 > Again. We knew that there were two Ppr points at the Tpr supplied.
@@ -203,8 +223,8 @@ getStandingKatzMatrix(ppr_vector = ppr_vec, tpr_vector = tpr_vec,
                       pprRange = "hp")
 ```
 
-## Getting all Ppr digitized values for a Tpr
-If we don't know what `Ppr` values have been exactly digitized for a `Tpr` curve, then we just pull all the `Ppr` points:
+## Getting all `Ppr` digitized values for a `Tpr`
+If we don't know what `Ppr` values have been exactly digitized for a `Tpr` curve, then we just pull all the `Ppr` points. In this example, we will work with the `hp` or high pressure `Ppr`:
 
 ```{r}
 library(zFactor)
@@ -244,5 +264,63 @@ df[which(res_li[[asked_tpr_str]]["Ppr_near"] == asked_ppr), "z"]
 
 ```
 
+## Concatenating `Tpr` tables
+
+
+```{r}
+library(zFactor)
+library(data.table)
+
+tpr <- c(1.05, 1.1, 1.2)
+
+tpr_li <- lapply(tpr, getStandingKatzData, pprRange = 'lp')
+names(tpr_li) <- tpr
+
+common <- rbindlist(tpr_li, idcol = TRUE)
+common
+```
+
+## Finding common values of `Ppr`
+
+```{r}
+unique(common$.id)
+common[common$.id == "1.05", c(".id", "Ppr_near")]$Ppr_near
+```
+
+```{r}
+# finding the intesected values for the three vectors
+# "1.05" "1.1"  "1.2" 
+intersect(intersect(common[common$.id == "1.05", c(".id", "Ppr_near")]$Ppr_near, common[common$.id == "1.1", c(".id", "Ppr_near")]$Ppr_near), common[common$.id == "1.2", c(".id", "Ppr_near")]$Ppr_near)
+```
+
+```{r}
+# common values of Ppr for two vectors: Tpr=1.05 and Tpr=1.1
+intersect(common[common$.id == "1.05", c(".id", "Ppr_near")]$Ppr_near, common[common$.id == "1.1", c(".id", "Ppr_near")]$Ppr_near)
+```
+
+```{r}
+# common Ppr values for two vectors: Tpr=1.1 and Tpr=1.2
+intersect(common[common$.id == "1.1", c(".id", "Ppr_near")]$Ppr_near, common[common$.id == "1.2", c(".id", "Ppr_near")]$Ppr_near)
+```
+
+```{r}
+intersect(common[common$.id == "1.05", c(".id", "Ppr_near")]$Ppr_near, common[common$.id == "1.2", c(".id", "Ppr_near")]$Ppr_near)
+```
+
+```{r}
+library(zFactor)
+getCurvesDigitized(pprRange = "all")
+```
+
+
+```{r}
+library(zFactor)
+getCurvesDigitized(pprRange = "lp")
+```
+
+```{r}
+library(zFactor)
+getCurvesDigitized(pprRange = "hp")
+```
 
 

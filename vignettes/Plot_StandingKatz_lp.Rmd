@@ -1,0 +1,22 @@
+---
+title: "Plot Standing-Katz low-pressure charts"
+author: "Vignette Author"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r}
+library(zFactor)
+
+getStandingKatzCurve(tpr = 1.05, toSave = FALSE, toView = FALSE)
+```
+
+```{r}
+tpr_vec <- getCurvesDigitized(pprRange = "lp")
+invisible(sapply(tpr_vec, function(x) getStandingKatzCurve(tpr = x, toSave = FALSE, toView = FALSE)))
+```
+
