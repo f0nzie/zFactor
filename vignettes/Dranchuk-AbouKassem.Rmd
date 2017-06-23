@@ -204,7 +204,7 @@ library(zFactor)
 p <- ggplot(sk_dak_3, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
     geom_line() +
     geom_point() +
-    geom_errorbar(aes(ymin=z.calc-dif, ymax=z.calc+dif), width=.4,
+    geom_errorbar(aes(ymin=z.calc-dif, ymax=z.calc+dif), width=.2,
                   position=position_dodge(0.05))
 print(p)
 ```

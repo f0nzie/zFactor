@@ -38,6 +38,8 @@ combineCorrWithSK <- function(sk_df, co_df) {
     sk_co_tidy <- cbind(sk_tidy, z.calc = co_tidy$z.calcs)
     sk_co_tidy$dif <- sk_co_tidy$z.chart  - sk_co_tidy$z.calc
     colnames(sk_co_tidy)[1:2] <- c("Tpr", "Ppr")
+    sk_co_tidy$Tpr <- as.character(sk_co_tidy$Tpr)
+    sk_co_tidy$Ppr <- as.numeric(sk_co_tidy$Ppr)
     sk_co_tidy
 }
 
