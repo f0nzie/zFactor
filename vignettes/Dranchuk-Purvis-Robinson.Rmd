@@ -7,7 +7,6 @@ vignette: >
   %\VignetteIndexEntry{Dranchuk-Purvis-Robinson}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-  \usepackage[utf8]{inputenc}
 ---
 
 ```{r setup, include=F, error=T, message=F, warning=F}

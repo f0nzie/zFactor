@@ -119,7 +119,7 @@ sk_dpr_2 <- createTidyFromMatrix(ppr2, tpr2, correlation = "DPR")
 sk_dpr_2
 
 ## ------------------------------------------------------------------------
-# library(ggplot2)
+library(ggplot2)
 
 p <- ggplot(sk_dpr_2, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
     geom_line() +
