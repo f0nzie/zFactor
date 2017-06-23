@@ -154,3 +154,15 @@ sum_t_err2
 ```
 
 We can see that the errors in `z` are considerable with a `r sum_t_err2[1,1]`% and `r sum_t_err2[6,1]`% for `Tpr=1.05`, and a `r sum_t_err2[1,2]`% and `r sum_t_err2[6,2]`% for `Tpr=1.10`
+
+## Prepare to plot SK vs HY correlation
+
+```{r}
+library(zFactor)
+
+tpr2 <- c(1.05, 1.1, 1.2, 1.4, 1.5, 1.7, 1.8, 1.9, 2.0) 
+ppr2 <- c(0.5, 1.0, 1.5) 
+
+createTidyFromMatrix(ppr2, tpr2)
+```
+
