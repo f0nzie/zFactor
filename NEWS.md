@@ -1,3 +1,12 @@
+## 20170622, 0.0.0.9010
+* add ggplot with error bars showing difference between Standing-Katz and Hall-Yarborough.
+* create a set of small function for creating a tidy dataset. in utils.R
+* now able to create a matrix from SK chart values given Ppr and Tpr vectors.
+* new vignette showing HY plots
+* add new Tpr curves 1.8, 1.9 to txt datasets
+* Digitizing more Ppr points for several Tpr curves
+
+
 ## 20170621, 0.0.0.9009
 
 * add vignette to show how to get data from Standing-Katz chart.
