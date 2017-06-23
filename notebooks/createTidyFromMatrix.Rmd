@@ -1,0 +1,218 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+```{r}
+matrixToDataframe <- function(mat) {
+    # convert a Ppr/Tpr matrix do a dataframe
+    mat <- cbind(as.double(rownames(mat)), mat)  # new column for Tpr
+    rownames(mat) <- NULL           # reset row names
+    df <- as.data.frame(mat)     # dataframe
+    names(df)[1] <- "Tpr"
+    df
+}
+
+matrixWithCorrelation <- function(ppr_vector, tpr_vector, corr.Function) {
+    # create a matrix using a z-factor correlation function and sapply
+    corr_matrix <- sapply(ppr_vector, function(x)  
+      sapply(tpr_vector, function(y) corr.Function(pres.pr = x, temp.pr = y))) 
+  
+    rownames(corr_matrix) <- tpr_vector
+    colnames(corr_matrix) <- ppr_vector
+    corr_matrix
+}
+
+combineCorrWithSK <- function(sk_df, co_df) {
+    # combine correlation tidy DF with Standing-Katz tidy DF
+    sk_tidy <- tidyr::gather(sk_df, "ppr", "z.chart", 2:ncol(sk_df))
+    co_tidy <- tidyr::gather(co_df, "ppr", "z.calcs", 2:ncol(co_df))
+    
+    sk_co_tidy <- cbind(sk_tidy, z.calc = co_tidy$z.calcs)
+    sk_co_tidy$dif <- sk_co_tidy$z.chart  - sk_co_tidy$z.calc
+    colnames(sk_co_tidy)[1:2] <- c("Tpr", "Ppr")
+    sk_co_tidy
+}
+```
+
+
+```{r}
+
+createTidyFromMatrix <- function(ppr_vector, tpr_vector, correlation = "HY") {
+    sk_matrix <- getStandingKatzMatrix(ppr_vector = ppr2, tpr_vector = tpr2, 
+                                       pprRange = "lp")
+    hy_matrix <- matrixWithCorrelation(ppr2, tpr2, corr.Function = z.HallYarborough)
+    
+    sk_df <- matrixToDataframe(sk_matrix)
+    hy_df <- matrixToDataframe(hy_matrix)
+    
+    sk_hy_tidy <- combineCorrWithSK(sk_df, hy_df)
+    sk_hy_tidy
+}
+
+
+tpr2 <- c(1.05, 1.1, 1.2, 1.4, 1.5, 1.7, 1.8, 1.9, 2.0) 
+ppr2 <- c(0.5, 1.0, 1.5) 
+
+createTidyFromMatrix(ppr2, tpr2)
+
+```
+
+
+
+```{r}
+createTidyFromMatrix2 <- function(ppr_vector, tpr_vector, correlation = "HY") {
+    # generic function
+    # convert to tidy table for z values calculated by HY and read from SK chart
+    corr <- tolower(correlation)
+    
+    sk_matrix <- getStandingKatzMatrix(ppr_vector = ppr2, tpr_vector = tpr2, 
+                                       pprRange = "lp")
+    
+    # create tidy data for z from SK chart
+    sk_matrix_t <- cbind(as.double(rownames(sk_matrix)), sk_matrix)  # new column for Tpr
+    rownames(sk_matrix_t) <- NULL           # reset row names
+    sk_df <- as.data.frame(sk_matrix_t)  # dataframe
+    
+    hy_matrix <- sapply(ppr2, function(x)  
+        sapply(tpr2, function(y) z.HallYarborough(pres.pr = x, temp.pr = y))) 
+    
+    rownames(hy_matrix) <- tpr2
+    colnames(hy_matrix) <- ppr2 
+    
+    hy_matrix_t <- cbind(as.double(rownames(hy_matrix)), hy_matrix)
+    rownames(hy_matrix_t) <- NULL
+    hy_df <- as.data.frame(hy_matrix_t)
+    
+    sk_tidy <- tidyr::gather(sk_df, "ppr", "z.chart", 2:ncol(sk_df))
+    hy_tidy <- tidyr::gather(hy_df, "ppr", "z.calcs", 2:ncol(hy_df))
+    
+    sk_hy_tidy <- cbind(sk_tidy, z.calc = hy_tidy$z.calcs)
+    sk_hy_tidy$dif <- sk_hy_tidy$z.chart  - sk_hy_tidy$z.calc
+    
+    colnames(sk_hy_tidy)[1:2] <- c("Tpr", "Ppr")
+    sk_hy_tidy
+}
+
+
+tpr2 <- c(1.05, 1.1, 1.2, 1.4, 1.5, 1.7, 1.8, 1.9, 2.0) 
+ppr2 <- c(0.5, 1.0, 1.5) 
+
+createTidyFromMatrix2(ppr2, tpr2)
+
+```
+
+
+
+```{r}
+library(zFactor)
+
+
+
+# generic function
+# convert to tidy table for z values calculated by HY and read from SK chart
+correlation = "HY"
+corr <- tolower(correlation)
+
+tpr2 <- c(1.05, 1.1, 1.2, 1.4, 1.5) 
+ppr2 <- c(0.5, 1.0, 1.5) 
+
+sk_matrix <- getStandingKatzMatrix(ppr_vector = ppr2, tpr_vector = tpr2, pprRange = "lp")
+hy_matrix <- matrixWithCorrelation(ppr2, tpr2, corr.Function = z.HallYarborough)
+
+sk_df <- matrixToDataframe(sk_matrix)
+hy_df <- matrixToDataframe(hy_matrix)
+
+sk_hy_tidy <- combineCorrWithSK(sk_df, hy_df)
+sk_hy_tidy
+```
+
+
+```{r}
+sapply(ppr2, function(x)  
+    sapply(tpr2, function(y) z.HallYarborough(pres.pr = x, temp.pr = y))) 
+```
+
+
+
+
+```{r}
+createTidyFromMatrix0 <- function(correlation = "HY") {
+    # generic function
+    # convert to tidy table for z values calculated by HY and read from SK chart
+    pkg_data_path <- system.file("data", package = "zFactor")
+
+    corr <- tolower(correlation)
+    # rda_name <- paste(paste("z", corr, "7p4t", sep = "_"), "rda", sep = ".")
+    # ds_name <- paste(pkg_data_path, rda_name, sep = "/")
+    # corr_rda_file <- paste(pkg_data_path, rda_name, sep = "/")
+
+    # load both tables (matrices)
+    # load(file = "./data/z_sk_chart_7p4t.rda")
+    # load(file = corr_rda_file)
+    tpr2 <- c(1.05, 1.1, 1.2) 
+    ppr2 <- c(0.5, 1.0, 1.5) 
+
+    sk_chart <- getStandingKatzMatrix(ppr_vector = ppr2, tpr_vector = tpr2, pprRange = "lp")
+
+    # create tidy data for z from SK chart
+    sk_short <- cbind(as.double(rownames(sk_short)), sk_short)  # new column for Tpr
+    rownames(sk_short) <- NULL           # reset row names
+    .z_chart <- as.data.frame(sk_short)  # dataframe
+    
+    hy_short <- sapply(ppr2, function(x)  
+        sapply(tpr2, function(y) z.HallYarborough(pres.pr = x, temp.pr = y))) 
+
+    hy_short <- cbind(as.double(rownames(hy_short)), hy_short)
+    rownames(hy_short) <- NULL
+    .z_calcs <- as.data.frame(hy_short)
+
+    z_chart <- tidyr::gather(.z_chart, "ppr", "z.chart", 2:8)
+    z_calcs <- tidyr::gather(.z_calcs, "ppr", "z.calcs", 2:8)
+
+    hy_dif <- cbind(z_chart, z.calc = z_calcs$z.calcs)
+    hy_dif$dif <- hy_dif$z.chart  - hy_dif$z.calc
+
+    colnames(hy_dif)[1:2] <- c("Tpr", "Ppr")
+
+    dif_name <- paste(paste(corr, "dif", sep = "_"), "rda", sep = ".")
+    dif_file <- paste(pkg_data_path, dif_name, sep = "/")
+    save(hy_dif, file = dif_file)
+
+}
+
+
+createTidyFromMatrix0()
+```
+
+```{r}
+library(zFactor)
+
+tpr2 <- c(1.05, 1.1, 1.2) 
+ppr2 <- c(0.5, 1.0, 1.5) 
+
+
+sk2 <- getStandingKatzMatrix(ppr_vector = ppr2, tpr_vector = tpr2, pprRange = "lp")
+sk2
+```
+
+```{r}
+library(zFactor)
+
+tpr_vec <- c(1.4, 1.5, 1.6, 1.7, 1.8, 1.9)
+ppr_vec <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5)
+
+getStandingKatzMatrix(ppr_vector = ppr_vec, tpr_vector = tpr_vec)
+```
+
+```{r}
+library(zFactor)
+
+tpr_vec <- c(1.4, 1.5, 1.6, 1.7, 1.8, 1.9)
+ppr_vec <- c(0.5, 1.0, 2.5, 3.5, 4.5, 5.5, 6.5)
+
+getStandingKatzMatrix(ppr_vector = ppr_vec, tpr_vector = tpr_vec)
+```
+
+

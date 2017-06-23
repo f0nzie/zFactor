@@ -1,46 +1,14 @@
 ---
-title: "Hall and Yarborough"
-output: html_notebook
+title: "Hall-Yarborough exploration with rNodal"
+output:
+  html_document: default
+  html_notebook: default
 ---
-
 
 ```{r setup, include=F, error=T, message=F, warning=F}
 knitr::opts_chunk$set(echo=T, comment=NA, error=T, warning=F, message = F, fig.align = 'center')
 ```
 
-
-
-## From paper by Kareem, Iwalezawa and Al-Marhoun
-Link to paper: https://www.dropbox.com/s/xiaijtokwsu5ykt/JPT%206481%E2%80%93492%20New%20explicit%20correlation%20for%20the%20compressibility%20factor%20of%20natural%20gas%20%5B5star%20petroleum%20zfactor%5D.pdf?dl=0
-
-
-
-![](./images/eq_7_HY_LIM482.jpg)
-
-
-
-## From book Guo, Lyons, Galambor, Petroleum Production Eng.
-The equations are OK bt in the worksheet they use $P_{pr}$ to find $T_{pr}$.
-The Excel workshet is included in this repository for analysis.
-
-
-![](./images/eq_2-52_HY_GLG35.jpg)
-
-
-
-## From paper by Fatoorehchi, Abolghasemi, Rach and Assar
-Link to paper: https://www.dropbox.com/s/3982pt63hi32p6c/10.1002%20cjce.22054%20-%20fatoorehchi2014.pdf?dl=0
-
-### Hall-Yarborough equations
-
-![Hall-Yarborough equations](./images/eq_1-3-HY_FARA.jpg)
-
-### Examples table
-
-![](./images/examples_HY_FARA.jpg)
-
-### Results. Fatoorachi
-![](./images/results_HY_FARA.jpg)
 
 ### Example 1. Fatoorechi paper
 Find z given the data below:
@@ -183,7 +151,7 @@ From the paper, $z = 0.7557$. The difference is very small.
 We do this in order to enter not only sampling pressure and temperature but also be able to provide pseudo-critical and pseudo-reduced pressures and temperatures as well.
 
 ```{r results="hold"}
-source("../R/HY.R")      # modified script saved as HY.R
+source("HY.R")      # modified script saved as HY.R
 
 # supplying gas.sg
 with_gas.sg <- c(method = "use_gas.sg", 
@@ -222,7 +190,7 @@ See R chunk below.
 ### Calculate `z` for various values of $P_{pr}$ and $T_{pr}$
 
 ```{r results="hold"}
-source("../R/HY.R")      # modified script saved as HY.R
+source("HY.R")      # modified script saved as HY.R
 z.hallyarboroughL(pres.pr = 0.5, temp.pr = 1.3)$z     # SK-chart = 0.92  x
 z.hallyarboroughL(pres.pr = 1.5, temp.pr = 1.3)$z     # SK-chart = 0.76  x
 z.hallyarboroughL(pres.pr = 2.5, temp.pr = 1.3)$z     # SK-chart = 0.64
@@ -269,7 +237,7 @@ We will test in the following paragraphs other intervals.
 We start by makng a function out of the chunk below first.
 
 ```{r}
-source("../R/HY.R")  
+source("HY.R")  
 
 ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.6)
 tpr <- c(1.3, 1.5, 1.7, 2)
@@ -290,7 +258,7 @@ plot(x = ppr, y = tbl[4,], type = "l", main = "z @ Tpr = 2.0")
 
 
 ```{r}
-source("../R/HY.R")  
+source("HY.R")  
 library(ggplot2)
 
 testIntervals <- function(interval) {
@@ -342,246 +310,4 @@ The interval (-20, 20) seems safe but (-20, 100) is not.
 ```{r}
 testIntervals(c(-20, 20))
 ```
-
-
-
-## Using the 1st derivative method instead
-
-```{r}
-
-z.HY_derivative <- function(pres.pr, temp.pr, verbose = FALSE) {
-    # Hall-Yarborough correlation modified to use the Newton-Raphson method
-
-    tol <- 1E-13
-    
-    f <- function(y) {
-        - A * pres.pr + (y + y^2 + y^3 - y^4) / (1 - y)^3  - B * y^2 + C * y^D    
-    }
-    
-    fdot <- function(y) {
-        (1 + 4 * y + 4 * y^2 - 4 * y^3 + y^4 ) / (1 - y)^4 - 2 * B * y + C * D * y^(D-1)
-    }
-    
-    t <- 1 / temp.pr
-    A <- 0.06125 * t * exp(-1.2 * (1 - t)^2)
-    B <- t * (14.76 - 9.76 * t + 4.58 * t^2)
-    C <- t * (90.7 - 242.2 * t + 42.4 * t^2)
-    D <- 2.18 + 2.82 * t
-    
-    # first guess for y
-    yk <- 0.0125 * pres.pr * t * exp(-1.2 * (1 - t)^2)
-    delta <- 1
-    i <- 1    # itertations
-    while (delta >= tol) {
-        fyk <- f(yk)
-        if (abs(fyk) < tol) break
-        yk1 <- yk - f(yk) / fdot(yk)
-        delta <- abs(yk - yk1)
-        if (verbose) cat(sprintf("%3d %10f %10f %10f \n", i, delta, yk, fyk))
-        yk <- yk1
-        i <- i + 1
-    }    
-    if (verbose) cat("\n")   
-    y <- yk
-    z <- A * pres.pr / y
-    if (verbose) print(z)
-    return(z)
-}
-
-z.HY_derivative(0.5, 1.3)
-
-```
-
-Now, we test with the the same test values in the Fatooreshi paper.
-
-```{r}
-# test HY with 1st-derivative using the values from paper
-
-ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5)
-tpr <- c(1.3, 1.5, 1.7, 2)
-
-tbl <- sapply(ppr, function(x) 
-    sapply(tpr, function(y) z.HY_derivative(pres.pr = x, temp.pr = y)))
-
-rownames(tbl) <- tpr
-colnames(tbl) <- ppr
-print(tbl)
-
-z_hy_deriv <- tbl
-
-
-library(ggplot2)
-plot(x = ppr, y = tbl[1,], type = "l", main = "z @ Tpr = 1.3", ylab = "z")
-plot(x = ppr, y = tbl[2,], type = "l", main = "z @ Tpr = 1.5", ylab = "z")
-plot(x = ppr, y = tbl[3,], type = "l", main = "z @ Tpr = 1.7", ylab = "z")
-plot(x = ppr, y = tbl[4,], type = "l", main = "z @ Tpr = 2.0", ylab = "z")
-```
-
-### How to the values obtained compare to Standing-Katz chart
-
-Values from Standing and Katz chart
-These values have been read from the SK-chart.
-
-    (0.5, 1.3) = 0.92
-    (1.5, 1.3) = 0.76
-    (2.5, 1.3) = 0.64
-    (3.5, 1.3) = 0.63
-    (4.5, 1.3) = 0.68
-    (5.5, 1.3) = 0.76
-    (6.5, 1.3) = 0.84
-
-    0.5, 1.5 = 0.94
-    1.5, 1.5 = 0.86
-    2.5, 1.5 = 0.79
-    3.5, 1.5 = 0.77
-    4.5, 1.5 = 0.79
-    5.5, 1.5 = 0.84
-    6.5, 1.5 = 0.89
-    
-    (0.5, 1.7) = 0.97
-    (1.5, 1.7) = 0.92
-    (2.5, 1.7) = 0.87
-    (3.5, 1.7) = 0.86
-    (4.5, 1.7) = 0.865
-    (5.5, 1.7) = 0.895
-    (6.5, 1.7) = 0.94  
-    
-    
-    (0.5, 2.0) = 0.985
-    (1.5, 2.0) = 0.957
-    (2.5, 2.0) = 0.941
-    (3.5, 2.0) = 0.938
-    (4.5, 2.0) = 0.945
-    (5.5, 2.0) = 0.97
-    (6.5, 2.0) = 1.01
-
-
-```{r}
-ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5)
-tpr <- c(1.3, 1.5, 1.7, 2)
-
-# data points from Standing-Katz chart
-z <- c(
-    c(0.92, 0.76, 0.64, 0.63, 0.68, 0.76, 0.84),
-    c(0.94, 0.86, 0.79, 0.77, 0.79, 0.84, 0.89),
-    c(0.97, 0.92, 0.87, 0.86, 0.865, 0.895, 0.94),
-    c(0.985, 0.957, 0.941, 0.938, 0.945, 0.97, 1.01)
-    )
-
-
-
-
-# create a matrix of SK chart points
-mx <- matrix(z, nrow = 4, ncol = 7, byrow = TRUE)
-rownames(mx) <- tpr
-colnames(mx) <- ppr
-print(mx)
-
-z_sk_chart <- mx
-save(z_hy_deriv, z_sk_chart, file = "../data/z_hy.rda")
-
-library(ggplot2)
-plot(x = ppr, y = mx[1,], type = "l", main = "z SK @ Tpr = 1.3", ylab = "z")
-lines(x = ppr, y = tbl[1,], col = "red")
-legend("topright", c("F(Y)", "chart"), lty = c(1,1), col = c("black", "red"))
-plot(x = ppr, y = mx[2,], type = "l", main = "z SK @ Tpr = 1.5", ylab = "z")
-lines(x = ppr, y = tbl[2,], col = "red")
-legend("topright", c("F(Y)", "chart"), lty = c(1,1), col = c("black", "red"))
-plot(x = ppr, y = mx[3,], type = "l", main = "z SK @ Tpr = 1.7", ylab = "z")
-lines(x = ppr, y = tbl[3,], col = "red")
-legend("topright", c("F(Y)", "chart"), lty = c(1,1), col = c("black", "red"))
-plot(x = ppr, y = mx[4,], type = "l", main = "z SK @ Tpr = 2.0", ylab = "z")
-lines(x = ppr, y = tbl[4,], col = "red")
-legend("topright", c("F(Y)", "chart"), lty = c(1,1), col = c("black", "red"))
-```
-
-We will compare the two tables:
-
-```{r}
-# calculate the error in percentage
-(tbl - mx) / tbl * 100
-```
-
-
-
-## Limits of Hall-Yarborough correlation
-
-HY is not recommended for $T_{pr} < 1$.
-
-![](./images/HY_correlation_limits-tarek_ahmed.jpg)
-
-
-```{r}
-tbl
-mx
-```
-
-```{r}
-plot(x = tbl[1, ], y = mx[1, ])
-```
-```{r}
-x = tbl[1, ]
-y = mx[1, ]
-pvalues <- data.frame(x = x, y = y)
-```
-
-
-```{r}
-plot(   # If this is a 2-column matrix, then first column pvalues[,1] will be by default the x-axis and second column pvalue[,2] the y-axis
-    # Can be a matrix with 2 columns or a data.frame with 2 columns
-    x = pvalues,
-    # x = tbl[1, ], y = mx[1, ],
-    # Analogous if you have two separated vectors instead of two columns, change to something like:
-    # x = pvalues[,1], # x-axis observation values
-    # y = pvalues[,2], # y-axis observation values
-    # x- and y-axis ranges [0,1]
-    # xlim=c(0, 1), 
-    # ylim=c(0, 1), 
-    xlim = c(0.6, 0.95),
-    ylim = c(0.6, 0.95),
-    # Select filled dots as the symbols
-    pch=16, 
-    # Conditional color vector based on where the observation is located
-    col=apply(pvalues, MARGIN=1, 
-              FUN = function(x) {ifelse(1*x[1] + 0.001 > x[2] & 1*x[1] - 0.001 < x[2], 
-        # Color for dots inside the area (semi-transparent black)
-        "#00000075", 
-        # Color for dots outside the area (semi-transparent blue)
-        "#0000FF75") 
-        } ),
-    # Axis labels
-    xlab="p values in differences condition 1", 
-    ylab="p values in differences condition 2"
-    )
-```
-
-```{r}
-x <- ppr
-y1 <- tbl[1,]
-y2 <- mx[1,]
-plot( seq_along(y1), y1, type="l", col="red" )
-par(new=TRUE)
-plot( seq_along(y2), y2, type="l", col="green" )
-```
-
-
-
-```{r}
-library(ggplot2)
-#df1 is the default dataset for all geoms
-(plot1 <- ggplot(tbl, aes(Ppr, z)) + 
-    geom_point() +
-    geom_step(data = mx)
-)
-```
-
-```{r}
- qplot(y=tbl[1,],x=mx[1,])
- qplot(y=tbl[1,],x=mx[1,]) + geom_jitter(width = 0.01, height = 0.01)
-```
-
-```{r}
- qplot(y=tbl[1,],x=tbl[1,], geom_point(y =mx[1,], x=mx[1,], col = "green"))
-```
-
 

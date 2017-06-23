@@ -1,0 +1,181 @@
+---
+title: "Hall-Yarborough correlation"
+author: "Vignette Author"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Hall-Yarborough}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=F, error=T, message=F, warning=F}
+knitr::opts_chunk$set(echo=T, comment=NA, error=T, warning=F, message = F, fig.align = 'center')
+```
+
+
+## How do we find the limits of accuracy in the HY correlation
+
+
+
+## Get `z` at selected `Ppr` and `Tpr`
+
+```{r}
+# get a z value using HY
+library(zFactor)
+
+z.HallYarborough(pres.pr = 1.5, temp.pr = 2.0)
+```
+
+From the Standing-Katz chart we obtain a digitized point:
+
+```{r}
+# get a z value from the SK chart at the same Ppr and Tpr
+library(zFactor)
+
+tpr_vec <- c(2.0)
+getStandingKatzMatrix(tpr_vector = tpr_vec, 
+                      pprRange = "lp")[1, "1.5"]
+```
+
+
+
+## Get `z` at selected `Ppr` and `Tpr`
+
+```{r}
+library(zFactor)
+
+z.HallYarborough(pres.pr = 1.5, temp.pr = 1.1)
+```
+
+From the Standing-Katz chart we obtain a digitized point:
+
+```{r}
+library(zFactor)
+
+tpr_vec <- c(1.1)
+getStandingKatzMatrix(tpr_vector = tpr_vec, 
+                      pprRange = "lp")[1, "1.5"]
+```
+
+> We perceive a noticeable difference between the values of z from the HY calculation and the value read from the Standing-Katz chart.
+
+
+## Get values of `z` for several `Ppr` and `Tpr`
+
+```{r}
+# test HY with 1st-derivative using the values from paper 
+ 
+ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
+tpr <- c(1.3, 1.5, 1.7, 2) 
+ 
+hy <- sapply(ppr, function(x)  
+    sapply(tpr, function(y) z.HallYarborough(pres.pr = x, temp.pr = y))) 
+ 
+rownames(hy) <- tpr 
+colnames(hy) <- ppr 
+print(hy) 
+```
+
+With the same ppr and tpr vector, we do the same for the Standing-Katz chart:
+
+```{r}
+library(zFactor)
+
+sk <- getStandingKatzMatrix(ppr_vector = ppr, tpr_vector = tpr)
+sk
+```
+
+Subtract and find the difference:
+
+```{r}
+err <- round((sk - hy) / sk * 100, 2)
+err
+```
+
+## Error by Ppr and by PPr
+
+```{r}
+print(colSums(err))
+```
+
+```{r}
+print(rowSums(err))
+```
+
+## Analyze the error for smaller values of `Tpr`
+
+```{r}
+library(zFactor)
+
+tpr2 <- c(1.05, 1.1) 
+ppr2 <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5) 
+
+
+sk2 <- getStandingKatzMatrix(ppr_vector = ppr2, tpr_vector = tpr2, pprRange = "lp")
+sk2
+```
+
+```{r}
+# find what common values of PPr are available in the chart
+getStandingKatzMatrix(tpr_vector = c(1.05))
+```
+
+We do the same with the HY correlation:
+
+```{r}
+# calculate z values at lower values of Tpr
+library(zFactor)
+
+hy2 <- sapply(ppr2, function(x)  
+    sapply(tpr2, function(y) z.HallYarborough(pres.pr = x, temp.pr = y))) 
+ 
+rownames(hy2) <- tpr2
+colnames(hy2) <- ppr2
+print(hy2)
+```
+
+```{r}
+err2 <- round((sk2 - hy2) / sk2 * 100, 2)
+err2
+```
+
+We can see that using Hall-Yarborough correlation shows a very high error at values of `Tpr` lower or equal than `1.1` being `Tpr=1.05` the worst curve to extract z values from.
+
+```{r}
+t_err2 <- t(err2)
+t_err2
+```
+
+
+```{r}
+sum_t_err2 <- summary(t_err2)
+sum_t_err2
+```
+
+We can see that the errors in `z` are considerable with a `r sum_t_err2[1,1]`% and `r sum_t_err2[6,1]`% for `Tpr=1.05`, and a `r sum_t_err2[1,2]`% and `r sum_t_err2[6,2]`% for `Tpr=1.10`
+
+## Prepare to plot SK vs HY correlation
+
+```{r}
+library(zFactor)
+
+tpr2 <- c(1.05, 1.1, 1.2, 1.3) 
+ppr2 <- c(0.5, 1.0, 1.5, 2, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5) 
+
+sk_hy_2 <- createTidyFromMatrix(ppr2, tpr2)
+sk_hy_2
+```
+
+
+```{r}
+library(ggplot2)
+
+p <- ggplot(sk_hy_2, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
+    geom_line() +
+    geom_point() +
+    geom_errorbar(aes(ymin=z.calc-dif, ymax=z.calc+dif), width=.4,
+                  position=position_dodge(0.05))
+print(p)
+```
+
