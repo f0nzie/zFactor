@@ -179,12 +179,56 @@ p <- ggplot(sk_hy_2, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
 print(p)
 ```
 
-## Plot above is not plotting right. Why?
 
+## Analyzing the error for all the `Tpr` curves
 
 ```{r}
-# Tpr should be character
-# Ppr should be numeric
-summary(sk_hy_2)
+library(ggplot2)
+
+# get all `lp` Tpr curves
+tpr_all <- getCurvesDigitized(pprRange = "lp")
+ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
+sk_hy_all <- createTidyFromMatrix(ppr, tpr_all, correlation = "HY")
+sk_hy_all
+
+
+p <- ggplot(sk_hy_all, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
+    geom_line() +
+    geom_point() +
+    geom_errorbar(aes(ymin=z.calc-dif, ymax=z.calc+dif), width=.4,
+                  position=position_dodge(0.05))
+print(p)
+```
+
+## Looking numerically at the errors
+
+```{r}
+# get all `lp` Tpr curves
+tpr <- getCurvesDigitized(pprRange = "lp")
+ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
+
+# calculate HY for the given Tpr
+all_hy <- sapply(ppr, function(x)  
+    sapply(tpr, function(y) z.HallYarborough(pres.pr = x, temp.pr = y))) 
+rownames(all_hy) <- tpr 
+colnames(all_hy) <- ppr 
+cat("Calculated Hall-Yarborough\n")
+print(all_hy) 
+
+cat("\nStanding-Katz chart\n")
+all_sk <- getStandingKatzMatrix(ppr_vector = ppr, tpr_vector = tpr)
+all_sk
+
+# find the error
+cat("\n Errors in percentage \n")
+all_err <- round((all_sk - all_hy) / all_sk * 100, 2)  # in percentage
+all_err
+
+cat("\n Errors in Ppr\n")
+summary(all_err)
+
+# for the transposed matrix
+cat("\n Errors for the transposed matrix: Tpr \n")
+summary(t(all_err))
 ```
 

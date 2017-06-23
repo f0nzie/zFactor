@@ -15,7 +15,7 @@ matrixToDataframe <- function(mat) {
     # convert a Ppr/Tpr matrix do a dataframe
     mat <- cbind(as.double(rownames(mat)), mat)  # new column for Tpr
     rownames(mat) <- NULL           # reset row names
-    df <- as.data.frame(mat)     # dataframe
+    df <- as.data.frame(mat)        # dataframe
     names(df)[1] <- "Tpr"
     df
 }
