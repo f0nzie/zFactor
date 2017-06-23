@@ -3,6 +3,10 @@
 #'
 #' @param str a contnuous long string to split as a vector
 #' @export
+#' @examples
+#' convertStringToVector("1.05 1.10 1.20")
+#' # result: "c(1.05, 1.1, 1.2)"
+#' # now, you can paste the vector in your test
 convertStringToVector <- function(str) {
     vs <- unlist(strsplit(str, " "))
     vn <- as.numeric(vs)
