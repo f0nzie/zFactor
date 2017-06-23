@@ -49,6 +49,11 @@ combineCorrWithSK <- function(sk_df, co_df) {
 #' @param correlation a z-factor correlation
 #' @export
 createTidyFromMatrix <- function(ppr_vector, tpr_vector, correlation) {
+    valid_choices <- c("HY", "DAK", "DPR")
+    msg_missing <- "You have to provide a z-factor correlation: 'HY' 'DAK' or 'DPR'."
+    if (missing(correlation)) stop(msg_missing)
+    if (!correlation %in% valid_choices) stop("Not a valid correlation.")
+
     if (correlation == "HY")  zFunction <- z.HallYarborough
     if (correlation == "DAK") zFunction <- z.DranchukAbuKassem
     if (correlation == "DPR") zFunction <- z.DranchukPurvisRobinson
