@@ -1,9 +1,11 @@
-## 20170623, 0.0.0.9012
+## 20170623, 0.0.1.9000
 * fix createTidyFromMatrix to be able to plot with ggplot using group. Tpr as character, Ppr as numeric.
 * add performance for HY, DAK and DPR. Show errors.
 * add "results='hold'" to knitr header.
+* now able to plot all the Tpr curves with ggplot2
 
 
+## 20170623, 0.0.0.9012
 * disable inst/doc in .gitignore (comment)
 
 ## 20170623, 0.0.0.9011
