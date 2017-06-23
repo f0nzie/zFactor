@@ -169,7 +169,7 @@ sk_hy_2
 
 
 ```{r}
-library(ggplot2)
+# library(ggplot2)
 
 p <- ggplot(sk_hy_2, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
     geom_line() +
