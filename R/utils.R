@@ -48,11 +48,14 @@ combineCorrWithSK <- function(sk_df, co_df) {
 #' @param tpr_vector a pseudo-reduced temperature vector
 #' @param correlation a z-factor correlation
 #' @export
-createTidyFromMatrix <- function(ppr_vector, tpr_vector, correlation = "HY") {
+createTidyFromMatrix <- function(ppr_vector, tpr_vector, correlation) {
+    if (correlation == "HY")  zFunction <- z.HallYarborough
+    if (correlation == "DAK") zFunction <- z.DranchukAbuKassem
+
     sk_matrix <- getStandingKatzMatrix(ppr_vector, tpr_vector,
                                        pprRange = "lp")
     hy_matrix <- matrixWithCorrelation(ppr_vector, tpr_vector,
-                                       corr.Function = z.HallYarborough)
+                                       corr.Function = zFunction)
 
     sk_df <- matrixToDataframe(sk_matrix)
     hy_df <- matrixToDataframe(hy_matrix)
