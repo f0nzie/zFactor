@@ -5,6 +5,7 @@
 #' @param tolerance controls the iteration accuracy
 #' @param verbose print internal calclulations
 #' @rdname Dranchuk-AbouKassem
+#' @export
 z.DranchukAbuKassem <- function(pres.pr, temp.pr, tolerance = 1E-13,
                                 verbose = FALSE) {
     F <- function(rhor)
