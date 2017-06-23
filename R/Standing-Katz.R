@@ -156,10 +156,10 @@ getStandingKatzMatrix <- function(ppr_vector, tpr_vector, pprRange = "lp") {
                 df <- res_li[[tpr_str]]      # extract a dataframe from the Tpr list
                 z <- df[which(df["Ppr_near"] == ppr), "z"] # get `z` value for the Ppr
                 z_vec <- c(z_vec, z)     # add a new `z` row to the bottom of vector `z_vec`
-                z_mx <- matrix(z_vec)    # convert the vector to a matrix
+                z_mx <<- matrix(z_vec)    # convert the vector to a matrix
             }
             colnames(z_mx) <- ppr           # add the column name to the column-vector Ppr
-            if (dim(z_mx) == c(0, 1)) stop("Ppr values may not be digitized at this Tpr")
+            if (dim(z_mx)[1] == 0)      stop("Ppr values may not be digitized at this Tpr")
             tbl_mx <- cbind(tbl_mx, z_mx) # add the Ppr column-vector to the matrix
         }
         rownames(tbl_mx) <- tpr_vec_str   # add Tpr names to the matrix
