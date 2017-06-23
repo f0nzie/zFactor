@@ -4,7 +4,7 @@
 \alias{createTidyFromMatrix}
 \title{Create a tidy table from Ppr and Tpr vectors}
 \usage{
-createTidyFromMatrix(ppr_vector, tpr_vector, correlation = "HY")
+createTidyFromMatrix(ppr_vector, tpr_vector, correlation)
 }
 \arguments{
 \item{ppr_vector}{a pseudo-reduced pressure vector}

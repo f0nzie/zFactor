@@ -10,6 +10,7 @@
 #' @param tolerance controls the iteration accuracy
 #' @param verbose print internal
 #' @rdname Dranchuk-Purvis-Robinson
+#' @export
 z.DranchukPurvisRobinson <- function(pres.pr, temp.pr, tolerance = 1E-13,
                                      verbose = FALSE) {
     F <- function(rhor) {

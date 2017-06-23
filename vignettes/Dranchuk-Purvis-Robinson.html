@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Vignette Author" />
+
+<meta name="date" content="2017-06-23" />
+
+<title>Dranchuk-Purvis-Robinson correlation</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Dranchuk-Purvis-Robinson correlation</h1>
+<h4 class="author"><em>Vignette Author</em></h4>
+<h4 class="date"><em>2017-06-23</em></h4>
+
+
+
+<div id="how-do-we-find-the-limits-of-accuracy-in-the-dak-correlation" class="section level2">
+<h2>How do we find the limits of accuracy in the <code>DAK</code> correlation</h2>
+</div>
+<div id="get-z-at-selected-ppr-and-tpr" class="section level2">
+<h2>Get <code>z</code> at selected <code>Ppr</code> and <code>Tpr</code></h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get a z value using HY</span>
+<span class="kw">library</span>(zFactor)
+
+<span class="kw">z.DranchukPurvisRobinson</span>(<span class="dt">pres.pr =</span> <span class="fl">1.5</span>, <span class="dt">temp.pr =</span> <span class="fl">2.0</span>)</code></pre></div>
+<pre><code>[1] 0.9546382</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># HY = 0.9580002</span></code></pre></div>
+<p>From the Standing-Katz chart we obtain a digitized point at the same <code>Ppr</code> and <code>Tpr</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get a z value from the SK chart at the same Ppr and Tpr</span>
+<span class="kw">library</span>(zFactor)
+
+tpr_vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">2.0</span>)
+<span class="kw">getStandingKatzMatrix</span>(<span class="dt">tpr_vector =</span> tpr_vec, 
+                      <span class="dt">pprRange =</span> <span class="st">&quot;lp&quot;</span>)[<span class="dv">1</span>, <span class="st">&quot;1.5&quot;</span>]</code></pre></div>
+<pre><code>  1.5 
+0.956 </code></pre>
+<p>It looks pretty good.</p>
+</div>
+<div id="get-z-at-selected-ppr-and-tpr-1" class="section level2">
+<h2>Get <code>z</code> at selected <code>Ppr</code> and <code>Tpr</code></h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zFactor)
+
+<span class="kw">z.DranchukPurvisRobinson</span>(<span class="dt">pres.pr =</span> <span class="fl">1.5</span>, <span class="dt">temp.pr =</span> <span class="fl">1.1</span>)</code></pre></div>
+<pre><code>[1] 0.4429389</code></pre>
+<p>From the <code>Standing-Katz</code> chart we obtain a digitized point:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zFactor)
+
+tpr_vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.1</span>)
+<span class="kw">getStandingKatzMatrix</span>(<span class="dt">tpr_vector =</span> tpr_vec, 
+                      <span class="dt">pprRange =</span> <span class="st">&quot;lp&quot;</span>)[<span class="dv">1</span>, <span class="st">&quot;1.5&quot;</span>]</code></pre></div>
+<pre><code>  1.5 
+0.426 </code></pre>
+<p>At lower <code>Tpr</code> we can see that there is some error.</p>
+<blockquote>
+<p>We perceive a difference between the values of z from the DAK calculation and the value read from the Standing-Katz chart.</p>
+</blockquote>
+</div>
+<div id="get-values-of-z-for-several-ppr-and-tpr" class="section level2">
+<h2>Get values of <code>z</code> for several <code>Ppr</code> and <code>Tpr</code></h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># test HY with 1st-derivative using the values from paper </span>
+ 
+ppr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="fl">3.5</span>, <span class="fl">4.5</span>, <span class="fl">5.5</span>, <span class="fl">6.5</span>) 
+tpr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.3</span>, <span class="fl">1.5</span>, <span class="fl">1.7</span>, <span class="dv">2</span>) 
+ 
+dpr &lt;-<span class="st"> </span><span class="kw">sapply</span>(ppr, function(x)  
+    <span class="kw">sapply</span>(tpr, function(y) <span class="kw">z.DranchukPurvisRobinson</span>(<span class="dt">pres.pr =</span> x, <span class="dt">temp.pr =</span> y))) 
+ 
+<span class="kw">rownames</span>(dpr) &lt;-<span class="st"> </span>tpr 
+<span class="kw">colnames</span>(dpr) &lt;-<span class="st"> </span>ppr 
+<span class="kw">print</span>(dpr)</code></pre></div>
+<pre><code>          0.5       1.5       2.5       3.5       4.5       5.5       6.5
+1.3 0.9197157 0.7525940 0.6366665 0.6337883 0.6891997 0.7650171 0.8480804
+1.5 0.9504834 0.8583491 0.7926325 0.7720713 0.7914322 0.8348883 0.8915239
+1.7 0.9677844 0.9121791 0.8752677 0.8630002 0.8743271 0.9033216 0.9440582
+2   0.9822021 0.9546382 0.9399310 0.9391490 0.9512966 0.9740256 1.0047347</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Hall-Yarborough</span>
+<span class="co">#    0.5       1.5       2.5       3.5       4.5       5.5       6.5</span>
+<span class="co"># 1.3 0.9176300 0.7534433 0.6399020 0.6323003 0.6881127 0.7651710 0.8493794</span>
+<span class="co"># 1.5 0.9496855 0.8581232 0.7924067 0.7687902 0.7868071 0.8316848 0.8906351</span>
+<span class="co"># 1.7 0.9682547 0.9134862 0.8756412 0.8605668 0.8694525 0.8978885 0.9396353</span>
+<span class="co"># 2   0.9838234 0.9580002 0.9426939 0.9396286 0.9490995 0.9697839 0.9994317</span></code></pre></div>
+<p>With the same <code>ppr</code> and <code>tpr</code> vectors, we do the same for the Standing-Katz chart:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zFactor)
+
+sk &lt;-<span class="st"> </span><span class="kw">getStandingKatzMatrix</span>(<span class="dt">ppr_vector =</span> ppr, <span class="dt">tpr_vector =</span> tpr)
+sk</code></pre></div>
+<pre><code>       0.5   1.5   2.5   3.5   4.5   5.5   6.5
+1.30 0.916 0.756 0.638 0.633 0.684 0.759 0.844
+1.50 0.948 0.859 0.794 0.770 0.790 0.836 0.892
+1.70 0.968 0.914 0.876 0.857 0.864 0.897 0.942
+2.00 0.982 0.956 0.941 0.937 0.945 0.969 1.003</code></pre>
+<p>Subtract and find the difference:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">err &lt;-<span class="st"> </span><span class="kw">round</span>((sk -<span class="st"> </span>dpr) /<span class="st"> </span>sk *<span class="st"> </span><span class="dv">100</span>, <span class="dv">2</span>)
+err</code></pre></div>
+<pre><code>       0.5  1.5  2.5   3.5   4.5   5.5   6.5
+1.30 -0.41 0.45 0.21 -0.12 -0.76 -0.79 -0.48
+1.50 -0.26 0.08 0.17 -0.27 -0.18  0.13  0.05
+1.70  0.02 0.20 0.08 -0.70 -1.20 -0.70 -0.22
+2.00 -0.02 0.14 0.11 -0.23 -0.67 -0.52 -0.17</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># DAK</span>
+<span class="co"># 0.5   1.5  2.5   3.5   4.5   5.5   6.5</span>
+<span class="co"># 1.30 -0.47  0.22 0.03 -0.15 -0.85 -0.97 -0.71</span>
+<span class="co"># 1.50 -0.31 -0.04 0.13 -0.14  0.05  0.34  0.18</span>
+<span class="co"># 1.70 -0.01  0.13 0.07 -0.58 -0.94 -0.38  0.11</span>
+<span class="co"># 2.00 -0.05  0.09 0.10 -0.16 -0.50 -0.26  0.14</span></code></pre></div>
+</div>
+<div id="error-by-ppr-and-by-ppr" class="section level2">
+<h2>Error by Ppr and by PPr</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="kw">colSums</span>(err))</code></pre></div>
+<pre><code>  0.5   1.5   2.5   3.5   4.5   5.5   6.5 
+-0.67  0.87  0.57 -1.32 -2.81 -1.88 -0.82 </code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="kw">rowSums</span>(err))</code></pre></div>
+<pre><code> 1.30  1.50  1.70  2.00 
+-1.90 -0.28 -2.52 -1.36 </code></pre>
+</div>
+<div id="analyze-the-error-for-smaller-values-of-tpr" class="section level2">
+<h2>Analyze the error for smaller values of <code>Tpr</code></h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zFactor)
+
+tpr2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.05</span>, <span class="fl">1.1</span>) 
+ppr2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="fl">3.5</span>, <span class="fl">4.5</span>, <span class="fl">5.5</span>) 
+
+
+sk2 &lt;-<span class="st"> </span><span class="kw">getStandingKatzMatrix</span>(<span class="dt">ppr_vector =</span> ppr2, <span class="dt">tpr_vector =</span> tpr2, <span class="dt">pprRange =</span> <span class="st">&quot;lp&quot;</span>)
+sk2</code></pre></div>
+<pre><code>       0.5   1.5   2.5   3.5   4.5   5.5
+1.05 0.829 0.253 0.343 0.471 0.598 0.727
+1.10 0.854 0.426 0.393 0.500 0.615 0.729</code></pre>
+<p>We do the same with the DPR correlation:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># calculate z values at lower values of Tpr</span>
+<span class="kw">library</span>(zFactor)
+
+dpr2 &lt;-<span class="st"> </span><span class="kw">sapply</span>(ppr2, function(x)  
+    <span class="kw">sapply</span>(tpr2, function(y) <span class="kw">z.DranchukPurvisRobinson</span>(<span class="dt">pres.pr =</span> x, <span class="dt">temp.pr =</span> y))) 
+ 
+<span class="kw">rownames</span>(dpr2) &lt;-<span class="st"> </span>tpr2
+<span class="kw">colnames</span>(dpr2) &lt;-<span class="st"> </span>ppr2
+<span class="kw">print</span>(dpr2)</code></pre></div>
+<pre><code>           0.5       1.5       2.5       3.5       4.5       5.5
+1.05 0.8299757 0.2849670 0.3874732 0.5071451 0.6251306 0.7407256
+1.1  0.8566368 0.4429389 0.4120547 0.5173680 0.6278497 0.7376397</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">err2 &lt;-<span class="st"> </span><span class="kw">round</span>((sk2 -<span class="st"> </span>dpr2) /<span class="st"> </span>sk2 *<span class="st"> </span><span class="dv">100</span>, <span class="dv">2</span>)
+err2</code></pre></div>
+<pre><code>       0.5    1.5    2.5   3.5   4.5   5.5
+1.05 -0.12 -12.64 -12.97 -7.67 -4.54 -1.89
+1.10 -0.31  -3.98  -4.85 -3.47 -2.09 -1.19</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># DAK</span>
+<span class="co"># 0.5    1.5    2.5   3.5   4.5   5.5</span>
+<span class="co"># 1.05 -0.13 -12.15 -12.78 -7.49 -4.34 -1.68</span>
+<span class="co"># 1.10 -0.36  -4.79  -4.97 -3.56 -2.14 -1.21</span></code></pre></div>
+<!-- We can see that using Hall-Yarborough correlation shows a very high error at values of `Tpr` lower or equal than `1.1` being `Tpr=1.05` the worst curve to extract z values from. -->
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t_err2 &lt;-<span class="st"> </span><span class="kw">t</span>(err2)
+t_err2</code></pre></div>
+<pre><code>      1.05  1.10
+0.5  -0.12 -0.31
+1.5 -12.64 -3.98
+2.5 -12.97 -4.85
+3.5  -7.67 -3.47
+4.5  -4.54 -2.09
+5.5  -1.89 -1.19</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sum_t_err2 &lt;-<span class="st"> </span><span class="kw">summary</span>(t_err2)
+sum_t_err2</code></pre></div>
+<pre><code>      1.05              1.10       
+ Min.   :-12.970   Min.   :-4.850  
+ 1st Qu.:-11.398   1st Qu.:-3.853  
+ Median : -6.105   Median :-2.780  
+ Mean   : -6.638   Mean   :-2.648  
+ 3rd Qu.: -2.553   3rd Qu.:-1.415  
+ Max.   : -0.120   Max.   :-0.310  </code></pre>
+<p>We can see that the errors in <code>z</code> with <code>DAK</code> are less than <code>HY</code> with a Min. :-12.970 % and Max. : -0.120 % for <code>Tpr=1.05</code>, and a Min. :-4.850 % and Max. :-0.310 % for <code>Tpr=1.10</code>. But there are still errors.</p>
+</div>
+<div id="prepare-to-plot-sk-vs-dpr-correlation" class="section level2">
+<h2>Prepare to plot SK vs DPR correlation</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zFactor)
+
+tpr2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.05</span>, <span class="fl">1.1</span>, <span class="fl">1.2</span>, <span class="fl">1.3</span>) 
+ppr2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.0</span>, <span class="fl">1.5</span>, <span class="dv">2</span>, <span class="fl">2.5</span>, <span class="fl">3.0</span>, <span class="fl">3.5</span>, <span class="fl">4.0</span>, <span class="fl">4.5</span>, <span class="fl">5.0</span>, <span class="fl">5.5</span>, <span class="fl">6.0</span>, <span class="fl">6.5</span>) 
+
+sk_dpr_2 &lt;-<span class="st"> </span><span class="kw">createTidyFromMatrix</span>(ppr2, tpr2, <span class="dt">correlation =</span> <span class="st">&quot;DPR&quot;</span>)
+sk_dpr_2</code></pre></div>
+<pre><code>    Tpr Ppr z.chart    z.calc           dif
+1  1.05 0.5   0.829 0.8299757 -9.756528e-04
+2  1.10 0.5   0.854 0.8566368 -2.636770e-03
+3  1.20 0.5   0.893 0.8944622 -1.462194e-03
+4  1.30 0.5   0.916 0.9197157 -3.715667e-03
+5  1.05   1   0.589 0.5856680  3.332038e-03
+6  1.10   1   0.669 0.6758858 -6.885762e-03
+7  1.20   1   0.779 0.7769542  2.045763e-03
+8  1.30   1   0.835 0.8359886 -9.885692e-04
+9  1.05 1.5   0.253 0.2849670 -3.196704e-02
+10 1.10 1.5   0.426 0.4429389 -1.693892e-02
+11 1.20 1.5   0.657 0.6506542  6.345814e-03
+12 1.30 1.5   0.756 0.7525940  3.406014e-03
+13 1.05   2   0.280 0.3290685 -4.906852e-02
+14 1.10   2   0.369 0.3757720 -6.771972e-03
+15 1.20   2   0.554 0.5502455  3.754494e-03
+16 1.30   2   0.684 0.6807881  3.211929e-03
+17 1.05 2.5   0.343 0.3874732 -4.447320e-02
+18 1.10 2.5   0.393 0.4120547 -1.905468e-02
+19 1.20 2.5   0.519 0.5167723  2.227720e-03
+20 1.30 2.5   0.638 0.6366665  1.333481e-03
+21 1.05   3   0.407 0.4473627 -4.036272e-02
+22 1.10   3   0.440 0.4630459 -2.304590e-02
+23 1.20   3   0.534 0.5292132  4.786753e-03
+24 1.30   3   0.624 0.6239211  7.894956e-05
+25 1.05 3.5   0.471 0.5071451 -3.614511e-02
+26 1.10 3.5   0.500 0.5173680 -1.736796e-02
+27 1.20 3.5   0.565 0.5620069  2.993100e-03
+28 1.30 3.5   0.633 0.6337883 -7.883068e-04
+29 1.05   4   0.534 0.5664346 -3.243459e-02
+30 1.10   4   0.557 0.5725654 -1.556540e-02
+31 1.20   4   0.607 0.6033862  3.613773e-03
+32 1.30   4   0.653 0.6574471 -4.447117e-03
+33 1.05 4.5   0.598 0.6251306 -2.713061e-02
+34 1.10 4.5   0.615 0.6278497 -1.284975e-02
+35 1.20 4.5   0.650 0.6486093  1.390669e-03
+36 1.30 4.5   0.684 0.6891997 -5.199685e-03
+37 1.05   5   0.663 0.6832213 -2.022133e-02
+38 1.10   5   0.673 0.6829166 -9.916605e-03
+39 1.20   5   0.695 0.6956520 -6.519911e-04
+40 1.30   5   0.719 0.7256985 -6.698527e-03
+41 1.05 5.5   0.727 0.7407256 -1.372564e-02
+42 1.10 5.5   0.729 0.7376397 -8.639653e-03
+43 1.20 5.5   0.741 0.7435619 -2.561944e-03
+44 1.30 5.5   0.759 0.7650171 -6.017052e-03
+45 1.05   6   0.786 0.7976728 -1.167279e-02
+46 1.10   6   0.784 0.7919680 -7.967989e-03
+47 1.20   6   0.789 0.7918517 -2.851738e-03
+48 1.30   6   0.802 0.8060342 -4.034249e-03
+49 1.05 6.5   0.846 0.8540945 -8.094486e-03
+50 1.10 6.5   0.841 0.8458855 -4.885521e-03
+51 1.20 6.5   0.841 0.8402555  7.445475e-04
+52 1.30 6.5   0.844 0.8480804 -4.080388e-03</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># library(ggplot2)</span>
+
+p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_dpr_2, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z.calc, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) +
+<span class="st">    </span><span class="kw">geom_line</span>() +
+<span class="st">    </span><span class="kw">geom_point</span>() +
+<span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc-dif, <span class="dt">ymax=</span>z.calc+dif), <span class="dt">width=</span>.<span class="dv">4</span>,
+                  <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.05</span>))</code></pre></div>
+<pre><code>Error in ggplot(sk_dpr_2, aes(x = Ppr, y = z.calc, group = Tpr, color = Tpr)): could not find function &quot;ggplot&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(p)</code></pre></div>
+<pre><code>Error in print(p): object 'p' not found</code></pre>
+<p>We can see with Dranchuk-AbouKassem there are still errors or differences between the values in the Standing-Katz chart and the values obtained from the correlation but they are not so bad as in the HY correlation.</p>
+</div>
+<div id="analysis-at-the-lowest-tpr" class="section level2">
+<h2>Analysis at the lowest <code>Tpr</code></h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sk_dpr_3 &lt;-<span class="st"> </span>sk_dpr_2[sk_dpr_2$Tpr==<span class="fl">1.05</span>,]
+sk_dpr_3</code></pre></div>
+<pre><code>    Tpr Ppr z.chart    z.calc           dif
+1  1.05 0.5   0.829 0.8299757 -0.0009756528
+5  1.05   1   0.589 0.5856680  0.0033320375
+9  1.05 1.5   0.253 0.2849670 -0.0319670358
+13 1.05   2   0.280 0.3290685 -0.0490685223
+17 1.05 2.5   0.343 0.3874732 -0.0444731970
+21 1.05   3   0.407 0.4473627 -0.0403627209
+25 1.05 3.5   0.471 0.5071451 -0.0361451067
+29 1.05   4   0.534 0.5664346 -0.0324345927
+33 1.05 4.5   0.598 0.6251306 -0.0271306123
+37 1.05   5   0.663 0.6832213 -0.0202213318
+41 1.05 5.5   0.727 0.7407256 -0.0137256422
+45 1.05   6   0.786 0.7976728 -0.0116727857
+49 1.05 6.5   0.846 0.8540945 -0.0080944856</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zFactor)
+
+p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_dpr_3, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z.calc, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) +
+<span class="st">    </span><span class="kw">geom_line</span>() +
+<span class="st">    </span><span class="kw">geom_point</span>() +
+<span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc-dif, <span class="dt">ymax=</span>z.calc+dif), <span class="dt">width=</span>.<span class="dv">4</span>,
+                  <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.05</span>))</code></pre></div>
+<pre><code>Error in ggplot(sk_dpr_3, aes(x = Ppr, y = z.calc, group = Tpr, color = Tpr)): could not find function &quot;ggplot&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(p)</code></pre></div>
+<pre><code>Error in print(p): object 'p' not found</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(sk_dpr_3)</code></pre></div>
+<pre><code>      Tpr           Ppr               z.chart           z.calc      
+ Min.   :1.05   Length:13          Min.   :0.2530   Min.   :0.2850  
+ 1st Qu.:1.05   Class :character   1st Qu.:0.4070   1st Qu.:0.4474  
+ Median :1.05   Mode  :character   Median :0.5890   Median :0.5857  
+ Mean   :1.05                      Mean   :0.5635   Mean   :0.5876  
+ 3rd Qu.:1.05                      3rd Qu.:0.7270   3rd Qu.:0.7407  
+ Max.   :1.05                      Max.   :0.8460   Max.   :0.8541  
+      dif           
+ Min.   :-0.049069  
+ 1st Qu.:-0.036145  
+ Median :-0.027131  
+ Mean   :-0.024072  
+ 3rd Qu.:-0.011673  
+ Max.   : 0.003332  </code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"> <span class="co"># dif     DAK      </span>
+ <span class="co"># Min.   :-0.048404  </span>
+ <span class="co"># 1st Qu.:-0.035300  </span>
+ <span class="co"># Median :-0.025978  </span>
+ <span class="co"># Mean   :-0.023178  </span>
+ <span class="co"># 3rd Qu.:-0.009960  </span>
+ <span class="co"># Max.   : 0.002325</span></code></pre></div>
+<p>We can that there is much difference between DAK and DPR; both present similar errors.</p>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
