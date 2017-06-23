@@ -1,3 +1,10 @@
+## 20170623, 0.0.0.9011
+* add vignettes for correlations DAK and DPR.
+* perform error analysis on DAK and DPR
+* enabled build vignettes with roxygen
+* now createTidyFromMatrix can work with DAK and DPR.
+* add ggplot2 to imports
+
 ## 20170622, 0.0.0.9010
 * add ggplot with error bars showing difference between Standing-Katz and Hall-Yarborough.
 * create a set of small function for creating a tidy dataset. in utils.R
