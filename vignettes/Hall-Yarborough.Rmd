@@ -10,7 +10,7 @@ vignette: >
 ---
 
 ```{r setup, include=F, error=T, message=F, warning=F}
-knitr::opts_chunk$set(echo=T, comment=NA, error=T, warning=F, message = F, fig.align = 'center')
+knitr::opts_chunk$set(echo=T, comment=NA, error=T, warning=F, message = F, fig.align = 'center', results="hold")
 ```
 
 
