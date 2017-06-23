@@ -159,4 +159,9 @@ ggplot(hi_tpr_df, aes(x=Ppr, y=z, group=Tpr, color=Tpr)) +
 ```
 
 
+```{r}
+summary(hi_tpr_df)
+```
+
+
 With this we are in a position to compare the original Standing-Katz chart against the most common compresssibility correlations.
