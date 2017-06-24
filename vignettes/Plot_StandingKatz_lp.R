@@ -1,7 +1,22 @@
 ## ------------------------------------------------------------------------
 library(zFactor)
 
+getStandingKatzCurve()
+
+## ------------------------------------------------------------------------
+library(zFactor)
+
 getStandingKatzCurve(tpr = 1.05, toSave = FALSE, toView = FALSE)
+
+## ------------------------------------------------------------------------
+library(zFactor)
+
+tpr_vec <- c(1.05, 1.1)
+result <- getStandingKatzCurve(tpr = tpr_vec, toSave = FALSE, toView = FALSE)
+
+## ------------------------------------------------------------------------
+class(result)
+names(result)
 
 ## ------------------------------------------------------------------------
 # view all the `Tpr` SK individual charts

@@ -9,11 +9,51 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+If we invoke the function `getStandingKatzCurve` without any parameters, by defult will use a `Tpr=1.3` for the low-pressure set of Tpr curves and plot it.
+
+```{r}
+library(zFactor)
+
+getStandingKatzCurve()
+```
+
+If we want to specify a Tpr curve:
+
 ```{r}
 library(zFactor)
 
 getStandingKatzCurve(tpr = 1.05, toSave = FALSE, toView = FALSE)
 ```
+
+Or a couple of Tpr curves:
+
+```{r}
+library(zFactor)
+
+tpr_vec <- c(1.05, 1.1)
+result <- getStandingKatzCurve(tpr = tpr_vec, toSave = FALSE, toView = FALSE)
+```
+
+## A dataframe for each `Tpr` dataset
+The returning object is a list of dataframes, which contain a dataframe for each of the Tpr curves specified:
+
+```{r}
+class(result)      # class of the object `result` is a list of dataframes
+names(result)      # name of each dataframe within the list
+```
+
+For Tpr = 1.05:
+
+```{r}
+result["1.05"]
+```
+
+And, for Tpr = 1.1:
+```{r}
+result["1.1"]
+```
+
+
 
 ```{r}
 # view all the `Tpr` SK individual charts
