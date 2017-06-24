@@ -6,6 +6,15 @@
 #' @param verbose print internal calclulations
 #' @rdname Dranchuk-AbouKassem
 #' @export
+#' @examples
+#' # calculate for one Tpr curve at a Ppr
+#' z.DranchukAbuKassem(pres.pr = 1.5, temp.pr = 2.0)
+#'
+#' # For vectors of Ppr and Tpr:
+#' ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5)
+#' tpr <- c(1.3, 1.5, 1.7, 2)
+#' dak <- z.DranchukAbuKassem(pres.pr = ppr, temp.pr = tpr)
+#' print(dak)
 z.DranchukAbuKassem <- function(pres.pr, temp.pr, tolerance = 1E-13,
                                 verbose = FALSE) {
 

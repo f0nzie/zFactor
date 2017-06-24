@@ -110,9 +110,8 @@ tpr_vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl"
                       <span class="dt">pprRange =</span> <span class="st">&quot;lp&quot;</span>)[<span class="dv">1</span>, <span class="st">&quot;1.5&quot;</span>]</code></pre></div>
 <pre><code>  1.5 
 0.426 </code></pre>
-<p>At lower <code>Tpr</code> we can see that there is some error.</p>
 <blockquote>
-<p>We perceive a difference between the values of z from the DAK calculation and the value read from the Standing-Katz chart.</p>
+<p>At lower <code>Tpr</code> there is some error. We see a difference between the values of z from the DAK calculation and the value read from the Standing-Katz chart.</p>
 </blockquote>
 </div>
 <div id="get-values-of-z-for-several-ppr-and-tpr" class="section level2">
@@ -122,11 +121,7 @@ tpr_vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl"
 ppr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="fl">3.5</span>, <span class="fl">4.5</span>, <span class="fl">5.5</span>, <span class="fl">6.5</span>) 
 tpr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.3</span>, <span class="fl">1.5</span>, <span class="fl">1.7</span>, <span class="dv">2</span>) 
  
-dpr &lt;-<span class="st"> </span><span class="kw">sapply</span>(ppr, function(x)  
-    <span class="kw">sapply</span>(tpr, function(y) <span class="kw">z.DranchukPurvisRobinson</span>(<span class="dt">pres.pr =</span> x, <span class="dt">temp.pr =</span> y))) 
- 
-<span class="kw">rownames</span>(dpr) &lt;-<span class="st"> </span>tpr 
-<span class="kw">colnames</span>(dpr) &lt;-<span class="st"> </span>ppr 
+dpr &lt;-<span class="st"> </span><span class="kw">z.DranchukPurvisRobinson</span>(<span class="dt">pres.pr =</span> ppr, <span class="dt">temp.pr =</span> tpr)
 <span class="kw">print</span>(dpr)
 
 <span class="co"># Hall-Yarborough</span>
@@ -144,13 +139,13 @@ dpr &lt;-<span class="st"> </span><span class="kw">sapply</span>(ppr, function(x
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zFactor)
 
 sk &lt;-<span class="st"> </span><span class="kw">getStandingKatzMatrix</span>(<span class="dt">ppr_vector =</span> ppr, <span class="dt">tpr_vector =</span> tpr)
-sk</code></pre></div>
+<span class="kw">print</span>(sk)</code></pre></div>
 <pre><code>       0.5   1.5   2.5   3.5   4.5   5.5   6.5
 1.30 0.916 0.756 0.638 0.633 0.684 0.759 0.844
 1.50 0.948 0.859 0.794 0.770 0.790 0.836 0.892
 1.70 0.968 0.914 0.876 0.857 0.864 0.897 0.942
 2.00 0.982 0.956 0.941 0.937 0.945 0.969 1.003</code></pre>
-<p>Subtract and find the difference:</p>
+<p>Subtract the two matrices and find the difference:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">err &lt;-<span class="st"> </span><span class="kw">round</span>((sk -<span class="st"> </span>dpr) /<span class="st"> </span>sk *<span class="st"> </span><span class="dv">100</span>, <span class="dv">2</span>)
 err
 
@@ -182,7 +177,6 @@ err
 tpr2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.05</span>, <span class="fl">1.1</span>) 
 ppr2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="fl">3.5</span>, <span class="fl">4.5</span>, <span class="fl">5.5</span>) 
 
-
 sk2 &lt;-<span class="st"> </span><span class="kw">getStandingKatzMatrix</span>(<span class="dt">ppr_vector =</span> ppr2, <span class="dt">tpr_vector =</span> tpr2, <span class="dt">pprRange =</span> <span class="st">&quot;lp&quot;</span>)
 sk2</code></pre></div>
 <pre><code>       0.5   1.5   2.5   3.5   4.5   5.5
@@ -192,15 +186,12 @@ sk2</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># calculate z values at lower values of Tpr</span>
 <span class="kw">library</span>(zFactor)
 
-dpr2 &lt;-<span class="st"> </span><span class="kw">sapply</span>(ppr2, function(x)  
-    <span class="kw">sapply</span>(tpr2, function(y) <span class="kw">z.DranchukPurvisRobinson</span>(<span class="dt">pres.pr =</span> x, <span class="dt">temp.pr =</span> y))) 
- 
-<span class="kw">rownames</span>(dpr2) &lt;-<span class="st"> </span>tpr2
-<span class="kw">colnames</span>(dpr2) &lt;-<span class="st"> </span>ppr2
+dpr2 &lt;-<span class="st"> </span><span class="kw">z.DranchukPurvisRobinson</span>(<span class="dt">pres.pr =</span> ppr2, <span class="dt">temp.pr =</span> tpr2)
 <span class="kw">print</span>(dpr2)</code></pre></div>
 <pre><code>           0.5       1.5       2.5       3.5       4.5       5.5
 1.05 0.8299757 0.2849670 0.3874732 0.5071451 0.6251306 0.7407256
 1.1  0.8566368 0.4429389 0.4120547 0.5173680 0.6278497 0.7376397</code></pre>
+<p>Subtract the matrices and calculate the error in percentage:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">err2 &lt;-<span class="st"> </span><span class="kw">round</span>((sk2 -<span class="st"> </span>dpr2) /<span class="st"> </span>sk2 *<span class="st"> </span><span class="dv">100</span>, <span class="dv">2</span>)
 err2
 
@@ -211,7 +202,7 @@ err2
 <pre><code>       0.5    1.5    2.5   3.5   4.5   5.5
 1.05 -0.12 -12.64 -12.97 -7.67 -4.54 -1.89
 1.10 -0.31  -3.98  -4.85 -3.47 -2.09 -1.19</code></pre>
-<!-- We can see that using Hall-Yarborough correlation shows a very high error at values of `Tpr` lower or equal than `1.1` being `Tpr=1.05` the worst curve to extract z values from. -->
+<p>Transposing the matrix with <code>Tpr</code> as columns and <code>Ppr</code> as rows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t_err2 &lt;-<span class="st"> </span><span class="kw">t</span>(err2)
 t_err2</code></pre></div>
 <pre><code>      1.05  1.10
@@ -221,6 +212,7 @@ t_err2</code></pre></div>
 3.5  -7.67 -3.47
 4.5  -4.54 -2.09
 5.5  -1.89 -1.19</code></pre>
+<p>A statistical summary by <code>Tpr</code> curve:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sum_t_err2 &lt;-<span class="st"> </span><span class="kw">summary</span>(t_err2)
 sum_t_err2</code></pre></div>
 <pre><code>      1.05              1.10       
@@ -230,7 +222,7 @@ sum_t_err2</code></pre></div>
  Mean   : -6.638   Mean   :-2.648  
  3rd Qu.: -2.553   3rd Qu.:-1.415  
  Max.   : -0.120   Max.   :-0.310  </code></pre>
-<p>We can see that the errors in <code>z</code> with <code>DAK</code> are less than <code>HY</code> with a Min. :-12.970 % and Max. : -0.120 % for <code>Tpr=1.05</code>, and a Min. :-4.850 % and Max. :-0.310 % for <code>Tpr=1.10</code>. But there are still errors.</p>
+<p>We can see that the errors in <code>z</code> with <code>DAK</code> are less than <code>HY</code> with a Min. :-12.970 % and Max. : -0.120 % for <code>Tpr=1.05</code>, and a Min. :-4.850 % and Max. :-0.310 % for <code>Tpr=1.10</code>.</p>
 </div>
 <div id="prepare-to-plot-sk-vs-dpr-correlation" class="section level2">
 <h2>Prepare to plot SK vs DPR correlation</h2>
@@ -303,10 +295,11 @@ p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_dpr_2, <span c
                   <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.05</span>))
 <span class="kw">print</span>(p)</code></pre></div>
 <p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAMAAAAjXV6yAAAAyVBMVEUAAAAAADoAAGYAOpAAZrYAv8QzMzM6AAA6ADo6AGY6OpA6kNtNTU1NTW5NTY5NbqtNjshmAABmADpmAGZmtv9uTU1uTW5uTY5ubo5ubqtuq+R8rgCOTU2OTW6OTY6Obk2ObquOyP+QOgCQOjqQOmaQkDqQkGaQtpCQ2/+rbk2rbm6rjk2r5OSr5P+2ZgC2///HfP/Ijk3I///bkDrb///kq27k///r6+vy8vL4dm3/tmb/yI7/25D/5Kv//7b//8j//9v//+T////gMrK1AAAACXBIWXMAAA7DAAAOwwHHb6hkAAANZUlEQVR4nO3dC3udthkH8NPEzPHipnPndEuUbbXXS7IuNqnjMjnHl/D9P9TQBdANXgECCc77f57GzjE+gV8lAZLQ2ZWY3uxi70DqQSAgCAQEgYAgEBAEAjICqLDjeq3r1UEb+79FeBoRBAKCQEAQCAgCAUEgIAgEBIGAIBAQBAIyHijPcwRypvFphRBIDQIBQSAgRSMU7Og2CVQRIZAz7U5hFXMGgfySZVmZB9yTRDO6BGUseff/0QMuQQgERAGqWyEEUlM0QgUCudLsUwUkhRBIDQIBQSAg7U41QgikBoGA6EBcCIHUKHtVFyEEUiP3iBDSFKFoQJQmC0RYogNVQjRloLqORSxBeU5TB6qEogHltO75DU8jMq0Nig5EKEkWqNo7CVTkEatY4kCyCCkDHMsCZTnJs+SBtCGyRYEoO5OmCiROsHGBctFtlyQQpY1QNKCcFLVP0kCx2qC8IFn70kwJAlSUMYByqvikB8SEWCvNhcoiQhXLVZ8EgQpaRAXSC1CKQEXUEmT4pAnUXAmVhUtoTqDqFjXTX5op04HYji4MxC4raGZsOVP6gB7fnX73B//u/vXpq9/7gRxCcwGxPg69hY4D9PXDRXn7Fy71j4/lrbRKAIj3cWTmlssDPf7z9/L+b6zg3L/5g//NDVQJRQCytlweiLNUZUctQX+q0mxAS8K/ZuKvi00WYp1AdKl/rAfoy3c1kNIaleqoRlPHxIXbQiUoz2hzB5ZICbr/4WP55ZVVxdo6Vt8bLQGUF6kAtW2QUpaiA1X/SCpAXz+8lWcxzxJkCs0BlPObQNsn4nUQK0RfTk+/rQuQC0ju8AJAhehGdGwZAagjKpC42ai79eYHYgUoc24cnkYkKJAhFB6IvX9G1gNU364uBVT7rA2o7RjWhYICyX5vcY+6NqCinB2oHhjgBWhNQEJoMaCMdG0cnkYkMJAmFB5I+qwQqOnegx+zGw9UbADI40HNUUA5n0tW+/gDPV3uRI7iANWt9NxA/PzV+gwrQfsX78fqlAGACjI/ED990YyuGUgRAo55XBuUEfUOdQTQ/sUvu93zz+X+5Ofds+t4QPCjvsOBeAHKpgIdP7t+ujyqvg5rjsIDQU+yDgbi7xcA6Jx/y7/GAHIUoTBA4u1IBUT6NgaB2J8PZ+dDW6TpQAUxgBqh6UBtk08IJWsEkkVoJqD2nFidwSjp3RgE4lXs5DoFoP4HNccAZQVpHzoYCyQb6WhAdhEKCETAjUEgdpo/Gn5VNAtQ73OIA4H4O9MpQCrT8KQMlDdvbHbSrwuo2n0TqO85xCEjYLJxswYx1glkFaFpQM1bWBVsRd0dnUA9zyEOvVB0FKA1AYlGaAYgXoAom2hnF6C1AplCU4Dq68OscBSgIUD/c2ZWID1sog6R32fK69NmC4nf5neoBNgUSAQgqwQVxFGCOh+z8x0BK+QtvKMAJV6CZgZSOiX1XrINABlCk4FEG7RdIPczQAOA9D6OlQLx01h9GNpprOMpMr8RMP5uWwEST4ibQiOB2l/JZi9B+xPRe/9wxrrzy5vdzu7PTw1I+Y2MP/Xdt/EgIEqpAXQnOZ4uz8ubo7K8cvVWzwdUjADKDR9CnduOAeIPAGpAV9/8KkrQw1+vWWF6+rfrdjZsG6S30mVRuISA8QvFhxYBgKgVs4rt//y5fPj+fVXRdjurEAUBUu4GtGfcBgIZPuxd5yxBDdDdcw7EOkTsUhQGqGyEDCDvp6TM+ijuwWg4IEcbZJQg/pLVDgVY9J/2AXk+42K26KKCDbnfBYG6z2KyDVoIyBr/9HqEwwCSFWwhoKfLl+wsxmra00/hT/MaUDvhtT0MnycUtPuLrPFZAIj9114HfWOdyBYA8phfnhfq/Re/Q10CyCdLAIHTp7XuRzFNoXuuXUwgVhnZ6ON4IEcbBALleg+/6ASi7m0jA10dcSVAyAXkvBJy9YHZR2cOw7JOoObt0gJ6OOPnuDtgApa1b9QLyDErhr1ozXTImunpGwUq7DaoA8j5Kpun0N6CpQVU3jCah7OX/b8yFig3K5MLyOjjmA40NfpZ7I5NKQZ8xgDJs7j8I1fMDKCsCA2UwGneBGqEXBc8uQpjNd38CnGbQK4i1HlX2nmPz36TJtoG8d4QkTGNdBAg/ouEKvfwCQH5x945qgPVQu6j6+5nFL9G1E6gQwTq7DCTPpSkC7Q/1qpYuyDF1w/Ox8IDAtX3cEwnWaDqVuzp8lxeLqrL45SfLvjqC75AUmgAUBYFqO4lU7/rA2I0Vy95xxFLuzRFuzTO3EC8es0DRAgxgO6aunLXfWIygVjPmtxYWdzkzW+yimnL4zTha9Wo01Qye5v+cCC28E3zdqGi+ChC7CfNsI/ynR3zbr7SuZElqF3S5P71BecScZcgRxEaUILYehxNAQpbgoiV0VWM9wddNd2Oaglyr/7SHt9EoEy+hTWIEa6K2SVoBJAepQ36sR+IX9rpg8RZakCONmgqULs8DjuL9VQxsazrBCA5yOMYaE7rLGZ2ubbL41TfOZYJDAXE6yN1+aQGNK7L1QlULx7ocXTimiAWkKDxvw4qR/QoysXJrSLkd3SuO4yFgHwSBEhc2o0Dkj4dU6XSAhrb5eoEqhcP3BTQyC7Xau/sKuYD1I4yrgXIK8GAlGFYuoo2KCxQs3igFxClzrlASQKNaKQnAxG3T3LDPl7pArLqmPsxAh2o9umYrplkCQoEpE30cB1d+0PWDY1A5tEpPzO6EZMFejjjNxlj26BhQKpPsRog3vM4BsjuEVKbGMfR8SFCShufdQB9//5qdx4MqB3qso+uvkHlQLT9PnEg1ie9O+q+swWATKFWwny5vvoRv7QqIDY2NrYEuYBsIaXm8UdVZD90DKC6KLDxwK5ll+y7+afLoECF0RBlBlA90tw13hoMqPpnDaB6sIfNsu9cmCHQab4HyChEBlAzEj83EP93NaBmsOeOnbydz0ItBKQIZZkJRM2NQwNlVqwqVpbNsxpxgOp2R/7ReLEujtmBOkuQCsR642MDtZ9GWL9K1NXpI7RBLVBPJ2EoIJeQAWS9vCxQ71mse+lABOr3WQjI/YQCpQSajbjIsM8NnxU181kMAHK+XAHRqEA+iQhEtgrkjjVHCAwpKZn/U7DWW4JIAa0dudYS1AOkC/UenflMMwJZQHo/9OaBHHXMeXSUz9cTiwYsATQ1iwPJ9UqsfmgsQXVEL5nVD41AKpBcleMAgTShPiCrHxqBFKC6AMEzog8TyLnsDQLJ8D4O7+maWwKyW+nkgeoOs7ud38MsQYD6P7vA6CVbEijPcwOoHvZhTjddc58XByqoe+m2uYH4s7IakPaMT+dwcmigwqMEDZhLFgAot2JVsSoLlqDez08xesmWAOosQQrQ/theWWkeIGVJxcSAHG3QogOHnkCkiAbUcxZjmXvo2Q+IRGiDYCC5juIiQP1tEPuR7A9KBoif412ru4UHss7zyQP5JDyQa/koKjuBeDciAjkOo5nCePBAhLTXig4gWhw6UFF0AUkfBGqFVCBC6i0QyAEkb+FFP+uyQFMzC5C1EOtGgdr1g8RaOVOBxM+3A6SsH1SWt6cwkCmkA9U+2wFq1+4oy/u//2sCkD5MuBkgZc2Xr//5r6hi7vWD6iizfdSZQoT/ZP6pQLOkB6hdP6i8fevTBqmDOaR9tb5AHFNWVlKCqu+GAjUfLlqIB1aUPo7NALVt0O0py9tRQOICUX3qezNAyvpBfqd5fbxUfPKhOOFvE0hZP2gUkHLfulGgjvTssCnU9HzA67MeHhAbv6iBRk/X3DRQu6DL+NmICHTAQO3Hy02YrrlpoPpvU2YjIhACTZuueQBA1PrBIQPpQgjkAUTt1xFI+Qt1vI5ANhDeanQATZ4JtGmgYUveHB5Q19qRCIRACNSf3h1uSbp8EKj5zu1z6EDKpSEC9QCZfRwIpANZfRwIpAHZt/AIhEBNYCBHH8chAfVHmQm00hlBekKXIPXy51BLUO8Oq9fPCGTvMEUgBAKDQEB6d1j1QSDXDlPnqwiEQG0QCAgCAUEgIAgEBIGAIBCQ3h0e91HfBwQ07ugCvEV4GhEEAoJAQBAICAIBQSAgCAQEgYAgEJDgA4dKepYgWHLjaUEgIAgEBIGAzAm0iSAQEAQCgkBAEAjIbED3r0/bZc/gKIunwJuefvtxzC6NylxAbGWm+x/8j+PWX/PTBV8ca6HMBfSFLTz0yfug1UXkgLB1nxbMnG2QXADNI80ich65f/PbFqpYKVaw8oy2iByQ+9cXfHm1hTIf0OM7bx99ETl44wFlc3JmPIv5n8P0ReSAPP64CaAhPiwDTvOfNlHFRKHwRxoA9Pju9NVyJzK8kgaCQEAQCAgCAUEgIAgEBIGAIBCQ5YGeLncsnZ9XlVhiAL1kX246P9k0rUQDejjr+My8xBITaP/il93u+edyf/Jz9yflxk40oKtn1/vjZ9dPl0fl/rjrQ04TSLRGuioy++Oqlu1fvOdfU020ElRyG1nVEj6jIRCQqEC8ip1cI5AWFUg20gikRq1i1Wn+qESgriQNUweBgCAQEOzuAIJAQBAICAIBQSAgCAQEgYD8H9/Bj5mguqukAAAAAElFTkSuQmCC" style="display: block; margin: auto;" /></p>
-<p>We can see with Dranchuk-AbouKassem there are still errors or differences between the values in the Standing-Katz chart and the values obtained from the correlation but they are not so bad as in the HY correlation.</p>
+<p>We can see with <code>Dranchuk-Purvis-Robinson</code> there are still errors or differences between the values in the Standing-Katz chart and the values calculated with the correlation but they are not so bad as in the <code>HY</code> correlation.</p>
 </div>
 <div id="analysis-at-the-lowest-tpr" class="section level2">
 <h2>Analysis at the lowest <code>Tpr</code></h2>
+<p>Extract only values at <code>Tpr = 1.05</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sk_dpr_3 &lt;-<span class="st"> </span>sk_dpr_2[sk_dpr_2$Tpr==<span class="fl">1.05</span>,]
 sk_dpr_3</code></pre></div>
 <pre><code>    Tpr Ppr z.chart    z.calc           dif
@@ -323,9 +316,7 @@ sk_dpr_3</code></pre></div>
 41 1.05 5.5   0.727 0.7407256 -0.0137256422
 45 1.05 6.0   0.786 0.7976728 -0.0116727857
 49 1.05 6.5   0.846 0.8540945 -0.0080944856</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zFactor)
-
-p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_dpr_3, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z.calc, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) +
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_dpr_3, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z.calc, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) +
 <span class="st">    </span><span class="kw">geom_line</span>() +
 <span class="st">    </span><span class="kw">geom_point</span>() +
 <span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc-dif, <span class="dt">ymax=</span>z.calc+dif), <span class="dt">width=</span>.<span class="dv">4</span>,
@@ -499,11 +490,8 @@ tpr &lt;-<span class="st"> </span><span class="kw">getCurvesDigitized</span>(<sp
 ppr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="fl">3.5</span>, <span class="fl">4.5</span>, <span class="fl">5.5</span>, <span class="fl">6.5</span>) 
 
 <span class="co"># calculate HY for the given Tpr</span>
-all_dak &lt;-<span class="st"> </span><span class="kw">sapply</span>(ppr, function(x)  
-    <span class="kw">sapply</span>(tpr, function(y) <span class="kw">z.DranchukPurvisRobinson</span>(<span class="dt">pres.pr =</span> x, <span class="dt">temp.pr =</span> y))) 
-<span class="kw">rownames</span>(all_dak) &lt;-<span class="st"> </span>tpr 
-<span class="kw">colnames</span>(all_dak) &lt;-<span class="st"> </span>ppr 
-<span class="kw">cat</span>(<span class="st">&quot;Calculated Hall-Yarborough</span><span class="ch">\n</span><span class="st">&quot;</span>)
+all_dak &lt;-<span class="st"> </span><span class="kw">z.DranchukPurvisRobinson</span>(<span class="dt">pres.pr =</span> ppr, <span class="dt">temp.pr =</span> tpr)
+<span class="kw">cat</span>(<span class="st">&quot;Calculated from the correlation </span><span class="ch">\n</span><span class="st">&quot;</span>)
 <span class="kw">print</span>(all_dak) 
 
 <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Standing-Katz chart</span><span class="ch">\n</span><span class="st">&quot;</span>)
@@ -521,7 +509,7 @@ all_err
 <span class="co"># for the transposed matrix</span>
 <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st"> Errors for the transposed matrix: Tpr </span><span class="ch">\n</span><span class="st">&quot;</span>)
 <span class="kw">summary</span>(<span class="kw">t</span>(all_err))</code></pre></div>
-<pre><code>Calculated Hall-Yarborough
+<pre><code>Calculated from the correlation 
            0.5       1.5       2.5       3.5       4.5       5.5       6.5
 1.05 0.8299757 0.2849670 0.3874732 0.5071451 0.6251306 0.7407256 0.8540945
 1.1  0.8566368 0.4429389 0.4120547 0.5173680 0.6278497 0.7376397 0.8458855

@@ -192,6 +192,7 @@ err2</code></pre></div>
 <pre><code>       0.5    1.5    2.5   3.5   4.5   5.5
 1.05 -0.13 -12.15 -12.78 -7.49 -4.34 -1.68
 1.10 -0.36  -4.79  -4.97 -3.56 -2.14 -1.21</code></pre>
+<p>Transposing the matrix with <code>Tpr</code> as columns and <code>Ppr</code> as rows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t_err2 &lt;-<span class="st"> </span><span class="kw">t</span>(err2)
 t_err2</code></pre></div>
 <pre><code>      1.05  1.10
@@ -201,6 +202,7 @@ t_err2</code></pre></div>
 3.5  -7.49 -3.56
 4.5  -4.34 -2.14
 5.5  -1.68 -1.21</code></pre>
+<p>A statistical summary by <code>Tpr</code> curve:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sum_t_err2 &lt;-<span class="st"> </span><span class="kw">summary</span>(t_err2)
 sum_t_err2</code></pre></div>
 <pre><code>      1.05              1.10       

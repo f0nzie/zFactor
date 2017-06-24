@@ -89,7 +89,7 @@ With the same `ppr` and `tpr` vectors, we do the same for the Standing-Katz char
 library(zFactor)
 
 sk <- getStandingKatzMatrix(ppr_vector = ppr, tpr_vector = tpr)
-sk
+print(sk)
 ```
 
 Subtract the two matrices and find the difference:

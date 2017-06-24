@@ -16,3 +16,9 @@ high pressure}
 Read a .txt file that was created from readings of the Standing-Katz chart
 and retrieve the points
 }
+\examples{
+getStandingKatzData(tpr = 1.5, pprRange = 'lp')
+# with a vector
+#tpr <- c(1.05, 1.1, 1.2)
+#getStandingKatzData(tpr, pprRange = 'lp')
+}
