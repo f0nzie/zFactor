@@ -1,3 +1,8 @@
+## 20170623, 0.1.0
+* prepare for release to CRAN.
+* added examples
+* expand use of functions for input vectors.
+
 ## 20170623, 0.0.1.9000
 * fix createTidyFromMatrix to be able to plot with ggplot using group. Tpr as character, Ppr as numeric.
 * add performance for HY, DAK and DPR. Show errors.
