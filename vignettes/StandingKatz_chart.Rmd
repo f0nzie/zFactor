@@ -79,7 +79,7 @@ library(zFactor)
 getStandingKatzCurve(tpr = 1.3, toView = FALSE, toSave = FALSE)
 ```
 
-In a simlar manner we could plot the SK curve at $T_{pr}$ = 1.3 but at the high pressure range. This is the lower part of the chart with the scale from 7.0 to 15.
+In a simlar manner we could plot the SK curve at $T_{pr}$ = 1.3 but at the `high pressure` range or `hp`. This is the lower part of the chart with the scale from 7.0 to 15.
 
 We have to specify that we want the high pressure range with `hp` as shown below:
 

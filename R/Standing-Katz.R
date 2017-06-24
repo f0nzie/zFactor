@@ -19,16 +19,16 @@ getStandingKatzCurve <- function(tpr = 1.3, pprRange = "lp", tolerance = 0.01,
                                  toView = FALSE, toSave = TRUE, toPlot = TRUE) {
     if (length(tpr) > 1) {
         tpr_vec <- tpr
-        print(tpr_vec)
         tpr_li <- lapply(tpr_vec, function(x)
             getStandingKatzCurve_1p(tpr = x, pprRange = pprRange,
                                     tolerance = tolerance, toPlot = toPlot,
                                     toSave = toSave, toView = toView))
-        # names(tpr_li) <- tpr_vec
+        names(tpr_li) <- tpr_vec
         invisible(tpr_li)
     } else {
-        getStandingKatzCurve_1p(tpr = tpr, pprRange = pprRange, tolerance = tolerance,
+        tpr_1p <- getStandingKatzCurve_1p(tpr = tpr, pprRange = pprRange, tolerance = tolerance,
                                 toView = toView, toSave = toSave, toPlot = toPlot)
+        invisible(tpr_1p)
     }
 }
 
