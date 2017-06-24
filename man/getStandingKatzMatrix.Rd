@@ -17,3 +17,16 @@ high pressure}
 \description{
 Generate a matrix of Standing-Katz pseudo-reduced pressure and tenperarture
 }
+\examples{
+# if we want to know all digitized values of Ppr at a Tpr curve
+tpr_vec <- c(2.0)
+getStandingKatzMatrix(tpr_vector = tpr_vec,
+                       pprRange = "lp")
+# or to extract at a Ppr=1.5
+getStandingKatzMatrix(tpr_vector = tpr_vec, pprRange = "lp")[1, "1.5"]
+# for two vectors
+ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5)
+tpr <- c(1.3, 1.5, 1.7, 2)
+sk <- getStandingKatzMatrix(ppr_vector = ppr, tpr_vector = tpr)
+print(sk)
+}

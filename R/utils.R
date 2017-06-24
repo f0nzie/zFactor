@@ -3,11 +3,15 @@
 #'
 #' @param str a contnuous long string to split as a vector
 #' @export
+#' @examples
+#' convertStringToVector("1.05 1.10 1.20")
+#' # result: "c(1.05, 1.1, 1.2)"
+#' # now, you can paste the vector in your test
 convertStringToVector <- function(str) {
     vs <- unlist(strsplit(str, " "))
     vn <- as.numeric(vs)
-    paste(vn, collapse = ", ")
-
+    vt <- paste(vn, collapse = ", ")
+    paste0('c(', vt, ')')
 }
 
 
@@ -50,6 +54,10 @@ combineCorrWithSK <- function(sk_df, co_df) {
 #' @param tpr_vector a pseudo-reduced temperature vector
 #' @param correlation a z-factor correlation
 #' @export
+#' @examples
+#' ppr <- c(0.5, 1.5, 2.5, 3.5)
+#' tpr <- c(1.05, 1.1, 1.2)
+#' createTidyFromMatrix(ppr, tpr, correlation = "DAK")
 createTidyFromMatrix <- function(ppr_vector, tpr_vector, correlation) {
     valid_choices <- c("HY", "DAK", "DPR")
     msg_missing <- "You have to provide a z-factor correlation: 'HY' 'DAK' or 'DPR'."
