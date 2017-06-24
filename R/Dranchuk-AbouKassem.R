@@ -8,6 +8,23 @@
 #' @export
 z.DranchukAbuKassem <- function(pres.pr, temp.pr, tolerance = 1E-13,
                                 verbose = FALSE) {
+
+    if (length(pres.pr) > 1 || length(temp.pr) > 1) {
+        dak <- sapply(pres.pr, function(x)
+            sapply(temp.pr, function(y) z.DranchukAbuKassem_1p(pres.pr = x, temp.pr = y)))
+        rownames(dak) <- temp.pr
+        colnames(dak) <- pres.pr
+        return(dak)
+    } else {
+        z.DranchukAbuKassem_1p(pres.pr, temp.pr, tolerance = 1E-13,
+                               verbose = FALSE)
+    }
+}
+
+
+
+z.DranchukAbuKassem_1p <- function(pres.pr, temp.pr, tolerance = 1E-13,
+                                verbose = FALSE) {
     F <- function(rhor)
     {
         R1 * rhor - R2 / rhor + R3 * rhor^2 - R4 * rhor^5 +     # equation 3-41
@@ -50,3 +67,5 @@ z.DranchukAbuKassem <- function(pres.pr, temp.pr, tolerance = 1E-13,
     z <- 0.27 * pres.pr / (rhork * temp.pr)
     return(z)
 }
+
+

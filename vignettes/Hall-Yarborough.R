@@ -75,10 +75,6 @@ sk2 <- getStandingKatzMatrix(ppr_vector = ppr2, tpr_vector = tpr2, pprRange = "l
 sk2
 
 ## ------------------------------------------------------------------------
-# find what common values of PPr are available in the chart
-getStandingKatzMatrix(tpr_vector = c(1.05))
-
-## ------------------------------------------------------------------------
 # calculate z values at lower values of Tpr
 library(zFactor)
 
