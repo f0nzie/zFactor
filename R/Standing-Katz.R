@@ -16,7 +16,26 @@
 #' @examples
 #' getStandingKatzCurve(tpr = 1.3, pprRange = 'hp', toView = FALSE, toSave = FALSE, toPlot = FALSE)
 getStandingKatzCurve <- function(tpr = 1.3, pprRange = "lp", tolerance = 0.01,
-                                 toView = TRUE, toSave = TRUE, toPlot = TRUE) {
+                                 toView = FALSE, toSave = TRUE, toPlot = TRUE) {
+    if (length(tpr) > 1) {
+        tpr_vec <- tpr
+        print(tpr_vec)
+        tpr_li <- lapply(tpr_vec, function(x)
+            getStandingKatzCurve_1p(tpr = x, pprRange = pprRange,
+                                    tolerance = tolerance, toPlot = toPlot,
+                                    toSave = toSave, toView = toView))
+        # names(tpr_li) <- tpr_vec
+        invisible(tpr_li)
+    } else {
+        getStandingKatzCurve_1p(tpr = tpr, pprRange = pprRange, tolerance = tolerance,
+                                toView = toView, toSave = toSave, toPlot = toPlot)
+    }
+}
+
+
+
+getStandingKatzCurve_1p <- function(tpr = 1.3, pprRange = "lp", tolerance = 0.01,
+                                 toView = FALSE, toSave = FALSE, toPlot = TRUE) {
     # Read digitized data from Standing-Katz chart, plot it
     # and put it in a .rda file
       #       x: Ppr
@@ -62,6 +81,10 @@ getStandingKatzCurve <- function(tpr = 1.3, pprRange = "lp", tolerance = 0.01,
     if (toView)  utils::View(tpr_obj, title = .tpr)     # view the object
     invisible(tpr_obj)
 }
+
+
+
+
 
 .plotStandingKatzSimple <- function(tpr_obj, tpr) {
     tpr_s2d <- format(round(tpr, 2), nsmall = 2)

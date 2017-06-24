@@ -5,7 +5,7 @@
 \title{Read file with readings from Standing-Katz chart, create data file and plot}
 \usage{
 getStandingKatzCurve(tpr = 1.3, pprRange = "lp", tolerance = 0.01,
-  toView = TRUE, toSave = TRUE, toPlot = TRUE)
+  toView = FALSE, toSave = TRUE, toPlot = TRUE)
 }
 \arguments{
 \item{tpr}{Pseudo-reduced temperature curve in SK chart}
