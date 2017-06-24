@@ -19,7 +19,7 @@
 #' @examples
 #' getStandingKatzCurve(tpr = 1.3, pprRange = 'hp', toView = FALSE, toSave = FALSE, toPlot = FALSE)
 getStandingKatzCurve <- function(tpr = 1.3, pprRange = "lp", tolerance = 0.01,
-                                 toView = FALSE, toSave = TRUE, toPlot = TRUE,
+                                 toView = FALSE, toSave = FALSE, toPlot = TRUE,
                                  ylim = c(0.2, 1.2)) {
     if (length(tpr) > 1) {
         tpr_vec <- tpr
