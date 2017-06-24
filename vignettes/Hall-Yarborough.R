@@ -1,5 +1,5 @@
 ## ----setup, include=F, error=T, message=F, warning=F---------------------
-knitr::opts_chunk$set(echo=T, comment=NA, error=T, warning=F, message = F, fig.align = 'center')
+knitr::opts_chunk$set(echo=T, comment=NA, error=T, warning=F, message = F, fig.align = 'center', results="hold")
 
 ## ------------------------------------------------------------------------
 # get a z value using HY
@@ -28,13 +28,21 @@ getStandingKatzMatrix(tpr_vector = tpr_vec,
                       pprRange = "lp")[1, "1.5"]
 
 ## ------------------------------------------------------------------------
+library(zFactor)
+
+ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
+tpr <- c(1.3, 1.5, 1.7, 2) 
+
+z.HallYarborough(ppr, tpr)
+
+## ------------------------------------------------------------------------
 # test HY with 1st-derivative using the values from paper 
  
 ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
 tpr <- c(1.3, 1.5, 1.7, 2) 
  
 hy <- sapply(ppr, function(x)  
-    sapply(tpr, function(y) z.HallYarborough(pres.pr = x, temp.pr = y))) 
+    sapply(tpr, function(y) zFactor:::z.HallYarborough_1p(pres.pr = x, temp.pr = y))) 
  
 rownames(hy) <- tpr 
 colnames(hy) <- ppr 
@@ -74,11 +82,11 @@ getStandingKatzMatrix(tpr_vector = c(1.05))
 # calculate z values at lower values of Tpr
 library(zFactor)
 
-hy2 <- sapply(ppr2, function(x)  
-    sapply(tpr2, function(y) z.HallYarborough(pres.pr = x, temp.pr = y))) 
- 
-rownames(hy2) <- tpr2
-colnames(hy2) <- ppr2
+tpr <- c(1.05, 1.1)
+ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5) 
+
+hy2 <- z.HallYarborough(pres.pr = ppr, temp.pr = tpr) 
+
 print(hy2)
 
 ## ------------------------------------------------------------------------
@@ -113,7 +121,48 @@ p <- ggplot(sk_hy_2, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
 print(p)
 
 ## ------------------------------------------------------------------------
-# Tpr should be character
-# Ppr should be numeric
-summary(sk_hy_2)
+library(ggplot2)
+
+# get all `lp` Tpr curves
+tpr_all <- getCurvesDigitized(pprRange = "lp")
+ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
+sk_hy_all <- createTidyFromMatrix(ppr, tpr_all, correlation = "HY")
+sk_hy_all
+
+
+p <- ggplot(sk_hy_all, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
+    geom_line() +
+    geom_point() +
+    geom_errorbar(aes(ymin=z.calc-dif, ymax=z.calc+dif), width=.4,
+                  position=position_dodge(0.05))
+print(p)
+
+## ------------------------------------------------------------------------
+# get all `lp` Tpr curves
+tpr <- getCurvesDigitized(pprRange = "lp")
+ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
+
+# calculate HY for the given Tpr
+all_hy <- sapply(ppr, function(x)  
+    sapply(tpr, function(y) z.HallYarborough(pres.pr = x, temp.pr = y))) 
+rownames(all_hy) <- tpr 
+colnames(all_hy) <- ppr 
+cat("Calculated Hall-Yarborough\n")
+print(all_hy) 
+
+cat("\nStanding-Katz chart\n")
+all_sk <- getStandingKatzMatrix(ppr_vector = ppr, tpr_vector = tpr)
+all_sk
+
+# find the error
+cat("\n Errors in percentage \n")
+all_err <- round((all_sk - all_hy) / all_sk * 100, 2)  # in percentage
+all_err
+
+cat("\n Errors in Ppr\n")
+summary(all_err)
+
+# for the transposed matrix
+cat("\n Errors for the transposed matrix: Tpr \n")
+summary(t(all_err))
 

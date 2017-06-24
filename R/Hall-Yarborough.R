@@ -6,7 +6,29 @@
 #' @param tolerance controls the iteration accuracy
 #' @param verbose print internal
 #' @export
+#' @examples
+#' # get one z value
+#' z.HallYarborough(pres.pr = 1.5, temp.pr = 2.0)
+#' z.HallYarborough(pres.pr = 1.5, temp.pr = 1.1)
+#' # for two given Tpr and Ppr vectors, find the calculated z points
+#'
 z.HallYarborough <- function(pres.pr, temp.pr, tolerance = 1E-13,
+                             verbose = FALSE) {
+
+    if (length(pres.pr) > 1 || length(temp.pr) > 1) {
+        hy <- sapply(pres.pr, function(x)
+            sapply(temp.pr, function(y) z.HallYarborough_1p(pres.pr = x, temp.pr = y)))
+        rownames(hy) <- temp.pr
+        colnames(hy) <- pres.pr
+        return(hy)
+    } else {
+        z.HallYarborough_1p(pres.pr, temp.pr, tolerance = 1E-13,
+                            verbose = FALSE)
+    }
+}
+
+
+z.HallYarborough_1p <- function(pres.pr, temp.pr, tolerance = 1E-13,
                              verbose = FALSE) {
     # Hall-Yarborough correlation modified to use the Newton-Raphson method
 
@@ -44,3 +66,14 @@ z.HallYarborough <- function(pres.pr, temp.pr, tolerance = 1E-13,
     if (verbose) print(z)
     return(z)
 }
+
+
+# # calculate z values at lower values of Tpr
+# library(zFactor)
+#
+# hy2 <- sapply(ppr2, function(x)
+#     sapply(tpr2, function(y) z.HallYarborough(pres.pr = x, temp.pr = y)))
+#
+# rownames(hy2) <- tpr2
+# colnames(hy2) <- ppr2
+# print(hy2)

@@ -18,3 +18,10 @@ z.HallYarborough(pres.pr, temp.pr, tolerance = 1e-13, verbose = FALSE)
 \description{
 Hall-Yarborough correlation
 }
+\examples{
+# get one z value
+z.HallYarborough(pres.pr = 1.5, temp.pr = 2.0)
+z.HallYarborough(pres.pr = 1.5, temp.pr = 1.1)
+# for two given Tpr and Ppr vectors, find the calculated z points
+
+}
