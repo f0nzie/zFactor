@@ -1,8 +1,8 @@
 ## ----setup, include=F, error=T, message=F, warning=F---------------------
-knitr::opts_chunk$set(echo=T, comment=NA, error=T, warning=F, message = F, fig.align = 'center')
+knitr::opts_chunk$set(echo=T, comment=NA, error=T, warning=F, message = F, fig.align = 'center', results="hold")
 
 ## ------------------------------------------------------------------------
-# get a z value using HY
+# get a z value using DPR correlation
 library(zFactor)
 
 z.DranchukPurvisRobinson(pres.pr = 1.5, temp.pr = 2.0)
@@ -152,4 +152,50 @@ summary(sk_dpr_3)
  # Mean   :-0.023178  
  # 3rd Qu.:-0.009960  
  # Max.   : 0.002325
+
+## ------------------------------------------------------------------------
+library(ggplot2)
+
+# get all `lp` Tpr curves
+tpr_all <- getCurvesDigitized(pprRange = "lp")
+ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
+sk_dpr_all <- createTidyFromMatrix(ppr, tpr_all, correlation = "DPR")
+sk_dpr_all
+
+
+p <- ggplot(sk_dpr_all, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
+    geom_line() +
+    geom_point() +
+    geom_errorbar(aes(ymin=z.calc-dif, ymax=z.calc+dif), width=.4,
+                  position=position_dodge(0.05))
+print(p)
+
+## ----results="hold"------------------------------------------------------
+# get all `lp` Tpr curves
+tpr <- getCurvesDigitized(pprRange = "lp")
+ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
+
+# calculate HY for the given Tpr
+all_dak <- sapply(ppr, function(x)  
+    sapply(tpr, function(y) z.DranchukPurvisRobinson(pres.pr = x, temp.pr = y))) 
+rownames(all_dak) <- tpr 
+colnames(all_dak) <- ppr 
+cat("Calculated Hall-Yarborough\n")
+print(all_dak) 
+
+cat("\nStanding-Katz chart\n")
+all_sk <- getStandingKatzMatrix(ppr_vector = ppr, tpr_vector = tpr)
+all_sk
+
+# find the error
+cat("\n Errors in percentage \n")
+all_err <- round((all_sk - all_dak) / all_sk * 100, 2)  # in percentage
+all_err
+
+cat("\n Errors in Ppr\n")
+summary(all_err)
+
+# for the transposed matrix
+cat("\n Errors for the transposed matrix: Tpr \n")
+summary(t(all_err))
 

@@ -140,11 +140,15 @@ err2 <- round((sk2 - dak2) / sk2 * 100, 2)
 err2
 ```
 
+Transposing the matrix with `Tpr` as columns and `Ppr` as rows:
+
 ```{r}
 t_err2 <- t(err2)
 t_err2
 ```
 
+
+A statistical summary by `Tpr` curve:
 
 ```{r}
 sum_t_err2 <- summary(t_err2)

@@ -1,8 +1,8 @@
 ## ----setup, include=F, error=T, message=F, warning=F---------------------
-knitr::opts_chunk$set(echo=T, comment=NA, error=T, warning=F, message = F, fig.align = 'center')
+knitr::opts_chunk$set(echo=T, comment=NA, error=T, warning=F, message = F, fig.align = 'center', results="hold")
 
 ## ------------------------------------------------------------------------
-# get a z value using HY
+# get a z value
 library(zFactor)
 
 z.DranchukAbuKassem(pres.pr = 1.5, temp.pr = 2.0)
@@ -33,14 +33,10 @@ getStandingKatzMatrix(tpr_vector = tpr_vec,
  
 ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
 tpr <- c(1.3, 1.5, 1.7, 2) 
- 
-dak <- sapply(ppr, function(x)  
-    sapply(tpr, function(y) z.DranchukAbuKassem(pres.pr = x, temp.pr = y))) 
- 
-rownames(dak) <- tpr 
-colnames(dak) <- ppr 
-print(dak)
 
+dak <- z.DranchukAbuKassem(ppr, tpr)
+print(dak)
+ 
 # Hall-Yarborough
 #    0.5       1.5       2.5       3.5       4.5       5.5       6.5
 # 1.3 0.9176300 0.7534433 0.6399020 0.6323003 0.6881127 0.7651710 0.8493794
@@ -78,11 +74,8 @@ sk2
 # calculate z values at lower values of Tpr
 library(zFactor)
 
-dak2 <- sapply(ppr2, function(x)  
-    sapply(tpr2, function(y) z.DranchukAbuKassem(pres.pr = x, temp.pr = y))) 
+dak2 <- z.DranchukAbuKassem(pres.pr = ppr2, temp.pr = tpr2) 
  
-rownames(dak2) <- tpr2
-colnames(dak2) <- ppr2
 print(dak2)
 
 ## ------------------------------------------------------------------------
@@ -126,10 +119,53 @@ library(zFactor)
 p <- ggplot(sk_dak_3, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
     geom_line() +
     geom_point() +
-    geom_errorbar(aes(ymin=z.calc-dif, ymax=z.calc+dif), width=.4,
+    geom_errorbar(aes(ymin=z.calc-dif, ymax=z.calc+dif), width=.2,
                   position=position_dodge(0.05))
 print(p)
 
 ## ------------------------------------------------------------------------
 summary(sk_dak_3)
+
+## ------------------------------------------------------------------------
+library(ggplot2)
+
+# get all `lp` Tpr curves
+tpr_all <- getCurvesDigitized(pprRange = "lp")
+ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
+sk_dak_all <- createTidyFromMatrix(ppr, tpr_all, correlation = "DAK")
+sk_dak_all
+
+
+p <- ggplot(sk_dak_all, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
+    geom_line() +
+    geom_point() +
+    geom_errorbar(aes(ymin=z.calc-dif, ymax=z.calc+dif), width=.4,
+                  position=position_dodge(0.05))
+print(p)
+
+## ------------------------------------------------------------------------
+# get all `lp` Tpr curves
+tpr <- getCurvesDigitized(pprRange = "lp")
+ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
+
+# calculate HY for the given Tpr
+all_dak <-z.DranchukAbuKassem(pres.pr = ppr, temp.pr = tpr)
+cat("Calculated from correlation \n")
+print(all_dak) 
+
+cat("\nStanding-Katz chart\n")
+all_sk <- getStandingKatzMatrix(ppr_vector = ppr, tpr_vector = tpr)
+all_sk
+
+# find the error
+cat("\n Errors in percentage \n")
+all_err <- round((all_sk - all_dak) / all_sk * 100, 2)  # in percentage
+all_err
+
+cat("\n Errors in Ppr\n")
+summary(all_err)
+
+# for the transposed matrix
+cat("\n Errors for the transposed matrix: Tpr \n")
+summary(t(all_err))
 

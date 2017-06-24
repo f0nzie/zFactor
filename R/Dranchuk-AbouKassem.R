@@ -69,3 +69,10 @@ z.DranchukAbuKassem_1p <- function(pres.pr, temp.pr, tolerance = 1E-13,
 }
 
 
+
+# dak2 <- sapply(ppr2, function(x)
+#     sapply(tpr2, function(y) z.DranchukAbuKassem(pres.pr = x, temp.pr = y)))
+#
+# rownames(dak2) <- tpr2
+# colnames(dak2) <- ppr2
+# print(dak2)

@@ -13,6 +13,22 @@
 #' @export
 z.DranchukPurvisRobinson <- function(pres.pr, temp.pr, tolerance = 1E-13,
                                      verbose = FALSE) {
+
+    if (length(pres.pr) > 1 || length(temp.pr) > 1) {
+        dpr <- sapply(pres.pr, function(x)
+            sapply(temp.pr, function(y) z.DranchukPurvisRobinson_1p(pres.pr = x, temp.pr = y)))
+        rownames(dpr) <- temp.pr
+        colnames(dpr) <- pres.pr
+        return(dpr)
+    } else {
+        z.DranchukPurvisRobinson_1p(pres.pr, temp.pr, tolerance = 1E-13,
+                               verbose = FALSE)
+    }
+}
+
+
+z.DranchukPurvisRobinson_1p <- function(pres.pr, temp.pr, tolerance = 1E-13,
+                                     verbose = FALSE) {
     F <- function(rhor) {
         1 + T1 * rhor + T2 * rhor^2 + T3 * rhor^5 +
             (T4 * rhor^2 * (1 + A8 * rhor^2) * exp(-A8 * rhor^2)) - T5 / rhor
