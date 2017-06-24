@@ -1,4 +1,6 @@
 
+
+
 #' Read file with readings from Standing-Katz chart, create data file and plot
 #'
 #' Read a .txt file that was created from readings of the Standing-Katz chart,
@@ -11,23 +13,26 @@
 #' @param toSave set to FALSE to indicate if the .rda file will not be saved to disk
 #' @param toPlot set to FALSE to indicate the dataset will not be plotted
 #' @param toView set to FALSE to prevent visualizing the dataframe
+#' @param ylim minimum and maximum limits for the y-scale
 #' @importFrom graphics lines plot mtext
 #' @export
 #' @examples
 #' getStandingKatzCurve(tpr = 1.3, pprRange = 'hp', toView = FALSE, toSave = FALSE, toPlot = FALSE)
 getStandingKatzCurve <- function(tpr = 1.3, pprRange = "lp", tolerance = 0.01,
-                                 toView = FALSE, toSave = TRUE, toPlot = TRUE) {
+                                 toView = FALSE, toSave = TRUE, toPlot = TRUE,
+                                 ylim = c(0.2, 1.2)) {
     if (length(tpr) > 1) {
         tpr_vec <- tpr
         tpr_li <- lapply(tpr_vec, function(x)
             getStandingKatzCurve_1p(tpr = x, pprRange = pprRange,
                                     tolerance = tolerance, toPlot = toPlot,
-                                    toSave = toSave, toView = toView))
+                                    toSave = toSave, toView = toView, ylim = ylim))
         names(tpr_li) <- tpr_vec
         invisible(tpr_li)
     } else {
         tpr_1p <- getStandingKatzCurve_1p(tpr = tpr, pprRange = pprRange, tolerance = tolerance,
-                                toView = toView, toSave = toSave, toPlot = toPlot)
+                                toView = toView, toSave = toSave, toPlot = toPlot,
+                                ylim = ylim)
         invisible(tpr_1p)
     }
 }
@@ -35,7 +40,8 @@ getStandingKatzCurve <- function(tpr = 1.3, pprRange = "lp", tolerance = 0.01,
 
 
 getStandingKatzCurve_1p <- function(tpr = 1.3, pprRange = "lp", tolerance = 0.01,
-                                 toView = FALSE, toSave = FALSE, toPlot = TRUE) {
+                                 toView = FALSE, toSave = FALSE, toPlot = TRUE,
+                                 ylim = c(0.2, 1.2)) {
     # Read digitized data from Standing-Katz chart, plot it
     # and put it in a .rda file
       #       x: Ppr
@@ -77,7 +83,7 @@ getStandingKatzCurve_1p <- function(tpr = 1.3, pprRange = "lp", tolerance = 0.01
     assign(.tpr, tpr_obj)
 
     if (toSave)  save(list = .tpr, file = ds_file) # save .rda with same name
-    if (toPlot)  .plotStandingKatzSimple(tpr_obj, tpr)  # plot the object
+    if (toPlot)  .plotStandingKatzSimple(tpr_obj, tpr, ylim)  # plot the object
     if (toView)  utils::View(tpr_obj, title = .tpr)     # view the object
     invisible(tpr_obj)
 }
@@ -85,14 +91,22 @@ getStandingKatzCurve_1p <- function(tpr = 1.3, pprRange = "lp", tolerance = 0.01
 
 
 
-
-.plotStandingKatzSimple <- function(tpr_obj, tpr) {
+#' @importFrom ggplot2 ggplot aes geom_line geom_point coord_cartesian labs
+.plotStandingKatzSimple <- function(tpr_obj, tpr, ylim) {
+    Ppr <- NULL; z <- NULL; Tpr <- NULL
     tpr_s2d <- format(round(tpr, 2), nsmall = 2)
     title <- paste0("Tpr = ", tpr_s2d)
-    plot(x = tpr_obj$Ppr, y = tpr_obj$z, ylim = c(0.2, 1.2),
-         main = title, xlab = "Ppr", ylab = "z")
-    lines(x = tpr_obj$Ppr_near, y = tpr_obj$z, col = "blue")  # nearest rounded points
-    mtext("z vs Ppr, Standing-Katz chart")        # subtitle
+    subtitle <- "z vs Ppr, Standing-Katz chart"        # subtitle
+    # plot(x = tpr_obj$Ppr, y = tpr_obj$z, ylim = c(0.2, 1.2),
+    #      main = title, xlab = "Ppr", ylab = "z")
+    # lines(x = tpr_obj$Ppr_near, y = tpr_obj$z, col = "blue")  # nearest rounded points
+    # mtext("z vs Ppr, Standing-Katz chart")        # subtitle
+
+    g <- ggplot(tpr_obj, aes(x=Ppr, y=z)) + geom_line() + geom_point() +
+        labs(title = title, subtitle = subtitle, x = "Ppr", y = "z") +
+        coord_cartesian(ylim = ylim)
+    print(g)
+
 }
 
 

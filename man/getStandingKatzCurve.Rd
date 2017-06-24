@@ -5,7 +5,7 @@
 \title{Read file with readings from Standing-Katz chart, create data file and plot}
 \usage{
 getStandingKatzCurve(tpr = 1.3, pprRange = "lp", tolerance = 0.01,
-  toView = FALSE, toSave = TRUE, toPlot = TRUE)
+  toView = FALSE, toSave = TRUE, toPlot = TRUE, ylim = c(0.2, 1.2))
 }
 \arguments{
 \item{tpr}{Pseudo-reduced temperature curve in SK chart}
@@ -21,6 +21,8 @@ the middle of the grid. "tolerance" adds flexibility in deciding point closeness
 \item{toSave}{set to FALSE to indicate if the .rda file will not be saved to disk}
 
 \item{toPlot}{set to FALSE to indicate the dataset will not be plotted}
+
+\item{ylim}{minimum and maximum limits for the y-scale}
 }
 \description{
 Read a .txt file that was created from readings of the Standing-Katz chart,
