@@ -34,6 +34,10 @@ tpr_vec <- getCurvesDigitized(pprRange = "lp")
 result <- getStandingKatzCurve(tpr_vec, toSave = FALSE,  toView = FALSE)
 
 ## ------------------------------------------------------------------------
+getStandingKatzCurve(tpr = 1.7, toSave = FALSE, toView = FALSE, 
+                     ylim = c(0.8, 1.1))
+
+## ------------------------------------------------------------------------
 names(result)
 
 ## ------------------------------------------------------------------------
