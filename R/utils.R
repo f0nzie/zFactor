@@ -79,3 +79,25 @@ createTidyFromMatrix <- function(ppr_vector, tpr_vector, correlation) {
     sk_co_tidy <- combineCorrWithSK(sk_df, co_df)
     sk_co_tidy
 }
+
+
+#' Plot multiple Tpr curves in one figure
+#'
+#' @param tpr Pseudo-reduced temperature curve in SK chart
+#' @param pprRange Takes one of two values: "lp": low pressure, or "hp" for
+#' @param ... additional parameters
+#' @importFrom ggplot2 ggplot aes geom_line geom_point
+#' @export
+multiplotStandingKatz <- function(tpr, pprRange = "lp", ...) {
+    Ppr <- NULL; z <- NULL; Tpr <- NULL
+    tpr_li <- getStandingKatzData(tpr, pprRange = pprRange)
+
+    # join the dataframes with rbindlist adding an identifier column
+    tpr_df <- data.table::rbindlist(tpr_li, idcol = TRUE)
+    colnames(tpr_df)[1] <- "Tpr"    # name the identifier as Tpr
+
+    g <- ggplot(tpr_df, aes(x=Ppr, y=z, group=Tpr, color=Tpr)) +
+        geom_line() +
+        geom_point()
+    print(g)
+}
