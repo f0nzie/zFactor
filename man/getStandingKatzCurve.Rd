@@ -26,3 +26,6 @@ the middle of the grid. "tolerance" adds flexibility in deciding point closeness
 Read a .txt file that was created from readings of the Standing-Katz chart,
 then convert it to a .rda file and plot the curve for given Tpr
 }
+\examples{
+getStandingKatzCurve(tpr = 1.3, pprRange = 'hp', toView = FALSE, toSave = FALSE, toPlot = FALSE)
+}

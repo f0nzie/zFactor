@@ -6,7 +6,33 @@
 #' @param verbose print internal calclulations
 #' @rdname Dranchuk-AbouKassem
 #' @export
+#' @examples
+#' # calculate for one Tpr curve at a Ppr
+#' z.DranchukAbuKassem(pres.pr = 1.5, temp.pr = 2.0)
+#'
+#' # For vectors of Ppr and Tpr:
+#' ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5)
+#' tpr <- c(1.3, 1.5, 1.7, 2)
+#' dak <- z.DranchukAbuKassem(pres.pr = ppr, temp.pr = tpr)
+#' print(dak)
 z.DranchukAbuKassem <- function(pres.pr, temp.pr, tolerance = 1E-13,
+                                verbose = FALSE) {
+
+    if (length(pres.pr) > 1 || length(temp.pr) > 1) {
+        dak <- sapply(pres.pr, function(x)
+            sapply(temp.pr, function(y) z.DranchukAbuKassem_1p(pres.pr = x, temp.pr = y)))
+        rownames(dak) <- temp.pr
+        colnames(dak) <- pres.pr
+        return(dak)
+    } else {
+        z.DranchukAbuKassem_1p(pres.pr, temp.pr, tolerance = 1E-13,
+                               verbose = FALSE)
+    }
+}
+
+
+
+z.DranchukAbuKassem_1p <- function(pres.pr, temp.pr, tolerance = 1E-13,
                                 verbose = FALSE) {
     F <- function(rhor)
     {
@@ -50,3 +76,12 @@ z.DranchukAbuKassem <- function(pres.pr, temp.pr, tolerance = 1E-13,
     z <- 0.27 * pres.pr / (rhork * temp.pr)
     return(z)
 }
+
+
+
+# dak2 <- sapply(ppr2, function(x)
+#     sapply(tpr2, function(y) z.DranchukAbuKassem(pres.pr = x, temp.pr = y)))
+#
+# rownames(dak2) <- tpr2
+# colnames(dak2) <- ppr2
+# print(dak2)

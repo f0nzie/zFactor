@@ -14,3 +14,7 @@ and lp}
 \description{
 Get a numeric vector of digitized curves available by Tpr
 }
+\examples{
+getCurvesDigitized(pprRange = "lp")
+getCurvesDigitized(pprRange = "common")
+}

@@ -13,3 +13,7 @@ high pressure, or 'all' for all the curve files}
 \description{
 List all Standing-Katz curves available at Low and High pressures
 }
+\examples{
+listStandingKatzCurves(pprRange = 'all')  # list all curves
+listStandingKatzCurves(pprRange = 'lp')   # list all the Tpr for low-pressure
+}

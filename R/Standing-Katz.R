@@ -13,6 +13,8 @@
 #' @param toView set to FALSE to prevent visualizing the dataframe
 #' @importFrom graphics lines plot mtext
 #' @export
+#' @examples
+#' getStandingKatzCurve(tpr = 1.3, pprRange = 'hp', toView = FALSE, toSave = FALSE, toPlot = FALSE)
 getStandingKatzCurve <- function(tpr = 1.3, pprRange = "lp", tolerance = 0.01,
                                  toView = TRUE, toSave = TRUE, toPlot = TRUE) {
     # Read digitized data from Standing-Katz chart, plot it
@@ -79,6 +81,11 @@ getStandingKatzCurve <- function(tpr = 1.3, pprRange = "lp", tolerance = 0.01,
 #' @param pprRange Takes one of two values: "lp": low pressure, or "hp" for
 #' high pressure
 #' @export
+#' @examples
+#' getStandingKatzData(tpr = 1.5, pprRange = 'lp')
+#' # with a vector
+#' #tpr <- c(1.05, 1.1, 1.2)
+#' #getStandingKatzData(tpr, pprRange = 'lp')
 getStandingKatzData <- function(tpr = 1.3, pprRange = "lp") {
     getStandingKatzCurve(tpr = tpr, pprRange = pprRange,
                          toView = FALSE, toSave = FALSE, toPlot = FALSE)
@@ -91,6 +98,9 @@ getStandingKatzData <- function(tpr = 1.3, pprRange = "lp") {
 #' @param pprRange Takes one of three values: "lp": low pressure, or "hp" for
 #' high pressure, or 'all' for all the curve files
 #' @export
+#' @examples
+#' listStandingKatzCurves(pprRange = 'all')  # list all curves
+#' listStandingKatzCurves(pprRange = 'lp')   # list all the Tpr for low-pressure
 listStandingKatzCurves <- function(pprRange = "lp") {
     range_valid <- c("lp", "hp", "all")
     # stop if it is not 'lp' or 'hp' or 'all'
@@ -114,6 +124,18 @@ listStandingKatzCurves <- function(pprRange = "lp") {
 #' @param pprRange Takes one of two values: "lp": low pressure, or "hp" for
 #' high pressure
 #' @export
+#' @examples
+#' # if we want to know all digitized values of Ppr at a Tpr curve
+#' tpr_vec <- c(2.0)
+#' getStandingKatzMatrix(tpr_vector = tpr_vec,
+#'                        pprRange = "lp")
+#' # or to extract at a Ppr=1.5
+#' getStandingKatzMatrix(tpr_vector = tpr_vec, pprRange = "lp")[1, "1.5"]
+#' # for two vectors
+#' ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5)
+#' tpr <- c(1.3, 1.5, 1.7, 2)
+#' sk <- getStandingKatzMatrix(ppr_vector = ppr, tpr_vector = tpr)
+#' print(sk)
 getStandingKatzMatrix <- function(ppr_vector, tpr_vector, pprRange = "lp") {
     # create a `z` table (matrix) for a set of Tpr and Ppr
     range_valid <- c("lp", "hp")
@@ -183,6 +205,9 @@ extractCurveNumber <- function(str) {
 #' high pressure; "all": all curves; "common": only curves that are common to hp
 #' and lp
 #' @export
+#' @examples
+#' getCurvesDigitized(pprRange = "lp")
+#' getCurvesDigitized(pprRange = "common")
 getCurvesDigitized <- function(pprRange) {
     range_valid <- c("lp", "hp", "all", "common")
     if (!pprRange %in% range_valid) stop("Ppr range keyword not valid")

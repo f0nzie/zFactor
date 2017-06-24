@@ -1,8 +1,8 @@
 ## ----setup, include=F, error=T, message=F, warning=F---------------------
-knitr::opts_chunk$set(echo=T, comment=NA, error=T, warning=F, message = F, fig.align = 'center')
+knitr::opts_chunk$set(echo=T, comment=NA, error=T, warning=F, message = F, fig.align = 'center', results="hold")
 
 ## ------------------------------------------------------------------------
-# get a z value using HY
+# get a z value using DPR correlation
 library(zFactor)
 
 z.DranchukPurvisRobinson(pres.pr = 1.5, temp.pr = 2.0)
@@ -34,11 +34,7 @@ getStandingKatzMatrix(tpr_vector = tpr_vec,
 ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
 tpr <- c(1.3, 1.5, 1.7, 2) 
  
-dpr <- sapply(ppr, function(x)  
-    sapply(tpr, function(y) z.DranchukPurvisRobinson(pres.pr = x, temp.pr = y))) 
- 
-rownames(dpr) <- tpr 
-colnames(dpr) <- ppr 
+dpr <- z.DranchukPurvisRobinson(pres.pr = ppr, temp.pr = tpr)
 print(dpr)
 
 # Hall-Yarborough
@@ -52,7 +48,7 @@ print(dpr)
 library(zFactor)
 
 sk <- getStandingKatzMatrix(ppr_vector = ppr, tpr_vector = tpr)
-sk
+print(sk)
 
 ## ------------------------------------------------------------------------
 err <- round((sk - dpr) / sk * 100, 2)
@@ -77,7 +73,6 @@ library(zFactor)
 tpr2 <- c(1.05, 1.1) 
 ppr2 <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5) 
 
-
 sk2 <- getStandingKatzMatrix(ppr_vector = ppr2, tpr_vector = tpr2, pprRange = "lp")
 sk2
 
@@ -85,11 +80,7 @@ sk2
 # calculate z values at lower values of Tpr
 library(zFactor)
 
-dpr2 <- sapply(ppr2, function(x)  
-    sapply(tpr2, function(y) z.DranchukPurvisRobinson(pres.pr = x, temp.pr = y))) 
- 
-rownames(dpr2) <- tpr2
-colnames(dpr2) <- ppr2
+dpr2 <- z.DranchukPurvisRobinson(pres.pr = ppr2, temp.pr = tpr2)
 print(dpr2)
 
 ## ------------------------------------------------------------------------
@@ -133,7 +124,6 @@ sk_dpr_3 <- sk_dpr_2[sk_dpr_2$Tpr==1.05,]
 sk_dpr_3
 
 ## ------------------------------------------------------------------------
-library(zFactor)
 
 p <- ggplot(sk_dpr_3, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
     geom_line() +
@@ -152,4 +142,47 @@ summary(sk_dpr_3)
  # Mean   :-0.023178  
  # 3rd Qu.:-0.009960  
  # Max.   : 0.002325
+
+## ------------------------------------------------------------------------
+library(ggplot2)
+
+# get all `lp` Tpr curves
+tpr_all <- getCurvesDigitized(pprRange = "lp")
+ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
+sk_dpr_all <- createTidyFromMatrix(ppr, tpr_all, correlation = "DPR")
+sk_dpr_all
+
+
+p <- ggplot(sk_dpr_all, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
+    geom_line() +
+    geom_point() +
+    geom_errorbar(aes(ymin=z.calc-dif, ymax=z.calc+dif), width=.4,
+                  position=position_dodge(0.05))
+print(p)
+
+## ----results="hold"------------------------------------------------------
+# get all `lp` Tpr curves
+tpr <- getCurvesDigitized(pprRange = "lp")
+ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
+
+# calculate HY for the given Tpr
+all_dak <- z.DranchukPurvisRobinson(pres.pr = ppr, temp.pr = tpr)
+cat("Calculated from the correlation \n")
+print(all_dak) 
+
+cat("\nStanding-Katz chart\n")
+all_sk <- getStandingKatzMatrix(ppr_vector = ppr, tpr_vector = tpr)
+all_sk
+
+# find the error
+cat("\n Errors in percentage \n")
+all_err <- round((all_sk - all_dak) / all_sk * 100, 2)  # in percentage
+all_err
+
+cat("\n Errors in Ppr\n")
+summary(all_err)
+
+# for the transposed matrix
+cat("\n Errors for the transposed matrix: Tpr \n")
+summary(t(all_err))
 

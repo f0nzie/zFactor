@@ -11,7 +11,32 @@
 #' @param verbose print internal
 #' @rdname Dranchuk-Purvis-Robinson
 #' @export
+#' @examples
+#' # calculate for one Tpr curve at a Ppr
+#' z.DranchukPurvisRobinson(pres.pr = 1.5, temp.pr = 2.0)
+#'
+#' # For vectors of Ppr and Tpr:
+#' ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5)
+#' tpr <- c(1.3, 1.5, 1.7, 2)
+#' dpr <- z.DranchukPurvisRobinson(pres.pr = ppr, temp.pr = tpr)
+#' print(dpr)
 z.DranchukPurvisRobinson <- function(pres.pr, temp.pr, tolerance = 1E-13,
+                                     verbose = FALSE) {
+
+    if (length(pres.pr) > 1 || length(temp.pr) > 1) {
+        dpr <- sapply(pres.pr, function(x)
+            sapply(temp.pr, function(y) z.DranchukPurvisRobinson_1p(pres.pr = x, temp.pr = y)))
+        rownames(dpr) <- temp.pr
+        colnames(dpr) <- pres.pr
+        return(dpr)
+    } else {
+        z.DranchukPurvisRobinson_1p(pres.pr, temp.pr, tolerance = 1E-13,
+                               verbose = FALSE)
+    }
+}
+
+
+z.DranchukPurvisRobinson_1p <- function(pres.pr, temp.pr, tolerance = 1E-13,
                                      verbose = FALSE) {
     F <- function(rhor) {
         1 + T1 * rhor + T2 * rhor^2 + T3 * rhor^5 +
