@@ -175,7 +175,7 @@ sum_t_err2
 We can see that the errors in `z` with `ANN10` are less than `HY` with a `r sum_t_err2[1,1]`% and `r sum_t_err2[6,1]`% for `Tpr = 1.05`, and a `r sum_t_err2[1,2]`% and `r sum_t_err2[6,2]`% for `Tpr = 1.10`. 
 
 
-## Prepare to plot `SK` chart vs `DPR` correlation
+## Prepare to plot `SK` chart vs `ANN10` model.
 
 ```{r}
 library(zFactor)
@@ -200,7 +200,6 @@ p <- ggplot(sk_dpr_2, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
 print(p)
 ```
 
-We can see with `Dranchuk-Purvis-Robinson` there are still errors or differences between the values in the Standing-Katz chart and the values calculated with the correlation but they are not so bad as in the `HY` correlation.
 
 
 ## Analysis at the lowest `Tpr`
@@ -234,7 +233,6 @@ summary(sk_dpr_3)
  # Max.   : 0.002325
 ```
 
-We can that there is not much difference between `DAK` and `DPR`; both present very similar errors. But both are far better than `Hall-Yarborough`.
 
 
 ## Analyzing performance of the `ANN10` correlation for all the `Tpr` curves
@@ -245,7 +243,7 @@ library(tibble)
 
 # get all `lp` Tpr curves
 tpr_all <- getCurvesDigitized(pprRange = "lp")
-ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
+ppr <- c(0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5) 
 sk_dpr_all <- createTidyFromMatrix(ppr, tpr_all, correlation = "N10")
 as.tibble(sk_dpr_all)
 
@@ -257,7 +255,6 @@ p <- ggplot(sk_dpr_all, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
 print(p)
 ```
 
-> The greatest errors are localized in two of the Tpr curves: 1.05 and barely at 1.1
 
 
 ## Looking numerically at the errors in `DKP` vs `SK` chart
