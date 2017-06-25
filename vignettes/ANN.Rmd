@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo=T, comment=NA, error=T, warning=F, message = F, fig.a
 ```
 
 
-## How do we find the limits of accuracy in the `DAK` correlation
+## How do we find the limits of accuracy in the `ANN10` correlation
 
 
 ## Get `z` at selected `Ppr` and `Tpr`
@@ -24,7 +24,7 @@ knitr::opts_chunk$set(echo=T, comment=NA, error=T, warning=F, message = F, fig.a
 library(zFactor)
 # library(rJava)
 
-z.Ann10(ppr = 1.5, tpr = 2.0)
+z.Ann10(pres.pr = 1.5, temp.pr = 2.0)
 # HY = 0.9580002
 ```
 
@@ -46,7 +46,7 @@ It looks pretty good.
 
 ```{r}
 library(zFactor)
-z.Ann10(ppr = 1.5, tpr = 1.1)
+z.Ann10(pres.pr = 1.5, temp.pr = 1.1)
 ```
 
 From the `Standing-Katz` chart we obtain a digitized point:
@@ -59,7 +59,7 @@ getStandingKatzMatrix(tpr_vector = tpr_vec,
 ```
 
 
-> At lower `Tpr` there is some error. We see a  difference between the values of z from the DAK calculation and the value read from the Standing-Katz chart.
+> At lower `Tpr` there is some error. We see a  difference between the values of z from the ANN10 calculation and the value read from the Standing-Katz chart.
 
 
 ## Get values of `z` for several `Ppr` and `Tpr`
@@ -172,7 +172,7 @@ sum_t_err2 <- summary(t_err2)
 sum_t_err2
 ```
 
-We can see that the errors in `z` with `DAK` are less than `HY` with a `r sum_t_err2[1,1]`% and `r sum_t_err2[6,1]`% for `Tpr = 1.05`, and a `r sum_t_err2[1,2]`% and `r sum_t_err2[6,2]`% for `Tpr = 1.10`. 
+We can see that the errors in `z` with `ANN10` are less than `HY` with a `r sum_t_err2[1,1]`% and `r sum_t_err2[6,1]`% for `Tpr = 1.05`, and a `r sum_t_err2[1,2]`% and `r sum_t_err2[6,2]`% for `Tpr = 1.10`. 
 
 
 ## Prepare to plot `SK` chart vs `DPR` correlation
@@ -225,7 +225,7 @@ print(p)
 ```{r}
 summary(sk_dpr_3)
 
- #         dif DAK      
+ #         dif ANN10      
  # Min.   :-0.048404  
  # 1st Qu.:-0.035300  
  # Median :-0.025978  
@@ -237,7 +237,7 @@ summary(sk_dpr_3)
 We can that there is not much difference between `DAK` and `DPR`; both present very similar errors. But both are far better than `Hall-Yarborough`.
 
 
-## Analyzing performance of the `DAK` correlation for all the `Tpr` curves
+## Analyzing performance of the `ANN10` correlation for all the `Tpr` curves
 
 ```{r}
 library(ggplot2)
