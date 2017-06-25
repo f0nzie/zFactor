@@ -1,0 +1,73 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+system("java -version")
+system("javac -version")
+```
+
+```{r}
+# compile Java code
+system("javac -verbose ./java/CalculateZFactor.java")
+```
+
+```{r}
+# preliminaries #
+library(rJava)
+
+# start the Java Virtual Machine
+.jinit()
+
+# replace with the path to the folder containing your class
+.jaddClassPath("./java")     
+
+# show the Java class path
+.jclassPath()
+```
+
+```{r}
+zFactor <- .jnew("CalculateZFactor")
+```
+
+```{r}
+.jcall(zFactor, "D", "ANN10", 1.5, 1.05)
+```
+
+```{r}
+.jcall(zFactor, "D", "ANN5", 1.5, 1.05)
+```
+
+```{r}
+.jcall(zFactor, "D", "DAK", 1.5, 1.05)
+```
+
+
+```{r}
+# call the my_convolve.class
+z = .jcall("CalculateZFactor", "D", "ANN10", 
+           as.double(1.0), as.double(1.05))
+z
+```
+
+
+```{r}
+# call the my_convolve.class
+z = .jcall("CalculateZFactor", "D", "ANN10", 
+           1.2, 1.05)
+z
+```
+
+```{r}
+# call the my_convolve.class
+z = .jcall("CalculateZFactor", "D", "DAK", 
+           as.double(1.0), as.double(1.05))
+z
+```
+
+
+
+
+
+
