@@ -18,12 +18,10 @@ getStandingKatzMatrix(tpr_vector = tpr_vec,
 
 ## ------------------------------------------------------------------------
 library(zFactor)
-
 z.DranchukPurvisRobinson(pres.pr = 1.5, temp.pr = 1.1)
 
 ## ------------------------------------------------------------------------
 library(zFactor)
-
 tpr_vec <- c(1.1)
 getStandingKatzMatrix(tpr_vector = tpr_vec, 
                       pprRange = "lp")[1, "1.5"]
@@ -37,12 +35,19 @@ tpr <- c(1.3, 1.5, 1.7, 2)
 dpr <- z.DranchukPurvisRobinson(pres.pr = ppr, temp.pr = tpr)
 print(dpr)
 
-# Hall-Yarborough
+# From Hall-Yarborough
 #    0.5       1.5       2.5       3.5       4.5       5.5       6.5
 # 1.3 0.9176300 0.7534433 0.6399020 0.6323003 0.6881127 0.7651710 0.8493794
 # 1.5 0.9496855 0.8581232 0.7924067 0.7687902 0.7868071 0.8316848 0.8906351
 # 1.7 0.9682547 0.9134862 0.8756412 0.8605668 0.8694525 0.8978885 0.9396353
 # 2   0.9838234 0.9580002 0.9426939 0.9396286 0.9490995 0.9697839 0.9994317
+
+# From Dranchuk-AbouKassem
+#  0.5       1.5       2.5       3.5       4.5       5.5       6.5
+# 1.3 0.9203019 0.7543694 0.6377871 0.6339357 0.6898314 0.7663247 0.8499523
+# 1.5 0.9509373 0.8593144 0.7929993 0.7710525 0.7896224 0.8331893 0.8904317
+# 1.7 0.9681353 0.9128087 0.8753784 0.8619509 0.8721085 0.9003962 0.9409634
+# 2   0.9824731 0.9551087 0.9400752 0.9385273 0.9497137 0.9715388 1.0015560
 
 ## ------------------------------------------------------------------------
 library(zFactor)
@@ -102,12 +107,13 @@ sum_t_err2
 
 ## ------------------------------------------------------------------------
 library(zFactor)
+library(tibble)
 
 tpr2 <- c(1.05, 1.1, 1.2, 1.3) 
 ppr2 <- c(0.5, 1.0, 1.5, 2, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5) 
 
 sk_dpr_2 <- createTidyFromMatrix(ppr2, tpr2, correlation = "DPR")
-sk_dpr_2
+as.tibble(sk_dpr_2)
 
 ## ------------------------------------------------------------------------
 library(ggplot2)
@@ -135,7 +141,7 @@ print(p)
 ## ------------------------------------------------------------------------
 summary(sk_dpr_3)
 
- # dif     DAK      
+ #         dif DAK      
  # Min.   :-0.048404  
  # 1st Qu.:-0.035300  
  # Median :-0.025978  
@@ -145,13 +151,13 @@ summary(sk_dpr_3)
 
 ## ------------------------------------------------------------------------
 library(ggplot2)
+library(tibble)
 
 # get all `lp` Tpr curves
 tpr_all <- getCurvesDigitized(pprRange = "lp")
 ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
 sk_dpr_all <- createTidyFromMatrix(ppr, tpr_all, correlation = "DPR")
-sk_dpr_all
-
+as.tibble(sk_dpr_all)
 
 p <- ggplot(sk_dpr_all, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
     geom_line() +

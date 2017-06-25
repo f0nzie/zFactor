@@ -99,12 +99,13 @@ sum_t_err2
 
 ## ------------------------------------------------------------------------
 library(zFactor)
+library(tibble)
 
 tpr2 <- c(1.05, 1.1, 1.2, 1.3) 
 ppr2 <- c(0.5, 1.0, 1.5, 2, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5) 
 
 sk_hy_2 <- createTidyFromMatrix(ppr2, tpr2, correlation = "HY")
-sk_hy_2
+as.tibble(sk_hy_2)
 
 ## ------------------------------------------------------------------------
 library(ggplot2)
@@ -118,12 +119,13 @@ print(p)
 
 ## ------------------------------------------------------------------------
 library(ggplot2)
+library(tibble)
 
 # get all `lp` Tpr curves
 tpr_all <- getCurvesDigitized(pprRange = "lp")
 ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
 sk_hy_all <- createTidyFromMatrix(ppr, tpr_all, correlation = "HY")
-sk_hy_all
+as.tibble(sk_hy_all)
 
 
 p <- ggplot(sk_hy_all, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +

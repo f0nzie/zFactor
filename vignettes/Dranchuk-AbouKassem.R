@@ -30,14 +30,13 @@ getStandingKatzMatrix(tpr_vector = tpr_vec,
 
 ## ------------------------------------------------------------------------
 # test HY with 1st-derivative using the values from paper 
- 
 ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
 tpr <- c(1.3, 1.5, 1.7, 2) 
 
 dak <- z.DranchukAbuKassem(ppr, tpr)
 print(dak)
  
-# Hall-Yarborough
+# From Hall-Yarborough
 #    0.5       1.5       2.5       3.5       4.5       5.5       6.5
 # 1.3 0.9176300 0.7534433 0.6399020 0.6323003 0.6881127 0.7651710 0.8493794
 # 1.5 0.9496855 0.8581232 0.7924067 0.7687902 0.7868071 0.8316848 0.8906351
@@ -92,12 +91,13 @@ sum_t_err2
 
 ## ------------------------------------------------------------------------
 library(zFactor)
+library(tibble)
 
 tpr2 <- c(1.05, 1.1, 1.2, 1.3) 
 ppr2 <- c(0.5, 1.0, 1.5, 2, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5) 
 
 sk_dak_2 <- createTidyFromMatrix(ppr2, tpr2, correlation = "DAK")
-sk_dak_2
+as.tibble(sk_dak_2)
 
 ## ------------------------------------------------------------------------
 library(ggplot2)
@@ -128,12 +128,13 @@ summary(sk_dak_3)
 
 ## ------------------------------------------------------------------------
 library(ggplot2)
+library(tibble)
 
 # get all `lp` Tpr curves
 tpr_all <- getCurvesDigitized(pprRange = "lp")
 ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
 sk_dak_all <- createTidyFromMatrix(ppr, tpr_all, correlation = "DAK")
-sk_dak_all
+as.tibble(sk_dak_all)
 
 
 p <- ggplot(sk_dak_all, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
