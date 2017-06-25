@@ -2,10 +2,6 @@
 knitr::opts_chunk$set(echo=T, comment=NA, error=T, warning=F, message = F, fig.align = 'center', results="hold")
 
 ## ------------------------------------------------------------------------
-library(zFactor)
-zFactor <- rJava::.jnew("CalculateZFactor")
-
-## ------------------------------------------------------------------------
 # get a z value using DPR correlation
 library(zFactor)
 # library(rJava)

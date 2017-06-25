@@ -74,9 +74,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zFactor)
-zFactor &lt;-<span class="st"> </span>rJava::<span class="kw">.jnew</span>(<span class="st">&quot;CalculateZFactor&quot;</span>)</code></pre></div>
-<pre><code>Error in rJava::.jnew(&quot;CalculateZFactor&quot;): java.lang.ClassNotFoundException</code></pre>
 <div id="how-do-we-find-the-limits-of-accuracy-in-the-ann10-correlation" class="section level2">
 <h2>How do we find the limits of accuracy in the <code>ANN10</code> correlation</h2>
 </div>
@@ -86,9 +83,9 @@ zFactor &lt;-<span class="st"> </span>rJava::<span class="kw">.jnew</span>(<span
 <span class="kw">library</span>(zFactor)
 <span class="co"># library(rJava)</span>
 
-<span class="kw">z.Ann10</span>(<span class="dt">pres.pr =</span> <span class="fl">1.5</span>, <span class="dt">temp.pr =</span> <span class="fl">2.0</span>)</code></pre></div>
-<pre><code>Error in rJava::.jnew(&quot;CalculateZFactor&quot;): java.lang.ClassNotFoundException</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># HY = 0.9580002</span></code></pre></div>
+<span class="kw">z.Ann10</span>(<span class="dt">pres.pr =</span> <span class="fl">1.5</span>, <span class="dt">temp.pr =</span> <span class="fl">2.0</span>)
+<span class="co"># HY = 0.9580002</span></code></pre></div>
+<pre><code>[1] 0.9572277</code></pre>
 <p>From the Standing-Katz chart we obtain a digitized point at the same <code>Ppr</code> and <code>Tpr</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get a z value from the SK chart at the same Ppr and Tpr</span>
 <span class="kw">library</span>(zFactor)
@@ -104,7 +101,7 @@ tpr_vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl"
 <h2>Get <code>z</code> at selected <code>Ppr</code> and <code>Tpr</code></h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zFactor)
 <span class="kw">z.Ann10</span>(<span class="dt">pres.pr =</span> <span class="fl">1.5</span>, <span class="dt">temp.pr =</span> <span class="fl">1.1</span>)</code></pre></div>
-<pre><code>Error in rJava::.jnew(&quot;CalculateZFactor&quot;): java.lang.ClassNotFoundException</code></pre>
+<pre><code>[1] 0.4309125</code></pre>
 <p>From the <code>Standing-Katz</code> chart we obtain a digitized point:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zFactor)
 tpr_vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.1</span>)
@@ -123,11 +120,10 @@ tpr_vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl"
 ppr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="fl">3.5</span>, <span class="fl">4.5</span>, <span class="fl">5.5</span>, <span class="fl">6.5</span>) 
 tpr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.3</span>, <span class="fl">1.5</span>, <span class="fl">1.7</span>, <span class="dv">2</span>) 
  
-dpr &lt;-<span class="st"> </span><span class="kw">z.Ann10</span>(ppr, tpr)</code></pre></div>
-<pre><code>Error in rJava::.jnew(&quot;CalculateZFactor&quot;): java.lang.ClassNotFoundException</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(dpr)</code></pre></div>
-<pre><code>Error in print(dpr): object 'dpr' not found</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># From Hall-Yarborough</span>
+dpr &lt;-<span class="st"> </span><span class="kw">z.Ann10</span>(ppr, tpr)
+<span class="kw">print</span>(dpr)
+
+<span class="co"># From Hall-Yarborough</span>
 <span class="co">#    0.5       1.5       2.5       3.5       4.5       5.5       6.5</span>
 <span class="co"># 1.3 0.9176300 0.7534433 0.6399020 0.6323003 0.6881127 0.7651710 0.8493794</span>
 <span class="co"># 1.5 0.9496855 0.8581232 0.7924067 0.7687902 0.7868071 0.8316848 0.8906351</span>
@@ -140,6 +136,11 @@ dpr &lt;-<span class="st"> </span><span class="kw">z.Ann10</span>(ppr, tpr)</cod
 <span class="co"># 1.5 0.9509373 0.8593144 0.7929993 0.7710525 0.7896224 0.8331893 0.8904317</span>
 <span class="co"># 1.7 0.9681353 0.9128087 0.8753784 0.8619509 0.8721085 0.9003962 0.9409634</span>
 <span class="co"># 2   0.9824731 0.9551087 0.9400752 0.9385273 0.9497137 0.9715388 1.0015560</span></code></pre></div>
+<pre><code>          0.5       1.5       2.5       3.5       4.5       5.5       6.5
+1.3 0.9196115 0.7567070 0.6394479 0.6341957 0.6857549 0.7611212 0.8471371
+1.5 0.9508509 0.8607096 0.7940885 0.7685691 0.7867923 0.8323518 0.8918874
+1.7 0.9682749 0.9146453 0.8767457 0.8581919 0.8672123 0.8978116 0.9413442
+2   0.9839990 0.9572277 0.9414698 0.9352303 0.9453140 0.9693022 1.0014522</code></pre>
 <p>With the same <code>ppr</code> and <code>tpr</code> vectors, we do the same for the Standing-Katz chart:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zFactor)
 
@@ -151,23 +152,29 @@ sk &lt;-<span class="st"> </span><span class="kw">getStandingKatzMatrix</span>(<
 1.70 0.968 0.914 0.876 0.857 0.864 0.897 0.942
 2.00 0.982 0.956 0.941 0.937 0.945 0.969 1.003</code></pre>
 <p>Subtract the two matrices and find the difference:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">err &lt;-<span class="st"> </span><span class="kw">round</span>((sk -<span class="st"> </span>dpr) /<span class="st"> </span>sk *<span class="st"> </span><span class="dv">100</span>, <span class="dv">2</span>)</code></pre></div>
-<pre><code>Error in eval(expr, envir, enclos): object 'dpr' not found</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">err</code></pre></div>
-<pre><code>Error in eval(expr, envir, enclos): object 'err' not found</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># DAK</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">err &lt;-<span class="st"> </span><span class="kw">round</span>((sk -<span class="st"> </span>dpr) /<span class="st"> </span>sk *<span class="st"> </span><span class="dv">100</span>, <span class="dv">2</span>)
+err
+
+<span class="co"># DAK</span>
 <span class="co"># 0.5   1.5  2.5   3.5   4.5   5.5   6.5</span>
 <span class="co"># 1.30 -0.47  0.22 0.03 -0.15 -0.85 -0.97 -0.71</span>
 <span class="co"># 1.50 -0.31 -0.04 0.13 -0.14  0.05  0.34  0.18</span>
 <span class="co"># 1.70 -0.01  0.13 0.07 -0.58 -0.94 -0.38  0.11</span>
 <span class="co"># 2.00 -0.05  0.09 0.10 -0.16 -0.50 -0.26  0.14</span></code></pre></div>
+<pre><code>       0.5   1.5   2.5   3.5   4.5   5.5   6.5
+1.30 -0.39 -0.09 -0.23 -0.19 -0.26 -0.28 -0.37
+1.50 -0.30 -0.20 -0.01  0.19  0.41  0.44  0.01
+1.70 -0.03 -0.07 -0.09 -0.14 -0.37 -0.09  0.07
+2.00 -0.20 -0.13 -0.05  0.19 -0.03 -0.03  0.15</code></pre>
 </div>
 <div id="error-by-ppr-and-by-ppr" class="section level2">
 <h2>Error by <code>Ppr</code> and by <code>PPr</code></h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="kw">colSums</span>(err))</code></pre></div>
-<pre><code>Error in is.data.frame(x): object 'err' not found</code></pre>
+<pre><code>  0.5   1.5   2.5   3.5   4.5   5.5   6.5 
+-0.92 -0.49 -0.38  0.05 -0.25  0.04 -0.14 </code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="kw">rowSums</span>(err))</code></pre></div>
-<pre><code>Error in is.data.frame(x): object 'err' not found</code></pre>
+<pre><code> 1.30  1.50  1.70  2.00 
+-1.81  0.54 -0.72 -0.10 </code></pre>
 </div>
 <div id="analyze-the-error-for-smaller-values-of-tpr" class="section level2">
 <h2>Analyze the error for smaller values of <code>Tpr</code></h2>
@@ -185,29 +192,42 @@ sk2</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># calculate z values at lower values of Tpr</span>
 <span class="kw">library</span>(zFactor)
 
-dpr2 &lt;-<span class="st"> </span><span class="kw">z.Ann10</span>(ppr2, tpr2)</code></pre></div>
-<pre><code>Error in rJava::.jnew(&quot;CalculateZFactor&quot;): java.lang.ClassNotFoundException</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(dpr2)</code></pre></div>
-<pre><code>Error in print(dpr2): object 'dpr2' not found</code></pre>
+dpr2 &lt;-<span class="st"> </span><span class="kw">z.Ann10</span>(ppr2, tpr2)
+<span class="kw">print</span>(dpr2)</code></pre></div>
+<pre><code>           0.5       1.5       2.5       3.5       4.5       5.5
+1.05 0.8324799 0.2526076 0.3420322 0.4693520 0.5991874 0.7254470
+1.1  0.8547310 0.4309125 0.3930420 0.4983162 0.6136523 0.7278621</code></pre>
 <p>Subtract the matrices and calculate the error in percentage:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">err2 &lt;-<span class="st"> </span><span class="kw">round</span>((sk2 -<span class="st"> </span>dpr2) /<span class="st"> </span>sk2 *<span class="st"> </span><span class="dv">100</span>, <span class="dv">2</span>)</code></pre></div>
-<pre><code>Error in eval(expr, envir, enclos): object 'dpr2' not found</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">err2</code></pre></div>
-<pre><code>Error in eval(expr, envir, enclos): object 'err2' not found</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># DAK</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">err2 &lt;-<span class="st"> </span><span class="kw">round</span>((sk2 -<span class="st"> </span>dpr2) /<span class="st"> </span>sk2 *<span class="st"> </span><span class="dv">100</span>, <span class="dv">2</span>)
+err2
+
+<span class="co"># DAK</span>
 <span class="co"># 0.5    1.5    2.5   3.5   4.5   5.5</span>
 <span class="co"># 1.05 -0.13 -12.15 -12.78 -7.49 -4.34 -1.68</span>
 <span class="co"># 1.10 -0.36  -4.79  -4.97 -3.56 -2.14 -1.21</span></code></pre></div>
+<pre><code>       0.5   1.5   2.5  3.5   4.5  5.5
+1.05 -0.42  0.16  0.28 0.35 -0.20 0.21
+1.10 -0.09 -1.15 -0.01 0.34  0.22 0.16</code></pre>
 <p>Transposing the matrix with <code>Tpr</code> as columns and <code>Ppr</code> as rows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t_err2 &lt;-<span class="st"> </span><span class="kw">t</span>(err2)</code></pre></div>
-<pre><code>Error in t(err2): object 'err2' not found</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t_err2</code></pre></div>
-<pre><code>Error in eval(expr, envir, enclos): object 't_err2' not found</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t_err2 &lt;-<span class="st"> </span><span class="kw">t</span>(err2)
+t_err2</code></pre></div>
+<pre><code>     1.05  1.10
+0.5 -0.42 -0.09
+1.5  0.16 -1.15
+2.5  0.28 -0.01
+3.5  0.35  0.34
+4.5 -0.20  0.22
+5.5  0.21  0.16</code></pre>
 <p>A statistical summary by <code>Tpr</code> curve:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sum_t_err2 &lt;-<span class="st"> </span><span class="kw">summary</span>(t_err2)</code></pre></div>
-<pre><code>Error in summary(t_err2): object 't_err2' not found</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sum_t_err2</code></pre></div>
-<pre><code>Error in eval(expr, envir, enclos): object 'sum_t_err2' not found</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sum_t_err2 &lt;-<span class="st"> </span><span class="kw">summary</span>(t_err2)
+sum_t_err2</code></pre></div>
+<pre><code>      1.05               1.10         
+ Min.   :-0.42000   Min.   :-1.15000  
+ 1st Qu.:-0.11000   1st Qu.:-0.07000  
+ Median : 0.18500   Median : 0.07500  
+ Mean   : 0.06333   Mean   :-0.08833  
+ 3rd Qu.: 0.26250   3rd Qu.: 0.20500  
+ Max.   : 0.35000   Max.   : 0.34000  </code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We can see that the errors in `z` with `ANN10` are less than `HY` with a `r sum_t_err2[1,1]`% and `r sum_t_err2[6,1]`% for `Tpr = 1.05`, and a `r sum_t_err2[1,2]`% and `r sum_t_err2[6,2]`% for `Tpr = 1.10`. </span></code></pre></div>
 </div>
 <div id="prepare-to-plot-sk-chart-vs-ann10-model." class="section level2">
@@ -218,45 +238,81 @@ dpr2 &lt;-<span class="st"> </span><span class="kw">z.Ann10</span>(ppr2, tpr2)</
 tpr2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.05</span>, <span class="fl">1.1</span>, <span class="fl">1.2</span>, <span class="fl">1.3</span>) 
 ppr2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.0</span>, <span class="fl">1.5</span>, <span class="dv">2</span>, <span class="fl">2.5</span>, <span class="fl">3.0</span>, <span class="fl">3.5</span>, <span class="fl">4.0</span>, <span class="fl">4.5</span>, <span class="fl">5.0</span>, <span class="fl">5.5</span>, <span class="fl">6.0</span>, <span class="fl">6.5</span>) 
 
-sk_dpr_2 &lt;-<span class="st"> </span><span class="kw">createTidyFromMatrix</span>(ppr2, tpr2, <span class="dt">correlation =</span> <span class="st">&quot;N10&quot;</span>)</code></pre></div>
-<pre><code>Error in rJava::.jnew(&quot;CalculateZFactor&quot;): java.lang.ClassNotFoundException</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.tibble</span>(sk_dpr_2)</code></pre></div>
-<pre><code>Error in as.tibble(sk_dpr_2): object 'sk_dpr_2' not found</code></pre>
+sk_dpr_2 &lt;-<span class="st"> </span><span class="kw">createTidyFromMatrix</span>(ppr2, tpr2, <span class="dt">correlation =</span> <span class="st">&quot;N10&quot;</span>)
+<span class="kw">as.tibble</span>(sk_dpr_2)</code></pre></div>
+<pre><code># A tibble: 52 x 5
+     Tpr   Ppr z.chart    z.calc           dif
+   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
+ 1  1.05   0.5   0.829 0.8324799 -0.0034799212
+ 2   1.1   0.5   0.854 0.8547310 -0.0007310197
+ 3   1.2   0.5   0.893 0.8953923 -0.0023923156
+ 4   1.3   0.5   0.916 0.9196115 -0.0036115485
+ 5  1.05   1.0   0.589 0.5896265 -0.0006265401
+ 6   1.1   1.0   0.669 0.6708697 -0.0018696755
+ 7   1.2   1.0   0.779 0.7807145 -0.0017144762
+ 8   1.3   1.0   0.835 0.8363278 -0.0013277938
+ 9  1.05   1.5   0.253 0.2526076  0.0003924371
+10   1.1   1.5   0.426 0.4309125 -0.0049124610
+# ... with 42 more rows</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
 
 p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_dpr_2, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z.calc, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) +
 <span class="st">    </span><span class="kw">geom_line</span>() +
 <span class="st">    </span><span class="kw">geom_point</span>() +
 <span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc-dif, <span class="dt">ymax=</span>z.calc+dif), <span class="dt">width=</span>.<span class="dv">4</span>,
-                  <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.05</span>))</code></pre></div>
-<pre><code>Error in ggplot(sk_dpr_2, aes(x = Ppr, y = z.calc, group = Tpr, color = Tpr)): object 'sk_dpr_2' not found</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(p)</code></pre></div>
-<pre><code>Error in print(p): object 'p' not found</code></pre>
+                  <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.05</span>))
+<span class="kw">print</span>(p)</code></pre></div>
+<p><img src="data:image/png;base64,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" style="display: block; margin: auto;" /></p>
 </div>
 <div id="analysis-at-the-lowest-tpr" class="section level2">
 <h2>Analysis at the lowest <code>Tpr</code></h2>
 <p>Extract only values at <code>Tpr = 1.05</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sk_dpr_3 &lt;-<span class="st"> </span>sk_dpr_2[sk_dpr_2$Tpr==<span class="fl">1.05</span>,]</code></pre></div>
-<pre><code>Error in eval(expr, envir, enclos): object 'sk_dpr_2' not found</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sk_dpr_3</code></pre></div>
-<pre><code>Error in eval(expr, envir, enclos): object 'sk_dpr_3' not found</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sk_dpr_3 &lt;-<span class="st"> </span>sk_dpr_2[sk_dpr_2$Tpr==<span class="fl">1.05</span>,]
+sk_dpr_3</code></pre></div>
+<pre><code>    Tpr Ppr z.chart    z.calc           dif
+1  1.05 0.5   0.829 0.8324799 -0.0034799212
+5  1.05 1.0   0.589 0.5896265 -0.0006265401
+9  1.05 1.5   0.253 0.2526076  0.0003924371
+13 1.05 2.0   0.280 0.2813986 -0.0013986023
+17 1.05 2.5   0.343 0.3420322  0.0009678343
+21 1.05 3.0   0.407 0.4046718  0.0023282390
+25 1.05 3.5   0.471 0.4693520  0.0016480466
+29 1.05 4.0   0.534 0.5347267 -0.0007266737
+33 1.05 4.5   0.598 0.5991874 -0.0011874468
+37 1.05 5.0   0.663 0.6627276  0.0002723595
+41 1.05 5.5   0.727 0.7254470  0.0015529844
+45 1.05 6.0   0.786 0.7868394 -0.0008393750
+49 1.05 6.5   0.846 0.8464481 -0.0004481081</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_dpr_3, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z.calc, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) +
 <span class="st">    </span><span class="kw">geom_line</span>() +
 <span class="st">    </span><span class="kw">geom_point</span>() +
 <span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc-dif, <span class="dt">ymax=</span>z.calc+dif), <span class="dt">width=</span>.<span class="dv">4</span>,
-                  <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.05</span>))</code></pre></div>
-<pre><code>Error in ggplot(sk_dpr_3, aes(x = Ppr, y = z.calc, group = Tpr, color = Tpr)): object 'sk_dpr_3' not found</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(p)</code></pre></div>
-<pre><code>Error in print(p): object 'p' not found</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(sk_dpr_3)</code></pre></div>
-<pre><code>Error in summary(sk_dpr_3): object 'sk_dpr_3' not found</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"> <span class="co">#         dif ANN10      </span>
+                  <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.05</span>))
+<span class="kw">print</span>(p)</code></pre></div>
+<p><img src="data:image/png;base64,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" style="display: block; margin: auto;" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(sk_dpr_3)
+
+ <span class="co">#         dif ANN10      </span>
  <span class="co"># Min.   :-0.048404  </span>
  <span class="co"># 1st Qu.:-0.035300  </span>
  <span class="co"># Median :-0.025978  </span>
  <span class="co"># Mean   :-0.023178  </span>
  <span class="co"># 3rd Qu.:-0.009960  </span>
  <span class="co"># Max.   : 0.002325</span></code></pre></div>
+<pre><code>     Tpr                 Ppr         z.chart           z.calc      
+ Length:13          Min.   :0.5   Min.   :0.2530   Min.   :0.2526  
+ Class :character   1st Qu.:2.0   1st Qu.:0.4070   1st Qu.:0.4047  
+ Mode  :character   Median :3.5   Median :0.5890   Median :0.5896  
+                    Mean   :3.5   Mean   :0.5635   Mean   :0.5637  
+                    3rd Qu.:5.0   3rd Qu.:0.7270   3rd Qu.:0.7254  
+                    Max.   :6.5   Max.   :0.8460   Max.   :0.8464  
+      dif            
+ Min.   :-0.0034799  
+ 1st Qu.:-0.0008394  
+ Median :-0.0004481  
+ Mean   :-0.0001188  
+ 3rd Qu.: 0.0009678  
+ Max.   : 0.0023282  </code></pre>
 </div>
 <div id="analyzing-performance-of-the-ann10-correlation-for-all-the-tpr-curves" class="section level2">
 <h2>Analyzing performance of the <code>ANN10</code> correlation for all the <code>Tpr</code> curves</h2>
@@ -266,18 +322,30 @@ p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_dpr_2, <span c
 <span class="co"># get all `lp` Tpr curves</span>
 tpr_all &lt;-<span class="st"> </span><span class="kw">getCurvesDigitized</span>(<span class="dt">pprRange =</span> <span class="st">&quot;lp&quot;</span>)
 ppr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.0</span>, <span class="fl">1.5</span>, <span class="fl">2.0</span>, <span class="fl">2.5</span>, <span class="fl">3.0</span>, <span class="fl">3.5</span>, <span class="fl">4.0</span>, <span class="fl">4.5</span>, <span class="fl">5.0</span>, <span class="fl">5.5</span>, <span class="fl">6.0</span>, <span class="fl">6.5</span>) 
-sk_dpr_all &lt;-<span class="st"> </span><span class="kw">createTidyFromMatrix</span>(ppr, tpr_all, <span class="dt">correlation =</span> <span class="st">&quot;N10&quot;</span>)</code></pre></div>
-<pre><code>Error in rJava::.jnew(&quot;CalculateZFactor&quot;): java.lang.ClassNotFoundException</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.tibble</span>(sk_dpr_all)</code></pre></div>
-<pre><code>Error in as.tibble(sk_dpr_all): object 'sk_dpr_all' not found</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_dpr_all, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z.calc, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) +
+sk_dpr_all &lt;-<span class="st"> </span><span class="kw">createTidyFromMatrix</span>(ppr, tpr_all, <span class="dt">correlation =</span> <span class="st">&quot;N10&quot;</span>)
+<span class="kw">as.tibble</span>(sk_dpr_all)
+
+p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_dpr_all, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z.calc, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) +
 <span class="st">    </span><span class="kw">geom_line</span>() +
 <span class="st">    </span><span class="kw">geom_point</span>() +
 <span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc-dif, <span class="dt">ymax=</span>z.calc+dif), <span class="dt">width=</span>.<span class="dv">4</span>,
-                  <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.05</span>))</code></pre></div>
-<pre><code>Error in ggplot(sk_dpr_all, aes(x = Ppr, y = z.calc, group = Tpr, color = Tpr)): object 'sk_dpr_all' not found</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(p)</code></pre></div>
-<pre><code>Error in print(p): object 'p' not found</code></pre>
+                  <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.05</span>))
+<span class="kw">print</span>(p)</code></pre></div>
+<p><img src="data:image/png;base64,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" style="display: block; margin: auto;" /></p>
+<pre><code># A tibble: 208 x 5
+     Tpr   Ppr z.chart    z.calc           dif
+   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
+ 1  1.05   0.5   0.829 0.8324799 -0.0034799212
+ 2   1.1   0.5   0.854 0.8547310 -0.0007310197
+ 3   1.2   0.5   0.893 0.8953923 -0.0023923156
+ 4   1.3   0.5   0.916 0.9196115 -0.0036115485
+ 5   1.4   0.5   0.936 0.9367118 -0.0007118312
+ 6   1.5   0.5   0.948 0.9508509 -0.0028509478
+ 7   1.6   0.5   0.959 0.9607316 -0.0017315940
+ 8   1.7   0.5   0.968 0.9682749 -0.0002748589
+ 9   1.8   0.5   0.974 0.9758251 -0.0018251256
+10   1.9   0.5   0.978 0.9814269 -0.0034269385
+# ... with 198 more rows</code></pre>
 </div>
 <div id="looking-numerically-at-the-errors-in-dkp-vs-sk-chart" class="section level2">
 <h2>Looking numerically at the errors in <code>DKP</code> vs <code>SK</code> chart</h2>
@@ -286,29 +354,43 @@ tpr &lt;-<span class="st"> </span><span class="kw">getCurvesDigitized</span>(<sp
 ppr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="fl">3.5</span>, <span class="fl">4.5</span>, <span class="fl">5.5</span>, <span class="fl">6.5</span>) 
 
 <span class="co"># calculate HY for the given Tpr</span>
-all_dak &lt;-<span class="st"> </span><span class="kw">z.Ann10</span>(<span class="dt">pres.pr =</span> ppr, <span class="dt">temp.pr =</span> tpr)</code></pre></div>
-<pre><code>Error in rJava::.jnew(&quot;CalculateZFactor&quot;): java.lang.ClassNotFoundException</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="st">&quot;Calculated from the correlation </span><span class="ch">\n</span><span class="st">&quot;</span>)
-<span class="kw">print</span>(all_dak) </code></pre></div>
-<pre><code>Error in print(all_dak): object 'all_dak' not found</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Standing-Katz chart</span><span class="ch">\n</span><span class="st">&quot;</span>)
+all_dak &lt;-<span class="st"> </span><span class="kw">z.Ann10</span>(<span class="dt">pres.pr =</span> ppr, <span class="dt">temp.pr =</span> tpr)
+<span class="kw">cat</span>(<span class="st">&quot;Calculated from the correlation </span><span class="ch">\n</span><span class="st">&quot;</span>)
+<span class="kw">print</span>(all_dak) 
+
+<span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Standing-Katz chart</span><span class="ch">\n</span><span class="st">&quot;</span>)
 all_sk &lt;-<span class="st"> </span><span class="kw">getStandingKatzMatrix</span>(<span class="dt">ppr_vector =</span> ppr, <span class="dt">tpr_vector =</span> tpr)
 all_sk
 
 <span class="co"># find the error</span>
 <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st"> Errors in percentage </span><span class="ch">\n</span><span class="st">&quot;</span>)
-all_err &lt;-<span class="st"> </span><span class="kw">round</span>((all_sk -<span class="st"> </span>all_dak) /<span class="st"> </span>all_sk *<span class="st"> </span><span class="dv">100</span>, <span class="dv">2</span>)  <span class="co"># in percentage</span></code></pre></div>
-<pre><code>Error in eval(expr, envir, enclos): object 'all_dak' not found</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all_err</code></pre></div>
-<pre><code>Error in eval(expr, envir, enclos): object 'all_err' not found</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st"> Errors in Ppr</span><span class="ch">\n</span><span class="st">&quot;</span>)
-<span class="kw">summary</span>(all_err)</code></pre></div>
-<pre><code>Error in summary(all_err): object 'all_err' not found</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># for the transposed matrix</span>
+all_err &lt;-<span class="st"> </span><span class="kw">round</span>((all_sk -<span class="st"> </span>all_dak) /<span class="st"> </span>all_sk *<span class="st"> </span><span class="dv">100</span>, <span class="dv">2</span>)  <span class="co"># in percentage</span>
+all_err
+
+<span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st"> Errors in Ppr</span><span class="ch">\n</span><span class="st">&quot;</span>)
+<span class="kw">summary</span>(all_err)
+
+<span class="co"># for the transposed matrix</span>
 <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st"> Errors for the transposed matrix: Tpr </span><span class="ch">\n</span><span class="st">&quot;</span>)
 <span class="kw">summary</span>(<span class="kw">t</span>(all_err))</code></pre></div>
-<pre><code>Error in t(all_err): object 'all_err' not found</code></pre>
 <pre><code>Calculated from the correlation 
+           0.5       1.5       2.5       3.5       4.5       5.5       6.5
+1.05 0.8324799 0.2526076 0.3420322 0.4693520 0.5991874 0.7254470 0.8464481
+1.1  0.8547310 0.4309125 0.3930420 0.4983162 0.6136523 0.7278621 0.8417240
+1.2  0.8953923 0.6607512 0.5179963 0.5676801 0.6492856 0.7424365 0.8393892
+1.3  0.9196115 0.7567070 0.6394479 0.6341957 0.6857549 0.7611212 0.8471371
+1.4  0.9367118 0.8179531 0.7301083 0.7058966 0.7360320 0.7938440 0.8650626
+1.5  0.9508509 0.8607096 0.7940885 0.7685691 0.7867923 0.8323518 0.8918874
+1.6  0.9607316 0.8909372 0.8413772 0.8186001 0.8303206 0.8669610 0.9174184
+1.7  0.9682749 0.9146453 0.8767457 0.8581919 0.8672123 0.8978116 0.9413442
+1.8  0.9758251 0.9330673 0.9033038 0.8900081 0.8983954 0.9253309 0.9638663
+1.9  0.9814269 0.9463194 0.9244863 0.9154178 0.9242331 0.9491918 0.9841183
+2    0.9839990 0.9572277 0.9414698 0.9352303 0.9453140 0.9693022 1.0014522
+2.2  0.9900357 0.9744007 0.9641093 0.9632802 0.9770073 1.0002489 1.0281919
+2.4  0.9948006 0.9851441 0.9796739 0.9835802 0.9995876 1.0223775 1.0476552
+2.6  0.9973689 0.9948164 0.9945873 1.0008562 1.0160982 1.0374500 1.0612594
+2.8  1.0003231 1.0036769 1.0082887 1.0163706 1.0293895 1.0474565 1.0693476
+3    1.0028553 1.0095269 1.0179196 1.0286167 1.0412701 1.0563968 1.0751669
 
 Standing-Katz chart
        0.5   1.5   2.5   3.5   4.5   5.5   6.5
@@ -330,10 +412,76 @@ Standing-Katz chart
 3.00 1.002 1.009 1.018 1.029 1.041 1.056 1.075
 
  Errors in percentage 
+       0.5   1.5   2.5   3.5   4.5   5.5   6.5
+1.05 -0.42  0.16  0.28  0.35 -0.20  0.21 -0.05
+1.10 -0.09 -1.15 -0.01  0.34  0.22  0.16 -0.09
+1.20 -0.27 -0.57  0.19 -0.47  0.11 -0.19  0.19
+1.30 -0.39 -0.09 -0.23 -0.19 -0.26 -0.28 -0.37
+1.40 -0.08 -0.24 -0.43 -0.13 -0.28 -0.23 -0.01
+1.50 -0.30 -0.20 -0.01  0.19  0.41  0.44  0.01
+1.60 -0.18 -0.33 -0.28 -0.32 -0.16  0.12  0.06
+1.70 -0.03 -0.07 -0.09 -0.14 -0.37 -0.09  0.07
+1.80 -0.19 -0.01  0.19  0.11  0.29  0.39  0.32
+1.90 -0.35 -0.14 -0.05  0.06 -0.03 -0.02  0.09
+2.00 -0.20 -0.13 -0.05  0.19 -0.03 -0.03  0.15
+2.20 -0.10 -0.14 -0.12 -0.03 -0.10 -0.02  0.08
+2.40 -0.18 -0.12  0.03 -0.06 -0.06  0.06  0.13
+2.60 -0.04 -0.08 -0.06 -0.09 -0.01  0.05  0.07
+2.80 -0.13 -0.17 -0.03 -0.04  0.06  0.15 -0.03
+3.00 -0.09 -0.05  0.01  0.04 -0.03 -0.04 -0.02
 
  Errors in Ppr
+      0.5               1.5               2.5                3.5          
+ Min.   :-0.4200   Min.   :-1.1500   Min.   :-0.43000   Min.   :-0.47000  
+ 1st Qu.:-0.2775   1st Qu.:-0.2100   1st Qu.:-0.09750   1st Qu.:-0.13250  
+ Median :-0.1800   Median :-0.1350   Median :-0.04000   Median :-0.03500  
+ Mean   :-0.1900   Mean   :-0.2081   Mean   :-0.04125   Mean   :-0.01188  
+ 3rd Qu.:-0.0900   3rd Qu.:-0.0775   3rd Qu.: 0.01500   3rd Qu.: 0.13000  
+ Max.   :-0.0300   Max.   : 0.1600   Max.   : 0.28000   Max.   : 0.35000  
+      4.5               5.5               6.5         
+ Min.   :-0.3700   Min.   :-0.2800   Min.   :-0.3700  
+ 1st Qu.:-0.1700   1st Qu.:-0.0525   1st Qu.:-0.0225  
+ Median :-0.0300   Median : 0.0150   Median : 0.0650  
+ Mean   :-0.0275   Mean   : 0.0425   Mean   : 0.0375  
+ 3rd Qu.: 0.0725   3rd Qu.: 0.1525   3rd Qu.: 0.1000  
+ Max.   : 0.4100   Max.   : 0.4400   Max.   : 0.3200  
 
- Errors for the transposed matrix: Tpr </code></pre>
+ Errors for the transposed matrix: Tpr 
+      1.05               1.10               1.20              1.30        
+ Min.   :-0.42000   Min.   :-1.15000   Min.   :-0.5700   Min.   :-0.3900  
+ 1st Qu.:-0.12500   1st Qu.:-0.09000   1st Qu.:-0.3700   1st Qu.:-0.3250  
+ Median : 0.16000   Median :-0.01000   Median :-0.1900   Median :-0.2600  
+ Mean   : 0.04714   Mean   :-0.08857   Mean   :-0.1443   Mean   :-0.2586  
+ 3rd Qu.: 0.24500   3rd Qu.: 0.19000   3rd Qu.: 0.1500   3rd Qu.:-0.2100  
+ Max.   : 0.35000   Max.   : 0.34000   Max.   : 0.1900   Max.   :-0.0900  
+      1.40             1.50               1.60              1.70        
+ Min.   :-0.430   Min.   :-0.30000   Min.   :-0.3300   Min.   :-0.3700  
+ 1st Qu.:-0.260   1st Qu.:-0.10500   1st Qu.:-0.3000   1st Qu.:-0.1150  
+ Median :-0.230   Median : 0.01000   Median :-0.1800   Median :-0.0900  
+ Mean   :-0.200   Mean   : 0.07714   Mean   :-0.1557   Mean   :-0.1029  
+ 3rd Qu.:-0.105   3rd Qu.: 0.30000   3rd Qu.:-0.0500   3rd Qu.:-0.0500  
+ Max.   :-0.010   Max.   : 0.44000   Max.   : 0.1200   Max.   : 0.0700  
+      1.80              1.90               2.00         
+ Min.   :-0.1900   Min.   :-0.35000   Min.   :-0.20000  
+ 1st Qu.: 0.0500   1st Qu.:-0.09500   1st Qu.:-0.09000  
+ Median : 0.1900   Median :-0.03000   Median :-0.03000  
+ Mean   : 0.1571   Mean   :-0.06286   Mean   :-0.01429  
+ 3rd Qu.: 0.3050   3rd Qu.: 0.02000   3rd Qu.: 0.06000  
+ Max.   : 0.3900   Max.   : 0.09000   Max.   : 0.19000  
+      2.20               2.40               2.60         
+ Min.   :-0.14000   Min.   :-0.18000   Min.   :-0.09000  
+ 1st Qu.:-0.11000   1st Qu.:-0.09000   1st Qu.:-0.07000  
+ Median :-0.10000   Median :-0.06000   Median :-0.04000  
+ Mean   :-0.06143   Mean   :-0.02857   Mean   :-0.02286  
+ 3rd Qu.:-0.02500   3rd Qu.: 0.04500   3rd Qu.: 0.02000  
+ Max.   : 0.08000   Max.   : 0.13000   Max.   : 0.07000  
+      2.80               3.00         
+ Min.   :-0.17000   Min.   :-0.09000  
+ 1st Qu.:-0.08500   1st Qu.:-0.04500  
+ Median :-0.03000   Median :-0.03000  
+ Mean   :-0.02714   Mean   :-0.02571  
+ 3rd Qu.: 0.01500   3rd Qu.:-0.00500  
+ Max.   : 0.15000   Max.   : 0.04000  </code></pre>
 </div>
 
 
