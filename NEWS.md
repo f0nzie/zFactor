@@ -1,5 +1,14 @@
+## 20170625, 0.1.1
+* change to capital case requested by CRAN
+* make getStandingKatzCurve() generic for points and vectors. make changes in noteboooks too.
+* all plots now in ggplot2
+* change defaults parameters toSave, toView to FALSE.
+* Use tibble for long dataframes.
+* add Java for artificial neural network and corresponding notebook.
+
+
 ## 20170623, 0.1.0
-* prepare for release to CRAN.
+* released to CRAN.
 * added examples
 * expand use of functions for input vectors.
 

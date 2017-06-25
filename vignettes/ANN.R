@@ -2,10 +2,11 @@
 knitr::opts_chunk$set(echo=T, comment=NA, error=T, warning=F, message = F, fig.align = 'center', results="hold")
 
 ## ------------------------------------------------------------------------
-# get a z value
+# get a z value using DPR correlation
 library(zFactor)
+# library(rJava)
 
-z.DranchukAbuKassem(pres.pr = 1.5, temp.pr = 2.0)
+z.Ann10(pres.pr = 1.5, temp.pr = 2.0)
 # HY = 0.9580002
 
 ## ------------------------------------------------------------------------
@@ -18,24 +19,23 @@ getStandingKatzMatrix(tpr_vector = tpr_vec,
 
 ## ------------------------------------------------------------------------
 library(zFactor)
-
-z.DranchukAbuKassem(pres.pr = 1.5, temp.pr = 1.1)
+z.Ann10(pres.pr = 1.5, temp.pr = 1.1)
 
 ## ------------------------------------------------------------------------
 library(zFactor)
-
 tpr_vec <- c(1.1)
 getStandingKatzMatrix(tpr_vector = tpr_vec, 
                       pprRange = "lp")[1, "1.5"]
 
 ## ------------------------------------------------------------------------
 # test HY with 1st-derivative using the values from paper 
+ 
 ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
 tpr <- c(1.3, 1.5, 1.7, 2) 
-
-dak <- z.DranchukAbuKassem(ppr, tpr)
-print(dak)
  
+dpr <- z.Ann10(ppr, tpr)
+print(dpr)
+
 # From Hall-Yarborough
 #    0.5       1.5       2.5       3.5       4.5       5.5       6.5
 # 1.3 0.9176300 0.7534433 0.6399020 0.6323003 0.6881127 0.7651710 0.8493794
@@ -43,15 +43,29 @@ print(dak)
 # 1.7 0.9682547 0.9134862 0.8756412 0.8605668 0.8694525 0.8978885 0.9396353
 # 2   0.9838234 0.9580002 0.9426939 0.9396286 0.9490995 0.9697839 0.9994317
 
+# From Dranchuk-AbouKassem
+#  0.5       1.5       2.5       3.5       4.5       5.5       6.5
+# 1.3 0.9203019 0.7543694 0.6377871 0.6339357 0.6898314 0.7663247 0.8499523
+# 1.5 0.9509373 0.8593144 0.7929993 0.7710525 0.7896224 0.8331893 0.8904317
+# 1.7 0.9681353 0.9128087 0.8753784 0.8619509 0.8721085 0.9003962 0.9409634
+# 2   0.9824731 0.9551087 0.9400752 0.9385273 0.9497137 0.9715388 1.0015560
+
 ## ------------------------------------------------------------------------
 library(zFactor)
 
 sk <- getStandingKatzMatrix(ppr_vector = ppr, tpr_vector = tpr)
-sk
+print(sk)
 
 ## ------------------------------------------------------------------------
-err <- round((sk - dak) / sk * 100, 2)
+err <- round((sk - dpr) / sk * 100, 2)
 err
+
+# DAK
+# 0.5   1.5  2.5   3.5   4.5   5.5   6.5
+# 1.30 -0.47  0.22 0.03 -0.15 -0.85 -0.97 -0.71
+# 1.50 -0.31 -0.04 0.13 -0.14  0.05  0.34  0.18
+# 1.70 -0.01  0.13 0.07 -0.58 -0.94 -0.38  0.11
+# 2.00 -0.05  0.09 0.10 -0.16 -0.50 -0.26  0.14
 
 ## ------------------------------------------------------------------------
 print(colSums(err))
@@ -65,7 +79,6 @@ library(zFactor)
 tpr2 <- c(1.05, 1.1) 
 ppr2 <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5) 
 
-
 sk2 <- getStandingKatzMatrix(ppr_vector = ppr2, tpr_vector = tpr2, pprRange = "lp")
 sk2
 
@@ -73,13 +86,17 @@ sk2
 # calculate z values at lower values of Tpr
 library(zFactor)
 
-dak2 <- z.DranchukAbuKassem(pres.pr = ppr2, temp.pr = tpr2) 
- 
-print(dak2)
+dpr2 <- z.Ann10(ppr2, tpr2)
+print(dpr2)
 
 ## ------------------------------------------------------------------------
-err2 <- round((sk2 - dak2) / sk2 * 100, 2)
+err2 <- round((sk2 - dpr2) / sk2 * 100, 2)
 err2
+
+# DAK
+# 0.5    1.5    2.5   3.5   4.5   5.5
+# 1.05 -0.13 -12.15 -12.78 -7.49 -4.34 -1.68
+# 1.10 -0.36  -4.79  -4.97 -3.56 -2.14 -1.21
 
 ## ------------------------------------------------------------------------
 t_err2 <- t(err2)
@@ -96,13 +113,13 @@ library(tibble)
 tpr2 <- c(1.05, 1.1, 1.2, 1.3) 
 ppr2 <- c(0.5, 1.0, 1.5, 2, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5) 
 
-sk_dak_2 <- createTidyFromMatrix(ppr2, tpr2, correlation = "DAK")
-as.tibble(sk_dak_2)
+sk_dpr_2 <- createTidyFromMatrix(ppr2, tpr2, correlation = "N10")
+as.tibble(sk_dpr_2)
 
 ## ------------------------------------------------------------------------
 library(ggplot2)
 
-p <- ggplot(sk_dak_2, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
+p <- ggplot(sk_dpr_2, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
     geom_line() +
     geom_point() +
     geom_errorbar(aes(ymin=z.calc-dif, ymax=z.calc+dif), width=.4,
@@ -110,21 +127,28 @@ p <- ggplot(sk_dak_2, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
 print(p)
 
 ## ------------------------------------------------------------------------
-sk_dak_3 <- sk_dak_2[sk_dak_2$Tpr==1.05,]
-sk_dak_3
+sk_dpr_3 <- sk_dpr_2[sk_dpr_2$Tpr==1.05,]
+sk_dpr_3
 
 ## ------------------------------------------------------------------------
-library(zFactor)
 
-p <- ggplot(sk_dak_3, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
+p <- ggplot(sk_dpr_3, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
     geom_line() +
     geom_point() +
-    geom_errorbar(aes(ymin=z.calc-dif, ymax=z.calc+dif), width=.2,
+    geom_errorbar(aes(ymin=z.calc-dif, ymax=z.calc+dif), width=.4,
                   position=position_dodge(0.05))
 print(p)
 
 ## ------------------------------------------------------------------------
-summary(sk_dak_3)
+summary(sk_dpr_3)
+
+ #         dif ANN10      
+ # Min.   :-0.048404  
+ # 1st Qu.:-0.035300  
+ # Median :-0.025978  
+ # Mean   :-0.023178  
+ # 3rd Qu.:-0.009960  
+ # Max.   : 0.002325
 
 ## ------------------------------------------------------------------------
 library(ggplot2)
@@ -132,26 +156,25 @@ library(tibble)
 
 # get all `lp` Tpr curves
 tpr_all <- getCurvesDigitized(pprRange = "lp")
-ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
-sk_dak_all <- createTidyFromMatrix(ppr, tpr_all, correlation = "DAK")
-as.tibble(sk_dak_all)
+ppr <- c(0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5) 
+sk_dpr_all <- createTidyFromMatrix(ppr, tpr_all, correlation = "N10")
+as.tibble(sk_dpr_all)
 
-
-p <- ggplot(sk_dak_all, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
+p <- ggplot(sk_dpr_all, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
     geom_line() +
     geom_point() +
     geom_errorbar(aes(ymin=z.calc-dif, ymax=z.calc+dif), width=.4,
                   position=position_dodge(0.05))
 print(p)
 
-## ------------------------------------------------------------------------
+## ----results="hold"------------------------------------------------------
 # get all `lp` Tpr curves
 tpr <- getCurvesDigitized(pprRange = "lp")
 ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
 
 # calculate HY for the given Tpr
-all_dak <-z.DranchukAbuKassem(pres.pr = ppr, temp.pr = tpr)
-cat("Calculated from correlation \n")
+all_dak <- z.Ann10(pres.pr = ppr, temp.pr = tpr)
+cat("Calculated from the correlation \n")
 print(all_dak) 
 
 cat("\nStanding-Katz chart\n")
