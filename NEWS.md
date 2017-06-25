@@ -1,3 +1,11 @@
+## 20170625, 0.1.2
+* correct spelling of 'compressibility'
+* add more tests to correlations. Also rda file for testing.
+* simplify Ann10 with one call only. no need for one point and a vector.
+* create a .jar file and put it under ./inst/java
+* tried to use .onLoad with rJava but doesn't work. Did it directly in the function.
+
+
 ## 20170625, 0.1.1
 * change to capital case requested by CRAN
 * make getStandingKatzCurve() generic for points and vectors. make changes in noteboooks too.

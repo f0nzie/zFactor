@@ -1,4 +1,5 @@
 
+
 #' ANN correlation
 #'
 #' @param pres.pr pseudo-reduced pressure
@@ -7,26 +8,34 @@
 #' @export
 # #' @importFrom rJava .jnew .jcall .jinit .jaddClassPath .jclassPath
 z.Ann10 <- function(pres.pr, temp.pr) {
+    # jinit and add classpath here because it doesn't work from .onLoad
+    jarFile <- paste(system.file(package = "zFactor"), "java", sep = "/")
+    rJava::.jinit()
+    rJava::.jaddClassPath(jarFile)
+    # print(rJava::.jclassPath())
+    zFactor <- rJava::.jnew("CalculateZFactor")
+
+    mx <- sapply(pres.pr, function(x) sapply(temp.pr, function(y)
+        rJava::.jcall(zFactor, "D", "ANN10", x, y)) )
+
     if (length(pres.pr) > 1 || length(temp.pr) > 1) {
-        mx <- sapply(pres.pr, function(x) sapply(temp.pr, function(y)
-            z.Ann10_1p(x, y)) )
         colnames(mx) <- pres.pr
         rownames(mx) <- temp.pr
-        mx
-    } else {
-        z.Ann10_1p(pres.pr, temp.pr)
+        # mx
     }
-}
-
-
-z.Ann10_1p <- function(pres.pr, temp.pr) {
-    classFile <- paste(system.file(package = "zFactor"), "java", sep = "/")
-    rJava::.jinit()    # start the Java Virtual Machine
-    rJava::.jaddClassPath(classFile)  # path to folder containing Java class
-    zFactor <- rJava::.jnew("CalculateZFactor")
-    mx <-  rJava::.jcall(zFactor, "D", "ANN10", pres.pr, temp.pr)
+    # else         # z.Ann10_1p(pres.pr, temp.pr)
     mx
 }
+
+
+# z.Ann10_1p <- function(pres.pr, temp.pr) {
+#     # classFile <- paste(system.file(package = "zFactor"), "java", sep = "/")
+#     # rJava::.jinit()    # start the Java Virtual Machine
+#     # rJava::.jaddClassPath(classFile)  # path to folder containing Java class
+#     zFactor <- rJava::.jnew("CalculateZFactor")
+#     mx <-  rJava::.jcall(zFactor, "D", "ANN10", pres.pr, temp.pr)
+#     mx
+# }
 
 
 
