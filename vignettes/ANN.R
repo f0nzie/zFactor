@@ -2,6 +2,10 @@
 knitr::opts_chunk$set(echo=T, comment=NA, error=T, warning=F, message = F, fig.align = 'center', results="hold")
 
 ## ------------------------------------------------------------------------
+library(zFactor)
+zFactor <- rJava::.jnew("CalculateZFactor")
+
+## ------------------------------------------------------------------------
 # get a z value using DPR correlation
 library(zFactor)
 # library(rJava)
@@ -105,6 +109,10 @@ t_err2
 ## ------------------------------------------------------------------------
 sum_t_err2 <- summary(t_err2)
 sum_t_err2
+
+## ------------------------------------------------------------------------
+
+# We can see that the errors in `z` with `ANN10` are less than `HY` with a `r sum_t_err2[1,1]`% and `r sum_t_err2[6,1]`% for `Tpr = 1.05`, and a `r sum_t_err2[1,2]`% and `r sum_t_err2[6,2]`% for `Tpr = 1.10`. 
 
 ## ------------------------------------------------------------------------
 library(zFactor)
