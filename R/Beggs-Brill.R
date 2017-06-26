@@ -27,13 +27,13 @@ z.BeggsBrill <- function(pres.pr, temp.pr, tolerance = 1e-13, verbose = FALSE) {
     # Brill and Beggs compressibility factor (1973)
 
     A <- 1.39 *(temp.pr - 0.92)^0.5 - 0.36 * temp.pr - 0.101
-    E <- 9 * (temp.pr - 1)
-    F <- 0.3106 - 0.49 * temp.pr + 0.1824 * temp.pr^2
+
+    zF <-(0.3016 - 0.49 * temp.pr + 0.1824 * temp.pr^2)
     B <- (0.62 - 0.23 * temp.pr) * pres.pr +
         (0.066 / (temp.pr - 0.86) - 0.037) * pres.pr^2 +
-        0.32 * pres.pr^6 / 10^E
+        0.32 * pres.pr^6 / 10^(9 * (temp.pr - 1))
     C <- 0.132 - 0.32 * log10(temp.pr)
-    D <- 10^F
+    D <- 10^(0.3106 - 0.49 * temp.pr + 0.1824 * temp.pr^2)
 
     z <- A + (1 - A) / exp(B) + C * pres.pr^D
 

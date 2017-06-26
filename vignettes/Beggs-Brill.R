@@ -32,8 +32,8 @@ getStandingKatzMatrix(tpr_vector = tpr_vec,
 ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
 tpr <- c(1.3, 1.5, 1.7, 2) 
  
-bb <- z.BeggsBrill(pres.pr = ppr, temp.pr = tpr)
-print(bb)
+corr <- z.BeggsBrill(pres.pr = ppr, temp.pr = tpr)
+print(corr)
 
 # From Hall-Yarborough
 #    0.5       1.5       2.5       3.5       4.5       5.5       6.5
@@ -56,7 +56,7 @@ sk <- getStandingKatzMatrix(ppr_vector = ppr, tpr_vector = tpr)
 print(sk)
 
 ## ------------------------------------------------------------------------
-err <- round((sk - bb) / sk * 100, 2)
+err <- round((sk - corr) / sk * 100, 2)
 err
 
 # DAK
@@ -85,11 +85,11 @@ sk2
 # calculate z values at lower values of Tpr
 library(zFactor)
 
-bb2 <- z.BeggsBrill(pres.pr = ppr2, temp.pr = tpr2)
-print(bb2)
+corr2 <- z.BeggsBrill(pres.pr = ppr2, temp.pr = tpr2)
+print(corr2)
 
 ## ------------------------------------------------------------------------
-err2 <- round((sk2 - bb2) / sk2 * 100, 2)
+err2 <- round((sk2 - corr2) / sk2 * 100, 2)
 err2
 
 # DAK
@@ -112,13 +112,13 @@ library(tibble)
 tpr2 <- c(1.05, 1.1, 1.2, 1.3) 
 ppr2 <- c(0.5, 1.0, 1.5, 2, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5) 
 
-sk_bb_2 <- createTidyFromMatrix(ppr2, tpr2, correlation = "BB")
-as.tibble(sk_bb_2)
+sk_corr_2 <- createTidyFromMatrix(ppr2, tpr2, correlation = "BB")
+as.tibble(sk_corr_2)
 
 ## ------------------------------------------------------------------------
 library(ggplot2)
 
-p <- ggplot(sk_bb_2, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
+p <- ggplot(sk_corr_2, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
     geom_line() +
     geom_point() +
     geom_errorbar(aes(ymin=z.calc-dif, ymax=z.calc+dif), width=.4,
@@ -126,12 +126,12 @@ p <- ggplot(sk_bb_2, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
 print(p)
 
 ## ------------------------------------------------------------------------
-sk_bb_3 <- sk_bb_2[sk_bb_2$Tpr==1.05,]
-sk_bb_3
+sk_corr_3 <- sk_corr_3[sk_corr_3$Tpr==1.05,]
+sk_corr_3
 
 ## ------------------------------------------------------------------------
 
-p <- ggplot(sk_bb_3, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
+p <- ggplot(sk_corr_3, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
     geom_line(size = 1) +
     geom_point(shape = 21, fill = "white", size = 3) +
     geom_errorbar(aes(ymin=z.calc-dif, ymax=z.calc+dif), width=0.2, size = 0.,
@@ -139,7 +139,7 @@ p <- ggplot(sk_bb_3, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
 print(p)
 
 ## ------------------------------------------------------------------------
-summary(sk_bb_3)
+summary(sk_corr_3)
 
  #         dif DAK      
  # Min.   :-0.048404  
@@ -156,10 +156,11 @@ library(tibble)
 # get all `lp` Tpr curves
 tpr_all <- getCurvesDigitized(pprRange = "lp")
 ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
-sk_bb_all <- createTidyFromMatrix(ppr, tpr_all, correlation = "BB")
-as.tibble(sk_bb_all)
 
-p <- ggplot(sk_bb_all, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
+sk_corr_all <- createTidyFromMatrix(ppr, tpr_all, correlation = "BB")
+as.tibble(sk_corr_all)
+
+p <- ggplot(sk_corr_all, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
     geom_line() +
     geom_point() +
     geom_errorbar(aes(ymin=z.calc-dif, ymax=z.calc+dif), width=.4,
@@ -167,10 +168,10 @@ p <- ggplot(sk_bb_all, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
 print(p)
 
 ## ------------------------------------------------------------------------
-sk_bb_all[which(sk_bb_all$z.calc < 0), ]
+sk_corr_all[which(sk_corr_all$z.calc < 0), ]
 
 ## ------------------------------------------------------------------------
-sk_bb_all[which(abs(sk_bb_all$dif) > 0.15), ]
+sk_corr_all[which(abs(sk_corr_all$dif) > 0.15), ]
 
 ## ----results="hold"------------------------------------------------------
 # get all `lp` Tpr curves
@@ -178,9 +179,9 @@ tpr <- getCurvesDigitized(pprRange = "lp")
 ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
 
 # calculate HY for the given Tpr
-all_bb <- z.BeggsBrill(pres.pr = ppr, temp.pr = tpr)
+all_corr <- z.BeggsBrill(pres.pr = ppr, temp.pr = tpr)
 cat("Calculated from the correlation \n")
-print(all_bb) 
+print(all_corr) 
 
 cat("\nStanding-Katz chart\n")
 all_sk <- getStandingKatzMatrix(ppr_vector = ppr, tpr_vector = tpr)
@@ -188,7 +189,7 @@ all_sk
 
 # find the error
 cat("\n Errors in percentage \n")
-all_err <- round((all_sk - all_bb) / all_sk * 100, 2)  # in percentage
+all_err <- round((all_sk - all_corr) / all_sk * 100, 2)  # in percentage
 all_err
 
 cat("\n Errors in Ppr\n")

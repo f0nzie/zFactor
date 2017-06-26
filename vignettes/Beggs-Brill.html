@@ -109,7 +109,7 @@ tpr_vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl"
 <pre><code>  1.5 
 0.426 </code></pre>
 <blockquote>
-<p>At lower <code>Tpr</code> there is some error. We see a difference between the values of z from the DAK calculation and the value read from the Standing-Katz chart.</p>
+<p>At lower <code>Tpr</code> there is some error. We see a difference between the values of z from the `BB calculation and the value read from the Standing-Katz chart.</p>
 </blockquote>
 </div>
 <div id="get-values-of-z-for-several-ppr-and-tpr" class="section level2">
@@ -119,8 +119,8 @@ tpr_vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl"
 ppr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="fl">3.5</span>, <span class="fl">4.5</span>, <span class="fl">5.5</span>, <span class="fl">6.5</span>) 
 tpr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.3</span>, <span class="fl">1.5</span>, <span class="fl">1.7</span>, <span class="dv">2</span>) 
  
-bb &lt;-<span class="st"> </span><span class="kw">z.BeggsBrill</span>(<span class="dt">pres.pr =</span> ppr, <span class="dt">temp.pr =</span> tpr)
-<span class="kw">print</span>(bb)
+corr &lt;-<span class="st"> </span><span class="kw">z.BeggsBrill</span>(<span class="dt">pres.pr =</span> ppr, <span class="dt">temp.pr =</span> tpr)
+<span class="kw">print</span>(corr)
 
 <span class="co"># From Hall-Yarborough</span>
 <span class="co">#    0.5       1.5       2.5       3.5       4.5       5.5       6.5</span>
@@ -151,7 +151,7 @@ sk &lt;-<span class="st"> </span><span class="kw">getStandingKatzMatrix</span>(<
 1.70 0.968 0.914 0.876 0.857 0.864 0.897 0.942
 2.00 0.982 0.956 0.941 0.937 0.945 0.969 1.003</code></pre>
 <p>Subtract the two matrices and find the difference:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">err &lt;-<span class="st"> </span><span class="kw">round</span>((sk -<span class="st"> </span>bb) /<span class="st"> </span>sk *<span class="st"> </span><span class="dv">100</span>, <span class="dv">2</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">err &lt;-<span class="st"> </span><span class="kw">round</span>((sk -<span class="st"> </span>corr) /<span class="st"> </span>sk *<span class="st"> </span><span class="dv">100</span>, <span class="dv">2</span>)
 err
 
 <span class="co"># DAK</span>
@@ -187,17 +187,17 @@ sk2</code></pre></div>
 <pre><code>       0.5   1.5   2.5   3.5   4.5   5.5
 1.05 0.829 0.253 0.343 0.471 0.598 0.727
 1.10 0.854 0.426 0.393 0.500 0.615 0.729</code></pre>
-<p>We do the same with the DPR correlation:</p>
+<p>We do the same with the <code>BB</code> correlation:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># calculate z values at lower values of Tpr</span>
 <span class="kw">library</span>(zFactor)
 
-bb2 &lt;-<span class="st"> </span><span class="kw">z.BeggsBrill</span>(<span class="dt">pres.pr =</span> ppr2, <span class="dt">temp.pr =</span> tpr2)
-<span class="kw">print</span>(bb2)</code></pre></div>
+corr2 &lt;-<span class="st"> </span><span class="kw">z.BeggsBrill</span>(<span class="dt">pres.pr =</span> ppr2, <span class="dt">temp.pr =</span> tpr2)
+<span class="kw">print</span>(corr2)</code></pre></div>
 <pre><code>           0.5       1.5       2.5       3.5       4.5       5.5
 1.05 0.8325491 0.2851494 0.3333796 0.4569204 0.5802310 0.7033638
 1.1  0.8639321 0.4631501 0.3848774 0.4993213 0.6131885 0.7266084</code></pre>
 <p>Subtract the matrices and calculate the error in percentage:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">err2 &lt;-<span class="st"> </span><span class="kw">round</span>((sk2 -<span class="st"> </span>bb2) /<span class="st"> </span>sk2 *<span class="st"> </span><span class="dv">100</span>, <span class="dv">2</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">err2 &lt;-<span class="st"> </span><span class="kw">round</span>((sk2 -<span class="st"> </span>corr2) /<span class="st"> </span>sk2 *<span class="st"> </span><span class="dv">100</span>, <span class="dv">2</span>)
 err2
 
 <span class="co"># DAK</span>
@@ -229,16 +229,16 @@ sum_t_err2</code></pre></div>
  Max.   :  3.2500   Max.   : 2.070  </code></pre>
 <p>We can see that the errors in <code>z</code> with <code>DAK</code> are less than <code>HY</code> with a Min. :-12.7100 % and Max. : 3.2500 % for <code>Tpr = 1.05</code>, and a Min. :-8.720 % and Max. : 2.070 % for <code>Tpr = 1.10</code>.</p>
 </div>
-<div id="prepare-to-plot-sk-chart-vs-dpr-correlation" class="section level2">
-<h2>Prepare to plot <code>SK</code> chart vs <code>DPR</code> correlation</h2>
+<div id="prepare-to-plot-sk-chart-vs-bb-correlation" class="section level2">
+<h2>Prepare to plot <code>SK</code> chart vs <code>BB</code> correlation</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zFactor)
 <span class="kw">library</span>(tibble)
 
 tpr2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.05</span>, <span class="fl">1.1</span>, <span class="fl">1.2</span>, <span class="fl">1.3</span>) 
 ppr2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.0</span>, <span class="fl">1.5</span>, <span class="dv">2</span>, <span class="fl">2.5</span>, <span class="fl">3.0</span>, <span class="fl">3.5</span>, <span class="fl">4.0</span>, <span class="fl">4.5</span>, <span class="fl">5.0</span>, <span class="fl">5.5</span>, <span class="fl">6.0</span>, <span class="fl">6.5</span>) 
 
-sk_bb_2 &lt;-<span class="st"> </span><span class="kw">createTidyFromMatrix</span>(ppr2, tpr2, <span class="dt">correlation =</span> <span class="st">&quot;BB&quot;</span>)
-<span class="kw">as.tibble</span>(sk_bb_2)</code></pre></div>
+sk_corr_2 &lt;-<span class="st"> </span><span class="kw">createTidyFromMatrix</span>(ppr2, tpr2, <span class="dt">correlation =</span> <span class="st">&quot;BB&quot;</span>)
+<span class="kw">as.tibble</span>(sk_corr_2)</code></pre></div>
 <pre><code># A tibble: 52 x 5
      Tpr   Ppr z.chart    z.calc          dif
    &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;        &lt;dbl&gt;
@@ -255,78 +255,53 @@ sk_bb_2 &lt;-<span class="st"> </span><span class="kw">createTidyFromMatrix</spa
 # ... with 42 more rows</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
 
-p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_bb_2, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z.calc, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) +
+p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_corr_2, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z.calc, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) +
 <span class="st">    </span><span class="kw">geom_line</span>() +
 <span class="st">    </span><span class="kw">geom_point</span>() +
 <span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc-dif, <span class="dt">ymax=</span>z.calc+dif), <span class="dt">width=</span>.<span class="dv">4</span>,
                   <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.05</span>))
 <span class="kw">print</span>(p)</code></pre></div>
 <p><img src="data:image/png;base64,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" style="display: block; margin: auto;" /></p>
-<p>We can see with <code>Dranchuk-Purvis-Robinson</code> there are still errors or differences between the values in the Standing-Katz chart and the values calculated with the correlation but they are not so bad as in the <code>HY</code> correlation.</p>
 </div>
 <div id="analysis-at-the-lowest-tpr" class="section level2">
 <h2>Analysis at the lowest <code>Tpr</code></h2>
 <p>Extract only values at <code>Tpr = 1.05</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sk_bb_3 &lt;-<span class="st"> </span>sk_bb_2[sk_bb_2$Tpr==<span class="fl">1.05</span>,]
-sk_bb_3</code></pre></div>
-<pre><code>    Tpr Ppr z.chart    z.calc          dif
-1  1.05 0.5   0.829 0.8325491 -0.003549064
-5  1.05 1.0   0.589 0.5857006  0.003299370
-9  1.05 1.5   0.253 0.2851494 -0.032149397
-13 1.05 2.0   0.280 0.2715884  0.008411630
-17 1.05 2.5   0.343 0.3333796  0.009620404
-21 1.05 3.0   0.407 0.3951833  0.011816743
-25 1.05 3.5   0.471 0.4569204  0.014079649
-29 1.05 4.0   0.534 0.5186005  0.015399484
-33 1.05 4.5   0.598 0.5802310  0.017769048
-37 1.05 5.0   0.663 0.6418172  0.021182758
-41 1.05 5.5   0.727 0.7033638  0.023636157
-45 1.05 6.0   0.786 0.7648744  0.021125603
-49 1.05 6.5   0.846 0.8263519  0.019648067</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_bb_3, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z.calc, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) +
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sk_corr_3 &lt;-<span class="st"> </span>sk_corr_3[sk_corr_3$Tpr==<span class="fl">1.05</span>,]</code></pre></div>
+<pre><code>Error in eval(expr, envir, enclos): object 'sk_corr_3' not found</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sk_corr_3</code></pre></div>
+<pre><code>Error in eval(expr, envir, enclos): object 'sk_corr_3' not found</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_corr_3, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z.calc, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) +
 <span class="st">    </span><span class="kw">geom_line</span>(<span class="dt">size =</span> <span class="dv">1</span>) +
 <span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">21</span>, <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">size =</span> <span class="dv">3</span>) +
 <span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc-dif, <span class="dt">ymax=</span>z.calc+dif), <span class="dt">width=</span><span class="fl">0.2</span>, <span class="dt">size =</span> <span class="dv">0</span>.,
-                  <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.05</span>), <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>)
-<span class="kw">print</span>(p)</code></pre></div>
-<p><img src="data:image/png;base64,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" style="display: block; margin: auto;" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(sk_bb_3)
-
- <span class="co">#         dif DAK      </span>
+                  <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.05</span>), <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>)</code></pre></div>
+<pre><code>Error in ggplot(sk_corr_3, aes(x = Ppr, y = z.calc, group = Tpr, color = Tpr)): object 'sk_corr_3' not found</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(p)</code></pre></div>
+<p><img src="data:image/png;base64,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" style="display: block; margin: auto;" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(sk_corr_3)</code></pre></div>
+<pre><code>Error in summary(sk_corr_3): object 'sk_corr_3' not found</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"> <span class="co">#         dif DAK      </span>
  <span class="co"># Min.   :-0.048404  </span>
  <span class="co"># 1st Qu.:-0.035300  </span>
  <span class="co"># Median :-0.025978  </span>
  <span class="co"># Mean   :-0.023178  </span>
  <span class="co"># 3rd Qu.:-0.009960  </span>
  <span class="co"># Max.   : 0.002325</span></code></pre></div>
-<pre><code>     Tpr                 Ppr         z.chart           z.calc      
- Length:13          Min.   :0.5   Min.   :0.2530   Min.   :0.2716  
- Class :character   1st Qu.:2.0   1st Qu.:0.4070   1st Qu.:0.3952  
- Mode  :character   Median :3.5   Median :0.5890   Median :0.5802  
-                    Mean   :3.5   Mean   :0.5635   Mean   :0.5535  
-                    3rd Qu.:5.0   3rd Qu.:0.7270   3rd Qu.:0.7034  
-                    Max.   :6.5   Max.   :0.8460   Max.   :0.8325  
-      dif           
- Min.   :-0.032149  
- 1st Qu.: 0.008412  
- Median : 0.014080  
- Mean   : 0.010022  
- 3rd Qu.: 0.019648  
- Max.   : 0.023636  </code></pre>
 <p>With this information there is no much we can say about Beggs-Brill.</p>
 </div>
-<div id="analyzing-performance-of-the-dak-correlation-for-all-the-tpr-curves" class="section level2">
-<h2>Analyzing performance of the <code>DAK</code> correlation for all the <code>Tpr</code> curves</h2>
+<div id="analyzing-performance-of-the-bb-correlation-for-all-the-tpr-curves" class="section level2">
+<h2>Analyzing performance of the <code>BB</code> correlation for all the <code>Tpr</code> curves</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
 <span class="kw">library</span>(tibble)
 
 <span class="co"># get all `lp` Tpr curves</span>
 tpr_all &lt;-<span class="st"> </span><span class="kw">getCurvesDigitized</span>(<span class="dt">pprRange =</span> <span class="st">&quot;lp&quot;</span>)
 ppr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="fl">3.5</span>, <span class="fl">4.5</span>, <span class="fl">5.5</span>, <span class="fl">6.5</span>) 
-sk_bb_all &lt;-<span class="st"> </span><span class="kw">createTidyFromMatrix</span>(ppr, tpr_all, <span class="dt">correlation =</span> <span class="st">&quot;BB&quot;</span>)
-<span class="kw">as.tibble</span>(sk_bb_all)
 
-p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_bb_all, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z.calc, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) +
+sk_corr_all &lt;-<span class="st"> </span><span class="kw">createTidyFromMatrix</span>(ppr, tpr_all, <span class="dt">correlation =</span> <span class="st">&quot;BB&quot;</span>)
+<span class="kw">as.tibble</span>(sk_corr_all)
+
+p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_corr_all, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z.calc, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) +
 <span class="st">    </span><span class="kw">geom_line</span>() +
 <span class="st">    </span><span class="kw">geom_point</span>() +
 <span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc-dif, <span class="dt">ymax=</span>z.calc+dif), <span class="dt">width=</span>.<span class="dv">4</span>,
@@ -351,13 +326,13 @@ p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_bb_all, <span 
 <p>The errors with Beggs and Brill are just so big and some <code>z</code> values are even negative. We have to be very careful when using this Beggs and Brill correlation.</p>
 </blockquote>
 <p>Let’s see which observations (rows) have <code>z</code> values that are negative:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sk_bb_all[<span class="kw">which</span>(sk_bb_all$z.calc &lt;<span class="st"> </span><span class="dv">0</span>), ]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sk_corr_all[<span class="kw">which</span>(sk_corr_all$z.calc &lt;<span class="st"> </span><span class="dv">0</span>), ]</code></pre></div>
 <pre><code>    Tpr Ppr z.chart    z.calc      dif
 80    3 4.5   1.041 -0.889701 1.930701
 96    3 5.5   1.056 -2.517895 3.573895
 112   3 6.5   1.075 -4.882513 5.957513</code></pre>
 <p>Or see which rows contain <code>z</code> values that show an error greater than 15%:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sk_bb_all[<span class="kw">which</span>(<span class="kw">abs</span>(sk_bb_all$dif) &gt;<span class="st"> </span><span class="fl">0.15</span>), ]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sk_corr_all[<span class="kw">which</span>(<span class="kw">abs</span>(sk_corr_all$dif) &gt;<span class="st"> </span><span class="fl">0.15</span>), ]</code></pre></div>
 <pre><code>    Tpr Ppr z.chart     z.calc       dif
 48    3 2.5   1.018  0.7082371 0.3097629
 63  2.8 3.5   1.016  0.8188474 0.1971526
@@ -370,16 +345,16 @@ p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_bb_all, <span 
 112   3 6.5   1.075 -4.8825128 5.9575128</code></pre>
 <p>You can also see that there are three rows with error greater than 100% !</p>
 </div>
-<div id="looking-numerically-at-the-errors-in-dkp-vs-sk-chart" class="section level2">
-<h2>Looking numerically at the errors in <code>DKP</code> vs <code>SK</code> chart</h2>
+<div id="looking-numerically-at-the-errors-in-bb-vs-sk-chart" class="section level2">
+<h2>Looking numerically at the errors in <code>BB</code> vs <code>SK</code> chart</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get all `lp` Tpr curves</span>
 tpr &lt;-<span class="st"> </span><span class="kw">getCurvesDigitized</span>(<span class="dt">pprRange =</span> <span class="st">&quot;lp&quot;</span>)
 ppr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="fl">3.5</span>, <span class="fl">4.5</span>, <span class="fl">5.5</span>, <span class="fl">6.5</span>) 
 
 <span class="co"># calculate HY for the given Tpr</span>
-all_bb &lt;-<span class="st"> </span><span class="kw">z.BeggsBrill</span>(<span class="dt">pres.pr =</span> ppr, <span class="dt">temp.pr =</span> tpr)
+all_corr &lt;-<span class="st"> </span><span class="kw">z.BeggsBrill</span>(<span class="dt">pres.pr =</span> ppr, <span class="dt">temp.pr =</span> tpr)
 <span class="kw">cat</span>(<span class="st">&quot;Calculated from the correlation </span><span class="ch">\n</span><span class="st">&quot;</span>)
-<span class="kw">print</span>(all_bb) 
+<span class="kw">print</span>(all_corr) 
 
 <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Standing-Katz chart</span><span class="ch">\n</span><span class="st">&quot;</span>)
 all_sk &lt;-<span class="st"> </span><span class="kw">getStandingKatzMatrix</span>(<span class="dt">ppr_vector =</span> ppr, <span class="dt">tpr_vector =</span> tpr)
@@ -387,7 +362,7 @@ all_sk
 
 <span class="co"># find the error</span>
 <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st"> Errors in percentage </span><span class="ch">\n</span><span class="st">&quot;</span>)
-all_err &lt;-<span class="st"> </span><span class="kw">round</span>((all_sk -<span class="st"> </span>all_bb) /<span class="st"> </span>all_sk *<span class="st"> </span><span class="dv">100</span>, <span class="dv">2</span>)  <span class="co"># in percentage</span>
+all_err &lt;-<span class="st"> </span><span class="kw">round</span>((all_sk -<span class="st"> </span>all_corr) /<span class="st"> </span>all_sk *<span class="st"> </span><span class="dv">100</span>, <span class="dv">2</span>)  <span class="co"># in percentage</span>
 all_err
 
 <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st"> Errors in Ppr</span><span class="ch">\n</span><span class="st">&quot;</span>)
