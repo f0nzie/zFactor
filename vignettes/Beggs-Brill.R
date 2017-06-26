@@ -113,7 +113,7 @@ tpr2 <- c(1.05, 1.1, 1.2, 1.3)
 ppr2 <- c(0.5, 1.0, 1.5, 2, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5) 
 
 sk_bb_2 <- createTidyFromMatrix(ppr2, tpr2, correlation = "BB")
-as.tibble(sk_dpr_2)
+as.tibble(sk_bb_2)
 
 ## ------------------------------------------------------------------------
 library(ggplot2)
@@ -132,14 +132,14 @@ sk_bb_3
 ## ------------------------------------------------------------------------
 
 p <- ggplot(sk_bb_3, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
-    geom_line() +
-    geom_point() +
-    geom_errorbar(aes(ymin=z.calc-dif, ymax=z.calc+dif), width=.4,
-                  position=position_dodge(0.05))
+    geom_line(size = 1) +
+    geom_point(shape = 21, fill = "white", size = 3) +
+    geom_errorbar(aes(ymin=z.calc-dif, ymax=z.calc+dif), width=0.2, size = 0.,
+                  position=position_dodge(0.05), color = "black")
 print(p)
 
 ## ------------------------------------------------------------------------
-summary(sk_dpr_3)
+summary(sk_bb_3)
 
  #         dif DAK      
  # Min.   :-0.048404  
@@ -166,13 +166,19 @@ p <- ggplot(sk_bb_all, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
                   position=position_dodge(0.05))
 print(p)
 
+## ------------------------------------------------------------------------
+sk_bb_all[which(sk_bb_all$z.calc < 0), ]
+
+## ------------------------------------------------------------------------
+sk_bb_all[which(abs(sk_bb_all$dif) > 0.15), ]
+
 ## ----results="hold"------------------------------------------------------
 # get all `lp` Tpr curves
 tpr <- getCurvesDigitized(pprRange = "lp")
 ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
 
 # calculate HY for the given Tpr
-all_bb <- z.DranchukPurvisRobinson(pres.pr = ppr, temp.pr = tpr)
+all_bb <- z.BeggsBrill(pres.pr = ppr, temp.pr = tpr)
 cat("Calculated from the correlation \n")
 print(all_bb) 
 

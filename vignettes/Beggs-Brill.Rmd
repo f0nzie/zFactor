@@ -58,7 +58,7 @@ getStandingKatzMatrix(tpr_vector = tpr_vec,
 ```
 
 
-> At lower `Tpr` there is some error. We see a  difference between the values of z from the DAK calculation and the value read from the Standing-Katz chart.
+> At lower `Tpr` there is some error. We see a  difference between the values of z from the `BB calculation and the value read from the Standing-Katz chart.
 
 
 ## Get values of `z` for several `Ppr` and `Tpr`
@@ -69,8 +69,8 @@ getStandingKatzMatrix(tpr_vector = tpr_vec,
 ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
 tpr <- c(1.3, 1.5, 1.7, 2) 
  
-bb <- z.BeggsBrill(pres.pr = ppr, temp.pr = tpr)
-print(bb)
+corr <- z.BeggsBrill(pres.pr = ppr, temp.pr = tpr)
+print(corr)
 
 # From Hall-Yarborough
 #    0.5       1.5       2.5       3.5       4.5       5.5       6.5
@@ -100,7 +100,7 @@ print(sk)
 Subtract the two matrices and find the difference:
 
 ```{r}
-err <- round((sk - bb) / sk * 100, 2)
+err <- round((sk - corr) / sk * 100, 2)
 err
 
 # DAK
@@ -135,20 +135,20 @@ sk2
 ```
 
 
-We do the same with the DPR correlation:
+We do the same with the `BB` correlation:
 
 ```{r}
 # calculate z values at lower values of Tpr
 library(zFactor)
 
-bb2 <- z.BeggsBrill(pres.pr = ppr2, temp.pr = tpr2)
-print(bb2)
+corr2 <- z.BeggsBrill(pres.pr = ppr2, temp.pr = tpr2)
+print(corr2)
 ```
 
 Subtract the matrices and calculate the error in percentage:
 
 ```{r}
-err2 <- round((sk2 - bb2) / sk2 * 100, 2)
+err2 <- round((sk2 - corr2) / sk2 * 100, 2)
 err2
 
 # DAK
@@ -174,7 +174,7 @@ sum_t_err2
 We can see that the errors in `z` with `DAK` are less than `HY` with a `r sum_t_err2[1,1]`% and `r sum_t_err2[6,1]`% for `Tpr = 1.05`, and a `r sum_t_err2[1,2]`% and `r sum_t_err2[6,2]`% for `Tpr = 1.10`. 
 
 
-## Prepare to plot `SK` chart vs `DPR` correlation
+## Prepare to plot `SK` chart vs `BB` correlation
 
 ```{r}
 library(zFactor)
@@ -183,15 +183,15 @@ library(tibble)
 tpr2 <- c(1.05, 1.1, 1.2, 1.3) 
 ppr2 <- c(0.5, 1.0, 1.5, 2, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5) 
 
-sk_bb_2 <- createTidyFromMatrix(ppr2, tpr2, correlation = "BB")
-as.tibble(sk_bb_2)
+sk_corr_2 <- createTidyFromMatrix(ppr2, tpr2, correlation = "BB")
+as.tibble(sk_corr_2)
 ```
 
 
 ```{r}
 library(ggplot2)
 
-p <- ggplot(sk_bb_2, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
+p <- ggplot(sk_corr_2, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
     geom_line() +
     geom_point() +
     geom_errorbar(aes(ymin=z.calc-dif, ymax=z.calc+dif), width=.4,
@@ -199,21 +199,20 @@ p <- ggplot(sk_bb_2, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
 print(p)
 ```
 
-We can see with `Dranchuk-Purvis-Robinson` there are still errors or differences between the values in the Standing-Katz chart and the values calculated with the correlation but they are not so bad as in the `HY` correlation.
 
 
 ## Analysis at the lowest `Tpr`
 Extract only values at `Tpr = 1.05`.
 
 ```{r}
-sk_bb_3 <- sk_bb_2[sk_bb_2$Tpr==1.05,]
-sk_bb_3
+sk_corr_3 <- sk_corr_3[sk_corr_3$Tpr==1.05,]
+sk_corr_3
 ```
 
 
 ```{r}
 
-p <- ggplot(sk_bb_3, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
+p <- ggplot(sk_corr_3, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
     geom_line(size = 1) +
     geom_point(shape = 21, fill = "white", size = 3) +
     geom_errorbar(aes(ymin=z.calc-dif, ymax=z.calc+dif), width=0.2, size = 0.,
@@ -222,7 +221,7 @@ print(p)
 ```
 
 ```{r}
-summary(sk_bb_3)
+summary(sk_corr_3)
 
  #         dif DAK      
  # Min.   :-0.048404  
@@ -236,7 +235,7 @@ summary(sk_bb_3)
 With this information there is no much we can say about Beggs-Brill.
 
 
-## Analyzing performance of the `DAK` correlation for all the `Tpr` curves
+## Analyzing performance of the `BB` correlation for all the `Tpr` curves
 
 ```{r}
 library(ggplot2)
@@ -245,10 +244,11 @@ library(tibble)
 # get all `lp` Tpr curves
 tpr_all <- getCurvesDigitized(pprRange = "lp")
 ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
-sk_bb_all <- createTidyFromMatrix(ppr, tpr_all, correlation = "BB")
-as.tibble(sk_bb_all)
 
-p <- ggplot(sk_bb_all, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
+sk_corr_all <- createTidyFromMatrix(ppr, tpr_all, correlation = "BB")
+as.tibble(sk_corr_all)
+
+p <- ggplot(sk_corr_all, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
     geom_line() +
     geom_point() +
     geom_errorbar(aes(ymin=z.calc-dif, ymax=z.calc+dif), width=.4,
@@ -262,19 +262,19 @@ print(p)
 Let's see which observations (rows) have `z` values that are negative:
 
 ```{r}
-sk_bb_all[which(sk_bb_all$z.calc < 0), ]
+sk_corr_all[which(sk_corr_all$z.calc < 0), ]
 ```
 
 Or see which rows contain `z` values that show an error greater than 15%:
 
 ```{r}
-sk_bb_all[which(abs(sk_bb_all$dif) > 0.15), ]
+sk_corr_all[which(abs(sk_corr_all$dif) > 0.15), ]
 ```
 
 You can also see that there are three rows with error greater than 100% !
 
 
-## Looking numerically at the errors in `DKP` vs `SK` chart
+## Looking numerically at the errors in `BB` vs `SK` chart
 
 ```{r results="hold"}
 # get all `lp` Tpr curves
@@ -282,9 +282,9 @@ tpr <- getCurvesDigitized(pprRange = "lp")
 ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
 
 # calculate HY for the given Tpr
-all_bb <- z.BeggsBrill(pres.pr = ppr, temp.pr = tpr)
+all_corr <- z.BeggsBrill(pres.pr = ppr, temp.pr = tpr)
 cat("Calculated from the correlation \n")
-print(all_bb) 
+print(all_corr) 
 
 cat("\nStanding-Katz chart\n")
 all_sk <- getStandingKatzMatrix(ppr_vector = ppr, tpr_vector = tpr)
@@ -292,7 +292,7 @@ all_sk
 
 # find the error
 cat("\n Errors in percentage \n")
-all_err <- round((all_sk - all_bb) / all_sk * 100, 2)  # in percentage
+all_err <- round((all_sk - all_corr) / all_sk * 100, 2)  # in percentage
 all_err
 
 cat("\n Errors in Ppr\n")
