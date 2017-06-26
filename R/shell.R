@@ -22,18 +22,20 @@ z.Shell <- function(pres.pr, temp.pr, tolerance = 1E-13,
 
 .z.Shell <- function(pres.pr, temp.pr, tolerance = 1E-13,
                      verbose = FALSE) {
+    # checked against three sources: two book and one paper
+
     tpr <- temp.pr
     ppr <- pres.pr
 
     A <- -0.101 - 0.36 * tpr + 1.3868 * sqrt(tpr - 0.919)
     B <- 0.021 + 0.04275 / (tpr - 0.65)
-    C <- 0.6222 - 0.224 * tpr
+    C <- 0.6222 - 0.224 * tpr     # 0.224
     D <- 0.0657 / (tpr - 0.86) - 0.037
     E <- 0.320 * exp(-19.53 * (tpr - 1))
-    F <- 0.122 * exp(-11.30 * (tpr - 1))
+    zF <- 0.122 * exp(-11.30 * (tpr - 1))
     G <- ppr * (C + D * ppr + E * ppr^4)
 
-    z <- A + B * ppr + (1 - A) * exp(-G) - F * (ppr / 10)^4
+    z <- A + B * ppr + (1 - A) * exp(-G) - zF * (ppr / 10)^4
 
     return(z)
 }
