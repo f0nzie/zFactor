@@ -42,7 +42,7 @@ ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5)
 tpr <- c(1.3, 1.5, 1.7, 2) 
  
 hy <- sapply(ppr, function(x)  
-    sapply(tpr, function(y) zFactor:::z.HallYarborough_1p(pres.pr = x, temp.pr = y))) 
+    sapply(tpr, function(y) zFactor:::.z.HallYarborough(pres.pr = x, temp.pr = y))) 
  
 rownames(hy) <- tpr 
 colnames(hy) <- ppr 
