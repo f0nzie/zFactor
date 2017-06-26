@@ -2,7 +2,7 @@
 % Please edit documentation in R/shell.R
 \name{z.Shell}
 \alias{z.Shell}
-\title{Shell correlation}
+\title{Shell correlation from Kumar thesis (2005)}
 \usage{
 z.Shell(pres.pr, temp.pr, tolerance = 1e-13, verbose = FALSE)
 }
@@ -16,5 +16,5 @@ z.Shell(pres.pr, temp.pr, tolerance = 1e-13, verbose = FALSE)
 \item{verbose}{print internal}
 }
 \description{
-Shell correlation
+Shell correlation from Kumar thesis (2005)
 }
