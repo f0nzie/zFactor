@@ -1,0 +1,47 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+https://stackoverflow.com/questions/31197726/calculate-mase-with-cross-sectional-non-time-series-data-in-r
+
+```{r}
+library(forecast)
+
+# Generate some artificial training and test data
+x <- 1:100
+y <- 5 + .1*x + rnorm(100)
+xtrain <- sample(x, size=80)
+ytrain <- y[xtrain]
+xtest <- x[-xtrain]
+ytest <- y[-xtrain]
+
+# Compute forecasts from a linear model
+forecast <- predict(lm(ytrain~xtrain), newdata=data.frame(xtrain=xtest))
+
+# Plot training data, test data and forecasts
+plot(xtrain, ytrain)
+lines(xtest,forecast,col='red',pch=19)
+points(xtest,ytest,col='blue',pch=19)
+
+# Compute accuracy statistics
+accuracy(forecast,ytest)
+```
+
+Both forecast and ytest are numerical vectors as requested. But MASE will not be produced because the MASE is based on a scaling factor computed from the training data. So it makes no sense to ask for MASE if you don't also pass the training data to accuracy. The simplest way to do that is to pass the whole forecast object like this:
+
+```{r}
+forecast <- forecast(lm(ytrain~xtrain), newdata=data.frame(xtrain=xtest))
+accuracy(forecast,ytest)
+```
+
+The forecast object contains more than just the point forecasts for the future periods. It also contains the training data, uncertainty estimates, and more.
+
+If you don't want to use a lm for prediction, then you have to set up the forecast object yourself, containing at least the point predictions (mean), the insample fits (fitted) and the training responses (x). Like this:
+
+```{r}
+forecast <- structure(list(mean=rep(10,20), fitted=rep(10,80),
+   x=ytrain), class='forecast')
+accuracy(forecast,ytest)
+```
+
