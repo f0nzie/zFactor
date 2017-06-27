@@ -57,7 +57,9 @@ z.Shell <- function(pres.pr, temp.pr, tolerance = 1E-13,
     D <- 0.122 * exp(-11.3 *(tpr - 1))
     E <- -0.6222 - 0.224 * tpr  # there is an error in the paper
                                 # -0.6222 should be +0.6222
-    E <- 0.6222 - 0.224 * tpr
+
+    E <- 0.6222 - 0.224 * tpr   # <- this is correct
+
     zF <- 0.0657 / (tpr - 0.85) - 0.037
     G <- 0.32 * exp(-19.53 * (tpr - 1))
     C <- ppr * (E + zF * ppr + G * ppr^4)
