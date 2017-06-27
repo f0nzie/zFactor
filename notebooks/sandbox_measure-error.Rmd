@@ -24,6 +24,77 @@ summarise(grouped, mean=mean(value), sd=sd(value))
 ```
 
 
+
+$$MPE = \frac {100%} {n} \sum_{t=1}^n \frac {a_t - f_t} {a_t}$$
+$$MAPE = \frac {100} {n} \sum | \frac {a_t - f_t} {a_t}|$$ 
+
+```{r}
+library(zFactor)
+library(ggplot2)
+library(dplyr)
+library(tibble)
+
+# get all `lp` Tpr curves
+tpr_all <- getCurvesDigitized(pprRange = "lp")
+ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
+sk_corr_all <- createTidyFromMatrix(ppr, tpr_all, correlation = "HY")
+# as.tibble(sk_corr_all)
+
+
+# MSE: Mean Squared Error
+# RMSE: Root Mean Sqyared Error
+# RSS: residual sum of square
+# ARE:  Average Relative Error, %
+# AARE: Average Absolute Relative Error, %
+# RMSLE: Root Mean Squared Logarithmic Error. Penalizes understimation.
+# MAPE: Mean Absolute Percentage Error = AARE
+# MPE: Mean Percentage error = ARE
+# MAE = Mean Absolute Error
+
+grouped <- group_by(sk_corr_all, Tpr, Ppr)
+smry_tpr_ppr <- summarise(grouped, 
+          #mean=mean(z.calc), 
+          #sd=sd(z.calc), 
+          RMSE= sqrt(mean((z.chart-z.calc)^2)), 
+          MSE = sum((z.calc - z.chart)^2) / n(), 
+          # rmse2 = sqrt(sum((z.chart-z.calc)^2)/n()),
+          RSS = sum((z.calc - z.chart)^2),
+          MAE = sum(abs(z.calc - z.chart)) / n(),
+          # ARE = sum((z.calc - z.chart) / z.chart) * 100 / n(),
+          MPE = sum((z.calc - z.chart) / z.chart) * 100 / n(),
+          MAPE = sum(abs((z.calc - z.chart) / z.chart)) * 100 / n(),
+          # AARE = sum(abs((z.calc - z.chart) / z.chart)) * 100 / n(),
+          RMLSE = sqrt(1/n()*sum((log(z.calc +1)-log(z.chart +1))^2))
+          )
+
+as.tibble(smry_tpr_ppr)
+
+ggplot(smry_tpr_ppr, aes(Ppr, Tpr)) + 
+    geom_tile(data=smry_tpr_ppr, aes(fill=MAPE), color="white") +
+    scale_fill_gradient2(low="blue", high="red", mid="yellow", na.value = "pink",
+                         midpoint=12.5, limit=c(0, 25), name="MAPE") + 
+    theme(axis.text.x = element_text(angle=45, vjust=1, size=11, hjust=1)) + 
+    coord_equal() +
+    ggtitle("Hall-Yarborough", subtitle = "HY")
+```
+
+
+
+```{r}
+library(dplyr)
+
+sk_corr_all %>%
+    filter(Tpr %in% c("1.4", "1.5", "1.6", "1.7", "1.8", "1.9")) %>%
+    ggplot(aes(x = z.chart, y=z.calc, group = Tpr, color = Tpr)) +
+    geom_point(size = 3) +
+    geom_line(aes(x = z.chart, y = z.chart), color = "black") +
+    facet_grid(. ~ Tpr) +
+    geom_errorbar(aes(ymin=z.calc-abs(dif), ymax=z.calc+abs(dif)), position=position_dodge(0.5), width = 0.05)
+```
+
+
+
+
 ```{r}
 
 library(ggplot2)
@@ -59,41 +130,58 @@ ggplot(sk_corr_all, aes(Ppr, Tpr)) +
     
 ```
 
-$$MPE = \frac {100%} {n} \sum_{t=1}^n \frac {a_t - f_t} {a_t}$$
-$$MAPE = \frac {100} {n} \sum | \frac {a_t - f_t} {a_t}|$$ 
 
 ```{r}
-# MSE: Mean Squared Error
-# RMSE: Root Mean Sqyared Error
-# RSS: residual sum of square
-# ARE:  Average Relative Error, %
-# AARE: Average Absolute Relative Error, %
-# RMSLE: Root Mean Squared Logarithmic Error. Penalizes understimation.
-# MAPE: Mean Absolute Percentage Error = AARE
-# MPE: Mean Percentage error = ARE
-# MAE = Mean Absolute Error
 library(dplyr)
-grouped <- group_by(sk_corr_all, Tpr, Ppr)
-smry_tpr_ppr <- summarise(grouped, 
-          #mean=mean(z.calc), 
-          #sd=sd(z.calc), 
-          RMSE= sqrt(mean((z.chart-z.calc)^2)), 
-          MSE = sum((z.calc - z.chart)^2) / n(), 
-          # rmse2 = sqrt(sum((z.chart-z.calc)^2)/n()),
-          RSS = sum((z.calc - z.chart)^2),
-          MAE = sum(abs(z.calc - z.chart)) / n(),
-          # ARE = sum((z.calc - z.chart) / z.chart) * 100 / n(),
-          MPE = sum((z.calc - z.chart) / z.chart) * 100 / n(),
-          MAPE = sum(abs((z.calc - z.chart) / z.chart)) * 100 / n(),
-          # AARE = sum(abs((z.calc - z.chart) / z.chart)) * 100 / n(),
-          RMLSE = sqrt(1/n()*sum((log(z.calc +1)-log(z.chart +1))^2))
-          )
 
-ggplot(smry_tpr_ppr, aes(Ppr, Tpr)) + 
-    geom_tile(data=smry_tpr_ppr, aes(fill=MAPE), color="white") +
-    scale_fill_gradient2(low="blue", high="red", mid="yellow", na.value = "pink",
-                         midpoint=12.5, limit=c(0, 25), name="MAPE") + 
-    theme(axis.text.x = element_text(angle=45, vjust=1, size=11, hjust=1)) + 
-    coord_equal() +
-    ggtitle("Hall-Yarborough", subtitle = "HY")
+sk_corr_all %>%
+    filter(as.double(Tpr) > 2 ) %>%
+    ggplot(aes(x = z.chart, y=z.calc, group = Tpr, color = Tpr)) +
+    geom_point(size = 3) +
+    geom_line(aes(x = z.chart, y = z.chart), color = "black") +
+    facet_grid(. ~ Tpr) +
+geom_errorbar(aes(ymin=z.calc-abs(dif), ymax=z.calc+abs(dif)), position=position_dodge(0.5), width = 0.05)
+```
+
+
+
+```{r}
+
+q <- ggplot(sk_corr_all, aes(x=z.chart, y=z.calc, color=Tpr)) +
+    geom_line() +
+    geom_point() +
+    facet_grid(Tpr ~ .)
+print(q)
+
+```
+
+
+```{r}
+# get all `lp` Tpr curves
+tpr <- getCurvesDigitized(pprRange = "lp")
+ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
+
+# calculate HY for the given Tpr
+all_hy <- sapply(ppr, function(x)  
+    sapply(tpr, function(y) z.HallYarborough(pres.pr = x, temp.pr = y))) 
+rownames(all_hy) <- tpr 
+colnames(all_hy) <- ppr 
+cat("Calculated Hall-Yarborough\n")
+print(all_hy) 
+
+cat("\nStanding-Katz chart\n")
+all_sk <- getStandingKatzMatrix(ppr_vector = ppr, tpr_vector = tpr)
+all_sk
+
+# find the error
+cat("\n Errors in percentage \n")
+all_err <- round((all_sk - all_hy) / all_sk * 100, 2)  # in percentage
+all_err
+
+cat("\n Errors in Ppr\n")
+summary(all_err)
+
+# for the transposed matrix
+cat("\n Errors for the transposed matrix: Tpr \n")
+summary(t(all_err))
 ```
