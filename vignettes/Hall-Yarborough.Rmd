@@ -199,11 +199,11 @@ library(tibble)
 # get all `lp` Tpr curves
 tpr_all <- getCurvesDigitized(pprRange = "lp")
 ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
-sk_hy_all <- createTidyFromMatrix(ppr, tpr_all, correlation = "HY")
-as.tibble(sk_hy_all)
+sk_corr_all <- createTidyFromMatrix(ppr, tpr_all, correlation = "HY")
+as.tibble(sk_corr_all)
 
 
-p <- ggplot(sk_hy_all, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
+p <- ggplot(sk_corr_all, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
     geom_line() +
     geom_point() +
     geom_errorbar(aes(ymin=z.calc-dif, ymax=z.calc+dif), width=.4,
@@ -214,34 +214,17 @@ print(p)
 > The greatest errors are localized in two of the Tpr curves: at 1.05 and 1.1.
 
 
-```{r}
-range(abs(sk_hy_all$dif))         # original range
-range(abs(sk_hy_all$dif))*10000 
-```
-
-```{r}
-# modify dataframe and create new dif2 (scaled)
-sk_hy_all$dif2 <- abs(sk_hy_all$dif)*10000 - 0.2267004
-```
-
-
-```{r}
-ggplot(sk_hy_all, aes(Ppr, Tpr)) +
-           geom_tile(data=sk_hy_all, aes(fill=dif2), color="white") +
-    scale_fill_gradient2(low="blue", high="red", mid="white", 
-  midpoint=150, limit=c(0, 600), name="z dif") +
-    theme(axis.text.x = element_text(angle=45, vjust=1, size=11, hjust=1))+
- coord_equal()
-    
-```
 
 $$RMSE = \sqrt {\frac {1}{n} \sum_{i=1}^{n} (y_i - \hat y_i)^2}$$
 
 ```{r}
+# MSE: Mean Squared Error
+# RMSE: Root Mean Sqyared Error
+# RSS: residual sum of square
 # ARE:  Average Relative Error, %
 # AARE: Average Absolute Relative Error, %
 library(dplyr)
-grouped <- group_by(sk_hy_all, Tpr, Ppr)
+grouped <- group_by(sk_corr_all, Tpr, Ppr)
 smry_tpr_ppr <- summarise(grouped, 
           #mean=mean(z.calc), 
           #sd=sd(z.calc), 
@@ -255,7 +238,7 @@ smry_tpr_ppr <- summarise(grouped,
 
 ggplot(smry_tpr_ppr, aes(Ppr, Tpr)) +
            geom_tile(data=smry_tpr_ppr, aes(fill=AARE), color="white") +
-    scale_fill_gradient2(low="blue", high="red", mid="white",
+    scale_fill_gradient2(low="blue", high="red", mid="yellow", na.value = "pink",
   midpoint=12.5, limit=c(0, 25), name="AARE") +
     theme(axis.text.x = element_text(angle=45, vjust=1, size=11, hjust=1))+
  coord_equal()

@@ -20,3 +20,38 @@ grouped <- group_by(melted, sex, treatment)
 summarise(grouped, mean=mean(value), sd=sd(value))
 ```
 
+
+```{r}
+
+library(ggplot2)
+library(tibble)
+
+# get all `lp` Tpr curves
+tpr_all <- getCurvesDigitized(pprRange = "lp")
+ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
+sk_corr_all <- createTidyFromMatrix(ppr, tpr_all, correlation = "HY")
+as.tibble(sk_corr_all)
+
+
+p <- ggplot(sk_corr_all, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
+    geom_line() +
+    geom_point() +
+    geom_errorbar(aes(ymin=z.calc-dif, ymax=z.calc+dif), width=.4,
+                  position=position_dodge(0.05))
+print(p)
+
+range(abs(sk_corr_all$dif))         # original range
+range(abs(sk_corr_all$dif))*10000 
+
+# modify dataframe and create new dif2 (scaled)
+sk_corr_all$dif2 <- abs(sk_corr_all$dif)*10000 - 0.2267004
+
+
+ggplot(sk_corr_all, aes(Ppr, Tpr)) +
+           geom_tile(data=sk_corr_all, aes(fill=dif2), color="white") +
+    scale_fill_gradient2(low="blue", high="red", mid="white", 
+  midpoint=150, limit=c(0, 600), name="z dif") +
+    theme(axis.text.x = element_text(angle=45, vjust=1, size=11, hjust=1))+
+ coord_equal()
+    
+```
