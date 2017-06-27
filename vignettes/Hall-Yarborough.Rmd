@@ -19,7 +19,7 @@ knitr::opts_chunk$set(echo=T, comment=NA, error=T, warning=F, message = F, fig.a
 
 ## Get `z` at selected `Ppr` and `Tpr=2.0`
 
-From the Standing-Katz chart we obtain a digitized point:
+Use the the corelation to calculate `z` and the Standing-Katz chart we obtain a digitized point at the given `Tpr` and `Ppr`.
 
 ```{r}
 # get a z value using HY
@@ -68,7 +68,7 @@ df
 
 ## Get values of `z` for combinations of `Ppr` and `Tpr`
 In this example we provide vectors instead of a single point.
-With the same `ppr` and `tpr` vectors that we use for the correlation, we do the same for the `Standing-Katz` chart. We want to compae both and find the `absolute percentage error`.
+With the same `ppr` and `tpr` vectors that we use for the correlation, we do the same for the `Standing-Katz` chart. We want to compare both and find the `absolute percentage error`.
 
 ```{r}
 library(zFactor)
@@ -141,7 +141,6 @@ sum_t_ape
 
 ## Prepare to plot `SK` chart values vs `HY` correlation
 Plotting the difference between the `z` values in the Standing-Katz and the values calculated by Hall-Yarborough. For the moment we will not pay attention to the numerical error but to the `error bars` in the plot.
-
 
 
 ```{r}
