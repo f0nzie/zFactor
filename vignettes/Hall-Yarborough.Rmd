@@ -247,7 +247,7 @@ smry_tpr_ppr <- summarise(grouped,
           #sd=sd(z.calc), 
           RMSE= sqrt(mean((z.chart-z.calc)^2)), 
           MSE = sum((z.calc - z.chart)^2) / n(), 
-          rmse2 = sqrt(sum((z.chart-z.calc)^2)/n()),
+          # rmse2 = sqrt(sum((z.chart-z.calc)^2)/n()),
           RSS = sum((z.calc - z.chart)^2),
           ARE = sum((z.calc - z.chart) / z.chart) * 100 / n(),
           AARE = sum( abs((z.calc - z.chart) / z.chart)) * 100 / n()
@@ -256,7 +256,7 @@ smry_tpr_ppr <- summarise(grouped,
 ggplot(smry_tpr_ppr, aes(Ppr, Tpr)) +
            geom_tile(data=smry_tpr_ppr, aes(fill=AARE), color="white") +
     scale_fill_gradient2(low="blue", high="red", mid="white",
-  midpoint=15, limit=c(0, 25), name="AARE") +
+  midpoint=12.5, limit=c(0, 25), name="AARE") +
     theme(axis.text.x = element_text(angle=45, vjust=1, size=11, hjust=1))+
  coord_equal()
 ```

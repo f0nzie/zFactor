@@ -245,16 +245,41 @@ library(tibble)
 # get all `lp` Tpr curves
 tpr_all <- getCurvesDigitized(pprRange = "lp")
 ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
-sk_dpr_all <- createTidyFromMatrix(ppr, tpr_all, correlation = "DPR")
-as.tibble(sk_dpr_all)
+sk_corr_all <- createTidyFromMatrix(ppr, tpr_all, correlation = "DPR")
+as.tibble(sk_corr_all)
 
-p <- ggplot(sk_dpr_all, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
+p <- ggplot(sk_corr_all, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
     geom_line() +
     geom_point() +
     geom_errorbar(aes(ymin=z.calc-dif, ymax=z.calc+dif), width=.4,
                   position=position_dodge(0.05))
 print(p)
 ```
+
+```{r}
+# ARE:  Average Relative Error, %
+# AARE: Average Absolute Relative Error, %
+library(dplyr)
+grouped <- group_by(sk_corr_all, Tpr, Ppr)
+smry_tpr_ppr <- summarise(grouped, 
+          #mean=mean(z.calc), 
+          #sd=sd(z.calc), 
+          RMSE= sqrt(mean((z.chart-z.calc)^2)), 
+          MSE = sum((z.calc - z.chart)^2) / n(), 
+          # rmse2 = sqrt(sum((z.chart-z.calc)^2)/n()),
+          RSS = sum((z.calc - z.chart)^2),
+          ARE = sum((z.calc - z.chart) / z.chart) * 100 / n(),
+          AARE = sum( abs((z.calc - z.chart) / z.chart)) * 100 / n()
+          )
+
+ggplot(smry_tpr_ppr, aes(Ppr, Tpr)) +
+           geom_tile(data=smry_tpr_ppr, aes(fill=AARE), color="white") +
+    scale_fill_gradient2(low="blue", high="red", mid="white",
+  midpoint=12.5, limit=c(0, 25), name="AARE") +
+    theme(axis.text.x = element_text(angle=45, vjust=1, size=11, hjust=1))+
+ coord_equal()
+```
+
 
 > The greatest errors are localized in two of the Tpr curves: 1.05 and barely at 1.1
 
