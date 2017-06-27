@@ -276,7 +276,7 @@ sk_corr_all %>%
     geom_line(aes(x = z.chart, y = z.chart), color = "black") +
     facet_grid(. ~ Tpr) +
     geom_errorbar(aes(ymin=z.calc-abs(dif), ymax=z.calc+abs(dif)), 
-                  position=position_dodge(0.5), width = 0.05)
+                  position=position_dodge(0.5))
 ```
 
 
@@ -286,39 +286,6 @@ Finally, the dataframe with the calculated errors between the `z` from the corre
 ```{r}
 as.tibble(smry_tpr_ppr)
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
