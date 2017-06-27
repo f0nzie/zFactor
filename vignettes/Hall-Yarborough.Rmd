@@ -163,6 +163,7 @@ print(p)
 
 ## Analyzing the error for all the `Tpr` curves
 In this last example, we compare the values of `z` at all the isotherms.
+We use the function `getCurvesDigitized` to obtain all the isotherms or `Tpr` curves in the Standing-Katz chart that have been digitized. The next function `createTidyFromMatrix` calculate `z` using the correlation and prepares a tidy dataset ready to plot.
 
 ```{r}
 library(ggplot2)
