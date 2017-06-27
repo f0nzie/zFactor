@@ -124,16 +124,98 @@ library(tibble)
 # get all `lp` Tpr curves
 tpr_all <- getCurvesDigitized(pprRange = "lp")
 ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
-sk_hy_all <- createTidyFromMatrix(ppr, tpr_all, correlation = "HY")
-as.tibble(sk_hy_all)
+sk_corr_all <- createTidyFromMatrix(ppr, tpr_all, correlation = "HY")
+as.tibble(sk_corr_all)
 
 
-p <- ggplot(sk_hy_all, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
+p <- ggplot(sk_corr_all, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
     geom_line() +
     geom_point() +
     geom_errorbar(aes(ymin=z.calc-dif, ymax=z.calc+dif), width=.4,
                   position=position_dodge(0.05))
 print(p)
+
+## ------------------------------------------------------------------------
+# MSE: Mean Squared Error
+# RMSE: Root Mean Sqyared Error
+# RSS: residual sum of square
+# ARE:  Average Relative Error, %
+# AARE: Average Absolute Relative Error, %
+library(dplyr)
+grouped <- group_by(sk_corr_all, Tpr, Ppr)
+smry_tpr_ppr <- summarise(grouped, 
+          RMSE= sqrt(mean((z.chart-z.calc)^2)), 
+          MSE = sum((z.calc - z.chart)^2) / n(), 
+          RSS = sum((z.calc - z.chart)^2),
+          ARE = sum((z.calc - z.chart) / z.chart) * 100 / n(),
+          AARE = sum( abs((z.calc - z.chart) / z.chart)) * 100 / n()
+          )
+
+ggplot(smry_tpr_ppr, aes(Ppr, Tpr)) + 
+    geom_tile(data=smry_tpr_ppr, aes(fill=AARE), color="white") +
+    scale_fill_gradient2(low="blue", high="red", mid="yellow", na.value = "pink",
+                         midpoint=12.5, limit=c(0, 25), name="AARE") + 
+    theme(axis.text.x = element_text(angle=45, vjust=1, size=11, hjust=1)) + 
+    coord_equal() +
+    ggtitle("Hall-Yarborough", subtitle = "HY")
+
+## ------------------------------------------------------------------------
+library(dplyr)
+
+sk_hy_all %>%
+    filter(Tpr %in% c("1.05", "1.1", "1.2", "1.3")) %>%
+    ggplot(aes(x = z.chart, y=z.calc, group = Tpr, color = Tpr)) +
+    geom_point(size = 3) +
+    geom_line(aes(x = z.chart, y = z.chart), color = "black") +
+    facet_grid(. ~ Tpr) +
+    geom_errorbar(aes(ymin=z.calc-abs(dif), ymax=z.calc+abs(dif)), position=position_dodge(0.5), width = 0.05)
+
+## ------------------------------------------------------------------------
+library(dplyr)
+
+sk_hy_all %>%
+    filter(Tpr %in% c("1.4", "1.5", "1.6", "1.7", "1.8", "1.9")) %>%
+    ggplot(aes(x = z.chart, y=z.calc, group = Tpr, color = Tpr)) +
+    geom_point(size = 3) +
+    geom_line(aes(x = z.chart, y = z.chart), color = "black") +
+    facet_grid(. ~ Tpr) +
+    geom_errorbar(aes(ymin=z.calc-abs(dif), ymax=z.calc+abs(dif)), position=position_dodge(0.5), width = 0.05)
+
+## ------------------------------------------------------------------------
+library(dplyr)
+
+sk_hy_all %>%
+    filter(as.double(Tpr) > 2 ) %>%
+    ggplot(aes(x = z.chart, y=z.calc, group = Tpr, color = Tpr)) +
+    geom_point(size = 3) +
+    geom_line(aes(x = z.chart, y = z.chart), color = "black") +
+    facet_grid(. ~ Tpr) +
+geom_errorbar(aes(ymin=z.calc-abs(dif), ymax=z.calc+abs(dif)), position=position_dodge(0.5), width = 0.05)
+
+## ------------------------------------------------------------------------
+sk_hy_all
+
+## ------------------------------------------------------------------------
+sk_hy_all$z.rng <- ifelse(sk_hy_all$Ppr > 3, "zgt05", "zlt05")
+
+q <- ggplot(sk_hy_all, aes(x=z.chart, y=z.calc)) +
+    geom_line() +
+    geom_point() +
+     facet_grid(Tpr ~ .)
+print(q)
+
+
+## ------------------------------------------------------------------------
+
+
+## ------------------------------------------------------------------------
+
+q <- ggplot(sk_hy_all, aes(x=z.chart, y=z.calc, color=Tpr)) +
+    geom_line() +
+    geom_point() +
+    facet_grid(Tpr ~ .)
+print(q)
+
 
 ## ------------------------------------------------------------------------
 # get all `lp` Tpr curves
