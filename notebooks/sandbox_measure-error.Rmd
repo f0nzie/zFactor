@@ -1,0 +1,22 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+## The code for the toy data is exactly the same
+data <- data.frame(sex = c(rep(1, 1000), rep(2, 1000)),
+                   treatment = rep(c(1, 2), 1000),
+                   response1 = rnorm(2000, 0, 1),
+                   response2 = rnorm(2000, 0, 1))
+ 
+## reshape2 still does its thing:
+library(reshape2)
+melted <- melt(data, id.vars=c("sex", "treatment"))
+ 
+## This part is new:
+library(dplyr)
+grouped <- group_by(melted, sex, treatment)
+summarise(grouped, mean=mean(value), sd=sd(value))
+```
+
