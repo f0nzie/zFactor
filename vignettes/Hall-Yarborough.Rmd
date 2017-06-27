@@ -33,9 +33,15 @@ z.chart <- getStandingKatzMatrix(tpr_vector = tpr_vec,
                       pprRange = "lp")[1, "1.5"]
 
 # calculate the APE
-cat(z.calc, "\n")
-cat(z.chart, "\n")
-abs((z.calc - z.chart) / z.chart) * 100
+# cat(z.calc, "\n")
+# cat(z.chart, "\n")
+ape <- abs((z.calc - z.chart) / z.chart) * 100
+
+# table(z.calc)
+# table(z.chart)
+# table(ape)
+
+as.data.frame(list(z.calc =z.calc, z.chart = z.chart, ape=ape))
 ```
 
 
