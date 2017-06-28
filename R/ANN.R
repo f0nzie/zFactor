@@ -37,14 +37,13 @@ wb2_10 <-	rbind(
     )
 
 
-
 # Weights and Biases for the 3rd layer of neurons
 wb3_10 <- c(-30.1311, 2.0902, -3.5296,	18.1108, -2.528, -0.7228, 0.0186, 5.3507, -0.1476, -5.0827, 3.9767)
 
-n1_10 <- matrix(0, nrow = 11, ncol= 3)
-n2_10 <- matrix(0, nrow = 11, ncol= 3)
+n1_10 <- matrix(0, nrow = 11, ncol= 3) # input and output of the 1st layer in 2-10-10-1 network.	[,0] ==> inputs, [,1] ==> outputs
+n2_10 <- matrix(0, nrow = 11, ncol= 3) # input and output of the 2nd layer in 2-10-10-1 network.	[,0] ==> inputs, [,1] ==> outputs
 
-#' ANN correlation
+#' Artificial Neural Network correlation
 #'
 #' @param pres.pr pseudo-reduced pressure
 #' @param temp.pr pseudo-reduced temperature
@@ -80,7 +79,6 @@ z.Ann10.r <- function(pres.pr, temp.pr) {
         n1_10[i, 1] <-  Ppr_n * wb1_10[i, 1] + Tpr_n * wb1_10[i, 2] + wb1_10[i, 3]
         n1_10[i, 2] <-  logSig(n1_10[i, 1]);
     }
-    # print(n1_10)
     for (i in 1:10)  {
         n2_10[i, 1]  <-  0;
         for (j  in 1:nrow(n2_10)) {
@@ -90,7 +88,6 @@ z.Ann10.r <- function(pres.pr, temp.pr) {
         n2_10[i, 1] <-  n2_10[i, 1] + wb2_10[i, 11];	#  //adding the bias value
         n2_10[i, 2] <- logSig(n2_10[i, 1])
     }
-    # print(n2_10)
     z_n = 0;
     for (j in 1:nrow(n2_10))
         z_n <-  z_n + n2_10[j, 2] * wb3_10[j]
@@ -111,25 +108,6 @@ logSig <- function(x) {
 
 
 
-z.Ann10.java <- function(pres.pr, temp.pr) {
-    # jinit and add classpath here because it doesn't work from .onLoad
-    jarFile <- paste(system.file(package = "zFactor"), "java", sep = "/")
-    rJava::.jinit()
-    rJava::.jaddClassPath(jarFile)
-    # print(rJava::.jclassPath())
-    zFactor <- rJava::.jnew("CalculateZFactor")
-
-    mx <- sapply(pres.pr, function(x) sapply(temp.pr, function(y)
-        rJava::.jcall(zFactor, "D", "ANN10", x, y)) )
-
-    if (length(pres.pr) > 1 || length(temp.pr) > 1) {
-        colnames(mx) <- pres.pr
-        rownames(mx) <- temp.pr
-        # mx
-    }
-    # else         # z.Ann10_1p(pres.pr, temp.pr)
-    mx
-}
 
 
 
