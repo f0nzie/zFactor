@@ -1,4 +1,6 @@
-# Correlation created using Artificial Neural Networks
+# Correlation Kamyab et al. Created using Artificial Neural Networks (ANN)
+# Paper "Using artiﬁcial neural networks to estimate the z-factor for natural
+# hydrocarbon gases". DOI:	10.1016/j.petrol.2010.07.006
 
 # Minimum and Maximum values used in the neural network to normalize the input and output values.
 Ppr_min = 0;
