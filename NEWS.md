@@ -1,3 +1,8 @@
+## 20170628, 0.1.4
+* switch Ann Java to R.
+* remove sandbox worksheets from extdata
+* move java tester notebook to scientific-computing-r
+
 ## 20170625, 0.1.3
 * add Shell correlation
 * add tile plot
