@@ -8,7 +8,7 @@ Description: Computational algorithms to solve equations and find the
     compressibility factor (z). Correlations available: Hall-Yarborough, 
     Dranchuk-AbuKassem and Dranchuk-Purvis-Robinson. It uses the original 
     Standing-Katz chart for comparison and plotting.
-Imports: rootSolve, tidyr, ggplot2, data.table, tibble, rJava
+Imports: rootSolve, tidyr, ggplot2, data.table, tibble, rJava, dplyr
 Suggests: knitr,
     rmarkdown, testthat
 Depends:
