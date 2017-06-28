@@ -1,3 +1,4 @@
+# Correlation created using Artificial Neural Networks
 
 # Minimum and Maximum values used in the neural network to normalize the input and output values.
 Ppr_min = 0;
@@ -47,16 +48,13 @@ n2_10 <- matrix(0, nrow = 11, ncol= 3) # input and output of the 2nd layer in 2-
 #'
 #' @param pres.pr pseudo-reduced pressure
 #' @param temp.pr pseudo-reduced temperature
-#' @rdname ANN
+#' @param tolerance controls the iteration accuracy
+#' @param verbose print internal
+#' @rdname Ann10
 #' @export
 # #' @importFrom rJava .jnew .jcall .jinit .jaddClassPath .jclassPath
 z.Ann10 <- function(pres.pr, temp.pr, tolerance, verbose) {
-    z.Ann10.r(pres.pr, temp.pr)
-}
-
-
-
-z.Ann10.r <- function(pres.pr, temp.pr) {
+    # z.Ann10.r(pres.pr, temp.pr)
     mx <- sapply(pres.pr, function(x) sapply(temp.pr, function(y)
         .z.Ann10.r(x, y) ))
 
@@ -70,7 +68,7 @@ z.Ann10.r <- function(pres.pr, temp.pr) {
 
 
 .z.Ann10.r <- function(pres.pr, temp.pr) {
-
+    # simpler function. solver one point at a time
     Ppr <- pres.pr; Tpr <- temp.pr
     Ppr_n = 2.0 / (Ppr_max - Ppr_min) * (Ppr - Ppr_min) - 1.0
     Tpr_n = 2.0 / (Tpr_max - Tpr_min) * (Tpr - Tpr_min) - 1.0
@@ -106,11 +104,16 @@ logSig <- function(x) {
 
 
 
-
-
-
-
-
+# z.Ann10.r <- function(pres.pr, temp.pr) {
+#     mx <- sapply(pres.pr, function(x) sapply(temp.pr, function(y)
+#         .z.Ann10.r(x, y) ))
+#
+#     if (length(pres.pr) > 1 || length(temp.pr) > 1) {
+#         colnames(mx) <- pres.pr
+#         rownames(mx) <- temp.pr
+#     }
+#     mx
+# }
 
 
 
