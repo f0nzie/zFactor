@@ -3,9 +3,9 @@ context("test z.DranchukPurvisRobinson")
 
 # test only one point at Ppr=0.5 and Tpr = 1.3
 # print(z.DranchukPurvisRobinson(0.5, 1.3))
-expect_equal(z.DranchukPurvisRobinson(0.5, 1.3), 0.9197157, tolerance = 1E-7)
-
-
+test_that("DPR matches z at Ppr=0.5 and Tpr=1.3", {
+    expect_equal(z.DranchukPurvisRobinson(0.5, 1.3), 0.9197157, tolerance = 1E-7)
+})
 
 test_that("DPR corr matches solution of 4x7 Ppr, Tpr matrix", {
     ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5)
