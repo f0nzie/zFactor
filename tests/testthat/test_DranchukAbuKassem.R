@@ -26,8 +26,9 @@ test_that("test DAK between 7 Ppr values and 4 Tpr", {
     # print(tbl)
     # DAK74 <- tbl
     # save(DAK74, file = "dak74.rda")
-    load(file = "dak74.rda")
-    expect_equal(tbl, DAK74)
+    # load(file = "dak74.rda")
+    load(file = "dak_4x7.rda");
+    expect_equal(tbl, dak)
 })
 
 

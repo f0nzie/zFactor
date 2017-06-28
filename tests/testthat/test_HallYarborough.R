@@ -18,8 +18,10 @@ test_that("test HY with  using the values from paper", {
     colnames(tbl) <- ppr
     # print(tbl)
     # HY74 <- tbl; save(HY74, file = "hy74.rda")
-    load(file = "hy74.rda");
-    expect_equal(tbl, HY74)
+    # load(file = "hy74.rda");
+    # expect_equal(tbl, HY74)
+    load(file = "hy_4x7.rda");
+    expect_equal(z.HallYarborough(ppr, tpr), hy_4x7)
 })
 
 test_that("HY corr matches a single z value", {
