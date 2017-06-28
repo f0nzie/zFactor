@@ -11,6 +11,9 @@ z.BeggsBrill(pres.pr, temp.pr, tolerance = 1e-13, verbose = FALSE)
 
 \item{temp.pr}{pseudo-reduced temperature}
 
+\item{tolerance}{rounding tolerance to avoid rounding readings that are in
+the middle of the grid. "tolerance" adds flexibility in deciding point closeness.}
+
 \item{verbose}{print internal}
 }
 \description{

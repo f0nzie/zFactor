@@ -6,6 +6,8 @@
 #'
 #' @param pres.pr pseudo-reduced pressure
 #' @param temp.pr pseudo-reduced temperature
+#' @param tolerance rounding tolerance to avoid rounding readings that are in
+#' the middle of the grid. "tolerance" adds flexibility in deciding point closeness.
 #' @param verbose print internal
 #' @rdname Beggs-Brill
 #' @export
