@@ -2,15 +2,19 @@
 % Please edit documentation in R/ANN.R
 \name{z.Ann10}
 \alias{z.Ann10}
-\title{ANN correlation}
+\title{Artificial Neural Network correlation}
 \usage{
-z.Ann10(pres.pr, temp.pr)
+z.Ann10(pres.pr, temp.pr, tolerance, verbose)
 }
 \arguments{
 \item{pres.pr}{pseudo-reduced pressure}
 
 \item{temp.pr}{pseudo-reduced temperature}
+
+\item{tolerance}{controls the iteration accuracy}
+
+\item{verbose}{print internal}
 }
 \description{
-ANN correlation
+Artificial Neural Network correlation
 }
