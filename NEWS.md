@@ -1,3 +1,13 @@
+## 20170625, 0.1.3
+* add Shell correlation
+* add tile plot
+* redo the notebooks neater
+* add error statistics: APE, MAPE, RSME, etc.
+* simplify correlation functions to call point and vectors. use dplyr
+* clip from papers
+* fix position_dodge overlapping
+
+
 ## 20170625, 0.1.2
 * correct spelling of 'compressibility'
 * add more tests to correlations. Also rda file for testing.
