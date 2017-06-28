@@ -4,7 +4,7 @@
 \alias{z.Ann10}
 \title{ANN correlation}
 \usage{
-z.Ann10(pres.pr, temp.pr)
+z.Ann10(pres.pr, temp.pr, tolerance, verbose)
 }
 \arguments{
 \item{pres.pr}{pseudo-reduced pressure}
