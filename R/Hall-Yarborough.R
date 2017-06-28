@@ -18,21 +18,23 @@
 #' print(hy)
 z.HallYarborough <- function(pres.pr, temp.pr, tolerance = 1E-13,
                              verbose = FALSE) {
+    hy <- sapply(pres.pr, function(x)
+        sapply(temp.pr, function(y) .z.HallYarborough(pres.pr = x,
+                                                      temp.pr = y,
+                                                      tolerance = tolerance,
+                                                      verbose = verbose)))
 
     if (length(pres.pr) > 1 || length(temp.pr) > 1) {
-        hy <- sapply(pres.pr, function(x)
-            sapply(temp.pr, function(y) z.HallYarborough_1p(pres.pr = x, temp.pr = y)))
         rownames(hy) <- temp.pr
         colnames(hy) <- pres.pr
-        return(hy)
-    } else {
-        z.HallYarborough_1p(pres.pr, temp.pr, tolerance = 1E-13,
-                            verbose = FALSE)
+
     }
+    return(hy)
 }
 
 
-z.HallYarborough_1p <- function(pres.pr, temp.pr, tolerance = 1E-13,
+
+.z.HallYarborough <- function(pres.pr, temp.pr, tolerance = 1E-13,
                              verbose = FALSE) {
     # Hall-Yarborough correlation modified to use the Newton-Raphson method
 

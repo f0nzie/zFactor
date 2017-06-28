@@ -28,14 +28,6 @@ z.Ann10 <- function(pres.pr, temp.pr) {
 }
 
 
-# z.Ann10_1p <- function(pres.pr, temp.pr) {
-#     # classFile <- paste(system.file(package = "zFactor"), "java", sep = "/")
-#     # rJava::.jinit()    # start the Java Virtual Machine
-#     # rJava::.jaddClassPath(classFile)  # path to folder containing Java class
-#     zFactor <- rJava::.jnew("CalculateZFactor")
-#     mx <-  rJava::.jcall(zFactor, "D", "ANN10", pres.pr, temp.pr)
-#     mx
-# }
 
 
 

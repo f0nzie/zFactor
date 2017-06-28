@@ -18,21 +18,22 @@
 z.DranchukAbuKassem <- function(pres.pr, temp.pr, tolerance = 1E-13,
                                 verbose = FALSE) {
 
+    dak <- sapply(pres.pr, function(x)
+        sapply(temp.pr, function(y)
+            .z.DranchukAbuKassem(pres.pr = x, temp.pr = y,
+                                 tolerance = tolerance, verbose = verbose)))
+
     if (length(pres.pr) > 1 || length(temp.pr) > 1) {
-        dak <- sapply(pres.pr, function(x)
-            sapply(temp.pr, function(y) z.DranchukAbuKassem_1p(pres.pr = x, temp.pr = y)))
         rownames(dak) <- temp.pr
         colnames(dak) <- pres.pr
-        return(dak)
-    } else {
-        z.DranchukAbuKassem_1p(pres.pr, temp.pr, tolerance = 1E-13,
-                               verbose = FALSE)
+
     }
+    return(dak)
 }
 
 
 
-z.DranchukAbuKassem_1p <- function(pres.pr, temp.pr, tolerance = 1E-13,
+.z.DranchukAbuKassem <- function(pres.pr, temp.pr, tolerance = 1E-13,
                                 verbose = FALSE) {
     F <- function(rhor)
     {

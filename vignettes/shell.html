@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Vignette Author" />
+
+<meta name="date" content="2017-06-27" />
+
+<title>Shell correlation</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Shell correlation</h1>
+<h4 class="author"><em>Vignette Author</em></h4>
+<h4 class="date"><em>2017-06-27</em></h4>
+
+
+
+<div id="get-z-at-selected-ppr-and-tpr" class="section level2">
+<h2>Get <code>z</code> at selected <code>Ppr</code> and <code>Tpr</code></h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get a z value using HY</span>
+<span class="kw">library</span>(zFactor)
+
+<span class="kw">z.Shell</span>(<span class="dt">pres.pr =</span> <span class="fl">1.5</span>, <span class="dt">temp.pr =</span> <span class="fl">2.0</span>)</code></pre></div>
+<pre><code>[1] 0.9785767</code></pre>
+<p>From the Standing-Katz chart we obtain a digitized point:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get a z value from the SK chart at the same Ppr and Tpr</span>
+<span class="kw">library</span>(zFactor)
+
+tpr_vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">2.0</span>)
+<span class="kw">getStandingKatzMatrix</span>(<span class="dt">tpr_vector =</span> tpr_vec, 
+                      <span class="dt">pprRange =</span> <span class="st">&quot;lp&quot;</span>)[<span class="dv">1</span>, <span class="st">&quot;1.5&quot;</span>]</code></pre></div>
+<pre><code>  1.5 
+0.956 </code></pre>
+</div>
+<div id="get-z-at-selected-ppr-and-tpr-1" class="section level2">
+<h2>Get <code>z</code> at selected <code>Ppr</code> and <code>Tpr</code></h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zFactor)
+
+
+<span class="kw">z.Shell</span>(<span class="dt">pres.pr =</span> <span class="fl">1.5</span>, <span class="dt">temp.pr =</span> <span class="fl">1.1</span>)</code></pre></div>
+<pre><code>[1] 0.4816432</code></pre>
+<p>From the Standing-Katz chart we obtain a digitized point:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zFactor)
+
+tpr_vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.1</span>)
+<span class="kw">getStandingKatzMatrix</span>(<span class="dt">tpr_vector =</span> tpr_vec, 
+                      <span class="dt">pprRange =</span> <span class="st">&quot;lp&quot;</span>)[<span class="dv">1</span>, <span class="st">&quot;1.5&quot;</span>]</code></pre></div>
+<pre><code>  1.5 
+0.426 </code></pre>
+<blockquote>
+<p>We perceive a noticeable difference between the values of z from the HY calculation and the value read from the Standing-Katz chart.</p>
+</blockquote>
+</div>
+<div id="get-values-of-z-for-several-ppr-and-tpr" class="section level2">
+<h2>Get values of <code>z</code> for several <code>Ppr</code> and <code>Tpr</code></h2>
+<p>In this example we provide vectors instead of a single point.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zFactor)
+
+ppr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="fl">3.5</span>, <span class="fl">4.5</span>, <span class="fl">5.5</span>, <span class="fl">6.5</span>) 
+tpr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.3</span>, <span class="fl">1.5</span>, <span class="fl">1.7</span>, <span class="dv">2</span>) 
+
+
+<span class="kw">z.Shell</span>(ppr, tpr)</code></pre></div>
+<pre><code>          0.5       1.5       2.5       3.5       4.5       5.5       6.5
+1.3 0.9178838 0.7518864 0.6451993 0.6256371 0.6803635 0.7638985 0.8502710
+1.5 0.9495503 0.8508783 0.7833739 0.7606142 0.7780715 0.8232803 0.8839834
+1.7 0.9710083 0.9144427 0.8728874 0.8549373 0.8616338 0.8890694 0.9314239
+2   0.9929208 0.9785767 0.9681390 0.9652473 0.9718700 0.9884569 1.0143097</code></pre>
+<p>Which is equivalent to using the sapply function with the internal function <code>.z.HallYarborough</code>, which we call adding the prefix <code>zFactor:::</code>. That is, the package name and <strong>three</strong> dots.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># test HY with 1st-derivative using the values from paper </span>
+ 
+ppr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="fl">3.5</span>, <span class="fl">4.5</span>, <span class="fl">5.5</span>, <span class="fl">6.5</span>) 
+tpr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.3</span>, <span class="fl">1.5</span>, <span class="fl">1.7</span>, <span class="dv">2</span>) 
+ 
+hy &lt;-<span class="st"> </span><span class="kw">sapply</span>(ppr, function(x)  
+    <span class="kw">sapply</span>(tpr, function(y) zFactor:::<span class="kw">.z.Shell</span>(<span class="dt">pres.pr =</span> x, <span class="dt">temp.pr =</span> y))) 
+ 
+<span class="kw">rownames</span>(hy) &lt;-<span class="st"> </span>tpr 
+<span class="kw">colnames</span>(hy) &lt;-<span class="st"> </span>ppr 
+<span class="kw">print</span>(hy) </code></pre></div>
+<pre><code>          0.5       1.5       2.5       3.5       4.5       5.5       6.5
+1.3 0.9178838 0.7518864 0.6451993 0.6256371 0.6803635 0.7638985 0.8502710
+1.5 0.9495503 0.8508783 0.7833739 0.7606142 0.7780715 0.8232803 0.8839834
+1.7 0.9710083 0.9144427 0.8728874 0.8549373 0.8616338 0.8890694 0.9314239
+2   0.9929208 0.9785767 0.9681390 0.9652473 0.9718700 0.9884569 1.0143097</code></pre>
+<p>With the same ppr and tpr vector, we do the same for the Standing-Katz chart:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zFactor)
+
+sk &lt;-<span class="st"> </span><span class="kw">getStandingKatzMatrix</span>(<span class="dt">ppr_vector =</span> ppr, <span class="dt">tpr_vector =</span> tpr)
+sk</code></pre></div>
+<pre><code>       0.5   1.5   2.5   3.5   4.5   5.5   6.5
+1.30 0.916 0.756 0.638 0.633 0.684 0.759 0.844
+1.50 0.948 0.859 0.794 0.770 0.790 0.836 0.892
+1.70 0.968 0.914 0.876 0.857 0.864 0.897 0.942
+2.00 0.982 0.956 0.941 0.937 0.945 0.969 1.003</code></pre>
+<p>Subtract and find the difference:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">err &lt;-<span class="st"> </span><span class="kw">round</span>((sk -<span class="st"> </span>hy) /<span class="st"> </span>sk *<span class="st"> </span><span class="dv">100</span>, <span class="dv">2</span>)
+err</code></pre></div>
+<pre><code>       0.5   1.5   2.5   3.5   4.5   5.5   6.5
+1.30 -0.21  0.54 -1.13  1.16  0.53 -0.65 -0.74
+1.50 -0.16  0.95  1.34  1.22  1.51  1.52  0.90
+1.70 -0.31 -0.05  0.36  0.24  0.27  0.88  1.12
+2.00 -1.11 -2.36 -2.88 -3.01 -2.84 -2.01 -1.13</code></pre>
+</div>
+<div id="error-by-ppr-and-by-ppr" class="section level2">
+<h2>Error by Ppr and by PPr</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="kw">colSums</span>(err))</code></pre></div>
+<pre><code>  0.5   1.5   2.5   3.5   4.5   5.5   6.5 
+-1.79 -0.92 -2.31 -0.39 -0.53 -0.26  0.15 </code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(<span class="kw">rowSums</span>(err))</code></pre></div>
+<pre><code>  1.30   1.50   1.70   2.00 
+ -0.50   7.28   2.51 -15.34 </code></pre>
+</div>
+<div id="analyze-the-error-for-smaller-values-of-tpr" class="section level2">
+<h2>Analyze the error for smaller values of <code>Tpr</code></h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zFactor)
+
+tpr2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.05</span>, <span class="fl">1.1</span>) 
+ppr2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="fl">3.5</span>, <span class="fl">4.5</span>, <span class="fl">5.5</span>) 
+
+sk2 &lt;-<span class="st"> </span><span class="kw">getStandingKatzMatrix</span>(<span class="dt">ppr_vector =</span> ppr2, <span class="dt">tpr_vector =</span> tpr2, <span class="dt">pprRange =</span> <span class="st">&quot;lp&quot;</span>)
+sk2</code></pre></div>
+<pre><code>       0.5   1.5   2.5   3.5   4.5   5.5
+1.05 0.829 0.253 0.343 0.471 0.598 0.727
+1.10 0.854 0.426 0.393 0.500 0.615 0.729</code></pre>
+<p>We do the same with the correlation:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># calculate z values at lower values of Tpr</span>
+<span class="kw">library</span>(zFactor)
+
+tpr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.05</span>, <span class="fl">1.1</span>)
+ppr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="fl">3.5</span>, <span class="fl">4.5</span>, <span class="fl">5.5</span>) 
+
+corr2 &lt;-<span class="st"> </span><span class="kw">z.Shell</span>(<span class="dt">pres.pr =</span> ppr, <span class="dt">temp.pr =</span> tpr) 
+
+<span class="kw">print</span>(corr2)</code></pre></div>
+<pre><code>           0.5       1.5       2.5       3.5       4.5       5.5
+1.05 0.8294221 0.3240119 0.3423544 0.4694593 0.5955314 0.7199048
+1.1  0.8584285 0.4816432 0.3838066 0.4984101 0.6133854 0.7273952</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">err2 &lt;-<span class="st"> </span><span class="kw">round</span>((sk2 -<span class="st"> </span>corr2) /<span class="st"> </span>sk2 *<span class="st"> </span><span class="dv">100</span>, <span class="dv">2</span>)
+err2</code></pre></div>
+<pre><code>       0.5    1.5  2.5  3.5  4.5  5.5
+1.05 -0.05 -28.07 0.19 0.33 0.41 0.98
+1.10 -0.52 -13.06 2.34 0.32 0.26 0.22</code></pre>
+<p>We can see that using Hall-Yarborough correlation shows a very high error at values of <code>Tpr</code> lower or equal than <code>1.1</code> being <code>Tpr=1.05</code> the worst curve to calculate z values from.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">t_err2 &lt;-<span class="st"> </span><span class="kw">t</span>(err2)
+t_err2</code></pre></div>
+<pre><code>      1.05   1.10
+0.5  -0.05  -0.52
+1.5 -28.07 -13.06
+2.5   0.19   2.34
+3.5   0.33   0.32
+4.5   0.41   0.26
+5.5   0.98   0.22</code></pre>
+<p>Applying the function <code>summary</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sum_t_err2 &lt;-<span class="st"> </span><span class="kw">summary</span>(t_err2)
+sum_t_err2</code></pre></div>
+<pre><code>      1.05              1.10        
+ Min.   :-28.070   Min.   :-13.060  
+ 1st Qu.:  0.010   1st Qu.: -0.335  
+ Median :  0.260   Median :  0.240  
+ Mean   : -4.368   Mean   : -1.740  
+ 3rd Qu.:  0.390   3rd Qu.:  0.305  
+ Max.   :  0.980   Max.   :  2.340  </code></pre>
+<p>We can see that the errors in <code>z</code> are considerable with a Min. :-28.070 % and Max. : 0.980 % for <code>Tpr=1.05</code>, and a Min. :-13.060 % and Max. : 2.340 % for <code>Tpr=1.10</code></p>
+</div>
+<div id="prepare-to-plot-sk-chart-values-vs-hy-correlation" class="section level2">
+<h2>Prepare to plot <code>SK</code> chart values vs <code>HY</code> correlation</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zFactor)
+<span class="kw">library</span>(tibble)
+
+tpr2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.05</span>, <span class="fl">1.1</span>, <span class="fl">1.2</span>, <span class="fl">1.3</span>) 
+ppr2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.0</span>, <span class="fl">1.5</span>, <span class="dv">2</span>, <span class="fl">2.5</span>, <span class="fl">3.0</span>, <span class="fl">3.5</span>, <span class="fl">4.0</span>, <span class="fl">4.5</span>, <span class="fl">5.0</span>, <span class="fl">5.5</span>, <span class="fl">6.0</span>, <span class="fl">6.5</span>) 
+
+sk_corr_2 &lt;-<span class="st"> </span><span class="kw">createTidyFromMatrix</span>(ppr2, tpr2, <span class="dt">correlation =</span> <span class="st">&quot;SH&quot;</span>)
+<span class="kw">as.tibble</span>(sk_corr_2)</code></pre></div>
+<pre><code># A tibble: 52 x 5
+     Tpr   Ppr z.chart    z.calc           dif
+   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
+ 1  1.05   0.5   0.829 0.8294221 -0.0004221265
+ 2   1.1   0.5   0.854 0.8584285 -0.0044285193
+ 3   1.2   0.5   0.893 0.8943922 -0.0013922130
+ 4   1.3   0.5   0.916 0.9178838 -0.0018837657
+ 5  1.05   1.0   0.589 0.5827255  0.0062744847
+ 6   1.1   1.0   0.669 0.6787470 -0.0097470141
+ 7   1.2   1.0   0.779 0.7770740  0.0019259690
+ 8   1.3   1.0   0.835 0.8310296  0.0039703927
+ 9  1.05   1.5   0.253 0.3240119 -0.0710119239
+10   1.1   1.5   0.426 0.4816432 -0.0556431731
+# ... with 42 more rows</code></pre>
+<p>Plotting the difference between the z values in the Standing-Katz and the values calculated by Hall-Yarborough:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+
+p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_corr_2, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z.calc, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) +
+<span class="st">    </span><span class="kw">geom_line</span>() +
+<span class="st">    </span><span class="kw">geom_point</span>() +
+<span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc-dif, <span class="dt">ymax=</span>z.calc+dif), <span class="dt">width=</span>.<span class="dv">4</span>,
+                  <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.05</span>))
+<span class="kw">print</span>(p)</code></pre></div>
+<p><img src="data:image/png;base64,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" style="display: block; margin: auto;" /></p>
+</div>
+<div id="analyzing-the-error-for-all-the-tpr-curves" class="section level2">
+<h2>Analyzing the error for all the <code>Tpr</code> curves</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zFactor)
+<span class="kw">library</span>(ggplot2)
+<span class="kw">library</span>(tibble)
+
+<span class="co"># get all `lp` Tpr curves</span>
+tpr_all &lt;-<span class="st"> </span><span class="kw">getCurvesDigitized</span>(<span class="dt">pprRange =</span> <span class="st">&quot;lp&quot;</span>)
+ppr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="fl">3.5</span>, <span class="fl">4.5</span>, <span class="fl">5.5</span>, <span class="fl">6.5</span>) 
+
+sk_corr_all &lt;-<span class="st"> </span><span class="kw">createTidyFromMatrix</span>(ppr, tpr_all, <span class="dt">correlation =</span> <span class="st">&quot;SH&quot;</span>)
+<span class="kw">as.tibble</span>(sk_corr_all)
+
+p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_corr_all, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z.calc, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) +
+<span class="st">    </span><span class="kw">geom_line</span>() +
+<span class="st">    </span><span class="kw">geom_point</span>() +
+<span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc-dif, <span class="dt">ymax=</span>z.calc+dif), <span class="dt">width=</span>.<span class="dv">4</span>,
+                  <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.05</span>))
+<span class="kw">print</span>(p)</code></pre></div>
+<p><img src="data:image/png;base64,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" style="display: block; margin: auto;" /></p>
+<pre><code># A tibble: 112 x 5
+     Tpr   Ppr z.chart    z.calc           dif
+   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
+ 1  1.05   0.5   0.829 0.8294221 -0.0004221265
+ 2   1.1   0.5   0.854 0.8584285 -0.0044285193
+ 3   1.2   0.5   0.893 0.8943922 -0.0013922130
+ 4   1.3   0.5   0.916 0.9178838 -0.0018837657
+ 5   1.4   0.5   0.936 0.9354852  0.0005147804
+ 6   1.5   0.5   0.948 0.9495503 -0.0015502871
+ 7   1.6   0.5   0.959 0.9611852 -0.0021852045
+ 8   1.7   0.5   0.968 0.9710083 -0.0030082959
+ 9   1.8   0.5   0.974 0.9794076 -0.0054076310
+10   1.9   0.5   0.978 0.9866478 -0.0086478046
+# ... with 102 more rows</code></pre>
+<blockquote>
+<p>The greatest errors are localized in two of the Tpr curves: at 1.05 and 1.1</p>
+</blockquote>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># MSE: Mean Squared Error</span>
+<span class="co"># RMSE: Root Mean Sqyared Error</span>
+<span class="co"># RSS: residual sum of square</span>
+<span class="co"># ARE:  Average Relative Error, %</span>
+<span class="co"># AARE: Average Absolute Relative Error, %</span>
+<span class="kw">library</span>(dplyr)
+grouped &lt;-<span class="st"> </span><span class="kw">group_by</span>(sk_corr_all, Tpr, Ppr)
+smry_tpr_ppr &lt;-<span class="st"> </span><span class="kw">summarise</span>(grouped, 
+          <span class="dt">RMSE=</span> <span class="kw">sqrt</span>(<span class="kw">mean</span>((z.chart-z.calc)^<span class="dv">2</span>)), 
+          <span class="dt">MSE =</span> <span class="kw">sum</span>((z.calc -<span class="st"> </span>z.chart)^<span class="dv">2</span>) /<span class="st"> </span><span class="kw">n</span>(), 
+          <span class="dt">RSS =</span> <span class="kw">sum</span>((z.calc -<span class="st"> </span>z.chart)^<span class="dv">2</span>),
+          <span class="dt">ARE =</span> <span class="kw">sum</span>((z.calc -<span class="st"> </span>z.chart) /<span class="st"> </span>z.chart) *<span class="st"> </span><span class="dv">100</span> /<span class="st"> </span><span class="kw">n</span>(),
+          <span class="dt">AARE =</span> <span class="kw">sum</span>( <span class="kw">abs</span>((z.calc -<span class="st"> </span>z.chart) /<span class="st"> </span>z.chart)) *<span class="st"> </span><span class="dv">100</span> /<span class="st"> </span><span class="kw">n</span>()
+          )
+
+<span class="kw">ggplot</span>(smry_tpr_ppr, <span class="kw">aes</span>(Ppr, Tpr)) +<span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_tile</span>(<span class="dt">data=</span>smry_tpr_ppr, <span class="kw">aes</span>(<span class="dt">fill=</span>AARE), <span class="dt">color=</span><span class="st">&quot;white&quot;</span>) +
+<span class="st">    </span><span class="kw">scale_fill_gradient2</span>(<span class="dt">low=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">high=</span><span class="st">&quot;red&quot;</span>, <span class="dt">mid=</span><span class="st">&quot;yellow&quot;</span>, <span class="dt">na.value =</span> <span class="st">&quot;pink&quot;</span>,
+                         <span class="dt">midpoint=</span><span class="fl">12.5</span>, <span class="dt">limit=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">25</span>), <span class="dt">name=</span><span class="st">&quot;AARE&quot;</span>) +<span class="st"> </span>
+<span class="st">    </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle=</span><span class="dv">45</span>, <span class="dt">vjust=</span><span class="dv">1</span>, <span class="dt">size=</span><span class="dv">11</span>, <span class="dt">hjust=</span><span class="dv">1</span>)) +<span class="st"> </span>
+<span class="st">    </span><span class="kw">coord_equal</span>() +
+<span class="st">    </span><span class="kw">ggtitle</span>(<span class="st">&quot;Shell&quot;</span>, <span class="dt">subtitle =</span> <span class="st">&quot;SH&quot;</span>)</code></pre></div>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASAAAAEgCAIAAACb4TnXAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAeP0lEQVR4nO2df3QjV3XH72R3s/lJfm1IQFZjFckEY8qPLuhkVJOKHz2VNiv29Ljm4B6cQnukGkhGhu6m1AuHA+tSdttIQwqudFpgzak5ODo9jppInEKjBtezEWwhFGMSS0GmskJCfmzSkJ+73ukfM5JGsvRGlubNjGbu58wfkt6bp6fxfH3fu+/OfYwoioAgCB0uMLoDCGJlUGAIQhEUGIJQBAWGIBRBgSEIRVBgCEIRFBiCUAQFhiAUQYE1UczyEZ+PkfH5Iny2qCjlfQzj44vtzye0rDi3l3aQfgIFpqTI+zzBaFIQqh8IQjIa9KASkG5BgSnInogKAGw8UxBlCpk4CyBET2SN7hvSn6DA6hTXVwHY+Eku4K5+5A5wK5kwQHKpSWHZiDyM9EWazFuxVsT4fJEs2j57gwKr4x4aARAW72vSRCAhimIioPhk7YQvmJSHkUIy6onU1FfkfZ5aEQhCEseXNgcFpiCQyIRZIephGJ8vEuGz2WJLbQjJJMSlUWQhHoa6fSvyt0YFYMPVIWYhE2dxfGlvUGANBBIrhUImHgZIJqPBoMfDMMz2cV44s8JJo0g3dyhc+7h436IAbPxkojrEdAe4k3F2+/gSsQ8osGbc7gCXWFkRRVEsFDLxMAvN4zx22FN/4xlmqy8LawKAEPUwCjxRAWB1HUeJdgUFRkDS2sk422JmhiCdgAKrkY0wLRd/Jd/HWkG1Ac8wCxDOiNuoDigR+4ECqxE4FAYQorc2xG4Ui9nIsWTTsLAN7gPjLCSDvvr5xSzvYxgmgnMw24ICqxNIZMIAQjIarE+jPJ5gUgA2frITI+TmjoYBhPr5nmBUADZ+OKB+LmJNUGBKAgmxkImH2ZrfAlg2HM8UOh7jBRJiIR6unc6y4R2cjFgQBrNKIQg90IIhCEVQYAhCERQYglAEBYYgFEGBIQhFUGAIQhEUGIJQBAWGIBRBgSEIRVBgSoq8T/EsVy1Gt8j7mgJ2t3+CIK1AgdXJRjzRkdrTJoX4ahBFhPQICqxGdimpDHx3cyfjLD7tj/QGCqyGZ5htTFDj5lYas0khyE5BgdVwcyuZcDLYPAGTqRXUU20giCooMCWBhDwBqyqtLrPGVACFOEtqB0FkUGAtCSQkFSWPYdpQpBdQYFWykeZxofvAONtJshsEaQsKrErgcJxNBhVZpYr8rVHAfBpIT+w2ugPmwc2tiEMRxsNE5Q/YOObTQHoEc3IgCEVwiIggFEGBIQhFUGAIQhEUGIJQBL2IMk899VTt9b59+5RvW6JbHaO+aN++feQGkU5AL6IM3luAF4ECaMFac+zm/yVXOPrAb/3oywvkOu+4feKlzT8i17l44F9hlSHVGBHhS8QKAHCHCA+cVqlz836VOjfvV2kB2Tk4B0MQitjDguVjodkcAAD4Z9LTXoN7g9gIG1iwSoqbhZl0Op1Oz01uzMbyRncIsRE2EJhjjK9aLcdNo66cgApDdMMeQ8QqlVPLJf+Ecoi4f788sz99Ws1JYAPQc6g5thFYJcVNzZfANTnXMAWr6Qo91IAXgQI2GCJKOMb4dDqdnihPcamK0Z1BbINtBCbjZf2l8qbRvUBsgw0Elo+F6kYrL+RczgFD+4PYCRvMwbzTc2VuKjQPAACuyTl+zGFwjxD7gLGIMji/B7wIFLCBBeuKL9xcJlf4zAPOH5y4m1znXYf/+NmffIxc58q3fhXOEEMNrxLh+2qxiO8WIaFWJyLCbcQ6d+G/Wu2xwRwMQYzDKhZMXuYCaBluWC/FWEREV6xhwfKxqeXRuVq4YdNKV720RSGC0MQSAssLOf+E7Bt0jE00rXRVyhuu0ZscrQsRhCqWGCJ6p9P1YV9eyLmc44pSh3OwtHCqMjbmgEpqIecaVRZiLKIS9BxqjiUEVqeS4mY3JuemG1a6vNNpiIVCIWixDIaxiErwImiOJYaIMvlYaGp5dNtCciXFhRac0gxtojwVwgfCEP2wisAqKS40CzPpFmEam+VSdQ4GXtYPG2X0ciB6YQmBVVLc1PxgOwf8gNNVWj4liSov5GDQiaFSiF5YYQ5WObVcAijNhnLVT/wz6emBFDdVnkhPex1j/Ew5JAcjuibneFwHQ3QDYxFlcH4PeBEoYAULRoPPsI+RK3xBeP33P3cvuc67P3fLr3KfJdd5nf/zZ5/zESrsuWIFXlCLM7xUhMfV6lwvQolYx4X/arXHEnMwBDErVrFg5FjEejE+D4boijUsGDkWEfKxqfJEOp1Op2cG549jLCKiH5YQGDkWEfJCzs9KNs073WqlDEFoYQmBeacVg8JtWTcq5Q2XsxwLhUKhUKjZuO2vsk+BXv02HZQuQpH3MQzj44udFUmfNaOo07oCw0SyGnZaIywhsDpSLOKRZiNVmi+z0gBydLlxiHi6ylMKdO2ymaBzEYr3LQrhcFiIntgmgLZFbLwgKinEIepRCqi5giiKYiKgXae1wkoCaxOLCACuyXE5d7ZzsBbVgehD9kRUCB86PMxCcinbcVETbu5oWLWSGbGKwAixiA7noAEdQmSyS0lghz3uA+PbZEQosgyWEBg5FhG87OD8ohRCr3j4EtGF7FIS2PEDbtguI0LR9mYiwSSED5lwDKiCFQQmxSLmZkM1YnnJpslPpninZ0AqnSpPoBdRT7JLSQgf5dwA22REKAIQop4G/0UwGc40zLGaK7RxohjPtpmiTXlSgdF9MQzNL0ImDBDOVN8V4mz9bfuiQpxV+DAKcbbZpdFYwdxYJZJDa+541+PkCl/6wfXZT95PrhO48z0Pn0yQ69x4a+SJ5U8TKlw3+sWnT0+TG7lmf+xJ4Q5ynWvZLz2e+wyhwvX+L5Bb2DnZpSQABJmk4jNhKZsIBEhFjbi5lcwaE/REhkzpJVTDCkNEAGlAqBgftq+EzzPrRpE/llQYKVGUbE9yKUsqakEgkQlDMmjGZS5VrCEwlVApiUrquBytiOhB8b5FodkvIU+2+PZFrUUUOBxn+1NilhCYSqgUAABUUseXB/0uvbtmX1rpqyqjaLRt0bHWrgo3dzLOQjJY82Rsd3KY081hiTkYOW0bgCSv0SNH4HiuKeU8pm1TomWElJtbEbmOP24salVFeWL7NkyHJQRWp2XaNllevANS207AtG1K8CJojiWGiDJt07YdXx7dFp6IIHpgFQtWDebYntGmcmq5VCpVN+ADmA1t4EOXiF5YwoIRQ6Xk3c8lD6ML/C3jFZH+QvHASs2z2PgQi1kcjlawYCpp24zsmu1h1FLxdEJz4rNsxLM4XhBX3ABF3ufx8YUVzg2FNaEpnMoMYNo2GZzfA42LQENg2QizdKimpOq7Iu+7FU6ucG4NvlBDrGDBaPCJ33maXOEf/ueab/7Jj8l1Pvwvb88dVRmq+I8Ffvj33yZUeOenPtjJXrWdfNG/3fZ9QoWDd72b3EI3KLXRudjIZwUSYt1MZZeS7PBhACisCULSw0QBAMA8pswSczDEtFzE1I+90OnRdFZbirwvuBo/ybkBiuur9QDgwvAxsyw6W8WCdbqFLO4hqy9X0Gs6G2GCq/GCPChsWMB2D40ISwUAEwwXrSEwORaRd0ha4lINfnhyKUKT19Bptsj7PNGRjLhijnEgAUsMEcmxiJ1EKiKUuFSLo4mquhpmWdmIIhSxuL5qlqefLWHByLGIxFKMRVSivfv0co3bAzmKGATFo2ThjJgIJArrvqqPg40XzGLbLCGwOq1jEQmlGIuoRPuLsEeDNppoFy5MCCM2ECsJLB8LzbYPgyKXInS40OgOGI1VBNY+FlG9FKEHycluCywhMHLaNpWkbghNLHF/9YIVLgA5FnGgZSmKTR9sP0TEWEQZdHIAjYswqUUs4nwf36JWsGA0+NM3Pkeu8I1Hrvjie35JrvPp+2+465Z1cp3b7h366gceJlT42D03fvmASiO33zf0WVYl4/7nBcdHiD/q649QCLuw/f1l+wuAUIWCm76/sIfAMBbRKOxxfxGwwwXAWETjsL0Fs0QsIhmMRTSQPVoc/YwNLBjGInaM9u7TXRq313fYQGB1MBZRhb6IRewvbDBElGm/wSxCj11aHNtplVUKIBsxXwptewiMsMEsQpXdWhzNyFmlpD1ZVuV89UXeF4SMKIpiYXzRY5asbXYQGMYiGggNJ0d2KSnvjCltji6sFQCgsCbID1m6D4yzptny2fpzsNaRiig2fbhDEeX0dx2HTf0l8ayWWaWK66tSdikAcA+NwOJ6EQImyMmBsYgy6OQAGhchrkUsYrTdLVrkfZ7F8cIK54ZshDk2XM2A0/DGWKxvwbpj3PUbcoXF0mWffMeT5Dp3/ujaI+98glzn+A+vO7yfVOfE6es+/pZnyI185adX3+J4iVzn3srFlxInBC+cJzfQFRTvr8asUp5hlt5X9YAN5mCIgVBxckhexCBkxLqRcg+NSHMxkHIkjgyZwHyB1QTWbhPm+g7OuEWzvtAQWMusUuAZZuXtMYv3LQpmSSplJYHlY6Gplpsw52NT84Mz5A2cETpQWAeTskolg007qbi5lcxI1MMwjGdxvGCSxNmWEVg+FgrNbkzOTLbYhLlS3nBNjnsB5FDE5VOoMN2gYMHc3IrYSFVNgYT03hTeDRmLODm80+n0NEAltbzDEzEWUYn27lOL3F/dY4ML4HAOlmYX82PTXqikFnIAk4pCjEVUov1FsMgIqXtsIDDwTs9NclOhEIBrcmbStWB0f+yEHe4vIva4AI4xPj0GAAD52PwgiwGJumH7x1XsYMLzsZDsOqykFnJ+FsOk9IPSOlj/YK1QqYpiX2bl63wsNJsDAHC1zZ2NczCgcRG+o0Wo1B/28S1qlMCKvM+zdtQs+3zCtnvr/de/Qq7/3cf3Bl+vEp2Ueezi37vmLLnOfz295+ZrXyVUeODJC1+3R+Vv9KuzzAecL5Lr3FO+ZOINzxMqLDx6ufYC+64WAnt/HwvMKANcWBMM+mZET/p8gNc7Rs3BAofj1cgWDcFQKbNh+zmYUQLLnogKIEQ9TBM9PIlKCpVaHp3DUCkjoJQyoH8wzIIlxJZ0OSlTC5UavckBgFnb9Mf2AutzA1yFFCrlcA6WFk5VxsYcUEkt5Fyjyv1lMVRKCaZt0xwj18EUqYF6HB2S8U6nJ8pToVCoRVqp01WeUkCpH+ZH+4tAdQ5W5H2Ku6bxdjJL1hvDBFZ9qKdGBoJ08m1VUlxowTmXTqfT6YnyFPo59ISewLIRxhNVuqILa0I40+tcQ3OMdHKEM8qrEEhkwkL0hPb/eDbLpeocDLysHzbK6OXQjQu0OLaRjTBMcDWeiSvSBBTXV9lhj24/rFNsECo14HTVngHLCzkYdGIsom4Mi/Wjc5PVdNY2AglRFFe4BjkV1oS6V9osA0TjnByBRCbMBH2K1D/ZSDDJxguaWfZaqJRjjJ8ph6ZC8wBSrBTGIurHLxSRHJ3fa12cVVxfBbaaAqfI+3y8xxTPXRoVKpWNMMEkqUK4OecCZTAWEWhchA0tQqUG29yi7ePtshFm6ZAp5mHGWTBRTBj03Z3wu1ecI1f47+d2X7VL5X/TmS3Ge5VKLGL+zJ63XLZFqPDT3+x62+UqnXno+d2d5Jkj74v7DdxClgI6z8GyETONjxHq6LbQnI0ofNDF9VWzpJWy1n8Y5SMqys8aI6gwdbZ+6LbQHEgU1n0eJgoAAGy8sGIOfVlJYPJDX/6mj+tPM0t1FpzjqC7doHp/ubkVsfEdR/PrusIibnpSLKKy1uzG5BHcwkhHMBZR/69MBpn2/sMunYedpG2rpBZy/ol0o7wwFlEJxiJqjgEC09sBL5NfnIfJuebRIaZtU6L9RUCBGd0BvcgLOdfoHI4OdeaCC43ugcHYRWCoL0MQxUt7b0SLtWrDsInAKuUN1+g46ktvRLi490ZQYJ0TSOgWmdWwJrZZLoFTpy9GFGhhwfoaa+VF7AF0cgCFi7D14tt7b2TXJT/uvRGjsMkQcceMXEqKDwSA1Rd2vf01KiGCP/6/jkIEybu/3lu5+EPEfIYA8K1HL/+Y2jazX/3p1X/+pmcJFf7p51eSW+gC8dxezdvsL1BgCEXOn9NgDtbXWEtgrWIRawXzJSDlzkYogBbMQgJrE4sIAPnYVHkinfYC5GOh46mbUGJ6cf6s3S2YHWIR80JtSxXvdBrVpSPi2b29H21bb8wqJT0MxTAMndxJXWIRC0aKRayUN1xOp7y/SvMQEWMRlWjuPj2/Re0Gk5+JD1ffF3lfEDKiGIAi7/NEhkzxPLNlBKZCab48ISuQaxwiYiyiEs0vwvmzVEKlshEmmGTjmfhicK36WWFNkB+ydB8YZ6NL2UTADAqzh8Bck/IzYIosv4gOvObGr9VeP/ezSIdnXfHmejaJlmfJCSeK/GLto+L6Kjt8WHrtHhqBxfUiBEyQ9MYGAnM4B6FsdCdsypmHPqF4t4fiWYU1AYY77ZaOWMTJQcTLDs4vSul8FRtBIDpw/uye3o+OvskzzKpXMgDrWjDFmph3ekYIhUIAUj4O1JduUHRyNOEeGhGWCgBukHIkjhwywfgQMBaxBjo5gMJFeGL50703ct3oF1sXNORFLPI+z+J4YYVzm2p7YutasN5wX3SeXKH48gUf+m2VOMNv/eKyvxhRCRH8x1X1EMHb36ay18mXH9rHqdXhH9r3QWJg5LdLl5Fb6IJOB3ga4OZWMmuMh4maKqmUxQTWJlSqMXMbZm3Tj/NbNHMGNGaVMmc2WwsJrH2o1Ga5hKoyBB0tmEmxiBeRGCpVKW+4nAO69wkBOL+1q/fD6B/RExaxYMS0bZvlUikn767SPEDEUCkl2odK2d6CWURgJCrljXoIYiXFcamBeqwUhkop0T5U6pwNbjAiNvj9DbmzHc7BkrAJgGthunD+XH8P8HrHBgJDjGPrrN0FZhEnB4l8LMSlqtsyV8ob1WfDEPpsndvd+2H0j+iJ/u49idqamHd6rsxVfRy4hayu4BARQ6Vk0MkBFC7CQ1/5Zu+NvO3jH+69EaOwrgXrjavVtod9ZouZUMumtvDo5Z1sReu7hrTN7MrTe37/2lfJjfznkxfeeIlKnrmHX9w1cCHpR22+qn0KXbRgKDCEIlu2F5i1nByVFBeK5bstRjRn6+zu3g+jf0RPWEhg+VioaTPmRiqp46RihAJbW7t6P7Y3W+R9TB1lYinT0d//HmrkY6HZnGtyZnJ5tk12gErq+PKg34UK0xVK9qewJhi0jeOOsYjA1LaQraSOL48eOQLHc036w1hEJZq7T7fO0RgiKRPcmB2LCIyMJC/eAaltRRiLqETzi+A/Fqy9/t5f/XuHZ73vb/+AeFZhTRCSHiYKAIbtSNwpNhBYTV5QUa+MaMp3PnW/4l2nN5vKWcX1VWDjhRXODQBF3ufjPdJrM2J9gVVOLZdKpWokB8BsaAM3gNALKm56N7cicrU3imQ3ZsT6AlME07fdfAWhxDlcBzO6A9TARS8TcO7s7t6P5kazEcX2DsX1VTljtjnBWEQZdHIAhYuw+NEf9N7I+Nfe1fRJkfd5ogIAQH0yZlKsP0Tsjjephfb9/MVd77vuFXKd7z2x9yNvfI5c5+uPXPHRG0l1vvbwFe9V+6L/eGJv8PUvk+tkHrvoA84XCRXuKV9CbqELztJ5HqxhFmZuUGAIRVrGYdgKawmsnRdDzugGmBRRZyhZsD7CQgJrlxexkuJmYSad9koCjOVRYrqBArOIF5GUF9Exxlcl5bhp1JUT0LWoG+e2dvV+GP0jesIiFkwtFlGmcmq55J9Q2i+MRVSiufv0VdtbMIsITB05P71rcq5hfIixiEo0vwi40GwbgckBHflYiEthpJRevNLnj0v2jt1+v5f1z2LiUd3AIaJFnBwkGvIi5oUcbgShH6+eu6D3w+gf0RPWtWDt8yLi+FA3XnrVujdYZ2Asogw6OYDCRQi/+UzvjSR/dlXvjRiF3f/BtOMNalvIPvryBX9G3PoVAP7551eSw/8A4J7yJXfdsk6ocNu9QwG1OMPsYxexV5OSKwKA8Mye1+4m/TP99Tnt8yK+0ucDvN5BgSEUee4VSjdYNsIEk2D+YHqLCaxdLKJik2YMRtSTM69QSXrD+4KQEcUAFHmfJzJk5qQcFhJY2z2a87Gp5dG5NO+QlIbrYPrxxEs03PSFNUF+yNJ9YJyNLmUTAdMqzCICI+VFzAs5/0RaUpRjbMI/j+tguvHwsxfWXl+tNq2t8czLdbvX4ixl1jb30AgsrhchYNZhokUERopF9E6n62PCvJBzOcfrhRiLqERz9ynT4DfpdLioclZhTYDhHjqlKxYRWGdUUtzsxuTctMJ8YSyikv64CJ5h1ugudI59vKj5WGhqeRSnX7oiihoczbiHRoS1gvS6uL4KI0NmHR+CXQRWSXGhWZhJo7osgWeYTR7jiwBQvG9RMHVSKTsMESspbmp+EL3z1sHNrWTWGA8TldbBzKwvCwusuiY2cGq5BFCaDeWqJbgU1v8EEqKYMLoTnYCxiDL9Mb+nDF4EzbGuBeuN975WLRXhr/fCy2rBexeJf+P/JbnKX+du2E/cx/n0c7vferlKksafPL/rzZeq1PnZC7tuuJC0EvXLV+0xIdcXa11TcrpsTKaN6I6FBEbeQlZtg1kEoYFFBEZK26ZWiiD0sMgcjJy2jVCKoVJK0LGhORYRWNdgqJQSvAiaY5EhIoKYExQYglAEBYYgFLGuwHDVCzEBGColg/N7wItAAbt7Edtx1S6V/ztnthh4QM2zf/P+N16s8pz8Iy9d8M4rSaFSP3x2t+8alZRsK0/vmXjD8+Q6C49e/h5i/Nf9v95LbgHpAusOERHEBPStBWuXoa22XawiSbYiaxvg0yqInvSnwNpmaKtvF1tJcVMxpySlzXIJVYUYQv8NEYmBhZvlkp/1AjTsFlspb+COKogx9J8FI4UdVsobtaRsDucgLJcr4HVslkulXHV7lSZThrGIStBzqDn9JzASm+USOJs/rJQ36hOySorjUgP15DcYi6gEL4LmWEtgA84W40Z581j5jXOwhJl9Ed3ovzkYCYdzsFTelF5Xyhsw6EQhIYZiLYHBgNOVW0hVAKByaln2dzRsIVspb8heEATRAUsMEetrYo4xfqYcmgrNS+tgXgCAbVvIor4Q3cBYRBmc3wNeBApYbIjYPfsU1Hz3PaJJO3p2RnkRNPlSBAWGIBRBgSEIRVBgCEIRdHIgCEXQgiEIRVBgCEIRFBiCUAQFhiAUQYEhCEUsEYuoLfUMHr3lGVBkAlHkB+mmEej6dIlqmhLAhCT6IyJKHrzz4MGDt9+9Kb86ePDgnQ923Y506ubdt3fdTK0bt9+92d350tfLPdnc3Nzsth2kK3CIqKSSWshVrY13Op1Oz/ghN7vzBMFyO5KtcIzxM36Q84PsmAGnC/x+f2l+qv7MzU7IL85DrScOh8OBT8jpCgqsmYaHNL3TXWlss1xqaGfA6YKNcjf6AIdzEDac4+mZ7jRWKW/U3+RjoTqYVlwXUGBKHM5BkB/YrFHV2E5uyAGnq2uT1aKtUnlT6kZpfopLpWI7kIfDOQil5VMVKaNdzj+TTqe7t8zIjkGBNeAdn3SV5o83GQrv9Ix/m/BIOMYm/H4ATe5fx02jLsn6yRqbz+3EUyH9osW8lByyepr8X2MHPwnpDhRYI46xI5Ou0vxU0z937/ikSzIEHeKdnp72thZBPhYKhXYw2KsnGsnHJGdgbnYnp48dmXTlZkOzucbkkF7WD7UEJggtUGDNyD6J2Z1oQI36nCwfC83mdui1H3C6NsqVfCxUHeLtcD4m/SKA0vxik03FfKz0MdqNaVIk33rVO65wdXfFg3cePHjng4o1gJ2f3oOnv6ERjX4R0iH4uEp7lHtG9LZAW1vp7XLFuZLiFp187yvEihVnXHLWBxSYLnQzMkSsAApMHyr5PHi9qC7bgQJDEIqgFxFBKIICQxCKoMAQhCIoMAShCAoMQSiCAkMQiqDAEIQiKDA9KfI+Zhs+vmh0vxBqoMD0ho0XlMGghThEPZGs0b1CKIECMxg3dzQMySVUmEVBgZmGIu9jfDwfaR45FnkfE+HlwSXauj4DBWYw2UgwCeFDAemdEI1CpsXIMRldOyqKoigmAkZ1FOkKFJjeCFGP0sURTIYzCtmEM9JrN3cyziaP1fwfNQki/QUKTG+anByNRokd9lRfuodGQFgrbPsc6StQYAhCERSYqaiZLIDi+ioODPsfFJi5SAYlz0aRvzUqoL76H9xdxVSw8TgEGQYAoMH3gfQrmDLANBR5n2dxvLDCuY3uCaIdOEREEIqgwBCEIjhERBCKoAVDEIqgwBCEIigwBKEICgxBKIICQxCKoMAQhCL/D8qNSP7glq26AAAAAElFTkSuQmCC" style="display: block; margin: auto;" /></p>
+</div>
+<div id="looking-numerically-at-the-errors" class="section level2">
+<h2>Looking numerically at the errors</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get all `lp` Tpr curves</span>
+tpr &lt;-<span class="st"> </span><span class="kw">getCurvesDigitized</span>(<span class="dt">pprRange =</span> <span class="st">&quot;lp&quot;</span>)
+ppr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="fl">3.5</span>, <span class="fl">4.5</span>, <span class="fl">5.5</span>, <span class="fl">6.5</span>) 
+
+<span class="co"># calculate HY for the given Tpr</span>
+all_corr &lt;-<span class="st"> </span><span class="kw">sapply</span>(ppr, function(x)  
+    <span class="kw">sapply</span>(tpr, function(y) <span class="kw">z.Shell</span>(<span class="dt">pres.pr =</span> x, <span class="dt">temp.pr =</span> y))) 
+
+<span class="kw">rownames</span>(all_corr) &lt;-<span class="st"> </span>tpr 
+<span class="kw">colnames</span>(all_corr) &lt;-<span class="st"> </span>ppr 
+<span class="kw">cat</span>(<span class="st">&quot;Calculated correlation</span><span class="ch">\n</span><span class="st">&quot;</span>)
+<span class="kw">print</span>(all_corr) 
+
+<span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">Standing-Katz chart</span><span class="ch">\n</span><span class="st">&quot;</span>)
+all_sk &lt;-<span class="st"> </span><span class="kw">getStandingKatzMatrix</span>(<span class="dt">ppr_vector =</span> ppr, <span class="dt">tpr_vector =</span> tpr)
+all_sk
+
+<span class="co"># find the error</span>
+<span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st"> Errors in percentage </span><span class="ch">\n</span><span class="st">&quot;</span>)
+all_err &lt;-<span class="st"> </span><span class="kw">round</span>((all_sk -<span class="st"> </span>all_corr) /<span class="st"> </span>all_sk *<span class="st"> </span><span class="dv">100</span>, <span class="dv">2</span>)  <span class="co"># in percentage</span>
+all_err
+
+<span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st"> Errors in Ppr</span><span class="ch">\n</span><span class="st">&quot;</span>)
+<span class="kw">summary</span>(all_err)
+
+<span class="co"># for the transposed matrix</span>
+<span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st"> Errors for the transposed matrix: Tpr </span><span class="ch">\n</span><span class="st">&quot;</span>)
+<span class="kw">summary</span>(<span class="kw">t</span>(all_err))</code></pre></div>
+<pre><code>Calculated correlation
+           0.5       1.5       2.5       3.5       4.5       5.5       6.5
+1.05 0.8294221 0.3240119 0.3423544 0.4694593 0.5955314 0.7199048 0.8417472
+1.1  0.8584285 0.4816432 0.3838066 0.4984101 0.6133854 0.7273952 0.8399666
+1.2  0.8943922 0.6648553 0.5151372 0.5486504 0.6458856 0.7439699 0.8415896
+1.3  0.9178838 0.7518864 0.6451993 0.6256371 0.6803635 0.7638985 0.8502710
+1.4  0.9354852 0.8081121 0.7247708 0.7021065 0.7304906 0.7904217 0.8641045
+1.5  0.9495503 0.8508783 0.7833739 0.7606142 0.7780715 0.8232803 0.8839834
+1.6  0.9611852 0.8855205 0.8316268 0.8104459 0.8210864 0.8561318 0.9068328
+1.7  0.9710083 0.9144427 0.8728874 0.8549373 0.8616338 0.8890694 0.9314239
+1.8  0.9794076 0.9390340 0.9087579 0.8951898 0.9002186 0.9222033 0.9576280
+1.9  0.9866478 0.9602009 0.9402627 0.9318069 0.9369389 0.9553795 0.9852958
+2    0.9929208 0.9785767 0.9681390 0.9652473 0.9718700 0.9884569 1.0143097
+2.2  1.0031184 1.0087024 1.0151173 1.0240698 1.0368088 1.0541013 1.0762644
+2.4  1.0108525 1.0320007 1.0529024 1.0741069 1.0960954 1.1192683 1.1439377
+2.6  1.0167087 1.0501519 1.0836518 1.1172342 1.1509230 1.1847409 1.2187090
+2.8  1.0211227 1.0643599 1.1089595 1.1549926 1.2025594 1.2517920 1.3028590
+3    1.0244369 1.0755584 1.1301093 1.1887613 1.2524060 1.3222220 1.3997691
+
+Standing-Katz chart
+       0.5   1.5   2.5   3.5   4.5   5.5   6.5
+1.05 0.829 0.253 0.343 0.471 0.598 0.727 0.846
+1.10 0.854 0.426 0.393 0.500 0.615 0.729 0.841
+1.20 0.893 0.657 0.519 0.565 0.650 0.741 0.841
+1.30 0.916 0.756 0.638 0.633 0.684 0.759 0.844
+1.40 0.936 0.816 0.727 0.705 0.734 0.792 0.865
+1.50 0.948 0.859 0.794 0.770 0.790 0.836 0.892
+1.60 0.959 0.888 0.839 0.816 0.829 0.868 0.918
+1.70 0.968 0.914 0.876 0.857 0.864 0.897 0.942
+1.80 0.974 0.933 0.905 0.891 0.901 0.929 0.967
+1.90 0.978 0.945 0.924 0.916 0.924 0.949 0.985
+2.00 0.982 0.956 0.941 0.937 0.945 0.969 1.003
+2.20 0.989 0.973 0.963 0.963 0.976 1.000 1.029
+2.40 0.993 0.984 0.980 0.983 0.999 1.023 1.049
+2.60 0.997 0.994 0.994 1.000 1.016 1.038 1.062
+2.80 0.999 1.002 1.008 1.016 1.030 1.049 1.069
+3.00 1.002 1.009 1.018 1.029 1.041 1.056 1.075
+
+ Errors in percentage 
+       0.5    1.5    2.5    3.5    4.5    5.5    6.5
+1.05 -0.05 -28.07   0.19   0.33   0.41   0.98   0.50
+1.10 -0.52 -13.06   2.34   0.32   0.26   0.22   0.12
+1.20 -0.16  -1.20   0.74   2.89   0.63  -0.40  -0.07
+1.30 -0.21   0.54  -1.13   1.16   0.53  -0.65  -0.74
+1.40  0.05   0.97   0.31   0.41   0.48   0.20   0.10
+1.50 -0.16   0.95   1.34   1.22   1.51   1.52   0.90
+1.60 -0.23   0.28   0.88   0.68   0.95   1.37   1.22
+1.70 -0.31  -0.05   0.36   0.24   0.27   0.88   1.12
+1.80 -0.56  -0.65  -0.42  -0.47   0.09   0.73   0.97
+1.90 -0.88  -1.61  -1.76  -1.73  -1.40  -0.67  -0.03
+2.00 -1.11  -2.36  -2.88  -3.01  -2.84  -2.01  -1.13
+2.20 -1.43  -3.67  -5.41  -6.34  -6.23  -5.41  -4.59
+2.40 -1.80  -4.88  -7.44  -9.27  -9.72  -9.41  -9.05
+2.60 -1.98  -5.65  -9.02 -11.72 -13.28 -14.14 -14.76
+2.80 -2.21  -6.22 -10.02 -13.68 -16.75 -19.33 -21.88
+3.00 -2.24  -6.60 -11.01 -15.53 -20.31 -25.21 -30.21
+
+ Errors in Ppr
+      0.5               1.5                2.5               3.5          
+ Min.   :-2.2400   Min.   :-28.0700   Min.   :-11.010   Min.   :-15.5300  
+ 1st Qu.:-1.5225   1st Qu.: -5.7925   1st Qu.: -5.918   1st Qu.: -7.0725  
+ Median :-0.5400   Median : -1.9850   Median : -0.775   Median : -0.1150  
+ Mean   :-0.8625   Mean   : -4.4550   Mean   : -2.683   Mean   : -3.4062  
+ 3rd Qu.:-0.1975   3rd Qu.:  0.0325   3rd Qu.:  0.455   3rd Qu.:  0.4775  
+ Max.   : 0.0500   Max.   :  0.9700   Max.   :  2.340   Max.   :  2.8900  
+      4.5                5.5                6.5         
+ Min.   :-20.3100   Min.   :-25.2100   Min.   :-30.210  
+ 1st Qu.: -7.1025   1st Qu.: -6.4100   1st Qu.: -5.705  
+ Median :  0.1750   Median : -0.5250   Median : -0.050  
+ Mean   : -4.0875   Mean   : -4.4581   Mean   : -4.846  
+ 3rd Qu.:  0.4925   3rd Qu.:  0.7675   3rd Qu.:  0.600  
+ Max.   :  1.5100   Max.   :  1.5200   Max.   :  1.220  
+
+ Errors for the transposed matrix: Tpr 
+      1.05              1.10              1.20              1.30         
+ Min.   :-28.070   Min.   :-13.060   Min.   :-1.2000   Min.   :-1.13000  
+ 1st Qu.:  0.070   1st Qu.: -0.200   1st Qu.:-0.2800   1st Qu.:-0.69500  
+ Median :  0.330   Median :  0.220   Median :-0.0700   Median :-0.21000  
+ Mean   : -3.673   Mean   : -1.474   Mean   : 0.3471   Mean   :-0.07143  
+ 3rd Qu.:  0.455   3rd Qu.:  0.290   3rd Qu.: 0.6850   3rd Qu.: 0.53500  
+ Max.   :  0.980   Max.   :  2.340   Max.   : 2.8900   Max.   : 1.16000  
+      1.40            1.50             1.60              1.70        
+ Min.   :0.050   Min.   :-0.160   Min.   :-0.2300   Min.   :-0.3100  
+ 1st Qu.:0.150   1st Qu.: 0.925   1st Qu.: 0.4800   1st Qu.: 0.0950  
+ Median :0.310   Median : 1.220   Median : 0.8800   Median : 0.2700  
+ Mean   :0.360   Mean   : 1.040   Mean   : 0.7357   Mean   : 0.3586  
+ 3rd Qu.:0.445   3rd Qu.: 1.425   3rd Qu.: 1.0850   3rd Qu.: 0.6200  
+ Max.   :0.970   Max.   : 1.520   Max.   : 1.3700   Max.   : 1.1200  
+      1.80               1.90             2.00             2.20       
+ Min.   :-0.65000   Min.   :-1.760   Min.   :-3.010   Min.   :-6.340  
+ 1st Qu.:-0.51500   1st Qu.:-1.670   1st Qu.:-2.860   1st Qu.:-5.820  
+ Median :-0.42000   Median :-1.400   Median :-2.360   Median :-5.410  
+ Mean   :-0.04429   Mean   :-1.154   Mean   :-2.191   Mean   :-4.726  
+ 3rd Qu.: 0.41000   3rd Qu.:-0.775   3rd Qu.:-1.570   3rd Qu.:-4.130  
+ Max.   : 0.97000   Max.   :-0.030   Max.   :-1.110   Max.   :-1.430  
+      2.40             2.60              2.80             3.00        
+ Min.   :-9.720   Min.   :-14.760   Min.   :-21.88   Min.   :-30.210  
+ 1st Qu.:-9.340   1st Qu.:-13.710   1st Qu.:-18.04   1st Qu.:-22.760  
+ Median :-9.050   Median :-11.720   Median :-13.68   Median :-15.530  
+ Mean   :-7.367   Mean   :-10.079   Mean   :-12.87   Mean   :-15.873  
+ 3rd Qu.:-6.160   3rd Qu.: -7.335   3rd Qu.: -8.12   3rd Qu.: -8.805  
+ Max.   :-1.800   Max.   : -1.980   Max.   : -2.21   Max.   : -2.240  </code></pre>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
