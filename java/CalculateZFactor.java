@@ -126,6 +126,7 @@ class CalculateZFactor {
         	n2_10[i][0] = 0;
         	for (int j = 0; j < n2_10.length; j++)
         		n2_10[i][0] += n1_10[j][1] * wb2_10[i][j];
+
         	n2_10[i][0] += wb2_10[i][10];	//adding the bias value
 
         	n2_10[i][1] = logSig(n2_10[i][0]);
