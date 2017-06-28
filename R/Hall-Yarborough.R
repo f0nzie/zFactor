@@ -52,6 +52,14 @@ z.HallYarborough <- function(pres.pr, temp.pr, tolerance = 1E-13,
         (1 + 4 * y + 4 * y^2 - 4 * y^3 + y^4 ) / (1 - y)^4 - 2 * B * y + C * D * y^(D-1)
     }
 
+    E <- function(x) {
+        tryCatch(F(x),
+                 error   = function(e) {
+                     x <- x + 0.2
+                     F(x)}
+                 )
+    }
+
     t <- 1 / temp.pr
     A <- 0.06125 * t * exp(-1.2 * (1 - t)^2)
     B <- t * (14.76 - 9.76 * t + 4.58 * t^2)
@@ -65,27 +73,17 @@ z.HallYarborough <- function(pres.pr, temp.pr, tolerance = 1E-13,
     i <- 1    # itertations
 
     while (TRUE) {
-        # if (is.na(F(yk))) stop("NA found")
-
-        result = tryCatch({
-            # expr
-            if (abs(F(yk)) < tolerance) break
-        }, error = function(cond) {
-            #error-handler-code
+        #try(if (abs(F(yk)) < tolerance) break)
+        try(absFyk <- abs(F(yk)))
+        if (is.na(absFyk)) {
             yk <- yk + 0.1
-            yk
-        }, finally={
-            #cleanup-code
-            yk
-        })
-        print(result)
-        yk <- result
-        # if (abs(F(yk)) < tolerance) break
+        } else if (abs(F(yk)) < tolerance) break
+        # if (abs(E(yk)) < tolerance) break
         yk1 <- yk - F(yk) / Fprime(yk)
         delta <- abs(yk - yk1)
         if (verbose)
-            cat(sprintf("%3d %12f %12f %12f %14f %14f \n", i, pres.pr, delta,
-                        yk, F(yk), Fprime(yk)))
+            cat(sprintf("%3d %12f %12f %12f %14f %14f %12f \n", i, pres.pr, delta,
+                        yk, F(yk), Fprime(yk), absFyk))
         yk <- yk1
         i <- i + 1
     }
