@@ -7,7 +7,7 @@ Maintainer: Alfonso R. Reyes <alfonso.reyes@oilgainsanalytics.com>
 Description: Computational algorithms to solve equations and find the
     compressibility factor (z). Correlations available: Hall-Yarborough, 
     Dranchuk-AbuKassem, Dranchuk-Purvis-Robinson, Beggs-Brill. It uses the original 
-    Standing-Katz chart for comparison and plotting.
+    Standing-Katz chart for statistical comparison and plotting.
 Imports: rootSolve, tidyr, ggplot2, data.table, tibble, dplyr
 Suggests: knitr,
     rmarkdown, testthat
