@@ -1,3 +1,6 @@
+## 20170629, 0.1.4.9002
+* Finally fixed README images. Chaanged fig.path to man/figures/README-
+
 ## 20170629, 0.1.4.9001
 * fix README images
 
