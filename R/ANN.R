@@ -58,14 +58,15 @@ n2_10 <- matrix(0, nrow = 11, ncol= 3) # input and output of the 2nd layer in 2-
 # #' @importFrom rJava .jnew .jcall .jinit .jaddClassPath .jclassPath
 z.Ann10 <- function(pres.pr, temp.pr, tolerance, verbose) {
     # z.Ann10.r(pres.pr, temp.pr)
-    mx <- sapply(pres.pr, function(x) sapply(temp.pr, function(y)
+    co <- sapply(pres.pr, function(x) sapply(temp.pr, function(y)
         .z.Ann10.r(x, y) ))
 
     if (length(pres.pr) > 1 || length(temp.pr) > 1) {
-        colnames(mx) <- pres.pr
-        rownames(mx) <- temp.pr
+        co <- matrix(co, nrow = length(temp.pr), ncol = length(pres.pr))
+        colnames(co) <- pres.pr
+        rownames(co) <- temp.pr
     }
-    mx
+    co
 }
 
 
