@@ -89,13 +89,19 @@ z.Ann10(ppr, tpr)
 
 ## Range of Applicability
 
+```{r}
+library(zFactor)
+
+zFactor:::z.plot.range("HY")
+```
 
 ```{r}
-
-library(zFactor)
-zFactor:::z.plot.range("HY")
-
 zFactor:::z.plot.range("BB")
+```
+
+
+
+```{r}
 
 zFactor:::z.plot.range("DAK")
 
