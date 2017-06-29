@@ -1,3 +1,6 @@
+## 20170629, 0.1.4.9001
+* fix README images
+
 ## 20170628, 0.1.4.9000
 * fix problem when passing a small vector or matrix to correlations.
 * add new script stats.R that will calculate stats dataframe and plots
