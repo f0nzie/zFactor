@@ -1,0 +1,83 @@
+---
+output:
+  github_document:
+    html_preview: true
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+options(tibble.print_min = 5, tibble.print_max = 5)
+```
+
+    # dplyr <img src="man/figures/logo.png" align="right" />
+
+[![Build Status](https://travis-ci.org/tidyverse/dplyr.svg?branch=master)](https://travis-ci.org/tidyverse/dplyr)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/tidyverse/dplyr?branch=master&svg=true)](https://ci.appveyor.com/project/tidyverse/dplyr)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/dplyr)](http://cran.r-project.org/package=dplyr)
+
+## Overview
+
+dplyr is a grammar of data manipulation, providing a consistent set of verbs that help you solve the most common data manipulation challenges:
+
+* `mutate()` adds new variables that are functions of existing variables
+* `select()` picks variables based on their names.
+* `filter()` picks cases based on their values.
+* `summarise()` reduces multiple values down to a single summary.
+* `arrange()` changes the ordering of the rows.
+
+These all combine naturally with `group_by()` which allows you to perform any operation "by group". You can learn more about them in `vignette("dplyr")`. As well as these single-table verbs, dplyr also provides a variety of two-table verbs, which you can learn about in `vignette("two-table")`.
+
+dplyr is designed to abstract over how the data is stored. That means as well as working with local data frames, you can also work with remote database tables, using exactly the same R code. Install the dbplyr package then read `vignette("databases", package = "dbplyr")`.
+
+If you are new to dplyr, the best place to start is the 
+[data import chapter](http://r4ds.had.co.nz/transform.html) in R 
+for data science.
+
+## Installation
+
+```{r, eval = FALSE}
+# The easiest way to get dplyr is to install the whole tidyverse:
+install.packages("tidyverse")
+
+# Alternatively, install just dplyr:
+install.packages("dplyr")
+
+# Or the the development version from GitHub:
+# install.packages("devtools")
+devtools::install_github("tidyverse/dplyr")
+```
+
+If you encounter a clear bug, please file a minimal reproducible example on [github](https://github.com/tidyverse/dplyr/issues). For questions and other discussion, please use the [manipulatr mailing list](https://groups.google.com/group/manipulatr).
+
+## Usage
+
+```{r, message = FALSE}
+library(dplyr)
+
+starwars %>% 
+  filter(species == "Droid")
+
+starwars %>% 
+  select(name, ends_with("color"))
+
+starwars %>% 
+  mutate(name, bmi = mass / ((height / 100)  ^ 2)) %>%
+  select(name:mass, bmi)
+
+starwars %>% 
+  arrange(desc(mass))
+
+starwars %>%
+  group_by(species) %>%
+  summarise(
+    n = n(),
+    mass = mean(mass, na.rm = TRUE)
+  ) %>%
+  filter(n > 1)
+```

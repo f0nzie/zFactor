@@ -18,17 +18,17 @@
 z.DranchukAbuKassem <- function(pres.pr, temp.pr, tolerance = 1E-13,
                                 verbose = FALSE) {
 
-    dak <- sapply(pres.pr, function(x)
+    co <- sapply(pres.pr, function(x)
         sapply(temp.pr, function(y)
             .z.DranchukAbuKassem(pres.pr = x, temp.pr = y,
                                  tolerance = tolerance, verbose = verbose)))
 
     if (length(pres.pr) > 1 || length(temp.pr) > 1) {
-        rownames(dak) <- temp.pr
-        colnames(dak) <- pres.pr
-
+        co <- matrix(co, nrow = length(temp.pr), ncol = length(pres.pr))
+        rownames(co) <- temp.pr
+        colnames(co) <- pres.pr
     }
-    return(dak)
+    return(co)
 }
 
 

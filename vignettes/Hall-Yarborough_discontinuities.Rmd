@@ -1,0 +1,77 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(zFactor)
+
+# zFactor:::.z.HallYarborough(6.99999999, 1.05, verbose = TRUE)
+# zFactor:::.z.HallYarborough(7, 1.05, verbose = TRUE)
+zFactor:::.z.HallYarborough(7.1, 1.05, verbose = TRUE)
+```
+
+
+```{r}
+library(zFactor)
+
+z.HallYarborough(c(6.8), c(1.1, 1.2))
+```
+
+```{r}
+library(zFactor)
+
+z.HallYarborough(pres.pr = c(0.5, 1), temp.pr = c(1.1))
+```
+
+
+```{r}
+ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5)
+tpr <- c(1.3)
+
+z.HallYarborough(ppr, tpr)
+```
+
+```{r}
+z.HallYarborough(1, 2)
+```
+
+```{r}
+library(zFactor)
+
+z.DranchukAbuKassem(1, 1.5)
+z.DranchukAbuKassem(c(1,2), 1.5)
+z.DranchukAbuKassem(c(1.1,2.1), c(1.5, 2.0))
+```
+
+```{r}
+library(zFactor)
+
+z.DranchukPurvisRobinson(1, 1.5)
+z.DranchukPurvisRobinson(c(1,2), 1.5)
+z.DranchukPurvisRobinson(c(1.1,2.1), c(1.5, 2.0))
+```
+```{r}
+library(zFactor)
+
+z.BeggsBrill(1, 1.5)
+z.BeggsBrill(c(1,2), 1.5)
+z.BeggsBrill(c(1.1,2.1), c(1.5, 2.0))
+```
+
+```{r}
+library(zFactor)
+
+z.Ann10(1, 1.5)
+z.Ann10(c(1,2), 1.5)
+z.Ann10(c(1.1,2.1), c(1.5, 2.0))
+```
+
+
+```{r}
+library(zFactor)
+
+z.Shell(1, 1.5)
+z.Shell(c(1,2), 1.5)
+z.Shell(c(1.1,2.1), c(1.5, 2.0))
+```
