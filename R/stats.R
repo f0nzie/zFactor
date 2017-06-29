@@ -14,8 +14,8 @@ z.stats <- function(correlation = "DAK", pprRange = "lp", interval = "coarse") {
                               MAPE = sum(abs((z.calc - z.chart) / z.chart)) * 100 / n(),
                               MSE = sum((z.calc - z.chart)^2) / n(),
                               RSS = sum((z.calc - z.chart)^2),
-                              MAE = sum(abs(z.calc - z.chart)) / n(),
-                              RMLSE = sqrt(1/n()*sum((log(z.calc +1)-log(z.chart +1))^2))
+                              MAE = sum(abs(z.calc - z.chart)) / n()
+                              # RMLSE = sqrt(1/n()*sum((log(z.calc +1)-log(z.chart +1))^2))
     )
     smry_tpr_ppr
 }
