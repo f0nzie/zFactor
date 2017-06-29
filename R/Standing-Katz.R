@@ -53,7 +53,7 @@ getStandingKatzCurve_1p <- function(tpr = 1.3, pprRange = "lp", tolerance = 0.01
     isNear <- function(n) abs(n - round(n, 1)) <= tolerance
 
     # stop if Tpr curve has not been recorded
-    if (!tpr %in% getCurvesDigitized(pprRange = "all"))
+    if (!tpr %in% getStandingKatzTpr(pprRange = "all"))
         stop(sprintf("Curve not available at Tpr =%5.2f", tpr))
 
     # stop if it is not `lp`` or `hp`` Ppr
@@ -245,7 +245,7 @@ extractCurveNumber <- function(str) {
 #' @examples
 #' getCurvesDigitized(pprRange = "lp")
 #' getCurvesDigitized(pprRange = "common")
-getCurvesDigitized <- function(pprRange) {
+getStandingKatzTpr <- function(pprRange) {
     range_valid <- c("lp", "hp", "all", "common")
     if (!pprRange %in% range_valid) stop("Ppr range keyword not valid")
 
@@ -261,5 +261,10 @@ getCurvesDigitized <- function(pprRange) {
         names(curves_vec) <- NULL
         sort(unique(curves_vec))   # only unique values if `all`. intersection of lp and hp
     }
+}
 
+
+getCurvesDigitized <- function(pprRange) {
+    .Deprecated("getStandingKatzTpr", package = "zFactor")
+    getStandingKatzTpr(pprRange = pprRange)
 }

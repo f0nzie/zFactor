@@ -39,7 +39,7 @@ test_that("SH corr matches solution of 4x13 Ppr, Tpr matrix", {
 
 
 test_that("SH corr matches solution of 16x7 Ppr, Tpr (all) matrix", {
-    tpr <- getCurvesDigitized(pprRange = "lp")
+    tpr <- getStandingKatzTpr(pprRange = "lp")
     ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5)
 
     dpr <- z.Shell(ppr, tpr); save(dpr, file = "sh_16x7.rda")
