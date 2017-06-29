@@ -1,5 +1,8 @@
 ---
 output: github_document
+bibliography: bibliography.bib
+nocite: |
+       @tahmed, @bahadori
 ---
 
 [![Rdoc](http://www.rdocumentation.org/badges/version/zFactor)](http://www.rdocumentation.org/packages/zFactor)
@@ -20,7 +23,6 @@ Computational tools for chemical and petroleum engineers. Calculates the error b
 
 ## Motivation
 
-The goal of rODE is to explore R and its S4 classes and the differences with Java and Python classes while exploring simulations by solving differential equations.
 
 
 The correlations that are implemented in R for `zFactor` are:
@@ -112,6 +114,18 @@ zFactor:::z.plot.range("N10")
 ```
 
 
+## What you can do with `zFactor`
+
+* Find `z` with any of the correlations provided
+* Get values from the Standing-Katz chart at any of the isotherms limited by the pseudo-reduced pressures (`Ppr`) digitized
+* Find what isotherms or pseudo-reduced temperatures (`Tpr`) are available from Standing and Katz chart
+* Find what pseudo-reduced pressure points are available
+* Plot any of the Standing-Katz isotherms to view `z` in graphical form
+* Plot a tile chart to show the range of applicability of the correlations
+* Get a statistics table when comparing any of the correlations to the Standing-Katz chart
+* Get a matrix of ``z` values calculated from any correlation where the rows are the pseudo-reduced temperatures and the columns the pseudo-reduced pressures
+
+
 ## Vignettes
 The vignettes contain examples on the use and analysis of the various correlations.
 
@@ -125,6 +139,12 @@ The vignettes contain examples on the use and analysis of the various correlatio
 
 ## Tests
 There are tests for the correlations under tests/testthat.
+
+## References
+The following books and papers were consulted during the development of this package:
+
+
+
 
 
 
