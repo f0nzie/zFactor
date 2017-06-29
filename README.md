@@ -108,27 +108,60 @@ z.Ann10(ppr, tpr)
 Comparative Analysis
 --------------------
 
+Range of Applicability
+----------------------
+
 ``` r
+
 library(zFactor)
-zFactor:::z.plot.range()
-#> # A tibble: 224 x 9
-#> # Groups:   Tpr [?]
-#>      Tpr   Ppr        RMSE        MPE       MAPE          MSE          RSS
-#>    <chr> <dbl>       <dbl>      <dbl>      <dbl>        <dbl>        <dbl>
-#>  1  1.05   0.5 0.001068340  0.1288709  0.1288709 1.141349e-06 1.141349e-06
-#>  2  1.05   1.0 0.002324861 -0.3947133  0.3947133 5.404979e-06 5.404979e-06
-#>  3  1.05   1.5 0.030731781 12.1469490 12.1469490 9.444424e-04 9.444424e-04
-#>  4  1.05   2.0 0.048404016 17.2871484 17.2871484 2.342949e-03 2.342949e-03
-#>  5  1.05   2.5 0.043828227 12.7779088 12.7779088 1.920913e-03 1.920913e-03
-#>  6  1.05   3.0 0.039638654  9.7392270  9.7392270 1.571223e-03 1.571223e-03
-#>  7  1.05   3.5 0.035300493  7.4947969  7.4947969 1.246125e-03 1.246125e-03
-#>  8  1.05   4.0 0.031444815  5.8885421  5.8885421 9.887764e-04 9.887764e-04
-#>  9  1.05   4.5 0.025978253  4.3441895  4.3441895 6.748697e-04 6.748697e-04
-#> 10  1.05   5.0 0.018892813  2.8495948  2.8495948 3.569384e-04 3.569384e-04
-#> # ... with 214 more rows, and 2 more variables: MAE <dbl>, RMLSE <dbl>
+zFactor:::z.plot.range("HY")
 ```
 
 ![](README-unnamed-chunk-4-1.png)
+
+``` r
+
+zFactor:::z.plot.range("BB")
+#> Warning in log(z.calc + 1): NaNs produced
+
+#> Warning in log(z.calc + 1): NaNs produced
+
+#> Warning in log(z.calc + 1): NaNs produced
+
+#> Warning in log(z.calc + 1): NaNs produced
+
+#> Warning in log(z.calc + 1): NaNs produced
+```
+
+![](README-unnamed-chunk-4-2.png)
+
+``` r
+
+zFactor:::z.plot.range("DAK")
+```
+
+![](README-unnamed-chunk-4-3.png)
+
+``` r
+
+zFactor:::z.plot.range("DPR")
+```
+
+![](README-unnamed-chunk-4-4.png)
+
+``` r
+
+zFactor:::z.plot.range("SH")
+```
+
+![](README-unnamed-chunk-4-5.png)
+
+``` r
+
+zFactor:::z.plot.range("N10")
+```
+
+![](README-unnamed-chunk-4-6.png)
 
 Vignettes
 ---------
