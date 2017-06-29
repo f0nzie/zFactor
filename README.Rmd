@@ -91,17 +91,22 @@ z.Ann10(ppr, tpr)
 
 
 ```{r}
-
 library(zFactor)
-zFactor:::z.plot.range("HY")
 
+zFactor:::z.plot.range("HY", interval = "coarse")
 zFactor:::z.plot.range("BB")
+```
+
+
+
+```{r}
 
 zFactor:::z.plot.range("DAK")
 
 zFactor:::z.plot.range("DPR")
 
 zFactor:::z.plot.range("SH")
+zFactor:::z.plot.range("SH", interval = "fine")
 
 zFactor:::z.plot.range("N10")
 ```

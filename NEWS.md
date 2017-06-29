@@ -1,3 +1,13 @@
+## 20170629, 0.1.4.9003
+* all stat plots now show the name of the correlation
+* stat tile plots can be drawn with Ppr `coarse` or `fine` interval
+* deprecate `getCurvesDigitized` in favor of `getStandingKatzTpr`
+* add new function `getStandingKatzPpr` which returns a short or long vector of Ppr intervals
+* add new functions `isValid_correlation`,` get_z_correlations`
+* add a dataframe `z_correlations` to contain z correlations info
+* make title and subtitles dynamic in `z.plot.range`
+* remove function `RMLSE` from stats dataframe. it was causing NaNs
+
 ## 20170629, 0.1.4.9002
 * Finally fixed README images. Chaanged fig.path to man/figures/README-
 
@@ -78,7 +88,7 @@
 ## 20170621, 0.0.0.9009
 
 * add vignette to show how to get data from Standing-Katz chart.
-*  create scripts to generate datasets of z vs. Ppr
+* create scripts to generate datasets of z vs. Ppr
 * add function getStandingKatzCurve() that plots, saves and view a Tpr curve
 * add function listStandingKatzCurves() that shows what Tpr curves have been digitized
 * add function getStandingKatzMatrix() to get a table of z -values for Ppr vs Tpr table.

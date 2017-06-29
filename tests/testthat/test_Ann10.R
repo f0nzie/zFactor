@@ -45,7 +45,7 @@ test_that("4x13 matrix stored matches Ann10 for two Ppr and Tpr vectors", {
 
 test_that("16x13 matrix stored matches Ann10 for two Ppr and Tpr vectors", {
     ppr <- c(0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5)
-    tpr <- getCurvesDigitized(pprRange = "lp")
+    tpr <- getStandingKatzTpr(pprRange = "lp")
     # ann10 <- z.Ann10(ppr, tpr);  save(ann10, file = "ann10_16x13.rda")
     load(file = "ann10_16x13.rda")
     expect_equal(z.Ann10(ppr, tpr), ann10)
