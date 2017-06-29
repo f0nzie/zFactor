@@ -1,4 +1,14 @@
 
+z_correlations <- data.frame(
+    short = c("BB", "HY", "DAK", "DPR", "SH", "N10"),
+    long = c("Beggs-Brill", "Hall-Yarborough", "Dranchuk-AbuKassem",
+             "Dranchuk-Purvis-Robinson", "Shell", "Ann10"),
+    function_name = c("z.BeggsBrill", "z.HallYarborough", "z.DranchukAbuKassem",
+                      "z.DranchukPurvisRobinson", "z.Shell", "z.Ann10"),
+    stringsAsFactors = FALSE
+)
+
+
 #' split a long string to create a vector for testing
 #'
 #' @param str a contnuous long string to split as a vector
@@ -59,9 +69,9 @@ combineCorrWithSK <- function(sk_df, co_df) {
 #' tpr <- c(1.05, 1.1, 1.2)
 #' createTidyFromMatrix(ppr, tpr, correlation = "DAK")
 createTidyFromMatrix <- function(ppr_vector, tpr_vector, correlation) {
-    valid_choices <- c("BB", "HY", "DAK", "DPR", "SH", "N10")
-    msg_missing <- "You have to provide a z-factor correlation: 'BB' or
-    'HY' or 'DAK' or 'DPR'."
+    # valid_choices <- c("BB", "HY", "DAK", "DPR", "SH", "N10")
+    msg_missing <- paste("You have to provide a z-factor correlation: ",
+                         paste(get_z_correlations(), collapse = " "))
     if (missing(correlation)) stop(msg_missing)
     if (!correlation %in% valid_choices) stop("Not a valid correlation.")
 
@@ -82,6 +92,25 @@ createTidyFromMatrix <- function(ppr_vector, tpr_vector, correlation) {
 
     sk_co_tidy <- combineCorrWithSK(sk_df, co_df)
     sk_co_tidy
+}
+
+#' @export
+isValid_correlation <- function(correlation) {
+    # valid_choices <- c("BB", "HY", "DAK", "DPR", "SH", "N10")
+    valid_choices <- z_correlations[["short"]]
+    ifelse(correlation %in% valid_choices, TRUE, FALSE)
+}
+
+
+#' @export
+get_z_correlations <- function(how = "short") {
+    if (how == "short")
+        return(z_correlations[["short"]])
+    if (how == "long")
+        return(z_correlations[["long"]])
+    if (how == "function")
+        return(z_correlations[["function_name"]])
+    else stop("wrong keyword")
 }
 
 
