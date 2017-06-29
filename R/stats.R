@@ -2,7 +2,7 @@
 z.stats <- function(correlation = "DAK", pprRange = "lp") {
     Ppr <- NULL; Tpr <- NULL; z.calc <- NULL; z.chart <- NULL; n <- NULL
     # get all `lp` Tpr curves
-    tpr_all <- getCurvesDigitized(pprRange)
+    tpr_all <- getStandingKatzTpr(pprRange)
     ppr <- c(0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0)
     sk_corr_all <- createTidyFromMatrix(ppr, tpr_all, correlation)
 

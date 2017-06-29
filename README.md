@@ -50,6 +50,9 @@ tpr <- c(1.2, 1.3, 1.5, 2.0, 3.0)
 ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5) 
 getStandingKatzMatrix(ppr_vector = ppr, tpr_vector = tpr, 
                                  pprRange = "lp")
+#> Warning: 'getCurvesDigitized' is deprecated.
+#> Use 'getStandingKatzTpr' instead.
+#> See help("Deprecated") and help("zFactor-deprecated").
 #>        0.5   1.5   2.5   3.5   4.5   5.5
 #> 1.20 0.893 0.657 0.519 0.565 0.650 0.741
 #> 1.30 0.916 0.756 0.638 0.633 0.684 0.759
@@ -115,6 +118,13 @@ Range of Applicability
 
 library(zFactor)
 zFactor:::z.plot.range("HY")
+#> Warning: 'getCurvesDigitized' is deprecated.
+#> Use 'getStandingKatzTpr' instead.
+#> See help("Deprecated") and help("zFactor-deprecated").
+
+#> Warning: 'getCurvesDigitized' is deprecated.
+#> Use 'getStandingKatzTpr' instead.
+#> See help("Deprecated") and help("zFactor-deprecated").
 ```
 
 ![](man/figures/README-unnamed-chunk-4-1.png)
@@ -122,6 +132,13 @@ zFactor:::z.plot.range("HY")
 ``` r
 
 zFactor:::z.plot.range("BB")
+#> Warning: 'getCurvesDigitized' is deprecated.
+#> Use 'getStandingKatzTpr' instead.
+#> See help("Deprecated") and help("zFactor-deprecated").
+
+#> Warning: 'getCurvesDigitized' is deprecated.
+#> Use 'getStandingKatzTpr' instead.
+#> See help("Deprecated") and help("zFactor-deprecated").
 #> Warning in log(z.calc + 1): NaNs produced
 
 #> Warning in log(z.calc + 1): NaNs produced
@@ -138,6 +155,12 @@ zFactor:::z.plot.range("BB")
 ``` r
 
 zFactor:::z.plot.range("DAK")
+#> Warning: 'getCurvesDigitized' is deprecated.
+#> Use 'getStandingKatzTpr' instead.
+#> See help("Deprecated") and help("zFactor-deprecated").
+#> Warning: 'getCurvesDigitized' is deprecated.
+#> Use 'getStandingKatzTpr' instead.
+#> See help("Deprecated") and help("zFactor-deprecated").
 ```
 
 ![](man/figures/README-unnamed-chunk-4-3.png)
@@ -145,6 +168,13 @@ zFactor:::z.plot.range("DAK")
 ``` r
 
 zFactor:::z.plot.range("DPR")
+#> Warning: 'getCurvesDigitized' is deprecated.
+#> Use 'getStandingKatzTpr' instead.
+#> See help("Deprecated") and help("zFactor-deprecated").
+
+#> Warning: 'getCurvesDigitized' is deprecated.
+#> Use 'getStandingKatzTpr' instead.
+#> See help("Deprecated") and help("zFactor-deprecated").
 ```
 
 ![](man/figures/README-unnamed-chunk-4-4.png)
@@ -152,6 +182,13 @@ zFactor:::z.plot.range("DPR")
 ``` r
 
 zFactor:::z.plot.range("SH")
+#> Warning: 'getCurvesDigitized' is deprecated.
+#> Use 'getStandingKatzTpr' instead.
+#> See help("Deprecated") and help("zFactor-deprecated").
+
+#> Warning: 'getCurvesDigitized' is deprecated.
+#> Use 'getStandingKatzTpr' instead.
+#> See help("Deprecated") and help("zFactor-deprecated").
 ```
 
 ![](man/figures/README-unnamed-chunk-4-5.png)
@@ -159,6 +196,13 @@ zFactor:::z.plot.range("SH")
 ``` r
 
 zFactor:::z.plot.range("N10")
+#> Warning: 'getCurvesDigitized' is deprecated.
+#> Use 'getStandingKatzTpr' instead.
+#> See help("Deprecated") and help("zFactor-deprecated").
+
+#> Warning: 'getCurvesDigitized' is deprecated.
+#> Use 'getStandingKatzTpr' instead.
+#> See help("Deprecated") and help("zFactor-deprecated").
 ```
 
 ![](man/figures/README-unnamed-chunk-4-6.png)

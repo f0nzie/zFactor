@@ -264,6 +264,16 @@ getStandingKatzTpr <- function(pprRange) {
 }
 
 
+getStandingKatzPpr <- function(interval = "coarse") {
+    if (interval == "coarse")
+        ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5)
+    else if (interval == "fine")
+        ppr <- c(0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0)
+    else
+        stop("wrong `interval` specified")
+}
+
+
 getCurvesDigitized <- function(pprRange) {
     .Deprecated("getStandingKatzTpr", package = "zFactor")
     getStandingKatzTpr(pprRange = pprRange)
