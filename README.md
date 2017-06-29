@@ -122,15 +122,15 @@ zFactor:::z.plot.range("HY")
 ``` r
 
 zFactor:::z.plot.range("BB")
-#> Warning in log(-6.38412632697345 + 1): NaNs produced
+#> Warning in log(z.calc + 1): NaNs produced
 
-#> Warning in log(-6.38412632697345 + 1): NaNs produced
+#> Warning in log(z.calc + 1): NaNs produced
 
-#> Warning in log(-6.38412632697345 + 1): NaNs produced
+#> Warning in log(z.calc + 1): NaNs produced
 
-#> Warning in log(-6.38412632697345 + 1): NaNs produced
+#> Warning in log(z.calc + 1): NaNs produced
 
-#> Warning in log(-6.38412632697345 + 1): NaNs produced
+#> Warning in log(z.calc + 1): NaNs produced
 ```
 
 ![](man/figures/README-unnamed-chunk-4-2.png)
