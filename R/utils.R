@@ -100,6 +100,9 @@ isMissing_correlation <- function(correlation) {
     else NULL
 }
 
+#' Check if supplied correlation (three letter) is valid
+#'
+#' @param correlation a z-factor correlation
 #' @export
 isValid_correlation <- function(correlation) {
     # check if supplied correlation is valid
@@ -107,7 +110,10 @@ isValid_correlation <- function(correlation) {
     ifelse(correlation %in% valid_choices, TRUE, FALSE)
 }
 
-
+#' Get correlation information
+#'
+#' @param how short: abbreviations; long: description; function: the name of the
+#' correlation function
 #' @export
 get_z_correlations <- function(how = "short") {
     # get correlation information. short: abbreviations; long: description
