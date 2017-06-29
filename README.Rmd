@@ -87,8 +87,23 @@ z.Ann10(ppr, tpr)
 
 ## Comparative Analysis
 
-```{r}
+## Range of Applicability
 
+```{r}
+library(zFactor)
+zFactor:::z.plot.range("HY")
+
+
+```
+
+```{r}
+zFactor:::z.plot.range("DAK")
+
+zFactor:::z.plot.range("DPR")
+
+zFactor:::z.plot.range("SH")
+
+zFactor:::z.plot.range("N10")
 ```
 
 

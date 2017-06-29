@@ -105,6 +105,31 @@ z.Ann10(ppr, tpr)
 #> 1.8 0.9758251 0.9330673 0.9033038 0.8900081 0.8983954 0.9253309 0.9638663
 ```
 
+Comparative Analysis
+--------------------
+
+``` r
+library(zFactor)
+zFactor:::z.plot.range()
+#> # A tibble: 224 x 9
+#> # Groups:   Tpr [?]
+#>      Tpr   Ppr        RMSE        MPE       MAPE          MSE          RSS
+#>    <chr> <dbl>       <dbl>      <dbl>      <dbl>        <dbl>        <dbl>
+#>  1  1.05   0.5 0.001068340  0.1288709  0.1288709 1.141349e-06 1.141349e-06
+#>  2  1.05   1.0 0.002324861 -0.3947133  0.3947133 5.404979e-06 5.404979e-06
+#>  3  1.05   1.5 0.030731781 12.1469490 12.1469490 9.444424e-04 9.444424e-04
+#>  4  1.05   2.0 0.048404016 17.2871484 17.2871484 2.342949e-03 2.342949e-03
+#>  5  1.05   2.5 0.043828227 12.7779088 12.7779088 1.920913e-03 1.920913e-03
+#>  6  1.05   3.0 0.039638654  9.7392270  9.7392270 1.571223e-03 1.571223e-03
+#>  7  1.05   3.5 0.035300493  7.4947969  7.4947969 1.246125e-03 1.246125e-03
+#>  8  1.05   4.0 0.031444815  5.8885421  5.8885421 9.887764e-04 9.887764e-04
+#>  9  1.05   4.5 0.025978253  4.3441895  4.3441895 6.748697e-04 6.748697e-04
+#> 10  1.05   5.0 0.018892813  2.8495948  2.8495948 3.569384e-04 3.569384e-04
+#> # ... with 214 more rows, and 2 more variables: MAE <dbl>, RMLSE <dbl>
+```
+
+![](README-unnamed-chunk-4-1.png)
+
 Vignettes
 ---------
 
@@ -121,8 +146,4 @@ The vignettes contain examples on the use and analysis of the various correlatio
 Tests
 -----
 
-There are tests for the core ODE solver classes under tests/testthat, as well as tests for the examples.
-
-### Tests for the examples
-
-The tests for the examples are two: one for the base/parent classes such as `Kepler` or `Planet` or `Projectile`; this test runner is called `run_tests_this_folder.R`. For the applications themselves there is another runner that opens each of the applications as request for a return value. If the hard coded value is not returned, the test will fail. This ensures that any minor change in the core solver classes do not have any impact on the application solutions, and if there is, it must be explained. The name of the test runner is `run_tes_applications.R`.
+There are tests for the correlations under tests/testthat.
