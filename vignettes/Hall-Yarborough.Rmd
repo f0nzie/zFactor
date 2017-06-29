@@ -221,6 +221,9 @@ ggplot(smry_tpr_ppr, aes(Ppr, Tpr)) +
     ggtitle("Hall-Yarborough", subtitle = "HY")
 ```
 
+
+
+
 ## Plotting the `Tpr` and `Ppr` values that show more error
 
 ```{r}
