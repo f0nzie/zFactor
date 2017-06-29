@@ -117,7 +117,7 @@ library(zFactor)
 zFactor:::z.plot.range("HY")
 ```
 
-![](README-unnamed-chunk-4-1.png)
+![](man/figures/README-unnamed-chunk-4-1.png)
 
 ``` r
 
@@ -133,35 +133,35 @@ zFactor:::z.plot.range("BB")
 #> Warning in log(-6.38412632697345 + 1): NaNs produced
 ```
 
-![](README-unnamed-chunk-4-2.png)
+![](man/figures/README-unnamed-chunk-4-2.png)
 
 ``` r
 
 zFactor:::z.plot.range("DAK")
 ```
 
-![](README-unnamed-chunk-4-3.png)
+![](man/figures/README-unnamed-chunk-4-3.png)
 
 ``` r
 
 zFactor:::z.plot.range("DPR")
 ```
 
-![](README-unnamed-chunk-4-4.png)
+![](man/figures/README-unnamed-chunk-4-4.png)
 
 ``` r
 
 zFactor:::z.plot.range("SH")
 ```
 
-![](README-unnamed-chunk-4-5.png)
+![](man/figures/README-unnamed-chunk-4-5.png)
 
 ``` r
 
 zFactor:::z.plot.range("N10")
 ```
 
-![](README-unnamed-chunk-4-6.png)
+![](man/figures/README-unnamed-chunk-4-6.png)
 
 Vignettes
 ---------
