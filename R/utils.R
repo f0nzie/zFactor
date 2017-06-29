@@ -34,15 +34,20 @@ matrixToDataframe <- function(mat) {
     df
 }
 
+
 matrixWithCorrelation <- function(ppr_vector, tpr_vector, corr.Function) {
     # create a matrix using a z-factor correlation function and sapply
-    corr_matrix <- sapply(ppr_vector, function(x)
+    co <- sapply(ppr_vector, function(x)
         sapply(tpr_vector, function(y) corr.Function(pres.pr = x, temp.pr = y)))
 
-    rownames(corr_matrix) <- tpr_vector
-    colnames(corr_matrix) <- ppr_vector
-    corr_matrix
+    if (length(ppr_vector) > 1 || length(tpr_vector) > 1) {
+        co <- matrix(co, nrow = length(tpr_vector), ncol = length(ppr_vector))
+        rownames(co) <- tpr_vector
+        colnames(co) <- ppr_vector
+    }
+    co
 }
+
 
 combineCorrWithSK <- function(sk_df, co_df) {
     # combine correlation tidy DF with Standing-Katz tidy DF
@@ -70,10 +75,12 @@ combineCorrWithSK <- function(sk_df, co_df) {
 #' createTidyFromMatrix(ppr, tpr, correlation = "DAK")
 createTidyFromMatrix <- function(ppr_vector, tpr_vector, correlation) {
     # valid_choices <- c("BB", "HY", "DAK", "DPR", "SH", "N10")
-    msg_missing <- paste("You have to provide a z-factor correlation: ",
-                         paste(get_z_correlations(), collapse = " "))
-    if (missing(correlation)) stop(msg_missing)
-    if (!correlation %in% valid_choices) stop("Not a valid correlation.")
+    # msg_missing <- paste("You have to provide a z-factor correlation: ",
+    #                      paste(get_z_correlations(), collapse = " "))
+    # if (missing(correlation)) stop(msg_missing)
+    isMissing_correlation(correlation)
+    if (!isValid_correlation(correlation)) stop("Not a valid correlation.")
+    # if (!correlation %in% valid_choices) stop("Not a valid correlation.")
 
     if (correlation == "BB")  zFunction <- z.BeggsBrill
     if (correlation == "HY")  zFunction <- z.HallYarborough
@@ -92,6 +99,13 @@ createTidyFromMatrix <- function(ppr_vector, tpr_vector, correlation) {
 
     sk_co_tidy <- combineCorrWithSK(sk_df, co_df)
     sk_co_tidy
+}
+
+isMissing_correlation <- function(correlation) {
+    msg_missing <- paste("You have to provide a z-factor correlation: ",
+                         paste(get_z_correlations(), collapse = " "))
+    if (missing(correlation)) stop(msg_missing)
+    else NULL
 }
 
 #' @export
