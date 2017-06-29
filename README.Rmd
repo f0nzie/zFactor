@@ -20,7 +20,7 @@ Computational tools for chemical and petroleum engineers. Calculates the error b
 
 ## Motivation
 
-The goal of rODE is to explore R and its S4 classes and the differences with Java and Python classes while exploring simulations by solving differential equations.
+
 
 
 The correlations that are implemented in R for `zFactor` are:
