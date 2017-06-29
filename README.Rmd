@@ -1,0 +1,126 @@
+---
+output: github_document
+---
+
+[![Rdoc](http://www.rdocumentation.org/badges/version/zFactor)](http://www.rdocumentation.org/packages/zFactor)
+
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+# zFactor
+Computational tools for chemical and petroleum engineers. Calculates the error between different correlations for gas compressibility.
+
+## Motivation
+
+The goal of rODE is to explore R and its S4 classes and the differences with Java and Python classes while exploring simulations by solving differential equations.
+
+
+The correlations that are implemented in R for `zFactor` are:
+
+* Beggs and Brill (BB)
+* Hall and Yarborough (HY)
+* Dranchuk and Abou-Kassem (DAK)
+* Dranchuk, Purvis and Robnson (DPR)
+* A correlation by Shell Oil Company (SH)
+* A correlation developed with Artificial Neural Networks (Ann10) by Kamyab et al
+
+Note. The Shell correlation was found cited in two books and two papers but the original paper or authors could not be found.
+
+
+## Installation
+You can install the latest version of `zFactor` from github with:
+
+```{r gh-installation, eval = FALSE}
+# install.packages("devtools")
+devtools::install_github("f0nzie/zFactor")
+```
+
+
+Or from `CRAN`:
+
+```{r eval=FALSE}
+install.packages("zFactor")
+```
+
+## Usage
+
+```{r, message = FALSE}
+library(zFactor)
+
+# get `z` values from the Standing-Katz chart
+tpr <- c(1.2, 1.3, 1.5, 2.0, 3.0) 
+ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5) 
+getStandingKatzMatrix(ppr_vector = ppr, tpr_vector = tpr, 
+                                 pprRange = "lp")
+
+# calculate `z` using the Beggs-Brill correlation
+z.BeggsBrill(pres.pr = 1.5, temp.pr = 2.0)
+
+# calculate `z` using the Hall-Yarborough correlation
+z.HallYarborough(pres.pr = 1.5, temp.pr = 2.0)
+
+# calculate `z` using the correlation Dranchuk-AbousKassem
+ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
+tpr <- c(1.05, 1.1, 1.7, 2) 
+z.DranchukAbuKassem(ppr, tpr)
+
+# We do the same with the Dranchuk-Purvis-Robinson correlation
+# but we change the values of the isotherms `Tpr`
+tpr <- c(1.4, 1.4, 1.6, 1.7, 1.8) 
+z.DranchukPurvisRobinson(pres.pr = ppr, temp.pr = tpr)
+
+# now we use the relative undocumented Shell correlation
+z.Shell(ppr, tpr)
+
+# and finally the correlation Kamyab et al that uses Artificial Neural Networks
+z.Ann10(ppr, tpr)
+
+```
+
+## Comparative Analysis
+
+## Range of Applicability
+
+
+```{r}
+
+library(zFactor)
+zFactor:::z.plot.range("HY")
+
+zFactor:::z.plot.range("BB")
+
+zFactor:::z.plot.range("DAK")
+
+zFactor:::z.plot.range("DPR")
+
+zFactor:::z.plot.range("SH")
+
+zFactor:::z.plot.range("N10")
+```
+
+
+## Vignettes
+The vignettes contain examples on the use and analysis of the various correlations.
+
+* StandingKatz_chart.Rmd
+* Beggs-Brill.Rmd
+* Hall-Yarborough.Rmd
+* Dranchuk-AbouKassem.Rmd
+* Dranchuk-Purvis-Robinson.Rmd
+* shell.Rmd
+* ANN.Rmd
+
+## Tests
+There are tests for the correlations under tests/testthat.
+
+
+
+

@@ -1,3 +1,10 @@
+## 20170628, 0.1.4.9000
+* fix problem when passing small vector to correlations.
+* add new scriopt stats.R that will calculate stats dataframe and pltos
+* add new tests for SHell and Beggs and Brill
+* fix test files for DPR
+* fix discontinuity in Hall-Yarborough by using "try"
+
 ## 20170628, 0.1.4
 * switch Ann Java to R.
 * remove sandbox worksheets from extdata
