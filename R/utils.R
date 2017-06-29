@@ -77,12 +77,8 @@ createTidyFromMatrix <- function(ppr_vector, tpr_vector, correlation) {
     isMissing_correlation(correlation)
     if (!isValid_correlation(correlation)) stop("Not a valid correlation.")
 
-    if (correlation == "BB")  zFunction <- z.BeggsBrill
-    if (correlation == "HY")  zFunction <- z.HallYarborough
-    if (correlation == "DAK") zFunction <- z.DranchukAbuKassem
-    if (correlation == "DPR") zFunction <- z.DranchukPurvisRobinson
-    if (correlation == "SH")  zFunction <- z.Shell
-    if (correlation == "N10") zFunction <- z.Ann10
+    zFunction <- get(z_correlations[which(z_correlations["short"] == correlation),
+                                    "function_name"])
 
     sk_matrix <- getStandingKatzMatrix(ppr_vector, tpr_vector,
                                        pprRange = "lp")
@@ -97,6 +93,7 @@ createTidyFromMatrix <- function(ppr_vector, tpr_vector, correlation) {
 }
 
 isMissing_correlation <- function(correlation) {
+    # stops if correlation argument is missing
     msg_missing <- paste("You have to provide a z-factor correlation: ",
                          paste(get_z_correlations(), collapse = " "))
     if (missing(correlation)) stop(msg_missing)
@@ -105,14 +102,16 @@ isMissing_correlation <- function(correlation) {
 
 #' @export
 isValid_correlation <- function(correlation) {
-    # valid_choices <- c("BB", "HY", "DAK", "DPR", "SH", "N10")
-    valid_choices <- z_correlations[["short"]]
+    # check if supplied correlation is valid
+    valid_choices <- z_correlations[["short"]]      # get vector of correlations
     ifelse(correlation %in% valid_choices, TRUE, FALSE)
 }
 
 
 #' @export
 get_z_correlations <- function(how = "short") {
+    # get correlation information. short: abbreviations; long: description
+    #     function: the name of the correlation function
     if (how == "short")
         return(z_correlations[["short"]])
     if (how == "long")
