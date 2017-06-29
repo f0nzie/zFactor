@@ -81,23 +81,41 @@ context("test getCurvesDigitized()")
 test_that("match digitized curves for `hp`", {
     expected <- c(1.05, 1.10, 1.20, 1.30, 1.40, 1.50, 1.70,
                   2.00, 2.20, 2.40, 2.60, 3.00)
-    expect_equal(getCurvesDigitized(pprRange = "hp"), expected)
+    expect_equal(getStandingKatzTpr(pprRange = "hp"), expected)
 })
 
 test_that("match digitized curves for `lp`", {
     expected <- c(1.05, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9,
                   2.0, 2.2, 2.4, 2.6, 2.8, 3.0)
-    expect_equal(getCurvesDigitized(pprRange = "lp"), expected)
+    expect_equal(getStandingKatzTpr(pprRange = "lp"), expected)
 })
 
 test_that("match digitized curves for `common`", {
     expected <- c(1.05, 1.1, 1.2, 1.3, 1.4, 1.5, 1.7, 2.0, 2.2, 2.4, 2.6, 3.0)
-    expect_equal(getCurvesDigitized(pprRange = "common"), expected)
+    expect_equal(getStandingKatzTpr(pprRange = "common"), expected)
 })
 
 test_that("match digitized curves for `all`", {
     expected <- c(1.05, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9,
                   2.0, 2.2, 2.4, 2.6, 2.8, 3.0)
-    expect_equivalent(getCurvesDigitized(pprRange = "all"), expected)
+    expect_equivalent(getStandingKatzTpr(pprRange = "all"), expected)
 })
 
+
+
+context("getStandingKatzPpr")
+
+test_that("getStandingKatzPpr interval is `coarse`", {
+    ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5)
+    expect_equal(getStandingKatzPpr(), ppr)          # default
+    expect_equal(getStandingKatzPpr("coarse"), ppr)  # explicit
+})
+
+test_that("getStandingKatzPpr interval is `fine`", {
+    ppr <- c(0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0)
+    expect_equal(getStandingKatzPpr("fine"), ppr)  # explicit
+})
+
+test_that("getStandingKatzPpr interval is yields error", {
+    expect_error(getStandingKatzPpr("any"), "wrong `interval` specified")
+})

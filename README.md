@@ -112,25 +112,15 @@ Range of Applicability
 ----------------------
 
 ``` r
-
 library(zFactor)
-zFactor:::z.plot.range("HY")
+
+zFactor:::z.plot.range("HY", interval = "coarse")
 ```
 
 ![](man/figures/README-unnamed-chunk-4-1.png)
 
 ``` r
-
 zFactor:::z.plot.range("BB")
-#> Warning in log(-6.38412632697345 + 1): NaNs produced
-
-#> Warning in log(-6.38412632697345 + 1): NaNs produced
-
-#> Warning in log(-6.38412632697345 + 1): NaNs produced
-
-#> Warning in log(-6.38412632697345 + 1): NaNs produced
-
-#> Warning in log(-6.38412632697345 + 1): NaNs produced
 ```
 
 ![](man/figures/README-unnamed-chunk-4-2.png)
@@ -140,28 +130,34 @@ zFactor:::z.plot.range("BB")
 zFactor:::z.plot.range("DAK")
 ```
 
-![](man/figures/README-unnamed-chunk-4-3.png)
+![](man/figures/README-unnamed-chunk-5-1.png)
 
 ``` r
 
 zFactor:::z.plot.range("DPR")
 ```
 
-![](man/figures/README-unnamed-chunk-4-4.png)
+![](man/figures/README-unnamed-chunk-5-2.png)
 
 ``` r
 
 zFactor:::z.plot.range("SH")
 ```
 
-![](man/figures/README-unnamed-chunk-4-5.png)
+![](man/figures/README-unnamed-chunk-5-3.png)
+
+``` r
+zFactor:::z.plot.range("SH", interval = "fine")
+```
+
+![](man/figures/README-unnamed-chunk-5-4.png)
 
 ``` r
 
 zFactor:::z.plot.range("N10")
 ```
 
-![](man/figures/README-unnamed-chunk-4-6.png)
+![](man/figures/README-unnamed-chunk-5-5.png)
 
 Vignettes
 ---------

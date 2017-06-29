@@ -53,7 +53,7 @@ getStandingKatzCurve_1p <- function(tpr = 1.3, pprRange = "lp", tolerance = 0.01
     isNear <- function(n) abs(n - round(n, 1)) <= tolerance
 
     # stop if Tpr curve has not been recorded
-    if (!tpr %in% getCurvesDigitized(pprRange = "all"))
+    if (!tpr %in% getStandingKatzTpr(pprRange = "all"))
         stop(sprintf("Curve not available at Tpr =%5.2f", tpr))
 
     # stop if it is not `lp`` or `hp`` Ppr
@@ -178,7 +178,7 @@ getStandingKatzMatrix <- function(ppr_vector, tpr_vector, pprRange = "lp") {
     range_valid <- c("lp", "hp")
     if (!pprRange %in% range_valid)
         stop("Ppr range keyword not valid")
-    if (!all(tpr_vector %in% getCurvesDigitized(pprRange)))
+    if (!all(tpr_vector %in% getStandingKatzTpr(pprRange)))
         stop("One of the Tpr curves is not available")
     # if (missing(ppr_vector) || missing(tpr_vector))
     #     stop("You must supply vectors for PPr and Tpr")
@@ -243,9 +243,9 @@ extractCurveNumber <- function(str) {
 #' and lp
 #' @export
 #' @examples
-#' getCurvesDigitized(pprRange = "lp")
-#' getCurvesDigitized(pprRange = "common")
-getCurvesDigitized <- function(pprRange) {
+#' getStandingKatzTpr(pprRange = "lp")
+#' getStandingKatzTpr(pprRange = "common")
+getStandingKatzTpr <- function(pprRange) {
     range_valid <- c("lp", "hp", "all", "common")
     if (!pprRange %in% range_valid) stop("Ppr range keyword not valid")
 
@@ -261,5 +261,20 @@ getCurvesDigitized <- function(pprRange) {
         names(curves_vec) <- NULL
         sort(unique(curves_vec))   # only unique values if `all`. intersection of lp and hp
     }
+}
 
+
+getStandingKatzPpr <- function(interval = "coarse") {
+    if (interval == "coarse")
+        ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5)
+    else if (interval == "fine")
+        ppr <- c(0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0)
+    else
+        stop("wrong `interval` specified")
+}
+
+
+getCurvesDigitized <- function(pprRange) {
+    .Deprecated("getStandingKatzTpr", package = "zFactor")
+    getStandingKatzTpr(pprRange = pprRange)
 }
