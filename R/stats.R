@@ -23,6 +23,11 @@ z.stats <- function(correlation = "DAK", pprRange = "lp", interval = "coarse") {
 #' @import ggplot2
 z.plot.range <- function(correlation = "DAK", pprRange = "lp", ...) {
     Ppr <- NULL; Tpr <- NULL; MAPE <- NULL; z.calc <- NULL; z.chart <- NULL
+    isMissing_correlation(correlation)
+    if (!isValid_correlation(correlation)) stop("Not a valid correlation.")
+
+    corr_name <- z_correlations[which(z_correlations["short"] == correlation),
+                                                     "long"]
 
     smry_tpr_ppr <- z.stats(correlation, pprRange, ...)
     g <- ggplot(smry_tpr_ppr, aes(Ppr, Tpr))
@@ -31,6 +36,6 @@ z.plot.range <- function(correlation = "DAK", pprRange = "lp", ...) {
                              midpoint=12.5, limit=c(0, 25), name="MAPE") +
         theme(axis.text.x = element_text(angle=45, vjust=1, size=11, hjust=1)) +
         coord_equal() +
-        ggtitle("Hall-Yarborough", subtitle = "HY")
+        ggtitle(corr_name, subtitle = correlation)
     print(g)
 }
