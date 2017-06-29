@@ -121,10 +121,6 @@ zFactor:::z.plot.range("HY")
 #> Warning: 'getCurvesDigitized' is deprecated.
 #> Use 'getStandingKatzTpr' instead.
 #> See help("Deprecated") and help("zFactor-deprecated").
-
-#> Warning: 'getCurvesDigitized' is deprecated.
-#> Use 'getStandingKatzTpr' instead.
-#> See help("Deprecated") and help("zFactor-deprecated").
 ```
 
 ![](man/figures/README-unnamed-chunk-4-1.png)
@@ -132,10 +128,6 @@ zFactor:::z.plot.range("HY")
 ``` r
 
 zFactor:::z.plot.range("BB")
-#> Warning: 'getCurvesDigitized' is deprecated.
-#> Use 'getStandingKatzTpr' instead.
-#> See help("Deprecated") and help("zFactor-deprecated").
-
 #> Warning: 'getCurvesDigitized' is deprecated.
 #> Use 'getStandingKatzTpr' instead.
 #> See help("Deprecated") and help("zFactor-deprecated").
@@ -158,9 +150,6 @@ zFactor:::z.plot.range("DAK")
 #> Warning: 'getCurvesDigitized' is deprecated.
 #> Use 'getStandingKatzTpr' instead.
 #> See help("Deprecated") and help("zFactor-deprecated").
-#> Warning: 'getCurvesDigitized' is deprecated.
-#> Use 'getStandingKatzTpr' instead.
-#> See help("Deprecated") and help("zFactor-deprecated").
 ```
 
 ![](man/figures/README-unnamed-chunk-4-3.png)
@@ -168,10 +157,6 @@ zFactor:::z.plot.range("DAK")
 ``` r
 
 zFactor:::z.plot.range("DPR")
-#> Warning: 'getCurvesDigitized' is deprecated.
-#> Use 'getStandingKatzTpr' instead.
-#> See help("Deprecated") and help("zFactor-deprecated").
-
 #> Warning: 'getCurvesDigitized' is deprecated.
 #> Use 'getStandingKatzTpr' instead.
 #> See help("Deprecated") and help("zFactor-deprecated").
@@ -185,10 +170,6 @@ zFactor:::z.plot.range("SH")
 #> Warning: 'getCurvesDigitized' is deprecated.
 #> Use 'getStandingKatzTpr' instead.
 #> See help("Deprecated") and help("zFactor-deprecated").
-
-#> Warning: 'getCurvesDigitized' is deprecated.
-#> Use 'getStandingKatzTpr' instead.
-#> See help("Deprecated") and help("zFactor-deprecated").
 ```
 
 ![](man/figures/README-unnamed-chunk-4-5.png)
@@ -196,10 +177,6 @@ zFactor:::z.plot.range("SH")
 ``` r
 
 zFactor:::z.plot.range("N10")
-#> Warning: 'getCurvesDigitized' is deprecated.
-#> Use 'getStandingKatzTpr' instead.
-#> See help("Deprecated") and help("zFactor-deprecated").
-
 #> Warning: 'getCurvesDigitized' is deprecated.
 #> Use 'getStandingKatzTpr' instead.
 #> See help("Deprecated") and help("zFactor-deprecated").

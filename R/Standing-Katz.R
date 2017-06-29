@@ -178,7 +178,7 @@ getStandingKatzMatrix <- function(ppr_vector, tpr_vector, pprRange = "lp") {
     range_valid <- c("lp", "hp")
     if (!pprRange %in% range_valid)
         stop("Ppr range keyword not valid")
-    if (!all(tpr_vector %in% getCurvesDigitized(pprRange)))
+    if (!all(tpr_vector %in% getStandingKatzTpr(pprRange)))
         stop("One of the Tpr curves is not available")
     # if (missing(ppr_vector) || missing(tpr_vector))
     #     stop("You must supply vectors for PPr and Tpr")
@@ -243,8 +243,8 @@ extractCurveNumber <- function(str) {
 #' and lp
 #' @export
 #' @examples
-#' getCurvesDigitized(pprRange = "lp")
-#' getCurvesDigitized(pprRange = "common")
+#' getStandingKatzTpr(pprRange = "lp")
+#' getStandingKatzTpr(pprRange = "common")
 getStandingKatzTpr <- function(pprRange) {
     range_valid <- c("lp", "hp", "all", "common")
     if (!pprRange %in% range_valid) stop("Ppr range keyword not valid")
