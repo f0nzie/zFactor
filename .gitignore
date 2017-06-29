@@ -6,3 +6,5 @@
 #NAMESPACE
 #inst/doc
 notebooks/*.html
+
+\.directory
