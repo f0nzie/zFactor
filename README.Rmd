@@ -112,6 +112,16 @@ zFactor:::z.plot.range("N10")
 ```
 
 
+## What you can do with `zFactor`
+
+* Find `z` with any of the correlations provided
+* Get values from the Standing-Katz chart at any of the isotherms limited by the pseudo-reduced pressures (`Ppr`) digitized
+* Find what isotherms or pseudo-reduced temperatures (`Tpr`) are available from Standing and Katz chart
+* Find what pseudo-reduced pressure points are available
+* Plot any of the Standing-Katz isotherms to view `z` in graphical form
+* Plot a tile chart to show the range of applicability of the correlations
+* Get a statistics table when comparing any of the correlations to the Standing-Katz chart
+
 ## Vignettes
 The vignettes contain examples on the use and analysis of the various correlations.
 
