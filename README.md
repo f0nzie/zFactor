@@ -10,8 +10,6 @@ Computational tools for chemical and petroleum engineers. Calculates the error b
 Motivation
 ----------
 
-The goal of rODE is to explore R and its S4 classes and the differences with Java and Python classes while exploring simulations by solving differential equations.
-
 The correlations that are implemented in R for `zFactor` are:
 
 -   Beggs and Brill (BB)
@@ -159,6 +157,18 @@ zFactor:::z.plot.range("N10")
 
 ![](man/figures/README-unnamed-chunk-5-5.png)
 
+What you can do with `zFactor`
+------------------------------
+
+-   Find `z` with any of the correlations provided
+-   Get values from the Standing-Katz chart at any of the isotherms limited by the pseudo-reduced pressures (`Ppr`) digitized
+-   Find what isotherms or pseudo-reduced temperatures (`Tpr`) are available from Standing and Katz chart
+-   Find what pseudo-reduced pressure points are available
+-   Plot any of the Standing-Katz isotherms to view `z` in graphical form
+-   Plot a tile chart to show the range of applicability of the correlations
+-   Get a statistics table when comparing any of the correlations to the Standing-Katz chart
+-   Get a matrix of \``z` values calculated from any correlation where the rows are the pseudo-reduced temperatures and the columns the pseudo-reduced pressures
+
 Vignettes
 ---------
 
@@ -176,3 +186,12 @@ Tests
 -----
 
 There are tests for the correlations under tests/testthat.
+
+References
+----------
+
+The following books and papers were consulted during the development of this package:
+
+Ahmed, Tarek. 2007. *Equations of State and Pvt Analysis*. Houston, Texas: Gulf Publishing. <https://books.google.com/books?id=_a_tAQAAQBAJ&source=gbs_similarbooks>.
+
+Bahadori, Alireza. 2016. *Fluid Phase Behavior for Conventional and Unconventional Oil and Gas Reservoirs*. Houston, Texas: Gulf Publishing. <https://books.google.com/books?id=BwXeDAAAQBAJ>.
