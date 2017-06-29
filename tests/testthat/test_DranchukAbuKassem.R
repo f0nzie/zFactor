@@ -61,3 +61,19 @@ test_that("DAK corr matches solution of 16x7 Ppr, Tpr (all) matrix", {
     load(file = "dak_16x7.rda");
     expect_equal(z.DranchukAbuKassem(ppr, tpr), dak)
 })
+
+test_that("uni-element vectors of Ppr and Tpr work", {
+    # print(z.DranchukAbuKassem(c(1.0), c(1.5)))
+    expect_equal(z.DranchukAbuKassem(1.0, 1.5), 0.9034006, tolerance = 1e-7)
+    expect_equal(z.DranchukAbuKassem(c(1.0), c(1.5)), 0.9034006, tolerance = 1e-7)
+})
+
+test_that("1x2 matrix of Ppr and Tpr work", {
+    ppr <- c(1.0, 2.0)
+    tpr <- 1.5
+    # print(z.DranchukAbuKassem(ppr, tpr))
+    expected <- matrix(c(0.9034006, 0.8214651), nrow=1, ncol=2)
+    rownames(expected) <- tpr
+    colnames(expected) <- ppr
+    expect_equal(z.DranchukAbuKassem(ppr, tpr), expected, tolerance = 1e-7)
+})

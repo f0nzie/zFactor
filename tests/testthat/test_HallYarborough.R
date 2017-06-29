@@ -62,3 +62,17 @@ test_that("HY corr matches solution of 16x7 Ppr, Tpr (all) matrix", {
     load(file = "hy_16x7.rda");
     expect_equal(z.HallYarborough(ppr, tpr), hy)
 })
+
+test_that("uni-element vectors of Ppr and Tpr work", {
+    expect_equal(z.HallYarborough(1.0, 1.5), 0.9018179, tolerance = 1e-7)
+    expect_equal(z.HallYarborough(c(1.0), c(1.5)), 0.9018179, tolerance = 1e-7)
+})
+
+test_that("1x2 matrix of Ppr and Tpr work", {
+    ppr <- c(1.0, 2.0)
+    tpr <- 1.5
+    expected <- matrix(c(0.9018179, 0.8208338), nrow=1, ncol=2)
+    rownames(expected) <- tpr
+    colnames(expected) <- ppr
+    expect_equal(z.HallYarborough(ppr, tpr), expected, tolerance = 1e-7)
+})
