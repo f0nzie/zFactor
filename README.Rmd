@@ -1,9 +1,8 @@
 ---
-output: 
-  html_document: 
-    keep_md: yes
-link-citations: yes    
+output: html_document
 bibliography: bibliography.bib
+biblio-style: apalike
+link-citations: yes
 ---
 
 [![Rdoc](http://www.rdocumentation.org/badges/version/zFactor)](http://www.rdocumentation.org/packages/zFactor)
