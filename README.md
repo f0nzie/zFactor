@@ -17,12 +17,14 @@ The correlations that are implemented in R for `zFactor` are:
 -   Dranchuk and Abou-Kassem (DAK)
 -   Dranchuk, Purvis and Robnson (DPR)
 -   A correlation by Shell Oil Company (SH)
--   A correlation developed with Artificial Neural Networks (Ann10) by Kamyab et al
+-   A correlation developed with Artificial Neural Networks (Ann10) by Kamyab et al ([2010](#ref-Kamyab2010))
 
 Note. The Shell correlation was found cited in two books and two papers but the original paper or authors could not be found.
 
 Installation
 ------------
+
+I recommend installing from GitHub using devtools. CRAN release cycles only allow updates every one to two months.
 
 You can install the latest version of `zFactor` from github with:
 
@@ -128,34 +130,34 @@ zFactor:::z.plot.range("BB")
 zFactor:::z.plot.range("DAK")
 ```
 
-![](man/figures/README-unnamed-chunk-5-1.png)
+![](man/figures/README-unnamed-chunk-4-3.png)
 
 ``` r
 
 zFactor:::z.plot.range("DPR")
 ```
 
-![](man/figures/README-unnamed-chunk-5-2.png)
+![](man/figures/README-unnamed-chunk-4-4.png)
 
 ``` r
 
 zFactor:::z.plot.range("SH")
 ```
 
-![](man/figures/README-unnamed-chunk-5-3.png)
+![](man/figures/README-unnamed-chunk-4-5.png)
 
 ``` r
 zFactor:::z.plot.range("SH", interval = "fine")
 ```
 
-![](man/figures/README-unnamed-chunk-5-4.png)
+![](man/figures/README-unnamed-chunk-4-6.png)
 
 ``` r
 
 zFactor:::z.plot.range("N10")
 ```
 
-![](man/figures/README-unnamed-chunk-5-5.png)
+![](man/figures/README-unnamed-chunk-4-7.png)
 
 What you can do with `zFactor`
 ------------------------------
@@ -192,12 +194,4 @@ References
 
 The following books and papers were consulted during the development of this package:
 
-Ahmed, Tarek. 2007. *Equations of State and Pvt Analysis*. Houston, Texas: Gulf Publishing. <https://books.google.com/books?id=_a_tAQAAQBAJ&source=gbs_similarbooks>.
-
-Al-Anazi, B Duraya, GR Pazuki, M Nikookar, and A Fannoush Al-Anazi. 2011. “The Prediction of the Compressibility Factor of Sour and Natural Gas by an Artificial Neural Network System.” *Petroleum Science and Technology* 29 (4). Taylor & Francis: 325–36.
-
-Bahadori, Alireza. 2016. *Fluid Phase Behavior for Conventional and Unconventional Oil and Gas Reservoirs*. Houston, Texas: Gulf Publishing. <https://books.google.com/books?id=BwXeDAAAQBAJ>.
-
-Dranchuk, Peter M, RA Purvis, DB Robinson, and others. 1973. “Computer Calculation of Natural Gas Compressibility Factors Using the Standing and Katz Correlation.” In *Annual Technical Meeting*. Petroleum Society of Canada. doi:[doi.org/10.2118/73-112](https://doi.org/doi.org/10.2118/73-112).
-
-Kamyab, Mohammadreza, Jorge HB Sampaio, Farhad Qanbari, and Alfred W Eustes. 2010. “Using Artificial Neural Networks to Estimate the Z-Factor for Natural Hydrocarbon Gases.” *Journal of Petroleum Science and Engineering* 73 (3). Elsevier: 248–57. doi:[10.1016/j.petrol.2010.07.006](https://doi.org/10.1016/j.petrol.2010.07.006).
+Kamyab, Mohammadreza, Jorge HB Sampaio, Farhad Qanbari, and Alfred W Eustes. 2010. “Using Artificial Neural Networks to Estimate the Z-Factor for Natural Hydrocarbon Gases.” *Journal of Petroleum Science and Engineering* 73 (3). Elsevier: 248–57. <http://doi.org/10.1016/j.petrol.2010.07.006>.
