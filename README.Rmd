@@ -2,7 +2,7 @@
 output: github_document
 bibliography: bibliography.bib
 nocite: |
-       @tahmed, @bahadori
+       @tahmed, @bahadori, @Dranchuk1973, @Kamyab2010, @ Rakap2016, @Al-Anazi2011, Elsharkawy2001
 ---
 
 [![Rdoc](http://www.rdocumentation.org/badges/version/zFactor)](http://www.rdocumentation.org/packages/zFactor)
