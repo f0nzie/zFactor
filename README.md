@@ -194,4 +194,10 @@ The following books and papers were consulted during the development of this pac
 
 Ahmed, Tarek. 2007. *Equations of State and Pvt Analysis*. Houston, Texas: Gulf Publishing. <https://books.google.com/books?id=_a_tAQAAQBAJ&source=gbs_similarbooks>.
 
+Al-Anazi, B Duraya, GR Pazuki, M Nikookar, and A Fannoush Al-Anazi. 2011. “The Prediction of the Compressibility Factor of Sour and Natural Gas by an Artificial Neural Network System.” *Petroleum Science and Technology* 29 (4). Taylor & Francis: 325–36.
+
 Bahadori, Alireza. 2016. *Fluid Phase Behavior for Conventional and Unconventional Oil and Gas Reservoirs*. Houston, Texas: Gulf Publishing. <https://books.google.com/books?id=BwXeDAAAQBAJ>.
+
+Dranchuk, Peter M, RA Purvis, DB Robinson, and others. 1973. “Computer Calculation of Natural Gas Compressibility Factors Using the Standing and Katz Correlation.” In *Annual Technical Meeting*. Petroleum Society of Canada. doi:[doi.org/10.2118/73-112](https://doi.org/doi.org/10.2118/73-112).
+
+Kamyab, Mohammadreza, Jorge HB Sampaio, Farhad Qanbari, and Alfred W Eustes. 2010. “Using Artificial Neural Networks to Estimate the Z-Factor for Natural Hydrocarbon Gases.” *Journal of Petroleum Science and Engineering* 73 (3). Elsevier: 248–57. doi:[10.1016/j.petrol.2010.07.006](https://doi.org/10.1016/j.petrol.2010.07.006).
