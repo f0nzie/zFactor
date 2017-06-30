@@ -1,8 +1,8 @@
 ---
 output: github_document
 bibliography: bibliography.bib
-nocite: |
-       @tahmed, @bahadori, @Dranchuk1973, @Kamyab2010, @ Rakap2016, @Al-Anazi2011, Elsharkawy2001
+biblio-style: apalike
+link-citations: yes
 ---
 
 [![Rdoc](http://www.rdocumentation.org/badges/version/zFactor)](http://www.rdocumentation.org/packages/zFactor)
@@ -32,12 +32,14 @@ The correlations that are implemented in R for `zFactor` are:
 * Dranchuk and Abou-Kassem (DAK)
 * Dranchuk, Purvis and Robnson (DPR)
 * A correlation by Shell Oil Company (SH)
-* A correlation developed with Artificial Neural Networks (Ann10) by Kamyab et al
+* A correlation developed with Artificial Neural Networks (Ann10) by Kamyab et al [-@Kamyab2010]
 
 Note. The Shell correlation was found cited in two books and two papers but the original paper or authors could not be found.
 
 
 ## Installation
+I recommend installing from GitHub using devtools. CRAN release cycles only allow updates every one to two months.
+
 You can install the latest version of `zFactor` from github with:
 
 ```{r gh-installation, eval = FALSE}
@@ -97,11 +99,6 @@ library(zFactor)
 
 zFactor:::z.plot.range("HY", interval = "coarse")
 zFactor:::z.plot.range("BB")
-```
-
-
-
-```{r}
 
 zFactor:::z.plot.range("DAK")
 
