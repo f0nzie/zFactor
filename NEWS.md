@@ -1,5 +1,5 @@
-## 20170629, 0.1.4.9015
-* add more citations
+## 20170629, 0.1.4.9016
+* add more citations from JabRef
 * note on sweet gases for now.
 * as github_document
 
