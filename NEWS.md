@@ -1,4 +1,6 @@
-## 20170629, 0.1.4.9014
+## 20170629, 0.1.4.9015
+* add more citations
+* note on sweet gases for now.
 * as github_document
 
 ## 20170629, 0.1.4.9003
