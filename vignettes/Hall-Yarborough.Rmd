@@ -1,6 +1,6 @@
 ---
 title: "Hall-Yarborough correlation"
-author: "Vignette Author"
+author: "Alfonso R. Reyes"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -19,7 +19,7 @@ knitr::opts_chunk$set(echo=T, comment=NA, error=T, warning=F, message = F, fig.a
 
 ## Get `z` at selected `Ppr` and `Tpr=2.0`
 
-Use the the corelation to calculate `z` and the Standing-Katz chart we obtain a digitized point at the given `Tpr` and `Ppr`.
+Use the the corelation to calculate `z`. From the Standing-Katz chart we obtain a digitized point at the given `Tpr` and `Ppr`.
 
 ```{r}
 # get a z value using HY
@@ -27,13 +27,14 @@ library(zFactor)
 
 ppr <- 1.5
 tpr <- 2.0
+
 z.calc <- z.HallYarborough(pres.pr = ppr, temp.pr = tpr)
 
 # get a z value from the SK chart at the same Ppr and Tpr
 z.chart <- getStandingKatzMatrix(tpr_vector = tpr, 
                       pprRange = "lp")[1, as.character(ppr)]
 
-# calculate the APE
+# calculate the APE (Average Percentage Error)
 ape <- abs((z.calc - z.chart) / z.chart) * 100
 
 df <- as.data.frame(list(Ppr = ppr,  z.calc =z.calc, z.chart = z.chart, ape=ape))
@@ -42,13 +43,14 @@ df
 ```
 
 
-## Get `z` at selected `Ppr` and `Tpr=1.1`
+## Get `z` at selected `Ppr` and `Tpr = 1.1`
 From the Standing-Katz chart we obtain a digitized point:
 
 ```{r}
 library(zFactor)
 ppr <- 1.5
 tpr <- 1.1
+
 z.calc <- z.HallYarborough(pres.pr = ppr, temp.pr = tpr)
 
 # From the Standing-Katz chart we obtain a digitized point:
@@ -63,7 +65,7 @@ rownames(df) <- tpr
 df
 ```
 
-> We see here a noticeable difference between the values of `z` from the HY correlation and the value read from the Standing-Katz chart. This is expected at these low pressures and temperatures.
+> We see here a noticeable difference between the values of `z` from the `HY` correlation and the value read from the Standing-Katz chart. This is expected at these low pressures and temperatures. This area is a challenge for all of the correlations as well.
 
 
 ## Get values of `z` for combinations of `Ppr` and `Tpr`
@@ -89,21 +91,24 @@ cat("\n z.chart \n"); print(z.chart)
 cat("\n APE \n"); print(ape)
 ```
 
-> You can see errors of 22.48% and 12.09% in the isotherm `Tpr=1.05`. Other errors, greater than one, can also be found at the isotherm `Tpr=1.1`. Then, the rest of the curves are fine.
+> You can see errors of 22.48% and 12.09% in the isotherm `Tpr=1.05` at `Ppr=1.5 and 2.5, respectively. Other errors, greater than one, can also be found at the isotherm `Tpr=1.1`. Then, the rest of the curves are fine.
 
 ## Analyze the error at the `isotherms`
-Applying the function `summary` over the transpose of the matrix:
+We apply the function `summary` over the transpose of the matrix. Applying the transpose will alow us to see the statistics at each of the isotherms.
 
 ```{r}
 sum_t_ape <- summary(t(ape))
 sum_t_ape
 ```
 
-> We can see that the errors in `z` are considerable with a `r sum_t_ape[1,1]`% and `r sum_t_ape[6,1]`% for `Tpr=1.05`, and a `r sum_t_ape[1,2]`% and `r sum_t_ape[6,2]`% for `Tpr=1.10`. The Hall-Yarborough correlation shows a very high error at values of `Tpr` lower or equal than `1.1` being `Tpr=1.05` the worst curve to calculate z values from. We will explore later a comparative **tile** chart where we confirm these early calculations.
+> We see that the errors in `z` are considerable with a `r sum_t_ape[1,1]`% and `r sum_t_ape[6,1]`% for `Tpr=1.05`, and a `r sum_t_ape[1,2]`% and `r sum_t_ape[6,2]`% for `Tpr=1.10`. 
+
+The Hall-Yarborough correlation shows a very high error at values of `Tpr` lower or equal than `1.1`, being `Tpr=1.05` the worst curve to calculate z values from. Keep that in mind. We will explore later a comparative **tile** chart where we confirm these early calculations.
 
 
 
 ## Analyze the error for greater values of `Tpr`
+Let's see the numbers now for higher values of `Tpr` at various values of `Ppr`.
 
 ```{r}
 library(zFactor)
@@ -128,19 +133,19 @@ cat("\n APE \n"); print(ape)
 
 
 ## Analyze the error at the `isotherms`
-Applying the function `summary` over the transpose of the matrix to observe the error of the correlation at each isotherm.
+Now, let's apply  the function `summary` over the transpose of the matrix to observe the error of the correlation at each isotherm.
 
 ```{r}
 sum_t_ape <- summary(t(ape))
 sum_t_ape
 ```
 
-> In all, the error of `z` at these isotherms is less than 0.82%. Pretty good.
+> In all, the error of `z` at these isotherms is less than 0.82%. **Pretty good**.
 
 
 
 ## Prepare to plot `SK` chart values vs `HY` correlation
-Plotting the difference between the `z` values in the Standing-Katz and the values calculated by Hall-Yarborough. For the moment we will not pay attention to the numerical error but to the `error bars` in the plot.
+Now, we will be plotting the difference between the `z` values in the Standing-Katz and the `z` values calculated by Hall-Yarborough. For the moment let's not pay attention to the numerical error but to the `error bars` in the plot (the orange bars).
 
 
 ```{r}
@@ -161,12 +166,13 @@ p <- ggplot(sk_corr_2, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
                   position=position_dodge(0.05))
 print(p)
 ```
+
 > As we were expecting, the errors can be found on Tpr=1.05 and Tpr=1.1
 
 
 ## Analyzing the error for all the `Tpr` curves
 In this last example, we compare the values of `z` at all the isotherms.
-We use the function `getCurvesDigitized` to obtain all the isotherms or `Tpr` curves in the Standing-Katz chart that have been digitized. The next function `createTidyFromMatrix` calculate `z` using the correlation and prepares a tidy dataset ready to plot.
+We use the function `getCurvesDigitized` in the `zfactor` package to obtain all the isotherms or `Tpr` curves in the Standing-Katz chart that have been digitized. The next function `createTidyFromMatrix` calculates `z` using the correlation and prepares a tidy dataset ready to plot.
 
 ```{r}
 library(ggplot2)
