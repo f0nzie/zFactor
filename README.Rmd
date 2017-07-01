@@ -2,7 +2,7 @@
 output: github_document
 bibliography: bibliography.bib
 nocite: |
-       @tahmed, @bahadori, @Dranchuk1973, @Kamyab2010, @Rakap2016, @Al-Anazi2011, @Elsharkawy2001
+       @tahmed, @bahadori, @Dranchuk1973, @Kamyab2010, @Rakap2016, @Al-Anazi2011, @Elsharkawy2001, @Mohamadi-Baghmolaei2015, @Kumar2004, @Almeida2014, @Elsharkawy2001a, @Standing1942, @Kareem2016, @Kassem1990, @Fatoorehchi2014, @Hall1973
 biblio-style: apalike
 link-citations: yes
 ---
