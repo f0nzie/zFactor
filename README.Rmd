@@ -1,8 +1,7 @@
 ---
-output: 
-  html_document: 
-    keep_md: yes
+output: github_document
 bibliography: bibliography.bib
+biblio-style: apalike
 link-citations: yes
 ---
 
@@ -24,6 +23,10 @@ Computational tools for chemical and petroleum engineers. Calculates the error b
 
 ## Motivation
 For the development of vertical lift performance curves is necessary to calculate properties of hydrocarbons in liquid and gaseous phases.  Compressibility is one of the hydrocarbons properties and is important to count with the apropriate correlation to calculte it at every iterations along the tubing.
+
+There are several compressibility correlations, In this package, few of thjem, or the most used are being evaluated. There has been extensive evaluations on the compressibility correlation. This evaluation is different in the sense that provides a graphical view of the range of applicability.
+
+Sweet hydrocarbon gases
 
 
 The correlations that are implemented in R for `zFactor` are:
