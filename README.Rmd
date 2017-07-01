@@ -1,6 +1,8 @@
 ---
 output: github_document
 bibliography: bibliography.bib
+nocite: |
+       @tahmed, @bahadori, @Dranchuk1973, @Kamyab2010, @Rakap2016, @Al-Anazi2011, @Elsharkawy2001
 biblio-style: apalike
 link-citations: yes
 ---
@@ -26,7 +28,7 @@ For the development of vertical lift performance curves is necessary to calculat
 
 There are several compressibility correlations, In this package, few of thjem, or the most used are being evaluated. There has been extensive evaluations on the compressibility correlation. This evaluation is different in the sense that provides a graphical view of the range of applicability.
 
-Sweet hydrocarbon gases
+This analysis focus on Sweet hydrocarbon gases. Compressibility correlation for sour gases are little bit more complicated since significant deviations to the hydrocarbon gases in the Standing-Katz charts. Effects of CO2, H2S and N2 have to accounted for. In a future release of `zFactor` correlations for sour hydrocarbons gases will be covered.
 
 
 The correlations that are implemented in R for `zFactor` are:

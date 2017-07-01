@@ -14,7 +14,7 @@ For the development of vertical lift performance curves is necessary to calculat
 
 There are several compressibility correlations, In this package, few of thjem, or the most used are being evaluated. There has been extensive evaluations on the compressibility correlation. This evaluation is different in the sense that provides a graphical view of the range of applicability.
 
-Sweet hydrocarbon gases
+This analysis focus on Sweet hydrocarbon gases. Compressibility correlation for sour gases are little bit more complicated since significant deviations to the hydrocarbon gases in the Standing-Katz charts. Effects of CO2, H2S and N2 have to accounted for. In a future release of `zFactor` correlations for sour hydrocarbons gases will be covered.
 
 The correlations that are implemented in R for `zFactor` are:
 
@@ -200,4 +200,16 @@ References
 
 The following books and papers were consulted during the development of this package:
 
+Ahmed, Tarek. 2007. *Equations of State and Pvt Analysis*. Houston, Texas: Gulf Publishing. <https://books.google.com/books?id=_a_tAQAAQBAJ&source=gbs_similarbooks>.
+
+Al-Anazi, B Duraya, GR Pazuki, M Nikookar, and A Fannoush Al-Anazi. 2011. “The Prediction of the Compressibility Factor of Sour and Natural Gas by an Artificial Neural Network System.” *Petroleum Science and Technology* 29 (4). Taylor & Francis: 325–36. <http://doi.org/10.1080/10916460903330080>.
+
+Bahadori, Alireza. 2016. *Fluid Phase Behavior for Conventional and Unconventional Oil and Gas Reservoirs*. Houston, Texas: Gulf Publishing. <https://books.google.com/books?id=BwXeDAAAQBAJ>.
+
+Dranchuk, Peter M, RA Purvis, DB Robinson, and others. 1973. “Computer Calculation of Natural Gas Compressibility Factors Using the Standing and Katz Correlation.” In *Annual Technical Meeting*. Petroleum Society of Canada. <http://doi.org/10.2118/73-112>.
+
+Elsharkawy, Adel M, Yousef S Kh S Hashem, and Abbas A Alikhan. 2001. “Compressibility Factor for Gas Condensates.” *Energy & Fuels* 15 (4). ACS Publications: 807–16. <http://doi.org/10.2118/59702-ms>.
+
 Kamyab, Mohammadreza, Jorge HB Sampaio, Farhad Qanbari, and Alfred W Eustes. 2010. “Using Artificial Neural Networks to Estimate the Z-Factor for Natural Hydrocarbon Gases.” *Journal of Petroleum Science and Engineering* 73 (3). Elsevier: 248–57. <http://doi.org/10.1016/j.petrol.2010.07.006>.
+
+Rakap, Salih, Serife Rakap, Derya Evran, and Oguzcan Cig. 2016. “Comparative Evaluation of the Reliability and Validity of Three Data Extraction Programs: UnGraph, Graphclick, and Digitizeit.” *Computers in Human Behavior* 55. Elsevier: 159–66. <http://doi.org/10.1016/j.chb.2015.09.008>.

@@ -1,3 +1,6 @@
+## 20170629, 0.1.4.9014
+* as github_document
+
 ## 20170629, 0.1.4.9003
 * all stat plots now show the name of the correlation
 * stat tile plots can be drawn with Ppr `coarse` or `fine` interval
