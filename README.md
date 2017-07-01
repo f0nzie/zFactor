@@ -5,7 +5,7 @@
 zFactor
 =======
 
-Computational tools for chemical, petrochemical and petroleum engineers. Calculates the deviation between different correlations for gas compressibility against the Standing-Katz chart.
+Computational tools for chemical, petrochemical and petroleum engineers. Calculates the deviation between different correlations for gas compressibility compared to the Standing-Katz chart.
 
 Motivation
 ----------
@@ -33,7 +33,7 @@ Note. The Shell correlation was found cited in two books and two papers but the 
 Installation
 ------------
 
-I recommend installing from GitHub using devtools. CRAN release cycles only allow updates every one to two months.
+I recommend installing from GitHub using devtools, that way you get the latest and greatest version. CRAN release cycles allows updates every one to two months.
 
 You can install the latest version of `zFactor` from github with:
 
@@ -42,7 +42,7 @@ You can install the latest version of `zFactor` from github with:
 devtools::install_github("f0nzie/zFactor")
 ```
 
-Or from `CRAN`:
+Or, if your prefer, from `CRAN`:
 
 ``` r
 install.packages("zFactor")
@@ -120,50 +120,55 @@ Comparative Analysis
 Range of Applicability
 ----------------------
 
+How to interpret the colors? We use the Mean Absolute Percentage Error or `MAPE` to visualize how close the correlation follow the experimental values of the Standing-Katz chart.
+
+-   `Blue`: the MAPE is zero or near zero
+-   `Yellow`: the MAPE is around 10 percent.
+-   'Red\`: the MAPE has reached 25% or more
+-   `Pink`: the mean absolute percentage error is above or way above 25%.
+
+You can see for yourself which correlation is more stable at different ranges of pseudo-reduce pressures and temperatures.
+
 ``` r
 library(zFactor)
 
-zFactor:::z.plot.range("HY", interval = "coarse")
+zFactor:::z.plot.range("HY",  interval = "fine")
 ```
 
 ![](man/figures/README-unnamed-chunk-4-1.png)
 
 ``` r
-zFactor:::z.plot.range("BB")
+zFactor:::z.plot.range("BB",  interval = "fine")
 ```
 
 ![](man/figures/README-unnamed-chunk-4-2.png)
 
 ``` r
-
-zFactor:::z.plot.range("DAK")
+zFactor:::z.plot.range("DAK", interval = "fine")
 ```
 
 ![](man/figures/README-unnamed-chunk-4-3.png)
 
 ``` r
-
-zFactor:::z.plot.range("DPR")
+zFactor:::z.plot.range("DPR", interval = "fine")
 ```
 
 ![](man/figures/README-unnamed-chunk-4-4.png)
 
 ``` r
-
-zFactor:::z.plot.range("SH")
+zFactor:::z.plot.range("SH",  interval = "fine")
 ```
 
 ![](man/figures/README-unnamed-chunk-4-5.png)
 
 ``` r
-zFactor:::z.plot.range("SH", interval = "fine")
+zFactor:::z.plot.range("SH",  interval = "fine")
 ```
 
 ![](man/figures/README-unnamed-chunk-4-6.png)
 
 ``` r
-
-zFactor:::z.plot.range("N10")
+zFactor:::z.plot.range("N10", interval = "fine")
 ```
 
 ![](man/figures/README-unnamed-chunk-4-7.png)
