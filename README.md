@@ -5,16 +5,19 @@
 zFactor
 =======
 
-Computational tools for chemical and petroleum engineers. Calculates the error between different correlations for gas compressibility.
+Computational tools for chemical, petrochemical and petroleum engineers. Calculates the deviation between different correlations for gas compressibility against the Standing-Katz chart.
 
 Motivation
 ----------
 
-For the development of vertical lift performance curves is necessary to calculate properties of hydrocarbons in liquid and gaseous phases. Compressibility is one of the hydrocarbons properties and is important to count with the apropriate correlation to calculte it at every iterations along the tubing.
+For the development of vertical lift performance (VLP) curves and other petroleum engineering calculations, it is necessary to calculate properties of hydrocarbons in mixtures, liquid and gaseous phases. Compressibility is one of these hydrocarbon properties. It is important to count with the apropriate correlation and know its range of applicability in order to calculate other properties dependant of `z`.
 
-There are several compressibility correlations, In this package, few of thjem, or the most used are being evaluated. There has been extensive evaluations on the compressibility correlation. This evaluation is different in the sense that provides a graphical view of the range of applicability.
+There are several compressibility correlations. In this package, few of them, or the most used are being evaluated. There has been extensive studies on compressibility correlations. This evaluation is different in the sense that provides a graphical view of the range of applicability as well statistical measures of the errors.
 
-This analysis focus on Sweet hydrocarbon gases. Compressibility correlation for sour gases are little bit more complicated since significant deviations to the hydrocarbon gases in the Standing-Katz charts. Effects of CO2, H2S and N2 have to accounted for. In a future release of `zFactor` correlations for sour hydrocarbons gases will be covered.
+This analysis focus on sweet hydrocarbon gases. Compressibility correlations for sour gases are little bit more complicated since they show significant deviations from the curves in the Standing-Katz charts. Effects of CO2, H2S and N2 have to accounted for. In a future release of `zFactor` correlations for sour hydrocarbons gases will be covered.
+
+Correlations used in this study
+-------------------------------
 
 The correlations that are implemented in R for `zFactor` are:
 
@@ -23,9 +26,9 @@ The correlations that are implemented in R for `zFactor` are:
 -   Dranchuk and Abou-Kassem (DAK)
 -   Dranchuk, Purvis and Robnson (DPR)
 -   A correlation by Shell Oil Company (SH)
--   A correlation developed with Artificial Neural Networks (Ann10) by Kamyab et al ([2010](#ref-Kamyab2010))
+-   A correlation developed with Artificial Neural Networks (Ann10) by Kamyab et al. See footnotes
 
-Note. The Shell correlation was found cited in two books and two papers but the original paper or authors could not be found.
+Note. The Shell correlation was found cited in two books and two papers but the original paper or authors could not be identified.
 
 Installation
 ------------
