@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 ```
 
 # zFactor
-Computational tools for chemical, petrochemical and petroleum engineers. Calculates the deviation between different correlations for gas compressibility against the Standing-Katz chart.
+Computational tools for chemical, petrochemical and petroleum engineers. Calculates the deviation between different correlations for gas compressibility compared to the Standing-Katz chart.
 
 ## Motivation
 For the development of vertical lift performance (VLP) curves and other petroleum engineering calculations, it is necessary to calculate properties of hydrocarbons in mixtures, liquid and gaseous phases.  Compressibility is one of these hydrocarbon properties. It is important to count with the apropriate correlation and know its range of applicability in order to calculate other properties dependant of `z`.
@@ -97,8 +97,8 @@ z.Ann10(ppr, tpr)
 
 ## Comparative Analysis
 
-## Range of Applicability
 
+## Range of Applicability
 
 ```{r}
 library(zFactor)
