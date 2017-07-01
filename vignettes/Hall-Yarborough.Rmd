@@ -179,7 +179,7 @@ library(ggplot2)
 library(tibble)
 
 # get all `lp` Tpr curves
-tpr_all <- getCurvesDigitized(pprRange = "lp")
+tpr_all <- getStandingKatzTpr(pprRange = "lp")
 ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
 sk_corr_all <- createTidyFromMatrix(ppr, tpr_all, correlation = "HY")
 as.tibble(sk_corr_all)
@@ -192,11 +192,11 @@ p <- ggplot(sk_corr_all, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
 print(p)
 ```
 
-> The greatest errors are localized in two of the Tpr curves: at 1.05 and 1.1.
+> As we saw before, we confirm that the greatest errors are localized in two of the `Tpr` curves: at 1.05 and 1.1.
 
 
 ## Range of applicability of the correlation
-
+What we will see here is the distribution of the Mean Average Percentage Error or MAPE accross all the `Tpr` isotherms and `Ppr` grids. Remember from the `README`: red and yellow are bad.
  
 ```{r}
 # MSE: Mean Squared Error
@@ -231,6 +231,7 @@ ggplot(smry_tpr_ppr, aes(Ppr, Tpr)) +
 
 
 ## Plotting the `Tpr` and `Ppr` values that show more error
+This is just plotting the couple of isotherms where we see the largest errors.
 
 ```{r}
 library(dplyr)
@@ -254,12 +255,15 @@ as.tibble(smry_tpr_ppr)
 ```
 
 
+## RMSE: Root Mean Square Error
+$$RMSE = \sqrt {\frac {1}{n} \sum_{i=1}^{n} (y_i - \hat y_i)^2}$$
+
 ## Appendix
 
-Which is equivalent to using the `sapply` function with the internal function `.z.HallYarborough`, which we call adding the prefix `zFactor:::`. That is, the package name and **three** dots.
+`getStandingKatzMatrix` is equivalent to using the `sapply` function with the internal function `.z.HallYarborough` (the **dot** means it's internal), which we call adding the prefix `zFactor:::`. That is, the package name and **three** colons.
 
 ```{r}
-# test HY with 1st-derivative using the values from paper 
+# test HY with 1st-derivative using the values from the paper 
  
 ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
 tpr <- c(1.3, 1.5, 1.7, 2) 
@@ -272,7 +276,8 @@ colnames(hy) <- ppr
 print(hy) 
 ```
 
-$$RMSE = \sqrt {\frac {1}{n} \sum_{i=1}^{n} (y_i - \hat y_i)^2}$$
+
+
 
 
 

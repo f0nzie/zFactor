@@ -122,6 +122,14 @@ zFactor:::z.plot.range("N10", interval = "fine")
 ## Comparative Analysis
 The comparative analysis shows tables with different error measurements:
 
+    MSE: Mean Squared Error
+    RMSE: Root Mean Sqyared Error
+    RSS: residual sum of square
+    RMSLE: Root Mean Squared Logarithmic Error. Penalizes understimation.
+    MAPE: Mean Absolute Percentage Error = AARE
+    MPE: Mean Percentage error = ARE
+    MAE: Mean Absolute Error
+
 ```{r}
 
 ```
