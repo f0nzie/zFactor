@@ -1,53 +1,54 @@
 
 [![Rdoc](http://www.rdocumentation.org/badges/version/zFactor)](http://www.rdocumentation.org/packages/zFactor)
 
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+zFactor
+=======
 
-
-
-# zFactor
 Computational tools for chemical and petroleum engineers. Calculates the error between different correlations for gas compressibility.
 
-## Motivation
-For the development of vertical lift performance curves is necessary to calculate properties of hydrocarbons in liquid and gaseous phases.  Compressibility is one of the hydrocarbons properties and is important to count with the apropriate correlation to calculte it at every iterations along the tubing.
+Motivation
+----------
 
+For the development of vertical lift performance curves is necessary to calculate properties of hydrocarbons in liquid and gaseous phases. Compressibility is one of the hydrocarbons properties and is important to count with the apropriate correlation to calculte it at every iterations along the tubing.
+
+There are several compressibility correlations, In this package, few of thjem, or the most used are being evaluated. There has been extensive evaluations on the compressibility correlation. This evaluation is different in the sense that provides a graphical view of the range of applicability.
+
+Sweet hydrocarbon gases
 
 The correlations that are implemented in R for `zFactor` are:
 
-* Beggs and Brill (BB)
-* Hall and Yarborough (HY)
-* Dranchuk and Abou-Kassem (DAK)
-* Dranchuk, Purvis and Robnson (DPR)
-* A correlation by Shell Oil Company (SH)
-* A correlation developed with Artificial Neural Networks (Ann10) by Kamyab et al [-@Kamyab2010]
+-   Beggs and Brill (BB)
+-   Hall and Yarborough (HY)
+-   Dranchuk and Abou-Kassem (DAK)
+-   Dranchuk, Purvis and Robnson (DPR)
+-   A correlation by Shell Oil Company (SH)
+-   A correlation developed with Artificial Neural Networks (Ann10) by Kamyab et al ([2010](#ref-Kamyab2010))
 
 Note. The Shell correlation was found cited in two books and two papers but the original paper or authors could not be found.
 
+Installation
+------------
 
-## Installation
 I recommend installing from GitHub using devtools. CRAN release cycles only allow updates every one to two months.
 
 You can install the latest version of `zFactor` from github with:
 
-
-```r
+``` r
 # install.packages("devtools")
 devtools::install_github("f0nzie/zFactor")
 ```
 
-
 Or from `CRAN`:
 
-
-```r
+``` r
 install.packages("zFactor")
 ```
 
-## Usage
+Usage
+-----
 
-
-```r
+``` r
 library(zFactor)
 
 # get `z` values from the Standing-Katz chart
@@ -110,93 +111,93 @@ z.Ann10(ppr, tpr)
 #> 1.8 0.9758251 0.9330673 0.9033038 0.8900081 0.8983954 0.9253309 0.9638663
 ```
 
-## Comparative Analysis
+Comparative Analysis
+--------------------
 
-## Range of Applicability
+Range of Applicability
+----------------------
 
-
-
-```r
+``` r
 library(zFactor)
 
 zFactor:::z.plot.range("HY", interval = "coarse")
 ```
 
-![](man/figures/README-unnamed-chunk-4-1.png)<!-- -->
+![](man/figures/README-unnamed-chunk-4-1.png)
 
-```r
+``` r
 zFactor:::z.plot.range("BB")
 ```
 
-![](man/figures/README-unnamed-chunk-4-2.png)<!-- -->
+![](man/figures/README-unnamed-chunk-4-2.png)
 
-```r
+``` r
 
 zFactor:::z.plot.range("DAK")
 ```
 
-![](man/figures/README-unnamed-chunk-4-3.png)<!-- -->
+![](man/figures/README-unnamed-chunk-4-3.png)
 
-```r
+``` r
 
 zFactor:::z.plot.range("DPR")
 ```
 
-![](man/figures/README-unnamed-chunk-4-4.png)<!-- -->
+![](man/figures/README-unnamed-chunk-4-4.png)
 
-```r
+``` r
 
 zFactor:::z.plot.range("SH")
 ```
 
-![](man/figures/README-unnamed-chunk-4-5.png)<!-- -->
+![](man/figures/README-unnamed-chunk-4-5.png)
 
-```r
+``` r
 zFactor:::z.plot.range("SH", interval = "fine")
 ```
 
-![](man/figures/README-unnamed-chunk-4-6.png)<!-- -->
+![](man/figures/README-unnamed-chunk-4-6.png)
 
-```r
+``` r
 
 zFactor:::z.plot.range("N10")
 ```
 
-![](man/figures/README-unnamed-chunk-4-7.png)<!-- -->
+![](man/figures/README-unnamed-chunk-4-7.png)
 
+What you can do with `zFactor`
+------------------------------
 
-## What you can do with `zFactor`
+-   Find `z` with any of the correlations provided
+-   Get values from the Standing-Katz chart at any of the isotherms limited by the pseudo-reduced pressures (`Ppr`) digitized
+-   Find what isotherms or pseudo-reduced temperatures (`Tpr`) are available from Standing and Katz chart
+-   Find what pseudo-reduced pressure points are available
+-   Plot any of the Standing-Katz isotherms to view `z` in graphical form
+-   Plot a tile chart to show the range of applicability of the correlations
+-   Get a statistics table when comparing any of the correlations to the Standing-Katz chart
+-   Get a matrix of \``z` values calculated from any correlation where the rows are the pseudo-reduced temperatures and the columns the pseudo-reduced pressures
 
-* Find `z` with any of the correlations provided
-* Get values from the Standing-Katz chart at any of the isotherms limited by the pseudo-reduced pressures (`Ppr`) digitized
-* Find what isotherms or pseudo-reduced temperatures (`Tpr`) are available from Standing and Katz chart
-* Find what pseudo-reduced pressure points are available
-* Plot any of the Standing-Katz isotherms to view `z` in graphical form
-* Plot a tile chart to show the range of applicability of the correlations
-* Get a statistics table when comparing any of the correlations to the Standing-Katz chart
-* Get a matrix of ``z` values calculated from any correlation where the rows are the pseudo-reduced temperatures and the columns the pseudo-reduced pressures
+Vignettes
+---------
 
-
-## Vignettes
 The vignettes contain examples on the use and analysis of the various correlations.
 
-* StandingKatz_chart.Rmd
-* Beggs-Brill.Rmd
-* Hall-Yarborough.Rmd
-* Dranchuk-AbouKassem.Rmd
-* Dranchuk-Purvis-Robinson.Rmd
-* shell.Rmd
-* ANN.Rmd
+-   StandingKatz\_chart.Rmd
+-   Beggs-Brill.Rmd
+-   Hall-Yarborough.Rmd
+-   Dranchuk-AbouKassem.Rmd
+-   Dranchuk-Purvis-Robinson.Rmd
+-   shell.Rmd
+-   ANN.Rmd
 
-## Tests
+Tests
+-----
+
 There are tests for the correlations under tests/testthat.
 
-## References
+References
+----------
+
 The following books and papers were consulted during the development of this package:
 
-
-
-
-
-
-
+Kamyab, Mohammadreza, Jorge HB Sampaio, Farhad Qanbari, and Alfred W Eustes. 2010. “Using Artificial Neural Networks to Estimate the Z-Factor for Natural Hydrocarbon Gases.” *Journal of Petroleum Science and Engineering* 73 (3). Elsevier: 248–57. <http://doi.org/10.1016/j.petrol.2010.07.006>.

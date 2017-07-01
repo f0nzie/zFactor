@@ -1,7 +1,7 @@
 Package: zFactor
 Type: Package
 Title: Calculate the Compressibility Factor 'z' for Hydrocarbon Gases
-Version: 0.1.4.9012
+Version: 0.1.4.9013
 Author: Alfonso R. Reyes <alfonso.reyes@oilgainsanalytics.com>
 Maintainer: Alfonso R. Reyes <alfonso.reyes@oilgainsanalytics.com>
 Description: Computational algorithms to solve equations and find the
