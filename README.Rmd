@@ -35,16 +35,19 @@ There are several compressibility correlations. In this package, few of them, or
 This analysis focus on sweet hydrocarbon gases. Compressibility correlations for sour gases are little bit more complicated since they show significant deviations from the curves in the Standing-Katz charts. Effects of CO2, H2S and N2 have to accounted for. In a future release of `zFactor` correlations for sour hydrocarbons gases will be covered.
 
 ## Correlations used in this study
-The correlations that are implemented in R for `zFactor` are:
+The correlations that are implemented in R for the package **zFactor** are:
 
-* Beggs and Brill (BB) 
-* Hall and Yarborough (HY) 
-* Dranchuk and Abou-Kassem (DAK) 
-* Dranchuk, Purvis and Robnson (DPR)
-* A correlation by Shell Oil Company (SH) ``r citep(bib[c("Kumar2004")])``
-* A correlation developed with Artificial Neural Networks (Ann10) by Kamyab et al. See footnotes `r citep(bib[c("Kamyab2010")])`
+* Beggs and Brill (BB) ``r citep(bib[c("Azizi2010")])`` 
 
-Note. The Shell correlation was found cited in two books and two papers but the original paper or authors could not be identified. 
+* Hall and Yarborough (HY) ``r citep(bib[c("Hall1973")])`` 
+
+* Dranchuk and Abou-Kassem (DAK) ``r citep(bib[c("Dranchuk1975")])`` 
+
+* Dranchuk, Purvis and Robinson (DPR) ``r citep(bib[c("Dranchuk1973")])`` 
+
+* A correlation by Shell Oil Company (SH) ``r citep(bib[c("Kumar2004")])``, ``r citep(bib["bahadori"])``, ``r citep(bib["Almeida2014"])``, ``r citep(bib["Al-Anazi2011"])``, ``r citep(bib["Azizi2010"])``, ``r citep(bib["Mohamadi-Baghmolaei2015"])``. The Shell correlation was found cited in two books and several papers (including the equation and constants), but the original paper or authors could not be identified. 
+
+* A correlation developed with Artificial Neural Networks (Ann10) by Kamyab et al. ``r citep(bib[c("Kamyab2010")])``
 
 
 ## Installation
@@ -126,15 +129,16 @@ zFactor:::z.plot.range("N10", interval = "fine")
 ## Comparative Analysis
 The comparative analysis shows tables with different error measurements:
 
-    MSE: Mean Squared Error
-    RMSE: Root Mean Sqyared Error
-    RSS: residual sum of square
+    MSE:   Mean Squared Error
+    RMSE:  Root Mean Sqyared Error
+    RSS:   Residual sum of Squares
     RMSLE: Root Mean Squared Logarithmic Error. Penalizes understimation.
-    MAPE: Mean Absolute Percentage Error = AARE
-    MPE: Mean Percentage error = ARE
-    MAE: Mean Absolute Error
+    MAPE:  Mean Absolute Percentage Error = AARE
+    MPE:   Mean Percentage error = ARE
+    MAE:   Mean Absolute Error
 
 ```{r}
+# Example of errors table
 
 ```
 

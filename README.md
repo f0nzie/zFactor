@@ -19,16 +19,19 @@ This analysis focus on sweet hydrocarbon gases. Compressibility correlations for
 Correlations used in this study
 -------------------------------
 
-The correlations that are implemented in R for `zFactor` are:
+The correlations that are implemented in R for the package **zFactor** are:
 
--   Beggs and Brill (BB)
--   Hall and Yarborough (HY)
--   Dranchuk and Abou-Kassem (DAK)
--   Dranchuk, Purvis and Robnson (DPR)
--   A correlation by Shell Oil Company (SH) `(Kumar, 2004)`
--   A correlation developed with Artificial Neural Networks (Ann10) by Kamyab et al. See footnotes (Kamyab, Sampaio, Qanbari, and Eustes, 2010)
+-   Beggs and Brill (BB) `(Azizi N. Behbahani R., 2010)`
 
-Note. The Shell correlation was found cited in two books and two papers but the original paper or authors could not be identified.
+-   Hall and Yarborough (HY) `(Hall and Yarborough, 1973)`
+
+-   Dranchuk and Abou-Kassem (DAK) `(Dranchuk and Abou-Kassem, 1975)`
+
+-   Dranchuk, Purvis and Robinson (DPR) `(Dranchuk, Purvis, Robinson, and others, 1973)`
+
+-   A correlation by Shell Oil Company (SH) `(Kumar, 2004)`, `(Bahadori, 2016)`, `(de Almeida, Velásquez, and Barbieri, 2014)`, `(Al-Anazi, Pazuki, Nikookar, and Al-Anazi, 2011)`, `(Azizi N. Behbahani R., 2010)`, `(Mohamadi-Baghmolaei, Azin, Osfouri, Mohamadi-Baghmolaei, and Zarei, 2015)`. The Shell correlation was found cited in two books and several papers (including the equation and constants), but the original paper or authors could not be identified.
+
+-   A correlation developed with Artificial Neural Networks (Ann10) by Kamyab et al. `(Kamyab, Sampaio, Qanbari, and Eustes, 2010)`
 
 Installation
 ------------
@@ -175,13 +178,13 @@ Comparative Analysis
 
 The comparative analysis shows tables with different error measurements:
 
-    MSE: Mean Squared Error
-    RMSE: Root Mean Sqyared Error
-    RSS: residual sum of square
+    MSE:   Mean Squared Error
+    RMSE:  Root Mean Sqyared Error
+    RSS:   Residual sum of Squares
     RMSLE: Root Mean Squared Logarithmic Error. Penalizes understimation.
-    MAPE: Mean Absolute Percentage Error = AARE
-    MPE: Mean Percentage error = ARE
-    MAE: Mean Absolute Error
+    MAPE:  Mean Absolute Percentage Error = AARE
+    MPE:   Mean Percentage error = ARE
+    MAE:   Mean Absolute Error
 
 What you can do with `zFactor`
 ------------------------------
@@ -218,6 +221,22 @@ References
 
 The following books and papers were consulted during the development of this package:
 
-\[1\] M. Kamyab, J. H. Sampaio, F. Qanbari, et al. "Using artificial neural networks to estimate the z-factor for natural hydrocarbon gases". In: *Journal of Petroleum Science and Engineering* 73.3 (2010), pp. 248-257. DOI: 10.1016/j.petrol.2010.07.006. &lt;URL: <http://doi.org/10.1016/j.petrol.2010.07.006>&gt;.
+\[1\] B. D. Al-Anazi, G. Pazuki, M. Nikookar, et al. "The prediction of the compressibility factor of sour and natural gas by an artificial neural network system". In: *Petroleum Science and Technology* 29.4 (2011), pp. 325-336. DOI: 10.1080/10916460903330080. &lt;URL: <http://doi.org/10.1080/10916460903330080>&gt;.
 
-\[2\] N. Kumar. "Compressibility factors for natural and sour reservoir gases by correlations and cubic equations of state". MA Thesis. Texas Tech University, 2004. &lt;URL: <https://ttu-ir.tdl.org/ttu-ir/bitstream/handle/2346/15386/NeerajKumarMastersThesis.pdf?sequence=1&isAllowed=y>&gt;.
+\[2\] J. C. de Almeida, J. A. Velásquez and R. Barbieri. "A Methodology for Calculating the Natural Gas Compressibility Factor for a Distribution Network". In: *Petroleum Science and Technology* 32.21 (2014), pp. 2616-2624. DOI: 10.1080/10916466.2012.755194. eprint: <http://dx.doi.org/10.1080/10916466.2012.755194>. &lt;URL: <http://dx.doi.org/10.1080/10916466.2012.755194>&gt;.
+
+\[3\] I. M. Azizi N. Behbahani R. "An efficient correlation for calculating compressibility factor of natural gases". In: *Journal of Natural Gas Chemistry* Volume 19.Issue 6, 2010, (2010), pp. 642-645. DOI: 10.1016/S1003-9953(09)60081-5. &lt;URL: <http://10.1016/S1003-9953(09)60081-5>&gt;.
+
+\[4\] A. Bahadori. *Fluid Phase Behavior for Conventional and Unconventional Oil and Gas Reservoirs*. ISBN 978-0-12-803437-8. Houston, Texas: Gulf Publishing, 2016. &lt;URL: <https://books.google.com/books?id=BwXeDAAAQBAJ>&gt;.
+
+\[5\] P. M. Dranchuk and H. Abou-Kassem. "Calculation of Z Factors For Natural Gases Using Equations of State". In: *Journal of Canadian Petroleum Technology* (Jul. 1975). DOI: 10.2118/75-03-03. &lt;URL: <https://doi.org/10.2118/75-03-03>&gt;.
+
+\[6\] P. M. Dranchuk, R. Purvis, D. Robinson, et al. "Computer calculation of natural gas compressibility factors using the Standing and Katz correlation". In: *Annual Technical Meeting*. Ed. by unknown. Petroleum Society of Canada. 1973. DOI: 10.2118/73-112. &lt;URL: <http://doi.org/10.2118/73-112>&gt;.
+
+\[7\] K. R. Hall and L. Yarborough. "A new equation of state for Z-factor calculations". In: *Oil and Gas journal* 71.7 (1973), pp. 82-92.
+
+\[8\] M. Kamyab, J. H. Sampaio, F. Qanbari, et al. "Using artificial neural networks to estimate the z-factor for natural hydrocarbon gases". In: *Journal of Petroleum Science and Engineering* 73.3 (2010), pp. 248-257. DOI: 10.1016/j.petrol.2010.07.006. &lt;URL: <http://doi.org/10.1016/j.petrol.2010.07.006>&gt;.
+
+\[9\] N. Kumar. "Compressibility factors for natural and sour reservoir gases by correlations and cubic equations of state". MA Thesis. Texas Tech University, 2004. &lt;URL: <https://ttu-ir.tdl.org/ttu-ir/bitstream/handle/2346/15386/NeerajKumarMastersThesis.pdf?sequence=1&isAllowed=y>&gt;.
+
+\[10\] M. Mohamadi-Baghmolaei, R. Azin, S. Osfouri, et al. "Prediction of gas compressibility factor using intelligent models". In: *Natural Gas Industry B* 2.4 (2015), pp. 283-294. DOI: 10.1016/j.ngib.2015.09.001. &lt;URL: <http://doi.org/10.1016/j.ngib.2015.09.001>&gt;.
