@@ -130,7 +130,7 @@ df</code></pre></div>
 <div id="get-values-of-z-for-combinations-of-ppr-and-tpr" class="section level2">
 <h2>Get values of <code>z</code> for combinations of <code>Ppr</code> and <code>Tpr</code></h2>
 <p>In this example we provide vectors instead of a single point. With the same <code>ppr</code> and <code>tpr</code> vectors that we use for the correlation, we do the same for the <code>Standing-Katz</code> chart. We want to compare both and find the <code>absolute percentage error</code> or <code>APE</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># test DAK with 1st-derivative using the values from paper </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># test with 1st-derivative using the values from paper </span>
 ppr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="fl">3.5</span>, <span class="fl">4.5</span>, <span class="fl">5.5</span>, <span class="fl">6.5</span>) 
 tpr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.05</span>, <span class="fl">1.1</span>, <span class="fl">1.7</span>, <span class="dv">2</span>) 
 
