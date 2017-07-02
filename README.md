@@ -186,6 +186,10 @@ The comparative analysis shows tables with different error measurements:
     MPE:   Mean Percentage error = ARE
     MAE:   Mean Absolute Error
 
+``` r
+# Example of errors table
+```
+
 What you can do with `zFactor`
 ------------------------------
 
@@ -216,6 +220,13 @@ Tests
 
 There are tests for the correlations under tests/testthat.
 
+How the Standing-Katz chart was constructed
+-------------------------------------------
+
+The Standing-Katz (SK) chart data has been read directly from a scanned figure of the original plot drawn by Standing and Katz in 1951. The software used to digitize the data is `graphClick` for the operating system `osX` by Apple. This software has been tested and qualified by scolars working on a similar task of digitizing data. `(Rakap, Rakap, Evran, and Cig, 2016)`
+
+Each one of the SK chart pseudo-reduce temperature curves has been digitized. There are some curves where more points were taken to describe the curvature better. Other curves are almost linear and few points were necessary to define the curve.
+
 References
 ----------
 
@@ -240,3 +251,5 @@ The following books and papers were consulted during the development of this pac
 \[9\] N. Kumar. "Compressibility factors for natural and sour reservoir gases by correlations and cubic equations of state". MA Thesis. Texas Tech University, 2004. &lt;URL: <https://ttu-ir.tdl.org/ttu-ir/bitstream/handle/2346/15386/NeerajKumarMastersThesis.pdf?sequence=1&isAllowed=y>&gt;.
 
 \[10\] M. Mohamadi-Baghmolaei, R. Azin, S. Osfouri, et al. "Prediction of gas compressibility factor using intelligent models". In: *Natural Gas Industry B* 2.4 (2015), pp. 283-294. DOI: 10.1016/j.ngib.2015.09.001. &lt;URL: <http://doi.org/10.1016/j.ngib.2015.09.001>&gt;.
+
+\[11\] S. Rakap, S. Rakap, D. Evran, et al. "Comparative evaluation of the reliability and validity of three data extraction programs: UnGraph, GraphClick, and DigitizeIt". In: *Computers in Human Behavior* 55 (2016), pp. 159-166. DOI: 10.1016/j.chb.2015.09.008. &lt;URL: <http://doi.org/10.1016/j.chb.2015.09.008>&gt;.
