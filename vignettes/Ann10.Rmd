@@ -75,7 +75,7 @@ In this example we provide vectors instead of a single point.
 With the same `ppr` and `tpr` vectors that we use for the correlation, we do the same for the `Standing-Katz` chart. We want to compare both and find the `absolute percentage error` or `APE`.
 
 ```{r}
-# test DAK with 1st-derivative using the values from paper 
+# test with 1st-derivative using the values from paper 
 ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
 tpr <- c(1.05, 1.1, 1.7, 2) 
 

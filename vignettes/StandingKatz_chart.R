@@ -18,7 +18,6 @@ listStandingKatzCurves(pprRange = 'lp')
 
 ## ----fig.width=5, fig.height=5-------------------------------------------
 library(zFactor)
-
 getStandingKatzCurve(tpr = 1.3, toView = FALSE, toSave = FALSE)
 
 ## ----fig.width=5, fig.height=5-------------------------------------------
@@ -31,7 +30,6 @@ getStandingKatzCurve(tpr = 1.3, pprRange = 'hp', ylim = c(0.75, 1.75))
 
 ## ----fig.width=5, fig.height=5-------------------------------------------
 library(zFactor)
-
 getStandingKatzCurve(tpr = 1.05, pprRange = "lp", toView = FALSE, toSave = FALSE)
 
 ## ---- echo=FALSE, results='asis'-----------------------------------------
@@ -144,13 +142,13 @@ common
 
 ## ------------------------------------------------------------------------
 library(zFactor)
-getCurvesDigitized(pprRange = "all")
+getStandingKatzTpr(pprRange = "all")
 
 ## ------------------------------------------------------------------------
 library(zFactor)
-getCurvesDigitized(pprRange = "lp")
+getStandingKatzTpr(pprRange = "lp")
 
 ## ------------------------------------------------------------------------
 library(zFactor)
-getCurvesDigitized(pprRange = "hp")
+getStandingKatzTpr(pprRange = "hp")
 

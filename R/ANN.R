@@ -1,4 +1,4 @@
-# Correlation Kamyab et al. Created using Artificial Neural Networks (ANN)
+#' # Correlation Kamyab et al. Created using Artificial Neural Networks (ANN)
 # Paper "Using artificial neural networks to estimate the z-factor for natural
 # hydrocarbon gases". DOI:	10.1016/j.petrol.2010.07.006 by Kamyab, Sampaio,
 # Qanbari, Eustes. 2010.
@@ -56,6 +56,15 @@ n2_10 <- matrix(0, nrow = 11, ncol= 3) # input and output of the 2nd layer in 2-
 #' @param verbose print internal
 #' @rdname Ann10
 #' @export
+#' @examples
+#' # calculate a single z point
+#' ppr <- 1.5
+#' tpr <- 2.0
+#' z.calc <- z.Ann10(pres.pr = ppr, temp.pr = tpr)
+#' ## calculate z for multiple Ppr and Tpr
+#' ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5)
+#' tpr <- c(1.05, 1.1, 1.7, 2)
+#' z.calc <- z.Ann10(ppr, tpr)
 z.Ann10 <- function(pres.pr, temp.pr, tolerance, verbose) {
     # z.Ann10.r(pres.pr, temp.pr)
     co <- sapply(pres.pr, function(x) sapply(temp.pr, function(y)
