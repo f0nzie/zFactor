@@ -110,6 +110,7 @@ isValid_correlation <- function(correlation) {
     ifelse(correlation %in% valid_choices, TRUE, FALSE)
 }
 
+
 #' Get correlation information
 #'
 #' @param how short: abbreviations; long: description; function: the name of the

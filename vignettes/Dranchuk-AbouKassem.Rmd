@@ -3,6 +3,8 @@ title: "Dranchuk-AbouKassem correlation"
 author: "Alfonso R. Reyes"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
+bibliography: ../bibliography.bib
+link-citations: yes
 vignette: >
   %\VignetteIndexEntry{Dranchuk-AbouKassem}
   %\VignetteEngine{knitr::rmarkdown}
@@ -14,8 +16,8 @@ knitr::opts_chunk$set(echo=T, comment=NA, error=T, warning=F, message = F, fig.a
 ```
 
 
-## How do we find the limits of accuracy in the `DAK` correlation
-
+## The `DAK` correlation
+The work by P.M. Dranchuk and J.H. Abou-Kassem was looking to examine `z` outside the regions established by the Standing-Katz chart. They used as a basis the generalized Starling equation of state. They provided the code in FORTRAN. See [@Dranchuk1975]
 
 ## Get `z` at selected `Ppr` and `Tpr`
 Use the the correlation to calculate `z` and from Standing-Katz chart obtain `z` a digitized point at the given `Tpr` and `Ppr`.
@@ -288,3 +290,5 @@ Finally, the dataframe with the calculated errors between the `z` from the corre
 ```{r}
 as.tibble(smry_tpr_ppr)
 ```
+
+## References

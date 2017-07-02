@@ -3,6 +3,8 @@ title: "Hall-Yarborough correlation"
 author: "Alfonso R. Reyes"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
+bibliography: ../bibliography.bib
+link-citations: yes
 vignette: >
   %\VignetteIndexEntry{Hall-Yarborough}
   %\VignetteEngine{knitr::rmarkdown}
@@ -14,8 +16,8 @@ knitr::opts_chunk$set(echo=T, comment=NA, error=T, warning=F, message = F, fig.a
 ```
 
 
-## How do we find the limits of accuracy in the HY correlation
-
+## The Hall-Yarborough correlation
+Kenneth Hall and Lyman Yarborough used the hard-sphere equation as the basis for the equation of state. They tested the correlation with 12 reservoir gas reservoir systems up to `Ppr` as high as 20.5. The Standing-Katz chart only extends to `Ppr=15`. At that moment the Standing-Katz chart had 30 years of existance. See [@Hall1973].
 
 ## Get `z` at selected `Ppr` and `Tpr=2.0`
 
@@ -259,7 +261,6 @@ as.tibble(smry_tpr_ppr)
 $$RMSE = \sqrt {\frac {1}{n} \sum_{i=1}^{n} (y_i - \hat y_i)^2}$$
 
 ## Appendix
-
 `getStandingKatzMatrix` is equivalent to using the `sapply` function with the internal function `.z.HallYarborough` (the **dot** means it's internal), which we call adding the prefix `zFactor:::`. That is, the package name and **three** colons.
 
 ```{r}
@@ -277,9 +278,6 @@ print(hy)
 ```
 
 
-
-
-
-
+## References
 
 

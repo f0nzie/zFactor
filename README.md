@@ -226,6 +226,8 @@ Almeida, J. Cézar de, J. A. Velásquez, and R. Barbieri. 2014. “A Methodology
 
 Bahadori, Alireza. 2016. *Fluid Phase Behavior for Conventional and Unconventional Oil and Gas Reservoirs*. Houston, Texas: Gulf Publishing. <https://books.google.com/books?id=BwXeDAAAQBAJ>.
 
+Dranchuk, P. M., and H. Abou-Kassem. 1975. “Calculation of Z Factors for Natural Gases Using Equations of State.” *Journal of Canadian Petroleum Technology*, July. Petroleum Society of Canada. doi:[10.2118/75-03-03](https://doi.org/10.2118/75-03-03).
+
 Dranchuk, Peter M, RA Purvis, DB Robinson, and others. 1973. “Computer Calculation of Natural Gas Compressibility Factors Using the Standing and Katz Correlation.” In *Annual Technical Meeting*. Petroleum Society of Canada. doi:[10.2118/73-112](https://doi.org/10.2118/73-112).
 
 Elsharkawy, Adel M, Yousef S Kh S Hashem, and Abbas A Alikhan. 2001. “Compressibility Factor for Gas Condensates.” *Energy & Fuels* 15 (4). ACS Publications: 807–16. doi:[10.2118/59702-ms](https://doi.org/10.2118/59702-ms).
