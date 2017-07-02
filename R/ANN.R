@@ -47,6 +47,7 @@ wb3_10 <- c(-30.1311, 2.0902, -3.5296,	18.1108, -2.528, -0.7228, 0.0186, 5.3507,
 n1_10 <- matrix(0, nrow = 11, ncol= 3) # input and output of the 1st layer in 2-10-10-1 network.	[,0] ==> inputs, [,1] ==> outputs
 n2_10 <- matrix(0, nrow = 11, ncol= 3) # input and output of the 2nd layer in 2-10-10-1 network.	[,0] ==> inputs, [,1] ==> outputs
 
+
 #' Artificial Neural Network correlation
 #'
 #' @param pres.pr pseudo-reduced pressure
@@ -55,7 +56,6 @@ n2_10 <- matrix(0, nrow = 11, ncol= 3) # input and output of the 2nd layer in 2-
 #' @param verbose print internal
 #' @rdname Ann10
 #' @export
-# #' @importFrom rJava .jnew .jcall .jinit .jaddClassPath .jclassPath
 z.Ann10 <- function(pres.pr, temp.pr, tolerance, verbose) {
     # z.Ann10.r(pres.pr, temp.pr)
     co <- sapply(pres.pr, function(x) sapply(temp.pr, function(y)
