@@ -238,6 +238,58 @@ ggplot(all_tpr_df, aes(x=Ppr, y=z, group=Tpr, color=Tpr)) +
 
 ![](man/figures/README-unnamed-chunk-8-1.png)
 
+### Build a table of statistical errors between a correlation and SK chart
+
+``` r
+library(ggplot2)
+library(tibble)
+library(dplyr)
+#> 
+#> Attaching package: 'dplyr'
+#> The following objects are masked from 'package:data.table':
+#> 
+#>     between, first, last
+#> The following objects are masked from 'package:stats':
+#> 
+#>     filter, lag
+#> The following objects are masked from 'package:base':
+#> 
+#>     intersect, setdiff, setequal, union
+
+# get all `lp` Tpr curves
+tpr_all <- getStandingKatzTpr(pprRange = "lp")
+ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
+sk_corr_all <- createTidyFromMatrix(ppr, tpr_all, correlation = "DPR")
+grouped <- group_by(sk_corr_all, Tpr, Ppr)
+
+smry_tpr_ppr <- summarise(grouped, 
+          RMSE  = sqrt(mean((z.chart-z.calc)^2)), 
+          MPE   = sum((z.calc - z.chart) / z.chart) * 100 / n(),
+          MAPE  = sum(abs((z.calc - z.chart) / z.chart)) * 100 / n(), 
+          MSE   = sum((z.calc - z.chart)^2) / n(), 
+          RSS   = sum((z.calc - z.chart)^2),
+          MAE   = sum(abs(z.calc - z.chart)) / n(),
+          RMLSE = sqrt(1/n()*sum((log(z.calc +1)-log(z.chart +1))^2))
+          )
+as.tibble(smry_tpr_ppr)
+#> # A tibble: 112 x 9
+#> # Groups:   Tpr [?]
+#>      Tpr   Ppr         RMSE        MPE       MAPE          MSE
+#>    <chr> <dbl>        <dbl>      <dbl>      <dbl>        <dbl>
+#>  1  1.05   0.5 0.0009756528  0.1176903  0.1176903 9.518984e-07
+#>  2  1.05   1.5 0.0319670358 12.6351920 12.6351920 1.021891e-03
+#>  3  1.05   2.5 0.0444731970 12.9659466 12.9659466 1.977865e-03
+#>  4  1.05   3.5 0.0361451067  7.6741203  7.6741203 1.306469e-03
+#>  5  1.05   4.5 0.0271306123  4.5368917  4.5368917 7.360701e-04
+#>  6  1.05   5.5 0.0137256422  1.8879838  1.8879838 1.883933e-04
+#>  7  1.05   6.5 0.0080944856  0.9567950  0.9567950 6.552070e-05
+#>  8   1.1   0.5 0.0026367700  0.3087553  0.3087553 6.952556e-06
+#>  9   1.1   1.5 0.0169389191  3.9762721  3.9762721 2.869270e-04
+#> 10   1.1   2.5 0.0190546763  4.8485181  4.8485181 3.630807e-04
+#> # ... with 102 more rows, and 3 more variables: RSS <dbl>, MAE <dbl>,
+#> #   RMLSE <dbl>
+```
+
 Vignettes
 ---------
 

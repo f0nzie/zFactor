@@ -138,11 +138,6 @@ The comparative analysis shows tables with different error measurements:
     MPE:   Mean Percentage error = ARE
     MAE:   Mean Absolute Error
 
-```{r}
-# Example of errors table
-
-```
-
 
 ## What you can do with `zFactor`
 
@@ -183,6 +178,30 @@ ggplot(all_tpr_df, aes(x=Ppr, y=z, group=Tpr, color=Tpr)) +
     geom_point()
 ```
 
+
+### Build a table of statistical errors between a correlation and SK chart
+```{r}
+library(ggplot2)
+library(tibble)
+library(dplyr)
+
+# get all `lp` Tpr curves
+tpr_all <- getStandingKatzTpr(pprRange = "lp")
+ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
+sk_corr_all <- createTidyFromMatrix(ppr, tpr_all, correlation = "DPR")
+grouped <- group_by(sk_corr_all, Tpr, Ppr)
+
+smry_tpr_ppr <- summarise(grouped, 
+          RMSE  = sqrt(mean((z.chart-z.calc)^2)), 
+          MPE   = sum((z.calc - z.chart) / z.chart) * 100 / n(),
+          MAPE  = sum(abs((z.calc - z.chart) / z.chart)) * 100 / n(), 
+          MSE   = sum((z.calc - z.chart)^2) / n(), 
+          RSS   = sum((z.calc - z.chart)^2),
+          MAE   = sum(abs(z.calc - z.chart)) / n(),
+          RMLSE = sqrt(1/n()*sum((log(z.calc +1)-log(z.chart +1))^2))
+          )
+as.tibble(smry_tpr_ppr)
+```
 
 ## Vignettes
 The vignettes contain examples on the use and analysis of the various correlations.
