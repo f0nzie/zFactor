@@ -156,6 +156,13 @@ The comparative analysis shows tables with different error measurements:
 * Get a matrix of ``z` values calculated from any correlation where the rows are the pseudo-reduced temperatures and the columns the pseudo-reduced pressures
 
 
+```{r fig.width=5, fig.height=5}
+library(zFactor)
+getStandingKatzCurve(tpr = 1.3, toView = FALSE, toSave = FALSE)
+```
+
+
+
 ## Vignettes
 The vignettes contain examples on the use and analysis of the various correlations.
 
