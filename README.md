@@ -25,19 +25,10 @@ The correlations that are implemented in R for `zFactor` are:
 -   Hall and Yarborough (HY)
 -   Dranchuk and Abou-Kassem (DAK)
 -   Dranchuk, Purvis and Robnson (DPR)
--   A correlation by Shell Oil Company (SH) (Kumar, 2004)
--   A correlation developed with Artificial Neural Networks (Ann10) by Kamyab et al. See footnotes
+-   A correlation by Shell Oil Company (SH) `(Kumar, 2004)`
+-   A correlation developed with Artificial Neural Networks (Ann10) by Kamyab et al. See footnotes (Kamyab, Sampaio, Qanbari, and Eustes, 2010)
 
 Note. The Shell correlation was found cited in two books and two papers but the original paper or authors could not be identified.
-
-``` r
-bib[["Kamyab2010"]]
-#> [1] M. Kamyab, J. H. Sampaio, F. Qanbari, et al. "Using artificial
-#> neural networks to estimate the z-factor for natural hydrocarbon
-#> gases". In: _Journal of Petroleum Science and Engineering_ 73.3
-#> (2010), pp. 248-257. DOI: 10.1016/j.petrol.2010.07.006. <URL:
-#> http://doi.org/10.1016/j.petrol.2010.07.006>.
-```
 
 Installation
 ------------
@@ -141,43 +132,43 @@ library(zFactor)
 zFactor:::z.plot.range("HY",  interval = "fine")
 ```
 
-![](man/figures/README-unnamed-chunk-6-1.png)
+![](man/figures/README-unnamed-chunk-5-1.png)
 
 ``` r
 zFactor:::z.plot.range("BB",  interval = "fine")
 ```
 
-![](man/figures/README-unnamed-chunk-6-2.png)
+![](man/figures/README-unnamed-chunk-5-2.png)
 
 ``` r
 zFactor:::z.plot.range("DAK", interval = "fine")
 ```
 
-![](man/figures/README-unnamed-chunk-6-3.png)
+![](man/figures/README-unnamed-chunk-5-3.png)
 
 ``` r
 zFactor:::z.plot.range("DPR", interval = "fine")
 ```
 
-![](man/figures/README-unnamed-chunk-6-4.png)
+![](man/figures/README-unnamed-chunk-5-4.png)
 
 ``` r
 zFactor:::z.plot.range("SH",  interval = "fine")
 ```
 
-![](man/figures/README-unnamed-chunk-6-5.png)
+![](man/figures/README-unnamed-chunk-5-5.png)
 
 ``` r
 zFactor:::z.plot.range("SH",  interval = "fine")
 ```
 
-![](man/figures/README-unnamed-chunk-6-6.png)
+![](man/figures/README-unnamed-chunk-5-6.png)
 
 ``` r
 zFactor:::z.plot.range("N10", interval = "fine")
 ```
 
-![](man/figures/README-unnamed-chunk-6-7.png)
+![](man/figures/README-unnamed-chunk-5-7.png)
 
 Comparative Analysis
 --------------------

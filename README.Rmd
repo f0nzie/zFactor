@@ -18,6 +18,7 @@ knitr::opts_chunk$set(
 
 ```{r echo=FALSE}
 library(knitcitations)
+knitcitations::cleanbib()
 bib_file <- system.file("doc", "bibliography.bib", package = "zFactor")
 bib <- read.bibtex(bib_file)
 ```
@@ -40,14 +41,10 @@ The correlations that are implemented in R for `zFactor` are:
 * Hall and Yarborough (HY) 
 * Dranchuk and Abou-Kassem (DAK) 
 * Dranchuk, Purvis and Robnson (DPR)
-* A correlation by Shell Oil Company (SH) `r citep(bib[c("Kumar2004")])`
-* A correlation developed with Artificial Neural Networks (Ann10) by Kamyab et al. See footnotes `r citep(bib[c("Kamyab2010")], linked = TRUE)`
+* A correlation by Shell Oil Company (SH) ``r citep(bib[c("Kumar2004")])``
+* A correlation developed with Artificial Neural Networks (Ann10) by Kamyab et al. See footnotes `r citep(bib[c("Kamyab2010")])`
 
 Note. The Shell correlation was found cited in two books and two papers but the original paper or authors could not be identified. 
-
-```{r}
-bib[["Kamyab2010"]]
-```
 
 
 ## Installation
