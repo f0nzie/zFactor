@@ -230,8 +230,8 @@ print(p)
 ```
 > The greatest errors are localized in two of the Tpr curves: at 1.05 and 1.1.
 
-## Range of applicability of the correlation
 
+## Range of applicability of the correlation
 
 ```{r}
 # MSE: Mean Squared Error
