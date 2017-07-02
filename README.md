@@ -224,6 +224,8 @@ Al-Anazi, B Duraya, GR Pazuki, M Nikookar, and A Fannoush Al-Anazi. 2011. “The
 
 Almeida, J. Cézar de, J. A. Velásquez, and R. Barbieri. 2014. “A Methodology for Calculating the Natural Gas Compressibility Factor for a Distribution Network.” *Petroleum Science and Technology* 32 (21): 2616–24. doi:[10.1080/10916466.2012.755194](https://doi.org/10.1080/10916466.2012.755194).
 
+Azizi N., Isazadeh M.A., Behbahani R. 2010. “An Efficient Correlation for Calculating Compressibility Factor of Natural Gases.” *Journal of Natural Gas Chemistry* Volume 19 (Issue 6, 2010,): 642–45. doi:[10.1016/S1003-9953(09)60081-5](https://doi.org/10.1016/S1003-9953(09)60081-5).
+
 Bahadori, Alireza. 2016. *Fluid Phase Behavior for Conventional and Unconventional Oil and Gas Reservoirs*. Houston, Texas: Gulf Publishing. <https://books.google.com/books?id=BwXeDAAAQBAJ>.
 
 Dranchuk, P. M., and H. Abou-Kassem. 1975. “Calculation of Z Factors for Natural Gases Using Equations of State.” *Journal of Canadian Petroleum Technology*, July. Petroleum Society of Canada. doi:[10.2118/75-03-03](https://doi.org/10.2118/75-03-03).
