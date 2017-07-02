@@ -25,10 +25,19 @@ The correlations that are implemented in R for `zFactor` are:
 -   Hall and Yarborough (HY)
 -   Dranchuk and Abou-Kassem (DAK)
 -   Dranchuk, Purvis and Robnson (DPR)
--   A correlation by Shell Oil Company (SH)
+-   A correlation by Shell Oil Company (SH) (Kumar, 2004)
 -   A correlation developed with Artificial Neural Networks (Ann10) by Kamyab et al. See footnotes
 
 Note. The Shell correlation was found cited in two books and two papers but the original paper or authors could not be identified.
+
+``` r
+bib[["Kamyab2010"]]
+#> [1] M. Kamyab, J. H. Sampaio, F. Qanbari, et al. "Using artificial
+#> neural networks to estimate the z-factor for natural hydrocarbon
+#> gases". In: _Journal of Petroleum Science and Engineering_ 73.3
+#> (2010), pp. 248-257. DOI: 10.1016/j.petrol.2010.07.006. <URL:
+#> http://doi.org/10.1016/j.petrol.2010.07.006>.
+```
 
 Installation
 ------------
@@ -132,43 +141,43 @@ library(zFactor)
 zFactor:::z.plot.range("HY",  interval = "fine")
 ```
 
-![](man/figures/README-unnamed-chunk-4-1.png)
+![](man/figures/README-unnamed-chunk-6-1.png)
 
 ``` r
 zFactor:::z.plot.range("BB",  interval = "fine")
 ```
 
-![](man/figures/README-unnamed-chunk-4-2.png)
+![](man/figures/README-unnamed-chunk-6-2.png)
 
 ``` r
 zFactor:::z.plot.range("DAK", interval = "fine")
 ```
 
-![](man/figures/README-unnamed-chunk-4-3.png)
+![](man/figures/README-unnamed-chunk-6-3.png)
 
 ``` r
 zFactor:::z.plot.range("DPR", interval = "fine")
 ```
 
-![](man/figures/README-unnamed-chunk-4-4.png)
+![](man/figures/README-unnamed-chunk-6-4.png)
 
 ``` r
 zFactor:::z.plot.range("SH",  interval = "fine")
 ```
 
-![](man/figures/README-unnamed-chunk-4-5.png)
+![](man/figures/README-unnamed-chunk-6-5.png)
 
 ``` r
 zFactor:::z.plot.range("SH",  interval = "fine")
 ```
 
-![](man/figures/README-unnamed-chunk-4-6.png)
+![](man/figures/README-unnamed-chunk-6-6.png)
 
 ``` r
 zFactor:::z.plot.range("N10", interval = "fine")
 ```
 
-![](man/figures/README-unnamed-chunk-4-7.png)
+![](man/figures/README-unnamed-chunk-6-7.png)
 
 Comparative Analysis
 --------------------
@@ -218,36 +227,6 @@ References
 
 The following books and papers were consulted during the development of this package:
 
-Ahmed, Tarek. 2007. *Equations of State and Pvt Analysis*. Houston, Texas: Gulf Publishing. <https://books.google.com/books?id=_a_tAQAAQBAJ&source=gbs_similarbooks>.
+\[1\] M. Kamyab, J. H. Sampaio, F. Qanbari, et al. "Using artificial neural networks to estimate the z-factor for natural hydrocarbon gases". In: *Journal of Petroleum Science and Engineering* 73.3 (2010), pp. 248-257. DOI: 10.1016/j.petrol.2010.07.006. &lt;URL: <http://doi.org/10.1016/j.petrol.2010.07.006>&gt;.
 
-Al-Anazi, B Duraya, GR Pazuki, M Nikookar, and A Fannoush Al-Anazi. 2011. “The Prediction of the Compressibility Factor of Sour and Natural Gas by an Artificial Neural Network System.” *Petroleum Science and Technology* 29 (4). Taylor & Francis: 325–36. doi:[10.1080/10916460903330080](https://doi.org/10.1080/10916460903330080).
-
-Almeida, J. Cézar de, J. A. Velásquez, and R. Barbieri. 2014. “A Methodology for Calculating the Natural Gas Compressibility Factor for a Distribution Network.” *Petroleum Science and Technology* 32 (21): 2616–24. doi:[10.1080/10916466.2012.755194](https://doi.org/10.1080/10916466.2012.755194).
-
-Azizi N., Isazadeh M.A., Behbahani R. 2010. “An Efficient Correlation for Calculating Compressibility Factor of Natural Gases.” *Journal of Natural Gas Chemistry* Volume 19 (Issue 6, 2010,): 642–45. doi:[10.1016/S1003-9953(09)60081-5](https://doi.org/10.1016/S1003-9953(09)60081-5).
-
-Bahadori, Alireza. 2016. *Fluid Phase Behavior for Conventional and Unconventional Oil and Gas Reservoirs*. Houston, Texas: Gulf Publishing. <https://books.google.com/books?id=BwXeDAAAQBAJ>.
-
-Dranchuk, P. M., and H. Abou-Kassem. 1975. “Calculation of Z Factors for Natural Gases Using Equations of State.” *Journal of Canadian Petroleum Technology*, July. Petroleum Society of Canada. doi:[10.2118/75-03-03](https://doi.org/10.2118/75-03-03).
-
-Dranchuk, Peter M, RA Purvis, DB Robinson, and others. 1973. “Computer Calculation of Natural Gas Compressibility Factors Using the Standing and Katz Correlation.” In *Annual Technical Meeting*. Petroleum Society of Canada. doi:[10.2118/73-112](https://doi.org/10.2118/73-112).
-
-Elsharkawy, Adel M, Yousef S Kh S Hashem, and Abbas A Alikhan. 2001. “Compressibility Factor for Gas Condensates.” *Energy & Fuels* 15 (4). ACS Publications: 807–16. doi:[10.2118/59702-ms](https://doi.org/10.2118/59702-ms).
-
-Elsharkawy, Adel M., and Ali Elkamel. 2001. “The Accuracy of Predicting Compressibility Factor for Sour Natural Gases.” *Petroleum Science and Technology* 19 (5-6): 711–31. doi:[10.1081/LFT-100105285](https://doi.org/10.1081/LFT-100105285).
-
-Fatoorehchi, Hooman, Hossein Abolghasemi, Randolph Rach, and Moein Assar. 2014. “An Improved Algorithm for Calculation of the Natural Gas Compressibility Factor via the Hall-Yarborough Equation of State.” *The Canadian Journal of Chemical Engineering* 92 (12): 2211–7. doi:[10.1002/cjce.22054](https://doi.org/10.1002/cjce.22054).
-
-Hall, Kenneth R, and Lyman Yarborough. 1973. “A New Equation of State for Z-Factor Calculations.” *Oil and Gas Journal* 71 (7): 82–92.
-
-Kamyab, Mohammadreza, Jorge HB Sampaio, Farhad Qanbari, and Alfred W Eustes. 2010. “Using Artificial Neural Networks to Estimate the Z-Factor for Natural Hydrocarbon Gases.” *Journal of Petroleum Science and Engineering* 73 (3). Elsevier: 248–57. doi:[10.1016/j.petrol.2010.07.006](https://doi.org/10.1016/j.petrol.2010.07.006).
-
-Kareem, Lateef A., Tajudeen M. Iwalewa, and Muhammad Al-Marhoun. 2016. “New Explicit Correlation for the Compressibility Factor of Natural Gas: Linearized Z-Factor Isotherms.” *Journal of Petroleum Exploration and Production Technology* 6 (3): 481–92. doi:[10.1007/s13202-015-0209-3](https://doi.org/10.1007/s13202-015-0209-3).
-
-Kumar, Neeraj. 2004. “Compressibility Factors for Natural and Sour Reservoir Gases by Correlations and Cubic Equations of State.” Master’s thesis, Texas Tech University. <https://ttu-ir.tdl.org/ttu-ir/bitstream/handle/2346/15386/NeerajKumarMastersThesis.pdf?sequence=1&isAllowed=y>.
-
-Mohamadi-Baghmolaei, Mohamad, Reza Azin, Shahriar Osfouri, Rezvan Mohamadi-Baghmolaei, and Zeinab Zarei. 2015. “Prediction of Gas Compressibility Factor Using Intelligent Models.” *Natural Gas Industry B* 2 (4). Elsevier: 283–94. doi:[10.1016/j.ngib.2015.09.001](https://doi.org/10.1016/j.ngib.2015.09.001).
-
-Rakap, Salih, Serife Rakap, Derya Evran, and Oguzcan Cig. 2016. “Comparative Evaluation of the Reliability and Validity of Three Data Extraction Programs: UnGraph, Graphclick, and Digitizeit.” *Computers in Human Behavior* 55. Elsevier: 159–66. doi:[10.1016/j.chb.2015.09.008](https://doi.org/10.1016/j.chb.2015.09.008).
-
-Standing, Marshall B., and Donald L. Katz. 1942. “Density of Natural Gases.” *American Institute Of Mining And Metallurgical Engineers*, December. Society of Petroleum Engineers. doi:[10.2118/942140-G](https://doi.org/10.2118/942140-G).
+\[2\] N. Kumar. "Compressibility factors for natural and sour reservoir gases by correlations and cubic equations of state". MA Thesis. Texas Tech University, 2004. &lt;URL: <https://ttu-ir.tdl.org/ttu-ir/bitstream/handle/2346/15386/NeerajKumarMastersThesis.pdf?sequence=1&isAllowed=y>&gt;.

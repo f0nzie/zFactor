@@ -2,12 +2,12 @@
 title: "Standing-Katz chart data"
 author: "Vignette Author"
 date: '`r Sys.Date()`'
-output:
-  html_document: default
-  fig_caption: yes
-  rmarkdown::html_vignette: null
-vignette: |
-  %\VignetteIndexEntry{Standing-Katz chart data} %\VignetteEngine{knitr::rmarkdown} %\VignetteEncoding{UTF-8}
+output: rmarkdown::html_vignette
+
+vignette: >
+  %\VignetteIndexEntry{Standing-Katz chart data}
+  %\VignetteEngine{knitr::rmarkdown} 
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include=F, error=T, message=F, warning=F}
@@ -19,7 +19,7 @@ knitr::opts_chunk$set(echo=T, comment=NA, error=T, warning=F, message = F, fig.a
 
 The Standing-Katz (SK) chart data is read directly from a scanned figure of the original plot drawn by Standing and Katz in 1951. 
 
-The software used to digitize the data is `graphClick` for the operating system `osX` by Apple. This software has been tested and qualified by scolars wokring on a similar task of digitizing data. <paper citation here>
+The software used to digitize the data is `graphClick` for the operating system `osX` by Apple. This software has been tested and qualified by scolars working on a similar task of digitizing data. <paper citation here>
 
 Each one of the SK chart curves has been digitized. There are some curves where more points were taken due to the curvature. Other curves are almost linear and few points were necessary to define the curve.
 
@@ -79,7 +79,7 @@ library(zFactor)
 getStandingKatzCurve(tpr = 1.3, toView = FALSE, toSave = FALSE)
 ```
 
-In a simlar manner we could plot the SK curve at $T_{pr}$ = 1.3 but at the `high pressure` range or `hp`. This is the lower part of the chart with the scale from 7.0 to 15.
+In a similar manner we could plot the SK curve at $T_{pr}$ = 1.3 but at the `high pressure` range or `hp`. This is the lower part of the chart with the scale from 7.0 to 15.
 
 We have to specify that we want the high pressure range with `hp` as shown below:
 

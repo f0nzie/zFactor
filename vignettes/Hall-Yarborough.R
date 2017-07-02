@@ -7,13 +7,14 @@ library(zFactor)
 
 ppr <- 1.5
 tpr <- 2.0
+
 z.calc <- z.HallYarborough(pres.pr = ppr, temp.pr = tpr)
 
 # get a z value from the SK chart at the same Ppr and Tpr
 z.chart <- getStandingKatzMatrix(tpr_vector = tpr, 
                       pprRange = "lp")[1, as.character(ppr)]
 
-# calculate the APE
+# calculate the APE (Average Percentage Error)
 ape <- abs((z.calc - z.chart) / z.chart) * 100
 
 df <- as.data.frame(list(Ppr = ppr,  z.calc =z.calc, z.chart = z.chart, ape=ape))
@@ -24,6 +25,7 @@ df
 library(zFactor)
 ppr <- 1.5
 tpr <- 1.1
+
 z.calc <- z.HallYarborough(pres.pr = ppr, temp.pr = tpr)
 
 # From the Standing-Katz chart we obtain a digitized point:
@@ -104,7 +106,7 @@ library(ggplot2)
 library(tibble)
 
 # get all `lp` Tpr curves
-tpr_all <- getCurvesDigitized(pprRange = "lp")
+tpr_all <- getStandingKatzTpr(pprRange = "lp")
 ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
 sk_corr_all <- createTidyFromMatrix(ppr, tpr_all, correlation = "HY")
 as.tibble(sk_corr_all)
@@ -160,7 +162,7 @@ sk_corr_all %>%
 as.tibble(smry_tpr_ppr)
 
 ## ------------------------------------------------------------------------
-# test HY with 1st-derivative using the values from paper 
+# test HY with 1st-derivative using the values from the paper 
  
 ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
 tpr <- c(1.3, 1.5, 1.7, 2) 

@@ -2,7 +2,7 @@
 title: "Hall-Yarborough correlation"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
-bibliography: ../bibliography.bib
+bibliography: bibliography.bib
 link-citations: yes
 vignette: >
   %\VignetteIndexEntry{Hall-Yarborough}

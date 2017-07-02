@@ -3,7 +3,7 @@ title: "Dranchuk-Purvis-Robinson correlation"
 author: "Alfonso R. Reyes"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
-bibliography: ../bibliography.bib
+bibliography: bibliography.bib
 link-citations: yes
 vignette: >
   %\VignetteIndexEntry{Dranchuk-Purvis-Robinson}
