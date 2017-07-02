@@ -34,6 +34,7 @@ There are several compressibility correlations. In this package, few of them, or
 
 This analysis focus on sweet hydrocarbon gases. Compressibility correlations for sour gases are little bit more complicated since they show significant deviations from the curves in the Standing-Katz charts. Effects of CO2, H2S and N2 have to accounted for. In a future release of `zFactor` correlations for sour hydrocarbons gases will be covered.
 
+
 ## Correlations used in this study
 The correlations that are implemented in R for the package **zFactor** are:
 
@@ -168,6 +169,13 @@ The vignettes contain examples on the use and analysis of the various correlatio
 
 ## Tests
 There are tests for the correlations under tests/testthat.
+
+
+## How the Standing-Katz chart was constructed
+The Standing-Katz (SK) chart data has been read directly from a scanned figure of the original plot drawn by Standing and Katz in 1951. The software used to digitize the data is `graphClick` for the operating system `osX` by Apple. This software has been tested and qualified by scolars working on a similar task of digitizing data.  ``r citep(bib[c("Rakap2016")])`` 
+
+Each one of the SK chart pseudo-reduce temperature curves has been digitized. There are some curves where more points were taken to describe the curvature better. Other curves are almost linear and few points were necessary to define the curve.
+
 
 ## References
 The following books and papers were consulted during the development of this package:
