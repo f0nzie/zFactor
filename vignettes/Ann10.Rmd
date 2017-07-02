@@ -15,7 +15,6 @@ knitr::opts_chunk$set(echo=T, comment=NA, error=T, warning=F, message = F, fig.a
 ```
 
 
-
 ## How do we find the limits of accuracy in the `ANN10` correlation
 [@Kamyab2010]
 
@@ -68,7 +67,8 @@ rownames(df) <- tpr
 df
 ```
 
-> At lower `Tpr` there is some error. We see a  difference between the values of z from the ANN10 calculation and the value read from the Standing-Katz chart.
+> At lower `Tpr` there is some small error. We see a difference between the values of z from the ANN10 calculation and the value read from the Standing-Katz chart.
+
 
 ## Get values of `z` for combinations of `Ppr` and `Tpr`
 In this example we provide vectors instead of a single point.
@@ -175,6 +175,7 @@ print(p)
 ```
 
 
+
 ## Analysis at the lowest `Tpr`
 This is the isotherm where we usually see the greatest error.
 
@@ -195,7 +196,7 @@ print(p)
 
 ## Analyzing performance of the `N10` correlation for all the `Tpr` curves
 In this last example, we compare the values of `z` at all the isotherms.
-We use the function `getCurvesDigitized` to obtain all the isotherms or `Tpr` curves in the Standing-Katz chart that have been digitized. The next function `createTidyFromMatrix` calculates `z` using the correlation and prepares a tidy dataset ready to plot.
+We use the function `getStandingKatzTpr` to obtain all the isotherms or `Tpr` curves in the Standing-Katz chart that have been digitized. The next function `createTidyFromMatrix` calculates `z` using the correlation and prepares a tidy dataset ready to plot.
 
 ```{r}
 library(ggplot2)
