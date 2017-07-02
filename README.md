@@ -114,9 +114,6 @@ z.Ann10(ppr, tpr)
 #> 1.8 0.9758251 0.9330673 0.9033038 0.8900081 0.8983954 0.9253309 0.9638663
 ```
 
-Comparative Analysis
---------------------
-
 Range of Applicability
 ----------------------
 
@@ -172,6 +169,19 @@ zFactor:::z.plot.range("N10", interval = "fine")
 ```
 
 ![](man/figures/README-unnamed-chunk-4-7.png)
+
+Comparative Analysis
+--------------------
+
+The comparative analysis shows tables with different error measurements:
+
+    MSE: Mean Squared Error
+    RMSE: Root Mean Sqyared Error
+    RSS: residual sum of square
+    RMSLE: Root Mean Squared Logarithmic Error. Penalizes understimation.
+    MAPE: Mean Absolute Percentage Error = AARE
+    MPE: Mean Percentage error = ARE
+    MAE: Mean Absolute Error
 
 What you can do with `zFactor`
 ------------------------------

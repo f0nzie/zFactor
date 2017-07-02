@@ -1,24 +1,29 @@
 ---
 title: "Dranchuk-Purvis-Robinson correlation"
-author: "Vignette Author"
+author: "Alfonso R. Reyes"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
+bibliography: DPR.bib
+link-citations: yes
 vignette: >
   %\VignetteIndexEntry{Dranchuk-Purvis-Robinson}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
+
 ```{r setup, include=F, error=T, message=F, warning=F}
 knitr::opts_chunk$set(echo=T, comment=NA, error=T, warning=F, message = F, fig.align = 'center', results="hold")
 ```
 
+## Why `DPR` is different
+The `Dranchuk-Purvis-Robinson` correlation is different than the other correlations in the sense that the authors were looking at redraw three of the isotherms of the original work by Standing-Katz, at `Tpr=1.05`, `Tpr=1.1` and `Tpr=1.15`. The authors were expecting that later the corrections was adopted with experimental data matching those two new curves. We haven't found a paper confirming that yet. [See @Dranchuk1973].
 
-## How do we find the limits of accuracy in the `DPR` correlation
+Other than that, the `DPR` correlation behaves pretty well but not much better than the `DAK` correlation.
 
 
 ## Get `z` at selected `Ppr` and `Tpr`
-Use the the corelation to calculate `z` and the Standing-Katz chart we obtain a digitized point at the given `Tpr` and `Ppr`.
+Use the corelation to calculate `z`. From the Standing-Katz chart we obtain `z` at a digitized point at the given `Tpr` and `Ppr`.
 
 ```{r}
 # get a z value
@@ -30,10 +35,8 @@ tpr <- 2.0
 z.calc <- z.DranchukPurvisRobinson(pres.pr = ppr, temp.pr = tpr)
 
 # get a z value from the SK chart at the same Ppr and Tpr
-
 z.chart <- getStandingKatzMatrix(tpr_vector = tpr, 
                       pprRange = "lp")[1, as.character(ppr)]
-
 
 # calculate the APE
 ape <- abs((z.calc - z.chart) / z.chart) * 100
@@ -46,7 +49,7 @@ df
 
 
 ## Get `z` at selected `Ppr` and `Tpr=1.1`
-From the Standing-Katz chart we obtain a digitized point:
+From the Standing-Katz chart we obtain `z` at a digitized point:
 
 ```{r}
 library(zFactor)
@@ -104,8 +107,7 @@ sum_t_ape <- summary(t(ape))
 sum_t_ape
 ```
 
-> We can see that the errors at `Tpr=1.05` in `z` are considerable with a `r sum_t_ape[1,1]`% and `r sum_t_ape[6,1]`%, and a `r sum_t_ape[1,2]`% and `r sum_t_ape[6,2]`% for `Tpr=1.10`. We will explore later a comparative **tile** chart where we confirm these early calculations.
-
+> We see that the errors at `Tpr=1.05` in `z` are considerable with a `r sum_t_ape[1,1]`% and `r sum_t_ape[6,1]`%, and a `r sum_t_ape[1,2]`% and `r sum_t_ape[6,2]`% for `Tpr=1.10`. We will explore later a comparative **tile** chart where we confirm these early calculations.
 
 
 ## Analyze the error for greater values of `Tpr`
@@ -160,9 +162,8 @@ We can see that the errors in `z` with `DPR` are far lower than `Hall-Yarborough
 
 
 
-## Prepare to plot SK vs DPR correlation
-
-The error bars represent the difference between the calculated values by the `Dranchuk-AbouKassem` corrrelation and teh values of `z` read from the Standing-Katz chart.
+## Prepare to plot `SK` vs `DPR` correlation
+The error bars represent the difference between the calculated values by the `DPR` corrrelation and the `z` values read from the Standing-Katz chart.
 
 ```{r}
 library(zFactor)
@@ -174,7 +175,6 @@ ppr2 <- c(0.5, 1.0, 1.5, 2, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5)
 
 sk_corr_2 <- createTidyFromMatrix(ppr2, tpr2, correlation = "DPR")
 as.tibble(sk_corr_2)
-
 
 p <- ggplot(sk_corr_2, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
     geom_line() +
@@ -188,14 +188,13 @@ We observe that with `Dranchuk-Purvis-Robinson` there are still errors or differ
 
 
 ## Analysis at the lowest `Tpr`
-This is where we see the greatest error.
+This is the isotherm where we see the greatest error.
 
 ```{r}
 library(zFactor)
 
 sk_corr_3 <- sk_corr_2[sk_corr_2$Tpr==1.05,]
 sk_corr_3
-
 
 p <- ggplot(sk_corr_3, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
     geom_line() +
@@ -208,15 +207,16 @@ print(p)
 
 ## Analyzing performance of the `DPR` correlation for all the `Tpr` curves
 In this last example, we compare the values of `z` at all the isotherms.
-We use the function `getCurvesDigitized` to obtain all the isotherms or `Tpr` curves in the Standing-Katz chart that have been digitized. The next function `createTidyFromMatrix` calculate `z` using the correlation and prepares a tidy dataset ready to plot.
+We use the function `getStandingKatzTpr` to obtain all the isotherms or `Tpr` curves in the Standing-Katz chart that have been digitized. The next function `createTidyFromMatrix` calculate `z` using the correlation and prepares a tidy dataset ready to plot.
 
 ```{r}
 library(ggplot2)
 library(tibble)
 
 # get all `lp` Tpr curves
-tpr_all <- getCurvesDigitized(pprRange = "lp")
+tpr_all <- getStandingKatzTpr(pprRange = "lp")
 ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
+
 sk_corr_all <- createTidyFromMatrix(ppr, tpr_all, correlation = "DPR")
 as.tibble(sk_corr_all)
 
@@ -229,8 +229,8 @@ print(p)
 ```
 > The greatest errors are localized in two of the Tpr curves: at 1.05 and 1.1.
 
-## Range of applicability of the correlation
 
+## Range of applicability of the correlation
 
 ```{r}
 # MSE: Mean Squared Error
@@ -263,7 +263,6 @@ ggplot(smry_tpr_ppr, aes(Ppr, Tpr)) +
 > The greatest errors are localized in two of the Tpr curves: 1.05 and barely at 1.1
 
 
-
 ## Plotting the `Tpr` and `Ppr` values that show more error
 
 ```{r}
@@ -287,6 +286,8 @@ Finally, the dataframe with the calculated errors between the `z` from the corre
 as.tibble(smry_tpr_ppr)
 ```
 
+
+## References
 
 
 
