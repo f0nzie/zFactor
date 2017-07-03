@@ -2,6 +2,8 @@
 [![Rdoc](http://www.rdocumentation.org/badges/version/zFactor)](http://www.rdocumentation.org/packages/zFactor)
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+    #> Warning: package 'knitcitations' was built under R version 3.4.1
+
 zFactor
 =======
 
@@ -29,7 +31,7 @@ The correlations that are implemented in R for the package **zFactor** are:
 
 -   Dranchuk, Purvis and Robinson (DPR) `(Dranchuk, Purvis, Robinson, and others, 1973)`
 
--   A correlation by Shell Oil Company (SH) `(Kumar, 2004)`, `(Bahadori, 2016)`, `(de Almeida, Velásquez, and Barbieri, 2014)`, `(Al-Anazi, Pazuki, Nikookar, and Al-Anazi, 2011)`, `(Azizi N. Behbahani R., 2010)`, `(Mohamadi-Baghmolaei, Azin, Osfouri, Mohamadi-Baghmolaei, and Zarei, 2015)`. The Shell correlation was found cited in two books and several papers (including the equation and constants), but the original paper or authors could not be identified.
+-   A correlation by Shell Oil Company (SH) `(Kumar, 2004)`, `(Bahadori, 2016)`, `(de Almeida, VelÃ¡squez, and Barbieri, 2014)`, `(Al-Anazi, Pazuki, Nikookar, and Al-Anazi, 2011)`, `(Azizi N. Behbahani R., 2010)`, `(Mohamadi-Baghmolaei, Azin, Osfouri, Mohamadi-Baghmolaei, and Zarei, 2015)`. The Shell correlation was found cited in two books and several papers (including the equation and constants), but the original paper or authors could not be identified.
 
 -   A correlation developed with Artificial Neural Networks (Ann10) by Kamyab et al. `(Kamyab, Sampaio, Qanbari, and Eustes, 2010)`
 
@@ -274,17 +276,18 @@ as.tibble(smry_tpr_ppr)
 #> Source: local data frame [112 x 9]
 #> Groups: Tpr [?]
 #> 
+#> # A tibble: 112 x 9
 #>      Tpr   Ppr         RMSE        MPE       MAPE          MSE
 #>    <chr> <dbl>        <dbl>      <dbl>      <dbl>        <dbl>
-#> 1   1.05   0.5 0.0009756528  0.1176903  0.1176903 9.518984e-07
-#> 2   1.05   1.5 0.0319670358 12.6351920 12.6351920 1.021891e-03
-#> 3   1.05   2.5 0.0444731970 12.9659466 12.9659466 1.977865e-03
-#> 4   1.05   3.5 0.0361451067  7.6741203  7.6741203 1.306469e-03
-#> 5   1.05   4.5 0.0271306123  4.5368917  4.5368917 7.360701e-04
-#> 6   1.05   5.5 0.0137256422  1.8879838  1.8879838 1.883933e-04
-#> 7   1.05   6.5 0.0080944856  0.9567950  0.9567950 6.552070e-05
-#> 8    1.1   0.5 0.0026367700  0.3087553  0.3087553 6.952556e-06
-#> 9    1.1   1.5 0.0169389191  3.9762721  3.9762721 2.869270e-04
+#>  1  1.05   0.5 0.0009756528  0.1176903  0.1176903 9.518984e-07
+#>  2  1.05   1.5 0.0319670358 12.6351920 12.6351920 1.021891e-03
+#>  3  1.05   2.5 0.0444731970 12.9659466 12.9659466 1.977865e-03
+#>  4  1.05   3.5 0.0361451067  7.6741203  7.6741203 1.306469e-03
+#>  5  1.05   4.5 0.0271306123  4.5368917  4.5368917 7.360701e-04
+#>  6  1.05   5.5 0.0137256422  1.8879838  1.8879838 1.883933e-04
+#>  7  1.05   6.5 0.0080944856  0.9567950  0.9567950 6.552070e-05
+#>  8   1.1   0.5 0.0026367700  0.3087553  0.3087553 6.952556e-06
+#>  9   1.1   1.5 0.0169389191  3.9762721  3.9762721 2.869270e-04
 #> 10   1.1   2.5 0.0190546763  4.8485181  4.8485181 3.630807e-04
 #> # ... with 102 more rows, and 3 more variables: RSS <dbl>, MAE <dbl>,
 #> #   RMLSE <dbl>
@@ -322,9 +325,9 @@ The following books and papers were consulted during the development of this pac
 
 \[1\] B. D. Al-Anazi, G. Pazuki, M. Nikookar, et al. "The prediction of the compressibility factor of sour and natural gas by an artificial neural network system". In: *Petroleum Science and Technology* 29.4 (2011), pp. 325-336. DOI: 10.1080/10916460903330080. &lt;URL: <http://doi.org/10.1080/10916460903330080>&gt;.
 
-\[2\] J. C. de Almeida, J. A. Velásquez and R. Barbieri. "A Methodology for Calculating the Natural Gas Compressibility Factor for a Distribution Network". In: *Petroleum Science and Technology* 32.21 (2014), pp. 2616-2624. DOI: 10.1080/10916466.2012.755194. eprint: <http://dx.doi.org/10.1080/10916466.2012.755194>. &lt;URL: <http://dx.doi.org/10.1080/10916466.2012.755194>&gt;.
+\[2\] J. C. de Almeida, J. A. VelÃÂ¡squez and R. Barbieri. "A Methodology for Calculating the Natural Gas Compressibility Factor for a Distribution Network". In: *Petroleum Science and Technology* 32.21 (2014), pp. 2616-2624. DOI: 10.1080/10916466.2012.755194. eprint: <http://dx.doi.org/10.1080/10916466.2012.755194>. &lt;URL: <http://dx.doi.org/10.1080/10916466.2012.755194>&gt;.
 
-\[3\] I. M. Azizi N. Behbahani R. "An efficient correlation for calculating compressibility factor of natural gases". In: *Journal of Natural Gas Chemistry* Volume 19.Issue 6, 2010, (2010), pp. 642-645. DOI: 10.1016/S1003-9953(09)60081-5. &lt;URL: <http://10.1016/S1003-9953(09)60081-5>&gt;.
+\[3\] I. M. Azizi N. Behbahani R. "An efficient correlation for calculating compressibility factor of natural gases". In: *Journal of Natural Gas Chemistry* Volume 19.Issue 6, 2010, (2010), pp. 642-645. DOI: 10.1016/S1003-9953(09)60081-5. &lt;URL: <http://doi.org/10.1016/S1003-9953(09)60081-5>&gt;.
 
 \[4\] A. Bahadori. *Fluid Phase Behavior for Conventional and Unconventional Oil and Gas Reservoirs*. ISBN 978-0-12-803437-8. Houston, Texas: Gulf Publishing, 2016. &lt;URL: <https://books.google.com/books?id=BwXeDAAAQBAJ>&gt;.
 
@@ -336,7 +339,7 @@ The following books and papers were consulted during the development of this pac
 
 \[8\] M. Kamyab, J. H. Sampaio, F. Qanbari, et al. "Using artificial neural networks to estimate the z-factor for natural hydrocarbon gases". In: *Journal of Petroleum Science and Engineering* 73.3 (2010), pp. 248-257. DOI: 10.1016/j.petrol.2010.07.006. &lt;URL: <http://doi.org/10.1016/j.petrol.2010.07.006>&gt;.
 
-\[9\] N. Kumar. "Compressibility factors for natural and sour reservoir gases by correlations and cubic equations of state". MA Thesis. Texas Tech University, 2004. &lt;URL: <https://ttu-ir.tdl.org/ttu-ir/bitstream/handle/2346/15386/NeerajKumarMastersThesis.pdf?sequence=1&isAllowed=y>&gt;.
+\[9\] N. Kumar. "Compressibility factors for natural and sour reservoir gases by correlations and cubic equations of state". MA Thesis. Texas Tech University, 2004. &lt;URL: <https://ttu-ir.tdl.org/ttu-ir/handle/2346/1370>&gt;.
 
 \[10\] M. Mohamadi-Baghmolaei, R. Azin, S. Osfouri, et al. "Prediction of gas compressibility factor using intelligent models". In: *Natural Gas Industry B* 2.4 (2015), pp. 283-294. DOI: 10.1016/j.ngib.2015.09.001. &lt;URL: <http://doi.org/10.1016/j.ngib.2015.09.001>&gt;.
 
