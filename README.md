@@ -2,8 +2,6 @@
 [![Rdoc](http://www.rdocumentation.org/badges/version/zFactor)](http://www.rdocumentation.org/packages/zFactor)
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-    #> Warning: package 'knitcitations' was built under R version 3.4.1
-
 zFactor
 =======
 
@@ -134,6 +132,7 @@ You can see for yourself which correlation is more stable at different ranges of
 ``` r
 library(zFactor)
 zFactor:::z.plot.range("BB",  interval = "fine")
+#> Warning: package 'bindrcpp' was built under R version 3.4.1
 ```
 
 ![](man/figures/README-unnamed-chunk-5-1.png)
@@ -241,10 +240,7 @@ ggplot(all_tpr_df, aes(x=Ppr, y=z, group=Tpr, color=Tpr)) +
 library(ggplot2)
 library(tibble)
 library(dplyr)
-#> -------------------------------------------------------------------------
-#> data.table + dplyr code now lives in dtplyr.
-#> Please library(dtplyr)!
-#> -------------------------------------------------------------------------
+#> Warning: package 'dplyr' was built under R version 3.4.1
 #> 
 #> Attaching package: 'dplyr'
 #> The following objects are masked from 'package:data.table':
@@ -273,10 +269,8 @@ smry_tpr_ppr <- summarise(grouped,
           RMLSE = sqrt(1/n()*sum((log(z.calc +1)-log(z.chart +1))^2))
           )
 as.tibble(smry_tpr_ppr)
-#> Source: local data frame [112 x 9]
-#> Groups: Tpr [?]
-#> 
 #> # A tibble: 112 x 9
+#> # Groups:   Tpr [?]
 #>      Tpr   Ppr         RMSE        MPE       MAPE          MSE
 #>    <chr> <dbl>        <dbl>      <dbl>      <dbl>        <dbl>
 #>  1  1.05   0.5 0.0009756528  0.1176903  0.1176903 9.518984e-07
