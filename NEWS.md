@@ -1,3 +1,7 @@
+## 20170703, 0.1.7
+* correct misspelled "hyddrocarbons". Noted by CRAN.
+* resubmit to CRAN
+
 ## 20170703, 0.1.6
 * to be released to CRAN.
 * CRAN found a problen in an URL in Shell.html file.
