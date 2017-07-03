@@ -131,32 +131,31 @@ You can see for yourself which correlation is more stable at different ranges of
 
 ``` r
 library(zFactor)
-
-zFactor:::z.plot.range("HY",  interval = "fine")
+zFactor:::z.plot.range("BB",  interval = "fine")
 ```
 
 ![](man/figures/README-unnamed-chunk-5-1.png)
 
 ``` r
-zFactor:::z.plot.range("BB",  interval = "fine")
+zFactor:::z.plot.range("HY",  interval = "fine")
 ```
 
 ![](man/figures/README-unnamed-chunk-5-2.png)
 
 ``` r
-zFactor:::z.plot.range("DAK", interval = "fine")
+zFactor:::z.plot.range("HY",  interval = "coarse")
 ```
 
 ![](man/figures/README-unnamed-chunk-5-3.png)
 
 ``` r
-zFactor:::z.plot.range("DPR", interval = "fine")
+zFactor:::z.plot.range("DAK", interval = "fine")
 ```
 
 ![](man/figures/README-unnamed-chunk-5-4.png)
 
 ``` r
-zFactor:::z.plot.range("SH",  interval = "fine")
+zFactor:::z.plot.range("DPR", interval = "fine")
 ```
 
 ![](man/figures/README-unnamed-chunk-5-5.png)
