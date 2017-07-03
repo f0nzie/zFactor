@@ -186,10 +186,6 @@ The comparative analysis shows tables with different error measurements:
     MPE:   Mean Percentage error = ARE
     MAE:   Mean Absolute Error
 
-``` r
-# Example of errors table
-```
-
 What you can do with `zFactor`
 ------------------------------
 
@@ -209,13 +205,13 @@ library(zFactor)
 getStandingKatzCurve(tpr = 1.3, toView = FALSE, toSave = FALSE)
 ```
 
-![](man/figures/README-unnamed-chunk-7-1.png)
+![](man/figures/README-unnamed-chunk-6-1.png)
 
 ``` r
 getStandingKatzCurve(tpr = 1.05, pprRange = "lp", toView = FALSE, toSave = FALSE)
 ```
 
-![](man/figures/README-unnamed-chunk-7-2.png)
+![](man/figures/README-unnamed-chunk-6-2.png)
 
 ### Ploting all the `Tpr` curves of Standing-Katz chart using `lapply`, `getStandingKatzData` and `data.table::rbindlist`:
 
@@ -236,7 +232,7 @@ ggplot(all_tpr_df, aes(x=Ppr, y=z, group=Tpr, color=Tpr)) +
     geom_point()
 ```
 
-![](man/figures/README-unnamed-chunk-8-1.png)
+![](man/figures/README-unnamed-chunk-7-1.png)
 
 ### Build a table of statistical errors between a correlation and SK chart
 
