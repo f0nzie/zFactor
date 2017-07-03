@@ -2,6 +2,8 @@
 [![Rdoc](http://www.rdocumentation.org/badges/version/zFactor)](http://www.rdocumentation.org/packages/zFactor)
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+    #> Warning: package 'knitcitations' was built under R version 3.4.1
+
 zFactor
 =======
 
@@ -29,7 +31,7 @@ The correlations that are implemented in R for the package **zFactor** are:
 
 -   Dranchuk, Purvis and Robinson (DPR) `(Dranchuk, Purvis, Robinson, and others, 1973)`
 
--   A correlation by Shell Oil Company (SH) `(Kumar, 2004)`, `(Bahadori, 2016)`, `(de Almeida, Velásquez, and Barbieri, 2014)`, `(Al-Anazi, Pazuki, Nikookar, and Al-Anazi, 2011)`, `(Azizi N. Behbahani R., 2010)`, `(Mohamadi-Baghmolaei, Azin, Osfouri, Mohamadi-Baghmolaei, and Zarei, 2015)`. The Shell correlation was found cited in two books and several papers (including the equation and constants), but the original paper or authors could not be identified.
+-   A correlation by Shell Oil Company (SH) `(Kumar, 2004)`, `(Bahadori, 2016)`, `(de Almeida, VelÃ¡squez, and Barbieri, 2014)`, `(Al-Anazi, Pazuki, Nikookar, and Al-Anazi, 2011)`, `(Azizi N. Behbahani R., 2010)`, `(Mohamadi-Baghmolaei, Azin, Osfouri, Mohamadi-Baghmolaei, and Zarei, 2015)`. The Shell correlation was found cited in two books and several papers (including the equation and constants), but the original paper or authors could not be identified.
 
 -   A correlation developed with Artificial Neural Networks (Ann10) by Kamyab et al. `(Kamyab, Sampaio, Qanbari, and Eustes, 2010)`
 
@@ -240,6 +242,10 @@ ggplot(all_tpr_df, aes(x=Ppr, y=z, group=Tpr, color=Tpr)) +
 library(ggplot2)
 library(tibble)
 library(dplyr)
+#> -------------------------------------------------------------------------
+#> data.table + dplyr code now lives in dtplyr.
+#> Please library(dtplyr)!
+#> -------------------------------------------------------------------------
 #> 
 #> Attaching package: 'dplyr'
 #> The following objects are masked from 'package:data.table':
@@ -268,8 +274,10 @@ smry_tpr_ppr <- summarise(grouped,
           RMLSE = sqrt(1/n()*sum((log(z.calc +1)-log(z.chart +1))^2))
           )
 as.tibble(smry_tpr_ppr)
+#> Source: local data frame [112 x 9]
+#> Groups: Tpr [?]
+#> 
 #> # A tibble: 112 x 9
-#> # Groups:   Tpr [?]
 #>      Tpr   Ppr         RMSE        MPE       MAPE          MSE
 #>    <chr> <dbl>        <dbl>      <dbl>      <dbl>        <dbl>
 #>  1  1.05   0.5 0.0009756528  0.1176903  0.1176903 9.518984e-07
@@ -318,7 +326,7 @@ The following books and papers were consulted during the development of this pac
 
 \[1\] B. D. Al-Anazi, G. Pazuki, M. Nikookar, et al. "The prediction of the compressibility factor of sour and natural gas by an artificial neural network system". In: *Petroleum Science and Technology* 29.4 (2011), pp. 325-336. DOI: 10.1080/10916460903330080. &lt;URL: <http://doi.org/10.1080/10916460903330080>&gt;.
 
-\[2\] J. C. de Almeida, J. A. Velásquez and R. Barbieri. "A Methodology for Calculating the Natural Gas Compressibility Factor for a Distribution Network". In: *Petroleum Science and Technology* 32.21 (2014), pp. 2616-2624. DOI: 10.1080/10916466.2012.755194. eprint: <http://dx.doi.org/10.1080/10916466.2012.755194>. &lt;URL: <http://dx.doi.org/10.1080/10916466.2012.755194>&gt;.
+\[2\] J. C. de Almeida, J. A. VelÃÂ¡squez and R. Barbieri. "A Methodology for Calculating the Natural Gas Compressibility Factor for a Distribution Network". In: *Petroleum Science and Technology* 32.21 (2014), pp. 2616-2624. DOI: 10.1080/10916466.2012.755194. eprint: <http://dx.doi.org/10.1080/10916466.2012.755194>. &lt;URL: <http://dx.doi.org/10.1080/10916466.2012.755194>&gt;.
 
 \[3\] I. M. Azizi N. Behbahani R. "An efficient correlation for calculating compressibility factor of natural gases". In: *Journal of Natural Gas Chemistry* Volume 19.Issue 6, 2010, (2010), pp. 642-645. DOI: 10.1016/S1003-9953(09)60081-5. &lt;URL: <http://10.1016/S1003-9953(09)60081-5>&gt;.
 
