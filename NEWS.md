@@ -1,3 +1,12 @@
+## 20170702, 0.1.5
+* to be released to CRAN. Problem with HY.rda
+* add citations to README
+* add citations to correlation notebooks
+* use knitcitations
+* add examples for all public functions
+* improve description of package clarifying it is for sweet gases only
+* update bibliography.bib. remove abstracts. ordered alphabetically.
+
 ## 20170629, 0.1.4.9016
 * add more citations from JabRef
 * note on sweet gases for now.

@@ -131,32 +131,31 @@ You can see for yourself which correlation is more stable at different ranges of
 
 ``` r
 library(zFactor)
-
-zFactor:::z.plot.range("HY",  interval = "fine")
+zFactor:::z.plot.range("BB",  interval = "fine")
 ```
 
 ![](man/figures/README-unnamed-chunk-5-1.png)
 
 ``` r
-zFactor:::z.plot.range("BB",  interval = "fine")
+zFactor:::z.plot.range("HY",  interval = "fine")
 ```
 
 ![](man/figures/README-unnamed-chunk-5-2.png)
 
 ``` r
-zFactor:::z.plot.range("DAK", interval = "fine")
+zFactor:::z.plot.range("HY",  interval = "coarse")
 ```
 
 ![](man/figures/README-unnamed-chunk-5-3.png)
 
 ``` r
-zFactor:::z.plot.range("DPR", interval = "fine")
+zFactor:::z.plot.range("DAK", interval = "fine")
 ```
 
 ![](man/figures/README-unnamed-chunk-5-4.png)
 
 ``` r
-zFactor:::z.plot.range("SH",  interval = "fine")
+zFactor:::z.plot.range("DPR", interval = "fine")
 ```
 
 ![](man/figures/README-unnamed-chunk-5-5.png)
@@ -186,10 +185,6 @@ The comparative analysis shows tables with different error measurements:
     MPE:   Mean Percentage error = ARE
     MAE:   Mean Absolute Error
 
-``` r
-# Example of errors table
-```
-
 What you can do with `zFactor`
 ------------------------------
 
@@ -209,13 +204,13 @@ library(zFactor)
 getStandingKatzCurve(tpr = 1.3, toView = FALSE, toSave = FALSE)
 ```
 
-![](man/figures/README-unnamed-chunk-7-1.png)
+![](man/figures/README-unnamed-chunk-6-1.png)
 
 ``` r
 getStandingKatzCurve(tpr = 1.05, pprRange = "lp", toView = FALSE, toSave = FALSE)
 ```
 
-![](man/figures/README-unnamed-chunk-7-2.png)
+![](man/figures/README-unnamed-chunk-6-2.png)
 
 ### Ploting all the `Tpr` curves of Standing-Katz chart using `lapply`, `getStandingKatzData` and `data.table::rbindlist`:
 
@@ -236,7 +231,7 @@ ggplot(all_tpr_df, aes(x=Ppr, y=z, group=Tpr, color=Tpr)) +
     geom_point()
 ```
 
-![](man/figures/README-unnamed-chunk-8-1.png)
+![](man/figures/README-unnamed-chunk-7-1.png)
 
 ### Build a table of statistical errors between a correlation and SK chart
 
@@ -244,6 +239,10 @@ ggplot(all_tpr_df, aes(x=Ppr, y=z, group=Tpr, color=Tpr)) +
 library(ggplot2)
 library(tibble)
 library(dplyr)
+#> -------------------------------------------------------------------------
+#> data.table + dplyr code now lives in dtplyr.
+#> Please library(dtplyr)!
+#> -------------------------------------------------------------------------
 #> 
 #> Attaching package: 'dplyr'
 #> The following objects are masked from 'package:data.table':
@@ -272,19 +271,20 @@ smry_tpr_ppr <- summarise(grouped,
           RMLSE = sqrt(1/n()*sum((log(z.calc +1)-log(z.chart +1))^2))
           )
 as.tibble(smry_tpr_ppr)
-#> # A tibble: 112 x 9
-#> # Groups:   Tpr [?]
+#> Source: local data frame [112 x 9]
+#> Groups: Tpr [?]
+#> 
 #>      Tpr   Ppr         RMSE        MPE       MAPE          MSE
 #>    <chr> <dbl>        <dbl>      <dbl>      <dbl>        <dbl>
-#>  1  1.05   0.5 0.0009756528  0.1176903  0.1176903 9.518984e-07
-#>  2  1.05   1.5 0.0319670358 12.6351920 12.6351920 1.021891e-03
-#>  3  1.05   2.5 0.0444731970 12.9659466 12.9659466 1.977865e-03
-#>  4  1.05   3.5 0.0361451067  7.6741203  7.6741203 1.306469e-03
-#>  5  1.05   4.5 0.0271306123  4.5368917  4.5368917 7.360701e-04
-#>  6  1.05   5.5 0.0137256422  1.8879838  1.8879838 1.883933e-04
-#>  7  1.05   6.5 0.0080944856  0.9567950  0.9567950 6.552070e-05
-#>  8   1.1   0.5 0.0026367700  0.3087553  0.3087553 6.952556e-06
-#>  9   1.1   1.5 0.0169389191  3.9762721  3.9762721 2.869270e-04
+#> 1   1.05   0.5 0.0009756528  0.1176903  0.1176903 9.518984e-07
+#> 2   1.05   1.5 0.0319670358 12.6351920 12.6351920 1.021891e-03
+#> 3   1.05   2.5 0.0444731970 12.9659466 12.9659466 1.977865e-03
+#> 4   1.05   3.5 0.0361451067  7.6741203  7.6741203 1.306469e-03
+#> 5   1.05   4.5 0.0271306123  4.5368917  4.5368917 7.360701e-04
+#> 6   1.05   5.5 0.0137256422  1.8879838  1.8879838 1.883933e-04
+#> 7   1.05   6.5 0.0080944856  0.9567950  0.9567950 6.552070e-05
+#> 8    1.1   0.5 0.0026367700  0.3087553  0.3087553 6.952556e-06
+#> 9    1.1   1.5 0.0169389191  3.9762721  3.9762721 2.869270e-04
 #> 10   1.1   2.5 0.0190546763  4.8485181  4.8485181 3.630807e-04
 #> # ... with 102 more rows, and 3 more variables: RSS <dbl>, MAE <dbl>,
 #> #   RMLSE <dbl>

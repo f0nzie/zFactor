@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 
 ```{r echo=FALSE}
 library(knitcitations)
-knitcitations::cleanbib()
+# knitcitations::cleanbib()
 bib_file <- system.file("doc", "bibliography.bib", package = "zFactor")
 bib <- read.bibtex(bib_file)
 ```
@@ -116,12 +116,11 @@ You can see for yourself which correlation is more stable at different ranges of
 
 ```{r}
 library(zFactor)
-
-zFactor:::z.plot.range("HY",  interval = "fine")
 zFactor:::z.plot.range("BB",  interval = "fine")
+zFactor:::z.plot.range("HY",  interval = "fine")
+zFactor:::z.plot.range("HY",  interval = "coarse")
 zFactor:::z.plot.range("DAK", interval = "fine")
 zFactor:::z.plot.range("DPR", interval = "fine")
-zFactor:::z.plot.range("SH",  interval = "fine")
 zFactor:::z.plot.range("SH",  interval = "fine")
 zFactor:::z.plot.range("N10", interval = "fine")
 ```
