@@ -1,4 +1,19 @@
+#' Get error summary statistics for any given compressibility correlation
+#'
+#' A quick way to show an error summary between any of the indicated correlations and
+#' the Standing-Katz chart
+#' @param correlation identifier. Can be "HY", "DAK", "DPR" "N10", "SH"
+#' @param pprRange low (lp) or high (hp) chart area of the Standing-Katz chart
+#' @param interval quality of the Ppr scale. Coarse: every 1.0; Fine: every 0.5
 #' @importFrom dplyr group_by summarise
+#' @rdname z.stats
+#' @export
+#' @examples
+#' # error statistics for the Dranchuk-AbouKassem correlation
+#' z.stats("DAK")
+#'
+#' # error statistics for Hall-Yarborough correlation at steps of 0.5 in Ppr
+#' z.stats("HY", interval = "fine")
 z.stats <- function(correlation = "DAK", pprRange = "lp", interval = "coarse") {
     Ppr <- NULL; Tpr <- NULL; z.calc <- NULL; z.chart <- NULL; n <- NULL
     # get all `lp` Tpr curves
@@ -19,7 +34,22 @@ z.stats <- function(correlation = "DAK", pprRange = "lp", interval = "coarse") {
     smry_tpr_ppr
 }
 
+
+#' Tile plot of best fit area for indicated correlation
+#'
+#' Plot will show blue areas with the lowest errors and redish with very high error
+#' or close to MAPE=25. Pink is much greater than 25.
+#' @param correlation identifier. Can be "HY", "DAK", "DPR" "N10", "SH"
+#' @param pprRange low (lp) or high (hp) chart area of the Standing-Katz chart
+#' @param ... any other parameter
 #' @import ggplot2
+#' @export
+#' @examples
+#' # plot Dranchuk-AbouKassem
+#' z.plot.range("DAK")
+#'
+#' # plot Beggs-Brill correlation with fine grid on Ppr
+#' z.plot.range("BB", interval = "fine")
 z.plot.range <- function(correlation = "DAK", pprRange = "lp", ...) {
     Ppr <- NULL; Tpr <- NULL; MAPE <- NULL; z.calc <- NULL; z.chart <- NULL
     isMissing_correlation(correlation)
