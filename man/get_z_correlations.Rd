@@ -13,3 +13,13 @@ correlation function}
 \description{
 Get correlation information
 }
+\examples{
+# get the short name for the correlation
+get_z_correlations(how = "short")
+
+# get the description for the correlation
+get_z_correlations(how = "long")
+
+# get the name of the function assgined to the correlation
+get_z_correlations(how = "function")
+}

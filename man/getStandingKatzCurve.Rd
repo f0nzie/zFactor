@@ -29,5 +29,8 @@ Read a .txt file that was created from readings of the Standing-Katz chart,
 then convert it to a .rda file and plot the curve for given Tpr
 }
 \examples{
-getStandingKatzCurve(tpr = 1.3, pprRange = 'hp', toView = FALSE, toSave = FALSE, toPlot = FALSE)
+# get SK curve for low-pressure chart
+getStandingKatzCurve(tpr = 1.3, pprRange = 'lp', toView = FALSE, toSave = FALSE, toPlot = FALSE)
+# get SK curve for high-pressure chart
+getStandingKatzCurve(tpr = 1.3, pprRange = 'hp', toView = FALSE, toSave = FALSE)
 }

@@ -10,9 +10,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<meta name="author" content="Vignette Author" />
+<meta name="author" content="Alfonso R. Reyes" />
 
-<meta name="date" content="2017-06-28" />
+<meta name="date" content="2017-07-02" />
 
 <title>Dranchuk-Purvis-Robinson correlation</title>
 
@@ -69,17 +69,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <h1 class="title toc-ignore">Dranchuk-Purvis-Robinson correlation</h1>
-<h4 class="author"><em>Vignette Author</em></h4>
-<h4 class="date"><em>2017-06-28</em></h4>
+<h4 class="author"><em>Alfonso R. Reyes</em></h4>
+<h4 class="date"><em>2017-07-02</em></h4>
 
 
 
-<div id="how-do-we-find-the-limits-of-accuracy-in-the-dpr-correlation" class="section level2">
-<h2>How do we find the limits of accuracy in the <code>DPR</code> correlation</h2>
+<div id="why-dpr-is-different" class="section level2">
+<h2>Why <code>DPR</code> is different</h2>
+<p>The <code>Dranchuk-Purvis-Robinson</code> correlation is different than the other correlations in the sense that the authors were looking at redraw three of the isotherms of the original work by Standing-Katz, at <code>Tpr=1.05</code>, <code>Tpr=1.1</code> and <code>Tpr=1.15</code>. The authors were expecting that later the corrections was adopted with experimental data matching those two new curves. We haven’t found a paper confirming that yet. <span class="citation">(See Dranchuk et al. <a href="#ref-Dranchuk1973">1973</a>)</span>.</p>
+<p>Other than that, the <code>DPR</code> correlation behaves pretty well but not much better than the <code>DAK</code> correlation.</p>
 </div>
 <div id="get-z-at-selected-ppr-and-tpr" class="section level2">
 <h2>Get <code>z</code> at selected <code>Ppr</code> and <code>Tpr</code></h2>
-<p>Use the the corelation to calculate <code>z</code> and the Standing-Katz chart we obtain a digitized point at the given <code>Tpr</code> and <code>Ppr</code>.</p>
+<p>Use the corelation to calculate <code>z</code>. From the Standing-Katz chart we obtain <code>z</code> at a digitized point at the given <code>Tpr</code> and <code>Ppr</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get a z value</span>
 <span class="kw">library</span>(zFactor)
 
@@ -89,10 +91,8 @@ tpr &lt;-<span class="st"> </span><span class="fl">2.0</span>
 z.calc &lt;-<span class="st"> </span><span class="kw">z.DranchukPurvisRobinson</span>(<span class="dt">pres.pr =</span> ppr, <span class="dt">temp.pr =</span> tpr)
 
 <span class="co"># get a z value from the SK chart at the same Ppr and Tpr</span>
-
 z.chart &lt;-<span class="st"> </span><span class="kw">getStandingKatzMatrix</span>(<span class="dt">tpr_vector =</span> tpr, 
                       <span class="dt">pprRange =</span> <span class="st">&quot;lp&quot;</span>)[<span class="dv">1</span>, <span class="kw">as.character</span>(ppr)]
-
 
 <span class="co"># calculate the APE</span>
 ape &lt;-<span class="st"> </span><span class="kw">abs</span>((z.calc -<span class="st"> </span>z.chart) /<span class="st"> </span>z.chart) *<span class="st"> </span><span class="dv">100</span>
@@ -106,7 +106,7 @@ df
 </div>
 <div id="get-z-at-selected-ppr-and-tpr1.1" class="section level2">
 <h2>Get <code>z</code> at selected <code>Ppr</code> and <code>Tpr=1.1</code></h2>
-<p>From the Standing-Katz chart we obtain a digitized point:</p>
+<p>From the Standing-Katz chart we obtain <code>z</code> at a digitized point:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zFactor)
 
 ppr &lt;-<span class="st"> </span><span class="fl">1.5</span>
@@ -189,7 +189,7 @@ sum_t_ape</code></pre></div>
  3rd Qu.:10.1547   3rd Qu.:3.7249   3rd Qu.:0.70244   3rd Qu.:0.37400  
  Max.   :12.9659   Max.   :4.8485   Max.   :1.19527   Max.   :0.66630  </code></pre>
 <blockquote>
-<p>We can see that the errors at <code>Tpr=1.05</code> in <code>z</code> are considerable with a Min. : 0.1177 % and Max. :12.9659 %, and a Min. :0.3088 % and Max. :4.8485 % for <code>Tpr=1.10</code>. We will explore later a comparative <strong>tile</strong> chart where we confirm these early calculations.</p>
+<p>We see that the errors at <code>Tpr=1.05</code> in <code>z</code> are considerable with a Min. : 0.1177 % and Max. :12.9659 %, and a Min. :0.3088 % and Max. :4.8485 % for <code>Tpr=1.10</code>. We will explore later a comparative <strong>tile</strong> chart where we confirm these early calculations.</p>
 </blockquote>
 </div>
 <div id="analyze-the-error-for-greater-values-of-tpr" class="section level2">
@@ -274,8 +274,8 @@ sum_t_ape
 <p>We can see that the errors in <code>z</code> with <code>DPR</code> are far lower than <code>Hall-Yarborough</code> with a Min. :0.1637 % and Max. :0.9659 % for <code>Tpr=1.2</code>, and a Min. :0.1245 % and Max. :0.7928 % for <code>Tpr=1.3</code>.</p>
 </div>
 <div id="prepare-to-plot-sk-vs-dpr-correlation" class="section level2">
-<h2>Prepare to plot SK vs DPR correlation</h2>
-<p>The error bars represent the difference between the calculated values by the <code>Dranchuk-AbouKassem</code> corrrelation and teh values of <code>z</code> read from the Standing-Katz chart.</p>
+<h2>Prepare to plot <code>SK</code> vs <code>DPR</code> correlation</h2>
+<p>The error bars represent the difference between the calculated values by the <code>DPR</code> corrrelation and the <code>z</code> values read from the Standing-Katz chart.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zFactor)
 <span class="kw">library</span>(tibble)
 <span class="kw">library</span>(ggplot2)
@@ -285,7 +285,6 @@ ppr2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.
 
 sk_corr_2 &lt;-<span class="st"> </span><span class="kw">createTidyFromMatrix</span>(ppr2, tpr2, <span class="dt">correlation =</span> <span class="st">&quot;DPR&quot;</span>)
 <span class="kw">as.tibble</span>(sk_corr_2)
-
 
 p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_corr_2, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z.calc, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) +
 <span class="st">    </span><span class="kw">geom_line</span>() +
@@ -312,12 +311,11 @@ p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_corr_2, <span 
 </div>
 <div id="analysis-at-the-lowest-tpr" class="section level2">
 <h2>Analysis at the lowest <code>Tpr</code></h2>
-<p>This is where we see the greatest error.</p>
+<p>This is the isotherm where we see the greatest error.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zFactor)
 
 sk_corr_3 &lt;-<span class="st"> </span>sk_corr_2[sk_corr_2$Tpr==<span class="fl">1.05</span>,]
 sk_corr_3
-
 
 p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_corr_3, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z.calc, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) +
 <span class="st">    </span><span class="kw">geom_line</span>() +
@@ -343,13 +341,14 @@ p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_corr_3, <span 
 </div>
 <div id="analyzing-performance-of-the-dpr-correlation-for-all-the-tpr-curves" class="section level2">
 <h2>Analyzing performance of the <code>DPR</code> correlation for all the <code>Tpr</code> curves</h2>
-<p>In this last example, we compare the values of <code>z</code> at all the isotherms. We use the function <code>getCurvesDigitized</code> to obtain all the isotherms or <code>Tpr</code> curves in the Standing-Katz chart that have been digitized. The next function <code>createTidyFromMatrix</code> calculate <code>z</code> using the correlation and prepares a tidy dataset ready to plot.</p>
+<p>In this last example, we compare the values of <code>z</code> at all the isotherms. We use the function <code>getStandingKatzTpr</code> to obtain all the isotherms or <code>Tpr</code> curves in the Standing-Katz chart that have been digitized. The next function <code>createTidyFromMatrix</code> calculate <code>z</code> using the correlation and prepares a tidy dataset ready to plot.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
 <span class="kw">library</span>(tibble)
 
 <span class="co"># get all `lp` Tpr curves</span>
-tpr_all &lt;-<span class="st"> </span><span class="kw">getCurvesDigitized</span>(<span class="dt">pprRange =</span> <span class="st">&quot;lp&quot;</span>)
+tpr_all &lt;-<span class="st"> </span><span class="kw">getStandingKatzTpr</span>(<span class="dt">pprRange =</span> <span class="st">&quot;lp&quot;</span>)
 ppr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="fl">3.5</span>, <span class="fl">4.5</span>, <span class="fl">5.5</span>, <span class="fl">6.5</span>) 
+
 sk_corr_all &lt;-<span class="st"> </span><span class="kw">createTidyFromMatrix</span>(ppr, tpr_all, <span class="dt">correlation =</span> <span class="st">&quot;DPR&quot;</span>)
 <span class="kw">as.tibble</span>(sk_corr_all)
 
@@ -444,6 +443,14 @@ sk_corr_all %&gt;%
 10   1.1   2.5 0.0190546763  4.8485181  4.8485181 3.630807e-04
 # ... with 102 more rows, and 3 more variables: RSS &lt;dbl&gt;, MAE &lt;dbl&gt;,
 #   RMLSE &lt;dbl&gt;</code></pre>
+</div>
+<div id="references" class="section level2 unnumbered">
+<h2>References</h2>
+<div id="refs" class="references">
+<div id="ref-Dranchuk1973">
+<p>Dranchuk, Peter M, RA Purvis, DB Robinson, and others. 1973. “Computer Calculation of Natural Gas Compressibility Factors Using the Standing and Katz Correlation.” In <em>Annual Technical Meeting</em>, edited by unknown. Petroleum Society of Canada. doi:<a href="https://doi.org/10.2118/73-112">10.2118/73-112</a>.</p>
+</div>
+</div>
 </div>
 
 

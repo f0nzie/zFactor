@@ -27,7 +27,7 @@ as_tibble(result[["1.1"]])
 
 ## ------------------------------------------------------------------------
 # view all the `Tpr` SK individual charts
-tpr_vec <- getCurvesDigitized(pprRange = "lp")
+tpr_vec <- getStandingKatzTpr(pprRange = "lp")
 result <- getStandingKatzCurve(tpr_vec, toSave = FALSE,  toView = FALSE)
 
 ## ------------------------------------------------------------------------
@@ -82,7 +82,7 @@ ggplot(all_tpr_df, aes(x=Ppr, y=z, group=Tpr, color=Tpr)) +
     geom_point()
 
 ## ------------------------------------------------------------------------
-tpr_vec <- getCurvesDigitized(pprRange = "lp")
+tpr_vec <- getStandingKatzTpr(pprRange = "lp")
 multiplotStandingKatz(tpr_vec)
 
 ## ------------------------------------------------------------------------
@@ -147,7 +147,6 @@ multiplotStandingKatz(hi_tpr_vec)
 
 ## ------------------------------------------------------------------------
 library(tibble)
-
 as.tibble(hi_tpr_df)
 
 ## ------------------------------------------------------------------------

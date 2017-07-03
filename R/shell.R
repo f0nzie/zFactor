@@ -6,6 +6,18 @@
 #' @param tolerance controls the iteration accuracy
 #' @param verbose print internal
 #' @export
+#' @examples
+#' # single z point and create a dataframe with info
+#' ppr <- 1.5
+#' tpr <- 1.1
+#' z.calc <- z.Shell(pres.pr = ppr, temp.pr = tpr)
+#' # From the Standing-Katz chart we obtain a digitized point:
+#' z.chart <- getStandingKatzMatrix(tpr_vector = tpr,
+#'                                  pprRange = "lp")[1, as.character(ppr)]
+#' ape <- abs((z.calc - z.chart) / z.chart) * 100
+#' df <- as.data.frame(list(Ppr = ppr,  z.calc =z.calc, z.chart = z.chart, ape=ape))
+#' rownames(df) <- tpr
+#' df
 z.Shell <- function(pres.pr, temp.pr, tolerance = 1E-13,
                              verbose = FALSE) {
     co <- sapply(pres.pr, function(x)

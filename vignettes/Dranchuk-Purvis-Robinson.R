@@ -11,10 +11,8 @@ tpr <- 2.0
 z.calc <- z.DranchukPurvisRobinson(pres.pr = ppr, temp.pr = tpr)
 
 # get a z value from the SK chart at the same Ppr and Tpr
-
 z.chart <- getStandingKatzMatrix(tpr_vector = tpr, 
                       pprRange = "lp")[1, as.character(ppr)]
-
 
 # calculate the APE
 ape <- abs((z.calc - z.chart) / z.chart) * 100
@@ -112,7 +110,6 @@ ppr2 <- c(0.5, 1.0, 1.5, 2, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5)
 sk_corr_2 <- createTidyFromMatrix(ppr2, tpr2, correlation = "DPR")
 as.tibble(sk_corr_2)
 
-
 p <- ggplot(sk_corr_2, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
     geom_line() +
     geom_point() +
@@ -126,7 +123,6 @@ library(zFactor)
 sk_corr_3 <- sk_corr_2[sk_corr_2$Tpr==1.05,]
 sk_corr_3
 
-
 p <- ggplot(sk_corr_3, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
     geom_line() +
     geom_point() +
@@ -139,8 +135,9 @@ library(ggplot2)
 library(tibble)
 
 # get all `lp` Tpr curves
-tpr_all <- getCurvesDigitized(pprRange = "lp")
+tpr_all <- getStandingKatzTpr(pprRange = "lp")
 ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
+
 sk_corr_all <- createTidyFromMatrix(ppr, tpr_all, correlation = "DPR")
 as.tibble(sk_corr_all)
 
