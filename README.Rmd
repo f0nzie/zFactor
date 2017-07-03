@@ -16,9 +16,9 @@ knitr::opts_chunk$set(
 ```
 
 
-```{r echo=FALSE}
-library(knitcitations)
-# knitcitations::cleanbib()
+```{r echo=FALSE, warning=FALSE}
+suppressPackageStartupMessages(library(knitcitations))
+knitcitations::cleanbib()
 bib_file <- system.file("doc", "bibliography.bib", package = "zFactor")
 bib <- read.bibtex(bib_file)
 ```
