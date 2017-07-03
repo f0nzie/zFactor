@@ -14,5 +14,12 @@ multiplotStandingKatz(tpr, pprRange = "lp", ...)
 \item{...}{additional parameters}
 }
 \description{
-Plot multiple Tpr curves in one figure
+Plot will show the digitized isotherm of the Standing-Katz chart
+}
+\examples{
+# plot Standing-Katz curves for Tpr=1.1 and 2.0
+multiplotStandingKatz(c(1.1, 2))
+
+# plot SK curves for the lowest range of Tpr
+multiplotStandingKatz(c(1.05, 1.1, 1.2))
 }

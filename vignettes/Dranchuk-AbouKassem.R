@@ -29,13 +29,14 @@ library(zFactor)
 
 ppr <- 1.5
 tpr <- 1.1
+
 z.calc <- z.DranchukAbuKassem(pres.pr = ppr, temp.pr = tpr)
 
 # From the Standing-Katz chart we obtain a digitized point:
 z.chart <- getStandingKatzMatrix(tpr_vector = tpr, 
                       pprRange = "lp")[1, as.character(ppr)]
 
-# calculate the APE
+# calculate the APE (Average Percentage Error)
 ape <- abs((z.calc - z.chart) / z.chart) * 100
 
 df <- as.data.frame(list(Ppr = ppr,  z.calc =z.calc, z.chart = z.chart, ape=ape))
@@ -69,6 +70,7 @@ library(zFactor)
 # enter vectors for Tpr and Ppr
 tpr2 <- c(1.2, 1.3, 1.5, 2.0, 3.0) 
 ppr2 <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5) 
+
 # get z values from the SK chart
 z.chart <- getStandingKatzMatrix(ppr_vector = ppr2, tpr_vector = tpr2, pprRange = "lp")
 
@@ -126,7 +128,6 @@ library(zFactor)
 sk_dak_3 <- sk_dak_2[sk_dak_2$Tpr==1.05,]
 sk_dak_3
 
-
 p <- ggplot(sk_dak_3, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
     geom_line() +
     geom_point() +
@@ -139,7 +140,7 @@ library(ggplot2)
 library(tibble)
 
 # get all `lp` Tpr curves
-tpr_all <- getCurvesDigitized(pprRange = "lp")
+tpr_all <- getStandingKatzTpr(pprRange = "lp")
 ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
 sk_corr_all <- createTidyFromMatrix(ppr, tpr_all, correlation = "DAK")
 as.tibble(sk_corr_all)

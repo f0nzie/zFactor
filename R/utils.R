@@ -1,4 +1,4 @@
-
+# A dataframe with information about any of the compressibility correlation available
 z_correlations <- data.frame(
     short = c("BB", "HY", "DAK", "DPR", "SH", "N10"),
     long = c("Beggs-Brill", "Hall-Yarborough", "Dranchuk-AbuKassem",
@@ -73,6 +73,7 @@ combineCorrWithSK <- function(sk_df, co_df) {
 #' ppr <- c(0.5, 1.5, 2.5, 3.5)
 #' tpr <- c(1.05, 1.1, 1.2)
 #' createTidyFromMatrix(ppr, tpr, correlation = "DAK")
+#' createTidyFromMatrix(ppr, tpr, correlation = "BB")
 createTidyFromMatrix <- function(ppr_vector, tpr_vector, correlation) {
     isMissing_correlation(correlation)
     if (!isValid_correlation(correlation)) stop("Not a valid correlation.")
@@ -92,6 +93,7 @@ createTidyFromMatrix <- function(ppr_vector, tpr_vector, correlation) {
     sk_co_tidy
 }
 
+
 isMissing_correlation <- function(correlation) {
     # stops if correlation argument is missing
     msg_missing <- paste("You have to provide a z-factor correlation: ",
@@ -99,6 +101,7 @@ isMissing_correlation <- function(correlation) {
     if (missing(correlation)) stop(msg_missing)
     else NULL
 }
+
 
 #' Check if supplied correlation (three letter) is valid
 #'
@@ -110,11 +113,22 @@ isValid_correlation <- function(correlation) {
     ifelse(correlation %in% valid_choices, TRUE, FALSE)
 }
 
+
 #' Get correlation information
 #'
 #' @param how short: abbreviations; long: description; function: the name of the
 #' correlation function
 #' @export
+#' @rdname get_z_correlations
+#' @examples
+#' # get the short name for the correlation
+#' get_z_correlations(how = "short")
+#'
+#' # get the description for the correlation
+#' get_z_correlations(how = "long")
+#'
+#' # get the name of the function assgined to the correlation
+#' get_z_correlations(how = "function")
 get_z_correlations <- function(how = "short") {
     # get correlation information. short: abbreviations; long: description
     #     function: the name of the correlation function
@@ -128,13 +142,23 @@ get_z_correlations <- function(how = "short") {
 }
 
 
+
 #' Plot multiple Tpr curves in one figure
+#'
+#' Plot will show the digitized isotherm of the Standing-Katz chart
 #'
 #' @param tpr Pseudo-reduced temperature curve in SK chart
 #' @param pprRange Takes one of two values: "lp": low pressure, or "hp" for
 #' @param ... additional parameters
+#' @rdname multiplotStandingKatz
 #' @importFrom ggplot2 ggplot aes geom_line geom_point
 #' @export
+#' @examples
+#' # plot Standing-Katz curves for Tpr=1.1 and 2.0
+#' multiplotStandingKatz(c(1.1, 2))
+#'
+#' # plot SK curves for the lowest range of Tpr
+#' multiplotStandingKatz(c(1.05, 1.1, 1.2))
 multiplotStandingKatz <- function(tpr, pprRange = "lp", ...) {
     Ppr <- NULL; z <- NULL; Tpr <- NULL
     tpr_li <- getStandingKatzData(tpr, pprRange = pprRange)

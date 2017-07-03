@@ -17,7 +17,10 @@
 #' @importFrom graphics lines plot mtext
 #' @export
 #' @examples
-#' getStandingKatzCurve(tpr = 1.3, pprRange = 'hp', toView = FALSE, toSave = FALSE, toPlot = FALSE)
+#' # get SK curve for low-pressure chart
+#' getStandingKatzCurve(tpr = 1.3, pprRange = 'lp', toView = FALSE, toSave = FALSE, toPlot = FALSE)
+#' # get SK curve for high-pressure chart
+#' getStandingKatzCurve(tpr = 1.3, pprRange = 'hp', toView = FALSE, toSave = FALSE)
 getStandingKatzCurve <- function(tpr = 1.3, pprRange = "lp", tolerance = 0.01,
                                  toView = FALSE, toSave = FALSE, toPlot = TRUE,
                                  ylim = c(0.2, 1.2)) {
@@ -138,6 +141,7 @@ getStandingKatzData <- function(tpr = 1.3, pprRange = "lp") {
 #' @examples
 #' listStandingKatzCurves(pprRange = 'all')  # list all curves
 #' listStandingKatzCurves(pprRange = 'lp')   # list all the Tpr for low-pressure
+#' #' listStandingKatzCurves(pprRange = 'hp')   # list all the Tpr for high-pressure
 listStandingKatzCurves <- function(pprRange = "lp") {
     range_valid <- c("lp", "hp", "all")
     # stop if it is not 'lp' or 'hp' or 'all'

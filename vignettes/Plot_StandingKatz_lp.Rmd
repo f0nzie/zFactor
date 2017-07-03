@@ -1,6 +1,5 @@
 ---
 title: "Plot Standing-Katz low-pressure `lp` charts"
-author: "Vignette Author"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -9,9 +8,12 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+## Plot a Standing-Katz curve
+
 ```{r setup, include=F, error=T, message=F, warning=F}
 knitr::opts_chunk$set(echo=T, comment=NA, error=T, warning=F, message = F, fig.align = 'center', results = "hold")
 ```
+
 
 If we invoke the function `getStandingKatzCurve` without any parameters, by defult it will use a `Tpr=1.3` for the low-pressure set of `Tpr` curves and plot it.
 
@@ -28,13 +30,14 @@ library(zFactor)
 getStandingKatzCurve(tpr = 1.05, toSave = FALSE, toView = FALSE)
 ```
 
-Or for a couple of Tpr curves, we specify a vector with 2 or more components:
 
+Or for a couple of Tpr curves, we specify a vector with 2 or more components:
 ```{r}
 library(zFactor)
 tpr_vec <- c(1.05, 1.1)
 result <- getStandingKatzCurve(tpr = tpr_vec, toSave = FALSE, toView = FALSE)
 ```
+
 
 ## A dataframe for each `Tpr` dataset
 The returning object of `getStandingKatzCurve` is a list of dataframes, which contains a dataframe for each of the `Tpr` curves specified:
@@ -57,12 +60,13 @@ And, for `Tpr = 1.1`:
 as_tibble(result[["1.1"]])
 ```
 
+
 ## Plot all the `lp` Standing-Katz curves
 Or we can plot all the `lp` Standing-Katz curves:
 
 ```{r}
 # view all the `Tpr` SK individual charts
-tpr_vec <- getCurvesDigitized(pprRange = "lp")
+tpr_vec <- getStandingKatzTpr(pprRange = "lp")
 result <- getStandingKatzCurve(tpr_vec, toSave = FALSE,  toView = FALSE)
 ```
 
@@ -158,10 +162,10 @@ ggplot(all_tpr_df, aes(x=Ppr, y=z, group=Tpr, color=Tpr)) +
     geom_point()
 ```
 
-Or the one-liner:
 
+Or the one-liner:
 ```{r}
-tpr_vec <- getCurvesDigitized(pprRange = "lp")
+tpr_vec <- getStandingKatzTpr(pprRange = "lp")
 multiplotStandingKatz(tpr_vec)
 ```
 
@@ -219,9 +223,8 @@ med_tpr_vec <- c(1.5, 1.6, 1.7, 1.8, 1.9)
 multiplotStandingKatz(low_tpr_vec)
 ```
 
+
 ## The high range of `Tpr` curves
-
-
 ```{r}
 library(zFactor)
 library(ggplot2)
@@ -254,7 +257,6 @@ By performing a summary of the tidy dataset we can learn a lot more of the data 
 
 ```{r}
 library(tibble)
-
 as.tibble(hi_tpr_df)
 ```
 
