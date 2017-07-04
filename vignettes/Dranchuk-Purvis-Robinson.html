@@ -10,7 +10,6 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<meta name="author" content="Alfonso R. Reyes" />
 
 <meta name="date" content="2017-07-03" />
 
@@ -69,14 +68,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <h1 class="title toc-ignore">Dranchuk-Purvis-Robinson correlation</h1>
-<h4 class="author"><em>Alfonso R. Reyes</em></h4>
 <h4 class="date"><em>2017-07-03</em></h4>
 
 
 
 <div id="why-dpr-is-different" class="section level2">
 <h2>Why <code>DPR</code> is different</h2>
-<p>The <code>Dranchuk-Purvis-Robinson</code> correlation is different than the other correlations in the sense that the authors were looking at redraw three of the isotherms of the original work by Standing-Katz, at <code>Tpr=1.05</code>, <code>Tpr=1.1</code> and <code>Tpr=1.15</code>. The authors were expecting that later the corrections was adopted with experimental data matching those two new curves. We haven’t found a paper confirming that yet. <span class="citation">(See Dranchuk et al. <a href="#ref-Dranchuk1973">1973</a>)</span>.</p>
+<p>The <code>Dranchuk-Purvis-Robinson</code> correlation is different than the other correlations in the sense that the authors were looking at redrawing three of the isotherms of the original work by Standing-Katz: the curves at <code>Tpr=1.05</code>, <code>Tpr=1.1</code> and <code>Tpr=1.15</code>. The authors were expecting that later the corrections to be adopted with experimental data matching those two new curves. We haven’t found a paper confirming that yet. <span class="citation">(See Dranchuk et al. <a href="#ref-Dranchuk1973">1973</a>)</span>.</p>
 <p>Other than that, the <code>DPR</code> correlation behaves pretty well but not much better than the <code>DAK</code> correlation.</p>
 </div>
 <div id="get-z-at-selected-ppr-and-tpr" class="section level2">
@@ -271,7 +269,7 @@ sum_t_ape
  Mean   :0.7920  
  3rd Qu.:1.1120  
  Max.   :1.2285  </code></pre>
-<p>We can see that the errors in <code>z</code> with <code>DPR</code> are far lower than <code>Hall-Yarborough</code> with a Min. :0.1637 % and Max. :0.9659 % for <code>Tpr=1.2</code>, and a Min. :0.1245 % and Max. :0.7928 % for <code>Tpr=1.3</code>.</p>
+<p>We see that the errors in <code>z</code> with <code>DPR</code> are far lower than <code>Hall-Yarborough</code> with a Min. :0.1637 % and Max. :0.9659 % for <code>Tpr=1.2</code>, and a Min. :0.1245 % and Max. :0.7928 % for <code>Tpr=1.3</code>.</p>
 </div>
 <div id="prepare-to-plot-sk-vs-dpr-correlation" class="section level2">
 <h2>Prepare to plot <code>SK</code> vs <code>DPR</code> correlation</h2>
