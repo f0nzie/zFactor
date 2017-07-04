@@ -28,17 +28,14 @@ Use the the correlation to calculate `z` and from Standing-Katz chart obtain `z`
 ```{r}
 # get a z value
 library(zFactor)
-
 ppr <- 1.5
 tpr <- 2.0
 
 z.calc <- z.Shell(pres.pr = ppr, temp.pr = tpr)
 
 # get a z value from the SK chart at the same Ppr and Tpr
-
 z.chart <- getStandingKatzMatrix(tpr_vector = tpr, 
                       pprRange = "lp")[1, as.character(ppr)]
-
 
 # calculate the APE
 ape <- abs((z.calc - z.chart) / z.chart) * 100
@@ -55,7 +52,6 @@ From the Standing-Katz chart we read `z` at a digitized point:
 
 ```{r}
 library(zFactor)
-
 ppr <- 1.5
 tpr <- 1.1
 
