@@ -20,7 +20,8 @@
 #' z.BeggsBrill(pres.pr = ppr, temp.pr = tpr)
 z.BeggsBrill <- function(pres.pr, temp.pr,
                          tolerance = 1e-13, verbose = FALSE) {
-
+    # calls the core function.
+    # this function converts the results to a matrix
     co <- sapply(pres.pr, function(x)
         sapply(temp.pr, function(y)
             .z.BeggsBrill(pres.pr = x, temp.pr = y,
@@ -34,7 +35,9 @@ z.BeggsBrill <- function(pres.pr, temp.pr,
 }
 
 
-.z.BeggsBrill <- function(pres.pr, temp.pr, tolerance = 1e-13, verbose = FALSE) {
+.z.BeggsBrill <- function(pres.pr, temp.pr,
+                          tolerance = 1e-13, verbose = FALSE) {
+    # core function
     # Brill and Beggs compressibility factor (1973)
 
     A <- 1.39 *(temp.pr - 0.92)^0.5 - 0.36 * temp.pr - 0.101
