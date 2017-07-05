@@ -179,7 +179,7 @@ ggplot(all_tpr_df, aes(x=Ppr, y=z, group=Tpr, color=Tpr)) +
 
 
 ### Build a table of statistical errors between a correlation and SK chart
-```{r}
+```{r message=FALSE}
 library(ggplot2)
 library(tibble)
 library(dplyr)
