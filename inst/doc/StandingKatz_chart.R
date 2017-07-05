@@ -3,17 +3,14 @@ knitr::opts_chunk$set(echo=T, comment=NA, error=T, warning=F, message = F, fig.a
 
 ## ------------------------------------------------------------------------
 library(zFactor)
-
 listStandingKatzCurves(pprRange = 'all')
 
 ## ------------------------------------------------------------------------
 library(zFactor)
-
 listStandingKatzCurves(pprRange = 'hp')
 
 ## ------------------------------------------------------------------------
 library(zFactor)
-
 listStandingKatzCurves(pprRange = 'lp')
 
 ## ----fig.width=5, fig.height=5-------------------------------------------
@@ -44,7 +41,6 @@ library(zFactor)
 library(tibble)
 
 tpr <- c(1.05, 1.3, 1.5)
-
 tpr_li <- lapply(tpr, getStandingKatzData, pprRange = 'lp')
 names(tpr_li) <- tpr
 tibble(tpr_li)
@@ -71,7 +67,6 @@ library(zFactor)
 
 tpr_vec <- c(1.05, 1.1, 1.2, 1.3)
 ppr_vec <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5)
-
 getStandingKatzMatrix(ppr_vector = ppr_vec, tpr_vector = tpr_vec)
 
 ## ------------------------------------------------------------------------
@@ -79,7 +74,6 @@ library(zFactor)
 
 tpr_vec <- c(2.0, 2.2, 2.4, 2.6, 2.8, 3.0)
 ppr_vec <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.0)
-
 getStandingKatzMatrix(ppr_vector = ppr_vec, tpr_vector = tpr_vec)
 
 ## ------------------------------------------------------------------------
@@ -126,7 +120,6 @@ names(res_li) <- tpr_vec
 asked_tpr_str <- as.character(asked_tpr)
 df <- res_li[[asked_tpr_str]]
 df[which(res_li[[asked_tpr_str]]["Ppr_near"] == asked_ppr), "z"]
-
 
 ## ------------------------------------------------------------------------
 library(zFactor)
