@@ -9,6 +9,35 @@ z_correlations <- data.frame(
 )
 
 
+#' Get correlation information
+#'
+#' @param how short: abbreviations; long: description; function: the name of the
+#' correlation function
+#' @export
+#' @rdname get_z_correlations
+#' @examples
+#' # get the short name for the correlation
+#' get_z_correlations(how = "short")
+#'
+#' # get the description for the correlation
+#' get_z_correlations(how = "long")
+#'
+#' # get the name of the function assgined to the correlation
+#' get_z_correlations(how = "function")
+get_z_correlations <- function(how = "short") {
+    # get correlation information. short: abbreviations; long: description
+    #     function: the name of the correlation function
+    if (how == "short")
+        return(z_correlations[["short"]])
+    if (how == "long")
+        return(z_correlations[["long"]])
+    if (how == "function")
+        return(z_correlations[["function_name"]])
+    else stop("wrong keyword")
+}
+
+
+
 #' split a long string to create a vector for testing
 #'
 #' @param str a contnuous long string to split as a vector
@@ -114,32 +143,7 @@ isValid_correlation <- function(correlation) {
 }
 
 
-#' Get correlation information
-#'
-#' @param how short: abbreviations; long: description; function: the name of the
-#' correlation function
-#' @export
-#' @rdname get_z_correlations
-#' @examples
-#' # get the short name for the correlation
-#' get_z_correlations(how = "short")
-#'
-#' # get the description for the correlation
-#' get_z_correlations(how = "long")
-#'
-#' # get the name of the function assgined to the correlation
-#' get_z_correlations(how = "function")
-get_z_correlations <- function(how = "short") {
-    # get correlation information. short: abbreviations; long: description
-    #     function: the name of the correlation function
-    if (how == "short")
-        return(z_correlations[["short"]])
-    if (how == "long")
-        return(z_correlations[["long"]])
-    if (how == "function")
-        return(z_correlations[["function_name"]])
-    else stop("wrong keyword")
-}
+
 
 
 

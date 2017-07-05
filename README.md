@@ -240,18 +240,6 @@ ggplot(all_tpr_df, aes(x=Ppr, y=z, group=Tpr, color=Tpr)) +
 library(ggplot2)
 library(tibble)
 library(dplyr)
-#> Warning: package 'dplyr' was built under R version 3.4.1
-#> 
-#> Attaching package: 'dplyr'
-#> The following objects are masked from 'package:data.table':
-#> 
-#>     between, first, last
-#> The following objects are masked from 'package:stats':
-#> 
-#>     filter, lag
-#> The following objects are masked from 'package:base':
-#> 
-#>     intersect, setdiff, setequal, union
 
 # get all `lp` Tpr curves
 tpr_all <- getStandingKatzTpr(pprRange = "lp")

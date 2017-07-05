@@ -4,17 +4,14 @@ knitr::opts_chunk$set(echo=T, comment=NA, error=T, warning=F, message = F, fig.a
 ## ------------------------------------------------------------------------
 # get a z value
 library(zFactor)
-
 ppr <- 1.5
 tpr <- 2.0
 
 z.calc <- z.Shell(pres.pr = ppr, temp.pr = tpr)
 
 # get a z value from the SK chart at the same Ppr and Tpr
-
 z.chart <- getStandingKatzMatrix(tpr_vector = tpr, 
                       pprRange = "lp")[1, as.character(ppr)]
-
 
 # calculate the APE
 ape <- abs((z.calc - z.chart) / z.chart) * 100
@@ -26,7 +23,6 @@ df
 
 ## ------------------------------------------------------------------------
 library(zFactor)
-
 ppr <- 1.5
 tpr <- 1.1
 

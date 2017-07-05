@@ -2,7 +2,7 @@
 % Please edit documentation in R/Dranchuk-AbouKassem.R
 \name{z.DranchukAbuKassem}
 \alias{z.DranchukAbuKassem}
-\title{Dranchuk- correlation}
+\title{Dranchuk-AbouKassem correlation}
 \usage{
 z.DranchukAbuKassem(pres.pr, temp.pr, tolerance = 1e-13, verbose = FALSE)
 }
@@ -16,7 +16,7 @@ z.DranchukAbuKassem(pres.pr, temp.pr, tolerance = 1e-13, verbose = FALSE)
 \item{verbose}{print internal calclulations}
 }
 \description{
-Dranchuk- correlation
+Dranchuk-AbouKassem correlation
 }
 \examples{
 ## calculate z for one Tpr curve at a single Ppr

@@ -4,19 +4,16 @@ knitr::opts_chunk$set(echo=T, comment=NA, error=T, warning=F, message = F, fig.a
 ## ------------------------------------------------------------------------
 # get a z value
 library(zFactor)
-
 ppr <- 1.5
 tpr <- 2.0
 
 z.calc <- z.Ann10(pres.pr = ppr, temp.pr = tpr)
-
 # get a z value from the SK chart at the same Ppr and Tpr
 z.chart <- getStandingKatzMatrix(tpr_vector = tpr, 
                       pprRange = "lp")[1, as.character(ppr)]
 
 # calculate the APE
 ape <- abs((z.calc - z.chart) / z.chart) * 100
-
 df <- as.data.frame(list(Ppr = ppr,  z.calc =z.calc, z.chart = z.chart, ape=ape))
 rownames(df) <- tpr
 df
@@ -24,7 +21,6 @@ df
 
 ## ------------------------------------------------------------------------
 library(zFactor)
-
 ppr <- 1.5
 tpr <- 1.1
 
@@ -36,7 +32,6 @@ z.chart <- getStandingKatzMatrix(tpr_vector = tpr,
 
 # calculate the APE (Average Percentage Error)
 ape <- abs((z.calc - z.chart) / z.chart) * 100
-
 df <- as.data.frame(list(Ppr = ppr,  z.calc =z.calc, z.chart = z.chart, ape=ape))
 rownames(df) <- tpr
 df
