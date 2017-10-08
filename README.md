@@ -132,7 +132,6 @@ You can see for yourself which correlation is more stable at different ranges of
 ``` r
 library(zFactor)
 zFactor:::z.plot.range("BB",  interval = "fine")
-#> Warning: package 'bindrcpp' was built under R version 3.4.1
 ```
 
 ![](man/figures/README-unnamed-chunk-5-1.png)
@@ -218,6 +217,7 @@ getStandingKatzCurve(tpr = 1.05, pprRange = "lp", toView = FALSE, toSave = FALSE
 ``` r
 library(zFactor)
 library(ggplot2)
+#> Warning: package 'ggplot2' was built under R version 3.4.2
 library(data.table)
 
 tpr_vec <- c(1.05, 1.1, 1.2, 1.3, 1.5, 1.6, 1.7, 1.9, 2.0, 2.4, 2.6, 2.8, 3.0)
