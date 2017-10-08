@@ -1,3 +1,7 @@
+## 20171008, 0.1.7.9002
+* add URL to description
+* remove middle name from author
+
 ## 20171008, 0.1.7.9001
 * Rebuild site after updates
 * minor cosmetic changes in README
