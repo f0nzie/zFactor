@@ -2,7 +2,7 @@ Package: zFactor
 Type: Package
 Title: Calculate the Compressibility Factor 'z' for Hydrocarbon Gases
 Version: 0.1.7
-Author: Alfonso R. Reyes <alfonso.reyes@oilgainsanalytics.com>
+Authors@R: person("Alfonso", "R.", "Reyes", role = c("aut", "cre"), email = "alfonso.reyes@oilgainsanalytics.com")
 Maintainer: Alfonso R. Reyes <alfonso.reyes@oilgainsanalytics.com>
 Description: Computational algorithms to solve equations and find the
     compressibility factor `z` of hydrocarbon gases. Correlations available: 
