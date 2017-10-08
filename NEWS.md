@@ -1,3 +1,6 @@
+## 20171008, 0.1.7.9003
+* remove rdocumentation badge, it was static. changed to CRAN badge.
+
 ## 20171008, 0.1.7.9002
 * add URL to description
 * remove middle name from author
