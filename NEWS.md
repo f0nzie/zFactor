@@ -1,3 +1,6 @@
+## 20171008, 0.1.7.9002
+* add URL to description
+
 ## 20171008, 0.1.7.9001
 * Rebuild site after updates
 * minor cosmetic changes in README
