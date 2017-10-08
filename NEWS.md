@@ -1,3 +1,8 @@
+## 20171008, 0.1.7.9001
+* Rebuild site after updates
+* minor cosmetic changes in README
+* add a link to wikipedia (MAPE)
+
 ## 20171008, 0.1.7.9000
 * Build the package with `pkgdown`
 * change author in description to use new way of adding authors

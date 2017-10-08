@@ -25,14 +25,14 @@ bib <- read.bibtex(bib_file)
 
 
 # zFactor
-Computational tools for chemical, petrochemical and petroleum engineers. Calculates the deviation between different correlations for gas compressibility compared to the Standing-Katz chart.
+Computational tools for chemical, petrochemical and petroleum engineers. Calculates the deviation between different correlations for gas compressibility compared to the original Standing-Katz chart.
 
 ## Motivation
-For the development of vertical lift performance (VLP) curves and other petroleum engineering calculations, it is necessary to calculate properties of hydrocarbons in mixtures, liquid and gaseous phases.  Compressibility is one of these hydrocarbon properties. It is important to count with the apropriate correlation and know its range of applicability in order to calculate other properties dependant of `z`.
+For the development of vertical lift performance (VLP) curves and other petroleum engineering calculations, it is necessary to calculate properties of hydrocarbons in mixtures, liquid and gaseous phases. **Compressibility** is one of these hydrocarbon properties. It is important to count with the apropriate correlation and know its range of applicability in order to calculate other properties dependant of `z`.
 
-There are several compressibility correlations. In this package, few of them, or the most used are being evaluated. There has been extensive studies on compressibility correlations. This evaluation is different in the sense that provides a graphical view of the range of applicability as well statistical measures of the errors.
+There are several compressibility correlations. In this package, few of them, or the most used are being evaluated. There has been extensive studies on compressibility correlations. This evaluation is different in the sense that provides a graphical view of the range of applicability as well statistical measures of the errors, besides that the work has been written in `R` providing the analysis and results for peer review and reproducibility purposes.
 
-This analysis focus on sweet hydrocarbon gases. Compressibility correlations for sour gases are little bit more complicated since they show significant deviations from the curves in the Standing-Katz charts. Effects of CO2, H2S and N2 have to be accounted for. In a future release of `zFactor` correlations for sour hydrocarbons gases will possibly be covered.
+This analysis focus on sweet hydrocarbon gases. Compressibility correlations for sour gases are little bit more complicated since they show significant deviations from the curves in the Standing-Katz charts. Effects of CO2, H2S and N2 have to be accounted for. In a future release of `zFactor` correlations for *sour hydrocarbons gases* will possibly be covered.
 
 
 ## Correlations used in this study
@@ -52,7 +52,7 @@ The correlations that are implemented in R for the package **zFactor** are:
 
 
 ## Installation
-I recommend installing from GitHub using devtools, that way you get the latest and greatest version. CRAN release cycles allows updates every one to two months.
+I recommend installing from GitHub using `devtools`, that way you get the latest and greatest version. CRAN release cycles allows updates every one to two months.
 
 You can install the latest version of `zFactor` from github with:
 
@@ -105,7 +105,7 @@ z.Ann10(ppr, tpr)
 
 
 ## Range of Applicability
-How to interpret the colors? We use the Mean Absolute Percentage Error or `MAPE` to visualize how close the correlation follow the experimental values of the Standing-Katz chart.
+How to interpret the colors? We use the [Mean Absolute Percentage Error](https://en.wikipedia.org/wiki/Mean_absolute_percentage_error) or `MAPE` to visualize how close the correlation follow the experimental values of the Standing-Katz chart.
 
 * `Blue`: the MAPE is zero or near zero
 * `Yellow`: the MAPE is around 10 percent.
