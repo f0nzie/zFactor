@@ -12,7 +12,7 @@ test_that("SH corr matches solution of 4x7 Ppr, Tpr matrix", {
     ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5)
     tpr <- c(1.3, 1.5, 1.7, 2)
 
-    dpr <- z.Shell(ppr, tpr); save(dpr, file = "sh_4x7.rda")
+    # dpr <- z.Shell(ppr, tpr); save(dpr, file = "sh_4x7.rda")
     load(file = "sh_4x7.rda");
     expect_equal(z.Shell(ppr, tpr), dpr)
 })
@@ -22,7 +22,7 @@ test_that("SH corr matches solution of 2x6 Ppr, Tpr matrix", {
     tpr <- c(1.05, 1.1)
     ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5)
 
-    dpr <- z.Shell(ppr, tpr); save(dpr, file = "sh_2x6.rda")
+    # dpr <- z.Shell(ppr, tpr); save(dpr, file = "sh_2x6.rda")
     load(file = "sh_2x6.rda");
     expect_equal(z.Shell(ppr, tpr), dpr)
 })
@@ -32,7 +32,7 @@ test_that("SH corr matches solution of 4x13 Ppr, Tpr matrix", {
     tpr <- c(1.05, 1.1, 1.2, 1.3)
     ppr <- c(0.5, 1.0, 1.5, 2, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5)
 
-    dpr <- z.Shell(ppr, tpr); save(dpr, file = "sh_4x13.rda")
+    # dpr <- z.Shell(ppr, tpr); save(dpr, file = "sh_4x13.rda")
     load(file = "sh_4x13.rda");
     expect_equal(z.Shell(ppr, tpr), dpr)
 })
@@ -42,7 +42,7 @@ test_that("SH corr matches solution of 16x7 Ppr, Tpr (all) matrix", {
     tpr <- getStandingKatzTpr(pprRange = "lp")
     ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5)
 
-    dpr <- z.Shell(ppr, tpr); save(dpr, file = "sh_16x7.rda")
+    # dpr <- z.Shell(ppr, tpr); save(dpr, file = "sh_16x7.rda")
     load(file = "sh_16x7.rda");
     expect_equal(z.Shell(ppr, tpr), dpr)
 })

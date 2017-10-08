@@ -9,6 +9,35 @@ z_correlations <- data.frame(
 )
 
 
+#' Get correlation information
+#'
+#' @param how short: abbreviations; long: description; function: the name of the
+#' correlation function
+#' @export
+#' @rdname get_z_correlations
+#' @examples
+#' # get the short name for the correlation
+#' get_z_correlations(how = "short")
+#'
+#' # get the description for the correlation
+#' get_z_correlations(how = "long")
+#'
+#' # get the name of the function assgined to the correlation
+#' get_z_correlations(how = "function")
+get_z_correlations <- function(how = "short") {
+    # get correlation information. short: abbreviations; long: description
+    #     function: the name of the correlation function
+    if (how == "short")
+        return(z_correlations[["short"]])
+    if (how == "long")
+        return(z_correlations[["long"]])
+    if (how == "function")
+        return(z_correlations[["function_name"]])
+    else stop("wrong keyword")
+}
+
+
+
 #' split a long string to create a vector for testing
 #'
 #' @param str a contnuous long string to split as a vector
@@ -51,8 +80,10 @@ matrixWithCorrelation <- function(ppr_vector, tpr_vector, corr.Function) {
 
 combineCorrWithSK <- function(sk_df, co_df) {
     # combine correlation tidy DF with Standing-Katz tidy DF
-    sk_tidy <- tidyr::gather(sk_df, "ppr", "z.chart", 2:ncol(sk_df))
-    co_tidy <- tidyr::gather(co_df, "ppr", "z.calcs", 2:ncol(co_df))
+    sk_cols <- ncol(sk_df)
+    co_cols <- ncol(co_df)
+    sk_tidy <- tidyr::gather(sk_df, "ppr", "z.chart", 2:sk_cols)
+    co_tidy <- tidyr::gather(co_df, "ppr", "z.calcs", 2:co_cols)
 
     sk_co_tidy <- cbind(sk_tidy, z.calc = co_tidy$z.calcs)
     sk_co_tidy$dif <- sk_co_tidy$z.chart  - sk_co_tidy$z.calc
@@ -114,32 +145,7 @@ isValid_correlation <- function(correlation) {
 }
 
 
-#' Get correlation information
-#'
-#' @param how short: abbreviations; long: description; function: the name of the
-#' correlation function
-#' @export
-#' @rdname get_z_correlations
-#' @examples
-#' # get the short name for the correlation
-#' get_z_correlations(how = "short")
-#'
-#' # get the description for the correlation
-#' get_z_correlations(how = "long")
-#'
-#' # get the name of the function assgined to the correlation
-#' get_z_correlations(how = "function")
-get_z_correlations <- function(how = "short") {
-    # get correlation information. short: abbreviations; long: description
-    #     function: the name of the correlation function
-    if (how == "short")
-        return(z_correlations[["short"]])
-    if (how == "long")
-        return(z_correlations[["long"]])
-    if (how == "function")
-        return(z_correlations[["function_name"]])
-    else stop("wrong keyword")
-}
+
 
 
 

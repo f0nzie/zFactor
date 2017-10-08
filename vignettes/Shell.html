@@ -12,7 +12,7 @@
 
 <meta name="author" content="Alfonso R. Reyes" />
 
-<meta name="date" content="2017-07-03" />
+<meta name="date" content="2017-07-05" />
 
 <title>Shell correlation</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Shell correlation</h1>
 <h4 class="author"><em>Alfonso R. Reyes</em></h4>
-<h4 class="date"><em>2017-07-03</em></h4>
+<h4 class="date"><em>2017-07-05</em></h4>
 
 
 
@@ -83,17 +83,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Use the the correlation to calculate <code>z</code> and from Standing-Katz chart obtain <code>z</code> a digitized point at the given <code>Tpr</code> and <code>Ppr</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get a z value</span>
 <span class="kw">library</span>(zFactor)
-
 ppr &lt;-<span class="st"> </span><span class="fl">1.5</span>
 tpr &lt;-<span class="st"> </span><span class="fl">2.0</span>
 
 z.calc &lt;-<span class="st"> </span><span class="kw">z.Shell</span>(<span class="dt">pres.pr =</span> ppr, <span class="dt">temp.pr =</span> tpr)
 
 <span class="co"># get a z value from the SK chart at the same Ppr and Tpr</span>
-
 z.chart &lt;-<span class="st"> </span><span class="kw">getStandingKatzMatrix</span>(<span class="dt">tpr_vector =</span> tpr, 
                       <span class="dt">pprRange =</span> <span class="st">&quot;lp&quot;</span>)[<span class="dv">1</span>, <span class="kw">as.character</span>(ppr)]
-
 
 <span class="co"># calculate the APE</span>
 ape &lt;-<span class="st"> </span><span class="kw">abs</span>((z.calc -<span class="st"> </span>z.chart) /<span class="st"> </span>z.chart) *<span class="st"> </span><span class="dv">100</span>
@@ -109,7 +106,6 @@ df
 <h2>Get <code>z</code> at selected <code>Ppr</code> and <code>Tpr=1.1</code></h2>
 <p>From the Standing-Katz chart we read <code>z</code> at a digitized point:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zFactor)
-
 ppr &lt;-<span class="st"> </span><span class="fl">1.5</span>
 tpr &lt;-<span class="st"> </span><span class="fl">1.1</span>
 

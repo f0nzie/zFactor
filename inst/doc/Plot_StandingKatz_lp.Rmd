@@ -48,14 +48,12 @@ names(result)      # name of each dataframe within the list
 ```
 
 For `Tpr = 1.05`:
-
 ```{r}
 library(tibble)
 as.tibble(result[["1.05"]])
 ```
 
 And, for `Tpr = 1.1`:
-
 ```{r}
 as_tibble(result[["1.1"]])
 ```
@@ -131,8 +129,6 @@ ggplot(all_tpr_df, aes(x=Ppr, y=z, group=Tpr, color=Tpr)) +
 
 ### The one step way
 Using this function `multiplotStandingKatz` you can achieve the same result:
-
-
 ```{r}
 tpr_vec <- c(1.05, 1.3, 1.5)
 multiplotStandingKatz(tpr_vec)
@@ -170,7 +166,7 @@ multiplotStandingKatz(tpr_vec)
 ```
 
 
-## Low range Tpr
+## Plotting the low-range Tpr
 If you just prefer the low range `Tpr` curves:
 
 ```{r}
@@ -197,7 +193,7 @@ low_tpr_vec <- c(1.05, 1.1, 1.2, 1.3, 1.4)
 multiplotStandingKatz(low_tpr_vec)
 ```
 
-## The medium range `Tpr` curves
+## The medium-range `Tpr` curves
 
 ```{r}
 library(zFactor)
@@ -224,7 +220,7 @@ multiplotStandingKatz(low_tpr_vec)
 ```
 
 
-## The high range of `Tpr` curves
+## The high-range of `Tpr` curves
 ```{r}
 library(zFactor)
 library(ggplot2)
@@ -242,6 +238,7 @@ ggplot(hi_tpr_df, aes(x=Ppr, y=z, group=Tpr, color=Tpr)) +
     geom_point()
 ```
 
+
 ```{r}
 hi_tpr_vec <- c(2.0, 2.4, 2.6, 2.8, 3.0)
 multiplotStandingKatz(hi_tpr_vec)
@@ -253,7 +250,7 @@ By performing a summary of the tidy dataset we can learn a lot more of the data 
 * The number of observations or rows is 117
 * The Ppr ranges from 0.3 to 8.005
 * The z values go from 0.937 to 1.097. This is understandle since we are referring to the high side of the Tpr curves.
-* From all the digitized point 1 of 117 was digitized far from the 1/10 grid.
+* From all the digitized points, only 1 out of 117 was digitized far from the 1/10 grid.
 
 ```{r}
 library(tibble)

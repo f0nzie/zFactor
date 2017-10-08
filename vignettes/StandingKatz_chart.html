@@ -12,7 +12,7 @@
 
 <meta name="author" content="Vignette Author" />
 
-<meta name="date" content="2017-07-03" />
+<meta name="date" content="2017-07-05" />
 
 <title>Standing-Katz chart data</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Standing-Katz chart data</h1>
 <h4 class="author"><em>Vignette Author</em></h4>
-<h4 class="date"><em>2017-07-03</em></h4>
+<h4 class="date"><em>2017-07-05</em></h4>
 
 
 
@@ -85,7 +85,6 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>If you feel you can add a Standing-Katz chart with higher resolution and improve the work of this package, you can do so. Just keep in mind certain convention to name the text files. Let’s see how the curves were saved for this package.</p>
 <p>We invoke the function <code>listStandingKatzCurves()</code> to list all the Standing-Katz curve data that has been digitized. See the <code>R</code> code chunk below:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zFactor)
-
 <span class="kw">listStandingKatzCurves</span>(<span class="dt">pprRange =</span> <span class="st">'all'</span>)</code></pre></div>
 <pre><code> [1] &quot;sk_hp_tpr_105.txt&quot; &quot;sk_hp_tpr_110.txt&quot; &quot;sk_hp_tpr_120.txt&quot;
  [4] &quot;sk_hp_tpr_130.txt&quot; &quot;sk_hp_tpr_140.txt&quot; &quot;sk_hp_tpr_150.txt&quot;
@@ -105,7 +104,6 @@ tpr: pseudo-reduced tempereture
 nnn: a three digit number representing the curve by the Tpr</code></pre>
 <p>Now that we know the meaning of the name of digitized curve. we could only list then the files that contain data only in the ‘high pressure’ range:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zFactor)
-
 <span class="kw">listStandingKatzCurves</span>(<span class="dt">pprRange =</span> <span class="st">'hp'</span>)</code></pre></div>
 <pre><code> [1] &quot;sk_hp_tpr_105.txt&quot; &quot;sk_hp_tpr_110.txt&quot; &quot;sk_hp_tpr_120.txt&quot;
  [4] &quot;sk_hp_tpr_130.txt&quot; &quot;sk_hp_tpr_140.txt&quot; &quot;sk_hp_tpr_150.txt&quot;
@@ -113,7 +111,6 @@ nnn: a three digit number representing the curve by the Tpr</code></pre>
 [10] &quot;sk_hp_tpr_240.txt&quot; &quot;sk_hp_tpr_260.txt&quot; &quot;sk_hp_tpr_300.txt&quot;</code></pre>
 <p>For the low-pressure <code>Ppr</code> range:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zFactor)
-
 <span class="kw">listStandingKatzCurves</span>(<span class="dt">pprRange =</span> <span class="st">'lp'</span>)</code></pre></div>
 <pre><code> [1] &quot;sk_lp_tpr_105.txt&quot; &quot;sk_lp_tpr_110.txt&quot; &quot;sk_lp_tpr_120.txt&quot;
  [4] &quot;sk_lp_tpr_130.txt&quot; &quot;sk_lp_tpr_140.txt&quot; &quot;sk_lp_tpr_150.txt&quot;
@@ -212,7 +209,6 @@ diff:     the difference between the Ppr of the point read and the grid</code></
 <span class="kw">library</span>(tibble)
 
 tpr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.05</span>, <span class="fl">1.3</span>, <span class="fl">1.5</span>)
-
 tpr_li &lt;-<span class="st"> </span><span class="kw">lapply</span>(tpr, getStandingKatzData, <span class="dt">pprRange =</span> <span class="st">'lp'</span>)
 <span class="kw">names</span>(tpr_li) &lt;-<span class="st"> </span>tpr
 <span class="kw">tibble</span>(tpr_li)</code></pre></div>
@@ -320,7 +316,6 @@ ppr_vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl"
 
 tpr_vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.05</span>, <span class="fl">1.1</span>, <span class="fl">1.2</span>, <span class="fl">1.3</span>)
 ppr_vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="fl">3.5</span>, <span class="fl">4.5</span>, <span class="fl">5.5</span>, <span class="fl">6.5</span>)
-
 <span class="kw">getStandingKatzMatrix</span>(<span class="dt">ppr_vector =</span> ppr_vec, <span class="dt">tpr_vector =</span> tpr_vec)</code></pre></div>
 <pre><code>       0.5   1.5   2.5   3.5   4.5   5.5   6.5
 1.05 0.829 0.253 0.343 0.471 0.598 0.727 0.846
@@ -334,7 +329,6 @@ ppr_vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl"
 
 tpr_vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">2.0</span>, <span class="fl">2.2</span>, <span class="fl">2.4</span>, <span class="fl">2.6</span>, <span class="fl">2.8</span>, <span class="fl">3.0</span>)
 ppr_vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="fl">3.5</span>, <span class="fl">4.5</span>, <span class="fl">5.5</span>, <span class="fl">6.0</span>)
-
 <span class="kw">getStandingKatzMatrix</span>(<span class="dt">ppr_vector =</span> ppr_vec, <span class="dt">tpr_vector =</span> tpr_vec)</code></pre></div>
 <pre><code>       0.5   1.5   2.5   3.5   4.5   5.5     6
 2.00 0.982 0.956 0.941 0.937 0.945 0.969 0.986
