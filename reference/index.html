@@ -11,8 +11,8 @@
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
+<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cerulean/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -39,7 +39,7 @@
   <body>
     <div class="container template-reference-index">
       <header>
-      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
@@ -52,26 +52,29 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="..//index.html">
-    <span class="fa fa-home fa-lg"></span>
+  <a href="../index.html">
+    <span class="fa fa-home"></span>
      
   </a>
 </li>
-<li>
-  <a href="../reference/index.html">Reference</a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
+    Vignettes
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/Ann10.html">Artificial Neural Network correlation</a>
+      <a href="../articles/StandingKatz_chart.html">Standing-Katz chart</a>
     </li>
     <li>
-      <a href="../articles/Beggs-Brill.html">Beggs-Brill correlation</a>
+      <a href="../articles/Plot_StandingKatz_lp.html">Plot Stand-Katz curves</a>
+    </li>
+    <li>
+      <a href="../articles/Hall-Yarborough.html">Hall-Yarborough correlation</a>
+    </li>
+    <li>
+      <a href="../articles/Beggs-Brill.html">Beggs and Brill correlation</a>
     </li>
     <li>
       <a href="../articles/Dranchuk-AbouKassem.html">Dranchuk-AbouKassem correlation</a>
@@ -80,29 +83,35 @@
       <a href="../articles/Dranchuk-Purvis-Robinson.html">Dranchuk-Purvis-Robinson correlation</a>
     </li>
     <li>
-      <a href="../articles/Hall-Yarborough.html">Hall-Yarborough correlation</a>
-    </li>
-    <li>
-      <a href="../articles/Plot_StandingKatz_lp.html">Plot Standing-Katz low-pressure `lp` charts</a>
-    </li>
-    <li>
       <a href="../articles/Shell.html">Shell correlation</a>
     </li>
     <li>
-      <a href="../articles/StandingKatz_chart.html">Standing-Katz chart data</a>
+      <a href="../articles/Ann10.html">Artificial Neural Networks</a>
     </li>
   </ul>
-</li>
-<li>
-  <a href="../news/index.html">News</a>
 </li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
         <li>
+  <a href="../news/index.html">
+    <span class="fa fa-newspaper-o"></span>
+     
+    News
+  </a>
+</li>
+<li>
+  <a href="../reference/index.html">
+    <span class="fa fa-file-code-o"></span>
+     
+    functions
+  </a>
+</li>
+<li>
   <a href="https://github.com/f0nzie/zFactor">
     <span class="fa fa-github fa-lg"></span>
      
+    github
   </a>
 </li>
       </ul>
@@ -118,7 +127,7 @@
     <div class="page-header">
       <h1>
         Reference
-        <small>version&nbsp;0.1.7.9003</small>
+        <small>version&nbsp;0.1.7.9004</small>
       </h1>
     </div>
 
@@ -133,76 +142,16 @@
       <tbody>
         <tr>
           <th colspan="2">
-            <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
+            <h2 id="section-standing-katz-chart" class="hasAnchor"><a href="#section-standing-katz-chart" class="anchor"></a>Standing-Katz chart</h2>
             <p class="section-desc"></p>
           </th>
         </tr>
         <tr>
           <!--  -->
           <td>
-            <p><code><a href="Ann10.html">z.Ann10</a></code> </p>
+            <p><code><a href="listStandingKatzCurves.html">listStandingKatzCurves</a></code> </p>
           </td>
-          <td><p>Artificial Neural Network correlation</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="Beggs-Brill.html">z.BeggsBrill</a></code> </p>
-          </td>
-          <td><p>Beggs and Brill correlation</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="convertStringToVector.html">convertStringToVector</a></code> </p>
-          </td>
-          <td><p>split a long string to create a vector for testing</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="createTidyFromMatrix.html">createTidyFromMatrix</a></code> </p>
-          </td>
-          <td><p>Create a tidy table from Ppr and Tpr vectors</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="DAK.genDataset7p4t.html">DAK.genDataset7p4t</a></code> </p>
-          </td>
-          <td><p>Generate a dataset of z values calculated by DAK</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="dak_short.html">dak_short</a></code> </p>
-          </td>
-          <td><p>Hall-Yarborough tidy dataset</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="DPR.genDataset7p4t.html">DPR.genDataset7p4t</a></code> </p>
-          </td>
-          <td><p>Generate a dataset of z values calculated by DPR</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="dpr_short.html">dpr_short</a></code> </p>
-          </td>
-          <td><p>Hall-Yarborough tidy dataset</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="Dranchuk-AbouKassem.html">z.DranchukAbuKassem</a></code> </p>
-          </td>
-          <td><p>Dranchuk-AbouKassem correlation</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="Dranchuk-Purvis-Robinson.html">z.DranchukPurvisRobinson</a></code> </p>
-          </td>
-          <td><p>Dranchuk-Purvis-Robinson correlation</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="get_z_correlations.html">get_z_correlations</a></code> </p>
-          </td>
-          <td><p>Get correlation information</p></td>
+          <td><p>List all Standing-Katz curves available at Low and High pressures</p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -230,45 +179,53 @@
         </tr><tr>
           <!--  -->
           <td>
+            <p><code><a href="multiplotStandingKatz.html">multiplotStandingKatz</a></code> </p>
+          </td>
+          <td><p>Plot multiple Tpr curves in one figure</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-correlations" class="hasAnchor"><a href="#section-correlations" class="anchor"></a>Correlations</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="get_z_correlations.html">get_z_correlations</a></code> </p>
+          </td>
+          <td><p>Get correlation information</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="z.stats.html">z.stats</a></code> </p>
+          </td>
+          <td><p>Get error summary statistics for any given compressibility correlation</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
             <p><code><a href="Hall-Yarborough.html">z.HallYarborough</a></code> </p>
           </td>
           <td><p>Hall-Yarborough correlation</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="HY.genDataset7p4t.html">HY.genDataset7p4t</a></code> </p>
+            <p><code><a href="Beggs-Brill.html">z.BeggsBrill</a></code> </p>
           </td>
-          <td><p>Generate a dataset of z values read from Standing-Kats chart</p></td>
+          <td><p>Beggs and Brill correlation</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="hy_short.html">hy_short</a></code> </p>
+            <p><code><a href="Dranchuk-AbouKassem.html">z.DranchukAbuKassem</a></code> </p>
           </td>
-          <td><p>Hall-Yarborough tidy dataset</p></td>
+          <td><p>Dranchuk-AbouKassem correlation</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="isValid_correlation.html">isValid_correlation</a></code> </p>
+            <p><code><a href="Dranchuk-Purvis-Robinson.html">z.DranchukPurvisRobinson</a></code> </p>
           </td>
-          <td><p>Check if supplied correlation (three letter) is valid</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="listStandingKatzCurves.html">listStandingKatzCurves</a></code> </p>
-          </td>
-          <td><p>List all Standing-Katz curves available at Low and High pressures</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="multiplotStandingKatz.html">multiplotStandingKatz</a></code> </p>
-          </td>
-          <td><p>Plot multiple Tpr curves in one figure</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="Ppr_min.html">Ppr_min</a></code> </p>
-          </td>
-          <td><p># Correlation Kamyab et al. Created using Artificial Neural Networks (ANN)</p></td>
+          <td><p>Dranchuk-Purvis-Robinson correlation</p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -278,10 +235,18 @@
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="SK.genDataset7p4t.html">SK.genDataset7p4t</a></code> </p>
+            <p><code><a href="Ann10.html">z.Ann10</a></code> </p>
           </td>
-          <td><p>Generate a dataset of z values read from Standing-Kats chart</p></td>
-        </tr><tr>
+          <td><p>Artificial Neural Network correlation</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-datasets" class="hasAnchor"><a href="#section-datasets" class="anchor"></a>Datasets</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
           <!--  -->
           <td>
             <p><code><a href="sk_short.html">sk_short</a></code> </p>
@@ -290,15 +255,21 @@
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="z.plot.range.html">z.plot.range</a></code> </p>
+            <p><code><a href="dak_short.html">dak_short</a></code> </p>
           </td>
-          <td><p>Tile plot of best fit area for indicated correlation</p></td>
+          <td><p>Hall-Yarborough tidy dataset</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="z.stats.html">z.stats</a></code> </p>
+            <p><code><a href="dpr_short.html">dpr_short</a></code> </p>
           </td>
-          <td><p>Get error summary statistics for any given compressibility correlation</p></td>
+          <td><p>Hall-Yarborough tidy dataset</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="hy_short.html">hy_short</a></code> </p>
+          </td>
+          <td><p>Hall-Yarborough tidy dataset</p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -320,9 +291,67 @@
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="zFactor-package.html">zFactor-package</a></code> </p>
+            <p><code><a href="DAK.genDataset7p4t.html">DAK.genDataset7p4t</a></code> </p>
           </td>
-          <td><p>Calculation of compressibility factors using varius correlations</p></td>
+          <td><p>Generate a dataset of z values calculated by DAK</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="DPR.genDataset7p4t.html">DPR.genDataset7p4t</a></code> </p>
+          </td>
+          <td><p>Generate a dataset of z values calculated by DPR</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="HY.genDataset7p4t.html">HY.genDataset7p4t</a></code> </p>
+          </td>
+          <td><p>Generate a dataset of z values read from Standing-Kats chart</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="SK.genDataset7p4t.html">SK.genDataset7p4t</a></code> </p>
+          </td>
+          <td><p>Generate a dataset of z values read from Standing-Kats chart</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-internal-functions-and-helpers" class="hasAnchor"><a href="#section-internal-functions-and-helpers" class="anchor"></a>Internal functions and helpers</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="convertStringToVector.html">convertStringToVector</a></code> </p>
+          </td>
+          <td><p>split a long string to create a vector for testing</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="isValid_correlation.html">isValid_correlation</a></code> </p>
+          </td>
+          <td><p>Check if supplied correlation (three letter) is valid</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="createTidyFromMatrix.html">createTidyFromMatrix</a></code> </p>
+          </td>
+          <td><p>Create a tidy table from Ppr and Tpr vectors</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-other" class="hasAnchor"><a href="#section-other" class="anchor"></a>Other</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="Ppr_min.html">Ppr_min</a></code> </p>
+          </td>
+          <td><p># Correlation Kamyab et al. Created using Artificial Neural Networks (ANN)</p></td>
         </tr>
       </tbody>
       </table>
@@ -332,7 +361,11 @@
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#section-standing-katz-chart">Standing-Katz chart</a></li>
+      <li><a href="#section-correlations">Correlations</a></li>
+      <li><a href="#section-datasets">Datasets</a></li>
+      <li><a href="#section-internal-functions-and-helpers">Internal functions and helpers</a></li>
+      <li><a href="#section-other">Other</a></li>
     </ul>
   </div>
 </div>

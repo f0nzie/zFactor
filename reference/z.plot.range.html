@@ -11,8 +11,8 @@
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
+<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cerulean/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -39,7 +39,7 @@
   <body>
     <div class="container template-reference-topic">
       <header>
-      <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
@@ -52,26 +52,29 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="..//index.html">
-    <span class="fa fa-home fa-lg"></span>
+  <a href="../index.html">
+    <span class="fa fa-home"></span>
      
   </a>
 </li>
-<li>
-  <a href="../reference/index.html">Reference</a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
+    Vignettes
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/Ann10.html">Artificial Neural Network correlation</a>
+      <a href="../articles/StandingKatz_chart.html">Standing-Katz chart</a>
     </li>
     <li>
-      <a href="../articles/Beggs-Brill.html">Beggs-Brill correlation</a>
+      <a href="../articles/Plot_StandingKatz_lp.html">Plot Stand-Katz curves</a>
+    </li>
+    <li>
+      <a href="../articles/Hall-Yarborough.html">Hall-Yarborough correlation</a>
+    </li>
+    <li>
+      <a href="../articles/Beggs-Brill.html">Beggs and Brill correlation</a>
     </li>
     <li>
       <a href="../articles/Dranchuk-AbouKassem.html">Dranchuk-AbouKassem correlation</a>
@@ -80,29 +83,35 @@
       <a href="../articles/Dranchuk-Purvis-Robinson.html">Dranchuk-Purvis-Robinson correlation</a>
     </li>
     <li>
-      <a href="../articles/Hall-Yarborough.html">Hall-Yarborough correlation</a>
-    </li>
-    <li>
-      <a href="../articles/Plot_StandingKatz_lp.html">Plot Standing-Katz low-pressure `lp` charts</a>
-    </li>
-    <li>
       <a href="../articles/Shell.html">Shell correlation</a>
     </li>
     <li>
-      <a href="../articles/StandingKatz_chart.html">Standing-Katz chart data</a>
+      <a href="../articles/Ann10.html">Artificial Neural Networks</a>
     </li>
   </ul>
-</li>
-<li>
-  <a href="../news/index.html">News</a>
 </li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
         <li>
+  <a href="../news/index.html">
+    <span class="fa fa-newspaper-o"></span>
+     
+    News
+  </a>
+</li>
+<li>
+  <a href="../reference/index.html">
+    <span class="fa fa-file-code-o"></span>
+     
+    functions
+  </a>
+</li>
+<li>
   <a href="https://github.com/f0nzie/zFactor">
     <span class="fa fa-github fa-lg"></span>
      
+    github
   </a>
 </li>
       </ul>
@@ -146,9 +155,9 @@ or close to MAPE=25. Pink is much greater than 25.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># plot Dranchuk-AbouKassem</span>
-<span class='fu'>z.plot.range</span>(<span class='st'>"DAK"</span>)</div><div class='img'><img src='z.plot.range-1.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
+<span class='fu'>z.plot.range</span>(<span class='st'>"DAK"</span>)</div><div class='img'><img src='z.plot.range-7.png' alt='' width='700' height='432.632880098887' /></div><div class='input'>
 <span class='co'># plot Beggs-Brill correlation with fine grid on Ppr</span>
-<span class='fu'>z.plot.range</span>(<span class='st'>"BB"</span>, <span class='kw'>interval</span> <span class='kw'>=</span> <span class='st'>"fine"</span>)</div><div class='img'><img src='z.plot.range-2.png' alt='' width='700' height='432.632880098887' /></div></pre>
+<span class='fu'>z.plot.range</span>(<span class='st'>"BB"</span>, <span class='kw'>interval</span> <span class='kw'>=</span> <span class='st'>"fine"</span>)</div><div class='img'><img src='z.plot.range-8.png' alt='' width='700' height='432.632880098887' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
