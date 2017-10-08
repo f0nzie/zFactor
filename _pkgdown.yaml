@@ -1,0 +1,86 @@
+title: zFactor
+url: https://github.com/f0nzie/zFactor
+template:
+    params:
+        bootswatch: cerulean
+reference:
+    - title: Standing-Katz chart
+      desc: ~
+      contents:
+        - '`listStandingKatzCurves`'
+        - '`getStandingKatzCurve`'
+        - '`getStandingKatzData`'
+        - '`getStandingKatzMatrix`'
+        - '`getStandingKatzTpr`'
+        - '`multiplotStandingKatz`'
+    - title: Correlations
+      desc: ~
+      contents:
+        - '`get_z_correlations`'
+        - '`z.stats`'
+        - '`z.HallYarborough`'
+        - '`z.BeggsBrill`'
+        - '`z.DranchukAbuKassem`'
+        - '`z.DranchukPurvisRobinson`'
+        - '`z.Shell`'
+        - '`z.Ann10`'
+    - title: Datasets
+      desc: ~
+      contents:
+        - '`sk_short`'
+        - '`dak_short`'
+        - '`dpr_short`'
+        - '`hy_short`'
+        - '`z_HY`'
+        - '`z_hy_deriv`'
+        - '`z_sk_chart`'
+        - '`DAK.genDataset7p4t`'
+        - '`DPR.genDataset7p4t`'
+        - '`HY.genDataset7p4t`'
+        - '`SK.genDataset7p4t`'
+    - title: Internal functions and helpers
+      desc: ~
+      contents:
+        - '`convertStringToVector`'
+        - '`isValid_correlation`'
+        - '`createTidyFromMatrix`'
+    - title: Other
+      desc: ~
+      contents:
+        - '`Ppr_min`'
+navbar:
+    type: inverse
+    left:
+        - icon: fa-home
+          href: index.html
+        - text: "Vignettes"
+          menu:
+            - text: Standing-Katz chart
+              href: articles/StandingKatz_chart.html
+            - text: Plot Stand-Katz curves
+              href: articles/Plot_StandingKatz_lp.html
+            - text: Hall-Yarborough correlation
+              href: articles/Hall-Yarborough.html
+            - text: Beggs and Brill correlation
+              href: articles/Beggs-Brill.html
+            - text: Dranchuk-AbouKassem correlation
+              href: articles/Dranchuk-AbouKassem.html
+            - text: Dranchuk-Purvis-Robinson correlation
+              href: articles/Dranchuk-Purvis-Robinson.html
+            - text: Shell correlation
+              href: articles/Shell.html
+            - text: Artificial Neural Networks
+              href: articles/Ann10.html
+    right:
+        - text: "News"
+          icon: fa-newspaper-o
+          href: news/index.html
+        - text: "functions"
+          icon: fa-file-code-o
+          href: reference/index.html
+        - text: "github"
+          icon: fa-github fa-lg
+          href: https://github.com/f0nzie/zFactor
+
+
+
