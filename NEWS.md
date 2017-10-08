@@ -2,6 +2,7 @@
 * Build the package with `pkgdown`
 * change author in description to use new way of adding authors
 * tested offline and website running
+* reinstalled package `rlang` to fix error during `pkgdown` installation
 
 ## 20170703, 0.1.7
 * correct misspelled "hyddrocarbons". Noted by CRAN.
