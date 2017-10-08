@@ -2,8 +2,6 @@
 output: github_document
 ---
 
-[![Rdoc](http://www.rdocumentation.org/badges/version/zFactor)](http://www.rdocumentation.org/packages/zFactor)
-
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
