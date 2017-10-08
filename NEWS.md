@@ -1,3 +1,8 @@
+## 20171008, 0.1.7.9000
+* Build the package with `pkgdown`
+* change author in description to use new way of adding authors
+* tested offline and website running
+
 ## 20170703, 0.1.7
 * correct misspelled "hyddrocarbons". Noted by CRAN.
 * resubmit to CRAN
