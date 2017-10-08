@@ -80,8 +80,10 @@ matrixWithCorrelation <- function(ppr_vector, tpr_vector, corr.Function) {
 
 combineCorrWithSK <- function(sk_df, co_df) {
     # combine correlation tidy DF with Standing-Katz tidy DF
-    sk_tidy <- tidyr::gather(sk_df, "ppr", "z.chart", 2:ncol(sk_df))
-    co_tidy <- tidyr::gather(co_df, "ppr", "z.calcs", 2:ncol(co_df))
+    sk_cols <- ncol(sk_df)
+    co_cols <- ncol(co_df)
+    sk_tidy <- tidyr::gather(sk_df, "ppr", "z.chart", 2:sk_cols)
+    co_tidy <- tidyr::gather(co_df, "ppr", "z.calcs", 2:co_cols)
 
     sk_co_tidy <- cbind(sk_tidy, z.calc = co_tidy$z.calcs)
     sk_co_tidy$dif <- sk_co_tidy$z.chart  - sk_co_tidy$z.calc
