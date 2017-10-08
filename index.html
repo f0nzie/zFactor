@@ -95,13 +95,13 @@
 <div id="zfactor" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#zfactor" class="anchor"></a>zFactor</h1></div>
-<p>Computational tools for chemical, petrochemical and petroleum engineers. Calculates the deviation between different correlations for gas compressibility compared to the Standing-Katz chart.</p>
+<p>Computational tools for chemical, petrochemical and petroleum engineers. Calculates the deviation between different correlations for gas compressibility compared to the original Standing-Katz chart.</p>
 <div id="motivation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#motivation" class="anchor"></a>Motivation</h2>
-<p>For the development of vertical lift performance (VLP) curves and other petroleum engineering calculations, it is necessary to calculate properties of hydrocarbons in mixtures, liquid and gaseous phases. Compressibility is one of these hydrocarbon properties. It is important to count with the apropriate correlation and know its range of applicability in order to calculate other properties dependant of <code>z</code>.</p>
-<p>There are several compressibility correlations. In this package, few of them, or the most used are being evaluated. There has been extensive studies on compressibility correlations. This evaluation is different in the sense that provides a graphical view of the range of applicability as well statistical measures of the errors.</p>
-<p>This analysis focus on sweet hydrocarbon gases. Compressibility correlations for sour gases are little bit more complicated since they show significant deviations from the curves in the Standing-Katz charts. Effects of CO2, H2S and N2 have to be accounted for. In a future release of <code>zFactor</code> correlations for sour hydrocarbons gases will possibly be covered.</p>
+<p>For the development of vertical lift performance (VLP) curves and other petroleum engineering calculations, it is necessary to calculate properties of hydrocarbons in mixtures, liquid and gaseous phases. <strong>Compressibility</strong> is one of these hydrocarbon properties. It is important to count with the apropriate correlation and know its range of applicability in order to calculate other properties dependant of <code>z</code>.</p>
+<p>There are several compressibility correlations. In this package, few of them, or the most used are being evaluated. There has been extensive studies on compressibility correlations. This evaluation is different in the sense that provides a graphical view of the range of applicability as well statistical measures of the errors, besides that the work has been written in <code>R</code> providing the analysis and results for peer review and reproducibility purposes.</p>
+<p>This analysis focus on sweet hydrocarbon gases. Compressibility correlations for sour gases are little bit more complicated since they show significant deviations from the curves in the Standing-Katz charts. Effects of CO2, H2S and N2 have to be accounted for. In a future release of <code>zFactor</code> correlations for <em>sour hydrocarbons gases</em> will possibly be covered.</p>
 </div>
 <div id="correlations-used-in-this-study" class="section level2">
 <h2 class="hasAnchor">
@@ -119,7 +119,7 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>I recommend installing from GitHub using devtools, that way you get the latest and greatest version. CRAN release cycles allows updates every one to two months.</p>
+<p>I recommend installing from GitHub using <code>devtools</code>, that way you get the latest and greatest version. CRAN release cycles allows updates every one to two months.</p>
 <p>You can install the latest version of <code>zFactor</code> from github with:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages("devtools")</span>
 devtools::<span class="kw">install_github</span>(<span class="st">"f0nzie/zFactor"</span>)</code></pre></div>
@@ -193,7 +193,7 @@ tpr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.4
 <div id="range-of-applicability" class="section level2">
 <h2 class="hasAnchor">
 <a href="#range-of-applicability" class="anchor"></a>Range of Applicability</h2>
-<p>How to interpret the colors? We use the Mean Absolute Percentage Error or <code>MAPE</code> to visualize how close the correlation follow the experimental values of the Standing-Katz chart.</p>
+<p>How to interpret the colors? We use the <a href="https://en.wikipedia.org/wiki/Mean_absolute_percentage_error">Mean Absolute Percentage Error</a> or <code>MAPE</code> to visualize how close the correlation follow the experimental values of the Standing-Katz chart.</p>
 <ul>
 <li>
 <code>Blue</code>: the MAPE is zero or near zero</li>
