@@ -1,5 +1,5 @@
 
-[![Rdoc](http://www.rdocumentation.org/badges/version/zFactor)](http://www.rdocumentation.org/packages/zFactor)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/zFactor)](https://cran.r-project.org/package=zFactor)
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 zFactor
