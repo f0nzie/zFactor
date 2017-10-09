@@ -314,7 +314,10 @@ getCurvesDigitized <- function(pprRange) {
 multiplotStandingKatz <- function(tpr = NULL, pprRange = "lp", ...) {
     if (is.null(tpr)) stop("a vector of one or multiple Tpr must be entered")
     Ppr <- NULL; z <- NULL; Tpr <- NULL      # dummy variables to prevent error
-    tpr_li <- getStandingKatzData(tpr, pprRange = pprRange)
+    if (length(tpr) > 1)
+        tpr_li <- getStandingKatzData(tpr, pprRange = pprRange)
+    else
+        tpr_li <- list(getStandingKatzData(tpr, pprRange = pprRange))
 
     # join the dataframes with rbindlist adding an identifier column
     tpr_df <- data.table::rbindlist(tpr_li, idcol = TRUE)
