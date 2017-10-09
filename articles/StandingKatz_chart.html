@@ -103,7 +103,6 @@
   <div class="col-md-9">
     <div class="page-header toc-ignore">
       <h1>Standing-Katz chart data</h1>
-                        <h4 class="author">Vignette Author</h4>
             
             <h4 class="date">2017-10-08</h4>
           </div>
@@ -115,7 +114,7 @@
 <h2 class="hasAnchor">
 <a href="#how-the-data-was-collected" class="anchor"></a>How the data was collected</h2>
 <p>The Standing-Katz (SK) chart data is read directly from a scanned figure of the original plot drawn by Standing and Katz in 1951.</p>
-<p>The software used to digitize the data is <code>graphClick</code> for the operating system <code>osX</code> by Apple. This software has been tested and qualified by scolars working on a similar task of digitizing data. <paper citation here></paper></p>
+<p>The software used to digitize the data is <code>graphClick</code> for the operating system <code>osX</code> by Apple. This software has been tested and qualified by scholars working on a similar task of digitizing data.</p>
 <p>Each one of the SK chart curves has been digitized. There are some curves where more points were taken due to the curvature. Other curves are almost linear and few points were necessary to define the curve.</p>
 </div>
 <div id="saving-the-standing-katz-curves" class="section level2">
@@ -141,7 +140,7 @@ hp:  high pressure range
 lp:  low pressure range
 tpr: pseudo-reduced tempereture
 nnn: a three digit number representing the curve by the Tpr</code></pre>
-<p>Now that we know the meaning of the name of digitized curve. we could only list then the files that contain data only in the ‘high pressure’ range:</p>
+<p>Now that we know the meaning of the name of digitized curve. we could only list then the files that contain data only in the ‘high pressure’ (hp) range:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zFactor)
 <span class="kw"><a href="../reference/listStandingKatzCurves.html">listStandingKatzCurves</a></span>(<span class="dt">pprRange =</span> <span class="st">'hp'</span>)</code></pre></div>
 <pre><code> [1] "sk_hp_tpr_105.txt" "sk_hp_tpr_110.txt" "sk_hp_tpr_120.txt"
