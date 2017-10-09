@@ -193,11 +193,6 @@ getStandingKatzMatrix <- function(ppr_vector = NULL,
     if (!all(tpr_vector %in% getStandingKatzTpr(pprRange)))
         stop("One of the Tpr curves is not available")
 
-    # if (missing(ppr_vector) || missing(tpr_vector))
-    #     stop("You must supply vectors for PPr and Tpr")
-    # if (length(ppr_vector) == 0 || length(tpr_vector) == 0) {
-    #     stop("Ppr or Tpr vectors must have at least one element")}
-
     # get a list of dataframes at all given Tpr
     res_li <- lapply(tpr_vector, getStandingKatzData, pprRange)
     tpr_vec_str <- format(round(tpr_vector, 2), nsmall = 2)   # all Tpr with 2 decimals
