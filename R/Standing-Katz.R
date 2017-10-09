@@ -4,7 +4,8 @@
 #' Read file with readings from Standing-Katz chart, create data file and plot
 #'
 #' Read a .txt file that was created from readings of the Standing-Katz chart,
-#' then convert it to a .rda file and plot the curve for given Tpr
+#' then convert it to a .rda file and plot the curve for given Tpr. If no values
+#' are supplied, the function will plot the SK curve at Tpr=1.30, low Ppr.
 #' @param tpr Pseudo-reduced temperature curve in SK chart
 #' @param pprRange Takes one of two values: "lp": low pressure, or "hp" for
 #' high pressure
