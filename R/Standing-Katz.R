@@ -11,15 +11,16 @@
 #' high pressure
 #' @param tolerance rounding tolerance to avoid rounding readings that are in
 #' the middle of the grid. "tolerance" adds flexibility in deciding point closeness.
+#' Default value is 0.01.
 #' @param toSave set to FALSE to indicate if the .rda file will not be saved to disk
 #' @param toPlot set to FALSE to indicate the dataset will not be plotted
 #' @param toView set to FALSE to prevent visualizing the dataframe
-#' @param ylim minimum and maximum limits for the y-scale
+#' @param ylim minimum (0.2) and maximum (1.2) limits for the y-scale
 #' @importFrom graphics lines plot mtext
 #' @export
 #' @examples
 #' # get SK curve for low-pressure chart
-#' getStandingKatzCurve(tpr = 1.3, pprRange = 'lp', toView = FALSE, toSave = FALSE, toPlot = FALSE)
+#' getStandingKatzCurve()
 #' # get SK curve for high-pressure chart
 #' getStandingKatzCurve(tpr = 1.3, pprRange = 'hp', toView = FALSE, toSave = FALSE)
 getStandingKatzCurve <- function(tpr = 1.3, pprRange = "lp", tolerance = 0.01,
