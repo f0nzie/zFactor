@@ -14,7 +14,8 @@ getStandingKatzCurve(tpr = 1.3, pprRange = "lp", tolerance = 0.01,
 high pressure}
 
 \item{tolerance}{rounding tolerance to avoid rounding readings that are in
-the middle of the grid. "tolerance" adds flexibility in deciding point closeness.}
+the middle of the grid. "tolerance" adds flexibility in deciding point closeness.
+Default value is 0.01.}
 
 \item{toView}{set to FALSE to prevent visualizing the dataframe}
 
@@ -22,15 +23,16 @@ the middle of the grid. "tolerance" adds flexibility in deciding point closeness
 
 \item{toPlot}{set to FALSE to indicate the dataset will not be plotted}
 
-\item{ylim}{minimum and maximum limits for the y-scale}
+\item{ylim}{minimum (0.2) and maximum (1.2) limits for the y-scale}
 }
 \description{
 Read a .txt file that was created from readings of the Standing-Katz chart,
-then convert it to a .rda file and plot the curve for given Tpr
+then convert it to a .rda file and plot the curve for given Tpr. If no values
+are supplied, the function will plot the SK curve at Tpr=1.30, low Ppr.
 }
 \examples{
 # get SK curve for low-pressure chart
-getStandingKatzCurve(tpr = 1.3, pprRange = 'lp', toView = FALSE, toSave = FALSE, toPlot = FALSE)
+getStandingKatzCurve()
 # get SK curve for high-pressure chart
 getStandingKatzCurve(tpr = 1.3, pprRange = 'hp', toView = FALSE, toSave = FALSE)
 }

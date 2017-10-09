@@ -115,7 +115,8 @@ getStandingKatzCurve_1p <- function(tpr = 1.3, pprRange = "lp", tolerance = 0.01
 }
 
 
-#' Read file with readings from Standing-Katz chart. Get only the data
+#' Read a file with readings from Standing-Katz chart. Similar to
+#' `getStandingKatzCurve` function but this gets only the data.
 #'
 #' Read a .txt file that was created from readings of the Standing-Katz chart
 #' and retrieve the points

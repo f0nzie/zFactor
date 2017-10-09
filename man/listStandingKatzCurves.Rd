@@ -2,16 +2,17 @@
 % Please edit documentation in R/Standing-Katz.R
 \name{listStandingKatzCurves}
 \alias{listStandingKatzCurves}
-\title{List all Standing-Katz curves available at Low and High pressures}
+\title{List all Standing-Katz curve files available at Low and High pressures}
 \usage{
 listStandingKatzCurves(pprRange = "lp")
 }
 \arguments{
 \item{pprRange}{Takes one of three values: "lp": low pressure, or "hp" for
-high pressure, or 'all' for all the curve files}
+high pressure, or 'all' for all the curve text files. The text files reside
+under extdata. High pressure is considered above a Ppr > 8.}
 }
 \description{
-List all Standing-Katz curves available at Low and High pressures
+List all Standing-Katz curve files available at Low and High pressures
 }
 \examples{
 listStandingKatzCurves(pprRange = 'all')  # list all curves
