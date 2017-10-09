@@ -2,9 +2,10 @@
 % Please edit documentation in R/Standing-Katz.R
 \name{getStandingKatzTpr}
 \alias{getStandingKatzTpr}
-\title{Get a numeric vector of digitized curves available by Tpr}
+\title{Get a numeric vector of the digitized curves available for Pseudo Reduced
+Temperature}
 \usage{
-getStandingKatzTpr(pprRange)
+getStandingKatzTpr(pprRange = NULL)
 }
 \arguments{
 \item{pprRange}{Takes one of 4 values: "lp": low pressure, or "hp" for
@@ -12,7 +13,8 @@ high pressure; "all": all curves; "common": only curves that are common to hp
 and lp}
 }
 \description{
-Get a numeric vector of digitized curves available by Tpr
+Get a numeric vector of the digitized curves available for Pseudo Reduced
+Temperature
 }
 \examples{
 getStandingKatzTpr(pprRange = "lp")

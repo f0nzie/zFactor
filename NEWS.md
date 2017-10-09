@@ -1,3 +1,12 @@
+## 20171008, 0.1.7.9005
+* small changes in the write-up of the README
+* fix case in multiplotStandingKatz() when a vector of length 1 is specified
+* ignore extra files in .Rbuildignore
+* add more details and improve titles of several function. First group in "Standing-Katz chart" in customized menu.
+* describe default values in parameters.
+* move multiplot function to StandingKatz.R
+* add some stops to functions
+
 ## 20171008, 0.1.7.9004
 * customize navbar
 * change menu to cerulean. 

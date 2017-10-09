@@ -11,7 +11,8 @@ get_z_correlations(how = "short")
 correlation function}
 }
 \description{
-Get correlation information
+Get information about the correlation specifying for short name, long name or
+the name of the function.
 }
 \examples{
 # get the short name for the correlation

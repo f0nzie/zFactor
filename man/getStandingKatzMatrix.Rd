@@ -2,9 +2,11 @@
 % Please edit documentation in R/Standing-Katz.R
 \name{getStandingKatzMatrix}
 \alias{getStandingKatzMatrix}
-\title{Generate a matrix of Standing-Katz pseudo-reduced pressure and tenperarture}
+\title{Generate a matrix of Standing-Katz pseudo-reduced pressure and tenperature
+by giving vector values}
 \usage{
-getStandingKatzMatrix(ppr_vector, tpr_vector, pprRange = "lp")
+getStandingKatzMatrix(ppr_vector = NULL, tpr_vector = NULL,
+  pprRange = "lp")
 }
 \arguments{
 \item{ppr_vector}{a vector of pseudo-reduced pressure}
@@ -12,10 +14,11 @@ getStandingKatzMatrix(ppr_vector, tpr_vector, pprRange = "lp")
 \item{tpr_vector}{a vector of pseudo-reduced temperatures}
 
 \item{pprRange}{Takes one of two values: "lp": low pressure, or "hp" for
-high pressure}
+high pressure. Default: "lp"}
 }
 \description{
-Generate a matrix of Standing-Katz pseudo-reduced pressure and tenperarture
+Generate a matrix of Standing-Katz pseudo-reduced pressure and tenperature
+by giving vector values
 }
 \examples{
 # if we want to know all digitized values of Ppr at a Tpr curve
