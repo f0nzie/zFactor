@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Read file with readings from Standing-Katz chart. Get only the data — getStandingKatzData â€¢ zFactor</title>
+<title>Read a file with readings from Standing-Katz chart. Similar to
+`getStandingKatzCurve` function but this gets only the data. — getStandingKatzData â€¢ zFactor</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -125,7 +126,8 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Read file with readings from Standing-Katz chart. Get only the data</h1>
+    <h1>Read a file with readings from Standing-Katz chart. Similar to
+`getStandingKatzCurve` function but this gets only the data.</h1>
     </div>
 
     
@@ -140,12 +142,12 @@ and retrieve the points</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>tpr</th>
-      <td><p>Pseudo-reduced temperature curve in SK chart</p></td>
+      <td><p>Pseudo-reduced temperature curve in SK chart. Default Tpr=1.30</p></td>
     </tr>
     <tr>
       <th>pprRange</th>
       <td><p>Takes one of two values: "lp": low pressure, or "hp" for
-high pressure</p></td>
+high pressure. Default is "lp".</p></td>
     </tr>
     </table>
     
