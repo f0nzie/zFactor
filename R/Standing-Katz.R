@@ -294,12 +294,13 @@ getCurvesDigitized <- function(pprRange) {
 
 
 
-#' Plot multiple Tpr curves in one figure
+#' Plot multiple Tpr isotherm curves in one figure
 #'
-#' Plot will show the digitized isotherm of the Standing-Katz chart
+#' Plot shows the digitized isotherm of the Standing-Katz chart
 #'
-#' @param tpr Pseudo-reduced temperature curve in SK chart
-#' @param pprRange Takes one of two values: "lp": low pressure, or "hp" for
+#' @param tpr a vector of one of multiple Pseudo-reduced temperatures
+#' @param pprRange Takes one of two values: "lp": low pressure, or "hp".
+#' Default: "lp"
 #' @param ... additional parameters
 #' @rdname multiplotStandingKatz
 #' @importFrom ggplot2 ggplot aes geom_line geom_point
@@ -310,8 +311,9 @@ getCurvesDigitized <- function(pprRange) {
 #'
 #' # plot SK curves for the lowest range of Tpr
 #' multiplotStandingKatz(c(1.05, 1.1, 1.2))
-multiplotStandingKatz <- function(tpr, pprRange = "lp", ...) {
-    Ppr <- NULL; z <- NULL; Tpr <- NULL
+multiplotStandingKatz <- function(tpr = NULL, pprRange = "lp", ...) {
+    if (is.null(tpr)) stop("a vector of one or multiple Tpr must be entered")
+    Ppr <- NULL; z <- NULL; Tpr <- NULL      # dummy variables to prevent error
     tpr_li <- getStandingKatzData(tpr, pprRange = pprRange)
 
     # join the dataframes with rbindlist adding an identifier column
