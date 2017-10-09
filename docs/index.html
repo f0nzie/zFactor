@@ -116,7 +116,7 @@
 <h2 class="hasAnchor">
 <a href="#motivation" class="anchor"></a>Motivation</h2>
 <p>For the development of vertical lift performance (VLP) curves and other petroleum engineering calculations, it is necessary to calculate properties of hydrocarbons in mixtures, liquid and gaseous phases. <strong>Compressibility</strong> is one of these hydrocarbon properties. It is important to count with the apropriate correlation and know its range of applicability in order to calculate other properties dependant of <code>z</code>.</p>
-<p>There are several compressibility correlations. In this package, few of them, or the most used are being evaluated. There has been extensive studies on compressibility correlations. This evaluation is different in the sense that provides a graphical view of the range of applicability as well statistical measures of the errors, besides that the work has been written in <code>R</code> providing the analysis and results for peer review and reproducibility purposes.</p>
+<p>There are several compressibility correlations. In this package, few of them, or the most used in the industry, are being evaluated. There have been extensive studies on compressibility correlations. This evaluation is different in the sense that provides a graphical view of the range of applicability as well statistical measures of the errors, besides that the work has been written fully in <code>R</code> providing the analysis and results for peer review and reproducibility purposes. All the code, functions, notes, datasets are available via GitHub.</p>
 <p>This analysis focus on sweet hydrocarbon gases. Compressibility correlations for sour gases are little bit more complicated since they show significant deviations from the curves in the Standing-Katz charts. Effects of CO2, H2S and N2 have to be accounted for. In a future release of <code>zFactor</code> correlations for <em>sour hydrocarbons gases</em> will possibly be covered.</p>
 </div>
 <div id="correlations-used-in-this-study" class="section level2">
@@ -136,7 +136,7 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>I recommend installing from GitHub using <code>devtools</code>, that way you get the latest and greatest version. CRAN release cycles allows updates every one to two months.</p>
-<p>You can install the latest version of <code>zFactor</code> from github with:</p>
+<p>You can install the latest version of <code>zFactor</code> from GitHub with:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages("devtools")</span>
 devtools::<span class="kw">install_github</span>(<span class="st">"f0nzie/zFactor"</span>)</code></pre></div>
 <p>Or, if your prefer, from <code>CRAN</code>:</p>
@@ -241,7 +241,7 @@ zFactor:::<span class="kw"><a href="reference/z.plot.range.html">z.plot.range</a
 <a href="#comparative-analysis" class="anchor"></a>Comparative Analysis</h2>
 <p>The comparative analysis shows tables with different error measurements:</p>
 <pre><code>MSE:   Mean Squared Error
-RMSE:  Root Mean Sqyared Error
+RMSE:  Root Mean Squared Error
 RSS:   Residual sum of Squares
 RMSLE: Root Mean Squared Logarithmic Error. Penalizes understimation.
 MAPE:  Mean Absolute Percentage Error = AARE
@@ -255,12 +255,13 @@ MAE:   Mean Absolute Error</code></pre>
 <ul>
 <li>Find <code>z</code> with any of the correlations provided</li>
 <li>Get values from the Standing-Katz chart at any of the isotherms limited by the pseudo-reduced pressures (<code>Ppr</code>) digitized</li>
-<li>Find what isotherms or pseudo-reduced temperatures (<code>Tpr</code>) are available from Standing and Katz chart</li>
+<li>Find what isotherms or pseudo-reduced temperatures (<code>Tpr</code>) are available from the Standing and Katz chart</li>
 <li>Find what pseudo-reduced pressure points are available</li>
 <li>Plot any of the Standing-Katz isotherms to view <code>z</code> in graphical form</li>
-<li>Plot a tile chart to show the range of applicability of the correlations</li>
+<li>Plot a tile chart to show the range of applicability of the correlations. In essence, get an idea of the accuracy by the location of the desired point at Tpr and Ppr</li>
 <li>Get a statistics table when comparing any of the correlations to the Standing-Katz chart</li>
-<li>Get a matrix of `<code>z</code> values calculated from any correlation where the rows are the pseudo-reduced temperatures and the columns the pseudo-reduced pressures</li>
+<li>Get a matrix of <code>z</code> values calculated from any correlation where the rows are the pseudo-reduced temperatures and the columns the pseudo-reduced pressures</li>
+<li>Plot one or multiple isotherms</li>
 </ul>
 <div id="plotting-a-specific-isotherm-of-sk-chart" class="section level3">
 <h3 class="hasAnchor">
@@ -298,7 +299,7 @@ all_tpr_df &lt;-<span class="st"> </span>data.table::<span class="kw">rbindlist<
 <span class="kw">library</span>(tibble)
 <span class="kw">library</span>(dplyr)
 
-<span class="co"># get all `lp` Tpr curves</span>
+<span class="co"># get all Tpr curves at low pressure (lp)</span>
 tpr_all &lt;-<span class="st"> </span><span class="kw"><a href="reference/getStandingKatzTpr.html">getStandingKatzTpr</a></span>(<span class="dt">pprRange =</span> <span class="st">"lp"</span>)
 ppr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="fl">3.5</span>, <span class="fl">4.5</span>, <span class="fl">5.5</span>, <span class="fl">6.5</span>) 
 sk_corr_all &lt;-<span class="st"> </span><span class="kw"><a href="reference/createTidyFromMatrix.html">createTidyFromMatrix</a></span>(ppr, tpr_all, <span class="dt">correlation =</span> <span class="st">"DPR"</span>)
@@ -349,7 +350,7 @@ smry_tpr_ppr &lt;-<span class="st"> </span><span class="kw">summarise</span>(gro
 <div id="tests" class="section level2">
 <h2 class="hasAnchor">
 <a href="#tests" class="anchor"></a>Tests</h2>
-<p>There are tests for the correlations under tests/testthat.</p>
+<p>There are unit tests for the correlations under tests/testthat.</p>
 </div>
 <div id="how-the-standing-katz-chart-was-constructed" class="section level2">
 <h2 class="hasAnchor">
