@@ -29,7 +29,7 @@ Computational tools for chemical, petrochemical and petroleum engineers. Calcula
 ## Motivation
 For the development of vertical lift performance (VLP) curves and other petroleum engineering calculations, it is necessary to calculate properties of hydrocarbons in mixtures, liquid and gaseous phases. **Compressibility** is one of these hydrocarbon properties. It is important to count with the apropriate correlation and know its range of applicability in order to calculate other properties dependant of `z`.
 
-There are several compressibility correlations. In this package, few of them, or the most used are being evaluated. There has been extensive studies on compressibility correlations. This evaluation is different in the sense that provides a graphical view of the range of applicability as well statistical measures of the errors, besides that the work has been written in `R` providing the analysis and results for peer review and reproducibility purposes.
+There are several compressibility correlations. In this package, few of them, or the most used in the industry, are being evaluated. There have been extensive studies on compressibility correlations. This evaluation is different in the sense that provides a graphical view of the range of applicability as well statistical measures of the errors, besides that the work has been written fully in `R` providing the analysis and results for peer review and reproducibility purposes. All the code, functions, notes, datasets are available via GitHub.
 
 This analysis focus on sweet hydrocarbon gases. Compressibility correlations for sour gases are little bit more complicated since they show significant deviations from the curves in the Standing-Katz charts. Effects of CO2, H2S and N2 have to be accounted for. In a future release of `zFactor` correlations for *sour hydrocarbons gases* will possibly be covered.
 
@@ -53,7 +53,7 @@ The correlations that are implemented in R for the package **zFactor** are:
 ## Installation
 I recommend installing from GitHub using `devtools`, that way you get the latest and greatest version. CRAN release cycles allows updates every one to two months.
 
-You can install the latest version of `zFactor` from github with:
+You can install the latest version of `zFactor` from GitHub with:
 
 ```{r gh-installation, eval = FALSE}
 # install.packages("devtools")
@@ -129,7 +129,7 @@ zFactor:::z.plot.range("N10", interval = "fine")
 The comparative analysis shows tables with different error measurements:
 
     MSE:   Mean Squared Error
-    RMSE:  Root Mean Sqyared Error
+    RMSE:  Root Mean Squared Error
     RSS:   Residual sum of Squares
     RMSLE: Root Mean Squared Logarithmic Error. Penalizes understimation.
     MAPE:  Mean Absolute Percentage Error = AARE
@@ -141,12 +141,13 @@ The comparative analysis shows tables with different error measurements:
 
 * Find `z` with any of the correlations provided
 * Get values from the Standing-Katz chart at any of the isotherms limited by the pseudo-reduced pressures (`Ppr`) digitized
-* Find what isotherms or pseudo-reduced temperatures (`Tpr`) are available from Standing and Katz chart
+* Find what isotherms or pseudo-reduced temperatures (`Tpr`) are available from the Standing and Katz chart
 * Find what pseudo-reduced pressure points are available
 * Plot any of the Standing-Katz isotherms to view `z` in graphical form
-* Plot a tile chart to show the range of applicability of the correlations
+* Plot a tile chart to show the range of applicability of the correlations. In essence, get an idea of the accuracy by the location of the desired point at Tpr and Ppr
 * Get a statistics table when comparing any of the correlations to the Standing-Katz chart
-* Get a matrix of ``z` values calculated from any correlation where the rows are the pseudo-reduced temperatures and the columns the pseudo-reduced pressures
+* Get a matrix of `z` values calculated from any correlation where the rows are the pseudo-reduced temperatures and the columns the pseudo-reduced pressures
+* Plot one or multiple isotherms
 
 
 ### Plotting a specific isotherm of SK chart
@@ -178,12 +179,13 @@ ggplot(all_tpr_df, aes(x=Ppr, y=z, group=Tpr, color=Tpr)) +
 
 
 ### Build a table of statistical errors between a correlation and SK chart
+
 ```{r message=FALSE, warning=FALSE}
 library(ggplot2)
 library(tibble)
 library(dplyr)
 
-# get all `lp` Tpr curves
+# get all Tpr curves at low pressure (lp)
 tpr_all <- getStandingKatzTpr(pprRange = "lp")
 ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
 sk_corr_all <- createTidyFromMatrix(ppr, tpr_all, correlation = "DPR")
@@ -213,7 +215,7 @@ The vignettes contain examples on the use and analysis of the various correlatio
 * ANN.Rmd
 
 ## Tests
-There are tests for the correlations under tests/testthat.
+There are unit tests for the correlations under tests/testthat.
 
 
 ## How the Standing-Katz chart was constructed
