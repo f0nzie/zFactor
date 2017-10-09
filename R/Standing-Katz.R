@@ -244,7 +244,8 @@ extractCurveNumber <- function(str) {
 }
 
 
-#' Get a numeric vector of digitized curves available by Tpr
+#' Get a numeric vector of the digitized curves available for Pseudo Reduced
+#' Temperature
 #'
 #' @param pprRange Takes one of 4 values: "lp": low pressure, or "hp" for
 #' high pressure; "all": all curves; "common": only curves that are common to hp
@@ -253,8 +254,12 @@ extractCurveNumber <- function(str) {
 #' @examples
 #' getStandingKatzTpr(pprRange = "lp")
 #' getStandingKatzTpr(pprRange = "common")
-getStandingKatzTpr <- function(pprRange) {
+getStandingKatzTpr <- function(pprRange = NULL) {
     range_valid <- c("lp", "hp", "all", "common")
+    msg <- "one of these values must be supplied:"
+    msg_stop <- paste(msg, paste(range_valid, collapse = ", "), sep = "\n > ")
+
+    if (is.null(pprRange)) stop(msg_stop)
     if (!pprRange %in% range_valid) stop("Ppr range keyword not valid")
 
     if (pprRange == "common") {
