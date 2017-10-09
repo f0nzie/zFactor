@@ -40,7 +40,7 @@ Note that the files follow this convention:
     tpr: pseudo-reduced tempereture
     nnn: a three digit number representing the curve by the Tpr
     
-Now that we know the meaning of the name of digitized curve. we could only list then the files that contain data only in the 'high pressure' range:
+Now that we know the meaning of the name of digitized curve. we could only list then the files that contain data only in the 'high pressure' (hp) range:
 
 ```{r}
 library(zFactor)
