@@ -1,3 +1,6 @@
+## 20171008, 0.1.7.9006
+* fix Rmd for Standing-Katz notebook
+
 ## 20171008, 0.1.7.9005
 * small changes in the write-up of the README
 * fix case in multiplotStandingKatz() when a vector of length 1 is specified
