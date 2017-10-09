@@ -133,10 +133,11 @@ getStandingKatzData <- function(tpr = 1.3, pprRange = "lp") {
 }
 
 
-#' List all Standing-Katz curves available at Low and High pressures
+#' List all Standing-Katz curve files available at Low and High pressures
 #'
 #' @param pprRange Takes one of three values: "lp": low pressure, or "hp" for
-#' high pressure, or 'all' for all the curve files
+#' high pressure, or 'all' for all the curve text files. The text files reside
+#' under extdata. High pressure is considered above a Ppr > 8.
 #' @export
 #' @examples
 #' listStandingKatzCurves(pprRange = 'all')  # list all curves
