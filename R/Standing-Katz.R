@@ -4,21 +4,23 @@
 #' Read file with readings from Standing-Katz chart, create data file and plot
 #'
 #' Read a .txt file that was created from readings of the Standing-Katz chart,
-#' then convert it to a .rda file and plot the curve for given Tpr
+#' then convert it to a .rda file and plot the curve for given Tpr. If no values
+#' are supplied, the function will plot the SK curve at Tpr=1.30, low Ppr.
 #' @param tpr Pseudo-reduced temperature curve in SK chart
 #' @param pprRange Takes one of two values: "lp": low pressure, or "hp" for
 #' high pressure
 #' @param tolerance rounding tolerance to avoid rounding readings that are in
 #' the middle of the grid. "tolerance" adds flexibility in deciding point closeness.
+#' Default value is 0.01.
 #' @param toSave set to FALSE to indicate if the .rda file will not be saved to disk
 #' @param toPlot set to FALSE to indicate the dataset will not be plotted
 #' @param toView set to FALSE to prevent visualizing the dataframe
-#' @param ylim minimum and maximum limits for the y-scale
+#' @param ylim minimum (0.2) and maximum (1.2) limits for the y-scale
 #' @importFrom graphics lines plot mtext
 #' @export
 #' @examples
 #' # get SK curve for low-pressure chart
-#' getStandingKatzCurve(tpr = 1.3, pprRange = 'lp', toView = FALSE, toSave = FALSE, toPlot = FALSE)
+#' getStandingKatzCurve()
 #' # get SK curve for high-pressure chart
 #' getStandingKatzCurve(tpr = 1.3, pprRange = 'hp', toView = FALSE, toSave = FALSE)
 getStandingKatzCurve <- function(tpr = 1.3, pprRange = "lp", tolerance = 0.01,
@@ -113,13 +115,14 @@ getStandingKatzCurve_1p <- function(tpr = 1.3, pprRange = "lp", tolerance = 0.01
 }
 
 
-#' Read file with readings from Standing-Katz chart. Get only the data
+#' Read a file with readings from Standing-Katz chart. Similar to
+#' `getStandingKatzCurve` function but this gets only the data.
 #'
 #' Read a .txt file that was created from readings of the Standing-Katz chart
 #' and retrieve the points
-#' @param tpr Pseudo-reduced temperature curve in SK chart
+#' @param tpr Pseudo-reduced temperature curve in SK chart. Default Tpr=1.30
 #' @param pprRange Takes one of two values: "lp": low pressure, or "hp" for
-#' high pressure
+#' high pressure. Default is "lp".
 #' @export
 #' @examples
 #' getStandingKatzData(tpr = 1.5, pprRange = 'lp')
@@ -133,10 +136,11 @@ getStandingKatzData <- function(tpr = 1.3, pprRange = "lp") {
 }
 
 
-#' List all Standing-Katz curves available at Low and High pressures
+#' List all Standing-Katz curve files available at Low and High pressures
 #'
 #' @param pprRange Takes one of three values: "lp": low pressure, or "hp" for
-#' high pressure, or 'all' for all the curve files
+#' high pressure, or 'all' for all the curve text files. The text files reside
+#' under extdata. High pressure is considered above a Ppr > 8.
 #' @export
 #' @examples
 #' listStandingKatzCurves(pprRange = 'all')  # list all curves
@@ -158,12 +162,13 @@ listStandingKatzCurves <- function(pprRange = "lp") {
 }
 
 
-#' Generate a matrix of Standing-Katz pseudo-reduced pressure and tenperarture
+#' Generate a matrix of Standing-Katz pseudo-reduced pressure and tenperature
+#' by giving vector values
 #'
 #' @param ppr_vector a vector of pseudo-reduced pressure
 #' @param tpr_vector a vector of pseudo-reduced temperatures
 #' @param pprRange Takes one of two values: "lp": low pressure, or "hp" for
-#' high pressure
+#' high pressure. Default: "lp"
 #' @export
 #' @examples
 #' # if we want to know all digitized values of Ppr at a Tpr curve
@@ -177,17 +182,16 @@ listStandingKatzCurves <- function(pprRange = "lp") {
 #' tpr <- c(1.3, 1.5, 1.7, 2)
 #' sk <- getStandingKatzMatrix(ppr_vector = ppr, tpr_vector = tpr)
 #' print(sk)
-getStandingKatzMatrix <- function(ppr_vector, tpr_vector, pprRange = "lp") {
+getStandingKatzMatrix <- function(ppr_vector = NULL,
+                                  tpr_vector = NULL,
+                                  pprRange = "lp") {
     # create a `z` table (matrix) for a set of Tpr and Ppr
     range_valid <- c("lp", "hp")
+    if (is.null(tpr_vector)) stop("a Tpr vector must be supplied")
     if (!pprRange %in% range_valid)
         stop("Ppr range keyword not valid")
     if (!all(tpr_vector %in% getStandingKatzTpr(pprRange)))
         stop("One of the Tpr curves is not available")
-    # if (missing(ppr_vector) || missing(tpr_vector))
-    #     stop("You must supply vectors for PPr and Tpr")
-    # if (length(ppr_vector) == 0 || length(tpr_vector) == 0) {
-    #     stop("Ppr or Tpr vectors must have at least one element")}
 
     # get a list of dataframes at all given Tpr
     res_li <- lapply(tpr_vector, getStandingKatzData, pprRange)
@@ -240,7 +244,8 @@ extractCurveNumber <- function(str) {
 }
 
 
-#' Get a numeric vector of digitized curves available by Tpr
+#' Get a numeric vector of the digitized curves available for Pseudo Reduced
+#' Temperature
 #'
 #' @param pprRange Takes one of 4 values: "lp": low pressure, or "hp" for
 #' high pressure; "all": all curves; "common": only curves that are common to hp
@@ -249,8 +254,12 @@ extractCurveNumber <- function(str) {
 #' @examples
 #' getStandingKatzTpr(pprRange = "lp")
 #' getStandingKatzTpr(pprRange = "common")
-getStandingKatzTpr <- function(pprRange) {
+getStandingKatzTpr <- function(pprRange = NULL) {
     range_valid <- c("lp", "hp", "all", "common")
+    msg <- "one of these values must be supplied:"
+    msg_stop <- paste(msg, paste(range_valid, collapse = ", "), sep = "\n > ")
+
+    if (is.null(pprRange)) stop(msg_stop)
     if (!pprRange %in% range_valid) stop("Ppr range keyword not valid")
 
     if (pprRange == "common") {
@@ -281,4 +290,41 @@ getStandingKatzPpr <- function(interval = "coarse") {
 getCurvesDigitized <- function(pprRange) {
     .Deprecated("getStandingKatzTpr", package = "zFactor")
     getStandingKatzTpr(pprRange = pprRange)
+}
+
+
+
+#' Plot multiple Tpr isotherm curves in one figure
+#'
+#' Plot shows the digitized isotherm of the Standing-Katz chart
+#'
+#' @param tpr a vector of one of multiple Pseudo-reduced temperatures
+#' @param pprRange Takes one of two values: "lp": low pressure, or "hp".
+#' Default: "lp"
+#' @param ... additional parameters
+#' @rdname multiplotStandingKatz
+#' @importFrom ggplot2 ggplot aes geom_line geom_point
+#' @export
+#' @examples
+#' # plot Standing-Katz curves for Tpr=1.1 and 2.0
+#' multiplotStandingKatz(c(1.1, 2))
+#'
+#' # plot SK curves for the lowest range of Tpr
+#' multiplotStandingKatz(c(1.05, 1.1, 1.2))
+multiplotStandingKatz <- function(tpr = NULL, pprRange = "lp", ...) {
+    if (is.null(tpr)) stop("a vector of one or multiple Tpr must be entered")
+    Ppr <- NULL; z <- NULL; Tpr <- NULL      # dummy variables to prevent error
+    if (length(tpr) > 1)
+        tpr_li <- getStandingKatzData(tpr, pprRange = pprRange)
+    else
+        tpr_li <- list(getStandingKatzData(tpr, pprRange = pprRange))
+
+    # join the dataframes with rbindlist adding an identifier column
+    tpr_df <- data.table::rbindlist(tpr_li, idcol = TRUE)
+    colnames(tpr_df)[1] <- "Tpr"    # name the identifier as Tpr
+
+    g <- ggplot(tpr_df, aes(x=Ppr, y=z, group=Tpr, color=Tpr)) +
+        geom_line() +
+        geom_point()
+    print(g)
 }

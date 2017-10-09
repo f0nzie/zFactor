@@ -2,15 +2,16 @@
 % Please edit documentation in R/Standing-Katz.R
 \name{getStandingKatzData}
 \alias{getStandingKatzData}
-\title{Read file with readings from Standing-Katz chart. Get only the data}
+\title{Read a file with readings from Standing-Katz chart. Similar to
+`getStandingKatzCurve` function but this gets only the data.}
 \usage{
 getStandingKatzData(tpr = 1.3, pprRange = "lp")
 }
 \arguments{
-\item{tpr}{Pseudo-reduced temperature curve in SK chart}
+\item{tpr}{Pseudo-reduced temperature curve in SK chart. Default Tpr=1.30}
 
 \item{pprRange}{Takes one of two values: "lp": low pressure, or "hp" for
-high pressure}
+high pressure. Default is "lp".}
 }
 \description{
 Read a .txt file that was created from readings of the Standing-Katz chart
