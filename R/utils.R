@@ -11,6 +11,9 @@ z_correlations <- data.frame(
 
 #' Get correlation information
 #'
+#' Get information about the correlation specifying for short name, long name or
+#' the name of the function.
+#'
 #' @param how short: abbreviations; long: description; function: the name of the
 #' correlation function
 #' @export
