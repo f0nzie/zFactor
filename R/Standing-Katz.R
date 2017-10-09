@@ -162,7 +162,7 @@ listStandingKatzCurves <- function(pprRange = "lp") {
 }
 
 
-#' Generate a matrix of Standing-Katz pseudo-reduced pressure and tenperarure
+#' Generate a matrix of Standing-Katz pseudo-reduced pressure and tenperature
 #' by giving vector values
 #'
 #' @param ppr_vector a vector of pseudo-reduced pressure
@@ -182,13 +182,17 @@ listStandingKatzCurves <- function(pprRange = "lp") {
 #' tpr <- c(1.3, 1.5, 1.7, 2)
 #' sk <- getStandingKatzMatrix(ppr_vector = ppr, tpr_vector = tpr)
 #' print(sk)
-getStandingKatzMatrix <- function(ppr_vector, tpr_vector, pprRange = "lp") {
+getStandingKatzMatrix <- function(ppr_vector = NULL,
+                                  tpr_vector = NULL,
+                                  pprRange = "lp") {
     # create a `z` table (matrix) for a set of Tpr and Ppr
     range_valid <- c("lp", "hp")
+    if (is.null(tpr_vector)) stop("a Tpr vector must be supplied")
     if (!pprRange %in% range_valid)
         stop("Ppr range keyword not valid")
     if (!all(tpr_vector %in% getStandingKatzTpr(pprRange)))
         stop("One of the Tpr curves is not available")
+
     # if (missing(ppr_vector) || missing(tpr_vector))
     #     stop("You must supply vectors for PPr and Tpr")
     # if (length(ppr_vector) == 0 || length(tpr_vector) == 0) {
