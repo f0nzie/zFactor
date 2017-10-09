@@ -352,7 +352,7 @@ tpr_all &lt;-<span class="st"> </span><span class="kw">getCurvesDigitized</span>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ppr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="fl">3.5</span>, <span class="fl">4.5</span>, <span class="fl">5.5</span>, <span class="fl">6.5</span>) 
 
 sk_corr_all &lt;-<span class="st"> </span><span class="kw"><a href="../reference/createTidyFromMatrix.html">createTidyFromMatrix</a></span>(ppr, tpr_all, <span class="dt">correlation =</span> <span class="st">"BB"</span>)</code></pre></div>
-<pre><code>Error in tpr_vector %in% getStandingKatzTpr(pprRange): object 'tpr_all' not found</code></pre>
+<pre><code>Error in getStandingKatzMatrix(ppr_vector, tpr_vector, pprRange = "lp"): object 'tpr_all' not found</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.tibble</span>(sk_corr_all)</code></pre></div>
 <pre><code>Error in as.tibble(sk_corr_all): object 'sk_corr_all' not found</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_corr_all, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z.calc, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) +
