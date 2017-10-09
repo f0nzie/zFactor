@@ -162,12 +162,13 @@ listStandingKatzCurves <- function(pprRange = "lp") {
 }
 
 
-#' Generate a matrix of Standing-Katz pseudo-reduced pressure and tenperarture
+#' Generate a matrix of Standing-Katz pseudo-reduced pressure and tenperarure
+#' by giving vector values
 #'
 #' @param ppr_vector a vector of pseudo-reduced pressure
 #' @param tpr_vector a vector of pseudo-reduced temperatures
 #' @param pprRange Takes one of two values: "lp": low pressure, or "hp" for
-#' high pressure
+#' high pressure. Default: "lp"
 #' @export
 #' @examples
 #' # if we want to know all digitized values of Ppr at a Tpr curve
