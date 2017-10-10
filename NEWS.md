@@ -1,3 +1,6 @@
+## 20171010, 0.1.7.9007
+* TODO: Fix "Beggs-Brill Correlation". object --> sk_corr_3
+
 ## 20171008, 0.1.7.9006
 * fix Rmd for Standing-Katz notebook
 
