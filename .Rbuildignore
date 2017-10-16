@@ -11,3 +11,4 @@ scan
 notebooks
 ^docs$
 _pkgdown.yaml
+^\.travis\.yml$
