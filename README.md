@@ -1,6 +1,10 @@
 
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/zFactor)](https://cran.r-project.org/package=zFactor)
 
+[![Travis-CI Build Status](https://travis-ci.org/f0nzie/zFactor.svg?branch=master)](https://travis-ci.org/f0nzie/zFactor)
+
+[![codecov](https://codecov.io/gh/f0nzie/zFactor/branch/master/graph/badge.svg)](https://codecov.io/gh/f0nzie/zFactor)
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 zFactor
 =======
@@ -218,7 +222,6 @@ getStandingKatzCurve(tpr = 1.05, pprRange = "lp", toView = FALSE, toSave = FALSE
 ``` r
 library(zFactor)
 library(ggplot2)
-#> Warning: package 'ggplot2' was built under R version 3.4.2
 library(data.table)
 
 tpr_vec <- c(1.05, 1.1, 1.2, 1.3, 1.5, 1.6, 1.7, 1.9, 2.0, 2.4, 2.6, 2.8, 3.0)

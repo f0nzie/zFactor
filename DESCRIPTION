@@ -11,7 +11,8 @@ Description: Computational algorithms to solve equations and find the
     and plotting. Applicable to sweet hydrocarbon gases for now.
 Imports: rootSolve, tidyr, ggplot2, data.table, tibble, dplyr
 Suggests: knitr,
-    rmarkdown, testthat
+    rmarkdown, testthat,
+    covr
 Depends:
     R (>= 2.10)    
 License: GPL-2
