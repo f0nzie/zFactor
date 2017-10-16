@@ -5,7 +5,6 @@
 
 [![codecov](https://codecov.io/gh/f0nzie/zFactor/branch/master/graph/badge.svg)](https://codecov.io/gh/f0nzie/zFactor)
 
-<!-- [![Coverage Status](https://img.shields.io/codecov/c/github/f0nzie/zFactor/master.svg)](https://codecov.io/github/f0nzie/zFactor?branch=master) -->
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 zFactor
 =======
