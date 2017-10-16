@@ -1,5 +1,15 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
 language: R
-sudo: false
 cache: packages
+
+sudo: required
+
+env: _R_CHECK_CRAN_INCOMING_=FALSE
+
+r_github_packages:
+  - f0nzie/zFactor
+
+
+after_success:
+  - Rscript -e 'covr::codecov()'
