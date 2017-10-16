@@ -1,7 +1,12 @@
 ## 20171010, 0.1.7.9007
 * TODO: Fix "Beggs-Brill Correlation". object --> sk_corr_3
+* add Papp's correlation
 
-## 20171008, 0.1.7.9006
+## 20171016, 0.1.7.9006
+* add travis.yml
+* add code coverage with covr
+* add badges to README
+* rename couple of Rda files in ./data
 * fix Rmd for Standing-Katz notebook
 
 ## 20171008, 0.1.7.9005
