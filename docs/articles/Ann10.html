@@ -104,7 +104,7 @@
     <div class="page-header toc-ignore">
       <h1>Artificial Neural Network correlation</h1>
             
-            <h4 class="date">2017-10-08</h4>
+            <h4 class="date">2017-10-16</h4>
           </div>
 
     
@@ -131,7 +131,7 @@ z.chart &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get
                       <span class="dt">pprRange =</span> <span class="st">"lp"</span>)[<span class="dv">1</span>, <span class="kw">as.character</span>(ppr)]
 
 <span class="co"># calculate the APE</span>
-ape &lt;-<span class="st"> </span><span class="kw">abs</span>((z.calc -<span class="st"> </span>z.chart) /<span class="st"> </span>z.chart) *<span class="st"> </span><span class="dv">100</span>
+ape &lt;-<span class="st"> </span><span class="kw">abs</span>((z.calc <span class="op">-</span><span class="st"> </span>z.chart) <span class="op">/</span><span class="st"> </span>z.chart) <span class="op">*</span><span class="st"> </span><span class="dv">100</span>
 df &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">list</span>(<span class="dt">Ppr =</span> ppr,  <span class="dt">z.calc =</span>z.calc, <span class="dt">z.chart =</span> z.chart, <span class="dt">ape=</span>ape))
 <span class="kw">rownames</span>(df) &lt;-<span class="st"> </span>tpr
 df
@@ -155,7 +155,7 @@ z.chart &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get
                       <span class="dt">pprRange =</span> <span class="st">"lp"</span>)[<span class="dv">1</span>, <span class="kw">as.character</span>(ppr)]
 
 <span class="co"># calculate the APE (Average Percentage Error)</span>
-ape &lt;-<span class="st"> </span><span class="kw">abs</span>((z.calc -<span class="st"> </span>z.chart) /<span class="st"> </span>z.chart) *<span class="st"> </span><span class="dv">100</span>
+ape &lt;-<span class="st"> </span><span class="kw">abs</span>((z.calc <span class="op">-</span><span class="st"> </span>z.chart) <span class="op">/</span><span class="st"> </span>z.chart) <span class="op">*</span><span class="st"> </span><span class="dv">100</span>
 df &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">list</span>(<span class="dt">Ppr =</span> ppr,  <span class="dt">z.calc =</span>z.calc, <span class="dt">z.chart =</span> z.chart, <span class="dt">ape=</span>ape))
 <span class="kw">rownames</span>(df) &lt;-<span class="st"> </span>tpr
 df</code></pre></div>
@@ -179,7 +179,7 @@ z.calc &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Ann1
 
 <span class="co"># With the same ppr and tpr vector, we do the same for the Standing-Katz chart</span>
 z.chart &lt;-<span class="st"> </span><span class="kw"><a href="../reference/getStandingKatzMatrix.html">getStandingKatzMatrix</a></span>(<span class="dt">ppr_vector =</span> ppr, <span class="dt">tpr_vector =</span> tpr)
-ape &lt;-<span class="st"> </span><span class="kw">abs</span>((z.calc -<span class="st"> </span>z.chart) /<span class="st"> </span>z.chart) *<span class="st"> </span><span class="dv">100</span>
+ape &lt;-<span class="st"> </span><span class="kw">abs</span>((z.calc <span class="op">-</span><span class="st"> </span>z.chart) <span class="op">/</span><span class="st"> </span>z.chart) <span class="op">*</span><span class="st"> </span><span class="dv">100</span>
 
 <span class="co"># calculate the APE</span>
 <span class="kw">cat</span>(<span class="st">"z.correlation </span><span class="ch">\n</span><span class="st">"</span>); <span class="kw">print</span>(z.calc)
@@ -241,7 +241,7 @@ z.chart &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get
 <span class="co"># We do the same with the HY correlation:</span>
 <span class="co"># calculate z values at lower values of Tpr</span>
 z.calc &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Ann10.html">z.Ann10</a></span>(<span class="dt">pres.pr =</span> ppr2, <span class="dt">temp.pr =</span> tpr2) 
-ape &lt;-<span class="st"> </span><span class="kw">abs</span>((z.calc -<span class="st"> </span>z.chart) /<span class="st"> </span>z.chart) *<span class="st"> </span><span class="dv">100</span>
+ape &lt;-<span class="st"> </span><span class="kw">abs</span>((z.calc <span class="op">-</span><span class="st"> </span>z.chart) <span class="op">/</span><span class="st"> </span>z.chart) <span class="op">*</span><span class="st"> </span><span class="dv">100</span>
 
 <span class="co"># calculate the APE</span>
 <span class="kw">cat</span>(<span class="st">"z.correlation </span><span class="ch">\n</span><span class="st">"</span>); <span class="kw">print</span>(z.calc)
@@ -318,13 +318,13 @@ sum_t_ape
 tpr2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.05</span>, <span class="fl">1.1</span>, <span class="fl">1.2</span>, <span class="fl">1.3</span>) 
 ppr2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.0</span>, <span class="fl">1.5</span>, <span class="dv">2</span>, <span class="fl">2.5</span>, <span class="fl">3.0</span>, <span class="fl">3.5</span>, <span class="fl">4.0</span>, <span class="fl">4.5</span>, <span class="fl">5.0</span>, <span class="fl">5.5</span>, <span class="fl">6.0</span>, <span class="fl">6.5</span>) 
 
-sk_dak_2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/createTidyFromMatrix.html">createTidyFromMatrix</a></span>(ppr2, tpr2, <span class="dt">correlation =</span> <span class="st">"N10"</span>)
-<span class="kw">as.tibble</span>(sk_dak_2)
+sk_dak_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw"><a href="../reference/createTidyFromMatrix.html">createTidyFromMatrix</a></span>(ppr2, tpr2, <span class="dt">correlation =</span> <span class="st">"N10"</span>)
+<span class="kw">as.tibble</span>(sk_dak_<span class="dv">2</span>)
 
-p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_dak_2, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z.calc, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) +
-<span class="st">    </span><span class="kw">geom_line</span>() +
-<span class="st">    </span><span class="kw">geom_point</span>() +
-<span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc-dif, <span class="dt">ymax=</span>z.calc+dif), <span class="dt">width=</span>.<span class="dv">4</span>,
+p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_dak_<span class="dv">2</span>, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z.calc, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc<span class="op">-</span>dif, <span class="dt">ymax=</span>z.calc<span class="op">+</span>dif), <span class="dt">width=</span>.<span class="dv">4</span>,
                   <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.05</span>))
 <span class="kw">print</span>(p)</code></pre></div>
 <p><img src="Ann10_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;"></p>
@@ -350,13 +350,13 @@ p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_dak_2, <span c
 <p>This is the isotherm where we usually see the greatest error.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zFactor)
 
-sk_dak_3 &lt;-<span class="st"> </span>sk_dak_2[sk_dak_2$Tpr==<span class="fl">1.05</span>,]
-sk_dak_3
+sk_dak_<span class="dv">3</span> &lt;-<span class="st"> </span>sk_dak_<span class="dv">2</span>[sk_dak_<span class="dv">2</span><span class="op">$</span>Tpr<span class="op">==</span><span class="fl">1.05</span>,]
+sk_dak_<span class="dv">3</span>
 
-p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_dak_3, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z.calc, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) +
-<span class="st">    </span><span class="kw">geom_line</span>() +
-<span class="st">    </span><span class="kw">geom_point</span>() +
-<span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc-dif, <span class="dt">ymax=</span>z.calc+dif), <span class="dt">width=</span>.<span class="dv">2</span>,
+p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_dak_<span class="dv">3</span>, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z.calc, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc<span class="op">-</span>dif, <span class="dt">ymax=</span>z.calc<span class="op">+</span>dif), <span class="dt">width=</span>.<span class="dv">2</span>,
                   <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.05</span>))
 <span class="kw">print</span>(p)</code></pre></div>
 <p><img src="Ann10_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;"></p>
@@ -388,10 +388,10 @@ ppr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5
 sk_corr_all &lt;-<span class="st"> </span><span class="kw"><a href="../reference/createTidyFromMatrix.html">createTidyFromMatrix</a></span>(ppr, tpr_all, <span class="dt">correlation =</span> <span class="st">"N10"</span>)
 <span class="kw">as.tibble</span>(sk_corr_all)
 
-p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_corr_all, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z.calc, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) +
-<span class="st">    </span><span class="kw">geom_line</span>() +
-<span class="st">    </span><span class="kw">geom_point</span>() +
-<span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc-dif, <span class="dt">ymax=</span>z.calc+dif), <span class="dt">width=</span>.<span class="dv">4</span>,
+p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_corr_all, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z.calc, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc<span class="op">-</span>dif, <span class="dt">ymax=</span>z.calc<span class="op">+</span>dif), <span class="dt">width=</span>.<span class="dv">4</span>,
                   <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.05</span>))
 <span class="kw">print</span>(p)</code></pre></div>
 <p><img src="Ann10_files/figure-html/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;"></p>
@@ -422,21 +422,21 @@ p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_corr_all, <spa
 grouped &lt;-<span class="st"> </span><span class="kw">group_by</span>(sk_corr_all, Tpr, Ppr)
 
 smry_tpr_ppr &lt;-<span class="st"> </span><span class="kw">summarise</span>(grouped, 
-          <span class="dt">RMSE=</span> <span class="kw">sqrt</span>(<span class="kw">mean</span>((z.chart-z.calc)^<span class="dv">2</span>)), 
-          <span class="dt">MPE =</span> <span class="kw">sum</span>((z.calc -<span class="st"> </span>z.chart) /<span class="st"> </span>z.chart) *<span class="st"> </span><span class="dv">100</span> /<span class="st"> </span><span class="kw">n</span>(),
-          <span class="dt">MAPE =</span> <span class="kw">sum</span>(<span class="kw">abs</span>((z.calc -<span class="st"> </span>z.chart) /<span class="st"> </span>z.chart)) *<span class="st"> </span><span class="dv">100</span> /<span class="st"> </span><span class="kw">n</span>(), 
-          <span class="dt">MSE =</span> <span class="kw">sum</span>((z.calc -<span class="st"> </span>z.chart)^<span class="dv">2</span>) /<span class="st"> </span><span class="kw">n</span>(), 
-          <span class="dt">RSS =</span> <span class="kw">sum</span>((z.calc -<span class="st"> </span>z.chart)^<span class="dv">2</span>),
-          <span class="dt">MAE =</span> <span class="kw">sum</span>(<span class="kw">abs</span>(z.calc -<span class="st"> </span>z.chart)) /<span class="st"> </span><span class="kw">n</span>(),
-          <span class="dt">RMLSE =</span> <span class="kw">sqrt</span>(<span class="dv">1</span>/<span class="kw">n</span>()*<span class="kw">sum</span>((<span class="kw">log</span>(z.calc +<span class="dv">1</span>)-<span class="kw">log</span>(z.chart +<span class="dv">1</span>))^<span class="dv">2</span>))
+          <span class="dt">RMSE=</span> <span class="kw">sqrt</span>(<span class="kw">mean</span>((z.chart<span class="op">-</span>z.calc)<span class="op">^</span><span class="dv">2</span>)), 
+          <span class="dt">MPE =</span> <span class="kw">sum</span>((z.calc <span class="op">-</span><span class="st"> </span>z.chart) <span class="op">/</span><span class="st"> </span>z.chart) <span class="op">*</span><span class="st"> </span><span class="dv">100</span> <span class="op">/</span><span class="st"> </span><span class="kw">n</span>(),
+          <span class="dt">MAPE =</span> <span class="kw">sum</span>(<span class="kw">abs</span>((z.calc <span class="op">-</span><span class="st"> </span>z.chart) <span class="op">/</span><span class="st"> </span>z.chart)) <span class="op">*</span><span class="st"> </span><span class="dv">100</span> <span class="op">/</span><span class="st"> </span><span class="kw">n</span>(), 
+          <span class="dt">MSE =</span> <span class="kw">sum</span>((z.calc <span class="op">-</span><span class="st"> </span>z.chart)<span class="op">^</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span><span class="kw">n</span>(), 
+          <span class="dt">RSS =</span> <span class="kw">sum</span>((z.calc <span class="op">-</span><span class="st"> </span>z.chart)<span class="op">^</span><span class="dv">2</span>),
+          <span class="dt">MAE =</span> <span class="kw">sum</span>(<span class="kw">abs</span>(z.calc <span class="op">-</span><span class="st"> </span>z.chart)) <span class="op">/</span><span class="st"> </span><span class="kw">n</span>(),
+          <span class="dt">RMLSE =</span> <span class="kw">sqrt</span>(<span class="dv">1</span><span class="op">/</span><span class="kw">n</span>()<span class="op">*</span><span class="kw">sum</span>((<span class="kw">log</span>(z.calc <span class="op">+</span><span class="dv">1</span>)<span class="op">-</span><span class="kw">log</span>(z.chart <span class="op">+</span><span class="dv">1</span>))<span class="op">^</span><span class="dv">2</span>))
           )
 
-<span class="kw">ggplot</span>(smry_tpr_ppr, <span class="kw">aes</span>(Ppr, Tpr)) +<span class="st"> </span>
-<span class="st">    </span><span class="kw">geom_tile</span>(<span class="dt">data=</span>smry_tpr_ppr, <span class="kw">aes</span>(<span class="dt">fill=</span>MAPE), <span class="dt">color=</span><span class="st">"white"</span>) +
+<span class="kw">ggplot</span>(smry_tpr_ppr, <span class="kw">aes</span>(Ppr, Tpr)) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_tile</span>(<span class="dt">data=</span>smry_tpr_ppr, <span class="kw">aes</span>(<span class="dt">fill=</span>MAPE), <span class="dt">color=</span><span class="st">"white"</span>) <span class="op">+</span>
 <span class="st">    </span><span class="kw">scale_fill_gradient2</span>(<span class="dt">low=</span><span class="st">"blue"</span>, <span class="dt">high=</span><span class="st">"red"</span>, <span class="dt">mid=</span><span class="st">"yellow"</span>, <span class="dt">na.value =</span> <span class="st">"pink"</span>,
-                         <span class="dt">midpoint=</span><span class="fl">12.5</span>, <span class="dt">limit=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">25</span>), <span class="dt">name=</span><span class="st">"MAPE"</span>) +<span class="st"> </span>
-<span class="st">    </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle=</span><span class="dv">45</span>, <span class="dt">vjust=</span><span class="dv">1</span>, <span class="dt">size=</span><span class="dv">11</span>, <span class="dt">hjust=</span><span class="dv">1</span>)) +<span class="st"> </span>
-<span class="st">    </span><span class="kw">coord_equal</span>() +
+                         <span class="dt">midpoint=</span><span class="fl">12.5</span>, <span class="dt">limit=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">25</span>), <span class="dt">name=</span><span class="st">"MAPE"</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle=</span><span class="dv">45</span>, <span class="dt">vjust=</span><span class="dv">1</span>, <span class="dt">size=</span><span class="dv">11</span>, <span class="dt">hjust=</span><span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">coord_equal</span>() <span class="op">+</span>
 <span class="st">    </span><span class="kw">ggtitle</span>(<span class="st">"Artificial Neural Network"</span>, <span class="dt">subtitle =</span> <span class="st">"N10"</span>)</code></pre></div>
 <p><img src="Ann10_files/figure-html/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;"></p>
 </div>
@@ -446,13 +446,13 @@ smry_tpr_ppr &lt;-<span class="st"> </span><span class="kw">summarise</span>(gro
 <p>The <code>MAPE</code> (mean average percentage error) gradient bar indicates that the more red the square is, the more error there is.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
 
-sk_corr_all %&gt;%
-<span class="st">    </span><span class="kw">filter</span>(Tpr %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">"1.05"</span>, <span class="st">"1.1"</span>)) %&gt;%
-<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> z.chart, <span class="dt">y=</span>z.calc, <span class="dt">group =</span> Tpr, <span class="dt">color =</span> Tpr)) +
-<span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">3</span>) +
-<span class="st">    </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> z.chart, <span class="dt">y =</span> z.chart), <span class="dt">color =</span> <span class="st">"black"</span>) +
-<span class="st">    </span><span class="kw">facet_grid</span>(. ~<span class="st"> </span>Tpr, <span class="dt">scales =</span> <span class="st">"free"</span>) +
-<span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc-<span class="kw">abs</span>(dif), <span class="dt">ymax=</span>z.calc+<span class="kw">abs</span>(dif)), 
+sk_corr_all <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">filter</span>(Tpr <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">"1.05"</span>, <span class="st">"1.1"</span>)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> z.chart, <span class="dt">y=</span>z.calc, <span class="dt">group =</span> Tpr, <span class="dt">color =</span> Tpr)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> z.chart, <span class="dt">y =</span> z.chart), <span class="dt">color =</span> <span class="st">"black"</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">facet_grid</span>(. <span class="op">~</span><span class="st"> </span>Tpr, <span class="dt">scales =</span> <span class="st">"free"</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc<span class="op">-</span><span class="kw">abs</span>(dif), <span class="dt">ymax=</span>z.calc<span class="op">+</span><span class="kw">abs</span>(dif)), 
                   <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.5</span>))</code></pre></div>
 <p><img src="Ann10_files/figure-html/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;"></p>
 </div>
