@@ -104,7 +104,7 @@
     <div class="page-header toc-ignore">
       <h1>Plot Standing-Katz low-pressure <code>lp</code> charts</h1>
             
-            <h4 class="date">2017-10-08</h4>
+            <h4 class="date">2017-10-16</h4>
           </div>
 
     
@@ -233,11 +233,11 @@ all_tpr2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ge
 <span class="kw">library</span>(ggplot2)
 
 <span class="co"># join the dataframes with rbindlist adding an identifier column</span>
-all_tpr_df &lt;-<span class="st"> </span>data.table::<span class="kw">rbindlist</span>(all_tpr2, <span class="dt">idcol =</span> <span class="ot">TRUE</span>)
+all_tpr_df &lt;-<span class="st"> </span>data.table<span class="op">::</span><span class="kw">rbindlist</span>(all_tpr2, <span class="dt">idcol =</span> <span class="ot">TRUE</span>)
 <span class="kw">colnames</span>(all_tpr_df)[<span class="dv">1</span>] &lt;-<span class="st"> "Tpr"</span>    <span class="co"># name the identifier as Tpr</span>
 
-<span class="kw">ggplot</span>(all_tpr_df, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) +<span class="st"> </span>
-<span class="st">    </span><span class="kw">geom_line</span>() +
+<span class="kw">ggplot</span>(all_tpr_df, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_point</span>()</code></pre></div>
 <p><img src="Plot_StandingKatz_lp_files/figure-html/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;"></p>
 </div>
@@ -260,14 +260,14 @@ all_tpr_df &lt;-<span class="st"> </span>data.table::<span class="kw">rbindlist<
 <span class="kw">library</span>(data.table)
 
 tpr_vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.05</span>, <span class="fl">1.1</span>, <span class="fl">1.2</span>, <span class="fl">1.3</span>, <span class="fl">1.5</span>, <span class="fl">1.6</span>, <span class="fl">1.7</span>, <span class="fl">1.9</span>, <span class="fl">2.0</span>, <span class="fl">2.4</span>, <span class="fl">2.6</span>, <span class="fl">2.8</span>, <span class="fl">3.0</span>)
-all_tpr2 &lt;-<span class="st"> </span>(<span class="kw">lapply</span>(tpr_vec, function(x) <span class="kw"><a href="../reference/getStandingKatzData.html">getStandingKatzData</a></span>(<span class="dt">tpr =</span> x)))
+all_tpr2 &lt;-<span class="st"> </span>(<span class="kw">lapply</span>(tpr_vec, <span class="cf">function</span>(x) <span class="kw"><a href="../reference/getStandingKatzData.html">getStandingKatzData</a></span>(<span class="dt">tpr =</span> x)))
 <span class="kw">names</span>(all_tpr2) &lt;-<span class="st"> </span>tpr_vec
 
-all_tpr_df &lt;-<span class="st"> </span>data.table::<span class="kw">rbindlist</span>(all_tpr2, <span class="dt">idcol =</span> <span class="ot">TRUE</span>)
+all_tpr_df &lt;-<span class="st"> </span>data.table<span class="op">::</span><span class="kw">rbindlist</span>(all_tpr2, <span class="dt">idcol =</span> <span class="ot">TRUE</span>)
 <span class="kw">colnames</span>(all_tpr_df)[<span class="dv">1</span>] &lt;-<span class="st"> "Tpr"</span>
 
-<span class="kw">ggplot</span>(all_tpr_df, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) +<span class="st"> </span>
-<span class="st">    </span><span class="kw">geom_line</span>() +
+<span class="kw">ggplot</span>(all_tpr_df, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_point</span>()</code></pre></div>
 <p><img src="Plot_StandingKatz_lp_files/figure-html/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;"></p>
 <p>Or the one-liner:</p>
@@ -284,14 +284,14 @@ all_tpr_df &lt;-<span class="st"> </span>data.table::<span class="kw">rbindlist<
 <span class="kw">library</span>(data.table)
 
 low_tpr_vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.05</span>, <span class="fl">1.1</span>, <span class="fl">1.2</span>, <span class="fl">1.3</span>, <span class="fl">1.4</span>)
-low_tpr_li &lt;-<span class="st"> </span>(<span class="kw">lapply</span>(low_tpr_vec, function(x) <span class="kw"><a href="../reference/getStandingKatzData.html">getStandingKatzData</a></span>(<span class="dt">tpr =</span> x)))
+low_tpr_li &lt;-<span class="st"> </span>(<span class="kw">lapply</span>(low_tpr_vec, <span class="cf">function</span>(x) <span class="kw"><a href="../reference/getStandingKatzData.html">getStandingKatzData</a></span>(<span class="dt">tpr =</span> x)))
 <span class="kw">names</span>(low_tpr_li) &lt;-<span class="st"> </span>low_tpr_vec
 
-low_tpr_df &lt;-<span class="st"> </span>data.table::<span class="kw">rbindlist</span>(low_tpr_li, <span class="dt">idcol =</span> <span class="ot">TRUE</span>)
+low_tpr_df &lt;-<span class="st"> </span>data.table<span class="op">::</span><span class="kw">rbindlist</span>(low_tpr_li, <span class="dt">idcol =</span> <span class="ot">TRUE</span>)
 <span class="kw">colnames</span>(low_tpr_df)[<span class="dv">1</span>] &lt;-<span class="st"> "Tpr"</span>
 
-<span class="kw">ggplot</span>(low_tpr_df, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) +<span class="st"> </span>
-<span class="st">    </span><span class="kw">geom_line</span>() +
+<span class="kw">ggplot</span>(low_tpr_df, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_point</span>()</code></pre></div>
 <p><img src="Plot_StandingKatz_lp_files/figure-html/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;"></p>
 <p>With the one liner:</p>
@@ -307,14 +307,14 @@ low_tpr_df &lt;-<span class="st"> </span>data.table::<span class="kw">rbindlist<
 <span class="kw">library</span>(data.table)
 
 med_tpr_vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.5</span>, <span class="fl">1.6</span>, <span class="fl">1.7</span>, <span class="fl">1.8</span>, <span class="fl">1.9</span>)
-med_tpr_li &lt;-<span class="st"> </span>(<span class="kw">lapply</span>(med_tpr_vec, function(x) <span class="kw"><a href="../reference/getStandingKatzData.html">getStandingKatzData</a></span>(<span class="dt">tpr =</span> x)))
+med_tpr_li &lt;-<span class="st"> </span>(<span class="kw">lapply</span>(med_tpr_vec, <span class="cf">function</span>(x) <span class="kw"><a href="../reference/getStandingKatzData.html">getStandingKatzData</a></span>(<span class="dt">tpr =</span> x)))
 <span class="kw">names</span>(med_tpr_li) &lt;-<span class="st"> </span>med_tpr_vec
 
-med_tpr_df &lt;-<span class="st"> </span>data.table::<span class="kw">rbindlist</span>(med_tpr_li, <span class="dt">idcol =</span> <span class="ot">TRUE</span>)
+med_tpr_df &lt;-<span class="st"> </span>data.table<span class="op">::</span><span class="kw">rbindlist</span>(med_tpr_li, <span class="dt">idcol =</span> <span class="ot">TRUE</span>)
 <span class="kw">colnames</span>(med_tpr_df)[<span class="dv">1</span>] &lt;-<span class="st"> "Tpr"</span>
 
-<span class="kw">ggplot</span>(med_tpr_df, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) +<span class="st"> </span>
-<span class="st">    </span><span class="kw">geom_line</span>() +
+<span class="kw">ggplot</span>(med_tpr_df, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_point</span>()</code></pre></div>
 <p><img src="Plot_StandingKatz_lp_files/figure-html/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;"></p>
 <p>The one liner:</p>
@@ -330,14 +330,14 @@ med_tpr_df &lt;-<span class="st"> </span>data.table::<span class="kw">rbindlist<
 <span class="kw">library</span>(data.table)
 
 hi_tpr_vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">2.0</span>, <span class="fl">2.4</span>, <span class="fl">2.6</span>, <span class="fl">2.8</span>, <span class="fl">3.0</span>)
-hi_tpr_li &lt;-<span class="st"> </span>(<span class="kw">lapply</span>(hi_tpr_vec, function(x) <span class="kw"><a href="../reference/getStandingKatzData.html">getStandingKatzData</a></span>(<span class="dt">tpr =</span> x)))
+hi_tpr_li &lt;-<span class="st"> </span>(<span class="kw">lapply</span>(hi_tpr_vec, <span class="cf">function</span>(x) <span class="kw"><a href="../reference/getStandingKatzData.html">getStandingKatzData</a></span>(<span class="dt">tpr =</span> x)))
 <span class="kw">names</span>(hi_tpr_li) &lt;-<span class="st"> </span>hi_tpr_vec
 
-hi_tpr_df &lt;-<span class="st"> </span>data.table::<span class="kw">rbindlist</span>(hi_tpr_li, <span class="dt">idcol =</span> <span class="ot">TRUE</span>)
+hi_tpr_df &lt;-<span class="st"> </span>data.table<span class="op">::</span><span class="kw">rbindlist</span>(hi_tpr_li, <span class="dt">idcol =</span> <span class="ot">TRUE</span>)
 <span class="kw">colnames</span>(hi_tpr_df)[<span class="dv">1</span>] &lt;-<span class="st"> "Tpr"</span>
 
-<span class="kw">ggplot</span>(hi_tpr_df, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) +<span class="st"> </span>
-<span class="st">    </span><span class="kw">geom_line</span>() +
+<span class="kw">ggplot</span>(hi_tpr_df, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_point</span>()</code></pre></div>
 <p><img src="Plot_StandingKatz_lp_files/figure-html/unnamed-chunk-20-1.png" width="672" style="display: block; margin: auto;"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hi_tpr_vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">2.0</span>, <span class="fl">2.4</span>, <span class="fl">2.6</span>, <span class="fl">2.8</span>, <span class="fl">3.0</span>)

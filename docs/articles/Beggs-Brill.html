@@ -105,7 +105,7 @@
       <h1>Beggs-Brill correlation</h1>
                         <h4 class="author">Vignette Author</h4>
             
-            <h4 class="date">2017-10-08</h4>
+            <h4 class="date">2017-10-16</h4>
           </div>
 
     
@@ -195,7 +195,7 @@ sk &lt;-<span class="st"> </span><span class="kw"><a href="../reference/getStand
 1.70 0.968 0.914 0.876 0.857 0.864 0.897 0.942
 2.00 0.982 0.956 0.941 0.937 0.945 0.969 1.003</code></pre>
 <p>Subtract the two matrices and find the difference:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">err &lt;-<span class="st"> </span><span class="kw">round</span>((sk -<span class="st"> </span>corr) /<span class="st"> </span>sk *<span class="st"> </span><span class="dv">100</span>, <span class="dv">2</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">err &lt;-<span class="st"> </span><span class="kw">round</span>((sk <span class="op">-</span><span class="st"> </span>corr) <span class="op">/</span><span class="st"> </span>sk <span class="op">*</span><span class="st"> </span><span class="dv">100</span>, <span class="dv">2</span>)
 err
 
 <span class="co"># DAK</span>
@@ -245,7 +245,7 @@ corr2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Beggs
 1.05 0.8325491 0.2851494 0.3333796 0.4569204 0.5802310 0.7033638
 1.1  0.8639321 0.4631501 0.3848774 0.4993213 0.6131885 0.7266084</code></pre>
 <p>Subtract the matrices and calculate the error in percentage:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">err2 &lt;-<span class="st"> </span><span class="kw">round</span>((sk2 -<span class="st"> </span>corr2) /<span class="st"> </span>sk2 *<span class="st"> </span><span class="dv">100</span>, <span class="dv">2</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">err2 &lt;-<span class="st"> </span><span class="kw">round</span>((sk2 <span class="op">-</span><span class="st"> </span>corr2) <span class="op">/</span><span class="st"> </span>sk2 <span class="op">*</span><span class="st"> </span><span class="dv">100</span>, <span class="dv">2</span>)
 err2
 
 <span class="co"># DAK</span>
@@ -286,8 +286,8 @@ sum_t_err2</code></pre></div>
 tpr2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.05</span>, <span class="fl">1.1</span>, <span class="fl">1.2</span>, <span class="fl">1.3</span>) 
 ppr2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.0</span>, <span class="fl">1.5</span>, <span class="dv">2</span>, <span class="fl">2.5</span>, <span class="fl">3.0</span>, <span class="fl">3.5</span>, <span class="fl">4.0</span>, <span class="fl">4.5</span>, <span class="fl">5.0</span>, <span class="fl">5.5</span>, <span class="fl">6.0</span>, <span class="fl">6.5</span>) 
 
-sk_corr_2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/createTidyFromMatrix.html">createTidyFromMatrix</a></span>(ppr2, tpr2, <span class="dt">correlation =</span> <span class="st">"BB"</span>)
-<span class="kw">as.tibble</span>(sk_corr_2)</code></pre></div>
+sk_corr_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw"><a href="../reference/createTidyFromMatrix.html">createTidyFromMatrix</a></span>(ppr2, tpr2, <span class="dt">correlation =</span> <span class="st">"BB"</span>)
+<span class="kw">as.tibble</span>(sk_corr_<span class="dv">2</span>)</code></pre></div>
 <pre><code># A tibble: 52 x 5
      Tpr   Ppr z.chart    z.calc          dif
    &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;        &lt;dbl&gt;
@@ -304,10 +304,10 @@ sk_corr_2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/c
 # ... with 42 more rows</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
 
-p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_corr_2, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z.calc, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) +
-<span class="st">    </span><span class="kw">geom_line</span>() +
-<span class="st">    </span><span class="kw">geom_point</span>() +
-<span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc-dif, <span class="dt">ymax=</span>z.calc+dif), <span class="dt">width=</span>.<span class="dv">4</span>,
+p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_corr_<span class="dv">2</span>, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z.calc, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc<span class="op">-</span>dif, <span class="dt">ymax=</span>z.calc<span class="op">+</span>dif), <span class="dt">width=</span>.<span class="dv">4</span>,
                   <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.05</span>))
 <span class="kw">print</span>(p)</code></pre></div>
 <p><img src="Beggs-Brill_files/figure-html/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;"></p>
@@ -317,19 +317,19 @@ p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_corr_2, <span 
 <a href="#analysis-at-the-lowest-tpr" class="anchor"></a>Analysis at the lowest <code>Tpr</code>
 </h2>
 <p>Extract only values at <code>Tpr = 1.05</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sk_corr_3 &lt;-<span class="st"> </span>sk_corr_3[sk_corr_3$Tpr==<span class="fl">1.05</span>,]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sk_corr_<span class="dv">3</span> &lt;-<span class="st"> </span>sk_corr_<span class="dv">3</span>[sk_corr_<span class="dv">3</span><span class="op">$</span>Tpr<span class="op">==</span><span class="fl">1.05</span>,]</code></pre></div>
 <pre><code>Error in eval(expr, envir, enclos): object 'sk_corr_3' not found</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sk_corr_3</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sk_corr_<span class="dv">3</span></code></pre></div>
 <pre><code>Error in eval(expr, envir, enclos): object 'sk_corr_3' not found</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_corr_3, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z.calc, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) +
-<span class="st">    </span><span class="kw">geom_line</span>(<span class="dt">size =</span> <span class="dv">1</span>) +
-<span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">21</span>, <span class="dt">fill =</span> <span class="st">"white"</span>, <span class="dt">size =</span> <span class="dv">3</span>) +
-<span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc-dif, <span class="dt">ymax=</span>z.calc+dif), <span class="dt">width=</span><span class="fl">0.2</span>, <span class="dt">size =</span> <span class="dv">0</span>.,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_corr_<span class="dv">3</span>, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z.calc, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_line</span>(<span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">21</span>, <span class="dt">fill =</span> <span class="st">"white"</span>, <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc<span class="op">-</span>dif, <span class="dt">ymax=</span>z.calc<span class="op">+</span>dif), <span class="dt">width=</span><span class="fl">0.2</span>, <span class="dt">size =</span> <span class="dv">0</span>.,
                   <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.05</span>), <span class="dt">color =</span> <span class="st">"black"</span>)</code></pre></div>
 <pre><code>Error in ggplot(sk_corr_3, aes(x = Ppr, y = z.calc, group = Tpr, color = Tpr)): object 'sk_corr_3' not found</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(p)</code></pre></div>
 <p><img src="Beggs-Brill_files/figure-html/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(sk_corr_3)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(sk_corr_<span class="dv">3</span>)</code></pre></div>
 <pre><code>Error in summary(sk_corr_3): object 'sk_corr_3' not found</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"> <span class="co">#         dif DAK      </span>
  <span class="co"># Min.   :-0.048404  </span>
@@ -355,10 +355,10 @@ sk_corr_all &lt;-<span class="st"> </span><span class="kw"><a href="../reference
 <pre><code>Error in getStandingKatzMatrix(ppr_vector, tpr_vector, pprRange = "lp"): object 'tpr_all' not found</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.tibble</span>(sk_corr_all)</code></pre></div>
 <pre><code>Error in as.tibble(sk_corr_all): object 'sk_corr_all' not found</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_corr_all, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z.calc, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) +
-<span class="st">    </span><span class="kw">geom_line</span>() +
-<span class="st">    </span><span class="kw">geom_point</span>() +
-<span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc-dif, <span class="dt">ymax=</span>z.calc+dif), <span class="dt">width=</span>.<span class="dv">4</span>,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_corr_all, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z.calc, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc<span class="op">-</span>dif, <span class="dt">ymax=</span>z.calc<span class="op">+</span>dif), <span class="dt">width=</span>.<span class="dv">4</span>,
                   <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.05</span>))</code></pre></div>
 <pre><code>Error in ggplot(sk_corr_all, aes(x = Ppr, y = z.calc, group = Tpr, color = Tpr)): object 'sk_corr_all' not found</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(p)</code></pre></div>
@@ -372,29 +372,29 @@ sk_corr_all &lt;-<span class="st"> </span><span class="kw"><a href="../reference
 grouped &lt;-<span class="st"> </span><span class="kw">group_by</span>(sk_corr_all, Tpr, Ppr)</code></pre></div>
 <pre><code>Error in group_by(sk_corr_all, Tpr, Ppr): object 'sk_corr_all' not found</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">smry_tpr_ppr &lt;-<span class="st"> </span><span class="kw">summarise</span>(grouped, 
-          <span class="dt">RMSE=</span> <span class="kw">sqrt</span>(<span class="kw">mean</span>((z.chart-z.calc)^<span class="dv">2</span>)), 
-          <span class="dt">MSE =</span> <span class="kw">sum</span>((z.calc -<span class="st"> </span>z.chart)^<span class="dv">2</span>) /<span class="st"> </span><span class="kw">n</span>(), 
-          <span class="dt">RSS =</span> <span class="kw">sum</span>((z.calc -<span class="st"> </span>z.chart)^<span class="dv">2</span>),
-          <span class="dt">ARE =</span> <span class="kw">sum</span>((z.calc -<span class="st"> </span>z.chart) /<span class="st"> </span>z.chart) *<span class="st"> </span><span class="dv">100</span> /<span class="st"> </span><span class="kw">n</span>(),
-          <span class="dt">AARE =</span> <span class="kw">sum</span>( <span class="kw">abs</span>((z.calc -<span class="st"> </span>z.chart) /<span class="st"> </span>z.chart)) *<span class="st"> </span><span class="dv">100</span> /<span class="st"> </span><span class="kw">n</span>()
+          <span class="dt">RMSE=</span> <span class="kw">sqrt</span>(<span class="kw">mean</span>((z.chart<span class="op">-</span>z.calc)<span class="op">^</span><span class="dv">2</span>)), 
+          <span class="dt">MSE =</span> <span class="kw">sum</span>((z.calc <span class="op">-</span><span class="st"> </span>z.chart)<span class="op">^</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span><span class="kw">n</span>(), 
+          <span class="dt">RSS =</span> <span class="kw">sum</span>((z.calc <span class="op">-</span><span class="st"> </span>z.chart)<span class="op">^</span><span class="dv">2</span>),
+          <span class="dt">ARE =</span> <span class="kw">sum</span>((z.calc <span class="op">-</span><span class="st"> </span>z.chart) <span class="op">/</span><span class="st"> </span>z.chart) <span class="op">*</span><span class="st"> </span><span class="dv">100</span> <span class="op">/</span><span class="st"> </span><span class="kw">n</span>(),
+          <span class="dt">AARE =</span> <span class="kw">sum</span>( <span class="kw">abs</span>((z.calc <span class="op">-</span><span class="st"> </span>z.chart) <span class="op">/</span><span class="st"> </span>z.chart)) <span class="op">*</span><span class="st"> </span><span class="dv">100</span> <span class="op">/</span><span class="st"> </span><span class="kw">n</span>()
           )</code></pre></div>
 <pre><code>Error in summarise(grouped, RMSE = sqrt(mean((z.chart - z.calc)^2)), MSE = sum((z.calc - : object 'grouped' not found</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(smry_tpr_ppr, <span class="kw">aes</span>(Ppr, Tpr)) +<span class="st"> </span>
-<span class="st">    </span><span class="kw">geom_tile</span>(<span class="dt">data=</span>smry_tpr_ppr, <span class="kw">aes</span>(<span class="dt">fill=</span>AARE), <span class="dt">color=</span><span class="st">"white"</span>) +
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(smry_tpr_ppr, <span class="kw">aes</span>(Ppr, Tpr)) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_tile</span>(<span class="dt">data=</span>smry_tpr_ppr, <span class="kw">aes</span>(<span class="dt">fill=</span>AARE), <span class="dt">color=</span><span class="st">"white"</span>) <span class="op">+</span>
 <span class="st">    </span><span class="kw">scale_fill_gradient2</span>(<span class="dt">low=</span><span class="st">"blue"</span>, <span class="dt">high=</span><span class="st">"red"</span>, <span class="dt">mid=</span><span class="st">"yellow"</span>, <span class="dt">na.value =</span> <span class="st">"pink"</span>,
-                         <span class="dt">midpoint=</span><span class="fl">12.5</span>, <span class="dt">limit=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">25</span>), <span class="dt">name=</span><span class="st">"AARE"</span>) +<span class="st"> </span>
-<span class="st">    </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle=</span><span class="dv">45</span>, <span class="dt">vjust=</span><span class="dv">1</span>, <span class="dt">size=</span><span class="dv">11</span>, <span class="dt">hjust=</span><span class="dv">1</span>)) +<span class="st"> </span>
-<span class="st">    </span><span class="kw">coord_equal</span>() +
+                         <span class="dt">midpoint=</span><span class="fl">12.5</span>, <span class="dt">limit=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">25</span>), <span class="dt">name=</span><span class="st">"AARE"</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle=</span><span class="dv">45</span>, <span class="dt">vjust=</span><span class="dv">1</span>, <span class="dt">size=</span><span class="dv">11</span>, <span class="dt">hjust=</span><span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">coord_equal</span>() <span class="op">+</span>
 <span class="st">    </span><span class="kw">ggtitle</span>(<span class="st">"Beggs-Brill"</span>, <span class="dt">subtitle =</span> <span class="st">"BB"</span>)</code></pre></div>
 <pre><code>Error in ggplot(smry_tpr_ppr, aes(Ppr, Tpr)): object 'smry_tpr_ppr' not found</code></pre>
 <blockquote>
 <p>The errors with Beggs and Brill are just so big and some <code>z</code> values are even negative. We have to be very careful when using this Beggs and Brill correlation.</p>
 </blockquote>
 <p>Let’s see which observations (rows) have <code>z</code> values that are negative:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sk_corr_all[<span class="kw">which</span>(sk_corr_all$z.calc &lt;<span class="st"> </span><span class="dv">0</span>), ]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sk_corr_all[<span class="kw">which</span>(sk_corr_all<span class="op">$</span>z.calc <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>), ]</code></pre></div>
 <pre><code>Error in eval(expr, envir, enclos): object 'sk_corr_all' not found</code></pre>
 <p>Or see which rows contain <code>z</code> values that show an error greater than 15%:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sk_corr_all[<span class="kw">which</span>(<span class="kw">abs</span>(sk_corr_all$dif) &gt;<span class="st"> </span><span class="fl">0.15</span>), ]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sk_corr_all[<span class="kw">which</span>(<span class="kw">abs</span>(sk_corr_all<span class="op">$</span>dif) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.15</span>), ]</code></pre></div>
 <pre><code>Error in eval(expr, envir, enclos): object 'sk_corr_all' not found</code></pre>
 <p>You can also see that there are three rows with error greater than 100% !</p>
 </div>
@@ -417,7 +417,7 @@ all_sk
 
 <span class="co"># find the error</span>
 <span class="kw">cat</span>(<span class="st">"</span><span class="ch">\n</span><span class="st"> Errors in percentage </span><span class="ch">\n</span><span class="st">"</span>)
-all_err &lt;-<span class="st"> </span><span class="kw">round</span>((all_sk -<span class="st"> </span>all_corr) /<span class="st"> </span>all_sk *<span class="st"> </span><span class="dv">100</span>, <span class="dv">2</span>)  <span class="co"># in percentage</span>
+all_err &lt;-<span class="st"> </span><span class="kw">round</span>((all_sk <span class="op">-</span><span class="st"> </span>all_corr) <span class="op">/</span><span class="st"> </span>all_sk <span class="op">*</span><span class="st"> </span><span class="dv">100</span>, <span class="dv">2</span>)  <span class="co"># in percentage</span>
 all_err
 
 <span class="kw">cat</span>(<span class="st">"</span><span class="ch">\n</span><span class="st"> Errors in Ppr</span><span class="ch">\n</span><span class="st">"</span>)
