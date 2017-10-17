@@ -3,9 +3,7 @@ output: github_document
 ---
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/zFactor)](https://cran.r-project.org/package=zFactor)
-
 [![Travis-CI Build Status](https://travis-ci.org/f0nzie/zFactor.svg?branch=master)](https://travis-ci.org/f0nzie/zFactor)
-
 [![codecov](https://codecov.io/gh/f0nzie/zFactor/branch/master/graph/badge.svg)](https://codecov.io/gh/f0nzie/zFactor)
 
 

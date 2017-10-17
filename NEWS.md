@@ -1,4 +1,5 @@
-## 201710xx, 0.1.7.9008
+## 20171016, 0.1.7.9008
+* remove blank lines separating the badges
 * TODO: Fix "Beggs-Brill Correlation". object --> sk_corr_3
 * TODO: add Papp's correlation
 
