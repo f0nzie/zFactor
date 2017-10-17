@@ -1,10 +1,10 @@
 # A dataframe with information about any of the compressibility correlation available
 z_correlations <- data.frame(
-    short = c("BB", "HY", "DAK", "DPR", "SH", "N10"),
+    short = c("BB", "HY", "DAK", "DPR", "SH", "N10", "PP"),
     long = c("Beggs-Brill", "Hall-Yarborough", "Dranchuk-AbuKassem",
-             "Dranchuk-Purvis-Robinson", "Shell", "Ann10"),
+             "Dranchuk-Purvis-Robinson", "Shell", "Ann10", "Papay"),
     function_name = c("z.BeggsBrill", "z.HallYarborough", "z.DranchukAbuKassem",
-                      "z.DranchukPurvisRobinson", "z.Shell", "z.Ann10"),
+                      "z.DranchukPurvisRobinson", "z.Shell", "z.Ann10", "z.Papay"),
     stringsAsFactors = FALSE
 )
 

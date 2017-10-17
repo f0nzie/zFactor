@@ -1,6 +1,5 @@
 ---
 title: "Shell correlation"
-author: "Alfonso R. Reyes"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 bibliography: bibliography.bib
