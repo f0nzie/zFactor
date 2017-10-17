@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hall-Yarborough correlation • zFactor</title>
+<title>Papay correlation • zFactor</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cerulean/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
@@ -105,7 +105,7 @@
       </header><div class="row">
   <div class="col-md-9">
     <div class="page-header toc-ignore">
-      <h1>Hall-Yarborough correlation</h1>
+      <h1>Papay correlation</h1>
             
             <h4 class="date">2017-10-16</h4>
           </div>
@@ -113,49 +113,26 @@
     
     
 <div class="contents">
-<div id="the-hall-yarborough-correlation" class="section level2">
+<div id="papay-correlation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#the-hall-yarborough-correlation" class="anchor"></a>The Hall-Yarborough correlation</h2>
-<p>Kenneth Hall and Lyman Yarborough used the hard-sphere equation as the basis for the equation of state. They tested the correlation with 12 reservoir gas reservoir systems up to <code>Ppr</code> as high as 20.5. The Standing-Katz chart only extends to <code>Ppr=15</code>. At that moment the Standing-Katz chart had 30 years of existance. See <span class="citation">(Hall and Yarborough <a href="#ref-Hall1973">1973</a>)</span>.</p>
+<a href="#papay-correlation" class="anchor"></a>Papay correlation</h2>
+<blockquote>
+<p>add references here</p>
+</blockquote>
 </div>
-<div id="get-z-at-selected-ppr-and-tpr2-0" class="section level2">
+<div id="get-z-at-selected-ppr-and-tpr" class="section level2">
 <h2 class="hasAnchor">
-<a href="#get-z-at-selected-ppr-and-tpr2-0" class="anchor"></a>Get <code>z</code> at selected <code>Ppr</code> and <code>Tpr=2.0</code>
+<a href="#get-z-at-selected-ppr-and-tpr" class="anchor"></a>Get <code>z</code> at selected <code>Ppr</code> and <code>Tpr</code>
 </h2>
-<p>Use the the corelation to calculate <code>z</code>. From the Standing-Katz chart we obtain a digitized point at the given <code>Tpr</code> and <code>Ppr</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get a z value using HY</span>
+<p>Use the the correlation to calculate <code>z</code> and from Standing-Katz chart obtain <code>z</code> a digitized point at the given <code>Tpr</code> and <code>Ppr</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get a z value</span>
 <span class="kw">library</span>(zFactor)
-
 ppr &lt;-<span class="st"> </span><span class="fl">1.5</span>
 tpr &lt;-<span class="st"> </span><span class="fl">2.0</span>
 
-z.calc &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Hall-Yarborough.html">z.HallYarborough</a></span>(<span class="dt">pres.pr =</span> ppr, <span class="dt">temp.pr =</span> tpr)
+z.calc &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Papay.html">z.Papay</a></span>(<span class="dt">pres.pr =</span> ppr, <span class="dt">temp.pr =</span> tpr)
 
 <span class="co"># get a z value from the SK chart at the same Ppr and Tpr</span>
-z.chart &lt;-<span class="st"> </span><span class="kw"><a href="../reference/getStandingKatzMatrix.html">getStandingKatzMatrix</a></span>(<span class="dt">tpr_vector =</span> tpr, 
-                      <span class="dt">pprRange =</span> <span class="st">"lp"</span>)[<span class="dv">1</span>, <span class="kw">as.character</span>(ppr)]
-
-<span class="co"># calculate the APE (Average Percentage Error)</span>
-ape &lt;-<span class="st"> </span><span class="kw">abs</span>((z.calc <span class="op">-</span><span class="st"> </span>z.chart) <span class="op">/</span><span class="st"> </span>z.chart) <span class="op">*</span><span class="st"> </span><span class="dv">100</span>
-
-df &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">list</span>(<span class="dt">Ppr =</span> ppr,  <span class="dt">z.calc =</span>z.calc, <span class="dt">z.chart =</span> z.chart, <span class="dt">ape=</span>ape))
-<span class="kw">rownames</span>(df) &lt;-<span class="st"> </span>tpr
-df</code></pre></div>
-<pre><code>  Ppr    z.calc z.chart      ape
-2 1.5 0.9580002   0.956 0.209229</code></pre>
-</div>
-<div id="get-z-at-selected-ppr-and-tpr-1-1" class="section level2">
-<h2 class="hasAnchor">
-<a href="#get-z-at-selected-ppr-and-tpr-1-1" class="anchor"></a>Get <code>z</code> at selected <code>Ppr</code> and <code>Tpr = 1.1</code>
-</h2>
-<p>From the Standing-Katz chart we obtain a digitized point:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zFactor)
-ppr &lt;-<span class="st"> </span><span class="fl">1.5</span>
-tpr &lt;-<span class="st"> </span><span class="fl">1.1</span>
-
-z.calc &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Hall-Yarborough.html">z.HallYarborough</a></span>(<span class="dt">pres.pr =</span> ppr, <span class="dt">temp.pr =</span> tpr)
-
-<span class="co"># From the Standing-Katz chart we obtain a digitized point:</span>
 z.chart &lt;-<span class="st"> </span><span class="kw"><a href="../reference/getStandingKatzMatrix.html">getStandingKatzMatrix</a></span>(<span class="dt">tpr_vector =</span> tpr, 
                       <span class="dt">pprRange =</span> <span class="st">"lp"</span>)[<span class="dv">1</span>, <span class="kw">as.character</span>(ppr)]
 
@@ -164,25 +141,47 @@ ape &lt;-<span class="st"> </span><span class="kw">abs</span>((z.calc <span clas
 
 df &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">list</span>(<span class="dt">Ppr =</span> ppr,  <span class="dt">z.calc =</span>z.calc, <span class="dt">z.chart =</span> z.chart, <span class="dt">ape=</span>ape))
 <span class="kw">rownames</span>(df) &lt;-<span class="st"> </span>tpr
-df</code></pre></div>
+df
+<span class="co"># HY = 0.9580002; # DAK = 0.9551087</span></code></pre></div>
+<pre><code>  Ppr   z.calc z.chart       ape
+2 1.5 0.962332   0.956 0.6623461</code></pre>
+</div>
+<div id="get-z-at-selected-ppr-and-tpr1-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#get-z-at-selected-ppr-and-tpr1-1" class="anchor"></a>Get <code>z</code> at selected <code>Ppr</code> and <code>Tpr=1.1</code>
+</h2>
+<p>From the Standing-Katz chart we read <code>z</code> at a digitized point:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zFactor)
+ppr &lt;-<span class="st"> </span><span class="fl">1.5</span>
+tpr &lt;-<span class="st"> </span><span class="fl">1.1</span>
+
+z.calc &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Papay.html">z.Papay</a></span>(<span class="dt">pres.pr =</span> ppr, <span class="dt">temp.pr =</span> tpr)
+
+<span class="co"># From the Standing-Katz chart we obtain a digitized point:</span>
+z.chart &lt;-<span class="st"> </span><span class="kw"><a href="../reference/getStandingKatzMatrix.html">getStandingKatzMatrix</a></span>(<span class="dt">tpr_vector =</span> tpr, 
+                      <span class="dt">pprRange =</span> <span class="st">"lp"</span>)[<span class="dv">1</span>, <span class="kw">as.character</span>(ppr)]
+
+<span class="co"># calculate the APE (Average Percentage Error)</span>
+ape &lt;-<span class="st"> </span><span class="kw">abs</span>((z.calc <span class="op">-</span><span class="st"> </span>z.chart) <span class="op">/</span><span class="st"> </span>z.chart) <span class="op">*</span><span class="st"> </span><span class="dv">100</span>
+
+df &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">list</span>(<span class="dt">Ppr =</span> ppr,  <span class="dt">z.calc =</span>z.calc, <span class="dt">z.chart =</span> z.chart, <span class="dt">ape=</span>ape))
+<span class="kw">rownames</span>(df) &lt;-<span class="st"> </span>tpr
+df
+<span class="co"># HY = 0.4732393  APE = 11.08903</span></code></pre></div>
 <pre><code>    Ppr    z.calc z.chart      ape
-1.1 1.5 0.4732393   0.426 11.08903</code></pre>
-<blockquote>
-<p>We see here a noticeable difference between the values of <code>z</code> from the <code>HY</code> correlation and the value read from the Standing-Katz chart. This is expected at these low pressures and temperatures. This area is a challenge for all of the correlations as well.</p>
-</blockquote>
+1.1 1.5 0.5361425   0.426 25.85506</code></pre>
 </div>
 <div id="get-values-of-z-for-combinations-of-ppr-and-tpr" class="section level2">
 <h2 class="hasAnchor">
 <a href="#get-values-of-z-for-combinations-of-ppr-and-tpr" class="anchor"></a>Get values of <code>z</code> for combinations of <code>Ppr</code> and <code>Tpr</code>
 </h2>
-<p>In this example we provide vectors instead of a single point. With the same <code>ppr</code> and <code>tpr</code> vectors that we use for the correlation, we do the same for the <code>Standing-Katz</code> chart. We want to compare both and find the <code>absolute percentage error</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zFactor)
-
+<p>In this example we provide vectors instead of a single point. With the same <code>ppr</code> and <code>tpr</code> vectors that we use for the correlation, we do the same for the <code>Standing-Katz</code> chart. We want to compare both and find the <code>absolute percentage error</code> or <code>APE</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># test with vector extracted from paper</span>
 ppr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="fl">3.5</span>, <span class="fl">4.5</span>, <span class="fl">5.5</span>, <span class="fl">6.5</span>) 
 tpr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.05</span>, <span class="fl">1.1</span>, <span class="fl">1.7</span>, <span class="dv">2</span>) 
 
 <span class="co"># calculate using the correlation</span>
-z.calc &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Hall-Yarborough.html">z.HallYarborough</a></span>(ppr, tpr)
+z.calc &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Papay.html">z.Papay</a></span>(ppr, tpr)
 
 <span class="co"># With the same ppr and tpr vector, we do the same for the Standing-Katz chart</span>
 z.chart &lt;-<span class="st"> </span><span class="kw"><a href="../reference/getStandingKatzMatrix.html">getStandingKatzMatrix</a></span>(<span class="dt">ppr_vector =</span> ppr, <span class="dt">tpr_vector =</span> tpr)
@@ -194,10 +193,10 @@ ape &lt;-<span class="st"> </span><span class="kw">abs</span>((z.calc <span clas
 <span class="kw">cat</span>(<span class="st">"</span><span class="ch">\n</span><span class="st"> APE </span><span class="ch">\n</span><span class="st">"</span>); <span class="kw">print</span>(ape)</code></pre></div>
 <pre><code>z.correlation 
            0.5       1.5       2.5       3.5       4.5       5.5       6.5
-1.05 0.8324659 0.3098781 0.3844710 0.4996188 0.6150882 0.7291019 0.8415294
-1.1  0.8565046 0.4732393 0.4138513 0.5136995 0.6220391 0.7307972 0.8386698
-1.7  0.9682547 0.9134862 0.8756412 0.8605668 0.8694525 0.8978885 0.9396353
-2    0.9838234 0.9580002 0.9426939 0.9396286 0.9490995 0.9697839 0.9994317
+1.05 0.8243607 0.4692711 0.3958632 0.4788553 0.5906236 0.7046099 0.8186716
+1.1  0.8517120 0.5361425 0.4430332 0.5056550 0.6077642 0.7145435 0.8215955
+1.7  0.9736623 0.9138939 0.8665932 0.8471834 0.8578133 0.8919610 0.9406180
+2    0.9877275 0.9623320 0.9432543 0.9366532 0.9450048 0.9675653 1.0015334
 
  z.chart 
        0.5   1.5   2.5   3.5   4.5   5.5   6.5
@@ -207,54 +206,47 @@ ape &lt;-<span class="st"> </span><span class="kw">abs</span>((z.calc <span clas
 2.00 0.982 0.956 0.941 0.937 0.945 0.969 1.003
 
  APE 
-            0.5         1.5         2.5       3.5       4.5        5.5
-1.05 0.41807702 22.48144801 12.09066991 6.0761856 2.8575603 0.28912295
-1.1  0.29327707 11.08903030  5.30568143 2.7398940 1.1445758 0.24652442
-1.7  0.02631234  0.05621824  0.04096114 0.4162014 0.6310709 0.09904802
-2    0.18568379  0.20922900  0.18000605 0.2805309 0.4338140 0.08089785
+           0.5         1.5        2.5        3.5         4.5       5.5
+1.05 0.5596238 85.48266650 15.4120172 1.66779568 1.233507926 3.0797870
+1.1  0.2679163 25.85505860 12.7311015 1.13099950 1.176554761 1.9830566
+1.7  0.5849433  0.01160694  1.0738373 1.14546413 0.716057626 0.5617635
+2    0.5832436  0.66234608  0.2395608 0.03701248 0.000507908 0.1480622
            6.5
-1.05 0.5284438
-1.1  0.2770741
-1.7  0.2510320
-2    0.3557593</code></pre>
-<blockquote>
-<p>You can see errors of 22.48% and 12.09% in the isotherm <code>Tpr=1.05</code> at <code>Ppr=1.5 and 2.5, respectively. Other errors, greater than one, can also be found at the isotherm</code>Tpr=1.1`. Then, the rest of the curves are fine.</p>
-</blockquote>
+1.05 3.2303092
+1.1  2.3073158
+1.7  0.1467143
+2    0.1462221</code></pre>
 </div>
 <div id="analyze-the-error-at-the-isotherms" class="section level2">
 <h2 class="hasAnchor">
 <a href="#analyze-the-error-at-the-isotherms" class="anchor"></a>Analyze the error at the <code>isotherms</code>
 </h2>
-<p>We apply the function <code>summary</code> over the transpose of the matrix. Applying the transpose will alow us to see the statistics at each of the isotherms.</p>
+<p>Applying the function <code>summary</code> over the transpose of the matrix:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sum_t_ape &lt;-<span class="st"> </span><span class="kw">summary</span>(<span class="kw">t</span>(ape))
 sum_t_ape</code></pre></div>
-<pre><code>      1.05              1.1               1.7                2         
- Min.   : 0.2891   Min.   : 0.2465   Min.   :0.02631   Min.   :0.0809  
- 1st Qu.: 0.4733   1st Qu.: 0.2852   1st Qu.:0.04859   1st Qu.:0.1828  
- Median : 2.8576   Median : 1.1446   Median :0.09905   Median :0.2092  
- Mean   : 6.3916   Mean   : 3.0137   Mean   :0.21726   Mean   :0.2466  
- 3rd Qu.: 9.0834   3rd Qu.: 4.0228   3rd Qu.:0.33362   3rd Qu.:0.3181  
- Max.   :22.4814   Max.   :11.0890   Max.   :0.63107   Max.   :0.4338  </code></pre>
-<blockquote>
-<p>We see that the errors in <code>z</code> are considerable with a Min. : 0.2891 % and Max. :22.4814 % for <code>Tpr=1.05</code>, and a Min. : 0.2465 % and Max. :11.0890 % for <code>Tpr=1.10</code>.</p>
-</blockquote>
-<p>The Hall-Yarborough correlation shows a very high error at values of <code>Tpr</code> lower or equal than <code>1.1</code>, being <code>Tpr=1.05</code> the worst curve to calculate z values from. Keep that in mind. We will explore later a comparative <strong>tile</strong> chart where we confirm these early calculations.</p>
+<pre><code>      1.05              1.1               1.7                2            
+ Min.   : 0.5596   Min.   : 0.2679   Min.   :0.01161   Min.   :0.0005079  
+ 1st Qu.: 1.4506   1st Qu.: 1.1538   1st Qu.:0.35424   1st Qu.:0.0916173  
+ Median : 3.0798   Median : 1.9831   Median :0.58494   Median :0.1480622  
+ Mean   :15.8094   Mean   : 6.4931   Mean   :0.60577   Mean   :0.2595650  
+ 3rd Qu.: 9.3212   3rd Qu.: 7.5192   3rd Qu.:0.89495   3rd Qu.:0.4114022  
+ Max.   :85.4827   Max.   :25.8551   Max.   :1.14546   Max.   :0.6623461  </code></pre>
 </div>
 <div id="analyze-the-error-for-greater-values-of-tpr" class="section level2">
 <h2 class="hasAnchor">
 <a href="#analyze-the-error-for-greater-values-of-tpr" class="anchor"></a>Analyze the error for greater values of <code>Tpr</code>
 </h2>
-<p>Let’s see the numbers now for higher values of <code>Tpr</code> at various values of <code>Ppr</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zFactor)
 <span class="co"># enter vectors for Tpr and Ppr</span>
 tpr2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.2</span>, <span class="fl">1.3</span>, <span class="fl">1.5</span>, <span class="fl">2.0</span>, <span class="fl">3.0</span>) 
 ppr2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="fl">3.5</span>, <span class="fl">4.5</span>, <span class="fl">5.5</span>) 
+
 <span class="co"># get z values from the SK chart</span>
 z.chart &lt;-<span class="st"> </span><span class="kw"><a href="../reference/getStandingKatzMatrix.html">getStandingKatzMatrix</a></span>(<span class="dt">ppr_vector =</span> ppr2, <span class="dt">tpr_vector =</span> tpr2, <span class="dt">pprRange =</span> <span class="st">"lp"</span>)
 
 <span class="co"># We do the same with the HY correlation:</span>
 <span class="co"># calculate z values at lower values of Tpr</span>
-z.calc &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Hall-Yarborough.html">z.HallYarborough</a></span>(<span class="dt">pres.pr =</span> ppr2, <span class="dt">temp.pr =</span> tpr2) 
+z.calc &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Papay.html">z.Papay</a></span>(<span class="dt">pres.pr =</span> ppr2, <span class="dt">temp.pr =</span> tpr2) 
 ape &lt;-<span class="st"> </span><span class="kw">abs</span>((z.calc <span class="op">-</span><span class="st"> </span>z.chart) <span class="op">/</span><span class="st"> </span>z.chart) <span class="op">*</span><span class="st"> </span><span class="dv">100</span>
 
 <span class="co"># calculate the APE</span>
@@ -263,11 +255,11 @@ ape &lt;-<span class="st"> </span><span class="kw">abs</span>((z.calc <span clas
 <span class="kw">cat</span>(<span class="st">"</span><span class="ch">\n</span><span class="st"> APE </span><span class="ch">\n</span><span class="st">"</span>); <span class="kw">print</span>(ape)</code></pre></div>
 <pre><code>z.correlation 
           0.5       1.5       2.5       3.5       4.5       5.5
-1.2 0.8924176 0.6573432 0.5219634 0.5618489 0.6474310 0.7422294
-1.3 0.9176300 0.7534433 0.6399020 0.6323003 0.6881127 0.7651710
-1.5 0.9496855 0.8581232 0.7924067 0.7687902 0.7868071 0.8316848
-2   0.9838234 0.9580002 0.9426939 0.9396286 0.9490995 0.9697839
-3   1.0004261 1.0041806 1.0118999 1.0234786 1.0386327 1.0569640
+1.2 0.8926577 0.6489440 0.5388870 0.5640639 0.6449346 0.7382795
+1.3 0.9208943 0.7357072 0.6290383 0.6271826 0.6858996 0.7656800
+1.5 0.9552137 0.8499334 0.7728520 0.7501411 0.7749505 0.8279008
+2   0.9877275 0.9623320 0.9432543 0.9366532 0.9450048 0.9675653
+3   0.9995561 1.0001483 1.0032952 1.0095589 1.0193297 1.0328185
 
  z.chart 
        0.5   1.5   2.5   3.5   4.5   5.5
@@ -278,91 +270,130 @@ ape &lt;-<span class="st"> </span><span class="kw">abs</span>((z.calc <span clas
 3.00 1.002 1.009 1.018 1.029 1.041 1.056
 
  APE 
-           0.5        1.5       2.5       3.5       4.5        5.5
-1.2 0.06522262 0.05224243 0.5709802 0.5577242 0.3952245 0.16590798
-1.3 0.17795221 0.33818375 0.2981152 0.1105437 0.6012676 0.81305005
-1.5 0.17779256 0.10207082 0.2006642 0.1571161 0.4041660 0.51617648
-2   0.18568379 0.20922900 0.1800061 0.2805309 0.4338140 0.08089785
-3   0.15708015 0.47764307 0.5992268 0.5365750 0.2274063 0.09128453</code></pre>
-<blockquote>
-<p>At <code>Tpr</code> above or equal to 1.2 the <code>HY</code> correlation behaves very well.</p>
-</blockquote>
+           0.5       1.5       2.5        3.5         4.5       5.5
+1.2 0.03832749 1.2261856 3.8317839 0.16567267 0.779298982 0.3671385
+1.3 0.53431458 2.6842320 1.4046605 0.91901585 0.277717125 0.8801037
+1.5 0.76093659 1.0554821 2.6634712 2.57908019 1.905004145 0.9688092
+2   0.58324362 0.6623461 0.2395608 0.03701248 0.000507908 0.1480622
+3   0.24389752 0.8772760 1.4444808 1.88931540 2.081676730 2.1952223</code></pre>
 </div>
 <div id="analyze-the-error-at-the-isotherms-1" class="section level2">
 <h2 class="hasAnchor">
 <a href="#analyze-the-error-at-the-isotherms-1" class="anchor"></a>Analyze the error at the <code>isotherms</code>
 </h2>
-<p>Now, let’s apply the function <code>summary</code> over the transpose of the matrix to observe the error of the correlation at each isotherm.</p>
+<p>Applying the function <code>summary</code> over the transpose of the matrix to observe the error of the correlation at each isotherm.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sum_t_ape &lt;-<span class="st"> </span><span class="kw">summary</span>(<span class="kw">t</span>(ape))
-sum_t_ape</code></pre></div>
-<pre><code>      1.2               1.3              1.5               2         
- Min.   :0.05224   Min.   :0.1105   Min.   :0.1021   Min.   :0.0809  
- 1st Qu.:0.09039   1st Qu.:0.2080   1st Qu.:0.1623   1st Qu.:0.1814  
- Median :0.28057   Median :0.3181   Median :0.1892   Median :0.1975  
- Mean   :0.30122   Mean   :0.3899   Mean   :0.2597   Mean   :0.2284  
- 3rd Qu.:0.51710   3rd Qu.:0.5355   3rd Qu.:0.3533   3rd Qu.:0.2627  
- Max.   :0.57098   Max.   :0.8131   Max.   :0.5162   Max.   :0.4338  
-       3          
- Min.   :0.09128  
- 1st Qu.:0.17466  
- Median :0.35252  
- Mean   :0.34820  
- 3rd Qu.:0.52184  
- Max.   :0.59923  </code></pre>
-<blockquote>
-<p>In all, the error of <code>z</code> at these isotherms is less than 0.82%. <strong>Pretty good</strong>.</p>
-</blockquote>
+sum_t_ape
+ <span class="co"># Hall-Yarborough</span>
+ <span class="co">#      1.2               1.3              1.5               2         </span>
+ <span class="co"># Min.   :0.05224   Min.   :0.1105   Min.   :0.1021   Min.   :0.0809  </span>
+ <span class="co"># 1st Qu.:0.09039   1st Qu.:0.2080   1st Qu.:0.1623   1st Qu.:0.1814  </span>
+ <span class="co"># Median :0.28057   Median :0.3181   Median :0.1892   Median :0.1975  </span>
+ <span class="co"># Mean   :0.30122   Mean   :0.3899   Mean   :0.2597   Mean   :0.2284  </span>
+ <span class="co"># 3rd Qu.:0.51710   3rd Qu.:0.5355   3rd Qu.:0.3533   3rd Qu.:0.2627  </span>
+ <span class="co"># Max.   :0.57098   Max.   :0.8131   Max.   :0.5162   Max.   :0.4338  </span>
+ <span class="co">#       3          </span>
+ <span class="co"># Min.   :0.09128  </span>
+ <span class="co"># 1st Qu.:0.17466  </span>
+ <span class="co"># Median :0.35252  </span>
+ <span class="co"># Mean   :0.34820  </span>
+ <span class="co"># 3rd Qu.:0.52184  </span>
+ <span class="co"># Max.   :0.59923  </span></code></pre></div>
+<pre><code>      1.2               1.3              1.5               2            
+ Min.   :0.03833   Min.   :0.2777   Min.   :0.7609   Min.   :0.0005079  
+ 1st Qu.:0.21604   1st Qu.:0.6208   1st Qu.:0.9905   1st Qu.:0.0647749  
+ Median :0.57322   Median :0.8996   Median :1.4802   Median :0.1938115  
+ Mean   :1.06807   Mean   :1.1167   Mean   :1.6555   Mean   :0.2784555  
+ 3rd Qu.:1.11446   3rd Qu.:1.2832   3rd Qu.:2.4106   3rd Qu.:0.4973229  
+ Max.   :3.83178   Max.   :2.6842   Max.   :2.6635   Max.   :0.6623461  
+       3         
+ Min.   :0.2439  
+ 1st Qu.:1.0191  
+ Median :1.6669  
+ Mean   :1.4553  
+ 3rd Qu.:2.0336  
+ Max.   :2.1952  </code></pre>
 </div>
-<div id="prepare-to-plot-sk-chart-values-vs-hy-correlation" class="section level2">
+<div id="prepare-to-plot-sk-vs-pp-correlation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#prepare-to-plot-sk-chart-values-vs-hy-correlation" class="anchor"></a>Prepare to plot <code>SK</code> chart values vs <code>HY</code> correlation</h2>
-<p>Now, we will be plotting the difference between the <code>z</code> values in the Standing-Katz and the <code>z</code> values calculated by Hall-Yarborough. For the moment let’s not pay attention to the numerical error but to the <code>error bars</code> in the plot (the orange bars).</p>
+<a href="#prepare-to-plot-sk-vs-pp-correlation" class="anchor"></a>Prepare to plot SK vs PP correlation</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zFactor)
 <span class="kw">library</span>(tibble)
 <span class="kw">library</span>(ggplot2)
 
-tpr2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.05</span>, <span class="fl">1.1</span>, <span class="fl">1.2</span>, <span class="fl">1.3</span>)
-ppr2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.0</span>, <span class="fl">1.5</span>, <span class="dv">2</span>, <span class="fl">2.5</span>, <span class="fl">3.0</span>, <span class="fl">3.5</span>, <span class="fl">4.0</span>, <span class="fl">4.5</span>, <span class="fl">5.0</span>, <span class="fl">5.5</span>, <span class="fl">6.0</span>, <span class="fl">6.5</span>)
+tpr2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.05</span>, <span class="fl">1.1</span>, <span class="fl">1.2</span>, <span class="fl">1.3</span>) 
+ppr2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.0</span>, <span class="fl">1.5</span>, <span class="dv">2</span>, <span class="fl">2.5</span>, <span class="fl">3.0</span>, <span class="fl">3.5</span>, <span class="fl">4.0</span>, <span class="fl">4.5</span>, <span class="fl">5.0</span>, <span class="fl">5.5</span>, <span class="fl">6.0</span>, <span class="fl">6.5</span>) 
 
-sk_corr_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw"><a href="../reference/createTidyFromMatrix.html">createTidyFromMatrix</a></span>(ppr2, tpr2, <span class="dt">correlation =</span> <span class="st">"HY"</span>)
-<span class="kw">as.tibble</span>(sk_corr_<span class="dv">2</span>)
+sk_dak_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw"><a href="../reference/createTidyFromMatrix.html">createTidyFromMatrix</a></span>(ppr2, tpr2, <span class="dt">correlation =</span> <span class="st">"PP"</span>)
+<span class="kw">as.tibble</span>(sk_dak_<span class="dv">2</span>)
 
-p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_corr_<span class="dv">2</span>, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z.calc, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) <span class="op">+</span>
+p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_dak_<span class="dv">2</span>, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z.calc, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc<span class="op">-</span><span class="kw">abs</span>(dif), <span class="dt">ymax=</span>z.calc<span class="op">+</span><span class="kw">abs</span>(dif)), <span class="dt">width=</span>.<span class="dv">4</span>,
+<span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc<span class="op">-</span>dif, <span class="dt">ymax=</span>z.calc<span class="op">+</span>dif), <span class="dt">width=</span>.<span class="dv">4</span>,
                   <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.05</span>))
 <span class="kw">print</span>(p)</code></pre></div>
-<p><img src="Hall-Yarborough_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="Papay_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;"></p>
 <pre><code># A tibble: 52 x 5
-     Tpr   Ppr z.chart    z.calc          dif
-   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;        &lt;dbl&gt;
- 1  1.05   0.5   0.829 0.8324659 -0.003465859
- 2   1.1   0.5   0.854 0.8565046 -0.002504586
- 3   1.2   0.5   0.893 0.8924176  0.000582438
- 4   1.3   0.5   0.916 0.9176300 -0.001630042
- 5  1.05   1.0   0.589 0.6023739 -0.013373916
- 6   1.1   1.0   0.669 0.6816110 -0.012611042
- 7   1.2   1.0   0.779 0.7761052  0.002894780
- 8   1.3   1.0   0.835 0.8339593  0.001040688
- 9  1.05   1.5   0.253 0.3098781 -0.056878063
-10   1.1   1.5   0.426 0.4732393 -0.047239269
+     Tpr   Ppr z.chart    z.calc           dif
+   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
+ 1  1.05   0.5   0.829 0.8243607  0.0046392814
+ 2   1.1   0.5   0.854 0.8517120  0.0022880049
+ 3   1.2   0.5   0.893 0.8926577  0.0003422645
+ 4   1.3   0.5   0.916 0.9208943 -0.0048943216
+ 5  1.05   1.0   0.589 0.6199052 -0.0309052477
+ 6   1.1   1.0   0.669 0.6758011 -0.0068010552
+ 7   1.2   1.0   0.779 0.7629806  0.0160193915
+ 8   1.3   1.0   0.835 0.8251938  0.0098062071
+ 9  1.05   1.5   0.253 0.4692711 -0.2162711462
+10   1.1   1.5   0.426 0.5361425 -0.1101425496
 # ... with 42 more rows</code></pre>
-<blockquote>
-<p>As we were expecting, the errors can be found on Tpr=1.05 and Tpr=1.1</p>
-</blockquote>
 </div>
-<div id="analyzing-the-error-for-all-the-tpr-curves" class="section level2">
+<div id="analysis-at-the-lowest-tpr" class="section level2">
 <h2 class="hasAnchor">
-<a href="#analyzing-the-error-for-all-the-tpr-curves" class="anchor"></a>Analyzing the error for all the <code>Tpr</code> curves</h2>
-<p>In this last example, we compare the values of <code>z</code> at all the isotherms. We use the function <code>getCurvesDigitized</code> in the <code>zfactor</code> package to obtain all the isotherms or <code>Tpr</code> curves in the Standing-Katz chart that have been digitized. The next function <code>createTidyFromMatrix</code> calculates <code>z</code> using the correlation and prepares a tidy dataset ready to plot.</p>
+<a href="#analysis-at-the-lowest-tpr" class="anchor"></a>Analysis at the lowest <code>Tpr</code>
+</h2>
+<p>This is the isotherm where we see the greatest error.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zFactor)
+
+sk_dak_<span class="dv">3</span> &lt;-<span class="st"> </span>sk_dak_<span class="dv">2</span>[sk_dak_<span class="dv">2</span><span class="op">$</span>Tpr<span class="op">==</span><span class="fl">1.05</span>,]
+sk_dak_<span class="dv">3</span>
+
+p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_dak_<span class="dv">3</span>, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z.calc, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc<span class="op">-</span>dif, <span class="dt">ymax=</span>z.calc<span class="op">+</span>dif), <span class="dt">width=</span>.<span class="dv">2</span>,
+                  <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.05</span>))
+<span class="kw">print</span>(p)</code></pre></div>
+<p><img src="Papay_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;"></p>
+<pre><code>    Tpr Ppr z.chart    z.calc           dif
+1  1.05 0.5   0.829 0.8243607  4.639281e-03
+5  1.05 1.0   0.589 0.6199052 -3.090525e-02
+9  1.05 1.5   0.253 0.4692711 -2.162711e-01
+13 1.05 2.0   0.280 0.3998218 -1.198218e-01
+17 1.05 2.5   0.343 0.3958632 -5.286322e-02
+21 1.05 3.0   0.407 0.4292515 -2.225150e-02
+25 1.05 3.5   0.471 0.4788553 -7.855318e-03
+29 1.05 4.0   0.534 0.5339879  1.210687e-05
+33 1.05 4.5   0.598 0.5906236  7.376377e-03
+37 1.05 5.0   0.663 0.6475878  1.541217e-02
+41 1.05 5.5   0.727 0.7046099  2.239005e-02
+45 1.05 6.0   0.786 0.7616403  2.435970e-02
+49 1.05 6.5   0.846 0.8186716  2.732842e-02</code></pre>
+</div>
+<div id="analyzing-performance-of-the-pp-correlation-for-all-the-tpr-curves" class="section level2">
+<h2 class="hasAnchor">
+<a href="#analyzing-performance-of-the-pp-correlation-for-all-the-tpr-curves" class="anchor"></a>Analyzing performance of the <code>PP</code> correlation for all the <code>Tpr</code> curves</h2>
+<p>In this last example, we compare the values of <code>z</code> at all the isotherms.</p>
+<p>We use the function <code>getCurvesDigitized</code> to obtain all the isotherms or <code>Tpr</code> curves in the Standing-Katz chart that have been digitized.</p>
+<p>The next function <code>createTidyFromMatrix</code> calculates <code>z</code> using the correlation and prepares a tidy dataset ready to plot.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
 <span class="kw">library</span>(tibble)
 
 <span class="co"># get all `lp` Tpr curves</span>
 tpr_all &lt;-<span class="st"> </span><span class="kw"><a href="../reference/getStandingKatzTpr.html">getStandingKatzTpr</a></span>(<span class="dt">pprRange =</span> <span class="st">"lp"</span>)
 ppr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="fl">3.5</span>, <span class="fl">4.5</span>, <span class="fl">5.5</span>, <span class="fl">6.5</span>) 
-sk_corr_all &lt;-<span class="st"> </span><span class="kw"><a href="../reference/createTidyFromMatrix.html">createTidyFromMatrix</a></span>(ppr, tpr_all, <span class="dt">correlation =</span> <span class="st">"HY"</span>)
+sk_corr_all &lt;-<span class="st"> </span><span class="kw"><a href="../reference/createTidyFromMatrix.html">createTidyFromMatrix</a></span>(ppr, tpr_all, <span class="dt">correlation =</span> <span class="st">"PP"</span>)
 <span class="kw">as.tibble</span>(sk_corr_all)
 
 p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_corr_all, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z.calc, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) <span class="op">+</span>
@@ -371,38 +402,33 @@ p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_corr_all, <spa
 <span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc<span class="op">-</span>dif, <span class="dt">ymax=</span>z.calc<span class="op">+</span>dif), <span class="dt">width=</span>.<span class="dv">4</span>,
                   <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.05</span>))
 <span class="kw">print</span>(p)</code></pre></div>
-<p><img src="Hall-Yarborough_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="Papay_files/figure-html/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;"></p>
 <pre><code># A tibble: 112 x 5
      Tpr   Ppr z.chart    z.calc           dif
    &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
- 1  1.05   0.5   0.829 0.8324659 -3.465859e-03
- 2   1.1   0.5   0.854 0.8565046 -2.504586e-03
- 3   1.2   0.5   0.893 0.8924176  5.824380e-04
- 4   1.3   0.5   0.916 0.9176300 -1.630042e-03
- 5   1.4   0.5   0.936 0.9359773  2.267004e-05
- 6   1.5   0.5   0.948 0.9496855 -1.685473e-03
- 7   1.6   0.5   0.959 0.9601420 -1.141963e-03
- 8   1.7   0.5   0.968 0.9682547 -2.547035e-04
- 9   1.8   0.5   0.974 0.9746397 -6.396615e-04
-10   1.9   0.5   0.978 0.9797268 -1.726818e-03
+ 1  1.05   0.5   0.829 0.8243607  0.0046392814
+ 2   1.1   0.5   0.854 0.8517120  0.0022880049
+ 3   1.2   0.5   0.893 0.8926577  0.0003422645
+ 4   1.3   0.5   0.916 0.9208943 -0.0048943216
+ 5   1.4   0.5   0.936 0.9408336 -0.0048335907
+ 6   1.5   0.5   0.948 0.9552137 -0.0072136788
+ 7   1.6   0.5   0.959 0.9657774 -0.0067773900
+ 8   1.7   0.5   0.968 0.9736623 -0.0056622515
+ 9   1.8   0.5   0.974 0.9796287 -0.0056286532
+10   1.9   0.5   0.978 0.9841963 -0.0061962511
 # ... with 102 more rows</code></pre>
-<blockquote>
-<p>As we saw before, we confirm that the greatest errors are localized in two of the <code>Tpr</code> curves: at 1.05 and 1.1.</p>
-</blockquote>
 </div>
 <div id="range-of-applicability-of-the-correlation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#range-of-applicability-of-the-correlation" class="anchor"></a>Range of applicability of the correlation</h2>
-<p>What we will see here is the distribution of the Mean Average Percentage Error or MAPE accross all the <code>Tpr</code> isotherms and <code>Ppr</code> grids. Remember from the <code>README</code>: red and yellow are bad.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># MSE: Mean Squared Error</span>
-<span class="co"># RMSE: Root Mean Sqyared Error</span>
+<span class="co"># RMSE: Root Mean Squared Error</span>
 <span class="co"># RSS: residual sum of square</span>
-<span class="co"># RMSLE: Root Mean Squared Logarithmic Error. Penalizes understimation.</span>
-<span class="co"># MAPE: Mean Absolute Percentage Error = AARE</span>
-<span class="co"># MPE: Mean Percentage error = ARE</span>
-<span class="co"># MAE: Mean Absolute Error</span>
+<span class="co"># ARE:  Average Relative Error, %</span>
+<span class="co"># AARE: Average Absolute Relative Error, %</span>
 <span class="kw">library</span>(dplyr)
 grouped &lt;-<span class="st"> </span><span class="kw">group_by</span>(sk_corr_all, Tpr, Ppr)
+
 smry_tpr_ppr &lt;-<span class="st"> </span><span class="kw">summarise</span>(grouped, 
           <span class="dt">RMSE=</span> <span class="kw">sqrt</span>(<span class="kw">mean</span>((z.chart<span class="op">-</span>z.calc)<span class="op">^</span><span class="dv">2</span>)), 
           <span class="dt">MPE =</span> <span class="kw">sum</span>((z.calc <span class="op">-</span><span class="st"> </span>z.chart) <span class="op">/</span><span class="st"> </span>z.chart) <span class="op">*</span><span class="st"> </span><span class="dv">100</span> <span class="op">/</span><span class="st"> </span><span class="kw">n</span>(),
@@ -419,24 +445,27 @@ smry_tpr_ppr &lt;-<span class="st"> </span><span class="kw">summarise</span>(gro
                          <span class="dt">midpoint=</span><span class="fl">12.5</span>, <span class="dt">limit=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">25</span>), <span class="dt">name=</span><span class="st">"MAPE"</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">    </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle=</span><span class="dv">45</span>, <span class="dt">vjust=</span><span class="dv">1</span>, <span class="dt">size=</span><span class="dv">11</span>, <span class="dt">hjust=</span><span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span>
 <span class="st">    </span><span class="kw">coord_equal</span>() <span class="op">+</span>
-<span class="st">    </span><span class="kw">ggtitle</span>(<span class="st">"Hall-Yarborough"</span>, <span class="dt">subtitle =</span> <span class="st">"HY"</span>)</code></pre></div>
-<p><img src="Hall-Yarborough_files/figure-html/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;"></p>
+<span class="st">    </span><span class="kw">ggtitle</span>(<span class="st">"Papay"</span>, <span class="dt">subtitle =</span> <span class="st">"PP"</span>)</code></pre></div>
+<p><img src="Papay_files/figure-html/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;"></p>
 </div>
 <div id="plotting-the-tpr-and-ppr-values-that-show-more-error" class="section level2">
 <h2 class="hasAnchor">
 <a href="#plotting-the-tpr-and-ppr-values-that-show-more-error" class="anchor"></a>Plotting the <code>Tpr</code> and <code>Ppr</code> values that show more error</h2>
-<p>This is just plotting the couple of isotherms where we see the largest errors.</p>
+<p>The <code>MAPE</code> (mean average percentage error) gradient bar indicates that the more red the square is, the more error there is.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
 
 sk_corr_all <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">filter</span>(Tpr <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">"1.05"</span>, <span class="st">"1.1"</span>)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">filter</span>(Tpr <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">"1.05"</span>, <span class="st">"1.1"</span>, <span class="st">"2.4"</span>, <span class="st">"2.6"</span>, <span class="st">"2.8"</span>, <span class="st">"3"</span>)) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> z.chart, <span class="dt">y=</span>z.calc, <span class="dt">group =</span> Tpr, <span class="dt">color =</span> Tpr)) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> z.chart, <span class="dt">y =</span> z.chart), <span class="dt">color =</span> <span class="st">"black"</span>) <span class="op">+</span>
-<span class="st">    </span><span class="kw">facet_grid</span>(. <span class="op">~</span><span class="st"> </span>Tpr) <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc<span class="op">-</span><span class="kw">abs</span>(dif), <span class="dt">ymax=</span>z.calc<span class="op">+</span><span class="kw">abs</span>(dif)),
-                  <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.05</span>))</code></pre></div>
-<p><img src="Hall-Yarborough_files/figure-html/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;"></p>
+<span class="st">    </span><span class="kw">facet_grid</span>(. <span class="op">~</span><span class="st"> </span>Tpr, <span class="dt">scales =</span> <span class="st">"free"</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc<span class="op">-</span><span class="kw">abs</span>(dif), <span class="dt">ymax=</span>z.calc<span class="op">+</span><span class="kw">abs</span>(dif)), 
+                  <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.5</span>))</code></pre></div>
+<p><img src="Papay_files/figure-html/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;"></p>
+<blockquote>
+<p>With the exception of the isotherms at 1.05 and 1.1, the Papay correlation looks acceptable good.</p>
+</blockquote>
 </div>
 <div id="looking-numerically-at-the-errors" class="section level2">
 <h2 class="hasAnchor">
@@ -447,52 +476,21 @@ sk_corr_all <span class="op">%&gt;%</span>
 # Groups:   Tpr [?]
      Tpr   Ppr        RMSE        MPE       MAPE          MSE          RSS
    &lt;chr&gt; &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;
- 1  1.05   0.5 0.003465859  0.4180770  0.4180770 1.201218e-05 1.201218e-05
- 2  1.05   1.5 0.056878063 22.4814480 22.4814480 3.235114e-03 3.235114e-03
- 3  1.05   2.5 0.041470998 12.0906699 12.0906699 1.719844e-03 1.719844e-03
- 4  1.05   3.5 0.028618834  6.0761856  6.0761856 8.190377e-04 8.190377e-04
- 5  1.05   4.5 0.017088211  2.8575603  2.8575603 2.920070e-04 2.920070e-04
- 6  1.05   5.5 0.002101924  0.2891229  0.2891229 4.418084e-06 4.418084e-06
- 7  1.05   6.5 0.004470634 -0.5284438  0.5284438 1.998657e-05 1.998657e-05
- 8   1.1   0.5 0.002504586  0.2932771  0.2932771 6.272952e-06 6.272952e-06
- 9   1.1   1.5 0.047239269 11.0890303 11.0890303 2.231549e-03 2.231549e-03
-10   1.1   2.5 0.020851328  5.3056814  5.3056814 4.347779e-04 4.347779e-04
+ 1  1.05   0.5 0.004639281 -0.5596238  0.5596238 2.152293e-05 2.152293e-05
+ 2  1.05   1.5 0.216271146 85.4826665 85.4826665 4.677321e-02 4.677321e-02
+ 3  1.05   2.5 0.052863219 15.4120172 15.4120172 2.794520e-03 2.794520e-03
+ 4  1.05   3.5 0.007855318  1.6677957  1.6677957 6.170602e-05 6.170602e-05
+ 5  1.05   4.5 0.007376377 -1.2335079  1.2335079 5.441094e-05 5.441094e-05
+ 6  1.05   5.5 0.022390052 -3.0797870  3.0797870 5.013144e-04 5.013144e-04
+ 7  1.05   6.5 0.027328416 -3.2303092  3.2303092 7.468423e-04 7.468423e-04
+ 8   1.1   0.5 0.002288005 -0.2679163  0.2679163 5.234967e-06 5.234967e-06
+ 9   1.1   1.5 0.110142550 25.8550586 25.8550586 1.213138e-02 1.213138e-02
+10   1.1   2.5 0.050033229 12.7311015 12.7311015 2.503324e-03 2.503324e-03
 # ... with 102 more rows, and 2 more variables: MAE &lt;dbl&gt;, RMLSE &lt;dbl&gt;</code></pre>
 </div>
-<div id="rmse-root-mean-square-error" class="section level2">
-<h2 class="hasAnchor">
-<a href="#rmse-root-mean-square-error" class="anchor"></a>RMSE: Root Mean Square Error</h2>
-<p><span class="math display">\[RMSE = \sqrt {\frac {1}{n} \sum_{i=1}^{n} (y_i - \hat y_i)^2}\]</span></p>
-</div>
-<div id="appendix" class="section level2">
-<h2 class="hasAnchor">
-<a href="#appendix" class="anchor"></a>Appendix</h2>
-<p><code>getStandingKatzMatrix</code> is equivalent to using the <code>sapply</code> function with the internal function <code>.z.HallYarborough</code> (the <strong>dot</strong> means it’s internal), which we call adding the prefix <code>zFactor:::</code>. That is, the package name and <strong>three</strong> colons.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># test HY with 1st-derivative using the values from the paper </span>
- 
-ppr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="fl">3.5</span>, <span class="fl">4.5</span>, <span class="fl">5.5</span>, <span class="fl">6.5</span>) 
-tpr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.3</span>, <span class="fl">1.5</span>, <span class="fl">1.7</span>, <span class="dv">2</span>) 
- 
-hy &lt;-<span class="st"> </span><span class="kw">sapply</span>(ppr, <span class="cf">function</span>(x)  
-    <span class="kw">sapply</span>(tpr, <span class="cf">function</span>(y) zFactor<span class="op">:::</span><span class="kw">.z.HallYarborough</span>(<span class="dt">pres.pr =</span> x, <span class="dt">temp.pr =</span> y))) 
- 
-<span class="kw">rownames</span>(hy) &lt;-<span class="st"> </span>tpr 
-<span class="kw">colnames</span>(hy) &lt;-<span class="st"> </span>ppr 
-<span class="kw">print</span>(hy) </code></pre></div>
-<pre><code>          0.5       1.5       2.5       3.5       4.5       5.5       6.5
-1.3 0.9176300 0.7534433 0.6399020 0.6323003 0.6881127 0.7651710 0.8493794
-1.5 0.9496855 0.8581232 0.7924067 0.7687902 0.7868071 0.8316848 0.8906351
-1.7 0.9682547 0.9134862 0.8756412 0.8605668 0.8694525 0.8978885 0.9396353
-2   0.9838234 0.9580002 0.9426939 0.9396286 0.9490995 0.9697839 0.9994317</code></pre>
-</div>
-<div id="references" class="section level2 unnumbered">
+<div id="references" class="section level2">
 <h2 class="hasAnchor">
 <a href="#references" class="anchor"></a>References</h2>
-<div id="refs" class="references">
-<div id="ref-Hall1973">
-<p>Hall, Kenneth R, and Lyman Yarborough. 1973. “A New Equation of State for Z-Factor Calculations.” <em>Oil and Gas Journal</em> 71 (7): 82–92.</p>
-</div>
-</div>
 </div>
 </div>
   </div>
@@ -502,20 +500,19 @@ hy &lt;-<span class="st"> </span><span class="kw">sapply</span>(ppr, <span class
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#the-hall-yarborough-correlation">The Hall-Yarborough correlation</a></li>
-      <li><a href="#get-z-at-selected-ppr-and-tpr2-0">Get <code>z</code> at selected <code>Ppr</code> and <code>Tpr=2.0</code></a></li>
-      <li><a href="#get-z-at-selected-ppr-and-tpr-1-1">Get <code>z</code> at selected <code>Ppr</code> and <code>Tpr = 1.1</code></a></li>
+<li><a href="#papay-correlation">Papay correlation</a></li>
+      <li><a href="#get-z-at-selected-ppr-and-tpr">Get <code>z</code> at selected <code>Ppr</code> and <code>Tpr</code></a></li>
+      <li><a href="#get-z-at-selected-ppr-and-tpr1-1">Get <code>z</code> at selected <code>Ppr</code> and <code>Tpr=1.1</code></a></li>
       <li><a href="#get-values-of-z-for-combinations-of-ppr-and-tpr">Get values of <code>z</code> for combinations of <code>Ppr</code> and <code>Tpr</code></a></li>
       <li><a href="#analyze-the-error-at-the-isotherms">Analyze the error at the <code>isotherms</code></a></li>
       <li><a href="#analyze-the-error-for-greater-values-of-tpr">Analyze the error for greater values of <code>Tpr</code></a></li>
       <li><a href="#analyze-the-error-at-the-isotherms-1">Analyze the error at the <code>isotherms</code></a></li>
-      <li><a href="#prepare-to-plot-sk-chart-values-vs-hy-correlation">Prepare to plot <code>SK</code> chart values vs <code>HY</code> correlation</a></li>
-      <li><a href="#analyzing-the-error-for-all-the-tpr-curves">Analyzing the error for all the <code>Tpr</code> curves</a></li>
+      <li><a href="#prepare-to-plot-sk-vs-pp-correlation">Prepare to plot SK vs PP correlation</a></li>
+      <li><a href="#analysis-at-the-lowest-tpr">Analysis at the lowest <code>Tpr</code></a></li>
+      <li><a href="#analyzing-performance-of-the-pp-correlation-for-all-the-tpr-curves">Analyzing performance of the <code>PP</code> correlation for all the <code>Tpr</code> curves</a></li>
       <li><a href="#range-of-applicability-of-the-correlation">Range of applicability of the correlation</a></li>
       <li><a href="#plotting-the-tpr-and-ppr-values-that-show-more-error">Plotting the <code>Tpr</code> and <code>Ppr</code> values that show more error</a></li>
       <li><a href="#looking-numerically-at-the-errors">Looking numerically at the errors</a></li>
-      <li><a href="#rmse-root-mean-square-error">RMSE: Root Mean Square Error</a></li>
-      <li><a href="#appendix">Appendix</a></li>
       <li><a href="#references">References</a></li>
       </ul>
 </div>

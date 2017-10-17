@@ -65,6 +65,9 @@
     <li>
       <a href="../articles/Ann10.html">Artificial Neural Networks</a>
     </li>
+    <li>
+      <a href="../articles/Papay.html">Papay correlation</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -103,7 +106,6 @@
   <div class="col-md-9">
     <div class="page-header toc-ignore">
       <h1>Beggs-Brill correlation</h1>
-                        <h4 class="author">Vignette Author</h4>
             
             <h4 class="date">2017-10-16</h4>
           </div>
@@ -317,27 +319,52 @@ p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_corr_<span cla
 <a href="#analysis-at-the-lowest-tpr" class="anchor"></a>Analysis at the lowest <code>Tpr</code>
 </h2>
 <p>Extract only values at <code>Tpr = 1.05</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sk_corr_<span class="dv">3</span> &lt;-<span class="st"> </span>sk_corr_<span class="dv">3</span>[sk_corr_<span class="dv">3</span><span class="op">$</span>Tpr<span class="op">==</span><span class="fl">1.05</span>,]</code></pre></div>
-<pre><code>Error in eval(expr, envir, enclos): object 'sk_corr_3' not found</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sk_corr_<span class="dv">3</span></code></pre></div>
-<pre><code>Error in eval(expr, envir, enclos): object 'sk_corr_3' not found</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sk_corr_<span class="dv">3</span> &lt;-<span class="st"> </span>sk_corr_<span class="dv">2</span>[sk_corr_<span class="dv">2</span><span class="op">$</span>Tpr<span class="op">==</span><span class="fl">1.05</span>,]
+sk_corr_<span class="dv">3</span></code></pre></div>
+<pre><code>    Tpr Ppr z.chart    z.calc          dif
+1  1.05 0.5   0.829 0.8325491 -0.003549064
+5  1.05 1.0   0.589 0.5857006  0.003299370
+9  1.05 1.5   0.253 0.2851494 -0.032149397
+13 1.05 2.0   0.280 0.2715884  0.008411630
+17 1.05 2.5   0.343 0.3333796  0.009620404
+21 1.05 3.0   0.407 0.3951833  0.011816743
+25 1.05 3.5   0.471 0.4569204  0.014079649
+29 1.05 4.0   0.534 0.5186005  0.015399484
+33 1.05 4.5   0.598 0.5802310  0.017769048
+37 1.05 5.0   0.663 0.6418172  0.021182758
+41 1.05 5.5   0.727 0.7033638  0.023636157
+45 1.05 6.0   0.786 0.7648744  0.021125603
+49 1.05 6.5   0.846 0.8263519  0.019648067</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_corr_<span class="dv">3</span>, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z.calc, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_line</span>(<span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">21</span>, <span class="dt">fill =</span> <span class="st">"white"</span>, <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc<span class="op">-</span>dif, <span class="dt">ymax=</span>z.calc<span class="op">+</span>dif), <span class="dt">width=</span><span class="fl">0.2</span>, <span class="dt">size =</span> <span class="dv">0</span>.,
-                  <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.05</span>), <span class="dt">color =</span> <span class="st">"black"</span>)</code></pre></div>
-<pre><code>Error in ggplot(sk_corr_3, aes(x = Ppr, y = z.calc, group = Tpr, color = Tpr)): object 'sk_corr_3' not found</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(p)</code></pre></div>
+                  <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.05</span>), <span class="dt">color =</span> <span class="st">"black"</span>)
+<span class="kw">print</span>(p)</code></pre></div>
 <p><img src="Beggs-Brill_files/figure-html/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(sk_corr_<span class="dv">3</span>)</code></pre></div>
-<pre><code>Error in summary(sk_corr_3): object 'sk_corr_3' not found</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"> <span class="co">#         dif DAK      </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(sk_corr_<span class="dv">3</span>)
+
+ <span class="co">#         dif DAK      </span>
  <span class="co"># Min.   :-0.048404  </span>
  <span class="co"># 1st Qu.:-0.035300  </span>
  <span class="co"># Median :-0.025978  </span>
  <span class="co"># Mean   :-0.023178  </span>
  <span class="co"># 3rd Qu.:-0.009960  </span>
  <span class="co"># Max.   : 0.002325</span></code></pre></div>
+<pre><code>     Tpr                 Ppr         z.chart           z.calc      
+ Length:13          Min.   :0.5   Min.   :0.2530   Min.   :0.2716  
+ Class :character   1st Qu.:2.0   1st Qu.:0.4070   1st Qu.:0.3952  
+ Mode  :character   Median :3.5   Median :0.5890   Median :0.5802  
+                    Mean   :3.5   Mean   :0.5635   Mean   :0.5535  
+                    3rd Qu.:5.0   3rd Qu.:0.7270   3rd Qu.:0.7034  
+                    Max.   :6.5   Max.   :0.8460   Max.   :0.8325  
+      dif           
+ Min.   :-0.032149  
+ 1st Qu.: 0.008412  
+ Median : 0.014080  
+ Mean   : 0.010022  
+ 3rd Qu.: 0.019648  
+ Max.   : 0.023636  </code></pre>
 <p>With this information there is no much we can say about Beggs-Brill.</p>
 </div>
 <div id="analyzing-performance-of-the-bb-correlation-for-all-the-tpr-curves" class="section level2">
@@ -347,64 +374,111 @@ p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_corr_<span cla
 <span class="kw">library</span>(tibble)
 
 <span class="co"># get all `lp` Tpr curves</span>
-tpr_all &lt;-<span class="st"> </span><span class="kw">getCurvesDigitized</span>(<span class="dt">pprRange =</span> <span class="st">"lp"</span>)</code></pre></div>
-<pre><code>Error in getCurvesDigitized(pprRange = "lp"): could not find function "getCurvesDigitized"</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ppr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="fl">3.5</span>, <span class="fl">4.5</span>, <span class="fl">5.5</span>, <span class="fl">6.5</span>) 
+tpr_all &lt;-<span class="st"> </span><span class="kw"><a href="../reference/getStandingKatzTpr.html">getStandingKatzTpr</a></span>(<span class="dt">pprRange =</span> <span class="st">"lp"</span>)
+ppr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="fl">3.5</span>, <span class="fl">4.5</span>, <span class="fl">5.5</span>, <span class="fl">6.5</span>) 
 
-sk_corr_all &lt;-<span class="st"> </span><span class="kw"><a href="../reference/createTidyFromMatrix.html">createTidyFromMatrix</a></span>(ppr, tpr_all, <span class="dt">correlation =</span> <span class="st">"BB"</span>)</code></pre></div>
-<pre><code>Error in getStandingKatzMatrix(ppr_vector, tpr_vector, pprRange = "lp"): object 'tpr_all' not found</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.tibble</span>(sk_corr_all)</code></pre></div>
-<pre><code>Error in as.tibble(sk_corr_all): object 'sk_corr_all' not found</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_corr_all, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z.calc, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) <span class="op">+</span>
+sk_corr_all &lt;-<span class="st"> </span><span class="kw"><a href="../reference/createTidyFromMatrix.html">createTidyFromMatrix</a></span>(ppr, tpr_all, <span class="dt">correlation =</span> <span class="st">"BB"</span>)
+<span class="kw">as.tibble</span>(sk_corr_all)
+
+p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_corr_all, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z.calc, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc<span class="op">-</span>dif, <span class="dt">ymax=</span>z.calc<span class="op">+</span>dif), <span class="dt">width=</span>.<span class="dv">4</span>,
-                  <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.05</span>))</code></pre></div>
-<pre><code>Error in ggplot(sk_corr_all, aes(x = Ppr, y = z.calc, group = Tpr, color = Tpr)): object 'sk_corr_all' not found</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(p)</code></pre></div>
+                  <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.05</span>))
+<span class="kw">print</span>(p)</code></pre></div>
 <p><img src="Beggs-Brill_files/figure-html/unnamed-chunk-20-1.png" width="672" style="display: block; margin: auto;"></p>
+<pre><code># A tibble: 112 x 5
+     Tpr   Ppr z.chart    z.calc          dif
+   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;        &lt;dbl&gt;
+ 1  1.05   0.5   0.829 0.8325491 -0.003549064
+ 2   1.1   0.5   0.854 0.8639321 -0.009932126
+ 3   1.2   0.5   0.893 0.9026461 -0.009646136
+ 4   1.3   0.5   0.916 0.9266436 -0.010643559
+ 5   1.4   0.5   0.936 0.9432988 -0.007298768
+ 6   1.5   0.5   0.948 0.9555248 -0.007524787
+ 7   1.6   0.5   0.959 0.9647818 -0.005781769
+ 8   1.7   0.5   0.968 0.9719193 -0.003919260
+ 9   1.8   0.5   0.974 0.9774854 -0.003485374
+10   1.9   0.5   0.978 0.9818623 -0.003862346
+# ... with 102 more rows</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># MSE: Mean Squared Error</span>
 <span class="co"># RMSE: Root Mean Sqyared Error</span>
 <span class="co"># RSS: residual sum of square</span>
 <span class="co"># ARE:  Average Relative Error, %</span>
 <span class="co"># AARE: Average Absolute Relative Error, %</span>
 <span class="kw">library</span>(dplyr)
-grouped &lt;-<span class="st"> </span><span class="kw">group_by</span>(sk_corr_all, Tpr, Ppr)</code></pre></div>
-<pre><code>Error in group_by(sk_corr_all, Tpr, Ppr): object 'sk_corr_all' not found</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">smry_tpr_ppr &lt;-<span class="st"> </span><span class="kw">summarise</span>(grouped, 
+grouped &lt;-<span class="st"> </span><span class="kw">group_by</span>(sk_corr_all, Tpr, Ppr)
+smry_tpr_ppr &lt;-<span class="st"> </span><span class="kw">summarise</span>(grouped, 
           <span class="dt">RMSE=</span> <span class="kw">sqrt</span>(<span class="kw">mean</span>((z.chart<span class="op">-</span>z.calc)<span class="op">^</span><span class="dv">2</span>)), 
           <span class="dt">MSE =</span> <span class="kw">sum</span>((z.calc <span class="op">-</span><span class="st"> </span>z.chart)<span class="op">^</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span><span class="kw">n</span>(), 
           <span class="dt">RSS =</span> <span class="kw">sum</span>((z.calc <span class="op">-</span><span class="st"> </span>z.chart)<span class="op">^</span><span class="dv">2</span>),
           <span class="dt">ARE =</span> <span class="kw">sum</span>((z.calc <span class="op">-</span><span class="st"> </span>z.chart) <span class="op">/</span><span class="st"> </span>z.chart) <span class="op">*</span><span class="st"> </span><span class="dv">100</span> <span class="op">/</span><span class="st"> </span><span class="kw">n</span>(),
           <span class="dt">AARE =</span> <span class="kw">sum</span>( <span class="kw">abs</span>((z.calc <span class="op">-</span><span class="st"> </span>z.chart) <span class="op">/</span><span class="st"> </span>z.chart)) <span class="op">*</span><span class="st"> </span><span class="dv">100</span> <span class="op">/</span><span class="st"> </span><span class="kw">n</span>()
-          )</code></pre></div>
-<pre><code>Error in summarise(grouped, RMSE = sqrt(mean((z.chart - z.calc)^2)), MSE = sum((z.calc - : object 'grouped' not found</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(smry_tpr_ppr, <span class="kw">aes</span>(Ppr, Tpr)) <span class="op">+</span><span class="st"> </span>
+          )
+
+<span class="kw">ggplot</span>(smry_tpr_ppr, <span class="kw">aes</span>(Ppr, Tpr)) <span class="op">+</span><span class="st"> </span>
 <span class="st">    </span><span class="kw">geom_tile</span>(<span class="dt">data=</span>smry_tpr_ppr, <span class="kw">aes</span>(<span class="dt">fill=</span>AARE), <span class="dt">color=</span><span class="st">"white"</span>) <span class="op">+</span>
 <span class="st">    </span><span class="kw">scale_fill_gradient2</span>(<span class="dt">low=</span><span class="st">"blue"</span>, <span class="dt">high=</span><span class="st">"red"</span>, <span class="dt">mid=</span><span class="st">"yellow"</span>, <span class="dt">na.value =</span> <span class="st">"pink"</span>,
                          <span class="dt">midpoint=</span><span class="fl">12.5</span>, <span class="dt">limit=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">25</span>), <span class="dt">name=</span><span class="st">"AARE"</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">    </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle=</span><span class="dv">45</span>, <span class="dt">vjust=</span><span class="dv">1</span>, <span class="dt">size=</span><span class="dv">11</span>, <span class="dt">hjust=</span><span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span>
 <span class="st">    </span><span class="kw">coord_equal</span>() <span class="op">+</span>
 <span class="st">    </span><span class="kw">ggtitle</span>(<span class="st">"Beggs-Brill"</span>, <span class="dt">subtitle =</span> <span class="st">"BB"</span>)</code></pre></div>
-<pre><code>Error in ggplot(smry_tpr_ppr, aes(Ppr, Tpr)): object 'smry_tpr_ppr' not found</code></pre>
+<p><img src="Beggs-Brill_files/figure-html/unnamed-chunk-21-1.png" width="672" style="display: block; margin: auto;"></p>
 <blockquote>
 <p>The errors with Beggs and Brill are just so big and some <code>z</code> values are even negative. We have to be very careful when using this Beggs and Brill correlation.</p>
 </blockquote>
+</div>
+<div id="plotting-the-tpr-and-ppr-values-that-show-more-error" class="section level2">
+<h2 class="hasAnchor">
+<a href="#plotting-the-tpr-and-ppr-values-that-show-more-error" class="anchor"></a>Plotting the Tpr and Ppr values that show more error</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+
+sk_corr_all <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">filter</span>(Tpr <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">"1.05"</span>, <span class="st">"1.1"</span>)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> z.chart, <span class="dt">y=</span>z.calc, <span class="dt">group =</span> Tpr, <span class="dt">color =</span> Tpr)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> z.chart, <span class="dt">y =</span> z.chart), <span class="dt">color =</span> <span class="st">"black"</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">facet_grid</span>(. <span class="op">~</span><span class="st"> </span>Tpr) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc<span class="op">-</span><span class="kw">abs</span>(dif), <span class="dt">ymax=</span>z.calc<span class="op">+</span><span class="kw">abs</span>(dif)), 
+                  <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.5</span>))</code></pre></div>
+<p><img src="Beggs-Brill_files/figure-html/unnamed-chunk-22-1.png" width="672" style="display: block; margin: auto;"></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+
+sk_corr_all <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">filter</span>(Tpr <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">"2.6"</span>, <span class="st">"2.8"</span>)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> z.chart, <span class="dt">y=</span>z.calc, <span class="dt">group =</span> Tpr, <span class="dt">color =</span> Tpr)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> z.chart, <span class="dt">y =</span> z.chart), <span class="dt">color =</span> <span class="st">"black"</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">facet_grid</span>(. <span class="op">~</span><span class="st"> </span>Tpr) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc<span class="op">-</span><span class="kw">abs</span>(dif), <span class="dt">ymax=</span>z.calc<span class="op">+</span><span class="kw">abs</span>(dif)), 
+                  <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.5</span>))</code></pre></div>
+<p><img src="Beggs-Brill_files/figure-html/unnamed-chunk-23-1.png" width="672" style="display: block; margin: auto;"></p>
 <p>Let’s see which observations (rows) have <code>z</code> values that are negative:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sk_corr_all[<span class="kw">which</span>(sk_corr_all<span class="op">$</span>z.calc <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>), ]</code></pre></div>
-<pre><code>Error in eval(expr, envir, enclos): object 'sk_corr_all' not found</code></pre>
+<pre><code>    Tpr Ppr z.chart    z.calc      dif
+80    3 4.5   1.041 -0.889701 1.930701
+96    3 5.5   1.056 -2.517895 3.573895
+112   3 6.5   1.075 -4.882513 5.957513</code></pre>
 <p>Or see which rows contain <code>z</code> values that show an error greater than 15%:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sk_corr_all[<span class="kw">which</span>(<span class="kw">abs</span>(sk_corr_all<span class="op">$</span>dif) <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.15</span>), ]</code></pre></div>
-<pre><code>Error in eval(expr, envir, enclos): object 'sk_corr_all' not found</code></pre>
+<pre><code>    Tpr Ppr z.chart     z.calc       dif
+48    3 2.5   1.018  0.7082371 0.3097629
+63  2.8 3.5   1.016  0.8188474 0.1971526
+64    3 3.5   1.029  0.1399229 0.8890771
+79  2.8 4.5   1.030  0.6645377 0.3654623
+80    3 4.5   1.041 -0.8897010 1.9307010
+95  2.8 5.5   1.049  0.4548462 0.5941538
+96    3 5.5   1.056 -2.5178952 3.5738952
+111 2.8 6.5   1.069  0.1860147 0.8829853
+112   3 6.5   1.075 -4.8825128 5.9575128</code></pre>
 <p>You can also see that there are three rows with error greater than 100% !</p>
 </div>
 <div id="looking-numerically-at-the-errors-in-bb-vs-sk-chart" class="section level2">
 <h2 class="hasAnchor">
 <a href="#looking-numerically-at-the-errors-in-bb-vs-sk-chart" class="anchor"></a>Looking numerically at the errors in <code>BB</code> vs <code>SK</code> chart</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># get all `lp` Tpr curves</span>
-tpr &lt;-<span class="st"> </span><span class="kw">getCurvesDigitized</span>(<span class="dt">pprRange =</span> <span class="st">"lp"</span>)</code></pre></div>
-<pre><code>Error in getCurvesDigitized(pprRange = "lp"): could not find function "getCurvesDigitized"</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ppr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="fl">3.5</span>, <span class="fl">4.5</span>, <span class="fl">5.5</span>, <span class="fl">6.5</span>) 
+tpr &lt;-<span class="st"> </span><span class="kw"><a href="../reference/getStandingKatzTpr.html">getStandingKatzTpr</a></span>(<span class="dt">pprRange =</span> <span class="st">"lp"</span>)
+ppr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="fl">3.5</span>, <span class="fl">4.5</span>, <span class="fl">5.5</span>, <span class="fl">6.5</span>) 
 
 <span class="co"># calculate HY for the given Tpr</span>
 all_corr &lt;-<span class="st"> </span><span class="kw"><a href="../reference/Beggs-Brill.html">z.BeggsBrill</a></span>(<span class="dt">pres.pr =</span> ppr, <span class="dt">temp.pr =</span> tpr)
@@ -427,50 +501,124 @@ all_err
 <span class="kw">cat</span>(<span class="st">"</span><span class="ch">\n</span><span class="st"> Errors for the transposed matrix: Tpr </span><span class="ch">\n</span><span class="st">"</span>)
 <span class="kw">summary</span>(<span class="kw">t</span>(all_err))</code></pre></div>
 <pre><code>Calculated from the correlation 
-          0.5       1.5       2.5       3.5       4.5       5.5       6.5
-1.3 0.9266436 0.7675523 0.6526911 0.6234648 0.6921991 0.7779095 0.8630653
-1.5 0.9555248 0.8618306 0.7945385 0.7691830 0.7828753 0.8248905 0.8837555
-1.7 0.9719193 0.9159219 0.8728791 0.8521620 0.8556641 0.8800665 0.9198223
-2   0.9853337 0.9629020 0.9471826 0.9404180 0.9443010 0.9593080 0.9848256
+           0.5       1.5       2.5       3.5        4.5        5.5
+1.05 0.8325491 0.2851494 0.3333796 0.4569204  0.5802310  0.7033638
+1.1  0.8639321 0.4631501 0.3848774 0.4993213  0.6131885  0.7266084
+1.2  0.9026461 0.6758659 0.4977865 0.5605500  0.6589953  0.7567099
+1.3  0.9266436 0.7675523 0.6526911 0.6234648  0.6921991  0.7779095
+1.4  0.9432988 0.8224273 0.7388187 0.7103492  0.7343367  0.7966791
+1.5  0.9555248 0.8618306 0.7945385 0.7691830  0.7828753  0.8248905
+1.6  0.9647818 0.8920527 0.8376331 0.8139976  0.8214333  0.8532880
+1.7  0.9719193 0.9159219 0.8728791 0.8521620  0.8556641  0.8800665
+1.8  0.9774854 0.9350585 0.9022222 0.8855750  0.8874829  0.9067399
+1.9  0.9818623 0.9504907 0.9267646 0.9149047  0.9171073  0.9333359
+2    0.9853337 0.9629020 0.9471826 0.9404180  0.9443010  0.9593080
+2.2  0.9904020 0.9803535 0.9768810 0.9795480  0.9887829  1.0049837
+2.4  0.9940266 0.9894204 0.9909094 0.9974289  1.0086828  1.0246183
+2.6  0.9971532 0.9902007 0.9817596 0.9719460  0.9608415  0.9485126
+2.8  1.0004100 0.9802574 0.9222416 0.8188474  0.6645377  0.4548462
+3    1.0040392 0.9514557 0.7082371 0.1399229 -0.8897010 -2.5178952
+            6.5
+1.05  0.8263519
+1.1   0.8396647
+1.2   0.8538299
+1.3   0.8630653
+1.4   0.8717561
+1.5   0.8837555
+1.6   0.9011787
+1.7   0.9198223
+1.8   0.9400764
+1.9   0.9619430
+2     0.9848256
+2.2   1.0282971
+2.4   1.0452638
+2.6   0.9350177
+2.8   0.1860147
+3    -4.8825128
 
 Standing-Katz chart
        0.5   1.5   2.5   3.5   4.5   5.5   6.5
+1.05 0.829 0.253 0.343 0.471 0.598 0.727 0.846
+1.10 0.854 0.426 0.393 0.500 0.615 0.729 0.841
+1.20 0.893 0.657 0.519 0.565 0.650 0.741 0.841
 1.30 0.916 0.756 0.638 0.633 0.684 0.759 0.844
+1.40 0.936 0.816 0.727 0.705 0.734 0.792 0.865
 1.50 0.948 0.859 0.794 0.770 0.790 0.836 0.892
+1.60 0.959 0.888 0.839 0.816 0.829 0.868 0.918
 1.70 0.968 0.914 0.876 0.857 0.864 0.897 0.942
+1.80 0.974 0.933 0.905 0.891 0.901 0.929 0.967
+1.90 0.978 0.945 0.924 0.916 0.924 0.949 0.985
 2.00 0.982 0.956 0.941 0.937 0.945 0.969 1.003
+2.20 0.989 0.973 0.963 0.963 0.976 1.000 1.029
+2.40 0.993 0.984 0.980 0.983 0.999 1.023 1.049
+2.60 0.997 0.994 0.994 1.000 1.016 1.038 1.062
+2.80 0.999 1.002 1.008 1.016 1.030 1.049 1.069
+3.00 1.002 1.009 1.018 1.029 1.041 1.056 1.075
 
  Errors in percentage 
-       0.5   1.5   2.5   3.5   4.5   5.5   6.5
-1.30 -1.16 -1.53 -2.30  1.51 -1.20 -2.49 -2.26
-1.50 -0.79 -0.33 -0.07  0.11  0.90  1.33  0.92
-1.70 -0.40 -0.21  0.36  0.56  0.96  1.89  2.35
-2.00 -0.34 -0.72 -0.66 -0.36  0.07  1.00  1.81
+       0.5    1.5   2.5   3.5    4.5    5.5    6.5
+1.05 -0.43 -12.71  2.80  2.99   2.97   3.25   2.32
+1.10 -1.16  -8.72  2.07  0.14   0.29   0.33   0.16
+1.20 -1.08  -2.87  4.09  0.79  -1.38  -2.12  -1.53
+1.30 -1.16  -1.53 -2.30  1.51  -1.20  -2.49  -2.26
+1.40 -0.78  -0.79 -1.63 -0.76  -0.05  -0.59  -0.78
+1.50 -0.79  -0.33 -0.07  0.11   0.90   1.33   0.92
+1.60 -0.60  -0.46  0.16  0.25   0.91   1.69   1.83
+1.70 -0.40  -0.21  0.36  0.56   0.96   1.89   2.35
+1.80 -0.36  -0.22  0.31  0.61   1.50   2.40   2.78
+1.90 -0.39  -0.58 -0.30  0.12   0.75   1.65   2.34
+2.00 -0.34  -0.72 -0.66 -0.36   0.07   1.00   1.81
+2.20 -0.14  -0.76 -1.44 -1.72  -1.31  -0.50   0.07
+2.40 -0.10  -0.55 -1.11 -1.47  -0.97  -0.16   0.36
+2.60 -0.02   0.38  1.23  2.81   5.43   8.62  11.96
+2.80 -0.14   2.17  8.51 19.40  35.48  56.64  82.60
+3.00 -0.20   5.70 30.43 86.40 185.47 338.44 554.19
 
  Errors in Ppr
-      0.5               1.5               2.5               3.5         
- Min.   :-1.1600   Min.   :-1.5300   Min.   :-2.3000   Min.   :-0.3600  
- 1st Qu.:-0.8825   1st Qu.:-0.9225   1st Qu.:-1.0700   1st Qu.:-0.0075  
- Median :-0.5950   Median :-0.5250   Median :-0.3650   Median : 0.3350  
- Mean   :-0.6725   Mean   :-0.6975   Mean   :-0.6675   Mean   : 0.4550  
- 3rd Qu.:-0.3850   3rd Qu.:-0.3000   3rd Qu.: 0.0375   3rd Qu.: 0.7975  
- Max.   :-0.3400   Max.   :-0.2100   Max.   : 0.3600   Max.   : 1.5100  
-      4.5               5.5               6.5        
- Min.   :-1.2000   Min.   :-2.4900   Min.   :-2.260  
- 1st Qu.:-0.2475   1st Qu.: 0.1275   1st Qu.: 0.125  
- Median : 0.4850   Median : 1.1650   Median : 1.365  
- Mean   : 0.1825   Mean   : 0.4325   Mean   : 0.705  
- 3rd Qu.: 0.9150   3rd Qu.: 1.4700   3rd Qu.: 1.945  
- Max.   : 0.9600   Max.   : 1.8900   Max.   : 2.350  
+      0.5               1.5                2.5               3.5         
+ Min.   :-1.1600   Min.   :-12.7100   Min.   :-2.3000   Min.   :-1.7200  
+ 1st Qu.:-0.7825   1st Qu.: -0.9750   1st Qu.:-0.7725   1st Qu.:-0.0075  
+ Median :-0.3950   Median : -0.5650   Median : 0.2350   Median : 0.4050  
+ Mean   :-0.5056   Mean   : -1.3875   Mean   : 2.6531   Mean   : 6.9612  
+ 3rd Qu.:-0.1850   3rd Qu.: -0.2175   3rd Qu.: 2.2525   3rd Qu.: 1.8350  
+ Max.   :-0.0200   Max.   :  5.7000   Max.   :30.4300   Max.   :86.4000  
+      4.5               5.5               6.5          
+ Min.   : -1.380   Min.   : -2.490   Min.   : -2.2600  
+ 1st Qu.: -0.280   1st Qu.: -0.245   1st Qu.:  0.1375  
+ Median :  0.825   Median :  1.490   Median :  1.8200  
+ Mean   : 14.364   Mean   : 25.711   Mean   : 41.1950  
+ 3rd Qu.:  1.867   3rd Qu.:  2.612   3rd Qu.:  2.4575  
+ Max.   :185.470   Max.   :338.440   Max.   :554.1900  
 
  Errors for the transposed matrix: Tpr 
-      1.30             1.50              1.70              2.00        
- Min.   :-2.490   Min.   :-0.7900   Min.   :-0.4000   Min.   :-0.7200  
- 1st Qu.:-2.280   1st Qu.:-0.2000   1st Qu.: 0.0750   1st Qu.:-0.5100  
- Median :-1.530   Median : 0.1100   Median : 0.5600   Median :-0.3400  
- Mean   :-1.347   Mean   : 0.2957   Mean   : 0.7871   Mean   : 0.1143  
- 3rd Qu.:-1.180   3rd Qu.: 0.9100   3rd Qu.: 1.4250   3rd Qu.: 0.5350  
- Max.   : 1.510   Max.   : 1.3300   Max.   : 2.3500   Max.   : 1.8100  </code></pre>
+      1.05              1.10              1.20              1.30       
+ Min.   :-12.710   Min.   :-8.7200   Min.   :-2.8700   Min.   :-2.490  
+ 1st Qu.:  0.945   1st Qu.:-0.5100   1st Qu.:-1.8250   1st Qu.:-2.280  
+ Median :  2.800   Median : 0.1600   Median :-1.3800   Median :-1.530  
+ Mean   :  0.170   Mean   :-0.9843   Mean   :-0.5857   Mean   :-1.347  
+ 3rd Qu.:  2.980   3rd Qu.: 0.3100   3rd Qu.:-0.1450   3rd Qu.:-1.180  
+ Max.   :  3.250   Max.   : 2.0700   Max.   : 4.0900   Max.   : 1.510  
+      1.40              1.50              1.60            1.70        
+ Min.   :-1.6300   Min.   :-0.7900   Min.   :-0.60   Min.   :-0.4000  
+ 1st Qu.:-0.7850   1st Qu.:-0.2000   1st Qu.:-0.15   1st Qu.: 0.0750  
+ Median :-0.7800   Median : 0.1100   Median : 0.25   Median : 0.5600  
+ Mean   :-0.7686   Mean   : 0.2957   Mean   : 0.54   Mean   : 0.7871  
+ 3rd Qu.:-0.6750   3rd Qu.: 0.9100   3rd Qu.: 1.30   3rd Qu.: 1.4250  
+ Max.   :-0.0500   Max.   : 1.3300   Max.   : 1.83   Max.   : 2.3500  
+      1.80             1.90              2.00              2.20        
+ Min.   :-0.360   Min.   :-0.5800   Min.   :-0.7200   Min.   :-1.7200  
+ 1st Qu.: 0.045   1st Qu.:-0.3450   1st Qu.:-0.5100   1st Qu.:-1.3750  
+ Median : 0.610   Median : 0.1200   Median :-0.3400   Median :-0.7600  
+ Mean   : 1.003   Mean   : 0.5129   Mean   : 0.1143   Mean   :-0.8286  
+ 3rd Qu.: 1.950   3rd Qu.: 1.2000   3rd Qu.: 0.5350   3rd Qu.:-0.3200  
+ Max.   : 2.780   Max.   : 2.3400   Max.   : 1.8100   Max.   : 0.0700  
+      2.40              2.60             2.80            3.00       
+ Min.   :-1.4700   Min.   :-0.020   Min.   :-0.14   Min.   : -0.20  
+ 1st Qu.:-1.0400   1st Qu.: 0.805   1st Qu.: 5.34   1st Qu.: 18.07  
+ Median :-0.5500   Median : 2.810   Median :19.40   Median : 86.40  
+ Mean   :-0.5714   Mean   : 4.344   Mean   :29.24   Mean   :171.49  
+ 3rd Qu.:-0.1300   3rd Qu.: 7.025   3rd Qu.:46.06   3rd Qu.:261.95  
+ Max.   : 0.3600   Max.   :11.960   Max.   :82.60   Max.   :554.19  </code></pre>
 </div>
 </div>
   </div>
@@ -489,6 +637,7 @@ Standing-Katz chart
       <li><a href="#prepare-to-plot-sk-chart-vs-bb-correlation">Prepare to plot <code>SK</code> chart vs <code>BB</code> correlation</a></li>
       <li><a href="#analysis-at-the-lowest-tpr">Analysis at the lowest <code>Tpr</code></a></li>
       <li><a href="#analyzing-performance-of-the-bb-correlation-for-all-the-tpr-curves">Analyzing performance of the <code>BB</code> correlation for all the <code>Tpr</code> curves</a></li>
+      <li><a href="#plotting-the-tpr-and-ppr-values-that-show-more-error">Plotting the Tpr and Ppr values that show more error</a></li>
       <li><a href="#looking-numerically-at-the-errors-in-bb-vs-sk-chart">Looking numerically at the errors in <code>BB</code> vs <code>SK</code> chart</a></li>
       </ul>
 </div>
