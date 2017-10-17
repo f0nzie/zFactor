@@ -100,6 +100,9 @@ z.DranchukPurvisRobinson(pres.pr = ppr, temp.pr = tpr)
 # now we use the relative undocumented Shell correlation
 z.Shell(ppr, tpr)
 
+# the newly added Papay correlation
+z.Papay(ppr, tpr)
+
 # and finally the correlation Kamyab et al that uses Artificial Neural Networks
 z.Ann10(ppr, tpr)
 
@@ -125,6 +128,7 @@ zFactor:::z.plot.range("DAK", interval = "fine")
 zFactor:::z.plot.range("DPR", interval = "fine")
 zFactor:::z.plot.range("SH",  interval = "fine")
 zFactor:::z.plot.range("N10", interval = "fine")
+zFactor:::z.plot.range("PP",  interval = "fine")
 ```
 
 
@@ -216,6 +220,7 @@ The vignettes contain examples on the use and analysis of the various correlatio
 * Dranchuk-Purvis-Robinson.Rmd
 * shell.Rmd
 * ANN.Rmd
+* Papay.Rmd
 
 ## Tests
 There are unit tests for the correlations under tests/testthat.
