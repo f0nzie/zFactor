@@ -26,7 +26,7 @@ bib <- read.bibtex(bib_file)
 ```
 
 
-# zFactor
+# zFactor dev-0.1.7.9009
 Computational tools for chemical, petrochemical and petroleum engineers. Calculates the deviation between different correlations for gas compressibility compared to the original Standing-Katz chart.
 
 ## Motivation
