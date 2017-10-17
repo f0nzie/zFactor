@@ -107,6 +107,8 @@
     
 <div class="contents">
 
+<p><a href="https://travis-ci.org/f0nzie/zFactor"><img src="https://travis-ci.org/f0nzie/zFactor.svg?branch=master" alt="Travis-CI Build Status"></a></p>
+<p><a href="https://codecov.io/gh/f0nzie/zFactor"><img src="https://codecov.io/gh/f0nzie/zFactor/branch/master/graph/badge.svg" alt="codecov"></a></p>
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <div id="zfactor" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
@@ -138,7 +140,7 @@
 <p>I recommend installing from GitHub using <code>devtools</code>, that way you get the latest and greatest version. CRAN release cycles allows updates every one to two months.</p>
 <p>You can install the latest version of <code>zFactor</code> from GitHub with:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages("devtools")</span>
-devtools::<span class="kw">install_github</span>(<span class="st">"f0nzie/zFactor"</span>)</code></pre></div>
+devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"f0nzie/zFactor"</span>)</code></pre></div>
 <p>Or, if your prefer, from <code>CRAN</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">"zFactor"</span>)</code></pre></div>
 </div>
@@ -221,19 +223,19 @@ tpr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.4
 </ul>
 <p>You can see for yourself which correlation is more stable at different ranges of pseudo-reduce pressures and temperatures.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zFactor)
-zFactor:::<span class="kw"><a href="reference/z.plot.range.html">z.plot.range</a></span>(<span class="st">"BB"</span>,  <span class="dt">interval =</span> <span class="st">"fine"</span>)</code></pre></div>
+zFactor<span class="op">:::</span><span class="kw"><a href="reference/z.plot.range.html">z.plot.range</a></span>(<span class="st">"BB"</span>,  <span class="dt">interval =</span> <span class="st">"fine"</span>)</code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-5-1.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">zFactor:::<span class="kw"><a href="reference/z.plot.range.html">z.plot.range</a></span>(<span class="st">"HY"</span>,  <span class="dt">interval =</span> <span class="st">"fine"</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">zFactor<span class="op">:::</span><span class="kw"><a href="reference/z.plot.range.html">z.plot.range</a></span>(<span class="st">"HY"</span>,  <span class="dt">interval =</span> <span class="st">"fine"</span>)</code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-5-2.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">zFactor:::<span class="kw"><a href="reference/z.plot.range.html">z.plot.range</a></span>(<span class="st">"HY"</span>,  <span class="dt">interval =</span> <span class="st">"coarse"</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">zFactor<span class="op">:::</span><span class="kw"><a href="reference/z.plot.range.html">z.plot.range</a></span>(<span class="st">"HY"</span>,  <span class="dt">interval =</span> <span class="st">"coarse"</span>)</code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-5-3.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">zFactor:::<span class="kw"><a href="reference/z.plot.range.html">z.plot.range</a></span>(<span class="st">"DAK"</span>, <span class="dt">interval =</span> <span class="st">"fine"</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">zFactor<span class="op">:::</span><span class="kw"><a href="reference/z.plot.range.html">z.plot.range</a></span>(<span class="st">"DAK"</span>, <span class="dt">interval =</span> <span class="st">"fine"</span>)</code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-5-4.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">zFactor:::<span class="kw"><a href="reference/z.plot.range.html">z.plot.range</a></span>(<span class="st">"DPR"</span>, <span class="dt">interval =</span> <span class="st">"fine"</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">zFactor<span class="op">:::</span><span class="kw"><a href="reference/z.plot.range.html">z.plot.range</a></span>(<span class="st">"DPR"</span>, <span class="dt">interval =</span> <span class="st">"fine"</span>)</code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-5-5.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">zFactor:::<span class="kw"><a href="reference/z.plot.range.html">z.plot.range</a></span>(<span class="st">"SH"</span>,  <span class="dt">interval =</span> <span class="st">"fine"</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">zFactor<span class="op">:::</span><span class="kw"><a href="reference/z.plot.range.html">z.plot.range</a></span>(<span class="st">"SH"</span>,  <span class="dt">interval =</span> <span class="st">"fine"</span>)</code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-5-6.png" width="672"></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">zFactor:::<span class="kw"><a href="reference/z.plot.range.html">z.plot.range</a></span>(<span class="st">"N10"</span>, <span class="dt">interval =</span> <span class="st">"fine"</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">zFactor<span class="op">:::</span><span class="kw"><a href="reference/z.plot.range.html">z.plot.range</a></span>(<span class="st">"N10"</span>, <span class="dt">interval =</span> <span class="st">"fine"</span>)</code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-5-7.png" width="672"></p>
 </div>
 <div id="comparative-analysis" class="section level2">
@@ -277,18 +279,17 @@ MAE:   Mean Absolute Error</code></pre>
 <a href="#ploting-all-the-tpr-curves-of-standing-katz-chart-using-lapply-getstandingkatzdata-and-data-tablerbindlist" class="anchor"></a>Ploting all the <code>Tpr</code> curves of Standing-Katz chart using <code>lapply</code>, <code>getStandingKatzData</code> and <code><a href="http://www.rdocumentation.org/packages/data.table/topics/rbindlist">data.table::rbindlist</a></code>:</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zFactor)
 <span class="kw">library</span>(ggplot2)
-<span class="co">#&gt; Warning: package 'ggplot2' was built under R version 3.4.2</span>
 <span class="kw">library</span>(data.table)
 
 tpr_vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.05</span>, <span class="fl">1.1</span>, <span class="fl">1.2</span>, <span class="fl">1.3</span>, <span class="fl">1.5</span>, <span class="fl">1.6</span>, <span class="fl">1.7</span>, <span class="fl">1.9</span>, <span class="fl">2.0</span>, <span class="fl">2.4</span>, <span class="fl">2.6</span>, <span class="fl">2.8</span>, <span class="fl">3.0</span>)
-all_tpr2 &lt;-<span class="st"> </span>(<span class="kw">lapply</span>(tpr_vec, function(x) <span class="kw"><a href="reference/getStandingKatzData.html">getStandingKatzData</a></span>(<span class="dt">tpr =</span> x)))
+all_tpr2 &lt;-<span class="st"> </span>(<span class="kw">lapply</span>(tpr_vec, <span class="cf">function</span>(x) <span class="kw"><a href="reference/getStandingKatzData.html">getStandingKatzData</a></span>(<span class="dt">tpr =</span> x)))
 <span class="kw">names</span>(all_tpr2) &lt;-<span class="st"> </span>tpr_vec
 
-all_tpr_df &lt;-<span class="st"> </span>data.table::<span class="kw">rbindlist</span>(all_tpr2, <span class="dt">idcol =</span> <span class="ot">TRUE</span>)
+all_tpr_df &lt;-<span class="st"> </span>data.table<span class="op">::</span><span class="kw">rbindlist</span>(all_tpr2, <span class="dt">idcol =</span> <span class="ot">TRUE</span>)
 <span class="kw">colnames</span>(all_tpr_df)[<span class="dv">1</span>] &lt;-<span class="st"> "Tpr"</span>
 
-<span class="kw">ggplot</span>(all_tpr_df, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) +<span class="st"> </span>
-<span class="st">    </span><span class="kw">geom_line</span>() +
+<span class="kw">ggplot</span>(all_tpr_df, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_point</span>()</code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-7-1.png" width="672"></p>
 </div>
@@ -306,13 +307,13 @@ sk_corr_all &lt;-<span class="st"> </span><span class="kw"><a href="reference/cr
 grouped &lt;-<span class="st"> </span><span class="kw">group_by</span>(sk_corr_all, Tpr, Ppr)
 
 smry_tpr_ppr &lt;-<span class="st"> </span><span class="kw">summarise</span>(grouped, 
-          <span class="dt">RMSE  =</span> <span class="kw">sqrt</span>(<span class="kw">mean</span>((z.chart-z.calc)^<span class="dv">2</span>)), 
-          <span class="dt">MPE   =</span> <span class="kw">sum</span>((z.calc -<span class="st"> </span>z.chart) /<span class="st"> </span>z.chart) *<span class="st"> </span><span class="dv">100</span> /<span class="st"> </span><span class="kw">n</span>(),
-          <span class="dt">MAPE  =</span> <span class="kw">sum</span>(<span class="kw">abs</span>((z.calc -<span class="st"> </span>z.chart) /<span class="st"> </span>z.chart)) *<span class="st"> </span><span class="dv">100</span> /<span class="st"> </span><span class="kw">n</span>(), 
-          <span class="dt">MSE   =</span> <span class="kw">sum</span>((z.calc -<span class="st"> </span>z.chart)^<span class="dv">2</span>) /<span class="st"> </span><span class="kw">n</span>(), 
-          <span class="dt">RSS   =</span> <span class="kw">sum</span>((z.calc -<span class="st"> </span>z.chart)^<span class="dv">2</span>),
-          <span class="dt">MAE   =</span> <span class="kw">sum</span>(<span class="kw">abs</span>(z.calc -<span class="st"> </span>z.chart)) /<span class="st"> </span><span class="kw">n</span>(),
-          <span class="dt">RMLSE =</span> <span class="kw">sqrt</span>(<span class="dv">1</span>/<span class="kw">n</span>()*<span class="kw">sum</span>((<span class="kw">log</span>(z.calc +<span class="dv">1</span>)-<span class="kw">log</span>(z.chart +<span class="dv">1</span>))^<span class="dv">2</span>))
+          <span class="dt">RMSE  =</span> <span class="kw">sqrt</span>(<span class="kw">mean</span>((z.chart<span class="op">-</span>z.calc)<span class="op">^</span><span class="dv">2</span>)), 
+          <span class="dt">MPE   =</span> <span class="kw">sum</span>((z.calc <span class="op">-</span><span class="st"> </span>z.chart) <span class="op">/</span><span class="st"> </span>z.chart) <span class="op">*</span><span class="st"> </span><span class="dv">100</span> <span class="op">/</span><span class="st"> </span><span class="kw">n</span>(),
+          <span class="dt">MAPE  =</span> <span class="kw">sum</span>(<span class="kw">abs</span>((z.calc <span class="op">-</span><span class="st"> </span>z.chart) <span class="op">/</span><span class="st"> </span>z.chart)) <span class="op">*</span><span class="st"> </span><span class="dv">100</span> <span class="op">/</span><span class="st"> </span><span class="kw">n</span>(), 
+          <span class="dt">MSE   =</span> <span class="kw">sum</span>((z.calc <span class="op">-</span><span class="st"> </span>z.chart)<span class="op">^</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span><span class="kw">n</span>(), 
+          <span class="dt">RSS   =</span> <span class="kw">sum</span>((z.calc <span class="op">-</span><span class="st"> </span>z.chart)<span class="op">^</span><span class="dv">2</span>),
+          <span class="dt">MAE   =</span> <span class="kw">sum</span>(<span class="kw">abs</span>(z.calc <span class="op">-</span><span class="st"> </span>z.chart)) <span class="op">/</span><span class="st"> </span><span class="kw">n</span>(),
+          <span class="dt">RMLSE =</span> <span class="kw">sqrt</span>(<span class="dv">1</span><span class="op">/</span><span class="kw">n</span>()<span class="op">*</span><span class="kw">sum</span>((<span class="kw">log</span>(z.calc <span class="op">+</span><span class="dv">1</span>)<span class="op">-</span><span class="kw">log</span>(z.chart <span class="op">+</span><span class="dv">1</span>))<span class="op">^</span><span class="dv">2</span>))
           )
 <span class="kw">as.tibble</span>(smry_tpr_ppr)
 <span class="co">#&gt; # A tibble: 112 x 9</span>
