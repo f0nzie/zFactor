@@ -111,9 +111,9 @@
 <div class="contents">
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-<div id="zfactor" class="section level1">
+<div id="zfactor-dev-0-1-7-9009" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#zfactor" class="anchor"></a>zFactor</h1></div>
+<a href="#zfactor-dev-0-1-7-9009" class="anchor"></a>zFactor dev-0.1.7.9009</h1></div>
 <p>Computational tools for chemical, petrochemical and petroleum engineers. Calculates the deviation between different correlations for gas compressibility compared to the original Standing-Katz chart.</p>
 <div id="motivation" class="section level2">
 <h2 class="hasAnchor">
@@ -131,7 +131,7 @@
 <li><p>Hall and Yarborough (HY) <code>(Hall and Yarborough, 1973)</code></p></li>
 <li><p>Dranchuk and Abou-Kassem (DAK) <code>(Dranchuk and Abou-Kassem, 1975)</code></p></li>
 <li><p>Dranchuk, Purvis and Robinson (DPR) <code>(Dranchuk, Purvis, Robinson, and others, 1973)</code></p></li>
-<li><p>A correlation by Shell Oil Company (SH) <code>(Kumar, 2004)</code>, <code>(Bahadori, 2016)</code>, <code>(de Almeida, VelÃ¡squez, and Barbieri, 2014)</code>, <code>(Al-Anazi, Pazuki, Nikookar, and Al-Anazi, 2011)</code>, <code>(Azizi N. Behbahani R., 2010)</code>, <code>(Mohamadi-Baghmolaei, Azin, Osfouri, Mohamadi-Baghmolaei, and Zarei, 2015)</code>. The Shell correlation was found cited in two books and several papers (including the equation and constants), but the original paper or authors could not be identified.</p></li>
+<li><p>A correlation by Shell Oil Company (SH) <code>(Kumar, 2004)</code>, <code>(Bahadori, 2016)</code>, <code>(de Almeida, Velásquez, and Barbieri, 2014)</code>, <code>(Al-Anazi, Pazuki, Nikookar, and Al-Anazi, 2011)</code>, <code>(Azizi N. Behbahani R., 2010)</code>, <code>(Mohamadi-Baghmolaei, Azin, Osfouri, Mohamadi-Baghmolaei, and Zarei, 2015)</code>. The Shell correlation was found cited in two books and several papers (including the equation and constants), but the original paper or authors could not be identified.</p></li>
 <li><p>A correlation developed with Artificial Neural Networks (Ann10) by Kamyab et al. <code>(Kamyab, Sampaio, Qanbari, and Eustes, 2010)</code></p></li>
 </ul>
 </div>
@@ -300,9 +300,9 @@ all_tpr2 &lt;-<span class="st"> </span>(<span class="kw">lapply</span>(tpr_vec, 
 all_tpr_df &lt;-<span class="st"> </span>data.table<span class="op">::</span><span class="kw">rbindlist</span>(all_tpr2, <span class="dt">idcol =</span> <span class="ot">TRUE</span>)
 <span class="kw">colnames</span>(all_tpr_df)[<span class="dv">1</span>] &lt;-<span class="st"> "Tpr"</span>
 
-<span class="kw">ggplot</span>(all_tpr_df, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) <span class="op">+</span><span class="st"> </span>
-<span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_point</span>()</code></pre></div>
+<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(all_tpr_df, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_path">geom_line</a></span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>()</code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-7-1.png" width="672"></p>
 </div>
 <div id="build-a-table-of-statistical-errors-between-a-correlation-and-sk-chart" class="section level3">
@@ -316,18 +316,18 @@ all_tpr_df &lt;-<span class="st"> </span>data.table<span class="op">::</span><sp
 tpr_all &lt;-<span class="st"> </span><span class="kw"><a href="reference/getStandingKatzTpr.html">getStandingKatzTpr</a></span>(<span class="dt">pprRange =</span> <span class="st">"lp"</span>)
 ppr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="fl">3.5</span>, <span class="fl">4.5</span>, <span class="fl">5.5</span>, <span class="fl">6.5</span>) 
 sk_corr_all &lt;-<span class="st"> </span><span class="kw"><a href="reference/createTidyFromMatrix.html">createTidyFromMatrix</a></span>(ppr, tpr_all, <span class="dt">correlation =</span> <span class="st">"DPR"</span>)
-grouped &lt;-<span class="st"> </span><span class="kw">group_by</span>(sk_corr_all, Tpr, Ppr)
+grouped &lt;-<span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(sk_corr_all, Tpr, Ppr)
 
-smry_tpr_ppr &lt;-<span class="st"> </span><span class="kw">summarise</span>(grouped, 
+smry_tpr_ppr &lt;-<span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(grouped, 
           <span class="dt">RMSE  =</span> <span class="kw">sqrt</span>(<span class="kw">mean</span>((z.chart<span class="op">-</span>z.calc)<span class="op">^</span><span class="dv">2</span>)), 
-          <span class="dt">MPE   =</span> <span class="kw">sum</span>((z.calc <span class="op">-</span><span class="st"> </span>z.chart) <span class="op">/</span><span class="st"> </span>z.chart) <span class="op">*</span><span class="st"> </span><span class="dv">100</span> <span class="op">/</span><span class="st"> </span><span class="kw">n</span>(),
-          <span class="dt">MAPE  =</span> <span class="kw">sum</span>(<span class="kw">abs</span>((z.calc <span class="op">-</span><span class="st"> </span>z.chart) <span class="op">/</span><span class="st"> </span>z.chart)) <span class="op">*</span><span class="st"> </span><span class="dv">100</span> <span class="op">/</span><span class="st"> </span><span class="kw">n</span>(), 
-          <span class="dt">MSE   =</span> <span class="kw">sum</span>((z.calc <span class="op">-</span><span class="st"> </span>z.chart)<span class="op">^</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span><span class="kw">n</span>(), 
+          <span class="dt">MPE   =</span> <span class="kw">sum</span>((z.calc <span class="op">-</span><span class="st"> </span>z.chart) <span class="op">/</span><span class="st"> </span>z.chart) <span class="op">*</span><span class="st"> </span><span class="dv">100</span> <span class="op">/</span><span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/n.html">n</a></span>(),
+          <span class="dt">MAPE  =</span> <span class="kw">sum</span>(<span class="kw">abs</span>((z.calc <span class="op">-</span><span class="st"> </span>z.chart) <span class="op">/</span><span class="st"> </span>z.chart)) <span class="op">*</span><span class="st"> </span><span class="dv">100</span> <span class="op">/</span><span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/n.html">n</a></span>(), 
+          <span class="dt">MSE   =</span> <span class="kw">sum</span>((z.calc <span class="op">-</span><span class="st"> </span>z.chart)<span class="op">^</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/n.html">n</a></span>(), 
           <span class="dt">RSS   =</span> <span class="kw">sum</span>((z.calc <span class="op">-</span><span class="st"> </span>z.chart)<span class="op">^</span><span class="dv">2</span>),
-          <span class="dt">MAE   =</span> <span class="kw">sum</span>(<span class="kw">abs</span>(z.calc <span class="op">-</span><span class="st"> </span>z.chart)) <span class="op">/</span><span class="st"> </span><span class="kw">n</span>(),
-          <span class="dt">RMLSE =</span> <span class="kw">sqrt</span>(<span class="dv">1</span><span class="op">/</span><span class="kw">n</span>()<span class="op">*</span><span class="kw">sum</span>((<span class="kw">log</span>(z.calc <span class="op">+</span><span class="dv">1</span>)<span class="op">-</span><span class="kw">log</span>(z.chart <span class="op">+</span><span class="dv">1</span>))<span class="op">^</span><span class="dv">2</span>))
+          <span class="dt">MAE   =</span> <span class="kw">sum</span>(<span class="kw">abs</span>(z.calc <span class="op">-</span><span class="st"> </span>z.chart)) <span class="op">/</span><span class="st"> </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/n.html">n</a></span>(),
+          <span class="dt">RMLSE =</span> <span class="kw">sqrt</span>(<span class="dv">1</span><span class="op">/</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/n.html">n</a></span>()<span class="op">*</span><span class="kw">sum</span>((<span class="kw">log</span>(z.calc <span class="op">+</span><span class="dv">1</span>)<span class="op">-</span><span class="kw">log</span>(z.chart <span class="op">+</span><span class="dv">1</span>))<span class="op">^</span><span class="dv">2</span>))
           )
-<span class="kw">as.tibble</span>(smry_tpr_ppr)
+<span class="kw"><a href="http://www.rdocumentation.org/packages/tibble/topics/as_tibble">as.tibble</a></span>(smry_tpr_ppr)
 <span class="co">#&gt; # A tibble: 112 x 9</span>
 <span class="co">#&gt; # Groups:   Tpr [?]</span>
 <span class="co">#&gt;      Tpr   Ppr         RMSE        MPE       MAPE          MSE</span>
@@ -377,7 +377,7 @@ smry_tpr_ppr &lt;-<span class="st"> </span><span class="kw">summarise</span>(gro
 <a href="#references" class="anchor"></a>References</h2>
 <p>The following books and papers were consulted during the development of this package:</p>
 <p>[1] B. D. Al-Anazi, G. Pazuki, M. Nikookar, et al. “The prediction of the compressibility factor of sour and natural gas by an artificial neural network system”. In: <em>Petroleum Science and Technology</em> 29.4 (2011), pp. 325-336. DOI: 10.1080/10916460903330080. &lt;URL: <a href="http://doi.org/10.1080/10916460903330080" class="uri">http://doi.org/10.1080/10916460903330080</a>&gt;.</p>
-<p>[2] J. C. de Almeida, J. A. VelÃÂ¡squez and R. Barbieri. “A Methodology for Calculating the Natural Gas Compressibility Factor for a Distribution Network”. In: <em>Petroleum Science and Technology</em> 32.21 (2014), pp. 2616-2624. DOI: 10.1080/10916466.2012.755194. eprint: <a href="http://dx.doi.org/10.1080/10916466.2012.755194" class="uri">http://dx.doi.org/10.1080/10916466.2012.755194</a>. &lt;URL: <a href="http://dx.doi.org/10.1080/10916466.2012.755194" class="uri">http://dx.doi.org/10.1080/10916466.2012.755194</a>&gt;.</p>
+<p>[2] J. C. de Almeida, J. A. Velásquez and R. Barbieri. “A Methodology for Calculating the Natural Gas Compressibility Factor for a Distribution Network”. In: <em>Petroleum Science and Technology</em> 32.21 (2014), pp. 2616-2624. DOI: 10.1080/10916466.2012.755194. eprint: <a href="http://dx.doi.org/10.1080/10916466.2012.755194" class="uri">http://dx.doi.org/10.1080/10916466.2012.755194</a>. &lt;URL: <a href="http://dx.doi.org/10.1080/10916466.2012.755194" class="uri">http://dx.doi.org/10.1080/10916466.2012.755194</a>&gt;.</p>
 <p>[3] I. M. Azizi N. Behbahani R. “An efficient correlation for calculating compressibility factor of natural gases”. In: <em>Journal of Natural Gas Chemistry</em> Volume 19.Issue 6, 2010, (2010), pp. 642-645. DOI: 10.1016/S1003-9953(09)60081-5. &lt;URL: <a href="http://doi.org/10.1016/S1003-9953(09)60081-5" class="uri">http://doi.org/10.1016/S1003-9953(09)60081-5</a>&gt;.</p>
 <p>[4] A. Bahadori. <em>Fluid Phase Behavior for Conventional and Unconventional Oil and Gas Reservoirs</em>. ISBN 978-0-12-803437-8. Houston, Texas: Gulf Publishing, 2016. &lt;URL: <a href="https://books.google.com/books?id=BwXeDAAAQBAJ" class="uri">https://books.google.com/books?id=BwXeDAAAQBAJ</a>&gt;.</p>
 <p>[5] P. M. Dranchuk and H. Abou-Kassem. “Calculation of Z Factors For Natural Gases Using Equations of State”. In: <em>Journal of Canadian Petroleum Technology</em> (Jul. 1975). DOI: 10.2118/75-03-03. &lt;URL: <a href="https://doi.org/10.2118/75-03-03" class="uri">https://doi.org/10.2118/75-03-03</a>&gt;.</p>
