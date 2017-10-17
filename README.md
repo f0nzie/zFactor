@@ -1,9 +1,5 @@
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/zFactor)](https://cran.r-project.org/package=zFactor)
-
-[![Travis-CI Build Status](https://travis-ci.org/f0nzie/zFactor.svg?branch=master)](https://travis-ci.org/f0nzie/zFactor)
-
-[![codecov](https://codecov.io/gh/f0nzie/zFactor/branch/master/graph/badge.svg)](https://codecov.io/gh/f0nzie/zFactor)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/zFactor)](https://cran.r-project.org/package=zFactor) [![Travis-CI Build Status](https://travis-ci.org/f0nzie/zFactor.svg?branch=master)](https://travis-ci.org/f0nzie/zFactor) [![codecov](https://codecov.io/gh/f0nzie/zFactor/branch/master/graph/badge.svg)](https://codecov.io/gh/f0nzie/zFactor)
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 zFactor
@@ -111,6 +107,15 @@ z.Shell(ppr, tpr)
 #> 1.7 0.9711067 0.9150837 0.8740757 0.8563697 0.8629757 0.8901157 0.9321262
 #> 1.8 0.9794808 0.9395295 0.9097288 0.8964473 0.9015059 0.9233190 0.9584750
 
+# the newly added Papay correlation
+z.Papay(ppr, tpr)
+#>           0.5       1.5       2.5       3.5       4.5       5.5       6.5
+#> 1.4 0.9408336 0.8010648 0.7076525 0.6906870 0.7299354 0.7958370 0.8705316
+#> 1.4 0.9408336 0.8010648 0.7076525 0.6906870 0.7299354 0.7958370 0.8705316
+#> 1.6 0.9657774 0.8864710 0.8252564 0.8026787 0.8182983 0.8604984 0.9168234
+#> 1.7 0.9736623 0.9138939 0.8665932 0.8471834 0.8578133 0.8919610 0.9406180
+#> 1.8 0.9796287 0.9345928 0.8988524 0.8837788 0.8922563 0.9208289 0.9632719
+
 # and finally the correlation Kamyab et al that uses Artificial Neural Networks
 z.Ann10(ppr, tpr)
 #>           0.5       1.5       2.5       3.5       4.5       5.5       6.5
@@ -175,6 +180,12 @@ zFactor:::z.plot.range("N10", interval = "fine")
 ```
 
 ![](man/figures/README-unnamed-chunk-5-7.png)
+
+``` r
+zFactor:::z.plot.range("PP",  interval = "fine")
+```
+
+![](man/figures/README-unnamed-chunk-5-8.png)
 
 Comparative Analysis
 --------------------
@@ -291,6 +302,7 @@ The vignettes contain examples on the use and analysis of the various correlatio
 -   Dranchuk-Purvis-Robinson.Rmd
 -   shell.Rmd
 -   ANN.Rmd
+-   Papay.Rmd
 
 Tests
 -----

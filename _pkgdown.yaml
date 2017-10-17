@@ -1,8 +1,10 @@
 title: zFactor
 url: https://github.com/f0nzie/zFactor
+
 template:
     params:
         bootswatch: cerulean
+
 reference:
     - title: Standing-Katz chart
       desc: ~
@@ -24,6 +26,7 @@ reference:
         - '`z.DranchukPurvisRobinson`'
         - '`z.Shell`'
         - '`z.Ann10`'
+        - '`z.Papay`'
     - title: Datasets
       desc: ~
       contents:
@@ -71,6 +74,8 @@ navbar:
               href: articles/Shell.html
             - text: Artificial Neural Networks
               href: articles/Ann10.html
+            - text: Papay correlation
+              href: articles/Papay.html
     right:
         - text: "News"
           icon: fa-newspaper-o

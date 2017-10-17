@@ -126,7 +126,7 @@ p <- ggplot(sk_corr_2, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
 print(p)
 
 ## ------------------------------------------------------------------------
-sk_corr_3 <- sk_corr_3[sk_corr_3$Tpr==1.05,]
+sk_corr_3 <- sk_corr_2[sk_corr_2$Tpr==1.05,]
 sk_corr_3
 
 ## ------------------------------------------------------------------------
@@ -154,7 +154,7 @@ library(ggplot2)
 library(tibble)
 
 # get all `lp` Tpr curves
-tpr_all <- getCurvesDigitized(pprRange = "lp")
+tpr_all <- getStandingKatzTpr(pprRange = "lp")
 ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
 
 sk_corr_all <- createTidyFromMatrix(ppr, tpr_all, correlation = "BB")
@@ -192,6 +192,30 @@ ggplot(smry_tpr_ppr, aes(Ppr, Tpr)) +
     ggtitle("Beggs-Brill", subtitle = "BB")
 
 ## ------------------------------------------------------------------------
+library(dplyr)
+
+sk_corr_all %>%
+    filter(Tpr %in% c("1.05", "1.1")) %>%
+    ggplot(aes(x = z.chart, y=z.calc, group = Tpr, color = Tpr)) +
+    geom_point(size = 3) +
+    geom_line(aes(x = z.chart, y = z.chart), color = "black") +
+    facet_grid(. ~ Tpr) +
+    geom_errorbar(aes(ymin=z.calc-abs(dif), ymax=z.calc+abs(dif)), 
+                  position=position_dodge(0.5))
+
+## ------------------------------------------------------------------------
+library(dplyr)
+
+sk_corr_all %>%
+    filter(Tpr %in% c("2.6", "2.8")) %>%
+    ggplot(aes(x = z.chart, y=z.calc, group = Tpr, color = Tpr)) +
+    geom_point(size = 3) +
+    geom_line(aes(x = z.chart, y = z.chart), color = "black") +
+    facet_grid(. ~ Tpr) +
+    geom_errorbar(aes(ymin=z.calc-abs(dif), ymax=z.calc+abs(dif)), 
+                  position=position_dodge(0.5))
+
+## ------------------------------------------------------------------------
 sk_corr_all[which(sk_corr_all$z.calc < 0), ]
 
 ## ------------------------------------------------------------------------
@@ -199,7 +223,7 @@ sk_corr_all[which(abs(sk_corr_all$dif) > 0.15), ]
 
 ## ----results="hold"------------------------------------------------------
 # get all `lp` Tpr curves
-tpr <- getCurvesDigitized(pprRange = "lp")
+tpr <- getStandingKatzTpr(pprRange = "lp")
 ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
 
 # calculate HY for the given Tpr
