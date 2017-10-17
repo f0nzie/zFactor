@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Hall-Yarborough correlation — z.HallYarborough â€¢ zFactor</title>
+<title>Papay correlation — z.Papay â€¢ zFactor</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -128,14 +128,14 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Hall-Yarborough correlation</h1>
+    <h1>Papay correlation</h1>
     </div>
 
     
-    <p>Hall-Yarborough correlation</p>
+    <p>Calculate the Z factor with the Papay's correlation</p>
     
 
-    <pre class="usage"><span class='fu'>z.HallYarborough</span>(<span class='no'>pres.pr</span>, <span class='no'>temp.pr</span>, <span class='kw'>tolerance</span> <span class='kw'>=</span> <span class='fl'>1e-13</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>z.Papay</span>(<span class='no'>pres.pr</span>, <span class='no'>temp.pr</span>, <span class='kw'>tolerance</span> <span class='kw'>=</span> <span class='fl'>1e-13</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -150,7 +150,8 @@
     </tr>
     <tr>
       <th>tolerance</th>
-      <td><p>controls the iteration accuracy</p></td>
+      <td><p>rounding tolerance to avoid rounding readings that are in
+the middle of the grid. "tolerance" adds flexibility in deciding point closeness.</p></td>
     </tr>
     <tr>
       <th>verbose</th>
@@ -160,17 +161,17 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># get z value from a Tpr at Ppr</span>
-<span class='fu'>z.HallYarborough</span>(<span class='kw'>pres.pr</span> <span class='kw'>=</span> <span class='fl'>1.5</span>, <span class='kw'>temp.pr</span> <span class='kw'>=</span> <span class='fl'>2.0</span>)</div><div class='output co'>#&gt; [1] 0.9580002</div><div class='input'><span class='fu'>z.HallYarborough</span>(<span class='kw'>pres.pr</span> <span class='kw'>=</span> <span class='fl'>1.5</span>, <span class='kw'>temp.pr</span> <span class='kw'>=</span> <span class='fl'>1.1</span>)</div><div class='output co'>#&gt; [1] 0.4732393</div><div class='input'>
-<span class='co'># for two given Tpr and Ppr vectors, find the calculated z points</span>
+    <pre class="examples"><div class='input'><span class='co'># Example 1</span>
+<span class='co'>## one single z calculation</span>
+<span class='fu'>z.Papay</span>(<span class='kw'>pres.pr</span> <span class='kw'>=</span> <span class='fl'>1.5</span>, <span class='kw'>temp.pr</span> <span class='kw'>=</span> <span class='fl'>2.0</span>)</div><div class='output co'>#&gt; [1] 0.962332</div><div class='input'><span class='co'># Example 2</span>
+<span class='co'>## calculate z for multiple values of Tpr and Ppr</span>
 <span class='no'>ppr</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='fl'>0.5</span>, <span class='fl'>1.5</span>, <span class='fl'>2.5</span>, <span class='fl'>3.5</span>, <span class='fl'>4.5</span>, <span class='fl'>5.5</span>, <span class='fl'>6.5</span>)
 <span class='no'>tpr</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='fl'>1.3</span>, <span class='fl'>1.5</span>, <span class='fl'>1.7</span>, <span class='fl'>2</span>)
-<span class='no'>hy</span> <span class='kw'>&lt;-</span> <span class='fu'>z.HallYarborough</span>(<span class='kw'>pres.pr</span> <span class='kw'>=</span> <span class='no'>ppr</span>, <span class='kw'>temp.pr</span> <span class='kw'>=</span> <span class='no'>tpr</span>)
-<span class='fu'>print</span>(<span class='no'>hy</span>)</div><div class='output co'>#&gt;           0.5       1.5       2.5       3.5       4.5       5.5       6.5
-#&gt; 1.3 0.9176300 0.7534433 0.6399020 0.6323003 0.6881127 0.7651710 0.8493794
-#&gt; 1.5 0.9496855 0.8581232 0.7924067 0.7687902 0.7868071 0.8316848 0.8906351
-#&gt; 1.7 0.9682547 0.9134862 0.8756412 0.8605668 0.8694525 0.8978885 0.9396353
-#&gt; 2   0.9838234 0.9580002 0.9426939 0.9396286 0.9490995 0.9697839 0.9994317</div></pre>
+<span class='fu'>z.Papay</span>(<span class='kw'>pres.pr</span> <span class='kw'>=</span> <span class='no'>ppr</span>, <span class='kw'>temp.pr</span> <span class='kw'>=</span> <span class='no'>tpr</span>)</div><div class='output co'>#&gt;           0.5       1.5       2.5       3.5       4.5       5.5       6.5
+#&gt; 1.3 0.9208943 0.7357072 0.6290383 0.6271826 0.6858996 0.7656800 0.8501931
+#&gt; 1.5 0.9552137 0.8499334 0.7728520 0.7501411 0.7749505 0.8279008 0.8930795
+#&gt; 1.7 0.9736623 0.9138939 0.8665932 0.8471834 0.8578133 0.8919610 0.9406180
+#&gt; 2   0.9877275 0.9623320 0.9432543 0.9366532 0.9450048 0.9675653 1.0015334</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
