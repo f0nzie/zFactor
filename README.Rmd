@@ -25,6 +25,10 @@ bib_file <- system.file("doc", "bibliography.bib", package = "zFactor")
 bib <- read.bibtex(bib_file)
 ```
 
+## Versions
+* In CRAN:   `v 0.1.6`
+* In GitHub  `dev-0.1.6.9010`
+
 
 # zFactor dev-0.1.7.9009
 Computational tools for chemical, petrochemical and petroleum engineers. Calculates the deviation between different correlations for gas compressibility compared to the original Standing-Katz chart.
