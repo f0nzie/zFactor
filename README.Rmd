@@ -25,6 +25,10 @@ bib_file <- system.file("doc", "bibliography.bib", package = "zFactor")
 bib <- read.bibtex(bib_file)
 ```
 
+## Versions
+* In CRAN:   `v 0.1.6`
+* In GitHub  `dev-0.1.6.9010`
+
 
 # zFactor dev-0.1.7.9009
 Computational tools for chemical, petrochemical and petroleum engineers. Calculates the deviation between different correlations for gas compressibility compared to the original Standing-Katz chart.
@@ -100,8 +104,8 @@ z.DranchukPurvisRobinson(pres.pr = ppr, temp.pr = tpr)
 # now we use the relative undocumented Shell correlation
 z.Shell(ppr, tpr)
 
-# the newly added Papay correlation
-z.Papay(ppr, tpr)
+# the newly added Papp correlation
+z.Papp(ppr, tpr)
 
 # and finally the correlation Kamyab et al that uses Artificial Neural Networks
 z.Ann10(ppr, tpr)
@@ -220,7 +224,7 @@ The vignettes contain examples on the use and analysis of the various correlatio
 * Dranchuk-Purvis-Robinson.Rmd
 * shell.Rmd
 * ANN.Rmd
-* Papay.Rmd
+* Papp.Rmd
 
 ## Tests
 There are unit tests for the correlations under tests/testthat.

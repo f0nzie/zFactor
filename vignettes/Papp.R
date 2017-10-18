@@ -1,35 +1,13 @@
----
-title: "Papay correlation"
-date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
-bibliography: bibliography.bib
-link-citations: yes
-vignette: >
-  %\VignetteIndexEntry{Papay-correlation-PP}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
----
-
-```{r setup, include=F, error=T, message=F, warning=F}
+## ----setup, include=F, error=T, message=F, warning=F---------------------
 knitr::opts_chunk$set(echo=T, comment=NA, error=T, warning=F, message = F, fig.align = 'center', results="hold")
-```
 
-
-## Papay correlation
-
-> add references here
-
-
-## Get `z` at selected `Ppr` and `Tpr`
-Use the the correlation to calculate `z` and from Standing-Katz chart obtain `z` a digitized point at the given `Tpr` and `Ppr`.
-
-```{r}
+## ------------------------------------------------------------------------
 # get a z value
 library(zFactor)
 ppr <- 1.5
 tpr <- 2.0
 
-z.calc <- z.Papay(pres.pr = ppr, temp.pr = tpr)
+z.calc <- z.Papp(pres.pr = ppr, temp.pr = tpr)
 
 # get a z value from the SK chart at the same Ppr and Tpr
 z.chart <- getStandingKatzMatrix(tpr_vector = tpr, 
@@ -42,18 +20,13 @@ df <- as.data.frame(list(Ppr = ppr,  z.calc =z.calc, z.chart = z.chart, ape=ape)
 rownames(df) <- tpr
 df
 # HY = 0.9580002; # DAK = 0.9551087
-```
 
-
-## Get `z` at selected `Ppr` and `Tpr=1.1`
-From the Standing-Katz chart we read `z` at a digitized point:
-
-```{r}
+## ------------------------------------------------------------------------
 library(zFactor)
 ppr <- 1.5
 tpr <- 1.1
 
-z.calc <- z.Papay(pres.pr = ppr, temp.pr = tpr)
+z.calc <- z.Papp(pres.pr = ppr, temp.pr = tpr)
 
 # From the Standing-Katz chart we obtain a digitized point:
 z.chart <- getStandingKatzMatrix(tpr_vector = tpr, 
@@ -66,21 +39,14 @@ df <- as.data.frame(list(Ppr = ppr,  z.calc =z.calc, z.chart = z.chart, ape=ape)
 rownames(df) <- tpr
 df
 # HY = 0.4732393  APE = 11.08903
-```
 
-
-
-## Get values of `z` for combinations of `Ppr` and `Tpr`
-In this example we provide vectors instead of a single point.
-With the same `ppr` and `tpr` vectors that we use for the correlation, we do the same for the `Standing-Katz` chart. We want to compare both and find the `absolute percentage error` or `APE`.
-
-```{r}
+## ------------------------------------------------------------------------
 # test with vector extracted from paper
 ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
 tpr <- c(1.05, 1.1, 1.7, 2) 
 
 # calculate using the correlation
-z.calc <- z.Papay(ppr, tpr)
+z.calc <- z.Papp(ppr, tpr)
 
 # With the same ppr and tpr vector, we do the same for the Standing-Katz chart
 z.chart <- getStandingKatzMatrix(ppr_vector = ppr, tpr_vector = tpr)
@@ -91,23 +57,12 @@ cat("z.correlation \n"); print(z.calc)
 cat("\n z.chart \n"); print(z.chart)
 cat("\n APE \n"); print(ape)
  
-```
 
-
-
-## Analyze the error at the `isotherms`
-Applying the function `summary` over the transpose of the matrix:
-
-```{r}
+## ------------------------------------------------------------------------
 sum_t_ape <- summary(t(ape))
 sum_t_ape
-```
 
-
-
-## Analyze the error for greater values of `Tpr`
-
-```{r}
+## ------------------------------------------------------------------------
 library(zFactor)
 # enter vectors for Tpr and Ppr
 tpr2 <- c(1.2, 1.3, 1.5, 2.0, 3.0) 
@@ -118,21 +73,15 @@ z.chart <- getStandingKatzMatrix(ppr_vector = ppr2, tpr_vector = tpr2, pprRange 
 
 # We do the same with the HY correlation:
 # calculate z values at lower values of Tpr
-z.calc <- z.Papay(pres.pr = ppr2, temp.pr = tpr2) 
+z.calc <- z.Papp(pres.pr = ppr2, temp.pr = tpr2) 
 ape <- abs((z.calc - z.chart) / z.chart) * 100
 
 # calculate the APE
 cat("z.correlation \n"); print(z.calc)
 cat("\n z.chart \n"); print(z.chart)
 cat("\n APE \n"); print(ape)
-```
 
-
-
-## Analyze the error at the `isotherms`
-Applying the function `summary` over the transpose of the matrix to observe the error of the correlation at each isotherm.
-
-```{r}
+## ------------------------------------------------------------------------
 sum_t_ape <- summary(t(ape))
 sum_t_ape
  # Hall-Yarborough
@@ -150,13 +99,8 @@ sum_t_ape
  # Mean   :0.34820  
  # 3rd Qu.:0.52184  
  # Max.   :0.59923  
-```
 
-
-
-## Prepare to plot SK vs PP correlation
-
-```{r}
+## ------------------------------------------------------------------------
 library(zFactor)
 library(tibble)
 library(ggplot2)
@@ -173,13 +117,8 @@ p <- ggplot(sk_dak_2, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
     geom_errorbar(aes(ymin=z.calc-dif, ymax=z.calc+dif), width=.4,
                   position=position_dodge(0.05))
 print(p)
-```
 
-
-## Analysis at the lowest `Tpr`
-This is the isotherm where we see the greatest error.
-
-```{r}
+## ------------------------------------------------------------------------
 library(zFactor)
 
 sk_dak_3 <- sk_dak_2[sk_dak_2$Tpr==1.05,]
@@ -191,17 +130,8 @@ p <- ggplot(sk_dak_3, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
     geom_errorbar(aes(ymin=z.calc-dif, ymax=z.calc+dif), width=.2,
                   position=position_dodge(0.05))
 print(p)
-```
 
-
-## Analyzing performance of the `PP` correlation for all the `Tpr` curves
-In this last example, we compare the values of `z` at all the isotherms.
-
-We use the function `getCurvesDigitized` to obtain all the isotherms or `Tpr` curves in the Standing-Katz chart that have been digitized. 
-
-The next function `createTidyFromMatrix` calculates `z` using the correlation and prepares a tidy dataset ready to plot.
-
-```{r}
+## ------------------------------------------------------------------------
 library(ggplot2)
 library(tibble)
 
@@ -217,13 +147,8 @@ p <- ggplot(sk_corr_all, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
     geom_errorbar(aes(ymin=z.calc-dif, ymax=z.calc+dif), width=.4,
                   position=position_dodge(0.05))
 print(p)
-```
 
-
-
-## Range of applicability of the correlation
-
-```{r}
+## ------------------------------------------------------------------------
 # MSE: Mean Squared Error
 # RMSE: Root Mean Squared Error
 # RSS: residual sum of square
@@ -248,15 +173,9 @@ ggplot(smry_tpr_ppr, aes(Ppr, Tpr)) +
                          midpoint=12.5, limit=c(0, 25), name="MAPE") + 
     theme(axis.text.x = element_text(angle=45, vjust=1, size=11, hjust=1)) + 
     coord_equal() +
-    ggtitle("Papay", subtitle = "PP")
-```
+    ggtitle("Papp", subtitle = "PP")
 
-
-
-## Plotting the `Tpr` and `Ppr` values that show more error
-The `MAPE` (mean average percentage error) gradient bar indicates that the more red the square is, the more error there is.
-
-```{r}
+## ------------------------------------------------------------------------
 library(dplyr)
 
 sk_corr_all %>%
@@ -267,19 +186,7 @@ sk_corr_all %>%
     facet_grid(. ~ Tpr, scales = "free") +
     geom_errorbar(aes(ymin=z.calc-abs(dif), ymax=z.calc+abs(dif)), 
                   position=position_dodge(0.5))
-```
 
-> With the exception of the isotherms at 1.05 and 1.1, the Papay correlation looks acceptable good.
-
-
-
-## Looking numerically at the errors
-Finally, the dataframe with the calculated errors between the `z` from the correlation and the `z` read from the chart:
-
-```{r}
+## ------------------------------------------------------------------------
 as.tibble(smry_tpr_ppr)
-```
-
-## References
-
 
