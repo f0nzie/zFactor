@@ -66,7 +66,7 @@
       <a href="../articles/Ann10.html">Artificial Neural Networks</a>
     </li>
     <li>
-      <a href="../articles/Papay.html">Papay correlation</a>
+      <a href="../articles/Papp.html">Papp correlation</a>
     </li>
   </ul>
 </li>
@@ -107,7 +107,7 @@
     <div class="page-header toc-ignore">
       <h1>Plot Standing-Katz low-pressure <code>lp</code> charts</h1>
             
-            <h4 class="date">2017-10-17</h4>
+            <h4 class="date">2017-10-18</h4>
           </div>
 
     
@@ -140,7 +140,7 @@ result &lt;-<span class="st"> </span><span class="kw"><a href="../reference/getS
 [1] "1.05" "1.1" </code></pre>
 <p>For <code>Tpr = 1.05</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tibble)
-<span class="kw"><a href="http://www.rdocumentation.org/packages/tibble/topics/as_tibble">as.tibble</a></span>(result[[<span class="st">"1.05"</span>]])</code></pre></div>
+<span class="kw">as.tibble</span>(result[[<span class="st">"1.05"</span>]])</code></pre></div>
 <pre><code># A tibble: 52 x 5
      Ppr     z isNear Ppr_near          diff
  * &lt;dbl&gt; &lt;dbl&gt;  &lt;lgl&gt;    &lt;dbl&gt;         &lt;dbl&gt;
@@ -156,7 +156,7 @@ result &lt;-<span class="st"> </span><span class="kw"><a href="../reference/getS
 10 1.332 0.319  FALSE    1.332  0.000000e+00
 # ... with 42 more rows</code></pre>
 <p>And, for <code>Tpr = 1.1</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/tibble/topics/as_tibble">as_tibble</a></span>(result[[<span class="st">"1.1"</span>]])</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as_tibble</span>(result[[<span class="st">"1.1"</span>]])</code></pre></div>
 <pre><code># A tibble: 86 x 5
      Ppr     z isNear Ppr_near  diff
  * &lt;dbl&gt; &lt;dbl&gt;  &lt;lgl&gt;    &lt;dbl&gt; &lt;dbl&gt;
@@ -207,7 +207,7 @@ all_tpr2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ge
 <pre><code>[1] "1.05" "1.3"  "1.5" </code></pre>
 <p>Similarly, to what we did with <code>getStandingKatzCurve</code>, we could extract a dataframe for any Tpr:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tibble)
-<span class="kw"><a href="http://www.rdocumentation.org/packages/tibble/topics/as_tibble">as.tibble</a></span>(all_tpr2[[<span class="st">"1.5"</span>]])</code></pre></div>
+<span class="kw">as.tibble</span>(all_tpr2[[<span class="st">"1.5"</span>]])</code></pre></div>
 <pre><code># A tibble: 37 x 5
      Ppr     z isNear Ppr_near  diff
  * &lt;dbl&gt; &lt;dbl&gt;  &lt;lgl&gt;    &lt;dbl&gt; &lt;dbl&gt;
@@ -239,9 +239,9 @@ all_tpr2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ge
 all_tpr_df &lt;-<span class="st"> </span>data.table<span class="op">::</span><span class="kw">rbindlist</span>(all_tpr2, <span class="dt">idcol =</span> <span class="ot">TRUE</span>)
 <span class="kw">colnames</span>(all_tpr_df)[<span class="dv">1</span>] &lt;-<span class="st"> "Tpr"</span>    <span class="co"># name the identifier as Tpr</span>
 
-<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(all_tpr_df, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) <span class="op">+</span><span class="st"> </span>
-<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_path">geom_line</a></span>() <span class="op">+</span>
-<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>()</code></pre></div>
+<span class="kw">ggplot</span>(all_tpr_df, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>()</code></pre></div>
 <p><img src="Plot_StandingKatz_lp_files/figure-html/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;"></p>
 </div>
 <div id="the-one-step-way" class="section level3">
@@ -269,9 +269,9 @@ all_tpr2 &lt;-<span class="st"> </span>(<span class="kw">lapply</span>(tpr_vec, 
 all_tpr_df &lt;-<span class="st"> </span>data.table<span class="op">::</span><span class="kw">rbindlist</span>(all_tpr2, <span class="dt">idcol =</span> <span class="ot">TRUE</span>)
 <span class="kw">colnames</span>(all_tpr_df)[<span class="dv">1</span>] &lt;-<span class="st"> "Tpr"</span>
 
-<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(all_tpr_df, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) <span class="op">+</span><span class="st"> </span>
-<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_path">geom_line</a></span>() <span class="op">+</span>
-<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>()</code></pre></div>
+<span class="kw">ggplot</span>(all_tpr_df, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>()</code></pre></div>
 <p><img src="Plot_StandingKatz_lp_files/figure-html/unnamed-chunk-14-1.png" width="672" style="display: block; margin: auto;"></p>
 <p>Or the one-liner:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">tpr_vec &lt;-<span class="st"> </span><span class="kw"><a href="../reference/getStandingKatzTpr.html">getStandingKatzTpr</a></span>(<span class="dt">pprRange =</span> <span class="st">"lp"</span>)
@@ -293,9 +293,9 @@ low_tpr_li &lt;-<span class="st"> </span>(<span class="kw">lapply</span>(low_tpr
 low_tpr_df &lt;-<span class="st"> </span>data.table<span class="op">::</span><span class="kw">rbindlist</span>(low_tpr_li, <span class="dt">idcol =</span> <span class="ot">TRUE</span>)
 <span class="kw">colnames</span>(low_tpr_df)[<span class="dv">1</span>] &lt;-<span class="st"> "Tpr"</span>
 
-<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(low_tpr_df, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) <span class="op">+</span><span class="st"> </span>
-<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_path">geom_line</a></span>() <span class="op">+</span>
-<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>()</code></pre></div>
+<span class="kw">ggplot</span>(low_tpr_df, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>()</code></pre></div>
 <p><img src="Plot_StandingKatz_lp_files/figure-html/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;"></p>
 <p>With the one liner:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">low_tpr_vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.05</span>, <span class="fl">1.1</span>, <span class="fl">1.2</span>, <span class="fl">1.3</span>, <span class="fl">1.4</span>)
@@ -316,9 +316,9 @@ med_tpr_li &lt;-<span class="st"> </span>(<span class="kw">lapply</span>(med_tpr
 med_tpr_df &lt;-<span class="st"> </span>data.table<span class="op">::</span><span class="kw">rbindlist</span>(med_tpr_li, <span class="dt">idcol =</span> <span class="ot">TRUE</span>)
 <span class="kw">colnames</span>(med_tpr_df)[<span class="dv">1</span>] &lt;-<span class="st"> "Tpr"</span>
 
-<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(med_tpr_df, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) <span class="op">+</span><span class="st"> </span>
-<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_path">geom_line</a></span>() <span class="op">+</span>
-<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>()</code></pre></div>
+<span class="kw">ggplot</span>(med_tpr_df, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>()</code></pre></div>
 <p><img src="Plot_StandingKatz_lp_files/figure-html/unnamed-chunk-18-1.png" width="672" style="display: block; margin: auto;"></p>
 <p>The one liner:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">med_tpr_vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.5</span>, <span class="fl">1.6</span>, <span class="fl">1.7</span>, <span class="fl">1.8</span>, <span class="fl">1.9</span>)
@@ -339,9 +339,9 @@ hi_tpr_li &lt;-<span class="st"> </span>(<span class="kw">lapply</span>(hi_tpr_v
 hi_tpr_df &lt;-<span class="st"> </span>data.table<span class="op">::</span><span class="kw">rbindlist</span>(hi_tpr_li, <span class="dt">idcol =</span> <span class="ot">TRUE</span>)
 <span class="kw">colnames</span>(hi_tpr_df)[<span class="dv">1</span>] &lt;-<span class="st"> "Tpr"</span>
 
-<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(hi_tpr_df, <span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) <span class="op">+</span><span class="st"> </span>
-<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_path">geom_line</a></span>() <span class="op">+</span>
-<span class="st">    </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>()</code></pre></div>
+<span class="kw">ggplot</span>(hi_tpr_df, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>()</code></pre></div>
 <p><img src="Plot_StandingKatz_lp_files/figure-html/unnamed-chunk-20-1.png" width="672" style="display: block; margin: auto;"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hi_tpr_vec &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">2.0</span>, <span class="fl">2.4</span>, <span class="fl">2.6</span>, <span class="fl">2.8</span>, <span class="fl">3.0</span>)
 <span class="kw"><a href="../reference/multiplotStandingKatz.html">multiplotStandingKatz</a></span>(hi_tpr_vec)</code></pre></div>
@@ -358,7 +358,7 @@ hi_tpr_df &lt;-<span class="st"> </span>data.table<span class="op">::</span><spa
 <li>From all the digitized points, only 1 out of 117 was digitized far from the 1/10 grid.</li>
 </ul>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tibble)
-<span class="kw"><a href="http://www.rdocumentation.org/packages/tibble/topics/as_tibble">as.tibble</a></span>(hi_tpr_df)</code></pre></div>
+<span class="kw">as.tibble</span>(hi_tpr_df)</code></pre></div>
 <pre><code># A tibble: 117 x 6
      Tpr   Ppr     z isNear Ppr_near          diff
    &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;lgl&gt;    &lt;dbl&gt;         &lt;dbl&gt;
