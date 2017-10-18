@@ -25,12 +25,9 @@ bib_file <- system.file("doc", "bibliography.bib", package = "zFactor")
 bib <- read.bibtex(bib_file)
 ```
 
-## Versions
-* In CRAN:   `v 0.1.6`
-* In GitHub  `dev-0.1.6.9010`
 
 
-# zFactor dev-0.1.7.9009
+# zFactor
 Computational tools for chemical, petrochemical and petroleum engineers. Calculates the deviation between different correlations for gas compressibility compared to the original Standing-Katz chart.
 
 ## Motivation
@@ -56,6 +53,13 @@ The correlations that are implemented in R for the package **zFactor** are:
 
 * A correlation developed with Artificial Neural Networks (Ann10) by Kamyab et al. ``r citep(bib[c("Kamyab2010")])``
 
+* A correlation mentioned in Takacs paper called **Papp*. Original paper by Papp not available in English.
+
+
+
+## Versions
+* In CRAN:   `v 0.1.6`
+* In GitHub  `dev-0.1.6.9010`
 
 ## Installation
 I recommend installing from GitHub using `devtools`, that way you get the latest and greatest version. CRAN release cycles allows updates every one to two months.
@@ -66,7 +70,6 @@ You can install the latest version of `zFactor` from GitHub with:
 # install.packages("devtools")
 devtools::install_github("f0nzie/zFactor")
 ```
-
 
 Or, if your prefer, from `CRAN`:
 
