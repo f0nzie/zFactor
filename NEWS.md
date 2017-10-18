@@ -1,3 +1,12 @@
+## 20171018 0.1.6.9010
+* TODO; change Papay to Papp
+
+## 20171018 0.1.6.9009
+* use a different git workflow
+* delete unused tags in remote and local
+* use "git subtree push --prefix docs origin gh-pages" in the Linux VM to send ./docs to remote branch gh-pages
+
+
 ## 20171016, 0.1.7.9008
 * add vignette for Papay
 * add function z.Papay
