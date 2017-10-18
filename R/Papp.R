@@ -18,7 +18,7 @@
 #' ## calculate z for multiple values of Tpr and Ppr
 #' ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5)
 #' tpr <- c(1.3, 1.5, 1.7, 2)
-#' z.Papay(pres.pr = ppr, temp.pr = tpr)
+#' z.Papp(pres.pr = ppr, temp.pr = tpr)
 z.Papp <- function(pres.pr, temp.pr,
                          tolerance = 1e-13, verbose = FALSE) {
     # calls the core function.
