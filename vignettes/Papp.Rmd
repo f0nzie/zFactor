@@ -1,11 +1,11 @@
 ---
-title: "Papay correlation"
+title: "Papp correlation"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 bibliography: bibliography.bib
 link-citations: yes
 vignette: >
-  %\VignetteIndexEntry{Papay-correlation-PP}
+  %\VignetteIndexEntry{Papp-correlation-PP}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo=T, comment=NA, error=T, warning=F, message = F, fig.a
 ```
 
 
-## Papay correlation
+## Papp correlation
 
 > add references here
 
@@ -29,7 +29,7 @@ library(zFactor)
 ppr <- 1.5
 tpr <- 2.0
 
-z.calc <- z.Papay(pres.pr = ppr, temp.pr = tpr)
+z.calc <- z.Papp(pres.pr = ppr, temp.pr = tpr)
 
 # get a z value from the SK chart at the same Ppr and Tpr
 z.chart <- getStandingKatzMatrix(tpr_vector = tpr, 
@@ -53,7 +53,7 @@ library(zFactor)
 ppr <- 1.5
 tpr <- 1.1
 
-z.calc <- z.Papay(pres.pr = ppr, temp.pr = tpr)
+z.calc <- z.Papp(pres.pr = ppr, temp.pr = tpr)
 
 # From the Standing-Katz chart we obtain a digitized point:
 z.chart <- getStandingKatzMatrix(tpr_vector = tpr, 
@@ -80,7 +80,7 @@ ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5)
 tpr <- c(1.05, 1.1, 1.7, 2) 
 
 # calculate using the correlation
-z.calc <- z.Papay(ppr, tpr)
+z.calc <- z.Papp(ppr, tpr)
 
 # With the same ppr and tpr vector, we do the same for the Standing-Katz chart
 z.chart <- getStandingKatzMatrix(ppr_vector = ppr, tpr_vector = tpr)
@@ -118,7 +118,7 @@ z.chart <- getStandingKatzMatrix(ppr_vector = ppr2, tpr_vector = tpr2, pprRange 
 
 # We do the same with the HY correlation:
 # calculate z values at lower values of Tpr
-z.calc <- z.Papay(pres.pr = ppr2, temp.pr = tpr2) 
+z.calc <- z.Papp(pres.pr = ppr2, temp.pr = tpr2) 
 ape <- abs((z.calc - z.chart) / z.chart) * 100
 
 # calculate the APE
@@ -248,7 +248,7 @@ ggplot(smry_tpr_ppr, aes(Ppr, Tpr)) +
                          midpoint=12.5, limit=c(0, 25), name="MAPE") + 
     theme(axis.text.x = element_text(angle=45, vjust=1, size=11, hjust=1)) + 
     coord_equal() +
-    ggtitle("Papay", subtitle = "PP")
+    ggtitle("Papp", subtitle = "PP")
 ```
 
 
@@ -269,7 +269,7 @@ sk_corr_all %>%
                   position=position_dodge(0.5))
 ```
 
-> With the exception of the isotherms at 1.05 and 1.1, the Papay correlation looks acceptable good.
+> With the exception of the isotherms at 1.05 and 1.1, the Papp correlation looks acceptable good.
 
 
 
