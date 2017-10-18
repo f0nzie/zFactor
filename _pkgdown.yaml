@@ -26,7 +26,7 @@ reference:
         - '`z.DranchukPurvisRobinson`'
         - '`z.Shell`'
         - '`z.Ann10`'
-        - '`z.Papay`'
+        - '`z.Papp`'
     - title: Datasets
       desc: ~
       contents:
@@ -74,8 +74,8 @@ navbar:
               href: articles/Shell.html
             - text: Artificial Neural Networks
               href: articles/Ann10.html
-            - text: Papay correlation
-              href: articles/Papay.html
+            - text: Papp correlation
+              href: articles/Papp.html
     right:
         - text: "News"
           icon: fa-newspaper-o
