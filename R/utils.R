@@ -2,9 +2,9 @@
 z_correlations <- data.frame(
     short = c("BB", "HY", "DAK", "DPR", "SH", "N10", "PP"),
     long = c("Beggs-Brill", "Hall-Yarborough", "Dranchuk-AbuKassem",
-             "Dranchuk-Purvis-Robinson", "Shell", "Ann10", "Papay"),
+             "Dranchuk-Purvis-Robinson", "Shell", "Ann10", "Papp"),
     function_name = c("z.BeggsBrill", "z.HallYarborough", "z.DranchukAbuKassem",
-                      "z.DranchukPurvisRobinson", "z.Shell", "z.Ann10", "z.Papay"),
+                      "z.DranchukPurvisRobinson", "z.Shell", "z.Ann10", "z.Papp"),
     stringsAsFactors = FALSE
 )
 
