@@ -66,7 +66,7 @@
       <a href="../articles/Ann10.html">Artificial Neural Networks</a>
     </li>
     <li>
-      <a href="../articles/Papay.html">Papay correlation</a>
+      <a href="../articles/Papp.html">Papp correlation</a>
     </li>
   </ul>
 </li>
@@ -107,7 +107,7 @@
     <div class="page-header toc-ignore">
       <h1>Standing-Katz chart data</h1>
             
-            <h4 class="date">2017-10-17</h4>
+            <h4 class="date">2017-10-18</h4>
           </div>
 
     
@@ -255,14 +255,14 @@ diff:     the difference between the Ppr of the point read and the grid</code></
 tpr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.05</span>, <span class="fl">1.3</span>, <span class="fl">1.5</span>)
 tpr_li &lt;-<span class="st"> </span><span class="kw">lapply</span>(tpr, getStandingKatzData, <span class="dt">pprRange =</span> <span class="st">'lp'</span>)
 <span class="kw">names</span>(tpr_li) &lt;-<span class="st"> </span>tpr
-<span class="kw"><a href="http://www.rdocumentation.org/packages/tibble/topics/tibble">tibble</a></span>(tpr_li)</code></pre></div>
+<span class="kw">tibble</span>(tpr_li)</code></pre></div>
 <pre><code># A tibble: 3 x 1
                  tpr_li
                  &lt;list&gt;
 1 &lt;data.frame [52 x 5]&gt;
 2 &lt;data.frame [36 x 5]&gt;
 3 &lt;data.frame [37 x 5]&gt;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/tibble/topics/as_tibble">as.tibble</a></span>(tpr_li[[<span class="st">"1.05"</span>]])</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.tibble</span>(tpr_li[[<span class="st">"1.05"</span>]])</code></pre></div>
 <pre><code># A tibble: 52 x 5
      Ppr     z isNear Ppr_near          diff
  * &lt;dbl&gt; &lt;dbl&gt;  &lt;lgl&gt;    &lt;dbl&gt;         &lt;dbl&gt;
@@ -277,7 +277,7 @@ tpr_li &lt;-<span class="st"> </span><span class="kw">lapply</span>(tpr, getStan
  9 1.301 0.350   TRUE    1.300  1.000000e-03
 10 1.332 0.319  FALSE    1.332  0.000000e+00
 # ... with 42 more rows</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/tibble/topics/as_tibble">as.tibble</a></span>(tpr_li[[<span class="st">"1.3"</span>]])</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.tibble</span>(tpr_li[[<span class="st">"1.3"</span>]])</code></pre></div>
 <pre><code># A tibble: 36 x 5
      Ppr     z isNear Ppr_near          diff
  * &lt;dbl&gt; &lt;dbl&gt;  &lt;lgl&gt;    &lt;dbl&gt;         &lt;dbl&gt;
@@ -292,7 +292,7 @@ tpr_li &lt;-<span class="st"> </span><span class="kw">lapply</span>(tpr, getStan
  9 1.303 0.788   TRUE      1.3  3.000000e-03
 10 1.503 0.756   TRUE      1.5  3.000000e-03
 # ... with 26 more rows</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="http://www.rdocumentation.org/packages/tibble/topics/as_tibble">as.tibble</a></span>(tpr_li[[<span class="st">"1.5"</span>]])</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.tibble</span>(tpr_li[[<span class="st">"1.5"</span>]])</code></pre></div>
 <pre><code># A tibble: 37 x 5
      Ppr     z isNear Ppr_near  diff
  * &lt;dbl&gt; &lt;dbl&gt;  &lt;lgl&gt;    &lt;dbl&gt; &lt;dbl&gt;
@@ -468,7 +468,7 @@ tpr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.0
 tpr_li &lt;-<span class="st"> </span><span class="kw">lapply</span>(tpr, getStandingKatzData, <span class="dt">pprRange =</span> <span class="st">'lp'</span>)
 <span class="kw">names</span>(tpr_li) &lt;-<span class="st"> </span>tpr
 
-common &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/data.table/topics/rbindlist">rbindlist</a></span>(tpr_li, <span class="dt">idcol =</span> <span class="ot">TRUE</span>)
+common &lt;-<span class="st"> </span><span class="kw">rbindlist</span>(tpr_li, <span class="dt">idcol =</span> <span class="ot">TRUE</span>)
 common</code></pre></div>
 <pre><code>      .id   Ppr     z isNear Ppr_near          diff
   1: 1.05 0.204 0.937   TRUE    0.200  4.000000e-03
