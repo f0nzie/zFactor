@@ -116,9 +116,7 @@
 <div id="papp-correlation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#papp-correlation" class="anchor"></a>Papp correlation</h2>
-<blockquote>
-<p>add references here</p>
-</blockquote>
+<p>This is an explicit correlation by <em>I. Papp</em> <code>(Papp, 1979)</code> mentioned in the comparative analysis paper by Gabor Takacs <code>(Takacs, 1989)</code>. The original paper is not available in English but Prof. Takacs describe the equation in his paper of 1989.</p>
 </div>
 <div id="get-z-at-selected-ppr-and-tpr" class="section level2">
 <h2 class="hasAnchor">
@@ -333,7 +331,7 @@ p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_dak_<span clas
 <span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc<span class="op">-</span>dif, <span class="dt">ymax=</span>z.calc<span class="op">+</span>dif), <span class="dt">width=</span>.<span class="dv">4</span>,
                   <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.05</span>))
 <span class="kw">print</span>(p)</code></pre></div>
-<p><img src="Papp_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="Papp_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;"></p>
 <pre><code># A tibble: 52 x 5
      Tpr   Ppr z.chart    z.calc           dif
    &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
@@ -365,7 +363,7 @@ p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_dak_<span clas
 <span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc<span class="op">-</span>dif, <span class="dt">ymax=</span>z.calc<span class="op">+</span>dif), <span class="dt">width=</span>.<span class="dv">2</span>,
                   <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.05</span>))
 <span class="kw">print</span>(p)</code></pre></div>
-<p><img src="Papp_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="Papp_files/figure-html/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;"></p>
 <pre><code>    Tpr Ppr z.chart    z.calc           dif
 1  1.05 0.5   0.829 0.8243607  4.639281e-03
 5  1.05 1.0   0.589 0.6199052 -3.090525e-02
@@ -402,7 +400,7 @@ p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_corr_all, <spa
 <span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc<span class="op">-</span>dif, <span class="dt">ymax=</span>z.calc<span class="op">+</span>dif), <span class="dt">width=</span>.<span class="dv">4</span>,
                   <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.05</span>))
 <span class="kw">print</span>(p)</code></pre></div>
-<p><img src="Papp_files/figure-html/unnamed-chunk-9-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="Papp_files/figure-html/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;"></p>
 <pre><code># A tibble: 112 x 5
      Tpr   Ppr z.chart    z.calc           dif
    &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;
@@ -446,7 +444,7 @@ smry_tpr_ppr &lt;-<span class="st"> </span><span class="kw">summarise</span>(gro
 <span class="st">    </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle=</span><span class="dv">45</span>, <span class="dt">vjust=</span><span class="dv">1</span>, <span class="dt">size=</span><span class="dv">11</span>, <span class="dt">hjust=</span><span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span>
 <span class="st">    </span><span class="kw">coord_equal</span>() <span class="op">+</span>
 <span class="st">    </span><span class="kw">ggtitle</span>(<span class="st">"Papp"</span>, <span class="dt">subtitle =</span> <span class="st">"PP"</span>)</code></pre></div>
-<p><img src="Papp_files/figure-html/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="Papp_files/figure-html/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;"></p>
 </div>
 <div id="plotting-the-tpr-and-ppr-values-that-show-more-error" class="section level2">
 <h2 class="hasAnchor">
@@ -462,7 +460,7 @@ sk_corr_all <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">facet_grid</span>(. <span class="op">~</span><span class="st"> </span>Tpr, <span class="dt">scales =</span> <span class="st">"free"</span>) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc<span class="op">-</span><span class="kw">abs</span>(dif), <span class="dt">ymax=</span>z.calc<span class="op">+</span><span class="kw">abs</span>(dif)), 
                   <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.5</span>))</code></pre></div>
-<p><img src="Papp_files/figure-html/unnamed-chunk-11-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="Papp_files/figure-html/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;"></p>
 <blockquote>
 <p>With the exception of the isotherms at 1.05 and 1.1, the Papp correlation looks acceptable good.</p>
 </blockquote>
@@ -491,6 +489,8 @@ sk_corr_all <span class="op">%&gt;%</span>
 <div id="references" class="section level2">
 <h2 class="hasAnchor">
 <a href="#references" class="anchor"></a>References</h2>
+<p>[1] I. Papp. “Uj modszer foldgazok elteresi tenyezojenek szamitasara”. In: <em>Koolaj es Foldgaz</em> (Nov. 1979), pp. 345-47.</p>
+<p>[2] G. Takacs. “Comparing Methods for Calculating z Factor”. In: <em>Oil and Gas Journal</em> (May. 1989). DOI: NA. &lt;URL: <a href="https://www.researchgate.net/publication/236510717_Comparing_methods_for_calculating_Z-factor" class="uri">https://www.researchgate.net/publication/236510717_Comparing_methods_for_calculating_Z-factor</a>&gt;.</p>
 </div>
 </div>
   </div>

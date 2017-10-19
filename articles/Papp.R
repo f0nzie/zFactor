@@ -1,6 +1,15 @@
 ## ----setup, include=F, error=T, message=F, warning=F---------------------
 knitr::opts_chunk$set(echo=T, comment=NA, error=T, warning=F, message = F, fig.align = 'center', results="hold")
 
+## ----echo=FALSE, warning=FALSE-------------------------------------------
+#suppressPackageStartupMessages(library(knitcitations))
+#knitcitations::cleanbib()
+#bib_file <- system.file("doc", "bibliography.bib", package = "zFactor")
+#bib <- read.bibtex(bib_file)
+library(knitcitations)
+bib_file <- system.file("doc", "bibliography.bib", package = "zFactor")
+bib <- read.bibtex(bib_file)
+
 ## ------------------------------------------------------------------------
 # get a z value
 library(zFactor)
@@ -189,4 +198,13 @@ sk_corr_all %>%
 
 ## ------------------------------------------------------------------------
 as.tibble(smry_tpr_ppr)
+
+## ---- echo = FALSE-------------------------------------------------------
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = ""
+)
+
+## ----results="asis", echo=FALSE------------------------------------------
+bibliography(style="citation")
 
