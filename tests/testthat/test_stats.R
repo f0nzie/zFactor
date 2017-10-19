@@ -4,19 +4,14 @@ library(testthat)
 
 context("z.stats")
 
-test_that("z.stats generates same dataframe size for all correlations", {
+test_that("z.stats matches dimension and mean of MAPE", {
     sh_corrs <- (zFactor:::z_correlations$short)
-    mean_mape <- vector("numeric")
-    # for (corr in sh_corrs) {
-    #     expect_equal(dim(z.stats(corr)), c(112, 8))
-    #     mape <- z.stats(corr)$MAPE
-    #     # print(corr); print(max(mape)); print(min(mape)); print(mean(mape))
-    #     mean_mape <- c(mean_mape, mean(mape))
-    # }
-    # sapply(sh_corrs, function(corr)
-    #     expect_equal(dim(z.stats(corr)), c(112,8)))
     sapply(sh_corrs, function(corr)
-        print(mean(z.stats(corr)$MAPE)))
+        expect_equal(dim(z.stats(corr)), c(112,8)))
+    s.mean <- sapply(sh_corrs, function(corr) mean(z.stats(corr)$MAPE))
+    expected <- c(13.8862628,  0.8186578,  0.7697211,  0.8123786,  4.1530402,  0.1635157,  2.0987294)
+    names(expected) <- sh_corrs
+    expect_equal(s.mean, expected)
 })
 
 
@@ -31,7 +26,6 @@ test_that("z_correlations matches the short names of the correlations", {
                                 "Dranchuk-Purvis-Robinson", "Shell", "Ann10", "Papp"))
     }
 })
-
 
 test_that("z_correlations matches the short names of the correlations", {
     sh_corrs <- (zFactor:::z_correlations$short)
