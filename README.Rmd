@@ -53,8 +53,7 @@ The correlations that are implemented in R for the package **zFactor** are:
 
 * A correlation developed with Artificial Neural Networks (Ann10) by Kamyab et al. ``r citep(bib[c("Kamyab2010")])``
 
-* A correlation mentioned in Takacs paper called **Papp*. Original paper by Papp not available in English. ``r citep(bib[c("Takacs1989")])`` 
-
+* An explicit correlation by *I. Papp* ``r citep(bib[c("Papp1979")])`` mentioned in the comparative analysis paper by Gabor Takacs ``r citep(bib[c("Takacs1989")])``. Not available in English. 
 
 
 ## Versions
@@ -126,15 +125,41 @@ How to interpret the colors? We use the [Mean Absolute Percentage Error](https:/
 
 You can see for yourself which correlation is more stable at different ranges of pseudo-reduce pressures and temperatures.
 
+#### Beggs-Brill
 ```{r}
 library(zFactor)
 zFactor:::z.plot.range("BB",  interval = "fine")
+```
+
+#### Hall-Yarborough
+```{r}
 zFactor:::z.plot.range("HY",  interval = "fine")
 zFactor:::z.plot.range("HY",  interval = "coarse")
+```
+
+#### Dranchuk-AbouKassem
+```{r}
 zFactor:::z.plot.range("DAK", interval = "fine")
+```
+
+#### Dranchuk-Purvis-Robinson
+```{r}
 zFactor:::z.plot.range("DPR", interval = "fine")
+```
+
+
+#### Shell (Shell Oil Company)
+```{r}
 zFactor:::z.plot.range("SH",  interval = "fine")
+```
+
+#### Ann10 (Neural Network, 10 neurons)
+```{r}
 zFactor:::z.plot.range("N10", interval = "fine")
+```
+
+#### Papp (explicit)
+```{r}
 zFactor:::z.plot.range("PP",  interval = "fine")
 ```
 

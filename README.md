@@ -33,7 +33,7 @@ The correlations that are implemented in R for the package **zFactor** are:
 
 -   A correlation developed with Artificial Neural Networks (Ann10) by Kamyab et al. `(Kamyab, Sampaio, Qanbari, and Eustes, 2010)`
 
--   A correlation mentioned in Takacs paper called \*\*Papp\*. Original paper by Papp not available in English. \`\`
+-   An explicit correlation by *I. Papp* `(Papp, 1979)` mentioned in the comparative analysis paper by Gabor Takacs `(Takacs, 1989)`. Not available in English.
 
 Versions
 --------
@@ -146,6 +146,8 @@ How to interpret the colors? We use the [Mean Absolute Percentage Error](https:/
 
 You can see for yourself which correlation is more stable at different ranges of pseudo-reduce pressures and temperatures.
 
+#### Beggs-Brill
+
 ``` r
 library(zFactor)
 zFactor:::z.plot.range("BB",  interval = "fine")
@@ -153,47 +155,59 @@ zFactor:::z.plot.range("BB",  interval = "fine")
 
 ![](man/figures/README-unnamed-chunk-5-1.png)
 
+#### Hall-Yarborough
+
 ``` r
 zFactor:::z.plot.range("HY",  interval = "fine")
 ```
 
-![](man/figures/README-unnamed-chunk-5-2.png)
+![](man/figures/README-unnamed-chunk-6-1.png)
 
 ``` r
 zFactor:::z.plot.range("HY",  interval = "coarse")
 ```
 
-![](man/figures/README-unnamed-chunk-5-3.png)
+![](man/figures/README-unnamed-chunk-6-2.png)
+
+#### Dranchuk-AbouKassem
 
 ``` r
 zFactor:::z.plot.range("DAK", interval = "fine")
 ```
 
-![](man/figures/README-unnamed-chunk-5-4.png)
+![](man/figures/README-unnamed-chunk-7-1.png)
+
+#### Dranchuk-Purvis-Robinson
 
 ``` r
 zFactor:::z.plot.range("DPR", interval = "fine")
 ```
 
-![](man/figures/README-unnamed-chunk-5-5.png)
+![](man/figures/README-unnamed-chunk-8-1.png)
+
+#### Shell (Shell Oil Company)
 
 ``` r
 zFactor:::z.plot.range("SH",  interval = "fine")
 ```
 
-![](man/figures/README-unnamed-chunk-5-6.png)
+![](man/figures/README-unnamed-chunk-9-1.png)
+
+#### Ann10 (Neural Network, 10 neurons)
 
 ``` r
 zFactor:::z.plot.range("N10", interval = "fine")
 ```
 
-![](man/figures/README-unnamed-chunk-5-7.png)
+![](man/figures/README-unnamed-chunk-10-1.png)
+
+#### Papp (explicit)
 
 ``` r
 zFactor:::z.plot.range("PP",  interval = "fine")
 ```
 
-![](man/figures/README-unnamed-chunk-5-8.png)
+![](man/figures/README-unnamed-chunk-11-1.png)
 
 Comparative Analysis
 --------------------
@@ -228,13 +242,13 @@ library(zFactor)
 getStandingKatzCurve(tpr = 1.3, toView = FALSE, toSave = FALSE)
 ```
 
-![](man/figures/README-unnamed-chunk-6-1.png)
+![](man/figures/README-unnamed-chunk-12-1.png)
 
 ``` r
 getStandingKatzCurve(tpr = 1.05, pprRange = "lp", toView = FALSE, toSave = FALSE)
 ```
 
-![](man/figures/README-unnamed-chunk-6-2.png)
+![](man/figures/README-unnamed-chunk-12-2.png)
 
 ### Ploting all the `Tpr` curves of Standing-Katz chart using `lapply`, `getStandingKatzData` and `data.table::rbindlist`:
 
@@ -255,7 +269,7 @@ ggplot(all_tpr_df, aes(x=Ppr, y=z, group=Tpr, color=Tpr)) +
     geom_point()
 ```
 
-![](man/figures/README-unnamed-chunk-7-1.png)
+![](man/figures/README-unnamed-chunk-13-1.png)
 
 ### Build a table of statistical errors between a correlation and SK chart
 
@@ -349,4 +363,8 @@ The following books and papers were consulted during the development of this pac
 
 \[10\] M. Mohamadi-Baghmolaei, R. Azin, S. Osfouri, et al. "Prediction of gas compressibility factor using intelligent models". In: *Natural Gas Industry B* 2.4 (2015), pp. 283-294. DOI: 10.1016/j.ngib.2015.09.001. &lt;URL: <http://doi.org/10.1016/j.ngib.2015.09.001>&gt;.
 
-\[11\] S. Rakap, S. Rakap, D. Evran, et al. "Comparative evaluation of the reliability and validity of three data extraction programs: UnGraph, GraphClick, and DigitizeIt". In: *Computers in Human Behavior* 55 (2016), pp. 159-166. DOI: 10.1016/j.chb.2015.09.008. &lt;URL: <http://doi.org/10.1016/j.chb.2015.09.008>&gt;.
+\[11\] I. Papp. "Uj modszer foldgazok elteresi tenyezojenek szamitasara". In: *Koolaj es Foldgaz* (Nov. 1979), pp. 345-47.
+
+\[12\] S. Rakap, S. Rakap, D. Evran, et al. "Comparative evaluation of the reliability and validity of three data extraction programs: UnGraph, GraphClick, and DigitizeIt". In: *Computers in Human Behavior* 55 (2016), pp. 159-166. DOI: 10.1016/j.chb.2015.09.008. &lt;URL: <http://doi.org/10.1016/j.chb.2015.09.008>&gt;.
+
+\[13\] G. Takacs. "Comparing Methods for Calculating z Factor". In: *Oil and Gas Journal* (May. 1989). DOI: NA. &lt;URL: <https://www.researchgate.net/publication/236510717_Comparing_methods_for_calculating_Z-factor>&gt;.
