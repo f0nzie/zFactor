@@ -51,8 +51,10 @@ get_z_correlations <- function(how = "short") {
 #' # now, you can paste the vector in your test
 convertStringToVector <- function(str) {
     vs <- unlist(strsplit(str, " "))
+    vs <- vs[lapply(vs, nchar) > 0]
     vn <- as.numeric(vs)
-    vt <- paste(vn, collapse = ", ")
+    if(all(is.na(vn))) vt <- paste(trimws(vs), collapse = ", ")
+    else vt <- paste(vn, collapse = ", ")
     paste0('c(', vt, ')')
 }
 

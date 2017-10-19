@@ -38,4 +38,26 @@ test_that("convertStringToVector with numeric string", {
     expect_equal(convertStringToVector(str), expected)
 })
 
+test_that("convertStringToVector with alphabetic string", {
+    str = c("BB HY DAK DPR  SH  N10   PP")
+    expected <- "c(BB, HY, DAK, DPR, SH, N10, PP)"
+    expect_equal(convertStringToVector(str), expected)
+})
 
+test_that("convertStringToVector with alphanumeric string", {
+    str = c("BB 1.2 1.0 DPR  SH  N10   PP")
+    expected <- "c(NA, 1.2, 1, NA, NA, NA, NA)"
+    expect_equal(convertStringToVector(str), expected)
+})
+
+
+
+
+# context("createTidyFromMatrix")
+#
+# test_that("createTidyFromMatrix", {
+#     ppr <- c(0.5, 1.5, 2.5, 3.5)
+#     tpr <- c(1.05, 1.1, 1.2)
+#     print(createTidyFromMatrix(ppr, tpr, "HY"))
+#
+# })
