@@ -2,7 +2,6 @@
 title: "Papp correlation"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
-bibliography: bibliography.bib
 link-citations: yes
 vignette: >
   %\VignetteIndexEntry{Papp-correlation-PP}
@@ -15,8 +14,11 @@ knitr::opts_chunk$set(echo=T, comment=NA, error=T, warning=F, message = F, fig.a
 ```
 
 ```{r echo=FALSE, warning=FALSE}
-suppressPackageStartupMessages(library(knitcitations))
-knitcitations::cleanbib()
+#suppressPackageStartupMessages(library(knitcitations))
+#knitcitations::cleanbib()
+#bib_file <- system.file("doc", "bibliography.bib", package = "zFactor")
+#bib <- read.bibtex(bib_file)
+library(knitcitations)
 bib_file <- system.file("doc", "bibliography.bib", package = "zFactor")
 bib <- read.bibtex(bib_file)
 ```
@@ -287,6 +289,13 @@ as.tibble(smry_tpr_ppr)
 ```
 
 ## References
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = ""
+)
+```
+
 ```{r results="asis", echo=FALSE}
 bibliography(style="citation")
 ```
