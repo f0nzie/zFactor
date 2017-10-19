@@ -57,13 +57,27 @@ test_that("HY.genDatasetDif  dimension correct", {
 
 
 context("genDatasetDif ")
+# correlations not implemented: BB, N10, SH, PP
 
-test_that("genDatasetDif  dimension correct", {
+test_that("genDatasetDif  dimension correct, default corr = HY", {
     result <- zFactor:::genDatasetDif()
-    print(result)
-    # expect_equal(dim(result), c(28, 5))
+    expect_equal(dim(result), c(28, 5))
 })
 
+test_that("genDatasetDif  dimension correct, default corr = DAK", {
+    result <- zFactor:::genDatasetDif(correlation = "DAK")
+    expect_equal(dim(result), c(28, 5))
+})
+
+test_that("genDatasetDif  dimension correct, default corr = DPR", {
+    result <- zFactor:::genDatasetDif(correlation = "DPR")
+    expect_equal(dim(result), c(28, 5))
+})
+
+test_that("genDatasetDif  dimension correct, default corr = HY", {
+    result <- zFactor:::genDatasetDif(correlation = "HY")
+    expect_equal(dim(result), c(28, 5))
+})
 
 
 

@@ -96,7 +96,8 @@ HY.genDatasetDif <- function(to_disk = FALSE) {
 
     # load both tables (matrices)
     # load(file = "./data/z_sk_chart_7p4t.rda")
-    load(file = "./data/z_hy_7p4t.rda")
+    # load(file = "./data/z_hy_7p4t.rda")
+    data("z_hy_7p4t")
 
     # create tidy data for z from SK chart
     sk_short <- cbind(as.double(rownames(sk_short)), sk_short)  # new column for Tpr
@@ -126,21 +127,15 @@ HY.genDatasetDif <- function(to_disk = FALSE) {
 genDatasetDif <- function(correlation = "HY", to_disk = FALSE) {
     # generic function
     # convert to tidy table for z values calculated by HY and read from SK chart
-
-    # pkg_data_path <- system.file("data", package = "zFactor")
-    # print(dir(pkg_data_path))
-
+    data_path <- "data"
     corr <- tolower(correlation)
     rda_name <- paste(paste("z", corr, "7p4t", sep = "_"), "rda", sep = ".")
-    # ds_name <- paste(pkg_data_path, rda_name, sep = "/")
-    data_path <- "./data"
-    corr_rda_file <- paste(data_path, rda_name, sep = "/")
-    print(file.exists(corr_rda_file))
-    print(corr_rda_file)
+    data_name <- paste("z", corr, "7p4t", sep = "_")
+    corr_rda_file <- paste(getwd(), data_path, rda_name, sep = "/")
 
-    # load both tables (matrices)
-    # load(file = "./data/z_sk_chart_7p4t.rda")
+    # load file with correlation calculations
     load(file = corr_rda_file)
+    # data(data_name)
 
     # create tidy data for z from SK chart
     sk_short <- cbind(as.double(rownames(sk_short)), sk_short)  # new column for Tpr
