@@ -59,4 +59,14 @@ test_that("z_correlations matches the short names of the correlations", {
 
 context("z.plot.range")
 
+test_that("z.plot.range work for Hall-Yarborough", {
+    expect_silent(z.plot.range("HY"))
+    expect_silent(z.plot.range("HY", pprRange = "hp"))
+    expect_silent(z.plot.range("HY", pprRange = "lp"))
+
+    expect_silent(z.plot.range("DAK"))
+    expect_silent(z.plot.range("DAK", pprRange = "hp"))
+    expect_silent(z.plot.range("DAK", pprRange = "lp"))
+})
+
 
