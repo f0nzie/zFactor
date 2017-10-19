@@ -29,7 +29,7 @@ SK.genDataset7p4t <- function(to_disk = FALSE) {
 #' Generate a dataset of z values read from Standing-Kats chart
 #'
 #' @export
-HY.genDataset7p4t <- function() {
+HY.genDataset7p4t <- function(to_disk = FALSE) {
     # create table from values read from SK chart
     ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5)
     tpr <- c(1.3, 1.5, 1.7, 2)
@@ -42,14 +42,16 @@ HY.genDataset7p4t <- function() {
 
 
     # 7 pressure and 4 temperatures
-    save(hy_short, file = "./data/z_hy_7p4t.rda")
+    if (to_disk) save(hy_short, file = "./data/z_hy_7p4t.rda")
+    invisible(hy_short)
 }
+
 
 
 #' Generate a dataset of z values calculated by DAK
 #'
 #' @export
-DAK.genDataset7p4t <- function() {
+DAK.genDataset7p4t <- function(to_disk = FALSE) {
     # create table from values read from SK chart
     ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5)
     tpr <- c(1.3, 1.5, 1.7, 2)
@@ -60,16 +62,17 @@ DAK.genDataset7p4t <- function() {
     rownames(dak_short) <- tpr
     colnames(dak_short) <- ppr
 
-
     # 7 pressure and 4 temperatures
-    save(dak_short, file = "./data/z_dak_7p4t.rda")
+    if (to_disk) save(dak_short, file = "./data/z_dak_7p4t.rda")
+    invisible(dak_short)
 }
+
 
 
 #' Generate a dataset of z values calculated by DPR
 #'
 #' @export
-DPR.genDataset7p4t <- function() {
+DPR.genDataset7p4t <- function(to_disk = FALSE) {
     # create table from values read from SK chart
     ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5)
     tpr <- c(1.3, 1.5, 1.7, 2)
@@ -80,10 +83,11 @@ DPR.genDataset7p4t <- function() {
     rownames(dpr_short) <- tpr
     colnames(dpr_short) <- ppr
 
-
     # 7 pressure and 4 temperatures
-    save(dpr_short, file = "./data/z_dpvr_7p4t.rda")
+    if (to_disk) save(dpr_short, file = "./data/z_dpvr_7p4t.rda")
+    invisible(dpr_short)
 }
+
 
 
 HY.genDatasetDif <- function() {
