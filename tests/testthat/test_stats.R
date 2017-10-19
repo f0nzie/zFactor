@@ -1,29 +1,23 @@
+
 library(testthat)
 
 
-# context("z.stats")
-#
-# test_that("z.stats generates same dataframe size for all correlations", {
-#     sh_corrs <- (zFactor:::z_correlations$short)
-#     mean_mape <- vector("numeric")
-#     for (corr in sh_corrs) {
-#         expect_equal(dim(z.stats(corr)), c(112, 8))
-#         mape <- z.stats(corr)$MAPE
-#         # print(corr); print(max(mape)); print(min(mape)); print(mean(mape))
-#         mean_mape <- c(mean_mape, mean(mape))
-#
-#     }
-#     names(mean_mape) <- sh_corrs
-#     # row.names(mean_mape) <- "MAPE"
-#     # print(z.stats(corr))
-#     # mape <- z.stats(corr)$MAPE
-#     # print(max(mape)) # 85.48267
-#     # print(min(mape)) # 0.000507908
-#     # print(median(mape)) # 0.000507908
-#     # print(Mode(mape)) # 0.000507908
-#     # print(fivenum(mape)) # 0.000507908
-#     print(mean_mape)
-# })
+context("z.stats")
+
+test_that("z.stats generates same dataframe size for all correlations", {
+    sh_corrs <- (zFactor:::z_correlations$short)
+    mean_mape <- vector("numeric")
+    # for (corr in sh_corrs) {
+    #     expect_equal(dim(z.stats(corr)), c(112, 8))
+    #     mape <- z.stats(corr)$MAPE
+    #     # print(corr); print(max(mape)); print(min(mape)); print(mean(mape))
+    #     mean_mape <- c(mean_mape, mean(mape))
+    # }
+    # sapply(sh_corrs, function(corr)
+    #     expect_equal(dim(z.stats(corr)), c(112,8)))
+    sapply(sh_corrs, function(corr)
+        print(mean(z.stats(corr)$MAPE)))
+})
 
 
 
