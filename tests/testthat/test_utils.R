@@ -97,3 +97,19 @@ test_that("createTidyFromMatrix if correlation not provided", {
     expect_error(createTidyFromMatrix(ppr, tpr, "XYZ"), expected)
 })
 
+
+
+context("isValid_correlation")
+
+test_that("isValid_correlation provided with wrong keyword", {
+    expect_false(isValid_correlation("XYZ"))
+})
+
+
+test_that("isValid_correlation", {
+    expect_false(isValid_correlation(""))
+})
+
+test_that("isValid_correlation fails when provided lowercase", {
+    expect_false(isValid_correlation("hy"))
+})
