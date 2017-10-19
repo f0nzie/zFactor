@@ -122,18 +122,20 @@ HY.genDatasetDif <- function(to_disk = FALSE) {
 
 }
 
-genDatasetDif <- function(correlation = "HY") {
+
+genDatasetDif <- function(correlation = "HY", to_disk = FALSE) {
     # generic function
     # convert to tidy table for z values calculated by HY and read from SK chart
     pkg_data_path <- system.file("data", package = "zFactor")
-
+    print(dir(pkg_data_path))
     corr <- tolower(correlation)
     rda_name <- paste(paste("z", corr, "7p4t", sep = "_"), "rda", sep = ".")
     # ds_name <- paste(pkg_data_path, rda_name, sep = "/")
     corr_rda_file <- paste(pkg_data_path, rda_name, sep = "/")
-
+    print(file.exists(corr_rda_file))
+    print(corr_rda_file)
     # load both tables (matrices)
-    load(file = "./data/z_sk_chart_7p4t.rda")
+    # load(file = "./data/z_sk_chart_7p4t.rda")
     load(file = corr_rda_file)
 
     # create tidy data for z from SK chart
@@ -155,6 +157,8 @@ genDatasetDif <- function(correlation = "HY") {
 
     dif_name <- paste(paste(corr, "dif", sep = "_"), "rda", sep = ".")
     dif_file <- paste(pkg_data_path, dif_name, sep = "/")
-    save(hy_dif, file = dif_file)
+
+    if (to_disk)  save(hy_dif, file = dif_file)
+    invisible(hy_dif)
 
 }
