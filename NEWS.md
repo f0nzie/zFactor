@@ -1,4 +1,5 @@
 ## 20171018 0.1.6.9011
+* add citations to Papp vignette
 * add correlation titles to sub-sections in README
 * update README with references to new authors
 * add two authors to bibliography: Takacs and Papp

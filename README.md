@@ -39,7 +39,7 @@ Versions
 --------
 
 -   In CRAN: `v 0.1.6`
--   In GitHub `dev-0.1.6.9010`
+-   In GitHub `dev-0.1.6.9011`
 
 Installation
 ------------
