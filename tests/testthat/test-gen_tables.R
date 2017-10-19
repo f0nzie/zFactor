@@ -51,19 +51,18 @@ context("HY.genDatasetDif ")
 
 test_that("HY.genDatasetDif  dimension correct", {
     result <- zFactor:::HY.genDatasetDif()
-    print(result)
     expect_equal(dim(result), c(28, 5))
 })
 
 
 
-# context("genDatasetDif ")
-#
-# test_that("genDatasetDif  dimension correct", {
-#     result <- zFactor:::genDatasetDif()
-#     print(result)
-#     # expect_equal(dim(result), c(28, 5))
-# })
+context("genDatasetDif ")
+
+test_that("genDatasetDif  dimension correct", {
+    result <- zFactor:::genDatasetDif()
+    print(result)
+    # expect_equal(dim(result), c(28, 5))
+})
 
 
 
