@@ -94,10 +94,5 @@ test_that("isValid_correlation fails when provided lowercase", {
 
 
 
-context("is_missing_correlation")
-
-test_that("is_missing_correlation", {
-    print(zFactor:::is_missing_correlation("HY"))
-})
 
 
