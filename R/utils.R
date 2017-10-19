@@ -113,7 +113,11 @@ combineCorrWithSK <- function(sk_df, co_df) {
 #' createTidyFromMatrix(ppr, tpr, correlation = "DAK")
 #' createTidyFromMatrix(ppr, tpr, correlation = "BB")
 createTidyFromMatrix <- function(ppr_vector, tpr_vector, correlation) {
-    isMissing_correlation(correlation)
+    # is_missing_correlation(correlation)
+    msg <- "You have to provide a z-factor correlation: "
+    msg_missing <- paste(msg, paste(get_z_correlations(), collapse = " "))
+    if (missing(correlation)) stop(msg_missing)
+
     if (!isValid_correlation(correlation)) stop("Not a valid correlation.")
 
     zFunction <- get(z_correlations[which(z_correlations["short"] == correlation),
@@ -132,11 +136,10 @@ createTidyFromMatrix <- function(ppr_vector, tpr_vector, correlation) {
 }
 
 
-isMissing_correlation <- function(correlation) {
+is_missing_correlation <- function(correlation) {
     # stops if correlation argument is missing
     msg <- "You have to provide a z-factor correlation: "
-    msg_missing <- paste(msg,
-                         paste(get_z_correlations(), collapse = " "))
+    msg_missing <- paste(msg, paste(get_z_correlations(), collapse = " "))
     if (missing(correlation)) stop(msg_missing)
     else NULL
 }

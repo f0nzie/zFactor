@@ -31,8 +31,6 @@ test_that("get_z_correlations return wrong parameter", {
 
 
 
-
-
 context("createTidyFromMatrix")
 
 test_that("createTidyFromMatrix", {
@@ -96,10 +94,10 @@ test_that("isValid_correlation fails when provided lowercase", {
 
 
 
-# context("isMissing_correlation")
-#
-# test_that("isMissing_correlation", {
-#     print(zFactor:::isMissing_correlation("HY"))
-# })
+context("is_missing_correlation")
+
+test_that("is_missing_correlation", {
+    print(zFactor:::is_missing_correlation("HY"))
+})
 
 
