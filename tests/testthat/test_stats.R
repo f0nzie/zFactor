@@ -1,4 +1,3 @@
-
 library(testthat)
 
 
@@ -64,9 +63,11 @@ test_that("z.plot.range work for Hall-Yarborough", {
     expect_silent(z.plot.range("HY", pprRange = "hp"))
     expect_silent(z.plot.range("HY", pprRange = "lp"))
 
-    expect_silent(z.plot.range("DAK"))
-    expect_silent(z.plot.range("DAK", pprRange = "hp"))
-    expect_silent(z.plot.range("DAK", pprRange = "lp"))
 })
 
+test_that("z.plot.range work for Hall-Yarborough", {
+    expected <- "You have to provide a z-factor correlation:  BB HY DAK DPR SH N10 PP"
+    expect_error(z.plot.range(), expected)
+
+})
 
