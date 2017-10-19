@@ -2,7 +2,7 @@
 #' Generate a dataset of z values read from Standing-Kats chart
 #'
 #' @export
-SK.genDataset7p4t <- function() {
+SK.genDataset7p4t <- function(to_disk = FALSE) {
     # create table from values read from SK chart
     ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5)
     tpr <- c(1.3, 1.5, 1.7, 2)
@@ -21,7 +21,8 @@ SK.genDataset7p4t <- function() {
     colnames(sk_short) <- ppr
 
     # 7 pressure and 4 temperatures
-    save(sk_short, file = "./data/z_sk_chart_7p4t.rda")
+    if (to_disk) save(sk_short, file = "./data/z_sk_chart_7p4t.rda")
+    invisible(sk_short)
 }
 
 
