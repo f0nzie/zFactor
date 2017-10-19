@@ -14,10 +14,16 @@ vignette: >
 knitr::opts_chunk$set(echo=T, comment=NA, error=T, warning=F, message = F, fig.align = 'center', results="hold")
 ```
 
+```{r echo=FALSE, warning=FALSE}
+suppressPackageStartupMessages(library(knitcitations))
+knitcitations::cleanbib()
+bib_file <- system.file("doc", "bibliography.bib", package = "zFactor")
+bib <- read.bibtex(bib_file)
+```
 
 ## Papp correlation
 
-> add references here
+This is an explicit correlation by *I. Papp* ``r citep(bib[c("Papp1979")])`` mentioned in the comparative analysis paper by Gabor Takacs ``r citep(bib[c("Takacs1989")])``. The original paper is not available in English but Prof. Takacs describe the equation in his paper of 1989. 
 
 
 ## Get `z` at selected `Ppr` and `Tpr`
@@ -281,5 +287,7 @@ as.tibble(smry_tpr_ppr)
 ```
 
 ## References
-
+```{r results="asis", echo=FALSE}
+bibliography(style="citation")
+```
 
