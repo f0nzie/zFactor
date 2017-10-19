@@ -1,12 +1,19 @@
+## 20171018 0.1.6.9011
+* add citations to Papp vignette
+* add correlation titles to sub-sections in README
+* update README with references to new authors
+* add two authors to bibliography: Takacs and Papp
+
 ## 20171018 0.1.6.9010
-* change Papay to Papp in README, _pkgdown.yaml, vignette, util.R
+* change wrong Papay name to Papp in README, _pkgdown.yaml, vignette, util.R
+* refresh site sending develop ./docs to branch `gh-pages using `git subtree`  
 
 ## 20171018 0.1.6.9009
 * use a different git workflow
 * delete unused tags in remote and local
 * use "git subtree push --prefix docs origin gh-pages" in the Linux VM to send ./docs to remote branch gh-pages
 
-## 20171016, 0.1.7.9008
+## 20171016, 0.1.6.9008
 * add vignette for Papay
 * add function z.Papay
 * fix Beggs-Brill vignette
@@ -15,16 +22,16 @@
 * TODO: add Papp's correlation
 
 
-## 20171016, 0.1.7.9007
+## 20171016, 0.1.6.9007
 * add travis.yml
 * add code coverage with covr
 * add badges to README
 * rename couple of Rda files in ./data
 
-## 20171010, 0.1.7.9006
+## 20171010, 0.1.6.9006
 * fix Rmd for Standing-Katz notebook
 
-## 20171008, 0.1.7.9005
+## 20171008, 0.1.6.9005
 * small changes in the write-up of the README
 * fix case in multiplotStandingKatz() when a vector of length 1 is specified
 * ignore extra files in .Rbuildignore
@@ -33,33 +40,32 @@
 * move multiplot function to StandingKatz.R
 * add some stops to functions
 
-## 20171008, 0.1.7.9004
+## 20171008, 0.1.6.9004
 * customize navbar
 * change menu to cerulean. 
 * customize order of vignettes. 
 * categorize functions.
 
-## 20171008, 0.1.7.9003
+## 20171008, 0.1.6.9003
 * remove rdocumentation badge, it was static. changed to CRAN badge.
 
-## 20171008, 0.1.7.9002
+## 20171008, 0.1.6.9002
 * add URL to description
 * remove middle name from author
 
-## 20171008, 0.1.7.9001
+## 20171008, 0.1.6.9001
 * Rebuild site after updates
 * minor cosmetic changes in README
 * add a link to wikipedia (MAPE)
 
-## 20171008, 0.1.7.9000
+## 20171008, 0.1.6.9000
+* correct misspelled "hyddrocarbons". Noted by CRAN.
+* resubmit to CRAN
 * Build the package with `pkgdown`
 * change author in description to use new way of adding authors
 * tested offline and website running
 * reinstalled package `rlang` to fix error during `pkgdown` installation
 
-## 20170703, 0.1.7
-* correct misspelled "hyddrocarbons". Noted by CRAN.
-* resubmit to CRAN
 
 ## 20170703, 0.1.6
 * to be released to CRAN.

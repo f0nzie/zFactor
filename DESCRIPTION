@@ -1,7 +1,7 @@
 Package: zFactor
 Type: Package
 Title: Calculate the Compressibility Factor 'z' for Hydrocarbon Gases
-Version: 0.1.6.9010
+Version: 0.1.6.9011
 Authors@R: person("Alfonso", "Reyes", role = c("aut", "cre"), email = "alfonso.reyes@oilgainsanalytics.com")
 Description: Computational algorithms to solve equations and find the
     compressibility factor `z` of hydrocarbon gases. Correlations available: 
@@ -11,8 +11,7 @@ Description: Computational algorithms to solve equations and find the
     comparison and plotting. Applicable to sweet hydrocarbon gases for now.
 Imports: rootSolve, tidyr, ggplot2, data.table, tibble, dplyr
 Suggests: knitr,
-    rmarkdown, testthat,
-    covr
+    rmarkdown, testthat, knitcitations, covr
 Depends:
     R (>= 2.10)    
 License: GPL-2
