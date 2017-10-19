@@ -1,7 +1,16 @@
 #' Get error summary statistics for any given compressibility correlation
 #'
 #' A quick way to show an error summary between any of the indicated correlations and
-#' the Standing-Katz chart
+#' the Standing-Katz chart.
+#'
+#'     MSE:   Mean Squared Error
+#'     RMSE:  Root Mean Squared Error
+#'     RSS:   Residual sum of Squares
+#'     RMSLE: Root Mean Squared Logarithmic Error. Penalizes understimation.
+#'     MAPE:  Mean Absolute Percentage Error = AARE
+#'     MPE:   Mean Percentage error = ARE
+#'     MAE:   Mean Absolute Error
+#'
 #' @param correlation identifier. Can be "HY", "DAK", "DPR" "N10", "SH"
 #' @param pprRange low (lp) or high (hp) chart area of the Standing-Katz chart
 #' @param interval quality of the Ppr scale. Coarse: every 1.0; Fine: every 0.5
@@ -24,7 +33,7 @@ z.stats <- function(correlation = "DAK", pprRange = "lp", interval = "coarse") {
 
     grouped <- group_by(sk_corr_all, Tpr, Ppr)
     smry_tpr_ppr <- summarise(grouped,
-                              RMSE= sqrt(mean((z.chart-z.calc)^2)),
+                              RMSE = sqrt(mean((z.chart-z.calc)^2)),
                               MPE = sum((z.calc - z.chart) / z.chart) * 100 / n(),
                               MAPE = sum(abs((z.calc - z.chart) / z.chart)) * 100 / n(),
                               MSE = sum((z.calc - z.chart)^2) / n(),
@@ -32,6 +41,22 @@ z.stats <- function(correlation = "DAK", pprRange = "lp", interval = "coarse") {
                               MAE = sum(abs(z.calc - z.chart)) / n()
     )
     smry_tpr_ppr
+}
+
+
+#' @title General statistics of z.stats tables
+#' @export
+stats_of_z.stats <- function() {
+    # Mode function from here:
+    # https://stackoverflow.com/a/8189441/5270873
+    Mode <- function(x) {
+        ux <- unique(x)
+        ux[which.max(tabulate(match(x, ux)))]
+    }
+    custom_functions <- c("mean", "max", "min", "median", "Mode")
+    sapply(corrs, function(corr)
+                sapply(custom_functions, function(f) get(f)(z.stats(corr)$MAPE)))
+
 }
 
 
