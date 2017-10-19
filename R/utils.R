@@ -52,7 +52,9 @@ get_z_correlations <- function(how = "short") {
 convertStringToVector <- function(str) {
     vs <- unlist(strsplit(str, " "))
     vs <- vs[lapply(vs, nchar) > 0]
-    vn <- as.numeric(vs)
+    # prevent warning message:  introducing NAs by coercion
+    # https://stackoverflow.com/a/14985152/5270873
+    vn <- suppressWarnings(as.numeric(vs))
     if(all(is.na(vn))) vt <- paste(trimws(vs), collapse = ", ")
     else vt <- paste(vn, collapse = ", ")
     paste0('c(', vt, ')')
@@ -132,7 +134,8 @@ createTidyFromMatrix <- function(ppr_vector, tpr_vector, correlation) {
 
 isMissing_correlation <- function(correlation) {
     # stops if correlation argument is missing
-    msg_missing <- paste("You have to provide a z-factor correlation: ",
+    msg <- "You have to provide a z-factor correlation: "
+    msg_missing <- paste(msg,
                          paste(get_z_correlations(), collapse = " "))
     if (missing(correlation)) stop(msg_missing)
     else NULL
