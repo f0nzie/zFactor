@@ -1,5 +1,7 @@
 library(testthat)
-context("test z.BeggsBrill")
+
+
+context("z.BeggsBrill")
 
 # test only one point at Ppr=0.5 and Tpr = 1.3
 test_that("BB matches z at Ppr=0.5 and Tpr=1.3", {
