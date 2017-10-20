@@ -18,6 +18,8 @@ boxplot(scorrs,  ylim= c(-2, 2), cex = 1.5, las=2, main = "MPE, y = (-2, 2)")
 grid()
 ```
 
+## MPE with with free y scale for all correlations
+
 ```{r}
 library(zFactor)
 qcorrs <- z.stats_quantile("MPE")
