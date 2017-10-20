@@ -1,8 +1,9 @@
 
 #' Generate a dataset of z values read from Standing-Kats chart
+#' @param to_disk logical indicator to save Rda file to disk. Default FALSE
 #'
 #' @export
-SK.genDataset7p4t <- function() {
+SK.genDataset7p4t <- function(to_disk = FALSE) {
     # create table from values read from SK chart
     ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5)
     tpr <- c(1.3, 1.5, 1.7, 2)
@@ -21,14 +22,16 @@ SK.genDataset7p4t <- function() {
     colnames(sk_short) <- ppr
 
     # 7 pressure and 4 temperatures
-    save(sk_short, file = "./data/z_sk_chart_7p4t.rda")
+    if (to_disk) save(sk_short, file = "./data/z_sk_chart_7p4t.rda")
+    invisible(sk_short)
 }
 
 
 #' Generate a dataset of z values read from Standing-Kats chart
+#' @param to_disk logical indicator to save Rda file to disk. Default FALSE
 #'
 #' @export
-HY.genDataset7p4t <- function() {
+HY.genDataset7p4t <- function(to_disk = FALSE) {
     # create table from values read from SK chart
     ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5)
     tpr <- c(1.3, 1.5, 1.7, 2)
@@ -41,14 +44,16 @@ HY.genDataset7p4t <- function() {
 
 
     # 7 pressure and 4 temperatures
-    save(hy_short, file = "./data/z_hy_7p4t.rda")
+    if (to_disk) save(hy_short, file = "./data/z_hy_7p4t.rda")
+    invisible(hy_short)
 }
 
 
+
 #' Generate a dataset of z values calculated by DAK
-#'
+#' @param to_disk logical indicator to save Rda file to disk. Default FALSE
 #' @export
-DAK.genDataset7p4t <- function() {
+DAK.genDataset7p4t <- function(to_disk = FALSE) {
     # create table from values read from SK chart
     ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5)
     tpr <- c(1.3, 1.5, 1.7, 2)
@@ -59,16 +64,17 @@ DAK.genDataset7p4t <- function() {
     rownames(dak_short) <- tpr
     colnames(dak_short) <- ppr
 
-
     # 7 pressure and 4 temperatures
-    save(dak_short, file = "./data/z_dak_7p4t.rda")
+    if (to_disk) save(dak_short, file = "./data/z_dak_7p4t.rda")
+    invisible(dak_short)
 }
 
 
+
 #' Generate a dataset of z values calculated by DPR
-#'
+#' @param to_disk logical indicator to save Rda file to disk. Default FALSE
 #' @export
-DPR.genDataset7p4t <- function() {
+DPR.genDataset7p4t <- function(to_disk = FALSE) {
     # create table from values read from SK chart
     ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5)
     tpr <- c(1.3, 1.5, 1.7, 2)
@@ -79,19 +85,20 @@ DPR.genDataset7p4t <- function() {
     rownames(dpr_short) <- tpr
     colnames(dpr_short) <- ppr
 
-
     # 7 pressure and 4 temperatures
-    save(dpr_short, file = "./data/z_dpvr_7p4t.rda")
+    if (to_disk) save(dpr_short, file = "./data/z_dpvr_7p4t.rda")
+    invisible(dpr_short)
 }
 
 
-HY.genDatasetDif <- function() {
+
+HY.genDatasetDif <- function(to_disk = FALSE) {
     # convert to tidy table for z values calculated by HY and read from SK chart
-    # library(tidyr)
 
     # load both tables (matrices)
-    load(file = "./data/z_sk_chart_7p4t.rda")
+    # load(file = "./data/z_sk_chart_7p4t.rda")
     load(file = "./data/z_hy_7p4t.rda")
+    # data("z_hy_7p4t")
 
     # create tidy data for z from SK chart
     sk_short <- cbind(as.double(rownames(sk_short)), sk_short)  # new column for Tpr
@@ -112,23 +119,23 @@ HY.genDatasetDif <- function() {
 
     colnames(hy_dif)[1:2] <- c("Tpr", "Ppr")
 
-    save(hy_dif, file = "./data/hy_dif.rda")
-
+    if (to_disk) save(hy_dif, file = "./data/hy_dif.rda")
+    invisible(hy_dif)
 }
 
-genDatasetDif <- function(correlation = "HY") {
+
+genDatasetDif <- function(correlation = "HY", to_disk = FALSE) {
     # generic function
     # convert to tidy table for z values calculated by HY and read from SK chart
-    pkg_data_path <- system.file("data", package = "zFactor")
-
+    data_path <- "data"
     corr <- tolower(correlation)
     rda_name <- paste(paste("z", corr, "7p4t", sep = "_"), "rda", sep = ".")
-    # ds_name <- paste(pkg_data_path, rda_name, sep = "/")
-    corr_rda_file <- paste(pkg_data_path, rda_name, sep = "/")
+    data_name <- paste("z", corr, "7p4t", sep = "_")
+    corr_rda_file <- paste(getwd(), data_path, rda_name, sep = "/")
 
-    # load both tables (matrices)
-    load(file = "./data/z_sk_chart_7p4t.rda")
+    # load file with correlation calculations
     load(file = corr_rda_file)
+    # data(data_name)
 
     # create tidy data for z from SK chart
     sk_short <- cbind(as.double(rownames(sk_short)), sk_short)  # new column for Tpr
@@ -148,7 +155,10 @@ genDatasetDif <- function(correlation = "HY") {
     colnames(hy_dif)[1:2] <- c("Tpr", "Ppr")
 
     dif_name <- paste(paste(corr, "dif", sep = "_"), "rda", sep = ".")
-    dif_file <- paste(pkg_data_path, dif_name, sep = "/")
-    save(hy_dif, file = dif_file)
+    # dif_file <- paste(pkg_data_path, dif_name, sep = "/")
+    dif_file <- paste(data_path, dif_name, sep = "/")
 
+    if (to_disk)  save(hy_dif, file = dif_file)
+    invisible(hy_dif)
 }
+

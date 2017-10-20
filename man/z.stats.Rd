@@ -15,7 +15,16 @@ z.stats(correlation = "DAK", pprRange = "lp", interval = "coarse")
 }
 \description{
 A quick way to show an error summary between any of the indicated correlations and
-the Standing-Katz chart
+the Standing-Katz chart.
+}
+\details{
+MSE:   Mean Squared Error
+    RMSE:  Root Mean Squared Error
+    RSS:   Residual sum of Squares
+    RMSLE: Root Mean Squared Logarithmic Error. Penalizes understimation.
+    MAPE:  Mean Absolute Percentage Error = AARE
+    MPE:   Mean Percentage error = ARE
+    MAE:   Mean Absolute Error
 }
 \examples{
 # error statistics for the Dranchuk-AbouKassem correlation
