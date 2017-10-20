@@ -55,7 +55,7 @@ stats_of_z.stats <- function() {
         ux <- unique(x)
         ux[which.max(tabulate(match(x, ux)))]
     }
-    sh_corrs <- z_correlations$short
+    corrs <- z_correlations$short
     custom_functions <- c("mean", "max", "min", "median", "Mode")
     sapply(corrs, function(corr)
                 sapply(custom_functions, function(f) get(f)(z.stats(corr)$MAPE)))
