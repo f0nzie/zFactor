@@ -1,3 +1,10 @@
+## 20171019 0.1.6.9012
+* add unit tests up to coverage 89%
+* improve couple of functions: convertStringToVector , 
+* add function stats_of_z.stats 
+* add three datasets to ./tests/testthat/data
+
+
 ## 20171018 0.1.6.9011
 * add citations to Papp vignette
 * add correlation titles to sub-sections in README
