@@ -3,20 +3,65 @@ title: "R Notebook"
 output: html_notebook
 ---
 
+## Boxplots of MPE for selected correlations
+
+```{r}
+library(zFactor)
+qcorrs <- z.stats_quantile("MPE")
+scorrs <- qcorrs[, c("HY", "DAK", "DPR", "N10")]
+
+par(mfrow = c(1,2))
+boxplot(scorrs,  ylim= c(-2, 25), cex = 1.5, las=2, main = "MPE, y = (-2, 25)")
+grid()
+
+boxplot(scorrs,  ylim= c(-2, 2), cex = 1.5, las=2, main = "MPE, y = (-2, 2)")
+grid()
+```
+
+```{r}
+library(zFactor)
+qcorrs <- z.stats_quantile("MPE")
+
+boxplot(qcorrs,  cex = 1.5, las=2, main = "MPE")
+grid()
+```
+
+## Boxplots for MAE at different `y` scale
+
+```{r}
+library(zFactor)
+qcorrs <- z.stats_quantile("MPE")
+
+par(mfrow = c(1,3))
+boxplot(qcorrs,  ylim= c(-600, 100), cex = 1.5, las=2, main = "MPE, y = (-4, 100)")
+grid()
+boxplot(qcorrs,  ylim= c(-4, 30), cex = 1.5, las=2, main = "MPE, y = (-4, 30)")
+grid()
+boxplot(qcorrs,  ylim= c(-4, 6), cex = 1.5, las=2, main = "MPE, y = (-4, 6)")
+grid()
+```
+
+
 ## Boxplots for four statistical indicators for all correlations
 
 ```{r fig.asp=1}
 library(zFactor)
-qcorrs <- z.stats_quantile("RMSE")
 
+qcorrs <- z.stats_quantile("RMSE")
 par(mfrow = c(2,2))
 boxplot(qcorrs, log = "y", ylim =  c(1e-6, 1e3), las=2, main = "RMSE")
 grid()
+
+qcorrs <- z.stats_quantile("MAPE")
 boxplot(qcorrs, log = "y", ylim =  c(1e-6, 1e3), las=2, main = "MAPE")
 grid()
-boxplot(qcorrs, log = "y", ylim = c(1e-6, 1e3), las=2, main = "MSE")
+
+qcorrs <- z.stats_quantile("MSE")
+boxplot(qcorrs, log = "y", ylim = c(1e-12, 1e3), las=2, main = "MSE")
 grid()
-boxplot(qcorrs, log = "y", ylim = c(1e-6, 1e3), las=2, main = "RSE")
+
+qcorrs <- z.stats_quantile("RSS")
+boxplot(qcorrs, log = "y", ylim = c(1e-12, 1e3), las=2, main = "RSS")
 grid()
 ```
 
