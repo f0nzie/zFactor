@@ -94,12 +94,11 @@ DPR.genDataset7p4t <- function(to_disk = FALSE) {
 
 HY.genDatasetDif <- function(to_disk = FALSE) {
     # convert to tidy table for z values calculated by HY and read from SK chart
-    # library(tidyr)
 
     # load both tables (matrices)
     # load(file = "./data/z_sk_chart_7p4t.rda")
-    # load(file = "./data/z_hy_7p4t.rda")
-    data("z_hy_7p4t")
+    load(file = "./data/z_hy_7p4t.rda")
+    # data("z_hy_7p4t")
 
     # create tidy data for z from SK chart
     sk_short <- cbind(as.double(rownames(sk_short)), sk_short)  # new column for Tpr
@@ -122,7 +121,6 @@ HY.genDatasetDif <- function(to_disk = FALSE) {
 
     if (to_disk) save(hy_dif, file = "./data/hy_dif.rda")
     invisible(hy_dif)
-
 }
 
 
@@ -162,5 +160,5 @@ genDatasetDif <- function(correlation = "HY", to_disk = FALSE) {
 
     if (to_disk)  save(hy_dif, file = dif_file)
     invisible(hy_dif)
-
 }
+
