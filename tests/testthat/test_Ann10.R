@@ -1,7 +1,8 @@
 library(testthat)
 library(zFactor)
 
-context("test Artificial Neural Networks ANN10")
+
+context("Artificial Neural Networks ANN10")
 
 test_that("Tpr=2 and Ppr=1.5 matches z value", {
     expect_equal(z.Ann10(pres.pr = 1.5, temp.pr = 2.0), 0.9572277, tolerance = 1e-7)
