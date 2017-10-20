@@ -31,10 +31,6 @@ Now, what if we take t
 
 We use this time the function `z.stats_quantile`
 
-```{r}
-
-```
-
 
 ## Boxplots for MPE at different `y` scale
 
@@ -53,11 +49,11 @@ grid()
 
 ## Boxplots for four statistical indicators for all correlations
 
-```{r fig.asp=1}
+```{r}
 library(zFactor)
 
 qcorrs <- z.stats_quantile("RMSE")
-par(mfrow = c(2,2))
+# op <- par(mfrow = c(1,4))
 boxplot(qcorrs, log = "y", ylim =  c(1e-6, 1e3), las=2, main = "RMSE")
 grid()
 
@@ -72,6 +68,7 @@ grid()
 qcorrs <- z.stats_quantile("RSS")
 boxplot(qcorrs, log = "y", ylim = c(1e-12, 1e3), las=2, main = "RSS")
 grid()
+# par(op)
 ```
 
 What we find out here is that four of the correlations show plenty of variation. The trends are similars since the statistical function originate from the sequare of the error.
@@ -118,3 +115,5 @@ grid()
 Still N10 is the correlation with less dispersion of the MPE. But any other three are still acceptable. DAK better than HY. 
 
 If you are uncomfortable with the results of the neural network correlation, there is still a backup correlation to go to DAK. There is this little problem: neural network results are too good. But there is no physics and no experiment behind.
+
+This leaves a lesson: 
