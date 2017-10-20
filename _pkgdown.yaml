@@ -19,7 +19,7 @@ reference:
       desc: ~
       contents:
         - '`get_z_correlations`'
-        - '`z.stats`'
+
         - '`z.HallYarborough`'
         - '`z.BeggsBrill`'
         - '`z.DranchukAbuKassem`'
@@ -27,6 +27,12 @@ reference:
         - '`z.Shell`'
         - '`z.Ann10`'
         - '`z.Papp`'
+    - title: Statistics
+      desc: ~
+      contents:
+        - '`z.stats`'
+        - '`z.stats_quantile`'
+        - '`stats_of_z.stats`'
     - title: Datasets
       desc: ~
       contents:
@@ -58,6 +64,8 @@ navbar:
           href: index.html
         - text: "Vignettes"
           menu:
+            - text: Selecting the Correlation
+              href: articles/correlation_selection.html
             - text: Standing-Katz chart
               href: articles/StandingKatz_chart.html
             - text: Plot Stand-Katz curves
