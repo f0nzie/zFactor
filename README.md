@@ -39,7 +39,7 @@ Versions
 --------
 
 -   In CRAN: `v 0.1.6`
--   In GitHub `dev-0.1.6.9011`
+-   In GitHub `dev-0.1.6.9012`
 
 Installation
 ------------
@@ -310,6 +310,28 @@ as.tibble(smry_tpr_ppr)
 #> 10   1.1   2.5 0.0190546763  4.8485181  4.8485181 3.630807e-04
 #> # ... with 102 more rows, and 3 more variables: RSS <dbl>, MAE <dbl>,
 #> #   RMLSE <dbl>
+```
+
+Summary of MAPE statistics
+--------------------------
+
+This function shows a statistical summary of the Mean Absolute Percentage Error of all the correlations. We are taking the mean, maximum error, minimum eroor, the median and the mode in the whole range of each opf the correlations.
+
+``` r
+library(zFactor)
+stats_of_z.stats()
+#>                 BB           HY          DAK         DPR         SH
+#> mean    13.8862628  0.818657798  0.769721132  0.81237862  4.1530402
+#> max    554.1872335 22.481448009 12.777908779 12.96594664 30.3942954
+#> min      0.0153618  0.002422012  0.000609287  0.02057809  0.0231023
+#> median   1.0402029  0.220154744  0.245336341  0.26714131  1.1092930
+#> Mode     0.4281138  0.418077023  0.128870880  0.11769033  0.4389189
+#>                N10           PP
+#> mean   0.163515716  2.098729377
+#> max    1.153159851 85.482666496
+#> min    0.007209524  0.000507908
+#> median 0.123437923  0.670820910
+#> Mode   0.419773370  0.559623816
 ```
 
 Vignettes
