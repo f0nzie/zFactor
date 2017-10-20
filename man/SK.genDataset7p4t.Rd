@@ -4,7 +4,10 @@
 \alias{SK.genDataset7p4t}
 \title{Generate a dataset of z values read from Standing-Kats chart}
 \usage{
-SK.genDataset7p4t()
+SK.genDataset7p4t(to_disk = FALSE)
+}
+\arguments{
+\item{to_disk}{logical indicator to save Rda file to disk. Default FALSE}
 }
 \description{
 Generate a dataset of z values read from Standing-Kats chart

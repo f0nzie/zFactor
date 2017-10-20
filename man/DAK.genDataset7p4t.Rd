@@ -4,7 +4,10 @@
 \alias{DAK.genDataset7p4t}
 \title{Generate a dataset of z values calculated by DAK}
 \usage{
-DAK.genDataset7p4t()
+DAK.genDataset7p4t(to_disk = FALSE)
+}
+\arguments{
+\item{to_disk}{logical indicator to save Rda file to disk. Default FALSE}
 }
 \description{
 Generate a dataset of z values calculated by DAK
