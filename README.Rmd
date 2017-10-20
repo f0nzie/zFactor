@@ -242,6 +242,16 @@ smry_tpr_ppr <- summarise(grouped,
 as.tibble(smry_tpr_ppr)
 ```
 
+## Summary of MAPE statistics
+This function shows a statistical summary of the Mean Absolute Percentage Error of all the correlations. We are taking the mean, maximum error, minimum eroor, the median and the mode in the whole range of each opf the correlations.
+
+```{r}
+library(zFactor)
+stats_of_z.stats()
+```
+
+
+
 ## Vignettes
 The vignettes contain examples on the use and analysis of the various correlations.
 
