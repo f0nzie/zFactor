@@ -1,8 +1,6 @@
 library(testthat)
 
 
-
-
 context("getStandingKatzCurve()")
 
 test_that("Tpr=2.4 matches values in file", {
@@ -168,3 +166,22 @@ test_that("getStandingKatzMatrix ppr, tpr", {
     # print(getStandingKatzMatrix(ppr, tpr, "hp"))
     expect_equal(dim(getStandingKatzMatrix(ppr, tpr)), c(2, 2))
 })
+
+
+
+context("getStandingKatzData")
+
+test_that("getStandingKatzData, default", {
+    expect_equal(dim(getStandingKatzData()), c(36, 5))
+})
+
+test_that("getStandingKatzData, default", {
+    expect_equal(dim(getStandingKatzData(pprRange = "lp")), c(36, 5))
+})
+
+
+test_that("getStandingKatzData, default", {
+    expect_equal(dim(getStandingKatzData(pprRange = "hp")), c(5, 5))
+})
+
+
