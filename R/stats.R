@@ -44,14 +44,17 @@ z.stats <- function(correlation = "DAK", pprRange = "lp", interval = "coarse") {
 }
 
 
-#' @title Calculate the quantiles for any of the statistical variables in z.stats
+#' @title Quantiles for z.stats
+#' @description Calculate the quantiles for any of the statistical variables
+#' that originates from calling z.stats
 #' @param stat Any of the statistical variables in z.stats:
 #' RMSE, MPRE, MAPE, MSE, RSS, MAE
 #' @export
+#' @importFrom stats quantile
 z.stats_quantile <- function(stat = "MAPE") {
     cols <- ncol(z.stats())
     z.stats_stats <- names(z.stats())[3:cols]
-    corrs <- zFactor:::z_correlations$short
+    corrs <- z_correlations$short
     sapply(corrs, function(corr) quantile(z.stats(corr)[[stat]] ))
 }
 
