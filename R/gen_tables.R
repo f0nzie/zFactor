@@ -1,5 +1,6 @@
 
 #' Generate a dataset of z values read from Standing-Kats chart
+#' @param to_disk logical indicator to save Rda file to disk. Default FALSE
 #'
 #' @export
 SK.genDataset7p4t <- function(to_disk = FALSE) {
@@ -27,6 +28,7 @@ SK.genDataset7p4t <- function(to_disk = FALSE) {
 
 
 #' Generate a dataset of z values read from Standing-Kats chart
+#' @param to_disk logical indicator to save Rda file to disk. Default FALSE
 #'
 #' @export
 HY.genDataset7p4t <- function(to_disk = FALSE) {
@@ -49,7 +51,7 @@ HY.genDataset7p4t <- function(to_disk = FALSE) {
 
 
 #' Generate a dataset of z values calculated by DAK
-#'
+#' @param to_disk logical indicator to save Rda file to disk. Default FALSE
 #' @export
 DAK.genDataset7p4t <- function(to_disk = FALSE) {
     # create table from values read from SK chart
@@ -70,7 +72,7 @@ DAK.genDataset7p4t <- function(to_disk = FALSE) {
 
 
 #' Generate a dataset of z values calculated by DPR
-#'
+#' @param to_disk logical indicator to save Rda file to disk. Default FALSE
 #' @export
 DPR.genDataset7p4t <- function(to_disk = FALSE) {
     # create table from values read from SK chart

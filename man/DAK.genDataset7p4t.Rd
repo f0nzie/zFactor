@@ -4,7 +4,7 @@
 \alias{DAK.genDataset7p4t}
 \title{Generate a dataset of z values calculated by DAK}
 \usage{
-DAK.genDataset7p4t()
+DAK.genDataset7p4t(to_disk = FALSE)
 }
 \description{
 Generate a dataset of z values calculated by DAK

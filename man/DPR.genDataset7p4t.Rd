@@ -4,7 +4,7 @@
 \alias{DPR.genDataset7p4t}
 \title{Generate a dataset of z values calculated by DPR}
 \usage{
-DPR.genDataset7p4t()
+DPR.genDataset7p4t(to_disk = FALSE)
 }
 \description{
 Generate a dataset of z values calculated by DPR
