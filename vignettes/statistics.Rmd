@@ -42,6 +42,104 @@ smry_tpr_ppr
 
 
 ```{r}
+smry_tpr_105 <- smry_tpr_ppr[smry_tpr_ppr$Tpr=="1.05", ]
+smry_tpr_105
+```
+
+```{r}
+plot(smry_tpr_105$Ppr, smry_tpr_105$RMSE)
+```
+
+
+```{r}
+plot(smry_tpr_105$Ppr, smry_tpr_105$z.chart, type = "l")
+points(smry_tpr_105$Ppr, smry_tpr_105$z.calc, cex = 1.25)
+points(smry_tpr_105$Ppr, smry_tpr_105$RMSE)
+```
+
+
+
+```{r}
+library(ggplot2)
+ggplot(smry_tpr_ppr, aes(x = Ppr, y = z.chart, group = Tpr, color = Tpr)) + 
+    geom_line() + 
+    geom_point(aes(y=z.calc), col = "blue") +
+    geom_crossbar(aes(ymin=z.chart-RMSE, ymax=z.chart+RMSE), width = 0.25, col = "orange") +
+    geom_linerange(aes(ymin = z.chart-RMSE, ymax = z.chart+RMSE), col = "orange")
+
+ggplot(smry_tpr_ppr, aes(x=Ppr, y=RMSE)) +  geom_line() + geom_point()
+```
+
+
+```{r}
+# MPE
+library(ggplot2)
+ggplot(smry_tpr_105, aes(x = Ppr, y = z.chart)) + 
+    geom_line() + 
+    geom_point(aes(y=z.calc), col = "blue") +
+    geom_crossbar(aes(ymin=z.chart-MPE, ymax=z.chart+MPE), width = 0.25, col = "orange")
+    #+ geom_linerange(aes(ymin = z.chart-MPE, ymax = z.chart+MPE), col = "orange")
+
+ggplot(smry_tpr_105, aes(x=Ppr, y=MPE)) +  geom_line() + geom_point()
+```
+
+```{r}
+# MAPE
+
+library(ggplot2)
+ggplot(smry_tpr_105, aes(x = Ppr, y = z.chart)) + 
+    geom_line() + 
+    geom_point(aes(y=z.calc), col = "blue") +
+    geom_crossbar(aes(ymin=z.chart-MAPE, ymax=z.chart+MAPE), width = 0.25, col = "orange")
+    #+ geom_linerange(aes(ymin = z.chart-MPE, ymax = z.chart+MPE), col = "orange")
+
+ggplot(smry_tpr_105, aes(x=Ppr, y=MAPE)) +  geom_line() + geom_point()
+```
+
+
+
+```{r}
+# MSE
+
+library(ggplot2)
+ggplot(smry_tpr_105, aes(x = Ppr, y = z.chart)) + 
+    geom_line() + 
+    geom_point(aes(y=z.calc), col = "blue") +
+    geom_crossbar(aes(ymin=z.chart-MSE, ymax=z.chart+MSE), width = 0.25, col = "orange")
+    #+ geom_linerange(aes(ymin = z.chart-MPE, ymax = z.chart+MPE), col = "orange")
+
+ggplot(smry_tpr_105, aes(x=Ppr, y=MSE)) +  geom_line() + geom_point()
+```
+
+```{r}
+library(ggplot2)
+ggplot(smry_tpr_105, aes(x=Ppr, y=RSS)) +  geom_line() + geom_point()
+    #geom_point(aes(y=z.calc), col = "blue") +
+    #geom_crossbar(aes(ymin=z.chart-RSS, ymax=z.chart+RSS), width = 0.25, col = "orange")
+```
+
+```{r}
+library(ggplot2)
+ggplot(smry_tpr_105, aes(x=Ppr, y=MAE)) + 
+    geom_line() + geom_point()
+    #geom_point(aes(y=z.calc), col = "blue") +
+    #geom_crossbar(aes(ymin=z.chart-RSS, ymax=z.chart+RSS), width = 0.25, col = "orange")
+```
+
+```{r}
+# RSS
+
+library(ggplot2)
+ggplot(smry_tpr_105, aes(x = Ppr, y = z.chart)) + 
+    #geom_line() + 
+    #geom_point(aes(y=z.calc), col = "blue") +
+    geom_crossbar(aes(ymin=z.chart-RSS, ymax=z.chart+RSS), width = 0.25, col = "orange")
+    #+ geom_linerange(aes(ymin = z.chart-MPE, ymax = z.chart+MPE), col = "orange")
+
+ggplot(smry_tpr_105, aes(x=Ppr, y=RSS)) +  geom_line() + geom_point()
+```
+
+```{r}
 library(zFactor)
 library(tibble)
 
