@@ -2,6 +2,8 @@
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/zFactor)](https://cran.r-project.org/package=zFactor) [![Travis-CI Build Status](https://travis-ci.org/f0nzie/zFactor.svg?branch=master)](https://travis-ci.org/f0nzie/zFactor) [![codecov](https://codecov.io/gh/f0nzie/zFactor/branch/master/graph/badge.svg)](https://codecov.io/gh/f0nzie/zFactor)
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+$$MAPE = \\frac {100} {n} \\sum | \\frac {a\_t - f\_t} {a\_t}|$$
+
 zFactor
 =======
 
@@ -222,6 +224,12 @@ The comparative analysis shows tables with different error measurements:
     MPE:   Mean Percentage error = ARE
     MAE:   Mean Absolute Error
 
+``` r
+MAPE = sum(abs((z.calc - z.chart) / z.chart)) * 100 / n()
+```
+
+$MPE = \\frac {100%} {n} \\sum\_{t=1}^n \\frac {a\_t - f\_t} {a\_t}$
+
 What you can do with `zFactor`
 ------------------------------
 
@@ -242,13 +250,13 @@ library(zFactor)
 getStandingKatzCurve(tpr = 1.3, toView = FALSE, toSave = FALSE)
 ```
 
-![](man/figures/README-unnamed-chunk-12-1.png)
+![](man/figures/README-unnamed-chunk-13-1.png)
 
 ``` r
 getStandingKatzCurve(tpr = 1.05, pprRange = "lp", toView = FALSE, toSave = FALSE)
 ```
 
-![](man/figures/README-unnamed-chunk-12-2.png)
+![](man/figures/README-unnamed-chunk-13-2.png)
 
 ### Ploting all the `Tpr` curves of Standing-Katz chart using `lapply`, `getStandingKatzData` and `data.table::rbindlist`:
 
@@ -269,7 +277,7 @@ ggplot(all_tpr_df, aes(x=Ppr, y=z, group=Tpr, color=Tpr)) +
     geom_point()
 ```
 
-![](man/figures/README-unnamed-chunk-13-1.png)
+![](man/figures/README-unnamed-chunk-14-1.png)
 
 ### Build a table of statistical errors between a correlation and SK chart
 

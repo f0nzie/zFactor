@@ -27,6 +27,7 @@ bib <- read.bibtex(bib_file)
 
 
 
+
 # zFactor
 Computational tools for chemical, petrochemical and petroleum engineers. Calculates the deviation between different correlations for gas compressibility compared to the original Standing-Katz chart.
 
@@ -174,6 +175,8 @@ The comparative analysis shows tables with different error measurements:
     MAPE:  Mean Absolute Percentage Error = AARE
     MPE:   Mean Percentage error = ARE
     MAE:   Mean Absolute Error
+
+
 
 
 ## What you can do with `zFactor`
