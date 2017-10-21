@@ -1,6 +1,5 @@
 ---
-title: "Vignette Title"
-author: "Vignette Author"
+title: "Measuring the *error* in calculating $z$"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -9,32 +8,88 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+## Practical example
+To demonstrate graphically the difference between correlation and experimental data we will use the Dranchuk-AbouKassem results at a $T_{pr}$=1.05 at various $P_{pr}$.
 
-## Comparative Analysis
+```{r}
+library(zFactor)
+zFactor:::z.plot.range("DAK", interval = "fine")
+```
+
+
+
+## Accuracy measurement
 The comparative analysis shows tables with different error measurements:
 
-    MSE:   Mean Squared Error
     RMSE:  Root Mean Squared Error
+    MPE:   Mean Percentage error
+    MAPE:  Mean Absolute Percentage Error
+    MSE:   Mean Squared Error
     RSS:   Residual sum of Squares
-    RMSLE: Root Mean Squared Logarithmic Error. Penalizes understimation.
-    MAPE:  Mean Absolute Percentage Error = AARE
-    MPE:   Mean Percentage error = ARE
     MAE:   Mean Absolute Error
 
 
+where:
 
-## MAPE
+$a_t$ are the observed true values. In our case the Standing-Katz chart $z$ values;    
+$f_t$ are the calculated or predicted values (the $z$ values calculated by the correlations); and    
+$n$ is the number of samples
+
+
+## RMSE
+Measure of accuracy, to compare errors of different calculation models for the same dataset.
+
+$$RMSE =  \sqrt {\sum_{t=1}^n \frac {(a_t - f_t)^2} {n}}$$
+
+<u>RMSE code</u>
+```{r eval=FALSE}
+RMSE = sqrt(mean((z.chart - z.calc)^2))
+```
+
+
+
+## MPE: Mean Percentage error
+
+
+$$MPE = \frac {100%} {n} \sum_{t=1}^n \frac {a_t - f_t} {a_t}$$
+
+<u>MPE code</u>
+```{r eval=FALSE}
+MPE  = sum((z.calc - z.chart) / z.chart) * 100 / n(),
+```
+
+
+## MAPE: Mean Absolute Percentage Error
 
 $$MAPE = \frac {100} {n} \sum | \frac {a_t - f_t} {a_t}|$$
 
-
-### MAPE code
-
+<u>MAPE code</u>
 ```{r eval=FALSE}
 MAPE = sum(abs((z.calc - z.chart) / z.chart)) * 100 / n()
 ```
 
 
-### MPE
+## MSE: Mean Squared Error
+$$MSE = \frac {1}{n}  \sum_{t=1}^n (a_t - f_t)^2 $$
+<u>MSE code</u>
+```{r eval=FALSE}
+MSE  = sum((z.calc - z.chart)^2) / n()
+```
 
-$$MPE = \frac {100%} {n} \sum_{t=1}^n \frac {a_t - f_t} {a_t}$$
+
+
+## RSS: Residual sum of Squares
+$$RSS =  \sum_{t=1}^n (a_t - f_t)^2 $$
+<u>RSS code</u>
+```{r eval=FALSE}
+RSS  = sum((z.calc - z.chart)^2)
+```
+
+
+## MAE: Mean Absolute Error
+
+$$MAE = \frac {1} {n} \sum | {a_t - f_t} |$$
+<u>MAE code</u>
+```{r eval=FALSE}
+MAE  = sum(abs(z.calc - z.chart)) / n()
+```
