@@ -2,7 +2,7 @@
 % Please edit documentation in R/stats.R
 \name{z.plot.range}
 \alias{z.plot.range}
-\title{Tile plot of best fit area for indicated correlation}
+\title{Tile plot of best fit area for a correlation}
 \usage{
 z.plot.range(correlation = "DAK", pprRange = "lp", ...)
 }

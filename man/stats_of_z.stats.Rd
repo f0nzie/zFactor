@@ -2,7 +2,7 @@
 % Please edit documentation in R/stats.R
 \name{stats_of_z.stats}
 \alias{stats_of_z.stats}
-\title{General statistics of z.stats tables}
+\title{Statistics on z.stats table}
 \usage{
 stats_of_z.stats(stat = "MAPE")
 }
