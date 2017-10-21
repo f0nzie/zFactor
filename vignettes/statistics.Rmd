@@ -1,0 +1,40 @@
+---
+title: "Vignette Title"
+author: "Vignette Author"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+## Comparative Analysis
+The comparative analysis shows tables with different error measurements:
+
+    MSE:   Mean Squared Error
+    RMSE:  Root Mean Squared Error
+    RSS:   Residual sum of Squares
+    RMSLE: Root Mean Squared Logarithmic Error. Penalizes understimation.
+    MAPE:  Mean Absolute Percentage Error = AARE
+    MPE:   Mean Percentage error = ARE
+    MAE:   Mean Absolute Error
+
+
+
+## MAPE
+
+$$MAPE = \frac {100} {n} \sum | \frac {a_t - f_t} {a_t}|$$
+
+
+### MAPE code
+
+```{r eval=FALSE}
+MAPE = sum(abs((z.calc - z.chart) / z.chart)) * 100 / n()
+```
+
+
+### MPE
+
+$$MPE = \frac {100%} {n} \sum_{t=1}^n \frac {a_t - f_t} {a_t}$$
