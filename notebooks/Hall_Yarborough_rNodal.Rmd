@@ -43,7 +43,10 @@ print(rNodal:::z.hallyarboroughL(pres.a = 2000, temp.f = 200, gas.sg = 0.7,
 
 Using the equation for impurities in gas:
 
-![](./images/eq_10_11-HY_FARA.jpg)
+```{r, out.width = "800px", echo=F}
+knitr::include_graphics("./images/eq_10_11-HY_FARA.jpg")
+```
+
 
 
 ```{r}
@@ -76,7 +79,10 @@ print(temp.r)
 
 This value is different of what is shown in the solution of example 1 in the paper.
 
-![Solution Example 1](./images/solution_1_HY_FARA.jpg)
+```{r, out.width = "800px", echo=F}
+knitr::include_graphics("./images/solution_1_HY_FARA.jpg")
+```
+
 
 ```{r}
 # To double check the calculation, we run it in Farenheit (Rankine), not Kelvin.
@@ -180,134 +186,3 @@ df
 ```
 \
 \
-   
-
-## Problems with using `rootSolve::uniroot.all`
-We have noticed some strong deviation in he use of `rootSolve` when being applied to the solution of Hall-Yarborough correlation. It is extremely sensitive for $P_{pr}$ under 1.5.
-See R chunk below.
-
-
-### Calculate `z` for various values of $P_{pr}$ and $T_{pr}$
-
-```{r results="hold"}
-source("HY.R")      # modified script saved as HY.R
-z.hallyarboroughL(pres.pr = 0.5, temp.pr = 1.3)$z     # SK-chart = 0.92  x
-z.hallyarboroughL(pres.pr = 1.5, temp.pr = 1.3)$z     # SK-chart = 0.76  x
-z.hallyarboroughL(pres.pr = 2.5, temp.pr = 1.3)$z     # SK-chart = 0.64
-z.hallyarboroughL(pres.pr = 3.5, temp.pr = 1.3)$z     # SK-chart = 0.63
-z.hallyarboroughL(pres.pr = 4.5, temp.pr = 1.3)$z     # SK-chart = 0.68
-z.hallyarboroughL(pres.pr = 5.5, temp.pr = 1.3)$z     # SK-chart = 0.76
-z.hallyarboroughL(pres.pr = 6.5, temp.pr = 1.3)$z     # SK-chart = 0.84
-```
-
-```{r}
-library(rNodal)
-# we use instead or temp.pr and pres.pr the values of sampling pressure and 
-# temperature and gas.sg = 07 because rNodal still has not been modified to 
-# take pseudo-critical or pseudo-reduced P, T.
-
-rNodal:::z.hallyarboroughL(pres.a = 334, temp.f = 45, gas.sg = 0.7)$z
-```
-
-## Values from Standing and Katz chart
-These values have been read from the SK-chart. pres.pr = 
-
-    (0.5, 1.3) = 0.92
-    (1.5, 1.3) = 0.76
-    (2.5, 1.3) = 0.64
-    (3.5, 1.3) = 0.63
-    (4.5, 1.3) = 0.68
-    (5.5, 1.3) = 0.76
-    (6.5, 1.3) = 0.84
-    
-
-## Plotting z vs $P_{pr}$ at various $T_{pr}$ using `HY.R`
-This cold give us the proof that using the method of finding the root for the HY equation is not appropiate to find a solution for z.
-
-It is essential that the boundaries selection for the root finding function are properly defined. 
-
-
-### Selecting a poor interval for root finding
-Below the is an example of a poor selection of the interval for root finding.
-In thise case, the inerval selected is `c(-5, 5.99)`.
-The reason for selecting this interval is that it was purely based on two examples.
-Sadly, extreme cases were not tested, such as values of $P_{pr}$ lower than 2.5 or $T_{pr}$ lower than 1.4.
-
-We will test in the following paragraphs other intervals.
-We start by makng a function out of the chunk below first.
-
-```{r}
-source("HY.R")  
-
-ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.6)
-tpr <- c(1.3, 1.5, 1.7, 2)
-tbl <- sapply(ppr, function(x) 
-    sapply(tpr, function(y) z.hallyarboroughL(pres.pr = x, temp.pr = y,
-                                              interval = c(-5, 5.99))$z))
-tbl
-
-library(ggplot2)
-plot(x = ppr, y = tbl[1,], type = "l", main = "z @ Tpr = 1.3")
-plot(x = ppr, y = tbl[2,], type = "l", main = "z @ Tpr = 1.5")
-plot(x = ppr, y = tbl[3,], type = "l", main = "z @ Tpr = 1.7")
-plot(x = ppr, y = tbl[4,], type = "l", main = "z @ Tpr = 2.0")
-```
-
-## Testing other intervals for the root finding
-
-
-
-```{r}
-source("HY.R")  
-library(ggplot2)
-
-testIntervals <- function(interval) {
-    ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.6)
-    tpr <- c(1.3, 1.5, 1.7, 2)
-    tbl <- sapply(ppr, function(x) 
-        sapply(tpr, function(y) z.hallyarboroughL(pres.pr = x, temp.pr = y,
-                                                  interval = interval)$z))
-    print(tbl)
-    
-    plot(x = ppr, y = tbl[1,], type = "l", main = "z @ Tpr = 1.3")
-    plot(x = ppr, y = tbl[2,], type = "l", main = "z @ Tpr = 1.5")
-    plot(x = ppr, y = tbl[3,], type = "l", main = "z @ Tpr = 1.7")
-    plot(x = ppr, y = tbl[4,], type = "l", main = "z @ Tpr = 2.0")
-}
-```
-
-```{r}
-testIntervals(c(0, 1))
-```
-
-```{r}
-testIntervals(c(0, 2))
-```
-
-
-### Discontinuity at Upper Limit (UL) = 100
-It is safe to navigate the range 0 to 99.99. But solving the equation will fail at exactly UL = 100 because of inifinite values generated. All values above 100 will yield zero on all Ppr and Tpr supplied.
-
-
-```{r}
-testIntervals(c(0, 101))
-```
-
-Upper bound values above 4.3 also brings some discontinuity when the lower bound is, for instance, -1.
-
-```{r}
-testIntervals(c(-1, 4.4))
-```
-
-Or the interval (-9, 5).
-
-```{r}
-testIntervals(c(-9, 5))
-```
-
-The interval (-20, 20) seems safe but (-20, 100) is not.
-
-```{r}
-testIntervals(c(-20, 20))
-```
-
