@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get error summary statistics for any given compressibility correlation — z.stats â€¢ zFactor</title>
+<title>Summary statistics table for a correlation — z.stats â€¢ zFactor</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -131,12 +131,20 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get error summary statistics for any given compressibility correlation</h1>
+    <h1>Summary statistics table for a correlation</h1>
     </div>
 
     
-    <p>A quick way to show an error summary between any of the indicated correlations and
+    <p>Get error summary statistics for any given compressibility correlation.
+A quick way to show an error summary between any of the indicated correlations and
 the Standing-Katz chart.</p>
+<p>MSE:   Mean Squared Error
+    RMSE:  Root Mean Squared Error
+    RSS:   Residual sum of Squares
+    RMSLE: Root Mean Squared Logarithmic Error. Penalizes understimation.
+    MAPE:  Mean Absolute Percentage Error = AARE
+    MPE:   Mean Percentage error = ARE
+    MAE:   Mean Absolute Error</p>
     
 
     <pre class="usage"><span class='fu'>z.stats</span>(<span class='kw'>correlation</span> <span class='kw'>=</span> <span class='st'>"DAK"</span>, <span class='kw'>pprRange</span> <span class='kw'>=</span> <span class='st'>"lp"</span>, <span class='kw'>interval</span> <span class='kw'>=</span> <span class='st'>"coarse"</span>)</pre>
@@ -157,16 +165,6 @@ the Standing-Katz chart.</p>
       <td><p>quality of the Ppr scale. Coarse: every 1.0; Fine: every 0.5</p></td>
     </tr>
     </table>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>MSE:   Mean Squared Error
-    RMSE:  Root Mean Squared Error
-    RSS:   Residual sum of Squares
-    RMSLE: Root Mean Squared Logarithmic Error. Penalizes understimation.
-    MAPE:  Mean Absolute Percentage Error = AARE
-    MPE:   Mean Percentage error = ARE
-    MAE:   Mean Absolute Error</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -207,9 +205,7 @@ the Standing-Katz chart.</p>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#details">Details</a></li>
-      
+            
       <li><a href="#examples">Examples</a></li>
     </ul>
 
