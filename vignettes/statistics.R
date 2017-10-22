@@ -113,42 +113,18 @@ sum_tpr <- as.tibble(z.stats("HY"))
 sum_tpr
 
 ## ------------------------------------------------------------------------
-# Ppr  <- as.numeric(sum_tpr$Ppr)
-# Tpr  <- as.numeric(sum_tpr$Tpr)
-# RMSE <- sum_tpr$RMSE
-
-sum_tpr <- as.tibble(z.stats("N10"))
-
-sum_tpr$Tpr <- as.numeric(sum_tpr$Tpr)
-sum_tpr$Ppr <- as.numeric(sum_tpr$Ppr)
-
-
-data.loess <- loess(RMSE ~ Ppr * Tpr, data = sum_tpr)
-
-xgrid <- seq(min(sum_tpr$Ppr), max(sum_tpr$Ppr), 0.1)
-ygrid <- seq(min(sum_tpr$Tpr), max(sum_tpr$Tpr), 0.2)
-
-data.fit <- expand.grid(Ppr = xgrid, Tpr = ygrid)
-mtrx3d <-  predict(data.loess, newdata = data.fit)
-
-contour(x = xgrid, y = ygrid, z = mtrx3d, nlev = 10, method = "edge")
-
-## ------------------------------------------------------------------------
-contour(x = xgrid, y = ygrid, z = mtrx3d)
-
-## ------------------------------------------------------------------------
 library(zFactor)
-correlation = "PP"
+correlation = "SH"
 pprRange <- "lp"
-stat <- "MAPE"
+stat <- "RMSE"
 interval <-  "fine"
 
 if (stat == "MAPE") {
     midpoint <-  12.5
     limit <- c(0, 25)
 } else if (stat == "RMSE") {
-    midpoint <-   0.015
-    limit <- c(0, 0.030)
+    midpoint <-   0.025
+    limit <- c(0, 0.050)
 }
 
 # Ppr <- NULL; Tpr <- NULL; MAPE <- NULL; z.calc <- NULL; z.chart <- NULL
@@ -165,7 +141,7 @@ corr_name <- zFactor:::z_correlations[which(zFactor:::z_correlations["short"] ==
 smry_tpr_ppr <- z.stats(correlation, pprRange, interval = interval)
 g <- ggplot(smry_tpr_ppr, aes(Ppr, Tpr))
 g <- g + geom_tile(data=smry_tpr_ppr, aes(fill=get(stat)), color="white") +
-    scale_fill_gradient2(low="blue", high="red", mid="yellow", na.value = "pink",
+    scale_fill_gradient2(low="blue", high="red", mid="yellow", na.value = "grey25",
                          midpoint = midpoint, limit = limit, name = stat) +
     theme(axis.text.x = element_text(angle=45, vjust=1, size=11, hjust=1)) +
     coord_equal() +
@@ -173,4 +149,16 @@ g <- g + geom_tile(data=smry_tpr_ppr, aes(fill=get(stat)), color="white") +
     guides(fill = guide_colorbar(barwidth = 0.6, barheight = 5, 
                                  label.vjust = 0.9))
 print(g)
+
+## ------------------------------------------------------------------------
+# par(mfrow = c(2,1))
+boxplot(smry_tpr_ppr$RMSE, horizontal = TRUE, main = "RMSE")
+boxplot(smry_tpr_ppr$MAPE, horizontal = TRUE, main = "MAPE")
+
+## ------------------------------------------------------------------------
+library(zFactor)
+
+z_hy  <- z.stats("HY")
+z_dak <- z.stats("DAK")
+z_n10 <- z.stats("N10")
 
