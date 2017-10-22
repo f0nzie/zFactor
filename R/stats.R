@@ -95,6 +95,7 @@ stats_of_z.stats <- function(stat = "MAPE") {
 #' or close to MAPE=25. Pink is much greater than 25.
 #' @param correlation identifier. Can be "HY", "DAK", "DPR" "N10", "SH"
 #' @param pprRange low (lp) or high (hp) chart area of the Standing-Katz chart
+#' @param stat Any of the statistical variables in z.stats:
 #' @param ... any other parameter
 #' @import ggplot2
 #' @export
