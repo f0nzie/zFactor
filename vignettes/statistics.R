@@ -1,122 +1,16 @@
----
-title: "Measuring the *error* in calculating $z$"
-date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Vignette Title}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
----
-
-## Practical example
-To demonstrate graphically the difference between correlation and experimental data we will use the Dranchuk-AbouKassem results at a $T_{pr}$=1.05 at various $P_{pr}$.
-
-```{r}
+## ------------------------------------------------------------------------
 library(zFactor)
 zFactor:::z.plot.range("DAK", interval = "fine")
-```
 
-## 
-```{r}
+## ------------------------------------------------------------------------
 library(tibble)
-library(ggplot2)
 dak_tpr <- as.tibble(z.stats("DAK"))
 dak_tpr
-```
 
-```{r}
-dak_tpr <- as.tibble(z.stats("DAK"))
-p1 <- ggplot(dak_tpr, aes(x = Tpr, y = z.chart-z.calc, col = Tpr)) +
-           geom_point()
-p2 <- ggplot(dak_tpr, aes(z.chart-z.calc)) + geom_histogram(bins=60)
+## ------------------------------------------------------------------------
+# ggplot(dak_tpr, aes())
 
-gridExtra::grid.arrange(p1, p2)
-```
-
-```{r}
-sum_tpr <- as.tibble(z.stats("BB"))
-bb <- ggplot(sum_tpr, aes(x = Tpr, y = RMSE, color = Tpr)) +
-           geom_point() + ylim(0, 0.5) +
-    theme(legend.position="none")
-bb
-```
-```{r}
-sum_tpr <- as.tibble(z.stats("HY"))
-hy <- ggplot(sum_tpr, aes(x = Tpr, y = RMSE, col = Tpr)) +
-           geom_point() + ylim(0, 0.5) + theme(legend.position="none")
-hy
-```
-```{r}
-sum_tpr <- as.tibble(z.stats("DAK"))
-dak <- ggplot(sum_tpr, aes(x = Tpr, y = RMSE, col = Tpr)) +
-           geom_point() + ylim(0, 0.5) + theme(legend.position="none")
-dak
-```
-```{r}
-sum_tpr <- as.tibble(z.stats("SH"))
-sh <- ggplot(sum_tpr, aes(x = Tpr, y = RMSE, col = Tpr)) +
-           geom_point() + ylim(0, 0.5) + theme(legend.position="none")
-sh
-```
-```{r}
-sum_tpr <- as.tibble(z.stats("N10"))
-n10 <- ggplot(sum_tpr, aes(x = Tpr, y = RMSE, col = Tpr)) +
-           geom_point() + ylim(0, 0.5) + theme(legend.position="none")
-n10
-```
-```{r}
-sum_tpr <- as.tibble(z.stats("PP"))
-pp <- ggplot(sum_tpr, aes(x = Tpr, y = RMSE, col = Tpr)) +
-           geom_point() + ylim(0, 0.5) + theme(legend.position="none")
-pp
-
-```
-
-```{r}
-# gridExtra::grid.arrange(bb, hy, sh, n10, pp)
-```
-
-```{r}
-dak_tpr <- as.tibble(z.stats("DAK"))
-ggplot(dak_tpr, aes(x = Ppr, y = MSE, col = Tpr)) +
-           geom_point(alpha=0.7) +
-    geom_smooth()
-    
-
-```
-
-
-```{r}
-dak_tpr <- as.tibble(z.stats("DAK"))
-# Change geom to freqpoly (position is identity by default) 
-ggplot(dak_tpr, aes(z.chart-z.calc, fill = Tpr)) +
-  geom_histogram(binwidth = 0.001)
-```
-
-```{r}
-bb_tpr <- as.tibble(z.stats("BB"))
-# Change geom to freqpoly (position is identity by default) 
-ggplot(bb_tpr, aes(z.chart-z.calc, fill = Tpr)) +
-  geom_histogram(binwidth = 0.5)
-```
-
-
-```{r}
-# residual <- dak_tpr$z.chart - dak_tpr$z.calc
-# ggplot(dak_tpr) + geom_bar(aes(fill = residual, stat = identity))
-```
-
-
-
-
-
-
-
-
-
-## sandbox
-
-```{r}
+## ------------------------------------------------------------------------
 library(dplyr)
 library(tibble)
 
@@ -138,45 +32,31 @@ smry_tpr_ppr <- summarise(grouped,  z.chart, z.calc,
 )
 as.tibble(smry_tpr_ppr)
 # dak_tpr_ppr <- smry_tpr_ppr
-```
 
-
-```{r}
+## ------------------------------------------------------------------------
 smry_tpr_105 <- smry_tpr_ppr[smry_tpr_ppr$Tpr=="1.05", ]
 smry_tpr_105
-```
 
-```{r fig.asp=1}
+## ----fig.asp=1-----------------------------------------------------------
 # par(mfrow = c(2,1))
 # hist(smry_tpr_105$z.chart - smry_tpr_105$z.calc)
 # boxplot(smry_tpr_105$z.chart - smry_tpr_105$z.calc)
-```
 
-
-
-```{r}
+## ------------------------------------------------------------------------
 # # RMSE Tpr=1.05
 # dat = data.frame(residual = smry_tpr_105$z.chart - smry_tpr_105$z.calc, yhat=smry_tpr_105$z.calc)
 # plt = ezplot::plt_dist(dat)
 # plt("residual")
-```
 
-
-
-```{r}
+## ------------------------------------------------------------------------
 plot(smry_tpr_105$Ppr, smry_tpr_105$RMSE)
-```
 
-
-```{r}
+## ------------------------------------------------------------------------
 plot(smry_tpr_105$Ppr, smry_tpr_105$z.chart, type = "l")
 points(smry_tpr_105$Ppr, smry_tpr_105$z.calc, cex = 1.25)
 points(smry_tpr_105$Ppr, smry_tpr_105$RMSE)
-```
 
-
-
-```{r}
+## ------------------------------------------------------------------------
 library(ggplot2)
 ggplot(smry_tpr_ppr, aes(x = Ppr, y = z.chart, group = Tpr, color = Tpr)) + 
     geom_line() + 
@@ -185,10 +65,8 @@ ggplot(smry_tpr_ppr, aes(x = Ppr, y = z.chart, group = Tpr, color = Tpr)) +
     geom_linerange(aes(ymin = z.chart-RMSE, ymax = z.chart+RMSE), col = "orange")
 
 ggplot(smry_tpr_ppr, aes(x=Ppr, y=RMSE)) +  geom_line() + geom_point()
-```
 
-
-```{r}
+## ------------------------------------------------------------------------
 # MPE
 library(ggplot2)
 ggplot(smry_tpr_105, aes(x = Ppr, y = z.chart)) + 
@@ -198,18 +76,16 @@ ggplot(smry_tpr_105, aes(x = Ppr, y = z.chart)) +
     #+ geom_linerange(aes(ymin = z.chart-MPE, ymax = z.chart+MPE), col = "orange")
 
 ggplot(smry_tpr_105, aes(x=Ppr, y=MPE)) +  geom_line() + geom_point()
-```
 
-```{r}
+## ------------------------------------------------------------------------
 # p <- ggplot(smry_tpr_105, aes(x = Ppr, y = z.chart))
 # p <- p + geom_line()    
 # p <- p + geom_line(aes(y=MPE))
 # p <- p + scale_y_continuous(sec.axis = sec_axis(Ppr+ MPE. * .1))
 # 
 # p
-```
 
-```{r}
+## ------------------------------------------------------------------------
 p <- ggplot(mtcars, aes(cyl, mpg)) +
   geom_point()
 
@@ -224,10 +100,8 @@ p + scale_y_continuous(sec.axis = dup_axis())
 
 # You can pass in a formula as a shorthand
 p + scale_y_continuous(sec.axis = ~.^2)
-```
 
-
-```{r}
+## ------------------------------------------------------------------------
 # MPE
 library(ggplot2)
 ggplot(smry_tpr_105, aes(x = Ppr, y = z.chart)) +
@@ -237,11 +111,8 @@ ggplot(smry_tpr_105, aes(x = Ppr, y = z.chart)) +
     # geom_hline(aes(x=Ppr, y = MPE, yintercept=0))  +
     # scale_y_continuous(sec.axis = sec_axis(~.*2 ))
     
-```
 
-
-
-```{r}
+## ------------------------------------------------------------------------
 # MAPE
 
 library(ggplot2)
@@ -252,11 +123,8 @@ ggplot(smry_tpr_105, aes(x = Ppr, y = z.chart)) +
     #+ geom_linerange(aes(ymin = z.chart-MPE, ymax = z.chart+MPE), col = "orange")
 
 ggplot(smry_tpr_105, aes(x=Ppr, y=MAPE)) +  geom_line() + geom_point()
-```
 
-
-
-```{r}
+## ------------------------------------------------------------------------
 # MSE
 
 library(ggplot2)
@@ -267,24 +135,21 @@ ggplot(smry_tpr_105, aes(x = Ppr, y = z.chart)) +
     #+ geom_linerange(aes(ymin = z.chart-MPE, ymax = z.chart+MPE), col = "orange")
 
 ggplot(smry_tpr_105, aes(x=Ppr, y=MSE)) +  geom_line() + geom_point()
-```
 
-```{r}
+## ------------------------------------------------------------------------
 library(ggplot2)
 ggplot(smry_tpr_105, aes(x=Ppr, y=RSS)) +  geom_line() + geom_point()
     #geom_point(aes(y=z.calc), col = "blue") +
     #geom_crossbar(aes(ymin=z.chart-RSS, ymax=z.chart+RSS), width = 0.25, col = "orange")
-```
 
-```{r}
+## ------------------------------------------------------------------------
 library(ggplot2)
 ggplot(smry_tpr_105, aes(x=Ppr, y=MAE)) + 
     geom_line() + geom_point()
     #geom_point(aes(y=z.calc), col = "blue") +
     #geom_crossbar(aes(ymin=z.chart-RSS, ymax=z.chart+RSS), width = 0.25, col = "orange")
-```
 
-```{r}
+## ------------------------------------------------------------------------
 # RSS
 
 library(ggplot2)
@@ -295,9 +160,8 @@ ggplot(smry_tpr_105, aes(x = Ppr, y = z.chart)) +
     #+ geom_linerange(aes(ymin = z.chart-MPE, ymax = z.chart+MPE), col = "orange")
 
 ggplot(smry_tpr_105, aes(x=Ppr, y=RSS)) +  geom_line() + geom_point()
-```
 
-```{r}
+## ------------------------------------------------------------------------
 library(zFactor)
 library(tibble)
 
@@ -305,87 +169,26 @@ dak <- z.stats("DAK")
 dak
 dak_105 <- dak[dak$Tpr=="1.05", ]
 dak_105
-```
 
-## Accuracy measurement
-The comparative analysis shows tables with different error measurements:
+## ----eval=FALSE----------------------------------------------------------
+#  RMSE = sqrt(mean((z.chart - z.calc)^2))
 
-    RMSE:  Root Mean Squared Error
-    MPE:   Mean Percentage error
-    MAPE:  Mean Absolute Percentage Error
-    MSE:   Mean Squared Error
-    RSS:   Residual sum of Squares
-    MAE:   Mean Absolute Error
+## ----eval=FALSE----------------------------------------------------------
+#  MPE  = sum((z.calc - z.chart) / z.chart) * 100 / n(),
 
+## ----eval=FALSE----------------------------------------------------------
+#  MAPE = sum(abs((z.calc - z.chart) / z.chart)) * 100 / n()
 
-where:
+## ----eval=FALSE----------------------------------------------------------
+#  MSE  = sum((z.calc - z.chart)^2) / n()
 
-$a_t$ are the observed true values. In our case the Standing-Katz chart $z$ values;    
-$f_t$ are the calculated or predicted values (the $z$ values calculated by the correlations); and    
-$n$ is the number of samples
+## ----eval=FALSE----------------------------------------------------------
+#  RSS  = sum((z.calc - z.chart)^2)
 
+## ----eval=FALSE----------------------------------------------------------
+#  MAE  = sum(abs(z.calc - z.chart)) / n()
 
-## RMSE
-Measure of accuracy, to compare errors of different calculation models for the same dataset.
-
-$$RMSE =  \sqrt {\sum_{t=1}^n \frac {(a_t - f_t)^2} {n}}$$
-
-<u>RMSE code</u>
-```{r eval=FALSE}
-RMSE = sqrt(mean((z.chart - z.calc)^2))
-```
-
-
-
-## MPE: Mean Percentage error
-
-
-$$MPE = \frac {100%} {n} \sum_{t=1}^n \frac {a_t - f_t} {a_t}$$
-
-<u>MPE code</u>
-```{r eval=FALSE}
-MPE  = sum((z.calc - z.chart) / z.chart) * 100 / n(),
-```
-
-
-## MAPE: Mean Absolute Percentage Error
-
-$$MAPE = \frac {100} {n} \sum | \frac {a_t - f_t} {a_t}|$$
-
-<u>MAPE code</u>
-```{r eval=FALSE}
-MAPE = sum(abs((z.calc - z.chart) / z.chart)) * 100 / n()
-```
-
-
-## MSE: Mean Squared Error
-$$MSE = \frac {1}{n}  \sum_{t=1}^n (a_t - f_t)^2 $$
-<u>MSE code</u>
-```{r eval=FALSE}
-MSE  = sum((z.calc - z.chart)^2) / n()
-```
-
-
-
-## RSS: Residual sum of Squares
-$$RSS =  \sum_{t=1}^n (a_t - f_t)^2 $$
-<u>RSS code</u>
-```{r eval=FALSE}
-RSS  = sum((z.calc - z.chart)^2)
-```
-
-
-## MAE: Mean Absolute Error
-
-$$MAE = \frac {1} {n} \sum | {a_t - f_t} |$$
-<u>MAE code</u>
-```{r eval=FALSE}
-MAE  = sum(abs(z.calc - z.chart)) / n()
-```
-
-
-
-```{r}
+## ------------------------------------------------------------------------
 d = data.frame(
   x  = c(1:5)
   , y  = c(1.1, 1.5, 2.9, 3.8, 5.2)
@@ -407,12 +210,10 @@ with (
   data = d
   , expr = errbar(x, y, y+sd, y-sd, add=F, pch=1, cap=.015, log="x")
 )
-```
 
-```{r}
+## ------------------------------------------------------------------------
 with (
   data = d,
 qplot(x,y)+geom_errorbar(aes(x=x, ymin=y-sd, ymax=y+sd), width=0.25)
 )
-```
 
