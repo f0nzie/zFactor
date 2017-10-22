@@ -1,219 +1,176 @@
 ## ------------------------------------------------------------------------
 library(zFactor)
-zFactor:::z.plot.range("DAK", interval = "fine")
-
-## ------------------------------------------------------------------------
 library(tibble)
-dak_tpr <- as.tibble(z.stats("DAK"))
-dak_tpr
-
-## ------------------------------------------------------------------------
-# ggplot(dak_tpr, aes())
-
-## ------------------------------------------------------------------------
-library(dplyr)
-library(tibble)
-
-correlation <- "DAK"
-# get all `lp` Tpr curves
-tpr_all <- getStandingKatzTpr(pprRange = "lp")
-# ppr <- c(0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5, 7.0)
-ppr <- zFactor:::getStandingKatzPpr(interval = "fine")
-sk_corr_all <- createTidyFromMatrix(ppr, tpr_all, correlation)
-grouped <- group_by(sk_corr_all, Tpr, Ppr)
-smry_tpr_ppr <- summarise(grouped,  z.chart, z.calc,
-                          RMSE = sqrt(mean((z.chart-z.calc)^2)),
-                          MPE  = sum((z.calc - z.chart) / z.chart) * 100 / n(),
-                          MAPE = sum(abs((z.calc - z.chart) / z.chart)) * 100 / n(),
-                          MSE  = sum((z.calc - z.chart)^2) / n(),
-                          RSS  = sum((z.calc - z.chart)^2),
-                          MAE  = sum(abs(z.calc - z.chart)) / n()
-                         
-)
-as.tibble(smry_tpr_ppr)
-# dak_tpr_ppr <- smry_tpr_ppr
-
-## ------------------------------------------------------------------------
-smry_tpr_105 <- smry_tpr_ppr[smry_tpr_ppr$Tpr=="1.05", ]
-smry_tpr_105
-
-## ----fig.asp=1-----------------------------------------------------------
-# par(mfrow = c(2,1))
-# hist(smry_tpr_105$z.chart - smry_tpr_105$z.calc)
-# boxplot(smry_tpr_105$z.chart - smry_tpr_105$z.calc)
-
-## ------------------------------------------------------------------------
-# # RMSE Tpr=1.05
-# dat = data.frame(residual = smry_tpr_105$z.chart - smry_tpr_105$z.calc, yhat=smry_tpr_105$z.calc)
-# plt = ezplot::plt_dist(dat)
-# plt("residual")
-
-## ------------------------------------------------------------------------
-plot(smry_tpr_105$Ppr, smry_tpr_105$RMSE)
-
-## ------------------------------------------------------------------------
-plot(smry_tpr_105$Ppr, smry_tpr_105$z.chart, type = "l")
-points(smry_tpr_105$Ppr, smry_tpr_105$z.calc, cex = 1.25)
-points(smry_tpr_105$Ppr, smry_tpr_105$RMSE)
-
-## ------------------------------------------------------------------------
 library(ggplot2)
-ggplot(smry_tpr_ppr, aes(x = Ppr, y = z.chart, group = Tpr, color = Tpr)) + 
-    geom_line() + 
-    geom_point(aes(y=z.calc), col = "blue") +
-    geom_crossbar(aes(ymin=z.chart-RMSE, ymax=z.chart+RMSE), width = 0.25, col = "orange") +
-    geom_linerange(aes(ymin = z.chart-RMSE, ymax = z.chart+RMSE), col = "orange")
 
-ggplot(smry_tpr_ppr, aes(x=Ppr, y=RMSE)) +  geom_line() + geom_point()
-
-## ------------------------------------------------------------------------
-# MPE
-library(ggplot2)
-ggplot(smry_tpr_105, aes(x = Ppr, y = z.chart)) + 
-    geom_line() + 
-    geom_point(aes(y=z.calc), col = "blue") +
-    geom_crossbar(aes(ymin=z.chart-MPE, ymax=z.chart+MPE), width = 0.25, col = "orange")
-    #+ geom_linerange(aes(ymin = z.chart-MPE, ymax = z.chart+MPE), col = "orange")
-
-ggplot(smry_tpr_105, aes(x=Ppr, y=MPE)) +  geom_line() + geom_point()
-
-## ------------------------------------------------------------------------
-# p <- ggplot(smry_tpr_105, aes(x = Ppr, y = z.chart))
-# p <- p + geom_line()    
-# p <- p + geom_line(aes(y=MPE))
-# p <- p + scale_y_continuous(sec.axis = sec_axis(Ppr+ MPE. * .1))
-# 
-# p
-
-## ------------------------------------------------------------------------
-p <- ggplot(mtcars, aes(cyl, mpg)) +
-  geom_point()
-
-# Create a simple secondary axis
-p + scale_y_continuous(sec.axis = sec_axis(~.+10))
-
-# Inherit the name from the primary axis
-p + scale_y_continuous("Miles/gallon", sec.axis = sec_axis(~.+10, name = derive()))
-
-# Duplicate the primary axis
-p + scale_y_continuous(sec.axis = dup_axis())
-
-# You can pass in a formula as a shorthand
-p + scale_y_continuous(sec.axis = ~.^2)
-
-## ------------------------------------------------------------------------
-# MPE
-library(ggplot2)
-ggplot(smry_tpr_105, aes(x = Ppr, y = z.chart)) +
-    geom_line() 
-    # geom_line(aes(y=MPE)) #+
-    #geom_point(aes(y=z.calc), col = "blue") +
-    # geom_hline(aes(x=Ppr, y = MPE, yintercept=0))  +
-    # scale_y_continuous(sec.axis = sec_axis(~.*2 ))
-    
-
-## ------------------------------------------------------------------------
-# MAPE
-
-library(ggplot2)
-ggplot(smry_tpr_105, aes(x = Ppr, y = z.chart)) + 
-    geom_line() + 
-    geom_point(aes(y=z.calc), col = "blue") +
-    geom_crossbar(aes(ymin=z.chart-MAPE, ymax=z.chart+MAPE), width = 0.25, col = "orange")
-    #+ geom_linerange(aes(ymin = z.chart-MPE, ymax = z.chart+MPE), col = "orange")
-
-ggplot(smry_tpr_105, aes(x=Ppr, y=MAPE)) +  geom_line() + geom_point()
-
-## ------------------------------------------------------------------------
-# MSE
-
-library(ggplot2)
-ggplot(smry_tpr_105, aes(x = Ppr, y = z.chart)) + 
-    geom_line() + 
-    geom_point(aes(y=z.calc), col = "blue") +
-    geom_crossbar(aes(ymin=z.chart-MSE, ymax=z.chart+MSE), width = 0.25, col = "orange")
-    #+ geom_linerange(aes(ymin = z.chart-MPE, ymax = z.chart+MPE), col = "orange")
-
-ggplot(smry_tpr_105, aes(x=Ppr, y=MSE)) +  geom_line() + geom_point()
-
-## ------------------------------------------------------------------------
-library(ggplot2)
-ggplot(smry_tpr_105, aes(x=Ppr, y=RSS)) +  geom_line() + geom_point()
-    #geom_point(aes(y=z.calc), col = "blue") +
-    #geom_crossbar(aes(ymin=z.chart-RSS, ymax=z.chart+RSS), width = 0.25, col = "orange")
-
-## ------------------------------------------------------------------------
-library(ggplot2)
-ggplot(smry_tpr_105, aes(x=Ppr, y=MAE)) + 
-    geom_line() + geom_point()
-    #geom_point(aes(y=z.calc), col = "blue") +
-    #geom_crossbar(aes(ymin=z.chart-RSS, ymax=z.chart+RSS), width = 0.25, col = "orange")
-
-## ------------------------------------------------------------------------
-# RSS
-
-library(ggplot2)
-ggplot(smry_tpr_105, aes(x = Ppr, y = z.chart)) + 
-    #geom_line() + 
-    #geom_point(aes(y=z.calc), col = "blue") +
-    geom_crossbar(aes(ymin=z.chart-RSS, ymax=z.chart+RSS), width = 0.25, col = "orange")
-    #+ geom_linerange(aes(ymin = z.chart-MPE, ymax = z.chart+MPE), col = "orange")
-
-ggplot(smry_tpr_105, aes(x=Ppr, y=RSS)) +  geom_line() + geom_point()
-
-## ------------------------------------------------------------------------
-library(zFactor)
-library(tibble)
-
-dak <- z.stats("DAK")
-dak
-dak_105 <- dak[dak$Tpr=="1.05", ]
-dak_105
+zFactor:::z.plot.range("HY", interval = "fine")
 
 ## ----eval=FALSE----------------------------------------------------------
 #  RMSE = sqrt(mean((z.chart - z.calc)^2))
 
+## ------------------------------------------------------------------------
+sum_tpr <- as.tibble(z.stats("HY"))
+hy <- ggplot(sum_tpr, aes(x = Tpr, y = RMSE, col = Tpr)) +
+           geom_point()  + theme(legend.position="none") + 
+    ggtitle("HY - Root Mean Squared Error")
+hy
+
 ## ----eval=FALSE----------------------------------------------------------
 #  MPE  = sum((z.calc - z.chart) / z.chart) * 100 / n(),
+
+## ------------------------------------------------------------------------
+sum_tpr <- as.tibble(z.stats("HY"))
+hy <- ggplot(sum_tpr, aes(x = Tpr, y = MPE, col = Tpr)) +
+           geom_point()  + theme(legend.position="none") + 
+    ggtitle("HY  - Mean Percentage error")
+hy
 
 ## ----eval=FALSE----------------------------------------------------------
 #  MAPE = sum(abs((z.calc - z.chart) / z.chart)) * 100 / n()
 
+## ------------------------------------------------------------------------
+sum_tpr <- as.tibble(z.stats("HY"))
+hy <- ggplot(sum_tpr, aes(x = Tpr, y = MAPE, col = Tpr)) +
+           geom_point()  + theme(legend.position="none") + 
+    ggtitle("HY - Mean Absolute Percentage Error")
+hy
+
 ## ----eval=FALSE----------------------------------------------------------
 #  MSE  = sum((z.calc - z.chart)^2) / n()
 
+## ------------------------------------------------------------------------
+sum_tpr <- as.tibble(z.stats("HY"))
+hy <- ggplot(sum_tpr, aes(x = Tpr, y = MSE, col = Tpr)) +
+           geom_point()  + theme(legend.position="none") + 
+    ggtitle("HY - Mean Squared Error")
+hy
+
 ## ----eval=FALSE----------------------------------------------------------
 #  RSS  = sum((z.calc - z.chart)^2)
+
+## ------------------------------------------------------------------------
+sum_tpr <- as.tibble(z.stats("HY"))
+hy <- ggplot(sum_tpr, aes(x = Tpr, y = RSS, col = Tpr)) +
+           geom_point()  + theme(legend.position="none") + 
+    ggtitle("HY - Residual sum of Squares")
+hy
 
 ## ----eval=FALSE----------------------------------------------------------
 #  MAE  = sum(abs(z.calc - z.chart)) / n()
 
 ## ------------------------------------------------------------------------
-d = data.frame(
-  x  = c(1:5)
-  , y  = c(1.1, 1.5, 2.9, 3.8, 5.2)
-  , sd = c(0.2, 0.3, 0.2, 0.0, 0.4)
-)
-
-##install.packages("Hmisc", dependencies=T)
-library("Hmisc")
-
-# add error bars (without adjusting yrange)
-plot(d$x, d$y, type="n")
-with (
-  data = d
-  , expr = errbar(x, y, y+sd, y-sd, add=T, pch=1, cap=.1)
-)
-
-# new plot (adjusts Yrange automatically)
-with (
-  data = d
-  , expr = errbar(x, y, y+sd, y-sd, add=F, pch=1, cap=.015, log="x")
-)
+sum_tpr <- as.tibble(z.stats("HY"))
+hy <- ggplot(sum_tpr, aes(x = Tpr, y = MAE, col = Tpr)) +
+           geom_point()  + theme(legend.position="none") + 
+    ggtitle("HY - Mean Absolute Error")
+hy
 
 ## ------------------------------------------------------------------------
-with (
-  data = d,
-qplot(x,y)+geom_errorbar(aes(x=x, ymin=y-sd, ymax=y+sd), width=0.25)
-)
+sum_tpr <- as.tibble(z.stats("BB"))
+bb <- ggplot(sum_tpr, aes(x = Tpr, y = RMSE, color = Tpr)) +
+           geom_point() + ylim(0, 0.4) + theme(legend.position="none") +
+    ggtitle("Beggs-Brill")
+bb
+
+## ------------------------------------------------------------------------
+sum_tpr <- as.tibble(z.stats("HY"))
+hy <- ggplot(sum_tpr, aes(x = Tpr, y = RMSE, col = Tpr)) +
+           geom_point() + ylim(0, 0.4) + theme(legend.position="none") + 
+    ggtitle("Hall-Yarborough")
+hy
+
+## ------------------------------------------------------------------------
+sum_tpr <- as.tibble(z.stats("DAK"))
+dak <- ggplot(sum_tpr, aes(x = Tpr, y = RMSE, col = Tpr)) +
+           geom_point() + ylim(0, 0.4) + theme(legend.position="none") +
+    ggtitle("Dranchuk-AbouKassem")
+dak
+
+## ------------------------------------------------------------------------
+sum_tpr <- as.tibble(z.stats("SH"))
+sh <- ggplot(sum_tpr, aes(x = Tpr, y = RMSE, col = Tpr)) +
+           geom_point() + ylim(0, 0.4) + theme(legend.position="none") +
+    ggtitle("Shell")
+sh
+
+## ------------------------------------------------------------------------
+sum_tpr <- as.tibble(z.stats("N10"))
+n10 <- ggplot(sum_tpr, aes(x = Tpr, y = RMSE, col = Tpr)) +
+           geom_point() + ylim(0, 0.4) + theme(legend.position="none") +
+    ggtitle("Neural-Network-10")
+n10
+
+## ------------------------------------------------------------------------
+sum_tpr <- as.tibble(z.stats("PP"))
+pp <- ggplot(sum_tpr, aes(x = Tpr, y = RMSE, col = Tpr)) +
+           geom_point() + ylim(0, 0.4) + theme(legend.position="none") +
+    ggtitle("Papp")
+pp
+
+
+## ------------------------------------------------------------------------
+sum_tpr <- as.tibble(z.stats("HY"))
+sum_tpr
+
+## ------------------------------------------------------------------------
+# Ppr  <- as.numeric(sum_tpr$Ppr)
+# Tpr  <- as.numeric(sum_tpr$Tpr)
+# RMSE <- sum_tpr$RMSE
+
+sum_tpr <- as.tibble(z.stats("N10"))
+
+sum_tpr$Tpr <- as.numeric(sum_tpr$Tpr)
+sum_tpr$Ppr <- as.numeric(sum_tpr$Ppr)
+
+
+data.loess <- loess(RMSE ~ Ppr * Tpr, data = sum_tpr)
+
+xgrid <- seq(min(sum_tpr$Ppr), max(sum_tpr$Ppr), 0.1)
+ygrid <- seq(min(sum_tpr$Tpr), max(sum_tpr$Tpr), 0.2)
+
+data.fit <- expand.grid(Ppr = xgrid, Tpr = ygrid)
+mtrx3d <-  predict(data.loess, newdata = data.fit)
+
+contour(x = xgrid, y = ygrid, z = mtrx3d, nlev = 10, method = "edge")
+
+## ------------------------------------------------------------------------
+contour(x = xgrid, y = ygrid, z = mtrx3d)
+
+## ------------------------------------------------------------------------
+library(zFactor)
+correlation = "PP"
+pprRange <- "lp"
+stat <- "MAPE"
+interval <-  "fine"
+
+if (stat == "MAPE") {
+    midpoint <-  12.5
+    limit <- c(0, 25)
+} else if (stat == "RMSE") {
+    midpoint <-   0.015
+    limit <- c(0, 0.030)
+}
+
+# Ppr <- NULL; Tpr <- NULL; MAPE <- NULL; z.calc <- NULL; z.chart <- NULL
+# sum_tpr <- as.tibble(z.stats(correlation))
+# isMissing_correlation(correlation)
+msg <- "You have to provide a z-factor correlation: "
+msg_missing <- paste(msg, paste(get_z_correlations(), collapse = " "))
+if (missing(correlation)) stop(msg_missing)
+if (!isValid_correlation(correlation)) stop("Not a valid correlation.")
+
+corr_name <- zFactor:::z_correlations[which(zFactor:::z_correlations["short"] == correlation),
+                                                 "long"]
+
+smry_tpr_ppr <- z.stats(correlation, pprRange, interval = interval)
+g <- ggplot(smry_tpr_ppr, aes(Ppr, Tpr))
+g <- g + geom_tile(data=smry_tpr_ppr, aes(fill=get(stat)), color="white") +
+    scale_fill_gradient2(low="blue", high="red", mid="yellow", na.value = "pink",
+                         midpoint = midpoint, limit = limit, name = stat) +
+    theme(axis.text.x = element_text(angle=45, vjust=1, size=11, hjust=1)) +
+    coord_equal() +
+    ggtitle(corr_name, subtitle = correlation) +
+    guides(fill = guide_colorbar(barwidth = 0.6, barheight = 5, 
+                                 label.vjust = 0.9))
+print(g)
 
