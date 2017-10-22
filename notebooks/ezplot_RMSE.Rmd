@@ -1,0 +1,16 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+set.seed(92)
+
+y = 1:100
+yhat = y + rnorm(100, 0, 2)
+
+dat = data.frame(residual = y - yhat, yhat=yhat)
+plt = ezplot::plt_dist(dat)
+plt("residual")
+```
+
