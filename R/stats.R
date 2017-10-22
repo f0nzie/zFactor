@@ -104,7 +104,7 @@ stats_of_z.stats <- function(stat = "MAPE") {
 #'
 #' # plot Beggs-Brill correlation with fine grid on Ppr
 #' z.plot.range("BB", interval = "fine")
-z.plot.range <- function(correlation = "DAK", pprRange = "lp", ...) {
+z.plot.range <- function(correlation = "DAK", stat = "MAPE", pprRange = "lp", ...) {
     Ppr <- NULL; Tpr <- NULL; MAPE <- NULL; z.calc <- NULL; z.chart <- NULL
     # isMissing_correlation(correlation)
     msg <- "You have to provide a z-factor correlation: "
@@ -112,16 +112,26 @@ z.plot.range <- function(correlation = "DAK", pprRange = "lp", ...) {
     if (missing(correlation)) stop(msg_missing)
     if (!isValid_correlation(correlation)) stop("Not a valid correlation.")
 
+    if (stat == "MAPE") {
+        midpoint <-  12.5
+        limit <- c(0, 25)
+    } else if (stat == "RMSE") {
+        midpoint <-   0.025
+        limit <- c(0, 0.050)
+    }
+
     corr_name <- z_correlations[which(z_correlations["short"] == correlation),
                                                      "long"]
 
     smry_tpr_ppr <- z.stats(correlation, pprRange, ...)
     g <- ggplot(smry_tpr_ppr, aes(Ppr, Tpr))
-    g <- g + geom_tile(data=smry_tpr_ppr, aes(fill=MAPE), color="white") +
-        scale_fill_gradient2(low="blue", high="red", mid="yellow", na.value = "pink",
-                             midpoint=12.5, limit=c(0, 25), name="MAPE") +
-        theme(axis.text.x = element_text(angle=45, vjust=1, size=11, hjust=1)) +
+    g <- g + geom_tile(data = smry_tpr_ppr, aes(fill = get(stat)), color="white") +
+        scale_fill_gradient2(low = "blue", high = "red", mid = "yellow", na.value = "grey25",
+                             midpoint = midpoint, limit = limit, name = stat) +
+        theme(axis.text.x = element_text(angle=45, vjust=1, size = 11, hjust = 1)) +
         coord_equal() +
-        ggtitle(corr_name, subtitle = correlation)
+        ggtitle(corr_name, subtitle = correlation) +
+        guides(fill = guide_colorbar(barwidth = 0.6, barheight = 5,
+                                     label.vjust = 0.9))
     print(g)
 }
