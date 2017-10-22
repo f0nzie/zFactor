@@ -261,19 +261,19 @@ contour(swiss2.lm, Tpr ~ Ppr)
 library(zFactor)
 correlation = "PP"
 pprRange <- "lp"
-stat <- "RMSE"
+stat <- "MAPE"
 interval <-  "fine"
 
 if (stat == "MAPE") {
     midpoint <-  12.5
-    limit <- c(0, 10)
+    limit <- c(0, 25)
 } else if (stat == "RMSE") {
     midpoint <-   0.015
     limit <- c(0, 0.030)
 }
 
 # Ppr <- NULL; Tpr <- NULL; MAPE <- NULL; z.calc <- NULL; z.chart <- NULL
-sum_tpr <- as.tibble(z.stats(correlation))
+# sum_tpr <- as.tibble(z.stats(correlation))
 # isMissing_correlation(correlation)
 msg <- "You have to provide a z-factor correlation: "
 msg_missing <- paste(msg, paste(get_z_correlations(), collapse = " "))
@@ -286,11 +286,13 @@ corr_name <- zFactor:::z_correlations[which(zFactor:::z_correlations["short"] ==
 smry_tpr_ppr <- z.stats(correlation, pprRange, interval = interval)
 g <- ggplot(smry_tpr_ppr, aes(Ppr, Tpr))
 g <- g + geom_tile(data=smry_tpr_ppr, aes(fill=get(stat)), color="white") +
-    scale_fill_gradient2(low="blue", high="red", mid="yellow", na.value = "black",
+    scale_fill_gradient2(low="blue", high="red", mid="yellow", na.value = "pink",
                          midpoint = midpoint, limit = limit, name = stat) +
     theme(axis.text.x = element_text(angle=45, vjust=1, size=11, hjust=1)) +
     coord_equal() +
-    ggtitle(corr_name, subtitle = correlation)
+    ggtitle(corr_name, subtitle = correlation) +
+    guides(fill = guide_colorbar(barwidth = 0.6, barheight = 5, 
+                                 label.vjust = 0.9))
 print(g)
 ```
 
