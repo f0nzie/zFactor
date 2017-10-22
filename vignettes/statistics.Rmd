@@ -9,11 +9,11 @@ vignette: >
 ---
 
 ## Practical example
-To demonstrate graphically the difference between correlation and experimental data we will use the Dranchuk-AbouKassem results at a $T_{pr}$=1.05 at various $P_{pr}$.
+To demonstrate graphically the difference between correlation and experimental data we will use the Hall-Yarborough correlation results at a $T_{pr}$=1.05 at various $P_{pr}$.
 
 ```{r}
 library(zFactor)
-zFactor:::z.plot.range("DAK", interval = "fine")
+zFactor:::z.plot.range("HY", interval = "fine")
 ```
 
 
@@ -35,7 +35,7 @@ $f_t$ are the calculated or predicted values (the $z$ values calculated by the c
 $n$ is the number of samples
 
 
-## RMSE
+## RMSE: Root Mean Squared Error
 Measure of accuracy, to compare errors of different calculation models for the same dataset.
 
 $$RMSE =  \sqrt {\sum_{t=1}^n \frac {(a_t - f_t)^2} {n}}$$
@@ -46,6 +46,16 @@ RMSE = sqrt(mean((z.chart - z.calc)^2))
 ```
 
 
+```{r}
+library(tibble)
+library(ggplot2)
+sum_tpr <- as.tibble(z.stats("HY"))
+hy <- ggplot(sum_tpr, aes(x = Tpr, y = RMSE, col = Tpr)) +
+           geom_point()  + theme(legend.position="none") + 
+    ggtitle("HY - Root Mean Squared Error")
+hy
+```
+
 
 ## MPE: Mean Percentage error
 
@@ -55,6 +65,16 @@ $$MPE = \frac {100%} {n} \sum_{t=1}^n \frac {a_t - f_t} {a_t}$$
 <u>MPE code</u>
 ```{r eval=FALSE}
 MPE  = sum((z.calc - z.chart) / z.chart) * 100 / n(),
+```
+
+```{r}
+library(tibble)
+library(ggplot2)
+sum_tpr <- as.tibble(z.stats("HY"))
+hy <- ggplot(sum_tpr, aes(x = Tpr, y = MPE, col = Tpr)) +
+           geom_point()  + theme(legend.position="none") + 
+    ggtitle("HY  - Mean Percentage error")
+hy
 ```
 
 
@@ -68,6 +88,17 @@ MAPE = sum(abs((z.calc - z.chart) / z.chart)) * 100 / n()
 ```
 
 
+```{r}
+library(tibble)
+library(ggplot2)
+sum_tpr <- as.tibble(z.stats("HY"))
+hy <- ggplot(sum_tpr, aes(x = Tpr, y = MAPE, col = Tpr)) +
+           geom_point()  + theme(legend.position="none") + 
+    ggtitle("HY - Mean Absolute Percentage Error")
+hy
+```
+
+
 ## MSE: Mean Squared Error
 $$MSE = \frac {1}{n}  \sum_{t=1}^n (a_t - f_t)^2 $$
 <u>MSE code</u>
@@ -76,12 +107,32 @@ MSE  = sum((z.calc - z.chart)^2) / n()
 ```
 
 
+```{r}
+library(tibble)
+library(ggplot2)
+sum_tpr <- as.tibble(z.stats("HY"))
+hy <- ggplot(sum_tpr, aes(x = Tpr, y = MSE, col = Tpr)) +
+           geom_point()  + theme(legend.position="none") + 
+    ggtitle("HY - Mean Squared Error")
+hy
+```
+
 
 ## RSS: Residual sum of Squares
 $$RSS =  \sum_{t=1}^n (a_t - f_t)^2 $$
 <u>RSS code</u>
 ```{r eval=FALSE}
 RSS  = sum((z.calc - z.chart)^2)
+```
+
+```{r}
+library(tibble)
+library(ggplot2)
+sum_tpr <- as.tibble(z.stats("HY"))
+hy <- ggplot(sum_tpr, aes(x = Tpr, y = RSS, col = Tpr)) +
+           geom_point()  + theme(legend.position="none") + 
+    ggtitle("HY - Residual sum of Squares")
+hy
 ```
 
 
@@ -93,16 +144,17 @@ $$MAE = \frac {1} {n} \sum | {a_t - f_t} |$$
 MAE  = sum(abs(z.calc - z.chart)) / n()
 ```
 
-
-
-## 
 ```{r}
 library(tibble)
 library(ggplot2)
-dak_tpr <- as.tibble(z.stats("DAK"))
-dak_tpr
+sum_tpr <- as.tibble(z.stats("HY"))
+hy <- ggplot(sum_tpr, aes(x = Tpr, y = MAE, col = Tpr)) +
+           geom_point()  + theme(legend.position="none") + 
+    ggtitle("HY - Mean Absolute Error")
+hy
 ```
 
+## RMSE vs isotherm for all correlations
 
 ```{r}
 sum_tpr <- as.tibble(z.stats("BB"))
@@ -111,6 +163,7 @@ bb <- ggplot(sum_tpr, aes(x = Tpr, y = RMSE, color = Tpr)) +
     ggtitle("Beggs-Brill")
 bb
 ```
+
 ```{r}
 sum_tpr <- as.tibble(z.stats("HY"))
 hy <- ggplot(sum_tpr, aes(x = Tpr, y = RMSE, col = Tpr)) +
