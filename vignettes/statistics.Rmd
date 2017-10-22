@@ -13,6 +13,9 @@ To demonstrate graphically the difference between correlation and experimental d
 
 ```{r}
 library(zFactor)
+library(tibble)
+library(ggplot2)
+
 zFactor:::z.plot.range("HY", interval = "fine")
 ```
 
@@ -47,8 +50,6 @@ RMSE = sqrt(mean((z.chart - z.calc)^2))
 
 
 ```{r}
-library(tibble)
-library(ggplot2)
 sum_tpr <- as.tibble(z.stats("HY"))
 hy <- ggplot(sum_tpr, aes(x = Tpr, y = RMSE, col = Tpr)) +
            geom_point()  + theme(legend.position="none") + 
@@ -68,8 +69,6 @@ MPE  = sum((z.calc - z.chart) / z.chart) * 100 / n(),
 ```
 
 ```{r}
-library(tibble)
-library(ggplot2)
 sum_tpr <- as.tibble(z.stats("HY"))
 hy <- ggplot(sum_tpr, aes(x = Tpr, y = MPE, col = Tpr)) +
            geom_point()  + theme(legend.position="none") + 
@@ -89,8 +88,6 @@ MAPE = sum(abs((z.calc - z.chart) / z.chart)) * 100 / n()
 
 
 ```{r}
-library(tibble)
-library(ggplot2)
 sum_tpr <- as.tibble(z.stats("HY"))
 hy <- ggplot(sum_tpr, aes(x = Tpr, y = MAPE, col = Tpr)) +
            geom_point()  + theme(legend.position="none") + 
@@ -108,8 +105,6 @@ MSE  = sum((z.calc - z.chart)^2) / n()
 
 
 ```{r}
-library(tibble)
-library(ggplot2)
 sum_tpr <- as.tibble(z.stats("HY"))
 hy <- ggplot(sum_tpr, aes(x = Tpr, y = MSE, col = Tpr)) +
            geom_point()  + theme(legend.position="none") + 
@@ -126,8 +121,6 @@ RSS  = sum((z.calc - z.chart)^2)
 ```
 
 ```{r}
-library(tibble)
-library(ggplot2)
 sum_tpr <- as.tibble(z.stats("HY"))
 hy <- ggplot(sum_tpr, aes(x = Tpr, y = RSS, col = Tpr)) +
            geom_point()  + theme(legend.position="none") + 
@@ -145,8 +138,6 @@ MAE  = sum(abs(z.calc - z.chart)) / n()
 ```
 
 ```{r}
-library(tibble)
-library(ggplot2)
 sum_tpr <- as.tibble(z.stats("HY"))
 hy <- ggplot(sum_tpr, aes(x = Tpr, y = MAE, col = Tpr)) +
            geom_point()  + theme(legend.position="none") + 
