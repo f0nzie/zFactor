@@ -29,6 +29,7 @@ The comparative analysis shows tables with different error measurements:
     MSE:   Mean Squared Error
     RSS:   Residual sum of Squares
     MAE:   Mean Absolute Error
+    MAAPE: Mean Arc-tangent Absolute Error
 
 
 where:
@@ -40,7 +41,7 @@ $n$ is the number of samples
 
 RMSE, MSE and MAE are all **scale-dependent measures** since their scale depend on the scale of the data. MAE is very easy to calculate an understand but it affected by large outliers. MSE is also vulnerable to outliers and in different scale than the measured units. RMSE, the square root of MSE, would be preferrable but still is sensitive to large outliers.
 
-A **non-scale dependent* measure is MAPE though it could be sensitive to values close or equal to zero since it contains a denominator. To fix the problem with small numbers, a new statistical function was proposed by Kim and Kim in 2016 that applies the Arc Tangent of the MAPE which prevents infinite when finds numbers closer to zero. The geometric explanation can be found if ypu picture a triangle where the tangent is $| \frac {a_t - f_t} {a_t}|$, and $\theta$ the angle for such triangle. We will see that as ${a_t}$ get smaller and closer to zero, `MAPE` would tend to infinite, while `MAAPE` with $Arc Tan$ of the quotient would tend to $\frac {\pi} {2}$.
+A **non-scale dependent measure** is `MAPE` though it could be sensitive to values close or equal to zero since it contains a denominator. To fix the problem with small numbers, a new statistical function was proposed by Kim and Kim in 2016 that applies the Arc Tangent of the `MAPE` which prevents infinite when finds numbers closer to zero. The geometric explanation can be found if you picture a triangle where the tangent is $| \frac {a_t - f_t} {a_t}|$, and $\theta$ the angle for such triangle. We will see that as ${a_t}$ get smaller and closer to zero, `MAPE` would tend to infinite, while `MAAPE` with $Arc Tan$ of the quotient would tend to $\frac {\pi} {2}$.
 
 
 ## RMSE: Root Mean Squared Error
