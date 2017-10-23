@@ -5,9 +5,9 @@ output: html_notebook
 
 ```{r}
 library(zFactor)
-correlation = "SH"
+correlation = "PP"
 pprRange <- "lp"
-stat <- "RMSE"
+stat <- "MAAPE"
 interval <-  "fine"
 
 if (stat == "MAPE") {
@@ -16,6 +16,9 @@ if (stat == "MAPE") {
 } else if (stat == "RMSE") {
     midpoint <-   0.025
     limit <- c(0, 0.050)
+} else if (stat == "MAAPE") {
+    midpoint <-   0.125
+    limit <- c(0, 0.250)
 }
 
 # Ppr <- NULL; Tpr <- NULL; MAPE <- NULL; z.calc <- NULL; z.chart <- NULL

@@ -6,7 +6,7 @@ context("z.stats")
 test_that("z.stats matches dimension and mean of MAPE. default interval = coarse", {
     sh_corrs <- (zFactor:::z_correlations$short)
     sapply(sh_corrs, function(corr)
-        expect_equal(dim(z.stats(corr)), c(112,10)))
+        expect_equal(dim(z.stats(corr)), c(112,11)))
     s.mean <- sapply(sh_corrs, function(corr) mean(z.stats(corr)$MAPE))
     expected <- c(13.8862628,  0.8186578,  0.7697211,  0.8123786,  4.1530402,  0.1635157,  2.0987294)
     names(expected) <- sh_corrs
@@ -17,7 +17,7 @@ test_that("z.stats matches dimension and mean of MAPE. default interval = coarse
 test_that("z.stats matches dimension and mean of MAPE, interval = fine", {
     sh_corrs <- (zFactor:::z_correlations$short)
     sapply(sh_corrs, function(corr)
-        expect_equal(dim(z.stats(corr)), c(112,10)))
+        expect_equal(dim(z.stats(corr)), c(112,11)))
     s.mean <- sapply(sh_corrs, function(corr) mean(z.stats(corr, interval = "fine")$MAPE))
     expected <- c(15.8031751, 0.7581761, 0.7500547, 0.7958098, 4.1555843, 0.1543264, 1.8543540)
     names(expected) <- sh_corrs
@@ -28,7 +28,7 @@ test_that("z.stats matches dimension and mean of MAPE, interval = fine", {
 test_that("z.stats matches dimension and mean of MAPE, range = hp", {
     sh_corrs <- (zFactor:::z_correlations$short)
     sapply(sh_corrs, function(corr)
-        expect_equal(dim(z.stats(corr)), c(112,10)))
+        expect_equal(dim(z.stats(corr)), c(112,11)))
     s.mean <- sapply(sh_corrs, function(corr) mean(z.stats(corr, pprRange = "hp")$MAPE))
     expected <- c(15.8345501,  1.0276664,  0.9324033,  0.9698105,  4.2518234,  0.1668054,  2.5638032 )
     names(expected) <- sh_corrs

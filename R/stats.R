@@ -121,6 +121,9 @@ z.plot.range <- function(correlation = "DAK", stat = "MAPE", pprRange = "lp", ..
     } else if (stat == "RMSE") {
         midpoint <-   0.025
         limit <- c(0, 0.050)
+    } else if (stat == "MAAPE") {
+        midpoint <-   0.125
+        limit <- c(0, 0.250)
     }
 
     corr_name <- z_correlations[which(z_correlations["short"] == correlation),
