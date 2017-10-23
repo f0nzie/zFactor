@@ -38,6 +38,10 @@ $f_t$ are the calculated or predicted values (the $z$ values calculated by the c
 $n$ is the number of samples
 
 
+RMSE, MSE and MAE are all **scale-dependent measures** since their scale depend on the scale of the data. MAE is very easy to calculate an understand but it affected by large outliers. MSE is also vulnerable to outliers and in different scale than the measured units. RMSE, the square root of MSE, would be preferrable but still is sensitive to large outliers.
+
+
+
 ## RMSE: Root Mean Squared Error
 Measure of accuracy, to compare errors of different calculation models for the same dataset.
 
