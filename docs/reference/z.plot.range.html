@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Tile plot of best fit area for indicated correlation — z.plot.range â€¢ zFactor</title>
+<title>Tile plot of best fit area for a correlation — z.plot.range â€¢ zFactor</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -64,6 +64,12 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/correlation_selection.html">Selecting the Correlation</a>
+    </li>
+    <li>
+      <a href="../articles/statistics.html">Measuring errors in calculating z</a>
+    </li>
     <li>
       <a href="../articles/StandingKatz_chart.html">Standing-Katz chart</a>
     </li>
@@ -128,7 +134,7 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Tile plot of best fit area for indicated correlation</h1>
+    <h1>Tile plot of best fit area for a correlation</h1>
     </div>
 
     
@@ -136,7 +142,7 @@
 or close to MAPE=25. Pink is much greater than 25.</p>
     
 
-    <pre class="usage"><span class='fu'>z.plot.range</span>(<span class='kw'>correlation</span> <span class='kw'>=</span> <span class='st'>"DAK"</span>, <span class='kw'>pprRange</span> <span class='kw'>=</span> <span class='st'>"lp"</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>z.plot.range</span>(<span class='kw'>correlation</span> <span class='kw'>=</span> <span class='st'>"DAK"</span>, <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"MAPE"</span>, <span class='kw'>pprRange</span> <span class='kw'>=</span> <span class='st'>"lp"</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -144,6 +150,10 @@ or close to MAPE=25. Pink is much greater than 25.</p>
     <tr>
       <th>correlation</th>
       <td><p>identifier. Can be "HY", "DAK", "DPR" "N10", "SH"</p></td>
+    </tr>
+    <tr>
+      <th>stat</th>
+      <td><p>Any of the statistical variables in z.stats:</p></td>
     </tr>
     <tr>
       <th>pprRange</th>

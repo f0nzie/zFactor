@@ -42,6 +42,12 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="articles/correlation_selection.html">Selecting the Correlation</a>
+    </li>
+    <li>
+      <a href="articles/statistics.html">Measuring errors in calculating z</a>
+    </li>
+    <li>
       <a href="articles/StandingKatz_chart.html">Standing-Katz chart</a>
     </li>
     <li>
@@ -142,7 +148,7 @@
 <ul>
 <li>In CRAN: <code>v 0.1.6</code>
 </li>
-<li>In GitHub <code>dev-0.1.6.9011</code>
+<li>In GitHub <code>dev-0.1.6.9012</code>
 </li>
 </ul>
 </div>
@@ -384,6 +390,25 @@ smry_tpr_ppr &lt;-<span class="st"> </span><span class="kw">summarise</span>(gro
 <span class="co">#&gt; # ... with 102 more rows, and 3 more variables: RSS &lt;dbl&gt;, MAE &lt;dbl&gt;,</span>
 <span class="co">#&gt; #   RMLSE &lt;dbl&gt;</span></code></pre></div>
 </div>
+</div>
+<div id="summary-of-mape-statistics" class="section level2">
+<h2 class="hasAnchor">
+<a href="#summary-of-mape-statistics" class="anchor"></a>Summary of MAPE statistics</h2>
+<p>This function shows a statistical summary of the Mean Absolute Percentage Error of all the correlations. We are taking the mean, maximum error, minimum eroor, the median and the mode in the whole range of each opf the correlations.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zFactor)
+<span class="kw"><a href="reference/stats_of_z.stats.html">stats_of_z.stats</a></span>()
+<span class="co">#&gt;                 BB           HY          DAK         DPR         SH</span>
+<span class="co">#&gt; mean    13.8862628  0.818657798  0.769721132  0.81237862  4.1530402</span>
+<span class="co">#&gt; max    554.1872335 22.481448009 12.777908779 12.96594664 30.3942954</span>
+<span class="co">#&gt; min      0.0153618  0.002422012  0.000609287  0.02057809  0.0231023</span>
+<span class="co">#&gt; median   1.0402029  0.220154744  0.245336341  0.26714131  1.1092930</span>
+<span class="co">#&gt; Mode     0.4281138  0.418077023  0.128870880  0.11769033  0.4389189</span>
+<span class="co">#&gt;                N10           PP</span>
+<span class="co">#&gt; mean   0.163515716  2.098729377</span>
+<span class="co">#&gt; max    1.153159851 85.482666496</span>
+<span class="co">#&gt; min    0.007209524  0.000507908</span>
+<span class="co">#&gt; median 0.123437923  0.670820910</span>
+<span class="co">#&gt; Mode   0.419773370  0.559623816</span></code></pre></div>
 </div>
 <div id="vignettes" class="section level2">
 <h2 class="hasAnchor">

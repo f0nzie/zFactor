@@ -1,0 +1,313 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+## Boxplots of MPE for selected correlations
+
+```{r}
+library(zFactor)
+qcorrs <- z.stats_quantile("MPE")
+scorrs <- qcorrs[, c("HY", "DAK", "DPR", "N10")]
+
+par(mfrow = c(1,2))
+boxplot(scorrs,  ylim= c(-2, 25), cex = 1.5, las=2, main = "MPE, y = (-2, 25)")
+grid()
+
+boxplot(scorrs,  ylim= c(-2, 2), cex = 1.5, las=2, main = "MPE, y = (-2, 2)")
+grid()
+```
+
+## MPE with with free y scale for all correlations
+
+```{r}
+library(zFactor)
+qcorrs <- z.stats_quantile("MPE")
+
+boxplot(qcorrs,  cex = 1.5, las=2, main = "MPE")
+grid()
+```
+
+## Boxplots for MAE at different `y` scale
+
+```{r}
+library(zFactor)
+qcorrs <- z.stats_quantile("MPE")
+
+par(mfrow = c(1,3))
+boxplot(qcorrs,  ylim= c(-600, 100), cex = 1.5, las=2, main = "MPE, y = (-4, 100)")
+grid()
+boxplot(qcorrs,  ylim= c(-4, 30), cex = 1.5, las=2, main = "MPE, y = (-4, 30)")
+grid()
+boxplot(qcorrs,  ylim= c(-4, 6), cex = 1.5, las=2, main = "MPE, y = (-4, 6)")
+grid()
+```
+
+
+## Boxplots for four statistical indicators for all correlations
+
+```{r fig.asp=1}
+library(zFactor)
+
+qcorrs <- z.stats_quantile("RMSE")
+par(mfrow = c(2,2))
+boxplot(qcorrs, log = "y", ylim =  c(1e-6, 1e3), las=2, main = "RMSE")
+grid()
+
+qcorrs <- z.stats_quantile("MAPE")
+boxplot(qcorrs, log = "y", ylim =  c(1e-6, 1e3), las=2, main = "MAPE")
+grid()
+
+qcorrs <- z.stats_quantile("MSE")
+boxplot(qcorrs, log = "y", ylim = c(1e-12, 1e3), las=2, main = "MSE")
+grid()
+
+qcorrs <- z.stats_quantile("RSS")
+boxplot(qcorrs, log = "y", ylim = c(1e-12, 1e3), las=2, main = "RSS")
+grid()
+```
+
+
+## Using `z.stats_quantile` to all correlations
+
+```{r}
+library(zFactor)
+qcorrs <- z.stats_quantile("RMSE")
+
+boxplot(qcorrs, log = "y", ylim =  c(1e-6, 1e3), main = "RMSE")
+grid()
+```
+
+```{r}
+# MAPE
+boxplot(qcorrs, log = "y", ylim =  c(1e-5, 1e3), main = "MAPE")
+grid()
+```
+
+```{r}
+# MSE
+boxplot(qcorrs, log = "y", ylim = c(1e-6, 1e3), main = "MSE")
+grid()
+```
+
+```{r}
+# RSE
+boxplot(qcorrs, log = "y", ylim = c(1e-6, 1e3), main = "RSE")
+grid()
+```
+
+```{r}
+# MAE
+boxplot(qcorrs, log = "y", ylim = c(1e-6, 1e3), main = "MAE")
+grid()
+```
+
+```{r}
+library(zFactor)
+
+z.stats()
+```
+
+
+```{r}
+z.stats_quantile <- function(stat = "MAPE", ylim, ...) {
+    cols <- ncol(z.stats())
+    z.stats_stats <- names(z.stats())[3:cols]
+    corrs <- zFactor:::z_correlations$short
+    
+    qcorrs <- sapply(corrs, function(corr) quantile(z.stats(corr)[[stat]] ))
+    
+    boxplot(qcorrs, log = "y", ylim = ylim)
+    grid()
+    # boxplot(qcorrs, log = "y")
+    # abline(h=0.1, col = "blue")
+}
+
+z.stats_quantile("RMSE", c(1e-6, 1000))
+# z.stats_quantile("MPE", c(1e-1, 100))
+z.stats_quantile("MAPE", c(1e-4, 1000))
+z.stats_quantile("MSE", c(1e-12, 1e3))
+z.stats_quantile("RSS", ylim = c(1e-12, 1e4))
+z.stats_quantile("MAE", c(1e-6, 1000))
+
+```
+
+```{r}
+library(zFactor)
+# quantile for MAPE all correlations
+stat = "RMSLE"
+cols <- ncol(z.stats())
+z.stats_stats <- names(z.stats())[3:cols]
+corrs <- zFactor:::z_correlations$short
+
+qcorrs <- sapply(corrs, function(corr) quantile(z.stats(corr)[[stat]] ))
+qcorrs
+
+boxplot(qcorrs, log = "y", ylim = c(1e-12, 1e12))
+# abline(h=0.1, col = "blue")
+```
+
+```{r}
+library(zFactor)
+# quantile for MAPE all correlations
+stat = "MPE"
+cols <- ncol(z.stats())
+z.stats_stats <- names(z.stats())[3:cols]
+corrs <- zFactor:::z_correlations$short
+
+
+qcorrs <- sapply(corrs, function(corr) quantile(z.stats(corr)[[stat]] ))
+qcorrs
+par(mfrow = c(1,3))
+boxplot(qcorrs,  ylim= c(-4, 100), cex = 1.5, las=2)
+grid()
+boxplot(qcorrs,  ylim= c(-4, 10), cex = 1.5, las=2)
+grid()
+boxplot(qcorrs,  ylim= c(-4, 6), cex = 1.5, las=2)
+grid()
+# abline(h=5, col = "gray")
+# abline(h=0, col = "red")
+# abline(h=-0.5, col = "gray")
+# abline(h=-1, col = "gray")
+```
+
+```{r}
+op <- par(mfcol = 1:2)
+with(iris,
+     {
+     plot(Sepal.Length, Sepal.Width, col = as.integer(Species),
+          xlim = c(4, 8), ylim = c(2, 4.5), panel.first = grid(),
+          main = "with(iris,  plot(...., panel.first = grid(), ..) )")
+         
+     plot(Sepal.Length, Sepal.Width, col = as.integer(Species),
+          panel.first = grid(3, lty = 1, lwd = 2),
+          main = "... panel.first = grid(3, lty = 1, lwd = 2), ..")
+     }
+    )
+par(op)
+```
+
+
+```{r}
+library(zFactor)
+# quantile for MAPE all correlations
+stat = "MAPE"
+cols <- ncol(z.stats())
+z.stats_stats <- names(z.stats())[3:cols]
+corrs <- zFactor:::z_correlations$short
+
+
+qcorrs <- sapply(corrs, function(corr) quantile(z.stats(corr)[[stat]] ))
+qcorrs
+
+boxplot(qcorrs, log = "y", ylim = c(1e-4, 1000))
+abline(h=0.1, col = "blue")
+```
+
+
+
+```{r}
+boxplot(qcorrs, log = "y", ylim = c(1e-4, 1000))
+abline(h=0.1, col = "blue")
+```
+
+```{r}
+library(zFactor)
+zbb <- z.stats("BB")
+zbb
+```
+
+```{r}
+max(zbb$MAPE)
+```
+
+```{r}
+quantile(zbb$MAPE)
+```
+
+```{r}
+# MAPE of one correlation
+stat = "MAPE"
+cols <- ncol(z.stats())
+z.stats_stats <- names(z.stats())[3:cols]
+corrs <- zFactor:::z_correlations$short
+
+custom_functions <- c("mean", "max", "min", "median", "Mode")
+
+sapply(corrs, function(corr)
+            sapply(custom_functions, function(f) get(f)( z.stats(corr)[[stat]] )))
+```
+
+```{r}
+# quantile for MAPE all correlations
+stat = "MAPE"
+cols <- ncol(z.stats())
+z.stats_stats <- names(z.stats())[3:cols]
+corrs <- zFactor:::z_correlations$short
+
+
+qcorrs <- sapply(corrs, function(corr) quantile(z.stats(corr)[[stat]] ))
+qcorrs
+```
+
+```{r}
+boxplot(qcorrs, log = "y", ylim = c(1e-4, 1000))
+abline(h=0.1, col = "blue")
+```
+
+```{r}
+boxplot(qcorrs[, "BB"], log = "y", ylim = c(1e-3, 1000))
+```
+
+
+```{r}
+boxplot(qcorrs[,2], log = "y")
+```
+
+```{r}
+boxplot(qcorrs[,3], log = "y")
+```
+
+```{r}
+boxplot(qcorrs[, "DPR"], log = "y")
+```
+
+
+```{r}
+boxplot(qcorrs[, "SH"], log = "y")
+```
+
+
+
+```{r}
+boxplot(qcorrs[, "N10"], log = "y")
+```
+
+
+```{r}
+boxplot(qcorrs[, "PP"], log = "y", ylim = c(1e-3, 1000))
+```
+
+```{r}
+boxplot(qcorrs, log = "y", ylim = c(1e-4, 1000))
+abline(h=0.1, col = "blue")
+```
+
+
+```{r}
+
+## maybe change the desired number of tick marks:  par(lab = c(mx, my, 7))
+op <- par(mfcol = 1:2)
+with(iris,
+     {
+     plot(Sepal.Length, Sepal.Width, col = as.integer(Species),
+          xlim = c(4, 8), ylim = c(2, 4.5), panel.first = grid(),
+          main = "with(iris,  plot(...., panel.first = grid(), ..) )")
+     plot(Sepal.Length, Sepal.Width, col = as.integer(Species),
+          panel.first = grid(3, lty = 1, lwd = 2),
+          main = "... panel.first = grid(3, lty = 1, lwd = 2), ..")
+     }
+    )
+par(op)
+```
+

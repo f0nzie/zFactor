@@ -1,3 +1,14 @@
+## 20171019 0.1.6.9012
+* release to CRAN as 0.1.7
+* add function MAAPE
+* add boxplots to show outliers in correlation calculation
+* new vignette statistics
+* add unit tests up to coverage 89%
+* improve couple of functions: convertStringToVector , 
+* add function stats_of_z.stats 
+* add three datasets to ./tests/testthat/data
+
+
 ## 20171018 0.1.6.9011
 * add citations to Papp vignette
 * add correlation titles to sub-sections in README

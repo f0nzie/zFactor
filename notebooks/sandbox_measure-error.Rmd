@@ -1,6 +1,8 @@
 ---
 title: "R Notebook"
-output: html_notebook
+output:
+  html_document:
+    df_print: paged
 ---
 
 https://www.r-bloggers.com/using-r-quickly-calculating-summary-statistics-with-dplyr/
@@ -26,7 +28,8 @@ summarise(grouped, mean=mean(value), sd=sd(value))
 
 
 $$MPE = \frac {100%} {n} \sum_{t=1}^n \frac {a_t - f_t} {a_t}$$
-$$MAPE = \frac {100} {n} \sum | \frac {a_t - f_t} {a_t}|$$ 
+$$MAPE = \frac {100} {n} \sum | \frac {a_t - f_t} {a_t}|$$
+
 
 ```{r}
 library(zFactor)

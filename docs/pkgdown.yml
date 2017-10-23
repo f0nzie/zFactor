@@ -4,6 +4,7 @@ urls:
 articles:
   Ann10: Ann10.html
   Beggs-Brill: Beggs-Brill.html
+  correlation_selection: correlation_selection.html
   Dranchuk-AbouKassem: Dranchuk-AbouKassem.html
   Dranchuk-Purvis-Robinson: Dranchuk-Purvis-Robinson.html
   Hall-Yarborough: Hall-Yarborough.html
@@ -11,4 +12,5 @@ articles:
   Plot_StandingKatz_lp: Plot_StandingKatz_lp.html
   Shell: Shell.html
   StandingKatz_chart: StandingKatz_chart.html
+  statistics: statistics.html
 

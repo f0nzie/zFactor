@@ -27,6 +27,7 @@ bib <- read.bibtex(bib_file)
 
 
 
+
 # zFactor
 Computational tools for chemical, petrochemical and petroleum engineers. Calculates the deviation between different correlations for gas compressibility compared to the original Standing-Katz chart.
 
@@ -57,8 +58,8 @@ The correlations that are implemented in R for the package **zFactor** are:
 
 
 ## Versions
-* In CRAN:   `v 0.1.6`
-* In GitHub  `dev-0.1.6.9011`
+* In CRAN:   `v 0.1.7`
+* In GitHub  `development versions`
 
 ## Installation
 I recommend installing from GitHub using `devtools`, that way you get the latest and greatest version. CRAN release cycles allows updates every one to two months.
@@ -176,6 +177,8 @@ The comparative analysis shows tables with different error measurements:
     MAE:   Mean Absolute Error
 
 
+
+
 ## What you can do with `zFactor`
 
 * Find `z` with any of the correlations provided
@@ -241,6 +244,16 @@ smry_tpr_ppr <- summarise(grouped,
           )
 as.tibble(smry_tpr_ppr)
 ```
+
+## Summary of MAPE statistics
+This function shows a statistical summary of the Mean Absolute Percentage Error of all the correlations. We are taking the mean, maximum error, minimum eroor, the median and the mode in the whole range of each opf the correlations.
+
+```{r}
+library(zFactor)
+stats_of_z.stats()
+```
+
+
 
 ## Vignettes
 The vignettes contain examples on the use and analysis of the various correlations.

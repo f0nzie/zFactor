@@ -1,0 +1,445 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(ggplot2)
+
+mtcars$quart <- cut(mtcars$qsec, quantile(mtcars$qsec))
+
+ggplot(mtcars, aes(x = wt, y = hp, color = factor(quart))) +
+       geom_point(shape = 16, size = 5) +
+       theme(legend.position = c(0.80, 0.85), 
+             legend.background = element_rect(colour = "black"), 
+            panel.background = element_rect(fill = "black")) +
+       labs(x = "Weight (1,000lbs)",  y = "Horsepower") +
+       scale_colour_manual(values = c("#fdcc8a", "#fc8d59", "#e34a33", "#b30000"),
+                          name = "Quartiles of qsec",
+                          labels = c("14.5-16.9s", "17.0-17.7s", "17.8-18.9s", "19.0-22.9s"))
+```
+
+
+```{r}
+data.loess <- loess(qsec ~ wt * hp, data = mtcars)
+```
+
+```{r}
+# Create a sequence of incrementally increasing (by 0.3 units) values for both wt and hp
+xgrid <-  seq(min(mtcars$wt), max(mtcars$wt), 0.3)
+ygrid <-  seq(min(mtcars$hp), max(mtcars$hp), 0.3)
+# Generate a dataframe with every possible combination of wt and hp
+data.fit <-  expand.grid(wt = xgrid, hp = ygrid)
+# Feed the dataframe into the loess model and receive a matrix output with estimates of 
+# acceleration for each combination of wt and hp
+mtrx3d <-  predict(data.loess, newdata = data.fit)
+# Abbreviated display of final matrix
+mtrx3d[1:4, 1:4]
+```
+
+
+```{r}
+contour(x = xgrid, y = ygrid, z = mtrx3d, xlab = "Weight (1,000lbs)", ylab = "Horsepower")
+```
+
+```{r}
+outer(x, x)
+```
+
+```{r}
+require(grDevices) # for colours
+x <- -6:16
+op <- par(mfrow = c(2, 2))
+contour(outer(x, x), method = "edge", vfont = c("sans serif", "plain"))
+
+# z <- outer(x, sqrt(abs(x)), FUN = "/")
+# 
+# image(x, x, z)
+# contour(x, x, z, col = "pink", add = TRUE, method = "edge",
+#         vfont = c("sans serif", "plain"))
+```
+
+```{r}
+contour(x, x, z, ylim = c(1, 6), method = "simple", labcex = 1,
+        xlab = quote(x[1]), ylab = quote(x[2]))
+```
+
+```{r}
+contour(x, x, z, ylim = c(-6, 6), nlev = 20, lty = 2, method = "simple",
+        main = "20 levels; \"simple\" labelling method")
+par(op)
+```
+
+```{r}
+## Persian Rug Art:
+x <- y <- seq(-4*pi, 4*pi, len = 27)
+r <- sqrt(outer(x^2, y^2, "+"))
+opar <- par(mfrow = c(2, 2), mar = rep(0, 4))
+for(f in pi^(0:3))
+  contour(cos(r^2)*exp(-r/f),
+          drawlabels = FALSE, axes = FALSE, frame = TRUE)
+```
+
+
+
+
+```{r}
+rx <- range(x <- 10*1:nrow(volcano))
+ry <- range(y <- 10*1:ncol(volcano))
+ry <- ry + c(-1, 1) * (diff(rx) - diff(ry))/2
+tcol <- terrain.colors(12)
+par(opar); opar <- par(pty = "s", bg = "lightcyan")
+plot(x = 0, y = 0, type = "n", xlim = rx, ylim = ry, xlab = "", ylab = "")
+u <- par("usr")
+rect(u[1], u[3], u[2], u[4], col = tcol[8], border = "red")
+contour(x, y, volcano, col = tcol[2], lty = "solid", add = TRUE,
+        vfont = c("sans serif", "plain"))
+title("A Topographic Map of Maunga Whau", font = 4)
+abline(h = 200*0:4, v = 200*0:4, col = "lightgray", lty = 2, lwd = 0.1)
+## contourLines produces the same contour lines as contour
+plot(x = 0, y = 0, type = "n", xlim = rx, ylim = ry, xlab = "", ylab = "")
+u <- par("usr")
+rect(u[1], u[3], u[2], u[4], col = tcol[8], border = "red")
+contour(x, y, volcano, col = tcol[1], lty = "solid", add = TRUE,
+        vfont = c("sans serif", "plain"))
+line.list <- contourLines(x, y, volcano)
+invisible(lapply(line.list, lines, lwd=3, col=adjustcolor(2, .3)))
+par(opar)
+```
+
+```{r}
+library(rsm)
+
+swiss2.lm <- lm(Fertility ~ poly(Agriculture, Education, degree=2), data=swiss)
+par(mfrow=c(1,3))
+image(swiss2.lm, Education ~ Agriculture)
+contour(swiss2.lm, Education ~ Agriculture)
+persp(swiss2.lm, Education ~ Agriculture, zlab = "Fertility")
+
+```
+
+
+
+
+
+```{r}
+# http://www.stat.cmu.edu/~cshalizi/statcomp/12/lectures/10/lecture-10.R
+# Code for examples in Lecture 10, 36-350, Fall 2012
+# See lecture slides for context
+
+	# Load the data for the West et al. model once again
+gmp <- read.table("http://www.stat.cmu.edu/~cshalizi/statcomp/labs/02/gmp.dat")
+pop <- gmp$gmp/gmp$pcgmp
+gmp <- data.frame(gmp,pop=pop)
+
+	# Define the MSE function
+# Calculate mean squared error of West et al. power-law scaling model
+# Inputs: scale factor (y0), scaling exponent (a), response variable (Y),
+  # predictor variable (N)
+# Output: the MSE
+mse <- function(y0,a,Y=gmp$pcgmp,N=gmp$pop) {
+  mean((Y - y0*(N^a))^2)
+}
+
+	# Interaction of curve() and mse()
+# Next line won't work --- why?
+###curve(mse(a=x,y0=6611),from=0.10,to=0.15)
+# Using sapply() to "vectorize" mse:
+sapply(seq(from=0.10,to=0.15,by=0.01),mse,y0=6611)
+# Check that it's doing what it should:
+mse(6611,0.10)
+# Define a vectorized version using sapply
+  # You should work out what the inputs and outputs are here!
+mse.plottable <- function(a,...){sapply(a,mse,...)}
+# Make some plots
+curve(mse.plottable(a=x,y0=6611),from=0.10,to=0.15)
+curve(mse.plottable(a=x,y0=5100),from=0.10,to=0.20)
+# You should try varying Y and N in mse.plottable
+
+
+	# Numerical gradients
+# This approach to numerical gradients is "for educational purposes only"
+# For serious work, see the numDeriv package on CRAN (or texts on numerical
+# analysis) --- slides mention some drawbacks of simple first differences
+
+
+	# Clunky numerical gradient calculation, with a for loop
+# Take numerical gradient by first differences
+# Inputs: function (f), point at which to take derivative (x), increments for
+  # first differences (deriv.steps), further arguments to f (...)
+# Output: vector of partial derivatives
+# Presumes: f takes a vector as argument and returns a numeric scalar
+  # deriv.steps and x have the same number of components
+gradient <- function(f,x,deriv.steps,...) {
+  p <- length(x)
+  stopifnot(length(deriv.steps)==p)
+  f.old <- f(x,...)
+  gradient <- vector(length=p)
+  for (coordinate in 1:p) {
+   x.new <- x
+   x.new[coordinate] <- x.new[coordinate]+deriv.steps[coordinate]
+   f.new <- f(x.new,...)
+   gradient[coordinate] <- (f.new - f.old)/deriv.steps[coordinate]
+  }
+  return(gradient)
+}
+
+	# Better version, avoiding iteration
+# Take numerical gradient by first differences
+# Inputs: function (f), point at which to take derivative (x), increments for
+  # first differences (deriv.steps), further arguments to f (...)
+# Output: vector of partial derivatives
+# Presumes: f takes a vector as argument and returns a numeric scalar
+  # deriv.steps and x have the same number of components
+gradient <- function(f,x,deriv.steps,...) {
+  p <- length(x)
+  stopifnot(length(deriv.steps)==p)
+  f.old <- f(x,...)
+  x.new <- matrix(rep(x,times=p),nrow=p) + diag(deriv.steps,nrow=p)
+  # columns of x.new are perturbations of x because of how matrix() fills in
+  f.new <- apply(x.new,2,f,...)
+  gradient <- (f.new - f.old)/deriv.steps # Recycling
+  return(gradient)
+}
+
+# Minimize a function by gradient descent
+# Inputs: function (f), starting guess (x), number of steps to
+  # take (max.iterations), factor by which to multiply gradient (step.scale),
+  # size of negible derivatives (stopping.deriv), further arguments to
+  # gradien or to f (...)
+# Outputs: list with final guess at minimum, final value of gradient, number
+  # of iterations taken
+# Presumes: f takes a numeric vector and returns a numeric scalar
+  # need to pass gradient any extra arguments via ...
+gradient.descent <- function(f,x,max.iterations,step.scale,
+  stopping.deriv,...) {
+  for (iteration in 1:max.iterations) {
+    grad <- gradient(f,x,...)
+    if(all(abs(grad) < stopping.deriv)) { break() }
+    x <- x - step.scale*grad
+  }
+  fit <- list(argmin=x,final.gradient=grad,final.value=f(x),
+    iterations=iteration)
+  return(fit)
+}
+
+
+	# Adapting mse() to gradient() and gradient.descent()
+# Option 1: write a wrapper
+# Version of MSE function taking a vector argument
+# Inputs: Vector of parameters (param), optional extra arguments to mse (...)
+# Output: The mean squared error
+mse.for.optimization <- function(param,...) {
+  mse(y0=param[1],a=param[2],...)
+}
+# Try the following call (may have to wait a little)
+gradient.descent(f=mse.for.optimization,x=c(6611,0.15),
+  max.iterations=1e5,step.scale=c(1e-3,1e-12),stopping.deriv=1e-2,
+  deriv.step=c(1e-2,1e-7))
+
+# Option 2: use an anonymous function
+gradient.descent(function(param,...) {mse(y0=param[1],a=param[2],...)},
+ x=c(6611,0.15),max.iterations=1e5,step.scale=c(1e-3,1e-12),
+ stopping.deriv=1e-2,deriv.step=c(1e-2,1e-7))
+# Results should be identical to previous call
+
+
+
+
+
+
+	# Returning functions
+
+	# Rather trivial example
+
+# Make circumference-calculators for non-standard values of pi
+# Inputs: effective value of pi (ratio.to.diameter)
+# Outputs: Function which calculates circumference from diameter
+make.noneuclidean <- function(ratio.to.diameter=pi) {
+  circumference <- function(d) { return(ratio.to.diameter*d) }
+  return(circumference)
+}
+
+# Next line will produce a ``not found'' error
+#### circumference(10)
+kings.i <- make.noneuclidean(3)
+kings.i(10)
+formals(kings.i)
+body(kings.i)
+environment(kings.i)
+#### circumference(10) # Still not found
+
+	# Less trivial example
+
+# Make a linear predictor based on sample data
+# Inputs: vectors for independent and dependent variable (x and y)
+# Output: function which calculates expected response at new values of x
+make.linear.predictor <- function(x,y) {
+  linear.fit <- lm(y~x)
+  predictor <- function(x) {
+   return(predict(object=linear.fit,newdata=data.frame(x=x)))
+  }
+  return(predictor)
+}
+
+independent.variable <- runif(10)
+dependent.variable <- 7 + 3*independent.variable   # No noise
+my.predictor <- make.linear.predictor(x=independent.variable,
+  y=dependent.variable)
+all.equal(my.predictor(independent.variable),dependent.variable)
+   # Wouldn't work with noise in dependent variable
+rm(independent.variable,dependent.variable)
+### independent.variable  # Gives not-found error
+### dependent.variable    # Ditto
+my.predictor(5)       # Should be 5*3+7=22
+my.predictor(runif(10))
+
+
+
+
+	# Even less trivial example: build the gradient operator, instead
+	# of just a function that evaluates the gradient at a point
+
+# Gradient operator
+# Inputs: function (f), optional extras (...)
+# Outputs: the function which calculates the gradient of f
+# Presumes: f takes a vector argument and is numeric-valued
+  # our gradient() function from last lecture exists
+nabla <- function(f,...) {
+  g <- function(x,...) { gradient(f=f,x=x,...) }
+  return(g)
+}
+
+# Presume that our mse.for.optimization()  function from last time is around
+mse.gradient <- nabla(mse.for.optimization)
+# Next two should match
+mse.gradient(c(6611,0.15),deriv.steps=c(1,1e-6))
+gradient(mse.for.optimization,c(6611,0.15),c(1,1e-6))
+# Check that ellipses are working properly by changing a default value
+gradient(mse.for.optimization,c(6611,0.15),c(1,1e-6),Y=2*gmp$pcgmp)
+mse.gradient(c(6611,0.15),deriv.steps=c(1,1e-6),Y=2*gmp$pcgmp)
+
+	# As mentioned last time, the first-difference method for approximating
+	# partial derivatives is not very good, the numDeriv package has
+	# better approximation algorithms in its grad() function
+
+# Gradient operator
+# Inputs: function (f), optional extras (...)
+# Outputs: the function which calculates the gradient of f
+# Presumes: f takes a vector argument and is numeric-valued
+  # the numDeriv package is on the system
+del <- function(f,...) {
+  # If the numDeriv library isn't loaded, load it or die trying
+  require(numDeriv)  
+  # Invoke its grad() function in our function definition
+  g <- function(x,...) { grad(func=f,x=x, ...)}
+  return(g)
+}
+
+
+
+	# Long example: write surface() as an analog to curve(), using
+	# the standard graphics function contour() to do actual plots
+          # EXERCISE: Switch to using persp() to do perspective plots           
+
+	# First attempt
+# Plot contours of a two-argument function
+# Inputs: function (f), limits for x and y (from.x,to.x,from.y,to.y), number
+  # of values to space between limits (n.x,n.y), optional extras for contour()
+  # via ...
+# Outputs: Invisibly, a list with the x and y coordinates, and the matrix of
+  # z coordinates
+# Presumes: f takes a vector (of length 2!) and returns a single number
+surface.0 <- function(f,from.x=0,to.x=1,from.y=0,to.y=1,n.x=101,
+  n.y=101,...) {
+  # Make sequences with the right limits and sizes
+  x.seq <- seq(from=from.x,to=to.x,length.out=n.x)
+  y.seq <- seq(from=from.y,to=to.y,length.out=n.y)
+  # Make an (n.x*n.y) by 2 data frame with all combinations of x and y values
+  plot.grid <- expand.grid(x=x.seq,y=y.seq)
+  # Apply f to reach row of the plotting-grid dataframe
+  z.values <- apply(plot.grid,1,f)
+  # Reshape into an n.x by n.y matrix
+  z.matrix <- matrix(z.values,nrow=n.x)
+  # Make the contour plot
+  contour(x=x.seq,y=y.seq,z=z.matrix,...)
+  # Invisibly, return the values we calculated
+  invisible(list(x=x.seq,y=y.seq,z=z.matrix))
+}
+
+# First graphic
+	# Note use of anonymous function
+surface.0(function(p){return(sum(p^3))},from.x=-1,from.y=-1)
+
+
+	# Second attempt at surface()
+	# Use substitute() and eval() to hold off on evaluating the
+	# expression until the right values are assembled
+	# idea taken from source to curve()
+# Plot contours of a two-argument function
+# Inputs: R expression (expr), limits for x and y (from.x,to.x,from.y,to.y),
+  # number of values to space between limits (n.x,n.y), optional extras for
+  # contour() via ...
+# Outputs: Invisibly, a list with the x and y coordinates, and the matrix of
+  # z coordinates
+# Presumes: expr is a valid R expression involving x and y, any other names in
+  # it can be found in the environment the function is called from
+surface.1 <- function(expr,from.x=0,to.x=1,from.y=0,to.y=1,n.x=101,
+  n.y=101,...) {
+  # Make sequences with the right limits and sizes
+  x.seq <- seq(from=from.x,to=to.x,length.out=n.x)
+  y.seq <- seq(from=from.y,to=to.y,length.out=n.y)
+  # Make an (n.x*n.y) by 2 data frame with all combinations of x and y values
+  plot.grid <- expand.grid(x=x.seq,y=y.seq)
+  # Recover the unevaluated, but evaluable, R expression from the first
+    # argument
+  unevaluated.expression <- substitute(expr)
+  # ... and evaluate it in the environment set up by plot.grid
+  z.values <- eval(unevaluated.expression,envir=plot.grid)
+  # Reshape the vector of values into a matrix
+  z.matrix <- matrix(z.values,nrow=n.x)
+  # Make the contour plot
+  contour(x=x.seq,y=y.seq,z=z.matrix,...)
+   # Return everything we calculated
+  invisible(list(x=x.seq,y=y.seq,z=z.matrix))
+}
+
+# Second figure
+surface.1(abs(x^3)+abs(y^3),from.x=-1,from.y=-1)
+
+
+	# Third attempt, using function creation and outer
+# Plot contours of a two-argument function
+# Inputs: R expression (expr), limits for x and y (from.x,to.x,from.y,to.y),
+  # number of values to space between limits (n.x,n.y), optional extras for
+  # contour() via ...
+# Outputs: Invisibly, a list with the x and y coordinates, and the matrix of
+  # z coordinates
+# Presumes: expr is a valid R expression involving x and y, any other names in
+  # it can be found in the environment the function is called from
+surface.2 <- function(expr,from.x=0,to.x=1,from.y=0,to.y=1,n.x=101,
+  n.y=101,...) {
+  # Make appropriate coordinate sequences
+  x.seq <- seq(from=from.x,to=to.x,length.out=n.x)
+  y.seq <- seq(from=from.y,to=to.y,length.out=n.y)
+  # Recover the actual R expression from the first argument
+  unevaluated.expression <- substitute(expr)
+  # Define a new function that evaluates that expression
+  z <- function(x,y) {
+    return(eval(unevaluated.expression,envir=list(x=x,y=y)))
+  }
+  # Run that function on all combinations of coordinates
+  z.values <- outer(X=x.seq,Y=y.seq,FUN=z)
+  # Reshape the vector of z.values into a matrix
+  z.matrix <- matrix(z.values,nrow=n.x)
+  # Make the contour plot
+  contour(x=x.seq,y=y.seq,z=z.matrix,...)
+  # Return all the numbers we calculated
+    # How would you also return the function z as well?
+  invisible(list(x=x.seq,y=y.seq,z=z.matrix))
+}
+
+# Third plot
+surface.2(x^4-y^4,from.x=-1,from.y=-1)
+```
+
