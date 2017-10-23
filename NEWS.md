@@ -1,5 +1,8 @@
 ## 20171022 0.1.7
 * returned by CRAN with two notes
+* fixed name by adding R. as a middle name. Same as previous release.
+* make z.stats as donotrun to shrink time for examples
+* See cran-comments.md
 
 ## 20171019 0.1.6.9012
 * release to CRAN as 0.1.7
