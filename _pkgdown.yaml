@@ -65,6 +65,8 @@ navbar:
           menu:
             - text: Selecting the Correlation
               href: articles/correlation_selection.html
+            - text: Measuring errors in calculating z
+              href: articles/statistics.html
             - text: Standing-Katz chart
               href: articles/StandingKatz_chart.html
             - text: Plot Stand-Katz curves
