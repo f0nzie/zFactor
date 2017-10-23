@@ -6,7 +6,7 @@ Authors@R: person("Alfonso", "Reyes", role = c("aut", "cre"), email = "alfonso.r
 Description: Computational algorithms to solve equations and find the
     compressibility factor `z` of hydrocarbon gases. Correlations available: 
     Hall-Yarborough, Dranchuk-AbuKassem, Dranchuk-Purvis-Robinson, Beggs-Brill, 
-    Papay, Shell and an Artificial Neural Network correlation (Ann10) by Kamyab 
+    Papp, Shell and an Artificial Neural Network correlation (Ann10) by Kamyab 
     et al. The package uses the original Standing-Katz chart for statistical 
     comparison and plotting. Applicable to sweet hydrocarbon gases for now.
 Imports: rootSolve, tidyr, ggplot2, data.table, tibble, dplyr
