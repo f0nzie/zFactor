@@ -1,9 +1,9 @@
 ---
-title: "Measuring the *error* in calculating $z$"
+title: "Measuring the error in calculating z"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Measuring the error in calculating z}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
