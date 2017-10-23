@@ -11,13 +11,13 @@ stats_of_z.stats("MAPE")
 library(zFactor)
 qcorrs <- z.stats_quantile("MPE")
 
-par(mfrow = c(1,3))
+# par(mfrow = c(1,3))
 boxplot(qcorrs,  ylim= c(-600, 100), cex = 1.5, las=2, main = "MPE, y = (-4, 100)")
 grid()
 boxplot(qcorrs,  ylim= c(-4, 30), cex = 1.5, las=2, main = "MPE, y = (-4, 30)")
 grid()
 boxplot(qcorrs,  ylim= c(-4, 6), cex = 1.5, las=2, main = "MPE, y = (-4, 6)")
-grid()
+# grid()
 
 ## ------------------------------------------------------------------------
 library(zFactor)
@@ -44,23 +44,23 @@ grid()
 library(zFactor)
 qcorrs <- z.stats_quantile("MPE")
 
-par(mfrow = c(1,3))
+# par(mfrow = c(1,3))
 boxplot(qcorrs,  ylim= c(-600, 100), cex = 1.5, las=2, main = "MPE, y = (-4, 100)")
 grid()
 boxplot(qcorrs,  ylim= c(-4, 30), cex = 1.5, las=2, main = "MPE, y = (-4, 30)")
 grid()
 boxplot(qcorrs,  ylim= c(-4, 6), cex = 1.5, las=2, main = "MPE, y = (-4, 6)")
-grid()
+# grid()
 
 ## ------------------------------------------------------------------------
 library(zFactor)
 qcorrs <- z.stats_quantile("MPE")
 scorrs <- qcorrs[, c("HY", "DAK", "DPR", "N10")]
 
-par(mfrow = c(1,2))
+# par(mfrow = c(1,2))
 boxplot(scorrs,  ylim= c(-2, 25), cex = 1.5, las=2, main = "MPE, y = (-2, 25)")
 grid()
 
 boxplot(scorrs,  ylim= c(-2, 2), cex = 1.5, las=2, main = "MPE, y = (-2, 2)")
-grid()
+# grid()
 
