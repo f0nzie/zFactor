@@ -1,4 +1,7 @@
 ## 20171019 0.1.6.9012
+* add function MAAPE
+* add boxplots to show outliers in correlation calculation
+* new vignette statistics
 * add unit tests up to coverage 89%
 * improve couple of functions: convertStringToVector , 
 * add function stats_of_z.stats 
