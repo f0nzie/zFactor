@@ -20,9 +20,6 @@
 #' @examples
 #' # error statistics for the Dranchuk-AbouKassem correlation
 #' z.stats("DAK")
-#'
-#' # error statistics for Hall-Yarborough correlation at steps of 0.5 in Ppr
-#' z.stats("HY", interval = "fine")
 z.stats <- function(correlation = "DAK", pprRange = "lp", interval = "coarse") {
     Ppr <- NULL; Tpr <- NULL; z.calc <- NULL; z.chart <- NULL; n <- NULL
     # get all `lp` Tpr curves
