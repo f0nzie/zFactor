@@ -38,8 +38,8 @@ The correlations that are implemented in R for the package **zFactor** are:
 Versions
 --------
 
--   In CRAN: `v 0.1.6`
--   In GitHub `dev-0.1.6.9012`
+-   In CRAN: `v 0.1.7`
+-   In GitHub `development versions`
 
 Installation
 ------------
