@@ -7,14 +7,12 @@ output:
 
 
 
-
-
 ## From paper by Kareem, Iwalezawa and Al-Marhoun
 Link to paper: https://www.dropbox.com/s/xiaijtokwsu5ykt/JPT%206481%E2%80%93492%20New%20explicit%20correlation%20for%20the%20compressibility%20factor%20of%20natural%20gas%20%5B5star%20petroleum%20zfactor%5D.pdf?dl=0
 
-
-
-![](./images/eq_7_HY_LIM482.jpg)
+```{r, out.width = "800px", echo=F}
+knitr::include_graphics("./images/eq_7_HY_LIM482.jpg")
+```
 
 
 
@@ -22,8 +20,9 @@ Link to paper: https://www.dropbox.com/s/xiaijtokwsu5ykt/JPT%206481%E2%80%93492%
 The equations are OK bt in the worksheet they use $P_{pr}$ to find $T_{pr}$.
 The Excel workshet is included in this repository for analysis.
 
-
-![](./images/eq_2-52_HY_GLG35.jpg)
+```{r, out.width = "800px", echo=F}
+knitr::include_graphics("./images/eq_2-52_HY_GLG35.jpg")
+```
 
 
 
@@ -32,11 +31,21 @@ Link to paper: https://www.dropbox.com/s/3982pt63hi32p6c/10.1002%20cjce.22054%20
 
 ### Hall-Yarborough equations
 
-![Hall-Yarborough equations](./images/eq_1-3-HY_FARA.jpg)
+```{r, out.width = "800px", echo=F}
+knitr::include_graphics("./images/eq_1-3-HY_FARA.jpg")
+```
+
 
 ### Examples table
 
-![](./images/examples_HY_FARA.jpg)
+```{r, out.width = "800px", echo=F}
+knitr::include_graphics("./images/examples_HY_FARA.jpg")
+```
+
 
 ### Results. Fatoorachi
-![](./images/results_HY_FARA.jpg)
+
+
+```{r, out.width = "800px", echo=F}
+knitr::include_graphics("./images/results_HY_FARA.jpg")
+```

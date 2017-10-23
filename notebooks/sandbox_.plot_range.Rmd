@@ -1,0 +1,65 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(zFactor)
+correlation = "PP"
+pprRange <- "lp"
+stat <- "MAAPE"
+interval <-  "fine"
+
+if (stat == "MAPE") {
+    midpoint <-  12.5
+    limit <- c(0, 25)
+} else if (stat == "RMSE") {
+    midpoint <-   0.025
+    limit <- c(0, 0.050)
+} else if (stat == "MAAPE") {
+    midpoint <-   0.125
+    limit <- c(0, 0.250)
+}
+
+# Ppr <- NULL; Tpr <- NULL; MAPE <- NULL; z.calc <- NULL; z.chart <- NULL
+# sum_tpr <- as.tibble(z.stats(correlation))
+# isMissing_correlation(correlation)
+msg <- "You have to provide a z-factor correlation: "
+msg_missing <- paste(msg, paste(get_z_correlations(), collapse = " "))
+if (missing(correlation)) stop(msg_missing)
+if (!isValid_correlation(correlation)) stop("Not a valid correlation.")
+
+corr_name <- zFactor:::z_correlations[which(zFactor:::z_correlations["short"] == correlation),
+                                                 "long"]
+
+smry_tpr_ppr <- z.stats(correlation, pprRange, interval = interval)
+g <- ggplot(smry_tpr_ppr, aes(Ppr, Tpr))
+g <- g + geom_tile(data=smry_tpr_ppr, aes(fill=get(stat)), color="white") +
+    scale_fill_gradient2(low="blue", high="red", mid="yellow", na.value = "grey25",
+                         midpoint = midpoint, limit = limit, name = stat) +
+    theme(axis.text.x = element_text(angle=45, vjust=1, size=11, hjust=1)) +
+    coord_equal() +
+    ggtitle(corr_name, subtitle = correlation) +
+    guides(fill = guide_colorbar(barwidth = 0.6, barheight = 5,
+                                 label.vjust = 0.9))
+print(g)
+```
+
+
+```{r}
+library(zFactor)
+
+z_bb  <- z.stats("BB")
+z_hy  <- z.stats("HY")
+z_dak <- z.stats("DAK")
+z_sh  <- z.stats("SH")
+z_n10 <- z.stats("N10")
+z_pp  <- z.stats("PP")
+
+boxplot(z_bb$RMSE,  horizontal = TRUE, main = "BB", xlab = "RMSE")
+boxplot(z_hy$RMSE,  horizontal = TRUE, main = "HY", xlab = "RMSE")
+boxplot(z_dak$RMSE, horizontal = TRUE, main = "DAK", xlab = "RMSE")
+boxplot(z_sh$RMSE,  horizontal = TRUE, main = "SH", xlab = "RMSE")
+boxplot(z_n10$RMSE, horizontal = TRUE, main = "N10", xlab = "RMSE")
+boxplot(z_pp$RMSE,  horizontal = TRUE, main = "PP", xlab = "RMSE")
+```

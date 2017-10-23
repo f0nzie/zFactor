@@ -33,6 +33,14 @@ The correlations that are implemented in R for the package **zFactor** are:
 
 -   A correlation developed with Artificial Neural Networks (Ann10) by Kamyab et al. `(Kamyab, Sampaio, Qanbari, and Eustes, 2010)`
 
+-   An explicit correlation by *I. Papp* `(Papp, 1979)` mentioned in the comparative analysis paper by Gabor Takacs `(Takacs, 1989)`. Not available in English.
+
+Versions
+--------
+
+-   In CRAN: `v 0.1.7`
+-   In GitHub `development versions`
+
 Installation
 ------------
 
@@ -107,8 +115,8 @@ z.Shell(ppr, tpr)
 #> 1.7 0.9711067 0.9150837 0.8740757 0.8563697 0.8629757 0.8901157 0.9321262
 #> 1.8 0.9794808 0.9395295 0.9097288 0.8964473 0.9015059 0.9233190 0.9584750
 
-# the newly added Papay correlation
-z.Papay(ppr, tpr)
+# the newly added Papp correlation
+z.Papp(ppr, tpr)
 #>           0.5       1.5       2.5       3.5       4.5       5.5       6.5
 #> 1.4 0.9408336 0.8010648 0.7076525 0.6906870 0.7299354 0.7958370 0.8705316
 #> 1.4 0.9408336 0.8010648 0.7076525 0.6906870 0.7299354 0.7958370 0.8705316
@@ -138,6 +146,8 @@ How to interpret the colors? We use the [Mean Absolute Percentage Error](https:/
 
 You can see for yourself which correlation is more stable at different ranges of pseudo-reduce pressures and temperatures.
 
+#### Beggs-Brill
+
 ``` r
 library(zFactor)
 zFactor:::z.plot.range("BB",  interval = "fine")
@@ -145,47 +155,59 @@ zFactor:::z.plot.range("BB",  interval = "fine")
 
 ![](man/figures/README-unnamed-chunk-5-1.png)
 
+#### Hall-Yarborough
+
 ``` r
 zFactor:::z.plot.range("HY",  interval = "fine")
 ```
 
-![](man/figures/README-unnamed-chunk-5-2.png)
+![](man/figures/README-unnamed-chunk-6-1.png)
 
 ``` r
 zFactor:::z.plot.range("HY",  interval = "coarse")
 ```
 
-![](man/figures/README-unnamed-chunk-5-3.png)
+![](man/figures/README-unnamed-chunk-6-2.png)
+
+#### Dranchuk-AbouKassem
 
 ``` r
 zFactor:::z.plot.range("DAK", interval = "fine")
 ```
 
-![](man/figures/README-unnamed-chunk-5-4.png)
+![](man/figures/README-unnamed-chunk-7-1.png)
+
+#### Dranchuk-Purvis-Robinson
 
 ``` r
 zFactor:::z.plot.range("DPR", interval = "fine")
 ```
 
-![](man/figures/README-unnamed-chunk-5-5.png)
+![](man/figures/README-unnamed-chunk-8-1.png)
+
+#### Shell (Shell Oil Company)
 
 ``` r
 zFactor:::z.plot.range("SH",  interval = "fine")
 ```
 
-![](man/figures/README-unnamed-chunk-5-6.png)
+![](man/figures/README-unnamed-chunk-9-1.png)
+
+#### Ann10 (Neural Network, 10 neurons)
 
 ``` r
 zFactor:::z.plot.range("N10", interval = "fine")
 ```
 
-![](man/figures/README-unnamed-chunk-5-7.png)
+![](man/figures/README-unnamed-chunk-10-1.png)
+
+#### Papp (explicit)
 
 ``` r
 zFactor:::z.plot.range("PP",  interval = "fine")
 ```
 
-![](man/figures/README-unnamed-chunk-5-8.png)
+![](man/figures/README-unnamed-chunk-11-1.png)
 
 Comparative Analysis
 --------------------
@@ -220,13 +242,13 @@ library(zFactor)
 getStandingKatzCurve(tpr = 1.3, toView = FALSE, toSave = FALSE)
 ```
 
-![](man/figures/README-unnamed-chunk-6-1.png)
+![](man/figures/README-unnamed-chunk-12-1.png)
 
 ``` r
 getStandingKatzCurve(tpr = 1.05, pprRange = "lp", toView = FALSE, toSave = FALSE)
 ```
 
-![](man/figures/README-unnamed-chunk-6-2.png)
+![](man/figures/README-unnamed-chunk-12-2.png)
 
 ### Ploting all the `Tpr` curves of Standing-Katz chart using `lapply`, `getStandingKatzData` and `data.table::rbindlist`:
 
@@ -247,7 +269,7 @@ ggplot(all_tpr_df, aes(x=Ppr, y=z, group=Tpr, color=Tpr)) +
     geom_point()
 ```
 
-![](man/figures/README-unnamed-chunk-7-1.png)
+![](man/figures/README-unnamed-chunk-13-1.png)
 
 ### Build a table of statistical errors between a correlation and SK chart
 
@@ -290,6 +312,28 @@ as.tibble(smry_tpr_ppr)
 #> #   RMLSE <dbl>
 ```
 
+Summary of MAPE statistics
+--------------------------
+
+This function shows a statistical summary of the Mean Absolute Percentage Error of all the correlations. We are taking the mean, maximum error, minimum eroor, the median and the mode in the whole range of each opf the correlations.
+
+``` r
+library(zFactor)
+stats_of_z.stats()
+#>                 BB           HY          DAK         DPR         SH
+#> mean    13.8862628  0.818657798  0.769721132  0.81237862  4.1530402
+#> max    554.1872335 22.481448009 12.777908779 12.96594664 30.3942954
+#> min      0.0153618  0.002422012  0.000609287  0.02057809  0.0231023
+#> median   1.0402029  0.220154744  0.245336341  0.26714131  1.1092930
+#> Mode     0.4281138  0.418077023  0.128870880  0.11769033  0.4389189
+#>                N10           PP
+#> mean   0.163515716  2.098729377
+#> max    1.153159851 85.482666496
+#> min    0.007209524  0.000507908
+#> median 0.123437923  0.670820910
+#> Mode   0.419773370  0.559623816
+```
+
 Vignettes
 ---------
 
@@ -302,7 +346,7 @@ The vignettes contain examples on the use and analysis of the various correlatio
 -   Dranchuk-Purvis-Robinson.Rmd
 -   shell.Rmd
 -   ANN.Rmd
--   Papay.Rmd
+-   Papp.Rmd
 
 Tests
 -----
@@ -341,4 +385,8 @@ The following books and papers were consulted during the development of this pac
 
 \[10\] M. Mohamadi-Baghmolaei, R. Azin, S. Osfouri, et al. "Prediction of gas compressibility factor using intelligent models". In: *Natural Gas Industry B* 2.4 (2015), pp. 283-294. DOI: 10.1016/j.ngib.2015.09.001. &lt;URL: <http://doi.org/10.1016/j.ngib.2015.09.001>&gt;.
 
-\[11\] S. Rakap, S. Rakap, D. Evran, et al. "Comparative evaluation of the reliability and validity of three data extraction programs: UnGraph, GraphClick, and DigitizeIt". In: *Computers in Human Behavior* 55 (2016), pp. 159-166. DOI: 10.1016/j.chb.2015.09.008. &lt;URL: <http://doi.org/10.1016/j.chb.2015.09.008>&gt;.
+\[11\] I. Papp. "Uj modszer foldgazok elteresi tenyezojenek szamitasara". In: *Koolaj es Foldgaz* (Nov. 1979), pp. 345-47.
+
+\[12\] S. Rakap, S. Rakap, D. Evran, et al. "Comparative evaluation of the reliability and validity of three data extraction programs: UnGraph, GraphClick, and DigitizeIt". In: *Computers in Human Behavior* 55 (2016), pp. 159-166. DOI: 10.1016/j.chb.2015.09.008. &lt;URL: <http://doi.org/10.1016/j.chb.2015.09.008>&gt;.
+
+\[13\] G. Takacs. "Comparing Methods for Calculating z Factor". In: *Oil and Gas Journal* (May. 1989). DOI: NA. &lt;URL: <https://www.researchgate.net/publication/236510717_Comparing_methods_for_calculating_Z-factor>&gt;.

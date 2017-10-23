@@ -1,0 +1,73 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(zFactor)
+smx <- stats_of_z.stats(stat = "MAPE")
+smx
+```
+
+```{r}
+sdf <- as.data.frame(smx)
+row_names <- rownames(sdf)
+sdf <- cbind(row_names, sdf)
+rownames(sdf) <- NULL
+sdf$row_names <- as.character(sdf$row_names)
+names(sdf)[1] <- "stat"
+sdf
+```
+
+```{r}
+tidy_stats <- tidyr::gather(sdf, "corr", "stats", 2:ncol(sdf))
+tidy_stats
+```
+
+```{r}
+ggplot(tidy_stats, aes(x = corr, y = stats)) + 
+    geom_boxplot() + scale_y_log10()
+```
+
+
+```{r}
+ggplot(tidy_stats, aes(x = corr, y = stats, color = corr)) + 
+    geom_point() + 
+    facet_grid(. ~ stat, scales = "free_y")
+```
+
+```{r}
+ggplot(subset(tidy_stats, stat =="Mode"), aes(x = corr, y = stats)) + geom_point()
+```
+
+
+```{r}
+g <- ggplot(tidy_stats, aes(x=stats, y=stats, group=corr, color=corr))
+g + geom_
+```
+
+
+```{r}
+t <- ggplot(tidy_stats, aes(x=stats, y=stats, color=corr)) + 
+    geom_point() + facet_grid(.~ stat, scales = "free_y")
+
+print(t)
+```
+
+
+```{r}
+
+```
+
+
+```{r}
+# convert to dataframe
+mat <- cbind(rownames(smx), smx)
+rownames(mat) <- NULL
+df <- as.data.frame(mat)
+df <- as.double(df[,2:])
+```
+
+```{r}
+as.double(df[, 2:ncol(df)])
+```

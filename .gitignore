@@ -1,9 +1,7 @@
-
-# *.html
 .Rproj.user
 \.Rhistory
-#man/
-#NAMESPACE
-#inst/doc
+# man/
+# NAMESPACE
+inst/doc
 notebooks/*.html
 \.directory

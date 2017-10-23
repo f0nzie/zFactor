@@ -65,6 +65,12 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/correlation_selection.html">Selecting the Correlation</a>
+    </li>
+    <li>
+      <a href="../articles/statistics.html">Measuring errors in calculating z</a>
+    </li>
+    <li>
       <a href="../articles/StandingKatz_chart.html">Standing-Katz chart</a>
     </li>
     <li>
@@ -89,7 +95,7 @@
       <a href="../articles/Ann10.html">Artificial Neural Networks</a>
     </li>
     <li>
-      <a href="../articles/Papay.html">Papay correlation</a>
+      <a href="../articles/Papp.html">Papp correlation</a>
     </li>
   </ul>
 </li>
@@ -130,7 +136,7 @@
     <div class="page-header">
       <h1>
         Reference
-        <small>version&nbsp;0.1.7.9008</small>
+        <small>version&nbsp;0.1.7</small>
       </h1>
     </div>
 
@@ -205,12 +211,6 @@ Temperature</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="z.stats.html">z.stats</a></code> </p>
-          </td>
-          <td><p>Get error summary statistics for any given compressibility correlation</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
             <p><code><a href="Hall-Yarborough.html">z.HallYarborough</a></code> </p>
           </td>
           <td><p>Hall-Yarborough correlation</p></td>
@@ -247,9 +247,35 @@ Temperature</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="Papay.html">z.Papay</a></code> </p>
+            <p><code><a href="Papp.html">z.Papp</a></code> </p>
           </td>
-          <td><p>Papay correlation</p></td>
+          <td><p>Papp correlation</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-statistics" class="hasAnchor"><a href="#section-statistics" class="anchor"></a>Statistics</h2>
+            <p class="section-desc"></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="z.stats.html">z.stats</a></code> </p>
+          </td>
+          <td><p>Summary statistics table for a correlation</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="z.stats_quantile.html">z.stats_quantile</a></code> </p>
+          </td>
+          <td><p>Quantiles for z.stats</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="stats_of_z.stats.html">stats_of_z.stats</a></code> </p>
+          </td>
+          <td><p>Statistics on z.stats table</p></td>
         </tr>
       </tbody><tbody>
         <tr>
@@ -375,6 +401,7 @@ Temperature</p></td>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#section-standing-katz-chart">Standing-Katz chart</a></li>
       <li><a href="#section-correlations">Correlations</a></li>
+      <li><a href="#section-statistics">Statistics</a></li>
       <li><a href="#section-datasets">Datasets</a></li>
       <li><a href="#section-internal-functions-and-helpers">Internal functions and helpers</a></li>
       <li><a href="#section-other">Other</a></li>
@@ -384,7 +411,7 @@ Temperature</p></td>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Alfonso Reyes.</p>
+  <p>Developed by Alfonso R. Reyes.</p>
 </div>
 
 <div class="pkgdown">

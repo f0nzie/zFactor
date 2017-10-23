@@ -1,0 +1,46 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(ggplot2)
+library(gtable)
+library(grid)
+library(data.table)
+library(scales)
+
+# Data 
+dt.diamonds <- as.data.table(diamonds)
+d1 <- dt.diamonds[,list(revenue = sum(price),
+                        stones = length(price)),
+                  by=c("clarity", "cut")]
+setkey(d1, clarity, cut)
+
+library(tidyverse)
+
+max_stones <- max(d1$stones)
+max_revenue <- max(d1$revenue)
+
+d2 <- gather(d1, 'var', 'val', stones:revenue) %>% 
+  mutate(val = if_else(var == 'revenue', as.double(val), val / (max_stones / max_revenue)))
+d2
+```
+
+
+```{r}
+ggplot(mapping = aes(clarity, val)) +
+  geom_bar(aes(fill = cut), filter(d2, var == 'revenue'), stat = 'identity') +
+  geom_point(data = filter(d2, var == 'stones'), col = 'red') +
+  facet_grid(~cut) +
+  scale_y_continuous(sec.axis = sec_axis(trans = ~ . * (max_stones / max_revenue),
+                                          name = 'number of stones'),
+                      labels = dollar) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1),
+        axis.text.y = element_text(color = "#4B92DB"),
+        axis.text.y.right = element_text(color = "red"),
+        legend.position="bottom") +
+  ylab('revenue')
+```
+
+

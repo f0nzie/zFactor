@@ -2,7 +2,7 @@
 % Please edit documentation in R/stats.R
 \name{z.stats}
 \alias{z.stats}
-\title{Get error summary statistics for any given compressibility correlation}
+\title{Summary statistics table for a correlation}
 \usage{
 z.stats(correlation = "DAK", pprRange = "lp", interval = "coarse")
 }
@@ -14,13 +14,21 @@ z.stats(correlation = "DAK", pprRange = "lp", interval = "coarse")
 \item{interval}{quality of the Ppr scale. Coarse: every 1.0; Fine: every 0.5}
 }
 \description{
+Get error summary statistics for any given compressibility correlation.
 A quick way to show an error summary between any of the indicated correlations and
-the Standing-Katz chart
+the Standing-Katz chart.
+
+    MSE:   Mean Squared Error
+    RMSE:  Root Mean Squared Error
+    RSS:   Residual sum of Squares
+    RMSLE: Root Mean Squared Logarithmic Error. Penalizes understimation.
+    MAPE:  Mean Absolute Percentage Error = AARE
+    MPE:   Mean Percentage error = ARE
+    MAE:   Mean Absolute Error
 }
 \examples{
+\dontrun{
 # error statistics for the Dranchuk-AbouKassem correlation
 z.stats("DAK")
-
-# error statistics for Hall-Yarborough correlation at steps of 0.5 in Ppr
-z.stats("HY", interval = "fine")
+}
 }

@@ -42,6 +42,12 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="articles/correlation_selection.html">Selecting the Correlation</a>
+    </li>
+    <li>
+      <a href="articles/statistics.html">Measuring errors in calculating z</a>
+    </li>
+    <li>
       <a href="articles/StandingKatz_chart.html">Standing-Katz chart</a>
     </li>
     <li>
@@ -66,7 +72,7 @@
       <a href="articles/Ann10.html">Artificial Neural Networks</a>
     </li>
     <li>
-      <a href="articles/Papay.html">Papay correlation</a>
+      <a href="articles/Papp.html">Papp correlation</a>
     </li>
   </ul>
 </li>
@@ -133,6 +139,17 @@
 <li><p>Dranchuk, Purvis and Robinson (DPR) <code>(Dranchuk, Purvis, Robinson, and others, 1973)</code></p></li>
 <li><p>A correlation by Shell Oil Company (SH) <code>(Kumar, 2004)</code>, <code>(Bahadori, 2016)</code>, <code>(de Almeida, VelÃ¡squez, and Barbieri, 2014)</code>, <code>(Al-Anazi, Pazuki, Nikookar, and Al-Anazi, 2011)</code>, <code>(Azizi N. Behbahani R., 2010)</code>, <code>(Mohamadi-Baghmolaei, Azin, Osfouri, Mohamadi-Baghmolaei, and Zarei, 2015)</code>. The Shell correlation was found cited in two books and several papers (including the equation and constants), but the original paper or authors could not be identified.</p></li>
 <li><p>A correlation developed with Artificial Neural Networks (Ann10) by Kamyab et al. <code>(Kamyab, Sampaio, Qanbari, and Eustes, 2010)</code></p></li>
+<li><p>An explicit correlation by <em>I. Papp</em> <code>(Papp, 1979)</code> mentioned in the comparative analysis paper by Gabor Takacs <code>(Takacs, 1989)</code>. Not available in English.</p></li>
+</ul>
+</div>
+<div id="versions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#versions" class="anchor"></a>Versions</h2>
+<ul>
+<li>In CRAN: <code>v 0.1.7</code>
+</li>
+<li>In GitHub <code>development versions</code>
+</li>
 </ul>
 </div>
 <div id="installation" class="section level2">
@@ -200,8 +217,8 @@ tpr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.4
 <span class="co">#&gt; 1.7 0.9711067 0.9150837 0.8740757 0.8563697 0.8629757 0.8901157 0.9321262</span>
 <span class="co">#&gt; 1.8 0.9794808 0.9395295 0.9097288 0.8964473 0.9015059 0.9233190 0.9584750</span>
 
-<span class="co"># the newly added Papay correlation</span>
-<span class="kw"><a href="reference/Papay.html">z.Papay</a></span>(ppr, tpr)
+<span class="co"># the newly added Papp correlation</span>
+<span class="kw"><a href="reference/Papp.html">z.Papp</a></span>(ppr, tpr)
 <span class="co">#&gt;           0.5       1.5       2.5       3.5       4.5       5.5       6.5</span>
 <span class="co">#&gt; 1.4 0.9408336 0.8010648 0.7076525 0.6906870 0.7299354 0.7958370 0.8705316</span>
 <span class="co">#&gt; 1.4 0.9408336 0.8010648 0.7076525 0.6906870 0.7299354 0.7958370 0.8705316</span>
@@ -232,23 +249,51 @@ tpr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.4
 <code>Pink</code>: the mean absolute percentage error is above or way above 25%.</li>
 </ul>
 <p>You can see for yourself which correlation is more stable at different ranges of pseudo-reduce pressures and temperatures.</p>
+<div id="beggs-brill" class="section level4">
+<h4 class="hasAnchor">
+<a href="#beggs-brill" class="anchor"></a>Beggs-Brill</h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zFactor)
 zFactor<span class="op">:::</span><span class="kw"><a href="reference/z.plot.range.html">z.plot.range</a></span>(<span class="st">"BB"</span>,  <span class="dt">interval =</span> <span class="st">"fine"</span>)</code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-5-1.png" width="672"></p>
+</div>
+<div id="hall-yarborough" class="section level4">
+<h4 class="hasAnchor">
+<a href="#hall-yarborough" class="anchor"></a>Hall-Yarborough</h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">zFactor<span class="op">:::</span><span class="kw"><a href="reference/z.plot.range.html">z.plot.range</a></span>(<span class="st">"HY"</span>,  <span class="dt">interval =</span> <span class="st">"fine"</span>)</code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-5-2.png" width="672"></p>
+<p><img src="reference/figures/README-unnamed-chunk-6-1.png" width="672"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">zFactor<span class="op">:::</span><span class="kw"><a href="reference/z.plot.range.html">z.plot.range</a></span>(<span class="st">"HY"</span>,  <span class="dt">interval =</span> <span class="st">"coarse"</span>)</code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-5-3.png" width="672"></p>
+<p><img src="reference/figures/README-unnamed-chunk-6-2.png" width="672"></p>
+</div>
+<div id="dranchuk-aboukassem" class="section level4">
+<h4 class="hasAnchor">
+<a href="#dranchuk-aboukassem" class="anchor"></a>Dranchuk-AbouKassem</h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">zFactor<span class="op">:::</span><span class="kw"><a href="reference/z.plot.range.html">z.plot.range</a></span>(<span class="st">"DAK"</span>, <span class="dt">interval =</span> <span class="st">"fine"</span>)</code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-5-4.png" width="672"></p>
+<p><img src="reference/figures/README-unnamed-chunk-7-1.png" width="672"></p>
+</div>
+<div id="dranchuk-purvis-robinson" class="section level4">
+<h4 class="hasAnchor">
+<a href="#dranchuk-purvis-robinson" class="anchor"></a>Dranchuk-Purvis-Robinson</h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">zFactor<span class="op">:::</span><span class="kw"><a href="reference/z.plot.range.html">z.plot.range</a></span>(<span class="st">"DPR"</span>, <span class="dt">interval =</span> <span class="st">"fine"</span>)</code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-5-5.png" width="672"></p>
+<p><img src="reference/figures/README-unnamed-chunk-8-1.png" width="672"></p>
+</div>
+<div id="shell-shell-oil-company" class="section level4">
+<h4 class="hasAnchor">
+<a href="#shell-shell-oil-company" class="anchor"></a>Shell (Shell Oil Company)</h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">zFactor<span class="op">:::</span><span class="kw"><a href="reference/z.plot.range.html">z.plot.range</a></span>(<span class="st">"SH"</span>,  <span class="dt">interval =</span> <span class="st">"fine"</span>)</code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-5-6.png" width="672"></p>
+<p><img src="reference/figures/README-unnamed-chunk-9-1.png" width="672"></p>
+</div>
+<div id="ann10-neural-network-10-neurons" class="section level4">
+<h4 class="hasAnchor">
+<a href="#ann10-neural-network-10-neurons" class="anchor"></a>Ann10 (Neural Network, 10 neurons)</h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">zFactor<span class="op">:::</span><span class="kw"><a href="reference/z.plot.range.html">z.plot.range</a></span>(<span class="st">"N10"</span>, <span class="dt">interval =</span> <span class="st">"fine"</span>)</code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-5-7.png" width="672"></p>
+<p><img src="reference/figures/README-unnamed-chunk-10-1.png" width="672"></p>
+</div>
+<div id="papp-explicit" class="section level4">
+<h4 class="hasAnchor">
+<a href="#papp-explicit" class="anchor"></a>Papp (explicit)</h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">zFactor<span class="op">:::</span><span class="kw"><a href="reference/z.plot.range.html">z.plot.range</a></span>(<span class="st">"PP"</span>,  <span class="dt">interval =</span> <span class="st">"fine"</span>)</code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-5-8.png" width="672"></p>
+<p><img src="reference/figures/README-unnamed-chunk-11-1.png" width="672"></p>
+</div>
 </div>
 <div id="comparative-analysis" class="section level2">
 <h2 class="hasAnchor">
@@ -282,9 +327,9 @@ MAE:   Mean Absolute Error</code></pre>
 <a href="#plotting-a-specific-isotherm-of-sk-chart" class="anchor"></a>Plotting a specific isotherm of SK chart</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zFactor)
 <span class="kw"><a href="reference/getStandingKatzCurve.html">getStandingKatzCurve</a></span>(<span class="dt">tpr =</span> <span class="fl">1.3</span>, <span class="dt">toView =</span> <span class="ot">FALSE</span>, <span class="dt">toSave =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-6-1.png" width="480"></p>
+<p><img src="reference/figures/README-unnamed-chunk-12-1.png" width="480"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/getStandingKatzCurve.html">getStandingKatzCurve</a></span>(<span class="dt">tpr =</span> <span class="fl">1.05</span>, <span class="dt">pprRange =</span> <span class="st">"lp"</span>, <span class="dt">toView =</span> <span class="ot">FALSE</span>, <span class="dt">toSave =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-6-2.png" width="480"></p>
+<p><img src="reference/figures/README-unnamed-chunk-12-2.png" width="480"></p>
 </div>
 <div id="ploting-all-the-tpr-curves-of-standing-katz-chart-using-lapply-getstandingkatzdata-and-data-tablerbindlist" class="section level3">
 <h3 class="hasAnchor">
@@ -303,7 +348,7 @@ all_tpr_df &lt;-<span class="st"> </span>data.table<span class="op">::</span><sp
 <span class="kw">ggplot</span>(all_tpr_df, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) <span class="op">+</span><span class="st"> </span>
 <span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_point</span>()</code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-7-1.png" width="672"></p>
+<p><img src="reference/figures/README-unnamed-chunk-13-1.png" width="672"></p>
 </div>
 <div id="build-a-table-of-statistical-errors-between-a-correlation-and-sk-chart" class="section level3">
 <h3 class="hasAnchor">
@@ -346,6 +391,25 @@ smry_tpr_ppr &lt;-<span class="st"> </span><span class="kw">summarise</span>(gro
 <span class="co">#&gt; #   RMLSE &lt;dbl&gt;</span></code></pre></div>
 </div>
 </div>
+<div id="summary-of-mape-statistics" class="section level2">
+<h2 class="hasAnchor">
+<a href="#summary-of-mape-statistics" class="anchor"></a>Summary of MAPE statistics</h2>
+<p>This function shows a statistical summary of the Mean Absolute Percentage Error of all the correlations. We are taking the mean, maximum error, minimum eroor, the median and the mode in the whole range of each opf the correlations.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(zFactor)
+<span class="kw"><a href="reference/stats_of_z.stats.html">stats_of_z.stats</a></span>()
+<span class="co">#&gt;                 BB           HY          DAK         DPR         SH</span>
+<span class="co">#&gt; mean    13.8862628  0.818657798  0.769721132  0.81237862  4.1530402</span>
+<span class="co">#&gt; max    554.1872335 22.481448009 12.777908779 12.96594664 30.3942954</span>
+<span class="co">#&gt; min      0.0153618  0.002422012  0.000609287  0.02057809  0.0231023</span>
+<span class="co">#&gt; median   1.0402029  0.220154744  0.245336341  0.26714131  1.1092930</span>
+<span class="co">#&gt; Mode     0.4281138  0.418077023  0.128870880  0.11769033  0.4389189</span>
+<span class="co">#&gt;                N10           PP</span>
+<span class="co">#&gt; mean   0.163515716  2.098729377</span>
+<span class="co">#&gt; max    1.153159851 85.482666496</span>
+<span class="co">#&gt; min    0.007209524  0.000507908</span>
+<span class="co">#&gt; median 0.123437923  0.670820910</span>
+<span class="co">#&gt; Mode   0.419773370  0.559623816</span></code></pre></div>
+</div>
 <div id="vignettes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#vignettes" class="anchor"></a>Vignettes</h2>
@@ -358,7 +422,7 @@ smry_tpr_ppr &lt;-<span class="st"> </span><span class="kw">summarise</span>(gro
 <li>Dranchuk-Purvis-Robinson.Rmd</li>
 <li>shell.Rmd</li>
 <li>ANN.Rmd</li>
-<li>Papay.Rmd</li>
+<li>Papp.Rmd</li>
 </ul>
 </div>
 <div id="tests" class="section level2">
@@ -386,7 +450,9 @@ smry_tpr_ppr &lt;-<span class="st"> </span><span class="kw">summarise</span>(gro
 <p>[8] M. Kamyab, J. H. Sampaio, F. Qanbari, et al. “Using artificial neural networks to estimate the z-factor for natural hydrocarbon gases”. In: <em>Journal of Petroleum Science and Engineering</em> 73.3 (2010), pp. 248-257. DOI: 10.1016/j.petrol.2010.07.006. &lt;URL: <a href="http://doi.org/10.1016/j.petrol.2010.07.006" class="uri">http://doi.org/10.1016/j.petrol.2010.07.006</a>&gt;.</p>
 <p>[9] N. Kumar. “Compressibility factors for natural and sour reservoir gases by correlations and cubic equations of state”. MA Thesis. Texas Tech University, 2004. &lt;URL: <a href="https://ttu-ir.tdl.org/ttu-ir/handle/2346/1370" class="uri">https://ttu-ir.tdl.org/ttu-ir/handle/2346/1370</a>&gt;.</p>
 <p>[10] M. Mohamadi-Baghmolaei, R. Azin, S. Osfouri, et al. “Prediction of gas compressibility factor using intelligent models”. In: <em>Natural Gas Industry B</em> 2.4 (2015), pp. 283-294. DOI: 10.1016/j.ngib.2015.09.001. &lt;URL: <a href="http://doi.org/10.1016/j.ngib.2015.09.001" class="uri">http://doi.org/10.1016/j.ngib.2015.09.001</a>&gt;.</p>
-<p>[11] S. Rakap, S. Rakap, D. Evran, et al. “Comparative evaluation of the reliability and validity of three data extraction programs: UnGraph, GraphClick, and DigitizeIt”. In: <em>Computers in Human Behavior</em> 55 (2016), pp. 159-166. DOI: 10.1016/j.chb.2015.09.008. &lt;URL: <a href="http://doi.org/10.1016/j.chb.2015.09.008" class="uri">http://doi.org/10.1016/j.chb.2015.09.008</a>&gt;.</p>
+<p>[11] I. Papp. “Uj modszer foldgazok elteresi tenyezojenek szamitasara”. In: <em>Koolaj es Foldgaz</em> (Nov. 1979), pp. 345-47.</p>
+<p>[12] S. Rakap, S. Rakap, D. Evran, et al. “Comparative evaluation of the reliability and validity of three data extraction programs: UnGraph, GraphClick, and DigitizeIt”. In: <em>Computers in Human Behavior</em> 55 (2016), pp. 159-166. DOI: 10.1016/j.chb.2015.09.008. &lt;URL: <a href="http://doi.org/10.1016/j.chb.2015.09.008" class="uri">http://doi.org/10.1016/j.chb.2015.09.008</a>&gt;.</p>
+<p>[13] G. Takacs. “Comparing Methods for Calculating z Factor”. In: <em>Oil and Gas Journal</em> (May. 1989). DOI: NA. &lt;URL: <a href="https://www.researchgate.net/publication/236510717_Comparing_methods_for_calculating_Z-factor" class="uri">https://www.researchgate.net/publication/236510717_Comparing_methods_for_calculating_Z-factor</a>&gt;.</p>
 </div>
 </div>
 </div>
@@ -405,7 +471,7 @@ smry_tpr_ppr &lt;-<span class="st"> </span><span class="kw">summarise</span>(gro
 <p><a href="https://www.r-project.org/Licenses/GPL-2">GPL-2</a></p>
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Alfonso Reyes <br><small class="roles"> Author, maintainer </small> </li>
+<li>Alfonso R. Reyes <br><small class="roles"> Author, maintainer </small> </li>
 </ul>
 <h2>Dev status</h2>
 <ul class="list-unstyled">
@@ -419,7 +485,7 @@ smry_tpr_ppr &lt;-<span class="st"> </span><span class="kw">summarise</span>(gro
 
 
       <footer><div class="copyright">
-  <p>Developed by Alfonso Reyes.</p>
+  <p>Developed by Alfonso R. Reyes.</p>
 </div>
 
 <div class="pkgdown">

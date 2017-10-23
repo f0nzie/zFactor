@@ -1,5 +1,7 @@
 library(testthat)
-context("test z.DranchukAbuKassem")
+
+
+context("z.DranchukAbuKassem")
 
 test_that("DAK calculates z for only one point at Ppr=0.5 and Tpr=1.3", {
     expect_equal(z.DranchukAbuKassem(0.5, 1.3), 0.9203019)

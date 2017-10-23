@@ -2,9 +2,9 @@
 z_correlations <- data.frame(
     short = c("BB", "HY", "DAK", "DPR", "SH", "N10", "PP"),
     long = c("Beggs-Brill", "Hall-Yarborough", "Dranchuk-AbuKassem",
-             "Dranchuk-Purvis-Robinson", "Shell", "Ann10", "Papay"),
+             "Dranchuk-Purvis-Robinson", "Shell", "Ann10", "Papp"),
     function_name = c("z.BeggsBrill", "z.HallYarborough", "z.DranchukAbuKassem",
-                      "z.DranchukPurvisRobinson", "z.Shell", "z.Ann10", "z.Papay"),
+                      "z.DranchukPurvisRobinson", "z.Shell", "z.Ann10", "z.Papp"),
     stringsAsFactors = FALSE
 )
 
@@ -51,8 +51,12 @@ get_z_correlations <- function(how = "short") {
 #' # now, you can paste the vector in your test
 convertStringToVector <- function(str) {
     vs <- unlist(strsplit(str, " "))
-    vn <- as.numeric(vs)
-    vt <- paste(vn, collapse = ", ")
+    vs <- vs[lapply(vs, nchar) > 0]
+    # prevent warning message:  introducing NAs by coercion
+    # https://stackoverflow.com/a/14985152/5270873
+    vn <- suppressWarnings(as.numeric(vs))
+    if(all(is.na(vn))) vt <- paste(trimws(vs), collapse = ", ")
+    else vt <- paste(vn, collapse = ", ")
     paste0('c(', vt, ')')
 }
 
@@ -109,7 +113,10 @@ combineCorrWithSK <- function(sk_df, co_df) {
 #' createTidyFromMatrix(ppr, tpr, correlation = "DAK")
 #' createTidyFromMatrix(ppr, tpr, correlation = "BB")
 createTidyFromMatrix <- function(ppr_vector, tpr_vector, correlation) {
-    isMissing_correlation(correlation)
+    msg <- "You have to provide a z-factor correlation: "
+    msg_missing <- paste(msg, paste(get_z_correlations(), collapse = " "))
+    if (missing(correlation)) stop(msg_missing)
+
     if (!isValid_correlation(correlation)) stop("Not a valid correlation.")
 
     zFunction <- get(z_correlations[which(z_correlations["short"] == correlation),
@@ -127,14 +134,6 @@ createTidyFromMatrix <- function(ppr_vector, tpr_vector, correlation) {
     sk_co_tidy
 }
 
-
-isMissing_correlation <- function(correlation) {
-    # stops if correlation argument is missing
-    msg_missing <- paste("You have to provide a z-factor correlation: ",
-                         paste(get_z_correlations(), collapse = " "))
-    if (missing(correlation)) stop(msg_missing)
-    else NULL
-}
 
 
 #' Check if supplied correlation (three letter) is valid
