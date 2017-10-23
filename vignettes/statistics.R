@@ -9,11 +9,16 @@ zFactor:::z.plot.range("HY", interval = "fine")
 #  RMSE = sqrt(mean((z.chart - z.calc)^2))
 
 ## ------------------------------------------------------------------------
+z_hy  <- z.stats("HY")
+
 sum_tpr <- as.tibble(z.stats("HY"))
 hy <- ggplot(sum_tpr, aes(x = Tpr, y = RMSE, col = Tpr)) +
            geom_point()  + theme(legend.position="none") + 
     ggtitle("HY - Root Mean Squared Error")
 hy
+
+## ------------------------------------------------------------------------
+boxplot(z_hy$RMSE,  horizontal = TRUE, main = "HY", xlab = "RMSE")
 
 ## ----eval=FALSE----------------------------------------------------------
 #  MPE  = sum((z.calc - z.chart) / z.chart) * 100 / n(),
@@ -151,14 +156,23 @@ g <- g + geom_tile(data=smry_tpr_ppr, aes(fill=get(stat)), color="white") +
 print(g)
 
 ## ------------------------------------------------------------------------
-# par(mfrow = c(2,1))
 boxplot(smry_tpr_ppr$RMSE, horizontal = TRUE, main = "RMSE")
 boxplot(smry_tpr_ppr$MAPE, horizontal = TRUE, main = "MAPE")
 
 ## ------------------------------------------------------------------------
 library(zFactor)
 
+z_bb  <- z.stats("BB")
 z_hy  <- z.stats("HY")
 z_dak <- z.stats("DAK")
+z_sh  <- z.stats("SH")
 z_n10 <- z.stats("N10")
+z_pp  <- z.stats("PP")
+
+boxplot(z_bb$RMSE,  horizontal = TRUE, main = "BB", xlab = "RMSE")
+boxplot(z_hy$RMSE,  horizontal = TRUE, main = "HY", xlab = "RMSE")
+boxplot(z_dak$RMSE, horizontal = TRUE, main = "DAK", xlab = "RMSE")
+boxplot(z_sh$RMSE,  horizontal = TRUE, main = "SH", xlab = "RMSE")
+boxplot(z_n10$RMSE, horizontal = TRUE, main = "N10", xlab = "RMSE")
+boxplot(z_pp$RMSE,  horizontal = TRUE, main = "PP", xlab = "RMSE")
 
