@@ -27,9 +27,8 @@ the Standing-Katz chart.
     MAE:   Mean Absolute Error
 }
 \examples{
+\dontrun{
 # error statistics for the Dranchuk-AbouKassem correlation
 z.stats("DAK")
-
-# error statistics for Hall-Yarborough correlation at steps of 0.5 in Ppr
-z.stats("HY", interval = "fine")
+}
 }

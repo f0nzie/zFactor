@@ -18,8 +18,10 @@
 #' @rdname z.stats
 #' @export
 #' @examples
+#' \dontrun{
 #' # error statistics for the Dranchuk-AbouKassem correlation
 #' z.stats("DAK")
+#' }
 z.stats <- function(correlation = "DAK", pprRange = "lp", interval = "coarse") {
     Ppr <- NULL; Tpr <- NULL; z.calc <- NULL; z.chart <- NULL; n <- NULL
     # get all `lp` Tpr curves
@@ -66,8 +68,10 @@ z.stats_quantile <- function(stat = "MAPE") {
 #' RMSE, MPRE, MAPE, MSE, RSS, MAE
 #' @export
 #' @examples
+#' \dontrun{
 #' # Get a statistical summary of the Mean Absolute Percentage Error (MAPE)
 #' stats_of_z.stats()
+#' }
 stats_of_z.stats <- function(stat = "MAPE") {
     z.stats_stats <- names(z.stats())[3:ncol(z.stats())]
     msg <- paste0("statistic not in table. \n Try with: ", paste0(z.stats_stats, collapse=", "))
