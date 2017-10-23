@@ -1,3 +1,7 @@
+## 20171023 0.1.7.9000
+*
+
+
 ## 20171022 0.1.7
 * returned by CRAN with two notes
 * fixed name by adding R. as a middle name. Same as previous release.
