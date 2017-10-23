@@ -41,7 +41,7 @@ z.stats <- function(correlation = "DAK", pprRange = "lp", interval = "coarse") {
                               MAE  = sum(abs(z.chart - z.calc)) / n()
 
     )
-    smry_tpr_ppr
+    tibble::as.tibble(smry_tpr_ppr)
 }
 
 
