@@ -171,40 +171,10 @@ the Standing-Katz chart.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># error statistics for the Dranchuk-AbouKassem correlation</span>
-<span class='fu'>z.stats</span>(<span class='st'>"DAK"</span>)</div><div class='output co'>#&gt; # A tibble: 112 x 11
-#&gt; # Groups:   Tpr [?]
-#&gt;      Tpr   Ppr z.chart    z.calc        RMSE         MPE       MAPE
-#&gt;    &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;
-#&gt;  1  1.05   0.5   0.829 0.8300683 0.001068340  -0.1288709  0.1288709
-#&gt;  2  1.05   1.5   0.253 0.2837318 0.030731781 -12.1469490 12.1469490
-#&gt;  3  1.05   2.5   0.343 0.3868282 0.043828227 -12.7779088 12.7779088
-#&gt;  4  1.05   3.5   0.471 0.5063005 0.035300493  -7.4947969  7.4947969
-#&gt;  5  1.05   4.5   0.598 0.6239783 0.025978253  -4.3441895  4.3441895
-#&gt;  6  1.05   5.5   0.727 0.7392097 0.012209748  -1.6794701  1.6794701
-#&gt;  7  1.05   6.5   0.846 0.8521762 0.006176173  -0.7300441  0.7300441
-#&gt;  8   1.1   0.5   0.854 0.8570452 0.003045248  -0.3565864  0.3565864
-#&gt;  9   1.1   1.5   0.426 0.4463987 0.020398668  -4.7884197  4.7884197
-#&gt; 10   1.1   2.5   0.393 0.4125200 0.019519996  -4.9669201  4.9669201
-#&gt; # ... with 102 more rows, and 4 more variables: MSE &lt;dbl&gt;, RSS &lt;dbl&gt;,
-#&gt; #   MAE &lt;dbl&gt;, MAAPE &lt;dbl&gt;</div><div class='input'>
-<span class='co'># error statistics for Hall-Yarborough correlation at steps of 0.5 in Ppr</span>
-<span class='fu'>z.stats</span>(<span class='st'>"HY"</span>, <span class='kw'>interval</span> <span class='kw'>=</span> <span class='st'>"fine"</span>)</div><div class='output co'>#&gt; # A tibble: 224 x 11
-#&gt; # Groups:   Tpr [?]
-#&gt;      Tpr   Ppr z.chart    z.calc        RMSE        MPE      MAPE          MSE
-#&gt;    &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;        &lt;dbl&gt;
-#&gt;  1  1.05   0.5   0.829 0.8324659 0.003465859  -0.418077  0.418077 1.201218e-05
-#&gt;  2  1.05   1.0   0.589 0.6023739 0.013373916  -2.270614  2.270614 1.788616e-04
-#&gt;  3  1.05   1.5   0.253 0.3098781 0.056878063 -22.481448 22.481448 3.235114e-03
-#&gt;  4  1.05   2.0   0.280 0.3310063 0.051006294 -18.216534 18.216534 2.601642e-03
-#&gt;  5  1.05   2.5   0.343 0.3844710 0.041470998 -12.090670 12.090670 1.719844e-03
-#&gt;  6  1.05   3.0   0.407 0.4416883 0.034688324  -8.522930  8.522930 1.203280e-03
-#&gt;  7  1.05   3.5   0.471 0.4996188 0.028618834  -6.076186  6.076186 8.190377e-04
-#&gt;  8  1.05   4.0   0.534 0.5575012 0.023501162  -4.400967  4.400967 5.523046e-04
-#&gt;  9  1.05   4.5   0.598 0.6150882 0.017088211  -2.857560  2.857560 2.920070e-04
-#&gt; 10  1.05   5.0   0.663 0.6722960 0.009295991  -1.402110  1.402110 8.641545e-05
-#&gt; # ... with 214 more rows, and 3 more variables: RSS &lt;dbl&gt;, MAE &lt;dbl&gt;,
-#&gt; #   MAAPE &lt;dbl&gt;</div></pre>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='co'># error statistics for the Dranchuk-AbouKassem correlation</span>
+<span class='fu'>z.stats</span>(<span class='st'>"DAK"</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -219,7 +189,7 @@ the Standing-Katz chart.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Alfonso Reyes.</p>
+  <p>Developed by Alfonso R. Reyes.</p>
 </div>
 
 <div class="pkgdown">
