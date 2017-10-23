@@ -88,8 +88,19 @@ hy
 ## ------------------------------------------------------------------------
 boxplot(z_hy$MAE,  horizontal = TRUE, main = "HY", xlab = "MAE")
 
+## ----eval=FALSE----------------------------------------------------------
+#  MAE  = sum(atan(abs(z.calc - z.chart))) / n()
+
 ## ------------------------------------------------------------------------
-# sum_tpr <- as.tibble(z.stats("BB"))
+hy <- ggplot(z_hy, aes(x = Tpr, y = MAAPE, col = Tpr)) +
+           geom_point()  + theme(legend.position="none") + 
+    ggtitle("HY - Mean Arc-tangent Absolute Error")
+hy
+
+## ------------------------------------------------------------------------
+boxplot(z_hy$MAAPE,  horizontal = TRUE, main = "HY", xlab = "MAAPE")
+
+## ------------------------------------------------------------------------
 z_bb <- z.stats("BB")
 bb <- ggplot(z_bb, aes(x = Tpr, y = RMSE, color = Tpr)) +
            geom_point() + ylim(0, 0.4) + theme(legend.position="none") +
