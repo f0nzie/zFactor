@@ -10,9 +10,9 @@ zFactor:::z.plot.range("HY", interval = "fine")
 
 ## ------------------------------------------------------------------------
 z_hy  <- z.stats("HY")
-
 sum_tpr <- as.tibble(z.stats("HY"))
-hy <- ggplot(sum_tpr, aes(x = Tpr, y = RMSE, col = Tpr)) +
+
+hy <- ggplot(z_hy, aes(x = Tpr, y = RMSE, col = Tpr)) +
            geom_point()  + theme(legend.position="none") + 
     ggtitle("HY - Root Mean Squared Error")
 hy
@@ -24,21 +24,28 @@ boxplot(z_hy$RMSE,  horizontal = TRUE, main = "HY", xlab = "RMSE")
 #  MPE  = sum((z.calc - z.chart) / z.chart) * 100 / n(),
 
 ## ------------------------------------------------------------------------
-sum_tpr <- as.tibble(z.stats("HY"))
-hy <- ggplot(sum_tpr, aes(x = Tpr, y = MPE, col = Tpr)) +
+# sum_tpr <- as.tibble(z.stats("HY"))
+hy <- ggplot(z_hy, aes(x = Tpr, y = MPE, col = Tpr)) +
            geom_point()  + theme(legend.position="none") + 
     ggtitle("HY  - Mean Percentage error")
 hy
+
+## ------------------------------------------------------------------------
+boxplot(z_hy$MPE,  horizontal = TRUE, main = "HY", xlab = "MPE")
 
 ## ----eval=FALSE----------------------------------------------------------
 #  MAPE = sum(abs((z.calc - z.chart) / z.chart)) * 100 / n()
 
 ## ------------------------------------------------------------------------
-sum_tpr <- as.tibble(z.stats("HY"))
-hy <- ggplot(sum_tpr, aes(x = Tpr, y = MAPE, col = Tpr)) +
+# sum_tpr <- as.tibble(z.stats("HY"))
+
+hy <- ggplot(z_hy, aes(x = Tpr, y = MAPE, col = Tpr)) +
            geom_point()  + theme(legend.position="none") + 
     ggtitle("HY - Mean Absolute Percentage Error")
 hy
+
+## ------------------------------------------------------------------------
+boxplot(z_hy$MAPE,  horizontal = TRUE, main = "HY", xlab = "MAPE")
 
 ## ----eval=FALSE----------------------------------------------------------
 #  MSE  = sum((z.calc - z.chart)^2) / n()
@@ -50,32 +57,47 @@ hy <- ggplot(sum_tpr, aes(x = Tpr, y = MSE, col = Tpr)) +
     ggtitle("HY - Mean Squared Error")
 hy
 
+## ------------------------------------------------------------------------
+boxplot(z_hy$MSE,  horizontal = TRUE, main = "HY", xlab = "MSE")
+
 ## ----eval=FALSE----------------------------------------------------------
 #  RSS  = sum((z.calc - z.chart)^2)
 
 ## ------------------------------------------------------------------------
-sum_tpr <- as.tibble(z.stats("HY"))
-hy <- ggplot(sum_tpr, aes(x = Tpr, y = RSS, col = Tpr)) +
+# sum_tpr <- as.tibble(z.stats("HY"))
+
+hy <- ggplot(z_hy, aes(x = Tpr, y = RSS, col = Tpr)) +
            geom_point()  + theme(legend.position="none") + 
-    ggtitle("HY - Residual sum of Squares")
+    ggtitle("HY - Residual Sum of Squares")
 hy
+
+## ------------------------------------------------------------------------
+boxplot(z_hy$RSS,  horizontal = TRUE, main = "HY", xlab = "RSS")
 
 ## ----eval=FALSE----------------------------------------------------------
 #  MAE  = sum(abs(z.calc - z.chart)) / n()
 
 ## ------------------------------------------------------------------------
-sum_tpr <- as.tibble(z.stats("HY"))
-hy <- ggplot(sum_tpr, aes(x = Tpr, y = MAE, col = Tpr)) +
+# sum_tpr <- as.tibble(z.stats("HY"))
+
+hy <- ggplot(z_hy, aes(x = Tpr, y = MAE, col = Tpr)) +
            geom_point()  + theme(legend.position="none") + 
     ggtitle("HY - Mean Absolute Error")
 hy
 
 ## ------------------------------------------------------------------------
-sum_tpr <- as.tibble(z.stats("BB"))
-bb <- ggplot(sum_tpr, aes(x = Tpr, y = RMSE, color = Tpr)) +
+boxplot(z_hy$MAE,  horizontal = TRUE, main = "HY", xlab = "MAE")
+
+## ------------------------------------------------------------------------
+# sum_tpr <- as.tibble(z.stats("BB"))
+z_bb <- z.stats("BB")
+bb <- ggplot(z_bb, aes(x = Tpr, y = RMSE, color = Tpr)) +
            geom_point() + ylim(0, 0.4) + theme(legend.position="none") +
     ggtitle("Beggs-Brill")
 bb
+
+## ------------------------------------------------------------------------
+boxplot(z_bb$RMSE,  horizontal = TRUE, main = "BB", xlab = "RMSE")
 
 ## ------------------------------------------------------------------------
 sum_tpr <- as.tibble(z.stats("HY"))
@@ -118,61 +140,26 @@ sum_tpr <- as.tibble(z.stats("HY"))
 sum_tpr
 
 ## ------------------------------------------------------------------------
-library(zFactor)
-correlation = "SH"
-pprRange <- "lp"
-stat <- "RMSE"
-interval <-  "fine"
-
-if (stat == "MAPE") {
-    midpoint <-  12.5
-    limit <- c(0, 25)
-} else if (stat == "RMSE") {
-    midpoint <-   0.025
-    limit <- c(0, 0.050)
-}
-
-# Ppr <- NULL; Tpr <- NULL; MAPE <- NULL; z.calc <- NULL; z.chart <- NULL
-# sum_tpr <- as.tibble(z.stats(correlation))
-# isMissing_correlation(correlation)
-msg <- "You have to provide a z-factor correlation: "
-msg_missing <- paste(msg, paste(get_z_correlations(), collapse = " "))
-if (missing(correlation)) stop(msg_missing)
-if (!isValid_correlation(correlation)) stop("Not a valid correlation.")
-
-corr_name <- zFactor:::z_correlations[which(zFactor:::z_correlations["short"] == correlation),
-                                                 "long"]
-
-smry_tpr_ppr <- z.stats(correlation, pprRange, interval = interval)
-g <- ggplot(smry_tpr_ppr, aes(Ppr, Tpr))
-g <- g + geom_tile(data=smry_tpr_ppr, aes(fill=get(stat)), color="white") +
-    scale_fill_gradient2(low="blue", high="red", mid="yellow", na.value = "grey25",
-                         midpoint = midpoint, limit = limit, name = stat) +
-    theme(axis.text.x = element_text(angle=45, vjust=1, size=11, hjust=1)) +
-    coord_equal() +
-    ggtitle(corr_name, subtitle = correlation) +
-    guides(fill = guide_colorbar(barwidth = 0.6, barheight = 5, 
-                                 label.vjust = 0.9))
-print(g)
+z.plot.range(correlation = "BB", stat = "MAPE", interval = "fine")
+z.plot.range(correlation = "BB", stat = "RMSE", interval = "fine")
 
 ## ------------------------------------------------------------------------
-boxplot(smry_tpr_ppr$RMSE, horizontal = TRUE, main = "RMSE")
-boxplot(smry_tpr_ppr$MAPE, horizontal = TRUE, main = "MAPE")
+z.plot.range(correlation = "HY", stat = "MAPE", interval = "fine")
+z.plot.range(correlation = "HY", stat = "RMSE", interval = "fine")
 
 ## ------------------------------------------------------------------------
-library(zFactor)
+z.plot.range(correlation = "DAK", stat = "MAPE", interval = "fine")
+z.plot.range(correlation = "DAK", stat = "RMSE", interval = "fine")
 
-z_bb  <- z.stats("BB")
-z_hy  <- z.stats("HY")
-z_dak <- z.stats("DAK")
-z_sh  <- z.stats("SH")
-z_n10 <- z.stats("N10")
-z_pp  <- z.stats("PP")
+## ------------------------------------------------------------------------
+z.plot.range(correlation = "SH", stat = "MAPE", interval = "fine")
+z.plot.range(correlation = "SH", stat = "RMSE", interval = "fine")
 
-boxplot(z_bb$RMSE,  horizontal = TRUE, main = "BB", xlab = "RMSE")
-boxplot(z_hy$RMSE,  horizontal = TRUE, main = "HY", xlab = "RMSE")
-boxplot(z_dak$RMSE, horizontal = TRUE, main = "DAK", xlab = "RMSE")
-boxplot(z_sh$RMSE,  horizontal = TRUE, main = "SH", xlab = "RMSE")
-boxplot(z_n10$RMSE, horizontal = TRUE, main = "N10", xlab = "RMSE")
-boxplot(z_pp$RMSE,  horizontal = TRUE, main = "PP", xlab = "RMSE")
+## ------------------------------------------------------------------------
+z.plot.range(correlation = "N10", stat = "MAPE", interval = "fine")
+z.plot.range(correlation = "N10", stat = "RMSE", interval = "fine")
+
+## ------------------------------------------------------------------------
+z.plot.range(correlation = "PP", stat = "MAPE", interval = "fine")
+z.plot.range(correlation = "PP", stat = "RMSE", interval = "fine")
 

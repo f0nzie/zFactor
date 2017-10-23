@@ -171,11 +171,29 @@ hy
 boxplot(z_hy$MAE,  horizontal = TRUE, main = "HY", xlab = "MAE")
 ```
 
+## MAAPE: Mean Arc-tangent Absolute Error
+
+$$MAAPE = \frac {1} {n} \sum ArcTan \, | \frac {a_t - f_t} {a_t}|$$
+<u>MAE code</u>
+```{r eval=FALSE}
+MAE  = sum(atan(abs(z.calc - z.chart))) / n()
+```
+
+```{r}
+hy <- ggplot(z_hy, aes(x = Tpr, y = MAAPE, col = Tpr)) +
+           geom_point()  + theme(legend.position="none") + 
+    ggtitle("HY - Mean Arc-tangent Absolute Error")
+hy
+```
+
+```{r}
+boxplot(z_hy$MAAPE,  horizontal = TRUE, main = "HY", xlab = "MAAPE")
+```
+
 
 ## RMSE vs isotherm for all correlations
 
 ```{r}
-# sum_tpr <- as.tibble(z.stats("BB"))
 z_bb <- z.stats("BB")
 bb <- ggplot(z_bb, aes(x = Tpr, y = RMSE, color = Tpr)) +
            geom_point() + ylim(0, 0.4) + theme(legend.position="none") +
@@ -237,31 +255,6 @@ sum_tpr
 ```
 
 
-
-
-
-```{r}
-boxplot(smry_tpr_ppr$RMSE, horizontal = TRUE, main = "RMSE")
-boxplot(smry_tpr_ppr$MAPE, horizontal = TRUE, main = "MAPE")
-```
-
-```{r}
-library(zFactor)
-
-z_bb  <- z.stats("BB")
-z_hy  <- z.stats("HY")
-z_dak <- z.stats("DAK")
-z_sh  <- z.stats("SH")
-z_n10 <- z.stats("N10")
-z_pp  <- z.stats("PP")
-
-boxplot(z_bb$RMSE,  horizontal = TRUE, main = "BB", xlab = "RMSE")
-boxplot(z_hy$RMSE,  horizontal = TRUE, main = "HY", xlab = "RMSE")
-boxplot(z_dak$RMSE, horizontal = TRUE, main = "DAK", xlab = "RMSE")
-boxplot(z_sh$RMSE,  horizontal = TRUE, main = "SH", xlab = "RMSE")
-boxplot(z_n10$RMSE, horizontal = TRUE, main = "N10", xlab = "RMSE")
-boxplot(z_pp$RMSE,  horizontal = TRUE, main = "PP", xlab = "RMSE")
-```
 
 ### Beggs and Brill MAPE and RMSE
 ```{r}

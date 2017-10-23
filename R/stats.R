@@ -36,9 +36,10 @@ z.stats <- function(correlation = "DAK", pprRange = "lp", interval = "coarse") {
                               RMSE = sqrt(mean((z.chart-z.calc)^2)),
                               MPE  = sum((z.chart - z.calc) / z.chart) * 100 / n(),
                               MAPE = sum(abs((z.chart - z.calc) / z.chart)) * 100 / n(),
-                              MSE  = sum((z.chart - z.calc)^2) / n(),
-                              RSS  = sum((z.chart - z.calc)^2),
-                              MAE  = sum(abs(z.chart - z.calc)) / n()
+                              MSE   = sum((z.chart - z.calc)^2) / n(),
+                              RSS   = sum((z.chart - z.calc)^2),
+                              MAE   = sum(abs(z.chart - z.calc)) / n(),
+                              MAAPE = sum(atan(abs((z.chart - z.calc) / z.chart))) / n()
 
     )
     tibble::as.tibble(smry_tpr_ppr)
