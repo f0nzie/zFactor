@@ -68,6 +68,9 @@
       <a href="../articles/correlation_selection.html">Selecting the Correlation</a>
     </li>
     <li>
+      <a href="../articles/statistics.html">Measuring errors in calculating z</a>
+    </li>
+    <li>
       <a href="../articles/StandingKatz_chart.html">Standing-Katz chart</a>
     </li>
     <li>
@@ -139,7 +142,7 @@
 or close to MAPE=25. Pink is much greater than 25.</p>
     
 
-    <pre class="usage"><span class='fu'>z.plot.range</span>(<span class='kw'>correlation</span> <span class='kw'>=</span> <span class='st'>"DAK"</span>, <span class='kw'>pprRange</span> <span class='kw'>=</span> <span class='st'>"lp"</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>z.plot.range</span>(<span class='kw'>correlation</span> <span class='kw'>=</span> <span class='st'>"DAK"</span>, <span class='kw'>stat</span> <span class='kw'>=</span> <span class='st'>"MAPE"</span>, <span class='kw'>pprRange</span> <span class='kw'>=</span> <span class='st'>"lp"</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -147,6 +150,10 @@ or close to MAPE=25. Pink is much greater than 25.</p>
     <tr>
       <th>correlation</th>
       <td><p>identifier. Can be "HY", "DAK", "DPR" "N10", "SH"</p></td>
+    </tr>
+    <tr>
+      <th>stat</th>
+      <td><p>Any of the statistical variables in z.stats:</p></td>
     </tr>
     <tr>
       <th>pprRange</th>
