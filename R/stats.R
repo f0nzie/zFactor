@@ -34,11 +34,12 @@ z.stats <- function(correlation = "DAK", pprRange = "lp", interval = "coarse") {
     grouped <- group_by(sk_corr_all, Tpr, Ppr)
     smry_tpr_ppr <- summarise(grouped, z.chart, z.calc,
                               RMSE = sqrt(mean((z.chart-z.calc)^2)),
-                              MPE  = sum((z.calc - z.chart) / z.chart) * 100 / n(),
-                              MAPE = sum(abs((z.calc - z.chart) / z.chart)) * 100 / n(),
-                              MSE  = sum((z.calc - z.chart)^2) / n(),
-                              RSS  = sum((z.calc - z.chart)^2),
-                              MAE  = sum(abs(z.calc - z.chart)) / n()
+                              MPE  = sum((z.chart - z.calc) / z.chart) * 100 / n(),
+                              MAPE = sum(abs((z.chart - z.calc) / z.chart)) * 100 / n(),
+                              MSE  = sum((z.chart - z.calc)^2) / n(),
+                              RSS  = sum((z.chart - z.calc)^2),
+                              MAE  = sum(abs(z.chart - z.calc)) / n()
+
     )
     smry_tpr_ppr
 }
