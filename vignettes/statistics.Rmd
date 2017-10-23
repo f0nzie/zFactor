@@ -8,8 +8,8 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-## Practical example
-To demonstrate graphically the difference between correlation and experimental data we will use the Hall-Yarborough correlation results at a $T_{pr}$=1.05 at various $P_{pr}$.
+## Measures of Error
+To demonstrate graphically the difference between correlation and experimental data we will use the Hall-Yarborough correlation results.
 
 ```{r}
 library(zFactor)
