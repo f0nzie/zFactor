@@ -1,4 +1,5 @@
 ## 20171019 0.1.6.9012
+* release to CRAN as 0.1.7
 * add function MAAPE
 * add boxplots to show outliers in correlation calculation
 * new vignette statistics
