@@ -113,7 +113,7 @@
     <div class="page-header toc-ignore">
       <h1>Papp correlation</h1>
             
-            <h4 class="date">2017-10-23</h4>
+            <h4 class="date">2017-10-24</h4>
           </div>
 
     
@@ -459,7 +459,7 @@ smry_tpr_ppr &lt;-<span class="st"> </span><span class="kw">summarise</span>(gro
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
 
 sk_corr_all <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">filter</span>(Tpr <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">"1.05"</span>, <span class="st">"1.1"</span>, <span class="st">"2.4"</span>, <span class="st">"2.6"</span>, <span class="st">"2.8"</span>, <span class="st">"3"</span>)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">filter</span>(Tpr <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">"1.05"</span>, <span class="st">"1.1"</span>, <span class="st">"1.2"</span>, <span class="st">"2.6"</span>, <span class="st">"2.8"</span>, <span class="st">"3"</span>)) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> z.chart, <span class="dt">y=</span>z.calc, <span class="dt">group =</span> Tpr, <span class="dt">color =</span> Tpr)) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span>
 <span class="st">    </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> z.chart, <span class="dt">y =</span> z.chart), <span class="dt">color =</span> <span class="st">"black"</span>) <span class="op">+</span>
@@ -496,7 +496,7 @@ sk_corr_all <span class="op">%&gt;%</span>
 <h2 class="hasAnchor">
 <a href="#references" class="anchor"></a>References</h2>
 <p>[1] I. Papp. “Uj modszer foldgazok elteresi tenyezojenek szamitasara”. In: <em>Koolaj es Foldgaz</em> (Nov. 1979), pp. 345-47.</p>
-<p>[2] G. Takacs. “Comparing Methods for Calculating z Factor”. In: <em>Oil and Gas Journal</em> (May. 1989). DOI: NA. &lt;URL: <a href="https://www.researchgate.net/publication/236510717_Comparing_methods_for_calculating_Z-factor" class="uri">https://www.researchgate.net/publication/236510717_Comparing_methods_for_calculating_Z-factor</a>&gt;.</p>
+<p>[2] G. Takacs. “Comparing Methods for Calculating z Factor”. In: <em>Oil and Gas Journal</em> (May. 1989). DOI: Not Available. &lt;URL: <a href="https://www.researchgate.net/publication/236510717_Comparing_methods_for_calculating_Z-factor" class="uri">https://www.researchgate.net/publication/236510717_Comparing_methods_for_calculating_Z-factor</a>&gt;.</p>
 </div>
 </div>
   </div>
