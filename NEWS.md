@@ -1,3 +1,9 @@
+## 20171023 0.1.7.9000
+* add title to VignetteIndexEntry in statistics.Rmd. Preventing link to work in GitHub pages.
+* edit bibliography.bib with JabRef application. ./vignettes/bibliography.bib is a symbolic link of same file under ./inst/doc
+* Takacs was added entry for local PDF file in bibliography.bib
+
+
 ## 20171022 0.1.7
 * returned by CRAN with two notes
 * fixed name by adding R. as a middle name. Same as previous release.

@@ -54,7 +54,7 @@ The correlations that are implemented in R for the package **zFactor** are:
 
 * A correlation developed with Artificial Neural Networks (Ann10) by Kamyab et al. ``r citep(bib[c("Kamyab2010")])``
 
-* An explicit correlation by *I. Papp* ``r citep(bib[c("Papp1979")])`` mentioned in the comparative analysis paper by Gabor Takacs ``r citep(bib[c("Takacs1989")])``. Not available in English. 
+* An explicit correlation by *I. Papp* ``r citep(bib[c("Papp1979")])`` mentioned in the comparative analysis paper by Gabor Takacs ``r citep(bib[c("Takacs1989")])``. Papp's paper is not available in English. 
 
 
 ## Versions
