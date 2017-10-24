@@ -33,7 +33,7 @@ The correlations that are implemented in R for the package **zFactor** are:
 
 -   A correlation developed with Artificial Neural Networks (Ann10) by Kamyab et al. `(Kamyab, Sampaio, Qanbari, and Eustes, 2010)`
 
--   An explicit correlation by *I. Papp* `(Papp, 1979)` mentioned in the comparative analysis paper by Gabor Takacs `(Takacs, 1989)`. Not available in English.
+-   An explicit correlation by *I. Papp* `(Papp, 1979)` mentioned in the comparative analysis paper by Gabor Takacs `(Takacs, 1989)`. Papp's paper is not available in English.
 
 Versions
 --------
@@ -389,4 +389,4 @@ The following books and papers were consulted during the development of this pac
 
 \[12\] S. Rakap, S. Rakap, D. Evran, et al. "Comparative evaluation of the reliability and validity of three data extraction programs: UnGraph, GraphClick, and DigitizeIt". In: *Computers in Human Behavior* 55 (2016), pp. 159-166. DOI: 10.1016/j.chb.2015.09.008. &lt;URL: <http://doi.org/10.1016/j.chb.2015.09.008>&gt;.
 
-\[13\] G. Takacs. "Comparing Methods for Calculating z Factor". In: *Oil and Gas Journal* (May. 1989). DOI: NA. &lt;URL: <https://www.researchgate.net/publication/236510717_Comparing_methods_for_calculating_Z-factor>&gt;.
+\[13\] G. Takacs. "Comparing Methods for Calculating z Factor". In: *Oil and Gas Journal* (May. 1989). DOI: Not Available. &lt;URL: <https://www.researchgate.net/publication/236510717_Comparing_methods_for_calculating_Z-factor>&gt;.
