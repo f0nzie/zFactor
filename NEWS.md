@@ -1,3 +1,6 @@
+## 20171024 0.1.7.9001
+* add statistical papers
+
 ## 20171023 0.1.7.9000
 * add title to VignetteIndexEntry in statistics.Rmd. Preventing link to work in GitHub pages.
 * edit bibliography.bib with JabRef application. ./vignettes/bibliography.bib is a symbolic link of same file under ./inst/doc
