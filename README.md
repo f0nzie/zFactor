@@ -141,8 +141,8 @@ How to interpret the colors? We use the [Mean Absolute Percentage Error](https:/
 
 -   `Blue`: the MAPE is zero or near zero
 -   `Yellow`: the MAPE is around 10 percent.
--   'Red\`: the MAPE has reached 25% or more
--   `Pink`: the mean absolute percentage error is above or way above 25%.
+-   `Red`: the MAPE has reached 25%.
+-   `Grey`: the mean absolute percentage error is above or way above 25%.
 
 You can see for yourself which correlation is more stable at different ranges of pseudo-reduce pressures and temperatures.
 
