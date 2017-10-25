@@ -2,6 +2,6 @@
 \.Rhistory
 # man/
 # NAMESPACE
-inst/doc
+# inst/doc
 notebooks/*.html
 \.directory
