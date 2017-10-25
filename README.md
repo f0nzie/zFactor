@@ -221,6 +221,9 @@ The comparative analysis shows tables with different error measurements:
     MAPE:  Mean Absolute Percentage Error = AARE
     MPE:   Mean Percentage error = ARE
     MAE:   Mean Absolute Error
+    MAAPE: Mean Arc-tangent Absolute Percentage Error
+
+MAAPE was proposed by `(Kim and Kim, 2016)`
 
 What you can do with `zFactor`
 ------------------------------
@@ -365,6 +368,9 @@ References
 
 The following books and papers were consulted during the development of this package:
 
+    Warning in parse_Rd(Rd, encoding = encoding, fragment = fragment, ...): <connection>:7: unexpected END_OF_INPUT '
+    '
+
 \[1\] B. D. Al-Anazi, G. Pazuki, M. Nikookar, et al. "The prediction of the compressibility factor of sour and natural gas by an artificial neural network system". In: *Petroleum Science and Technology* 29.4 (2011), pp. 325-336. DOI: 10.1080/10916460903330080. &lt;URL: <http://doi.org/10.1080/10916460903330080>&gt;.
 
 \[2\] J. C. de Almeida, J. A. VelÃÂ¡squez and R. Barbieri. "A Methodology for Calculating the Natural Gas Compressibility Factor for a Distribution Network". In: *Petroleum Science and Technology* 32.21 (2014), pp. 2616-2624. DOI: 10.1080/10916466.2012.755194. eprint: <http://dx.doi.org/10.1080/10916466.2012.755194>. &lt;URL: <http://dx.doi.org/10.1080/10916466.2012.755194>&gt;.
@@ -381,12 +387,14 @@ The following books and papers were consulted during the development of this pac
 
 \[8\] M. Kamyab, J. H. Sampaio, F. Qanbari, et al. "Using artificial neural networks to estimate the z-factor for natural hydrocarbon gases". In: *Journal of Petroleum Science and Engineering* 73.3 (2010), pp. 248-257. DOI: 10.1016/j.petrol.2010.07.006. &lt;URL: <http://doi.org/10.1016/j.petrol.2010.07.006>&gt;.
 
-\[9\] N. Kumar. "Compressibility factors for natural and sour reservoir gases by correlations and cubic equations of state". MA Thesis. Texas Tech University, 2004. &lt;URL: <https://ttu-ir.tdl.org/ttu-ir/handle/2346/1370>&gt;.
+\[9\] S. Kim and H. Kim. "A new metric of absolute percentage error for intermittent demand forecasts". In: *International Journal of Forecasting* 32.3 (Jul. 2016), pp. 669-679. DOI: 10.1016/j.ijforecast.2015.12.003. &lt;URL: <http://www.sciencedirect.com/science/article/pii/S0169207016000121?lipi=urn%3Ali%3Apage%3Ad_flagship3_pulse_read%3Bbn%2F5H8L7RuWOkDxZe0AnAg%3D%3D>}.&gt;
 
-\[10\] M. Mohamadi-Baghmolaei, R. Azin, S. Osfouri, et al. "Prediction of gas compressibility factor using intelligent models". In: *Natural Gas Industry B* 2.4 (2015), pp. 283-294. DOI: 10.1016/j.ngib.2015.09.001. &lt;URL: <http://doi.org/10.1016/j.ngib.2015.09.001>&gt;.
+\[10\] N. Kumar. "Compressibility factors for natural and sour reservoir gases by correlations and cubic equations of state". MA Thesis. Texas Tech University, 2004. &lt;URL: <https://ttu-ir.tdl.org/ttu-ir/handle/2346/1370>&gt;.
 
-\[11\] I. Papp. "Uj modszer foldgazok elteresi tenyezojenek szamitasara". In: *Koolaj es Foldgaz* (Nov. 1979), pp. 345-47.
+\[11\] M. Mohamadi-Baghmolaei, R. Azin, S. Osfouri, et al. "Prediction of gas compressibility factor using intelligent models". In: *Natural Gas Industry B* 2.4 (2015), pp. 283-294. DOI: 10.1016/j.ngib.2015.09.001. &lt;URL: <http://doi.org/10.1016/j.ngib.2015.09.001>&gt;.
 
-\[12\] S. Rakap, S. Rakap, D. Evran, et al. "Comparative evaluation of the reliability and validity of three data extraction programs: UnGraph, GraphClick, and DigitizeIt". In: *Computers in Human Behavior* 55 (2016), pp. 159-166. DOI: 10.1016/j.chb.2015.09.008. &lt;URL: <http://doi.org/10.1016/j.chb.2015.09.008>&gt;.
+\[12\] I. Papp. "Uj modszer foldgazok elteresi tenyezojenek szamitasara". In: *Koolaj es Foldgaz* (Nov. 1979), pp. 345-47.
 
-\[13\] G. Takacs. "Comparing Methods for Calculating z Factor". In: *Oil and Gas Journal* (May. 1989). DOI: Not Available. &lt;URL: <https://www.researchgate.net/publication/236510717_Comparing_methods_for_calculating_Z-factor>&gt;.
+\[13\] S. Rakap, S. Rakap, D. Evran, et al. "Comparative evaluation of the reliability and validity of three data extraction programs: UnGraph, GraphClick, and DigitizeIt". In: *Computers in Human Behavior* 55 (2016), pp. 159-166. DOI: 10.1016/j.chb.2015.09.008. &lt;URL: <http://doi.org/10.1016/j.chb.2015.09.008>&gt;.
+
+\[14\] G. Takacs. "Comparing Methods for Calculating z Factor". In: *Oil and Gas Journal* (May. 1989). DOI: Not Available. &lt;URL: <https://www.researchgate.net/publication/236510717_Comparing_methods_for_calculating_Z-factor>&gt;.

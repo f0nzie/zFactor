@@ -21,8 +21,10 @@ knitr::opts_chunk$set(
 ```{r echo=FALSE, warning=FALSE}
 suppressPackageStartupMessages(library(knitcitations))
 knitcitations::cleanbib()
-bib_file <- system.file("doc", "bibliography.bib", package = "zFactor")
-bib <- read.bibtex(bib_file)
+bib_file1 <- system.file("doc", "bibliography.bib", package = "zFactor")
+bib_file2 <- system.file("doc", "error_stats.bib", package = "zFactor")
+bib <- read.bibtex(bib_file1)
+bib2 <- read.bibtex(bib_file2)
 ```
 
 
@@ -121,8 +123,8 @@ How to interpret the colors? We use the [Mean Absolute Percentage Error](https:/
 
 * `Blue`: the MAPE is zero or near zero
 * `Yellow`: the MAPE is around 10 percent.
-* 'Red`: the MAPE has reached 25% or more
-* `Pink`: the mean absolute percentage error is above or way above 25%.
+* `Red`: the MAPE has reached 25%.
+* `Grey`: the mean absolute percentage error is above or way above 25%.
 
 You can see for yourself which correlation is more stable at different ranges of pseudo-reduce pressures and temperatures.
 
@@ -175,8 +177,9 @@ The comparative analysis shows tables with different error measurements:
     MAPE:  Mean Absolute Percentage Error = AARE
     MPE:   Mean Percentage error = ARE
     MAE:   Mean Absolute Error
+    MAAPE: Mean Arc-tangent Absolute Percentage Error
 
-
+MAAPE was proposed by ``r citep(bib2[c("Kim2016")])`` 
 
 
 ## What you can do with `zFactor`
