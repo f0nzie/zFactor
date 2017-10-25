@@ -21,19 +21,19 @@ Correlations used in this study
 
 The correlations that are implemented in R for the package **zFactor** are:
 
--   Beggs and Brill (BB) `(Azizi N. Behbahani R., 2010)`
+-   Beggs and Brill (BB) `[@Azizi2010]`
 
--   Hall and Yarborough (HY) `(Hall and Yarborough, 1973)`
+-   Hall and Yarborough (HY) `[@Hall1973]`
 
--   Dranchuk and Abou-Kassem (DAK) `(Dranchuk and Abou-Kassem, 1975)`
+-   Dranchuk and Abou-Kassem (DAK) `[@Dranchuk1975]`
 
--   Dranchuk, Purvis and Robinson (DPR) `(Dranchuk, Purvis, Robinson, and others, 1973)`
+-   Dranchuk, Purvis and Robinson (DPR) `[@Dranchuk1973]`
 
--   A correlation by Shell Oil Company (SH) `(Kumar, 2004)`, `(Bahadori, 2016)`, `(de Almeida, VelÃ¡squez, and Barbieri, 2014)`, `(Al-Anazi, Pazuki, Nikookar, and Al-Anazi, 2011)`, `(Azizi N. Behbahani R., 2010)`, `(Mohamadi-Baghmolaei, Azin, Osfouri, Mohamadi-Baghmolaei, and Zarei, 2015)`. The Shell correlation was found cited in two books and several papers (including the equation and constants), but the original paper or authors could not be identified.
+-   A correlation by Shell Oil Company (SH) `[@Kumar2004]`, `[@bahadori]`, `[@Almeida2014]`, `[@Al-Anazi2011]`, `[@Azizi2010]`, `[@Mohamadi-Baghmolaei2015]`. The Shell correlation was found cited in two books and several papers (including the equation and constants), but the original paper or authors could not be identified.
 
--   A correlation developed with Artificial Neural Networks (Ann10) by Kamyab et al. `(Kamyab, Sampaio, Qanbari, and Eustes, 2010)`
+-   A correlation developed with Artificial Neural Networks (Ann10) by Kamyab et al. `[@Kamyab2010]`
 
--   An explicit correlation by *I. Papp* `(Papp, 1979)` mentioned in the comparative analysis paper by Gabor Takacs `(Takacs, 1989)`. Papp's paper is not available in English.
+-   An explicit correlation by *I. Papp* `[@Papp1979]` mentioned in the comparative analysis paper by Gabor Takacs `[@Takacs1989]`. Papp's paper is not available in English.
 
 Versions
 --------
@@ -223,7 +223,7 @@ The comparative analysis shows tables with different error measurements:
     MAE:   Mean Absolute Error
     MAAPE: Mean Arc-tangent Absolute Percentage Error
 
-> MAAPE was proposed by `(Kim and Kim, 2016)`
+> MAAPE was proposed by `[@Kim2016]`. Other authors consulted for the error measures are `[@Makridakis1993]`, `[@Chen2017]`, `[@Kobayashi2000]`, `[@Myttenaere2016]`, `[@Syntetos2013]`, and `[@Armstrong1992]`.
 
 What you can do with `zFactor`
 ------------------------------
@@ -359,7 +359,7 @@ There are unit tests for the correlations under tests/testthat.
 How the Standing-Katz chart was constructed
 -------------------------------------------
 
-The Standing-Katz (SK) chart data has been read directly from a scanned figure of the original plot drawn by Standing and Katz in 1951. The software used to digitize the data is `graphClick` for the operating system `osX` by Apple. This software has been tested and qualified by scolars working on a similar task of digitizing data. `(Rakap, Rakap, Evran, and Cig, 2016)`
+The Standing-Katz (SK) chart data has been read directly from a scanned figure of the original plot drawn by Standing and Katz in 1951. The software used to digitize the data is `graphClick` for the operating system `osX` by Apple. This software has been tested and qualified by scolars working on a similar task of digitizing data. `[@Rakap2016]`
 
 Each one of the SK chart pseudo-reduce temperature curves has been digitized. There are some curves where more points were taken to describe the curvature better. Other curves are almost linear and few points were necessary to define the curve.
 
@@ -368,33 +368,42 @@ References
 
 The following books and papers were consulted during the development of this package:
 
-    Warning in parse_Rd(Rd, encoding = encoding, fragment = fragment, ...): <connection>:7: unexpected END_OF_INPUT '
-    '
-
 \[1\] B. D. Al-Anazi, G. Pazuki, M. Nikookar, et al. "The prediction of the compressibility factor of sour and natural gas by an artificial neural network system". In: *Petroleum Science and Technology* 29.4 (2011), pp. 325-336. DOI: 10.1080/10916460903330080. &lt;URL: <http://doi.org/10.1080/10916460903330080>&gt;.
 
 \[2\] J. C. de Almeida, J. A. VelÃÂ¡squez and R. Barbieri. "A Methodology for Calculating the Natural Gas Compressibility Factor for a Distribution Network". In: *Petroleum Science and Technology* 32.21 (2014), pp. 2616-2624. DOI: 10.1080/10916466.2012.755194. eprint: <http://dx.doi.org/10.1080/10916466.2012.755194>. &lt;URL: <http://dx.doi.org/10.1080/10916466.2012.755194>&gt;.
 
-\[3\] I. M. Azizi N. Behbahani R. "An efficient correlation for calculating compressibility factor of natural gases". In: *Journal of Natural Gas Chemistry* Volume 19.Issue 6, 2010, (2010), pp. 642-645. DOI: 10.1016/S1003-9953(09)60081-5. &lt;URL: <http://doi.org/10.1016/S1003-9953(09)60081-5>&gt;.
+\[3\] J. Armstrong and F. Collopy. "Error measures for generalizing about forecasting methods: Empirical comparisons". In: *International Journal of Forecasting* 8.1 (Jun. 1992), pp. 69-80. DOI: 10.1016/0169-2070(92)90008-w. &lt;URL: <https://doi.org/10.1016/0169-2070(92)90008-W>&gt;.
 
-\[4\] A. Bahadori. *Fluid Phase Behavior for Conventional and Unconventional Oil and Gas Reservoirs*. ISBN 978-0-12-803437-8. Houston, Texas: Gulf Publishing, 2016. &lt;URL: <https://books.google.com/books?id=BwXeDAAAQBAJ>&gt;.
+\[4\] I. M. Azizi N. Behbahani R. "An efficient correlation for calculating compressibility factor of natural gases". In: *Journal of Natural Gas Chemistry* Volume 19.Issue 6, 2010, (2010), pp. 642-645. DOI: 10.1016/S1003-9953(09)60081-5. &lt;URL: <http://doi.org/10.1016/S1003-9953(09)60081-5>&gt;.
 
-\[5\] P. M. Dranchuk and H. Abou-Kassem. "Calculation of Z Factors For Natural Gases Using Equations of State". In: *Journal of Canadian Petroleum Technology* (Jul. 1975). DOI: 10.2118/75-03-03. &lt;URL: <https://doi.org/10.2118/75-03-03>&gt;.
+\[5\] A. Bahadori. *Fluid Phase Behavior for Conventional and Unconventional Oil and Gas Reservoirs*. ISBN 978-0-12-803437-8. Houston, Texas: Gulf Publishing, 2016. &lt;URL: <https://books.google.com/books?id=BwXeDAAAQBAJ>&gt;.
 
-\[6\] P. M. Dranchuk, R. Purvis, D. Robinson, et al. "Computer calculation of natural gas compressibility factors using the Standing and Katz correlation". In: *Annual Technical Meeting*. Ed. by unknown. Petroleum Society of Canada. 1973. DOI: 10.2118/73-112. &lt;URL: <http://doi.org/10.2118/73-112>&gt;.
+\[6\] C. Chen, J. Twycross and J. M. Garibaldi. "A new accuracy measure based on bounded relative error for time series forecasting". In: *PLOS ONE* 12.3 (Mar. 2017). Ed. by Z. Gao, p. e0174202. DOI: 10.1371/journal.pone.0174202. &lt;URL: <http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0174202>&gt;.
 
-\[7\] K. R. Hall and L. Yarborough. "A new equation of state for Z-factor calculations". In: *Oil and Gas journal* 71.7 (1973), pp. 82-92.
+\[7\] P. M. Dranchuk and H. Abou-Kassem. "Calculation of Z Factors For Natural Gases Using Equations of State". In: *Journal of Canadian Petroleum Technology* (Jul. 1975). DOI: 10.2118/75-03-03. &lt;URL: <https://doi.org/10.2118/75-03-03>&gt;.
 
-\[8\] M. Kamyab, J. H. Sampaio, F. Qanbari, et al. "Using artificial neural networks to estimate the z-factor for natural hydrocarbon gases". In: *Journal of Petroleum Science and Engineering* 73.3 (2010), pp. 248-257. DOI: 10.1016/j.petrol.2010.07.006. &lt;URL: <http://doi.org/10.1016/j.petrol.2010.07.006>&gt;.
+\[8\] P. M. Dranchuk, R. Purvis, D. Robinson, et al. "Computer calculation of natural gas compressibility factors using the Standing and Katz correlation". In: *Annual Technical Meeting*. Ed. by unknown. Petroleum Society of Canada. 1973. DOI: 10.2118/73-112. &lt;URL: <http://doi.org/10.2118/73-112>&gt;.
 
-\[9\] S. Kim and H. Kim. "A new metric of absolute percentage error for intermittent demand forecasts". In: *International Journal of Forecasting* 32.3 (Jul. 2016), pp. 669-679. DOI: 10.1016/j.ijforecast.2015.12.003. &lt;URL: <http://www.sciencedirect.com/science/article/pii/S0169207016000121?lipi=urn%3Ali%3Apage%3Ad_flagship3_pulse_read%3Bbn%2F5H8L7RuWOkDxZe0AnAg%3D%3D>}.&gt;
+\[9\] K. R. Hall and L. Yarborough. "A new equation of state for Z-factor calculations". In: *Oil and Gas journal* 71.7 (1973), pp. 82-92.
 
-\[10\] N. Kumar. "Compressibility factors for natural and sour reservoir gases by correlations and cubic equations of state". MA Thesis. Texas Tech University, 2004. &lt;URL: <https://ttu-ir.tdl.org/ttu-ir/handle/2346/1370>&gt;.
+\[10\] M. Kamyab, J. H. Sampaio, F. Qanbari, et al. "Using artificial neural networks to estimate the z-factor for natural hydrocarbon gases". In: *Journal of Petroleum Science and Engineering* 73.3 (2010), pp. 248-257. DOI: 10.1016/j.petrol.2010.07.006. &lt;URL: <http://doi.org/10.1016/j.petrol.2010.07.006>&gt;.
 
-\[11\] M. Mohamadi-Baghmolaei, R. Azin, S. Osfouri, et al. "Prediction of gas compressibility factor using intelligent models". In: *Natural Gas Industry B* 2.4 (2015), pp. 283-294. DOI: 10.1016/j.ngib.2015.09.001. &lt;URL: <http://doi.org/10.1016/j.ngib.2015.09.001>&gt;.
+\[11\] S. Kim and H. Kim. "A new metric of absolute percentage error for intermittent demand forecasts". In: *International Journal of Forecasting* 32.3 (Jul. 2016), pp. 669-679. DOI: 10.1016/j.ijforecast.2015.12.003. &lt;URL: <https://doi.org/10.1016/j.ijforecast.2015.12.003>&gt;.
 
-\[12\] I. Papp. "Uj modszer foldgazok elteresi tenyezojenek szamitasara". In: *Koolaj es Foldgaz* (Nov. 1979), pp. 345-47.
+\[12\] K. Kobayashi and M. U. Salam. "Comparing Simulated and Measured Values Using Mean Squared Deviation and its Components". In: *Agronomy Journal* 92.2 (2000), p. 345. DOI: 10.1007/s100870050043. &lt;URL: <https://www.researchgate.net/publication/243112181_Comparing_Simulated_and_Measured_Values_Using_Mean_Squared_Deviation_and_Its_Components>&gt;.
 
-\[13\] S. Rakap, S. Rakap, D. Evran, et al. "Comparative evaluation of the reliability and validity of three data extraction programs: UnGraph, GraphClick, and DigitizeIt". In: *Computers in Human Behavior* 55 (2016), pp. 159-166. DOI: 10.1016/j.chb.2015.09.008. &lt;URL: <http://doi.org/10.1016/j.chb.2015.09.008>&gt;.
+\[13\] N. Kumar. "Compressibility factors for natural and sour reservoir gases by correlations and cubic equations of state". MA Thesis. Texas Tech University, 2004. &lt;URL: <https://ttu-ir.tdl.org/ttu-ir/handle/2346/1370>&gt;.
 
-\[14\] G. Takacs. "Comparing Methods for Calculating z Factor". In: *Oil and Gas Journal* (May. 1989). DOI: Not Available. &lt;URL: <https://www.researchgate.net/publication/236510717_Comparing_methods_for_calculating_Z-factor>&gt;.
+\[14\] S. Makridakis. "Accuracy measures: theoretical and practical concerns". In: *International Journal of Forecasting* 9.4 (Dec. 1993), pp. 527-529. DOI: 10.1016/0169-2070(93)90079-3. &lt;URL: <https://www.sciencedirect.com/science/article/pii/0169207093900793>&gt;.
+
+\[15\] M. Mohamadi-Baghmolaei, R. Azin, S. Osfouri, et al. "Prediction of gas compressibility factor using intelligent models". In: *Natural Gas Industry B* 2.4 (2015), pp. 283-294. DOI: 10.1016/j.ngib.2015.09.001. &lt;URL: <http://doi.org/10.1016/j.ngib.2015.09.001>&gt;.
+
+\[16\] A. de Myttenaere, B. Golden, B. L. Grand, et al. "Mean Absolute Percentage Error for regression models". In: *Neurocomputing* 192 (Jun. 2016), pp. 38-48. DOI: 10.1016/j.neucom.2015.12.114. &lt;URL: <https://doi.org/10.1016/j.neucom.2015.12.114>&gt;.
+
+\[17\] I. Papp. "Uj modszer foldgazok elteresi tenyezojenek szamitasara". In: *Koolaj es Foldgaz* (Nov. 1979), pp. 345-47.
+
+\[18\] S. Rakap, S. Rakap, D. Evran, et al. "Comparative evaluation of the reliability and validity of three data extraction programs: UnGraph, GraphClick, and DigitizeIt". In: *Computers in Human Behavior* 55 (2016), pp. 159-166. DOI: 10.1016/j.chb.2015.09.008. &lt;URL: <http://doi.org/10.1016/j.chb.2015.09.008>&gt;.
+
+\[19\] A. Syntetos, D. Lengu and M. Z. Babai. "A note on the demand distributions of spare parts". In: *International Journal of Production Research* 51.21 (Nov. 2013), pp. 6356-6358. DOI: 10.1080/00207543.2013.798050.
+
+\[20\] G. Takacs. "Comparing Methods for Calculating z Factor". In: *Oil and Gas Journal* (May. 1989). DOI: Not Available. &lt;URL: <https://www.researchgate.net/publication/236510717_Comparing_methods_for_calculating_Z-factor>&gt;.

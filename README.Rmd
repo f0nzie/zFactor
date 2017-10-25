@@ -1,5 +1,6 @@
 ---
 output: github_document
+
 ---
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/zFactor)](https://cran.r-project.org/package=zFactor)
@@ -15,12 +16,16 @@ knitr::opts_chunk$set(
   comment = "#>",
   fig.path = "man/figures/README-"
 )
+
+options("citation_format" = "pandoc")
 ```
 
 
 ```{r echo=FALSE, warning=FALSE}
 suppressPackageStartupMessages(library(knitcitations))
+
 knitcitations::cleanbib()
+# knitcitations:::cite_options(hyperlink=TRUE)
 bib_file1 <- system.file("doc", "bibliography.bib", package = "zFactor")
 bib_file2 <- system.file("doc", "error_stats.bib", package = "zFactor")
 bib <- read.bibtex(bib_file1)
@@ -179,7 +184,9 @@ The comparative analysis shows tables with different error measurements:
     MAE:   Mean Absolute Error
     MAAPE: Mean Arc-tangent Absolute Percentage Error
 
-> MAAPE was proposed by ``r citep(bib2[c("Kim2016")])`` 
+
+> MAAPE was proposed by ``r citep(bib2[c("Kim2016")])``. Other authors consulted for the error measures are ``r citep(bib2[c("Makridakis1993")])``, ``r citep(bib2[c("Chen2017")])``, ``r citep(bib2[c("Kobayashi2000")])``, ``r citep(bib2[c("Myttenaere2016")])``, ``r citep(bib2[c("Syntetos2013")])``, and ``r citep(bib2[c("Armstrong1992")])``. 
+
 
 
 ## What you can do with `zFactor`
@@ -291,8 +298,8 @@ knitr::opts_chunk$set(
 ```
 
 ```{r results="asis", echo=FALSE}
-suppressPackageStartupMessages(library(knitcitations))
-bibliography(style="citation")
+# suppressPackageStartupMessages(library(knitcitations))
+knitcitations::bibliography(style="citation")
 ```
 
 
