@@ -223,7 +223,7 @@ The comparative analysis shows tables with different error measurements:
     MAE:   Mean Absolute Error
     MAAPE: Mean Arc-tangent Absolute Percentage Error
 
-MAAPE was proposed by `(Kim and Kim, 2016)`
+> MAAPE was proposed by `(Kim and Kim, 2016)`
 
 What you can do with `zFactor`
 ------------------------------
