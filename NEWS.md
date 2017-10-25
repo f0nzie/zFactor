@@ -1,5 +1,7 @@
 ## 20171024 0.1.7.9001
-* add statistical papers
+* Try not to use sciencedirect long links to prevent errors in knitcitations. shorten the URLs with doi links. 
+* add statistical papers for citation. file ./inst/doc/error_stats.bib
+* add error reference to README
 
 ## 20171023 0.1.7.9000
 * add title to VignetteIndexEntry in statistics.Rmd. Preventing link to work in GitHub pages.
