@@ -1,3 +1,6 @@
+## 20171028 0.1.7.9002
+*
+
 ## 20171024 0.1.7.9001
 * comment two lines in .travis.yml
 * Try not to use sciencedirect long links to prevent errors in knitcitations. shorten the URLs with doi links. 
