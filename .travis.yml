@@ -5,9 +5,6 @@ cache: packages
 sudo: false
 
 
-# r_github_packages:
-#  - f0nzie/zFactor
-
 
 after_success:
   - Rscript -e 'covr::codecov()'
