@@ -5,7 +5,7 @@
 zFactor
 =======
 
-Computational tools for chemical, petrochemical and petroleum engineers. Calculates the deviation between different correlations for gas compressibility compared to the original Standing-Katz chart.
+Computational tools for chemical, petrochemical and petroleum engineers. Calculates the error measures or deviation between different correlations for gas compressibility compared to the original Standing-Katz chart.
 
 Motivation
 ----------
