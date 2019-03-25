@@ -1,3 +1,11 @@
+## 20190324 0.1.7.9003
+* moving out vignettes, problem with symbolic links (bibliography)
+* add function n() to importFrom in stats.R
+* 
+
+## 20171028 0.1.7.9002
+*
+
 ## 20171024 0.1.7.9001
 * comment two lines in .travis.yml
 * Try not to use sciencedirect long links to prevent errors in knitcitations. shorten the URLs with doi links. 

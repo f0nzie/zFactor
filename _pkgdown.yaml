@@ -85,6 +85,8 @@ navbar:
               href: articles/Ann10.html
             - text: Papp correlation
               href: articles/Papp.html
+            - text: ztest
+              href: articles/ztest.html
     right:
         - text: "News"
           icon: fa-newspaper-o

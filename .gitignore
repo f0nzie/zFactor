@@ -1,6 +1,6 @@
 .Rproj.user
 \.Rhistory
-# man/
+man/
 # NAMESPACE
 # inst/doc
 notebooks/*.html
