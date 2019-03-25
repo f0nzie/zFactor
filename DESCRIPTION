@@ -23,3 +23,5 @@ Encoding: UTF-8
 LazyData: true
 URL: https://github.com/f0nzie/zFactor
 RoxygenNote: 6.1.1
+VignetteBuilder: knitr
+
