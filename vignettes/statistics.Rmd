@@ -1,0 +1,297 @@
+---
+title: "Measuring the error in calculating z"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Measuring the error in calculating z}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Measures of Error
+To demonstrate graphically the difference between correlation and experimental data we will use the Hall-Yarborough correlation results.
+
+```{r}
+library(zFactor)
+library(tibble)
+library(ggplot2)
+
+zFactor:::z.plot.range("HY", interval = "fine")
+```
+
+
+## Accuracy measurement
+The comparative analysis shows tables with different error measurements:
+
+    RMSE:  Root Mean Squared Error
+    MPE:   Mean Percentage error
+    MAPE:  Mean Absolute Percentage Error
+    MSE:   Mean Squared Error
+    RSS:   Residual sum of Squares
+    MAE:   Mean Absolute Error
+    MAAPE: Mean Arc-tangent Absolute Error
+
+
+where:
+
+$a_t$ are the observed true values. In our case the Standing-Katz chart $z$ values;    
+$f_t$ are the calculated or predicted values (the $z$ values calculated by the correlations); and    
+$n$ is the number of samples
+
+
+RMSE, MSE and MAE are all **scale-dependent measures** since their scale depend on the scale of the data. MAE is very easy to calculate an understand but it affected by large outliers. MSE is also vulnerable to outliers and in different scale than the measured units. RMSE, the square root of MSE, would be preferrable but still is sensitive to large outliers.
+
+A **non-scale dependent measure** is `MAPE` though it could be sensitive to values close or equal to zero since it contains a denominator. To fix the problem with small numbers, a new statistical function was proposed by Kim and Kim in 2016 that applies the Arc Tangent of the `MAPE` which prevents infinite when finds numbers closer to zero. The geometric explanation can be found if you picture a triangle where the tangent is $| \frac {a_t - f_t} {a_t}|$, and $\theta$ the angle for such triangle. We will see that as ${a_t}$ get smaller and closer to zero, `MAPE` would tend to infinite, while `MAAPE` with $Arc Tan$ of the quotient would tend to $\frac {\pi} {2}$.
+
+
+## RMSE: Root Mean Squared Error
+Measure of accuracy, to compare errors of different calculation models for the same dataset.
+
+$$RMSE =  \sqrt {\sum_{t=1}^n \frac {(a_t - f_t)^2} {n}}$$
+
+<u>RMSE code</u>
+```{r eval=FALSE}
+RMSE = sqrt(mean((z.chart - z.calc)^2))
+```
+
+
+```{r}
+z_hy  <- z.stats("HY")
+sum_tpr <- as.tibble(z.stats("HY"))
+
+hy <- ggplot(z_hy, aes(x = Tpr, y = RMSE, col = Tpr)) +
+           geom_point()  + theme(legend.position="none") + 
+    ggtitle("HY - Root Mean Squared Error")
+hy
+```
+```{r}
+boxplot(z_hy$RMSE,  horizontal = TRUE, main = "HY", xlab = "RMSE")
+```
+
+
+
+## MPE: Mean Percentage error
+
+
+$$MPE = \frac {100%} {n} \sum_{t=1}^n \frac {a_t - f_t} {a_t}$$
+
+<u>MPE code</u>
+```{r eval=FALSE}
+MPE  = sum((z.calc - z.chart) / z.chart) * 100 / n(),
+```
+
+```{r}
+# sum_tpr <- as.tibble(z.stats("HY"))
+hy <- ggplot(z_hy, aes(x = Tpr, y = MPE, col = Tpr)) +
+           geom_point()  + theme(legend.position="none") + 
+    ggtitle("HY  - Mean Percentage error")
+hy
+```
+```{r}
+boxplot(z_hy$MPE,  horizontal = TRUE, main = "HY", xlab = "MPE")
+```
+
+## MAPE: Mean Absolute Percentage Error
+
+$$MAPE = \frac {100} {n} \sum | \frac {a_t - f_t} {a_t}|$$
+
+<u>MAPE code</u>
+```{r eval=FALSE}
+MAPE = sum(abs((z.calc - z.chart) / z.chart)) * 100 / n()
+```
+
+
+```{r}
+# sum_tpr <- as.tibble(z.stats("HY"))
+
+hy <- ggplot(z_hy, aes(x = Tpr, y = MAPE, col = Tpr)) +
+           geom_point()  + theme(legend.position="none") + 
+    ggtitle("HY - Mean Absolute Percentage Error")
+hy
+```
+```{r}
+boxplot(z_hy$MAPE,  horizontal = TRUE, main = "HY", xlab = "MAPE")
+```
+
+## MSE: Mean Squared Error
+$$MSE = \frac {1}{n}  \sum_{t=1}^n (a_t - f_t)^2 $$
+<u>MSE code</u>
+```{r eval=FALSE}
+MSE  = sum((z.calc - z.chart)^2) / n()
+```
+
+
+```{r}
+sum_tpr <- as.tibble(z.stats("HY"))
+hy <- ggplot(sum_tpr, aes(x = Tpr, y = MSE, col = Tpr)) +
+           geom_point()  + theme(legend.position="none") + 
+    ggtitle("HY - Mean Squared Error")
+hy
+```
+```{r}
+boxplot(z_hy$MSE,  horizontal = TRUE, main = "HY", xlab = "MSE")
+```
+
+
+## RSS: Residual sum of Squares
+$$RSS =  \sum_{t=1}^n (a_t - f_t)^2 $$
+<u>RSS code</u>
+```{r eval=FALSE}
+RSS  = sum((z.calc - z.chart)^2)
+```
+
+```{r}
+# sum_tpr <- as.tibble(z.stats("HY"))
+
+hy <- ggplot(z_hy, aes(x = Tpr, y = RSS, col = Tpr)) +
+           geom_point()  + theme(legend.position="none") + 
+    ggtitle("HY - Residual Sum of Squares")
+hy
+```
+```{r}
+boxplot(z_hy$RSS,  horizontal = TRUE, main = "HY", xlab = "RSS")
+```
+
+## MAE: Mean Absolute Error
+
+$$MAE = \frac {1} {n} \sum | {a_t - f_t} |$$
+<u>MAE code</u>
+```{r eval=FALSE}
+MAE  = sum(abs(z.calc - z.chart)) / n()
+```
+
+```{r}
+# sum_tpr <- as.tibble(z.stats("HY"))
+
+hy <- ggplot(z_hy, aes(x = Tpr, y = MAE, col = Tpr)) +
+           geom_point()  + theme(legend.position="none") + 
+    ggtitle("HY - Mean Absolute Error")
+hy
+```
+```{r}
+boxplot(z_hy$MAE,  horizontal = TRUE, main = "HY", xlab = "MAE")
+```
+
+## MAAPE: Mean Arc-tangent Absolute Error
+
+$$MAAPE = \frac {1} {n} \sum ArcTan \, | \frac {a_t - f_t} {a_t}|$$
+<u>MAAPE code</u>
+```{r eval=FALSE}
+MAE  = sum(atan(abs(z.calc - z.chart))) / n()
+```
+
+```{r}
+hy <- ggplot(z_hy, aes(x = Tpr, y = MAAPE, col = Tpr)) +
+           geom_point()  + theme(legend.position="none") + 
+    ggtitle("HY - Mean Arc-tangent Absolute Error")
+hy
+```
+
+```{r}
+boxplot(z_hy$MAAPE,  horizontal = TRUE, main = "HY", xlab = "MAAPE")
+```
+
+
+## RMSE vs isotherm for all correlations
+
+```{r}
+z_bb <- z.stats("BB")
+bb <- ggplot(z_bb, aes(x = Tpr, y = RMSE, color = Tpr)) +
+           geom_point() + ylim(0, 0.4) + theme(legend.position="none") +
+    ggtitle("Beggs-Brill")
+bb
+```
+```{r}
+boxplot(z_bb$RMSE,  horizontal = TRUE, main = "BB", xlab = "RMSE")
+```
+
+
+```{r}
+sum_tpr <- as.tibble(z.stats("HY"))
+hy <- ggplot(sum_tpr, aes(x = Tpr, y = RMSE, col = Tpr)) +
+           geom_point() + ylim(0, 0.4) + theme(legend.position="none") + 
+    ggtitle("Hall-Yarborough")
+hy
+```
+
+```{r}
+sum_tpr <- as.tibble(z.stats("DAK"))
+dak <- ggplot(sum_tpr, aes(x = Tpr, y = RMSE, col = Tpr)) +
+           geom_point() + ylim(0, 0.4) + theme(legend.position="none") +
+    ggtitle("Dranchuk-AbouKassem")
+dak
+```
+
+```{r}
+sum_tpr <- as.tibble(z.stats("SH"))
+sh <- ggplot(sum_tpr, aes(x = Tpr, y = RMSE, col = Tpr)) +
+           geom_point() + ylim(0, 0.4) + theme(legend.position="none") +
+    ggtitle("Shell")
+sh
+```
+
+```{r}
+sum_tpr <- as.tibble(z.stats("N10"))
+n10 <- ggplot(sum_tpr, aes(x = Tpr, y = RMSE, col = Tpr)) +
+           geom_point() + ylim(0, 0.4) + theme(legend.position="none") +
+    ggtitle("Neural-Network-10")
+n10
+```
+
+```{r}
+sum_tpr <- as.tibble(z.stats("PP"))
+pp <- ggplot(sum_tpr, aes(x = Tpr, y = RMSE, col = Tpr)) +
+           geom_point() + ylim(0, 0.4) + theme(legend.position="none") +
+    ggtitle("Papp")
+pp
+
+```
+
+
+
+
+```{r}
+sum_tpr <- as.tibble(z.stats("HY"))
+sum_tpr
+```
+
+
+
+### Beggs and Brill MAPE and RMSE
+```{r}
+z.plot.range(correlation = "BB", stat = "MAPE", interval = "fine")
+z.plot.range(correlation = "BB", stat = "RMSE", interval = "fine")
+```
+
+### Hall-Yarborough MAPE and RMSE
+```{r}
+z.plot.range(correlation = "HY", stat = "MAPE", interval = "fine")
+z.plot.range(correlation = "HY", stat = "RMSE", interval = "fine")
+```
+
+### Dranchuk-AboutKassem MAPE and RMSE
+
+```{r}
+z.plot.range(correlation = "DAK", stat = "MAPE", interval = "fine")
+z.plot.range(correlation = "DAK", stat = "RMSE", interval = "fine")
+```
+
+### Shell MAPE and RMSE
+
+```{r}
+z.plot.range(correlation = "SH", stat = "MAPE", interval = "fine")
+z.plot.range(correlation = "SH", stat = "RMSE", interval = "fine")
+```
+
+### Neural-Network MAPE and RMSE
+```{r}
+z.plot.range(correlation = "N10", stat = "MAPE", interval = "fine")
+z.plot.range(correlation = "N10", stat = "RMSE", interval = "fine")
+```
+
+### Papp MAPE and RMSE
+```{r}
+z.plot.range(correlation = "PP", stat = "MAPE", interval = "fine")
+z.plot.range(correlation = "PP", stat = "RMSE", interval = "fine")
+```
+

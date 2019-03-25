@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="date" content="2019-03-25" />
+
+<title>Hall-Yarborough correlation</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#header {
+text-align: center;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Hall-Yarborough correlation</h1>
+<h4 class="date">2019-03-25</h4>
+
+
+
+<div id="the-hall-yarborough-correlation" class="section level2">
+<h2>The Hall-Yarborough correlation</h2>
+<p>Kenneth Hall and Lyman Yarborough used the hard-sphere equation as the basis for the equation of state. They tested the correlation with 12 reservoir gas reservoir systems up to <code>Ppr</code> as high as 20.5. The Standing-Katz chart only extends to <code>Ppr=15</code>. At that moment the Standing-Katz chart had 30 years of existance. See <span class="citation">(Hall and Yarborough <a href="#ref-Hall1973">1973</a>)</span>.</p>
+</div>
+<div id="get-z-at-selected-ppr-and-tpr2.0" class="section level2">
+<h2>Get <code>z</code> at selected <code>Ppr</code> and <code>Tpr=2.0</code></h2>
+<p>Use the the corelation to calculate <code>z</code>. From the Standing-Katz chart we obtain a digitized point at the given <code>Tpr</code> and <code>Ppr</code>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># get a z value using HY</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(zFactor)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">ppr &lt;-<span class="st"> </span><span class="fl">1.5</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">tpr &lt;-<span class="st"> </span><span class="fl">2.0</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">z.calc &lt;-<span class="st"> </span><span class="kw">z.HallYarborough</span>(<span class="dt">pres.pr =</span> ppr, <span class="dt">temp.pr =</span> tpr)</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co"># get a z value from the SK chart at the same Ppr and Tpr</span></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">z.chart &lt;-<span class="st"> </span><span class="kw">getStandingKatzMatrix</span>(<span class="dt">tpr_vector =</span> tpr, </a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">                      <span class="dt">pprRange =</span> <span class="st">&quot;lp&quot;</span>)[<span class="dv">1</span>, <span class="kw">as.character</span>(ppr)]</a>
+<a class="sourceLine" id="cb1-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb1-13" data-line-number="13"><span class="co"># calculate the APE (Average Percentage Error)</span></a>
+<a class="sourceLine" id="cb1-14" data-line-number="14">ape &lt;-<span class="st"> </span><span class="kw">abs</span>((z.calc <span class="op">-</span><span class="st"> </span>z.chart) <span class="op">/</span><span class="st"> </span>z.chart) <span class="op">*</span><span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb1-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb1-16" data-line-number="16">df &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">list</span>(<span class="dt">Ppr =</span> ppr,  <span class="dt">z.calc =</span>z.calc, <span class="dt">z.chart =</span> z.chart, <span class="dt">ape=</span>ape))</a>
+<a class="sourceLine" id="cb1-17" data-line-number="17"><span class="kw">rownames</span>(df) &lt;-<span class="st"> </span>tpr</a>
+<a class="sourceLine" id="cb1-18" data-line-number="18">df</a></code></pre></div>
+<pre><code>  Ppr    z.calc z.chart      ape
+2 1.5 0.9580002   0.956 0.209229</code></pre>
+</div>
+<div id="get-z-at-selected-ppr-and-tpr-1.1" class="section level2">
+<h2>Get <code>z</code> at selected <code>Ppr</code> and <code>Tpr = 1.1</code></h2>
+<p>From the Standing-Katz chart we obtain a digitized point:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">library</span>(zFactor)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">ppr &lt;-<span class="st"> </span><span class="fl">1.5</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">tpr &lt;-<span class="st"> </span><span class="fl">1.1</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">z.calc &lt;-<span class="st"> </span><span class="kw">z.HallYarborough</span>(<span class="dt">pres.pr =</span> ppr, <span class="dt">temp.pr =</span> tpr)</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co"># From the Standing-Katz chart we obtain a digitized point:</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">z.chart &lt;-<span class="st"> </span><span class="kw">getStandingKatzMatrix</span>(<span class="dt">tpr_vector =</span> tpr, </a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">                      <span class="dt">pprRange =</span> <span class="st">&quot;lp&quot;</span>)[<span class="dv">1</span>, <span class="kw">as.character</span>(ppr)]</a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co"># calculate the APE</span></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12">ape &lt;-<span class="st"> </span><span class="kw">abs</span>((z.calc <span class="op">-</span><span class="st"> </span>z.chart) <span class="op">/</span><span class="st"> </span>z.chart) <span class="op">*</span><span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb3-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb3-14" data-line-number="14">df &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">list</span>(<span class="dt">Ppr =</span> ppr,  <span class="dt">z.calc =</span>z.calc, <span class="dt">z.chart =</span> z.chart, <span class="dt">ape=</span>ape))</a>
+<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="kw">rownames</span>(df) &lt;-<span class="st"> </span>tpr</a>
+<a class="sourceLine" id="cb3-16" data-line-number="16">df</a></code></pre></div>
+<pre><code>    Ppr    z.calc z.chart      ape
+1.1 1.5 0.4732393   0.426 11.08903</code></pre>
+<blockquote>
+<p>We see here a noticeable difference between the values of <code>z</code> from the <code>HY</code> correlation and the value read from the Standing-Katz chart. This is expected at these low pressures and temperatures. This area is a challenge for all of the correlations as well.</p>
+</blockquote>
+</div>
+<div id="get-values-of-z-for-combinations-of-ppr-and-tpr" class="section level2">
+<h2>Get values of <code>z</code> for combinations of <code>Ppr</code> and <code>Tpr</code></h2>
+<p>In this example we provide vectors instead of a single point. With the same <code>ppr</code> and <code>tpr</code> vectors that we use for the correlation, we do the same for the <code>Standing-Katz</code> chart. We want to compare both and find the <code>absolute percentage error</code>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">library</span>(zFactor)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">ppr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="fl">3.5</span>, <span class="fl">4.5</span>, <span class="fl">5.5</span>, <span class="fl">6.5</span>) </a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">tpr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.05</span>, <span class="fl">1.1</span>, <span class="fl">1.7</span>, <span class="dv">2</span>) </a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co"># calculate using the correlation</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">z.calc &lt;-<span class="st"> </span><span class="kw">z.HallYarborough</span>(ppr, tpr)</a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co"># With the same ppr and tpr vector, we do the same for the Standing-Katz chart</span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10">z.chart &lt;-<span class="st"> </span><span class="kw">getStandingKatzMatrix</span>(<span class="dt">ppr_vector =</span> ppr, <span class="dt">tpr_vector =</span> tpr)</a>
+<a class="sourceLine" id="cb5-11" data-line-number="11">ape &lt;-<span class="st"> </span><span class="kw">abs</span>((z.calc <span class="op">-</span><span class="st"> </span>z.chart) <span class="op">/</span><span class="st"> </span>z.chart) <span class="op">*</span><span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb5-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co"># calculate the APE</span></a>
+<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="kw">cat</span>(<span class="st">&quot;z.correlation </span><span class="ch">\n</span><span class="st">&quot;</span>); <span class="kw">print</span>(z.calc)</a>
+<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st"> z.chart </span><span class="ch">\n</span><span class="st">&quot;</span>); <span class="kw">print</span>(z.chart)</a>
+<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st"> APE </span><span class="ch">\n</span><span class="st">&quot;</span>); <span class="kw">print</span>(ape)</a></code></pre></div>
+<pre><code>z.correlation 
+           0.5       1.5       2.5       3.5       4.5       5.5       6.5
+1.05 0.8324659 0.3098781 0.3844710 0.4996188 0.6150882 0.7291019 0.8415294
+1.1  0.8565046 0.4732393 0.4138513 0.5136995 0.6220391 0.7307972 0.8386698
+1.7  0.9682547 0.9134862 0.8756412 0.8605668 0.8694525 0.8978885 0.9396353
+2    0.9838234 0.9580002 0.9426939 0.9396286 0.9490995 0.9697839 0.9994317
+
+ z.chart 
+       0.5   1.5   2.5   3.5   4.5   5.5   6.5
+1.05 0.829 0.253 0.343 0.471 0.598 0.727 0.846
+1.10 0.854 0.426 0.393 0.500 0.615 0.729 0.841
+1.70 0.968 0.914 0.876 0.857 0.864 0.897 0.942
+2.00 0.982 0.956 0.941 0.937 0.945 0.969 1.003
+
+ APE 
+            0.5         1.5         2.5       3.5       4.5        5.5
+1.05 0.41807702 22.48144801 12.09066991 6.0761856 2.8575603 0.28912295
+1.1  0.29327707 11.08903030  5.30568143 2.7398940 1.1445758 0.24652442
+1.7  0.02631234  0.05621824  0.04096114 0.4162014 0.6310709 0.09904802
+2    0.18568379  0.20922900  0.18000605 0.2805309 0.4338140 0.08089785
+           6.5
+1.05 0.5284438
+1.1  0.2770741
+1.7  0.2510320
+2    0.3557593</code></pre>
+<blockquote>
+<p>You can see errors of 22.48% and 12.09% in the isotherm <code>Tpr=1.05</code> at <code>Ppr=1.5 and 2.5, respectively. Other errors, greater than one, can also be found at the isotherm</code>Tpr=1.1`. Then, the rest of the curves are fine.</p>
+</blockquote>
+</div>
+<div id="analyze-the-error-at-the-isotherms" class="section level2">
+<h2>Analyze the error at the <code>isotherms</code></h2>
+<p>We apply the function <code>summary</code> over the transpose of the matrix. Applying the transpose will alow us to see the statistics at each of the isotherms.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">sum_t_ape &lt;-<span class="st"> </span><span class="kw">summary</span>(<span class="kw">t</span>(ape))</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">sum_t_ape</a></code></pre></div>
+<pre><code>      1.05              1.1               1.7                2         
+ Min.   : 0.2891   Min.   : 0.2465   Min.   :0.02631   Min.   :0.0809  
+ 1st Qu.: 0.4733   1st Qu.: 0.2852   1st Qu.:0.04859   1st Qu.:0.1828  
+ Median : 2.8576   Median : 1.1446   Median :0.09905   Median :0.2092  
+ Mean   : 6.3916   Mean   : 3.0137   Mean   :0.21726   Mean   :0.2466  
+ 3rd Qu.: 9.0834   3rd Qu.: 4.0228   3rd Qu.:0.33362   3rd Qu.:0.3181  
+ Max.   :22.4814   Max.   :11.0890   Max.   :0.63107   Max.   :0.4338  </code></pre>
+<blockquote>
+<p>We see that the errors in <code>z</code> are considerable with a Min. : 0.2891 % and Max. :22.4814 % for <code>Tpr=1.05</code>, and a Min. : 0.2465 % and Max. :11.0890 % for <code>Tpr=1.10</code>.</p>
+</blockquote>
+<p>The Hall-Yarborough correlation shows a very high error at values of <code>Tpr</code> lower or equal than <code>1.1</code>, being <code>Tpr=1.05</code> the worst curve to calculate z values from. Keep that in mind. We will explore later a comparative <strong>tile</strong> chart where we confirm these early calculations.</p>
+</div>
+<div id="analyze-the-error-for-greater-values-of-tpr" class="section level2">
+<h2>Analyze the error for greater values of <code>Tpr</code></h2>
+<p>Let’s see the numbers now for higher values of <code>Tpr</code> at various values of <code>Ppr</code>.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">library</span>(zFactor)</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co"># enter vectors for Tpr and Ppr</span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">tpr2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.2</span>, <span class="fl">1.3</span>, <span class="fl">1.5</span>, <span class="fl">2.0</span>, <span class="fl">3.0</span>) </a>
+<a class="sourceLine" id="cb9-4" data-line-number="4">ppr2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="fl">3.5</span>, <span class="fl">4.5</span>, <span class="fl">5.5</span>) </a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co"># get z values from the SK chart</span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6">z.chart &lt;-<span class="st"> </span><span class="kw">getStandingKatzMatrix</span>(<span class="dt">ppr_vector =</span> ppr2, <span class="dt">tpr_vector =</span> tpr2, <span class="dt">pprRange =</span> <span class="st">&quot;lp&quot;</span>)</a>
+<a class="sourceLine" id="cb9-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co"># We do the same with the HY correlation:</span></a>
+<a class="sourceLine" id="cb9-9" data-line-number="9"><span class="co"># calculate z values at lower values of Tpr</span></a>
+<a class="sourceLine" id="cb9-10" data-line-number="10">z.calc &lt;-<span class="st"> </span><span class="kw">z.HallYarborough</span>(<span class="dt">pres.pr =</span> ppr2, <span class="dt">temp.pr =</span> tpr2) </a>
+<a class="sourceLine" id="cb9-11" data-line-number="11">ape &lt;-<span class="st"> </span><span class="kw">abs</span>((z.calc <span class="op">-</span><span class="st"> </span>z.chart) <span class="op">/</span><span class="st"> </span>z.chart) <span class="op">*</span><span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb9-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb9-13" data-line-number="13"><span class="co"># calculate the APE</span></a>
+<a class="sourceLine" id="cb9-14" data-line-number="14"><span class="kw">cat</span>(<span class="st">&quot;z.correlation </span><span class="ch">\n</span><span class="st">&quot;</span>); <span class="kw">print</span>(z.calc)</a>
+<a class="sourceLine" id="cb9-15" data-line-number="15"><span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st"> z.chart </span><span class="ch">\n</span><span class="st">&quot;</span>); <span class="kw">print</span>(z.chart)</a>
+<a class="sourceLine" id="cb9-16" data-line-number="16"><span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st"> APE </span><span class="ch">\n</span><span class="st">&quot;</span>); <span class="kw">print</span>(ape)</a></code></pre></div>
+<pre><code>z.correlation 
+          0.5       1.5       2.5       3.5       4.5       5.5
+1.2 0.8924176 0.6573432 0.5219634 0.5618489 0.6474310 0.7422294
+1.3 0.9176300 0.7534433 0.6399020 0.6323003 0.6881127 0.7651710
+1.5 0.9496855 0.8581232 0.7924067 0.7687902 0.7868071 0.8316848
+2   0.9838234 0.9580002 0.9426939 0.9396286 0.9490995 0.9697839
+3   1.0004261 1.0041806 1.0118999 1.0234786 1.0386327 1.0569640
+
+ z.chart 
+       0.5   1.5   2.5   3.5   4.5   5.5
+1.20 0.893 0.657 0.519 0.565 0.650 0.741
+1.30 0.916 0.756 0.638 0.633 0.684 0.759
+1.50 0.948 0.859 0.794 0.770 0.790 0.836
+2.00 0.982 0.956 0.941 0.937 0.945 0.969
+3.00 1.002 1.009 1.018 1.029 1.041 1.056
+
+ APE 
+           0.5        1.5       2.5       3.5       4.5        5.5
+1.2 0.06522262 0.05224243 0.5709802 0.5577242 0.3952245 0.16590798
+1.3 0.17795221 0.33818375 0.2981152 0.1105437 0.6012676 0.81305005
+1.5 0.17779256 0.10207082 0.2006642 0.1571161 0.4041660 0.51617648
+2   0.18568379 0.20922900 0.1800061 0.2805309 0.4338140 0.08089785
+3   0.15708015 0.47764307 0.5992268 0.5365750 0.2274063 0.09128453</code></pre>
+<blockquote>
+<p>At <code>Tpr</code> above or equal to 1.2 the <code>HY</code> correlation behaves very well.</p>
+</blockquote>
+</div>
+<div id="analyze-the-error-at-the-isotherms-1" class="section level2">
+<h2>Analyze the error at the <code>isotherms</code></h2>
+<p>Now, let’s apply the function <code>summary</code> over the transpose of the matrix to observe the error of the correlation at each isotherm.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">sum_t_ape &lt;-<span class="st"> </span><span class="kw">summary</span>(<span class="kw">t</span>(ape))</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">sum_t_ape</a></code></pre></div>
+<pre><code>      1.2               1.3              1.5               2         
+ Min.   :0.05224   Min.   :0.1105   Min.   :0.1021   Min.   :0.0809  
+ 1st Qu.:0.09039   1st Qu.:0.2080   1st Qu.:0.1623   1st Qu.:0.1814  
+ Median :0.28057   Median :0.3181   Median :0.1892   Median :0.1975  
+ Mean   :0.30122   Mean   :0.3899   Mean   :0.2597   Mean   :0.2284  
+ 3rd Qu.:0.51710   3rd Qu.:0.5355   3rd Qu.:0.3533   3rd Qu.:0.2627  
+ Max.   :0.57098   Max.   :0.8131   Max.   :0.5162   Max.   :0.4338  
+       3          
+ Min.   :0.09128  
+ 1st Qu.:0.17466  
+ Median :0.35252  
+ Mean   :0.34820  
+ 3rd Qu.:0.52184  
+ Max.   :0.59923  </code></pre>
+<blockquote>
+<p>In all, the error of <code>z</code> at these isotherms is less than 0.82%. <strong>Pretty good</strong>.</p>
+</blockquote>
+</div>
+<div id="prepare-to-plot-sk-chart-values-vs-hy-correlation" class="section level2">
+<h2>Prepare to plot <code>SK</code> chart values vs <code>HY</code> correlation</h2>
+<p>Now, we will be plotting the difference between the <code>z</code> values in the Standing-Katz and the <code>z</code> values calculated by Hall-Yarborough. For the moment let’s not pay attention to the numerical error but to the <code>error bars</code> in the plot (the orange bars).</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">library</span>(zFactor)</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="kw">library</span>(tibble)</a>
+<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb13-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb13-5" data-line-number="5">tpr2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.05</span>, <span class="fl">1.1</span>, <span class="fl">1.2</span>, <span class="fl">1.3</span>)</a>
+<a class="sourceLine" id="cb13-6" data-line-number="6">ppr2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.0</span>, <span class="fl">1.5</span>, <span class="dv">2</span>, <span class="fl">2.5</span>, <span class="fl">3.0</span>, <span class="fl">3.5</span>, <span class="fl">4.0</span>, <span class="fl">4.5</span>, <span class="fl">5.0</span>, <span class="fl">5.5</span>, <span class="fl">6.0</span>, <span class="fl">6.5</span>)</a>
+<a class="sourceLine" id="cb13-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb13-8" data-line-number="8">sk_corr_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="kw">createTidyFromMatrix</span>(ppr2, tpr2, <span class="dt">correlation =</span> <span class="st">&quot;HY&quot;</span>)</a>
+<a class="sourceLine" id="cb13-9" data-line-number="9"><span class="kw">as.tibble</span>(sk_corr_<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb13-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb13-11" data-line-number="11">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_corr_<span class="dv">2</span>, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z.calc, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb13-12" data-line-number="12"><span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb13-13" data-line-number="13"><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb13-14" data-line-number="14"><span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc<span class="op">-</span><span class="kw">abs</span>(dif), <span class="dt">ymax=</span>z.calc<span class="op">+</span><span class="kw">abs</span>(dif)), <span class="dt">width=</span>.<span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb13-15" data-line-number="15">                  <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.05</span>))</a>
+<a class="sourceLine" id="cb13-16" data-line-number="16"><span class="kw">print</span>(p)</a></code></pre></div>
+<p><img src="data:image/png;base64,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" style="display: block; margin: auto;" /></p>
+<pre><code># A tibble: 52 x 5
+   Tpr     Ppr z.chart z.calc       dif
+   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;
+ 1 1.05    0.5   0.829  0.832 -0.00347 
+ 2 1.1     0.5   0.854  0.857 -0.00250 
+ 3 1.2     0.5   0.893  0.892  0.000582
+ 4 1.3     0.5   0.916  0.918 -0.00163 
+ 5 1.05    1     0.589  0.602 -0.0134  
+ 6 1.1     1     0.669  0.682 -0.0126  
+ 7 1.2     1     0.779  0.776  0.00289 
+ 8 1.3     1     0.835  0.834  0.00104 
+ 9 1.05    1.5   0.253  0.310 -0.0569  
+10 1.1     1.5   0.426  0.473 -0.0472  
+# ... with 42 more rows</code></pre>
+<blockquote>
+<p>As we were expecting, the errors can be found on Tpr=1.05 and Tpr=1.1</p>
+</blockquote>
+</div>
+<div id="analyzing-the-error-for-all-the-tpr-curves" class="section level2">
+<h2>Analyzing the error for all the <code>Tpr</code> curves</h2>
+<p>In this last example, we compare the values of <code>z</code> at all the isotherms. We use the function <code>getCurvesDigitized</code> in the <code>zfactor</code> package to obtain all the isotherms or <code>Tpr</code> curves in the Standing-Katz chart that have been digitized. The next function <code>createTidyFromMatrix</code> calculates <code>z</code> using the correlation and prepares a tidy dataset ready to plot.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="kw">library</span>(tibble)</a>
+<a class="sourceLine" id="cb15-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="co"># get all `lp` Tpr curves</span></a>
+<a class="sourceLine" id="cb15-5" data-line-number="5">tpr_all &lt;-<span class="st"> </span><span class="kw">getStandingKatzTpr</span>(<span class="dt">pprRange =</span> <span class="st">&quot;lp&quot;</span>)</a>
+<a class="sourceLine" id="cb15-6" data-line-number="6">ppr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="fl">3.5</span>, <span class="fl">4.5</span>, <span class="fl">5.5</span>, <span class="fl">6.5</span>) </a>
+<a class="sourceLine" id="cb15-7" data-line-number="7">sk_corr_all &lt;-<span class="st"> </span><span class="kw">createTidyFromMatrix</span>(ppr, tpr_all, <span class="dt">correlation =</span> <span class="st">&quot;HY&quot;</span>)</a>
+<a class="sourceLine" id="cb15-8" data-line-number="8"><span class="kw">as.tibble</span>(sk_corr_all)</a>
+<a class="sourceLine" id="cb15-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb15-10" data-line-number="10">p &lt;-<span class="st"> </span><span class="kw">ggplot</span>(sk_corr_all, <span class="kw">aes</span>(<span class="dt">x=</span>Ppr, <span class="dt">y=</span>z.calc, <span class="dt">group=</span>Tpr, <span class="dt">color=</span>Tpr)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb15-11" data-line-number="11"><span class="st">    </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb15-12" data-line-number="12"><span class="st">    </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb15-13" data-line-number="13"><span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc<span class="op">-</span>dif, <span class="dt">ymax=</span>z.calc<span class="op">+</span>dif), <span class="dt">width=</span>.<span class="dv">4</span>,</a>
+<a class="sourceLine" id="cb15-14" data-line-number="14">                  <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.05</span>))</a>
+<a class="sourceLine" id="cb15-15" data-line-number="15"><span class="kw">print</span>(p)</a></code></pre></div>
+<p><img src="data:image/png;base64,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" style="display: block; margin: auto;" /></p>
+<pre><code># A tibble: 112 x 5
+   Tpr     Ppr z.chart z.calc        dif
+   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;
+ 1 1.05    0.5   0.829  0.832 -0.00347  
+ 2 1.1     0.5   0.854  0.857 -0.00250  
+ 3 1.2     0.5   0.893  0.892  0.000582 
+ 4 1.3     0.5   0.916  0.918 -0.00163  
+ 5 1.4     0.5   0.936  0.936  0.0000227
+ 6 1.5     0.5   0.948  0.950 -0.00169  
+ 7 1.6     0.5   0.959  0.960 -0.00114  
+ 8 1.7     0.5   0.968  0.968 -0.000255 
+ 9 1.8     0.5   0.974  0.975 -0.000640 
+10 1.9     0.5   0.978  0.980 -0.00173  
+# ... with 102 more rows</code></pre>
+<blockquote>
+<p>As we saw before, we confirm that the greatest errors are localized in two of the <code>Tpr</code> curves: at 1.05 and 1.1.</p>
+</blockquote>
+</div>
+<div id="range-of-applicability-of-the-correlation" class="section level2">
+<h2>Range of applicability of the correlation</h2>
+<p>What we will see here is the distribution of the Mean Average Percentage Error or MAPE accross all the <code>Tpr</code> isotherms and <code>Ppr</code> grids. Remember from the <code>README</code>: red and yellow are bad.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="co"># MSE: Mean Squared Error</span></a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="co"># RMSE: Root Mean Sqyared Error</span></a>
+<a class="sourceLine" id="cb17-3" data-line-number="3"><span class="co"># RSS: residual sum of square</span></a>
+<a class="sourceLine" id="cb17-4" data-line-number="4"><span class="co"># RMSLE: Root Mean Squared Logarithmic Error. Penalizes understimation.</span></a>
+<a class="sourceLine" id="cb17-5" data-line-number="5"><span class="co"># MAPE: Mean Absolute Percentage Error = AARE</span></a>
+<a class="sourceLine" id="cb17-6" data-line-number="6"><span class="co"># MPE: Mean Percentage error = ARE</span></a>
+<a class="sourceLine" id="cb17-7" data-line-number="7"><span class="co"># MAE: Mean Absolute Error</span></a>
+<a class="sourceLine" id="cb17-8" data-line-number="8"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb17-9" data-line-number="9">grouped &lt;-<span class="st"> </span><span class="kw">group_by</span>(sk_corr_all, Tpr, Ppr)</a>
+<a class="sourceLine" id="cb17-10" data-line-number="10">smry_tpr_ppr &lt;-<span class="st"> </span><span class="kw">summarise</span>(grouped, </a>
+<a class="sourceLine" id="cb17-11" data-line-number="11">          <span class="dt">RMSE=</span> <span class="kw">sqrt</span>(<span class="kw">mean</span>((z.chart<span class="op">-</span>z.calc)<span class="op">^</span><span class="dv">2</span>)), </a>
+<a class="sourceLine" id="cb17-12" data-line-number="12">          <span class="dt">MPE =</span> <span class="kw">sum</span>((z.calc <span class="op">-</span><span class="st"> </span>z.chart) <span class="op">/</span><span class="st"> </span>z.chart) <span class="op">*</span><span class="st"> </span><span class="dv">100</span> <span class="op">/</span><span class="st"> </span><span class="kw">n</span>(),</a>
+<a class="sourceLine" id="cb17-13" data-line-number="13">          <span class="dt">MAPE =</span> <span class="kw">sum</span>(<span class="kw">abs</span>((z.calc <span class="op">-</span><span class="st"> </span>z.chart) <span class="op">/</span><span class="st"> </span>z.chart)) <span class="op">*</span><span class="st"> </span><span class="dv">100</span> <span class="op">/</span><span class="st"> </span><span class="kw">n</span>(), </a>
+<a class="sourceLine" id="cb17-14" data-line-number="14">          <span class="dt">MSE =</span> <span class="kw">sum</span>((z.calc <span class="op">-</span><span class="st"> </span>z.chart)<span class="op">^</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span><span class="kw">n</span>(), </a>
+<a class="sourceLine" id="cb17-15" data-line-number="15">          <span class="dt">RSS =</span> <span class="kw">sum</span>((z.calc <span class="op">-</span><span class="st"> </span>z.chart)<span class="op">^</span><span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb17-16" data-line-number="16">          <span class="dt">MAE =</span> <span class="kw">sum</span>(<span class="kw">abs</span>(z.calc <span class="op">-</span><span class="st"> </span>z.chart)) <span class="op">/</span><span class="st"> </span><span class="kw">n</span>(),</a>
+<a class="sourceLine" id="cb17-17" data-line-number="17">          <span class="dt">RMLSE =</span> <span class="kw">sqrt</span>(<span class="dv">1</span><span class="op">/</span><span class="kw">n</span>()<span class="op">*</span><span class="kw">sum</span>((<span class="kw">log</span>(z.calc <span class="op">+</span><span class="dv">1</span>)<span class="op">-</span><span class="kw">log</span>(z.chart <span class="op">+</span><span class="dv">1</span>))<span class="op">^</span><span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb17-18" data-line-number="18">          )</a>
+<a class="sourceLine" id="cb17-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb17-20" data-line-number="20"><span class="kw">ggplot</span>(smry_tpr_ppr, <span class="kw">aes</span>(Ppr, Tpr)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb17-21" data-line-number="21"><span class="st">    </span><span class="kw">geom_tile</span>(<span class="dt">data=</span>smry_tpr_ppr, <span class="kw">aes</span>(<span class="dt">fill=</span>MAPE), <span class="dt">color=</span><span class="st">&quot;white&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb17-22" data-line-number="22"><span class="st">    </span><span class="kw">scale_fill_gradient2</span>(<span class="dt">low=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">high=</span><span class="st">&quot;red&quot;</span>, <span class="dt">mid=</span><span class="st">&quot;yellow&quot;</span>, <span class="dt">na.value =</span> <span class="st">&quot;pink&quot;</span>,</a>
+<a class="sourceLine" id="cb17-23" data-line-number="23">                         <span class="dt">midpoint=</span><span class="fl">12.5</span>, <span class="dt">limit=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">25</span>), <span class="dt">name=</span><span class="st">&quot;MAPE&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb17-24" data-line-number="24"><span class="st">    </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle=</span><span class="dv">45</span>, <span class="dt">vjust=</span><span class="dv">1</span>, <span class="dt">size=</span><span class="dv">11</span>, <span class="dt">hjust=</span><span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb17-25" data-line-number="25"><span class="st">    </span><span class="kw">coord_equal</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb17-26" data-line-number="26"><span class="st">    </span><span class="kw">ggtitle</span>(<span class="st">&quot;Hall-Yarborough&quot;</span>, <span class="dt">subtitle =</span> <span class="st">&quot;HY&quot;</span>)</a></code></pre></div>
+<p><img src="data:image/png;base64,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" style="display: block; margin: auto;" /></p>
+</div>
+<div id="plotting-the-tpr-and-ppr-values-that-show-more-error" class="section level2">
+<h2>Plotting the <code>Tpr</code> and <code>Ppr</code> values that show more error</h2>
+<p>This is just plotting the couple of isotherms where we see the largest errors.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb18-3" data-line-number="3">sk_corr_all <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb18-4" data-line-number="4"><span class="st">    </span><span class="kw">filter</span>(Tpr <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;1.05&quot;</span>, <span class="st">&quot;1.1&quot;</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb18-5" data-line-number="5"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> z.chart, <span class="dt">y=</span>z.calc, <span class="dt">group =</span> Tpr, <span class="dt">color =</span> Tpr)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb18-6" data-line-number="6"><span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb18-7" data-line-number="7"><span class="st">    </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> z.chart, <span class="dt">y =</span> z.chart), <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb18-8" data-line-number="8"><span class="st">    </span><span class="kw">facet_grid</span>(. <span class="op">~</span><span class="st"> </span>Tpr) <span class="op">+</span></a>
+<a class="sourceLine" id="cb18-9" data-line-number="9"><span class="st">    </span><span class="kw">geom_errorbar</span>(<span class="kw">aes</span>(<span class="dt">ymin=</span>z.calc<span class="op">-</span><span class="kw">abs</span>(dif), <span class="dt">ymax=</span>z.calc<span class="op">+</span><span class="kw">abs</span>(dif)),</a>
+<a class="sourceLine" id="cb18-10" data-line-number="10">                  <span class="dt">position=</span><span class="kw">position_dodge</span>(<span class="fl">0.05</span>))</a></code></pre></div>
+<p><img src="data:image/png;base64,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" style="display: block; margin: auto;" /></p>
+</div>
+<div id="looking-numerically-at-the-errors" class="section level2">
+<h2>Looking numerically at the errors</h2>
+<p>Finally, the dataframe with the calculated errors between the <code>z</code> from the correlation and the <code>z</code> read from the chart:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">as.tibble</span>(smry_tpr_ppr)</a></code></pre></div>
+<pre><code># A tibble: 112 x 9
+   Tpr     Ppr    RMSE     MPE   MAPE        MSE        RSS     MAE   RMLSE
+   &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+ 1 1.05    0.5 0.00347   0.418  0.418 0.0000120  0.0000120  0.00347 0.00189
+ 2 1.05    1.5 0.0569   22.5   22.5   0.00324    0.00324    0.0569  0.0444 
+ 3 1.05    2.5 0.0415   12.1   12.1   0.00172    0.00172    0.0415  0.0304 
+ 4 1.05    3.5 0.0286    6.08   6.08  0.000819   0.000819   0.0286  0.0193 
+ 5 1.05    4.5 0.0171    2.86   2.86  0.000292   0.000292   0.0171  0.0106 
+ 6 1.05    5.5 0.00210   0.289  0.289 0.00000442 0.00000442 0.00210 0.00122
+ 7 1.05    6.5 0.00447  -0.528  0.528 0.0000200  0.0000200  0.00447 0.00242
+ 8 1.1     0.5 0.00250   0.293  0.293 0.00000627 0.00000627 0.00250 0.00135
+ 9 1.1     1.5 0.0472   11.1   11.1   0.00223    0.00223    0.0472  0.0326 
+10 1.1     2.5 0.0209    5.31   5.31  0.000435   0.000435   0.0209  0.0149 
+# ... with 102 more rows</code></pre>
+</div>
+<div id="rmse-root-mean-square-error" class="section level2">
+<h2>RMSE: Root Mean Square Error</h2>
+<p><span class="math display">\[RMSE = \sqrt {\frac {1}{n} \sum_{i=1}^{n} (y_i - \hat y_i)^2}\]</span></p>
+</div>
+<div id="appendix" class="section level2">
+<h2>Appendix</h2>
+<p><code>getStandingKatzMatrix</code> is equivalent to using the <code>sapply</code> function with the internal function <code>.z.HallYarborough</code> (the <strong>dot</strong> means it’s internal), which we call adding the prefix <code>zFactor:::</code>. That is, the package name and <strong>three</strong> colons.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="co"># test HY with 1st-derivative using the values from the paper </span></a>
+<a class="sourceLine" id="cb21-2" data-line-number="2"> </a>
+<a class="sourceLine" id="cb21-3" data-line-number="3">ppr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="fl">3.5</span>, <span class="fl">4.5</span>, <span class="fl">5.5</span>, <span class="fl">6.5</span>) </a>
+<a class="sourceLine" id="cb21-4" data-line-number="4">tpr &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">1.3</span>, <span class="fl">1.5</span>, <span class="fl">1.7</span>, <span class="dv">2</span>) </a>
+<a class="sourceLine" id="cb21-5" data-line-number="5"> </a>
+<a class="sourceLine" id="cb21-6" data-line-number="6">hy &lt;-<span class="st"> </span><span class="kw">sapply</span>(ppr, <span class="cf">function</span>(x)  </a>
+<a class="sourceLine" id="cb21-7" data-line-number="7">    <span class="kw">sapply</span>(tpr, <span class="cf">function</span>(y) zFactor<span class="op">:::</span><span class="kw">.z.HallYarborough</span>(<span class="dt">pres.pr =</span> x, <span class="dt">temp.pr =</span> y))) </a>
+<a class="sourceLine" id="cb21-8" data-line-number="8"> </a>
+<a class="sourceLine" id="cb21-9" data-line-number="9"><span class="kw">rownames</span>(hy) &lt;-<span class="st"> </span>tpr </a>
+<a class="sourceLine" id="cb21-10" data-line-number="10"><span class="kw">colnames</span>(hy) &lt;-<span class="st"> </span>ppr </a>
+<a class="sourceLine" id="cb21-11" data-line-number="11"><span class="kw">print</span>(hy) </a></code></pre></div>
+<pre><code>          0.5       1.5       2.5       3.5       4.5       5.5       6.5
+1.3 0.9176300 0.7534433 0.6399020 0.6323003 0.6881127 0.7651710 0.8493794
+1.5 0.9496855 0.8581232 0.7924067 0.7687902 0.7868071 0.8316848 0.8906351
+1.7 0.9682547 0.9134862 0.8756412 0.8605668 0.8694525 0.8978885 0.9396353
+2   0.9838234 0.9580002 0.9426939 0.9396286 0.9490995 0.9697839 0.9994317</code></pre>
+</div>
+<div id="references" class="section level2 unnumbered">
+<h2>References</h2>
+<div id="refs" class="references">
+<div id="ref-Hall1973">
+<p>Hall, Kenneth R, and Lyman Yarborough. 1973. “A New Equation of State for Z-Factor Calculations.” <em>Oil and Gas Journal</em> 71 (7): 82–92.</p>
+</div>
+</div>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
