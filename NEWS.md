@@ -1,3 +1,6 @@
+## 20190325 0.1.8
+* release to CRAN
+
 ## 20190324 0.1.7.9003
 * moving out vignettes, problem with symbolic links (bibliography)
 * add function n() to importFrom in stats.R
