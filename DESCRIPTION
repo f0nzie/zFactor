@@ -11,7 +11,13 @@ Description: Computational algorithms to solve equations and find the
     Papp, Shell and an Artificial Neural Network correlation (Ann10) by Kamyab 
     et al. The package uses the original Standing-Katz chart for statistical 
     comparison and plotting. Applicable to sweet hydrocarbon gases for now.
-Imports: dplyr, rootSolve, tidyr, ggplot2, data.table, tibble
+Imports: logging, 
+    dplyr, 
+    rootSolve, 
+    tidyr, 
+    ggplot2, 
+    data.table, 
+    tibble
 Suggests: knitr,
     rmarkdown,
     testthat,
