@@ -36,7 +36,7 @@ assert <- function(cond, fail_msg = NULL, ...) {
 #'  dt <- data.table(c1= c(1,2,3), c2=c(Sys.Date()), c3=c("Ala & kotek"))
 #'  dt_validate(dt, "dt", list(c2 = "Date", c1 = "numeric"))
 #' }
-#'
+#' @importFrom data.table is.data.table
 #' @keywords internal
 #' @noRd
 #'
@@ -79,6 +79,7 @@ dt_validate <- function(dt, dt_arg, expected_col_class) {
 #'  # 3: 2016-04-05  3
 #' }
 #'
+#' @importFrom data.table setcolorder
 #' @keywords internal
 #' @noRd
 #'
