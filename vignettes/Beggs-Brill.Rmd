@@ -16,7 +16,7 @@ knitr::opts_chunk$set(echo=T, comment=NA, error=T, warning=F, message = F, fig.a
 ## How do we find the limits of accuracy in the `BB` correlation
 
 
-## Get `z` at selected `Ppr` and `Tpr`
+### Get `z` at selected `Ppr` and `Tpr`
 
 ```{r}
 # get a z value using DPR correlation
@@ -40,7 +40,7 @@ getStandingKatzMatrix(tpr_vector = tpr_vec,
 It looks pretty good.
 
 
-## Get `z` at selected `Ppr` and `Tpr`
+### Get `z` at selected `Ppr` and `Tpr`
 
 ```{r}
 library(zFactor)
