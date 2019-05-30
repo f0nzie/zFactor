@@ -78,3 +78,4 @@ test_that("1x2 matrix of Ppr and Tpr work", {
     colnames(expected) <- ppr
     expect_equal(z.HallYarborough(ppr, tpr), expected, tolerance = 1e-7)
 })
+

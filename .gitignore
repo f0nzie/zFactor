@@ -7,3 +7,4 @@ man/
 # inst/doc
 notebooks/*.html
 \.directory
+inst/doc
