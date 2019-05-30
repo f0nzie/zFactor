@@ -1,3 +1,8 @@
+## 20190529 0.1.8.9000
+* zFactor now part of rsuite project
+* found problem building vignettes from zfactor-rsuite
+* will release to master to make things easier
+
 ## 20190325 0.1.8
 * release to CRAN
 
