@@ -1,5 +1,6 @@
 ---
 output: github_document
+
 ---
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/zFactor)](https://cran.r-project.org/package=zFactor)
@@ -15,21 +16,27 @@ knitr::opts_chunk$set(
   comment = "#>",
   fig.path = "man/figures/README-"
 )
+
+options("citation_format" = "pandoc")
 ```
 
 
 ```{r echo=FALSE, warning=FALSE}
 suppressPackageStartupMessages(library(knitcitations))
+
 knitcitations::cleanbib()
-bib_file <- system.file("doc", "bibliography.bib", package = "zFactor")
-bib <- read.bibtex(bib_file)
+# knitcitations:::cite_options(hyperlink=TRUE)
+bib_file1 <- system.file("doc", "bibliography.bib", package = "zFactor")
+bib_file2 <- system.file("doc", "error_stats.bib", package = "zFactor")
+bib <- read.bibtex(bib_file1)
+bib2 <- read.bibtex(bib_file2)
 ```
 
 
 
 
 # zFactor
-Computational tools for chemical, petrochemical and petroleum engineers. Calculates the deviation between different correlations for gas compressibility compared to the original Standing-Katz chart.
+Computational tools for chemical, petrochemical and petroleum engineers. Calculates the error measures or deviation between different correlations for gas compressibility compared to the original Standing-Katz chart.
 
 ## Motivation
 For the development of vertical lift performance (VLP) curves and other petroleum engineering calculations, it is necessary to calculate properties of hydrocarbons in mixtures, liquid and gaseous phases. **Compressibility** is one of these hydrocarbon properties. It is important to count with the apropriate correlation and know its range of applicability in order to calculate other properties dependant of `z`.
@@ -54,7 +61,7 @@ The correlations that are implemented in R for the package **zFactor** are:
 
 * A correlation developed with Artificial Neural Networks (Ann10) by Kamyab et al. ``r citep(bib[c("Kamyab2010")])``
 
-* An explicit correlation by *I. Papp* ``r citep(bib[c("Papp1979")])`` mentioned in the comparative analysis paper by Gabor Takacs ``r citep(bib[c("Takacs1989")])``. Not available in English. 
+* An explicit correlation by *I. Papp* ``r citep(bib[c("Papp1979")])`` mentioned in the comparative analysis paper by Gabor Takacs ``r citep(bib[c("Takacs1989")])``. Papp's paper is not available in English. 
 
 
 ## Versions
@@ -121,8 +128,8 @@ How to interpret the colors? We use the [Mean Absolute Percentage Error](https:/
 
 * `Blue`: the MAPE is zero or near zero
 * `Yellow`: the MAPE is around 10 percent.
-* 'Red`: the MAPE has reached 25% or more
-* `Pink`: the mean absolute percentage error is above or way above 25%.
+* `Red`: the MAPE has reached 25%.
+* `Grey`: the mean absolute percentage error is above or way above 25%.
 
 You can see for yourself which correlation is more stable at different ranges of pseudo-reduce pressures and temperatures.
 
@@ -175,7 +182,10 @@ The comparative analysis shows tables with different error measurements:
     MAPE:  Mean Absolute Percentage Error = AARE
     MPE:   Mean Percentage error = ARE
     MAE:   Mean Absolute Error
+    MAAPE: Mean Arc-tangent Absolute Percentage Error
 
+
+> MAAPE was proposed by ``r citep(bib2[c("Kim2016")])``. Other authors consulted for the error measures are ``r citep(bib2[c("Makridakis1993")])``, ``r citep(bib2[c("Chen2017")])``, ``r citep(bib2[c("Kobayashi2000")])``, ``r citep(bib2[c("Myttenaere2016")])``, ``r citep(bib2[c("Syntetos2013")])``, and ``r citep(bib2[c("Armstrong1992")])``. 
 
 
 
@@ -288,8 +298,8 @@ knitr::opts_chunk$set(
 ```
 
 ```{r results="asis", echo=FALSE}
-suppressPackageStartupMessages(library(knitcitations))
-bibliography(style="citation")
+# suppressPackageStartupMessages(library(knitcitations))
+knitcitations::bibliography(style="citation")
 ```
 
 

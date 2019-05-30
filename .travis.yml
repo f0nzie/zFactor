@@ -2,13 +2,8 @@
 
 language: R
 cache: packages
+sudo: false
 
-sudo: required
-
-env: _R_CHECK_CRAN_INCOMING_=FALSE
-
-r_github_packages:
-  - f0nzie/zFactor
 
 
 after_success:

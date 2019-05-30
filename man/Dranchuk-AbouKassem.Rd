@@ -4,7 +4,8 @@
 \alias{z.DranchukAbuKassem}
 \title{Dranchuk-AbouKassem correlation}
 \usage{
-z.DranchukAbuKassem(pres.pr, temp.pr, tolerance = 1e-13, verbose = FALSE)
+z.DranchukAbuKassem(pres.pr, temp.pr, tolerance = 1e-13,
+  verbose = FALSE)
 }
 \arguments{
 \item{pres.pr}{pseudo-reduced pressure}

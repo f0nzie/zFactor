@@ -1,7 +1,10 @@
+Meta
+doc
 .Rproj.user
 \.Rhistory
-# man/
+man/
 # NAMESPACE
-inst/doc
+# inst/doc
 notebooks/*.html
 \.directory
+inst/doc

@@ -2,6 +2,7 @@
 title: "Papp correlation"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
+bibliography: bibliography.bib
 link-citations: yes
 vignette: >
   %\VignetteIndexEntry{Papp-correlation-PP}
@@ -18,14 +19,14 @@ knitr::opts_chunk$set(echo=T, comment=NA, error=T, warning=F, message = F, fig.a
 #knitcitations::cleanbib()
 #bib_file <- system.file("doc", "bibliography.bib", package = "zFactor")
 #bib <- read.bibtex(bib_file)
-library(knitcitations)
-bib_file <- system.file("doc", "bibliography.bib", package = "zFactor")
-bib <- read.bibtex(bib_file)
+# library(knitcitations)
+# bib_file <- system.file("doc", "bibliography.bib", package = "zFactor")
+# bib <- read.bibtex(bib_file)
 ```
 
 ## Papp correlation
-
-This is an explicit correlation by *I. Papp* ``r citep(bib[c("Papp1979")])`` mentioned in the comparative analysis paper by Gabor Takacs ``r citep(bib[c("Takacs1989")])``. The original paper is not available in English but Prof. Takacs describe the equation in his paper of 1989. 
+[@Hall1973]
+This is an explicit correlation by *I. Papp* [@Papp1979] mentioned in the comparative analysis paper by Gabor Takacs [@Takacs1989]. The original paper is not available in English but Prof. Takacs describe the equation in his paper of 1989. 
 
 
 ## Get `z` at selected `Ppr` and `Tpr`
@@ -268,7 +269,7 @@ The `MAPE` (mean average percentage error) gradient bar indicates that the more 
 library(dplyr)
 
 sk_corr_all %>%
-    filter(Tpr %in% c("1.05", "1.1", "2.4", "2.6", "2.8", "3")) %>%
+    filter(Tpr %in% c("1.05", "1.1", "1.2", "2.6", "2.8", "3")) %>%
     ggplot(aes(x = z.chart, y=z.calc, group = Tpr, color = Tpr)) +
     geom_point(size = 3) +
     geom_line(aes(x = z.chart, y = z.chart), color = "black") +
@@ -285,7 +286,7 @@ sk_corr_all %>%
 Finally, the dataframe with the calculated errors between the `z` from the correlation and the `z` read from the chart:
 
 ```{r}
-as.tibble(smry_tpr_ppr)
+as_tibble(smry_tpr_ppr)
 ```
 
 ## References
@@ -297,6 +298,8 @@ knitr::opts_chunk$set(
 ```
 
 ```{r results="asis", echo=FALSE}
-bibliography(style="citation")
+# bibliography(style="citation")
 ```
+
+## References
 

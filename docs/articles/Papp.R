@@ -188,7 +188,7 @@ ggplot(smry_tpr_ppr, aes(Ppr, Tpr)) +
 library(dplyr)
 
 sk_corr_all %>%
-    filter(Tpr %in% c("1.05", "1.1", "2.4", "2.6", "2.8", "3")) %>%
+    filter(Tpr %in% c("1.05", "1.1", "1.2", "2.6", "2.8", "3")) %>%
     ggplot(aes(x = z.chart, y=z.calc, group = Tpr, color = Tpr)) +
     geom_point(size = 3) +
     geom_line(aes(x = z.chart, y = z.chart), color = "black") +

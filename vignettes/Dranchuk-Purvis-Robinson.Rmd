@@ -282,7 +282,7 @@ sk_corr_all %>%
 Finally, the dataframe with the calculated errors between the `z` from the correlation and the `z` read from the chart:
 
 ```{r}
-as.tibble(smry_tpr_ppr)
+as_tibble(smry_tpr_ppr)
 ```
 
 

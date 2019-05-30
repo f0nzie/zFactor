@@ -1,3 +1,31 @@
+## 20190529 0.1.8.9000
+* zFactor now part of rsuite project
+* found problem building vignettes from zfactor-rsuite
+* will release to master to make things easier
+
+## 20190325 0.1.8
+* release to CRAN
+
+## 20190324 0.1.7.9003
+* moving out vignettes, problem with symbolic links (bibliography)
+* add function n() to importFrom in stats.R
+* 
+
+## 20171028 0.1.7.9002
+*
+
+## 20171024 0.1.7.9001
+* comment two lines in .travis.yml
+* Try not to use sciencedirect long links to prevent errors in knitcitations. shorten the URLs with doi links. 
+* add statistical papers for citation. file ./inst/doc/error_stats.bib
+* add error reference to README
+
+## 20171023 0.1.7.9000
+* add title to VignetteIndexEntry in statistics.Rmd. Preventing link to work in GitHub pages.
+* edit bibliography.bib with JabRef application. ./vignettes/bibliography.bib is a symbolic link of same file under ./inst/doc
+* Takacs was added entry for local PDF file in bibliography.bib
+
+
 ## 20171022 0.1.7
 * returned by CRAN with two notes
 * fixed name by adding R. as a middle name. Same as previous release.
