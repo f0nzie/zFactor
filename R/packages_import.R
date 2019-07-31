@@ -5,4 +5,7 @@
 #----------------------------------------------------------------------------
 
 #' @import logging
+#' @import rootSolve
+#' @import knitcitations
+#' @import covr
 NULL
