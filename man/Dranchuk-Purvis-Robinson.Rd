@@ -32,5 +32,5 @@ z.DranchukPurvisRobinson(pres.pr = ppr, temp.pr = tpr)
 tpr2 <- c(1.05, 1.1, 1.2, 1.3)
 ppr2 <- c(0.5, 1.0, 1.5, 2, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5)
 sk_corr_2 <- createTidyFromMatrix(ppr2, tpr2, correlation = "DPR")
-tibble::as.tibble(sk_corr_2)
+tibble::as_tibble(sk_corr_2)
 }

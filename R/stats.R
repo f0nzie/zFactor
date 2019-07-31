@@ -41,7 +41,7 @@ z.stats <- function(correlation = "DAK", pprRange = "lp", interval = "coarse") {
                               MAAPE = sum(atan(abs((z.chart - z.calc) / z.chart))) / n()
 
     )
-    tibble::as.tibble(smry_tpr_ppr)
+    tibble::as_tibble(smry_tpr_ppr)
 }
 
 
