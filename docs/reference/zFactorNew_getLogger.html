@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Papp correlation — z.Papp • zFactor</title>
+<title>Retrieves zFactorNew logger. — zFactorNew_getLogger • zFactor</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Papp correlation — z.Papp" />
+<meta property="og:title" content="Retrieves zFactorNew logger. — zFactorNew_getLogger" />
 
-<meta property="og:description" content="Calculate the Z factor with the Papp correlation" />
+<meta property="og:description" content="Retrieves zFactorNew logger." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -153,62 +153,31 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Papp correlation</h1>
-    <small class="dont-index">Source: <a href='https://github.com/f0nzie/zFactor/blob/master/R/Papp.R'><code>R/Papp.R</code></a></small>
-    <div class="hidden name"><code>Papp.Rd</code></div>
+    <h1>Retrieves zFactorNew logger.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/f0nzie/zFactor/blob/master/R/package_logger.R'><code>R/package_logger.R</code></a></small>
+    <div class="hidden name"><code>zFactorNew_getLogger.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Calculate the Z factor with the Papp correlation</p>
+    <p>Retrieves zFactorNew logger.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>z.Papp</span>(<span class='no'>pres.pr</span>, <span class='no'>temp.pr</span>, <span class='kw'>tolerance</span> <span class='kw'>=</span> <span class='fl'>1e-13</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>pres.pr</th>
-      <td><p>pseudo-reduced pressure</p></td>
-    </tr>
-    <tr>
-      <th>temp.pr</th>
-      <td><p>pseudo-reduced temperature</p></td>
-    </tr>
-    <tr>
-      <th>tolerance</th>
-      <td><p>rounding tolerance to avoid rounding readings that are in
-the middle of the grid. "tolerance" adds flexibility in deciding point closeness.</p></td>
-    </tr>
-    <tr>
-      <th>verbose</th>
-      <td><p>print internal</p></td>
-    </tr>
-    </table>
+    <pre class="usage"><span class='fu'>zFactorNew_getLogger</span>()</pre>
+        
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>logger object</p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Example 1</span>
-<span class='co'>## one single z calculation</span>
-<span class='fu'>z.Papp</span>(<span class='kw'>pres.pr</span> <span class='kw'>=</span> <span class='fl'>1.5</span>, <span class='kw'>temp.pr</span> <span class='kw'>=</span> <span class='fl'>2.0</span>)</div><div class='output co'>#&gt; [1] 0.962332</div><div class='input'><span class='co'># Example 2</span>
-<span class='co'>## calculate z for multiple values of Tpr and Ppr</span>
-<span class='no'>ppr</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0.5</span>, <span class='fl'>1.5</span>, <span class='fl'>2.5</span>, <span class='fl'>3.5</span>, <span class='fl'>4.5</span>, <span class='fl'>5.5</span>, <span class='fl'>6.5</span>)
-<span class='no'>tpr</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1.3</span>, <span class='fl'>1.5</span>, <span class='fl'>1.7</span>, <span class='fl'>2</span>)
-<span class='fu'>z.Papp</span>(<span class='kw'>pres.pr</span> <span class='kw'>=</span> <span class='no'>ppr</span>, <span class='kw'>temp.pr</span> <span class='kw'>=</span> <span class='no'>tpr</span>)</div><div class='output co'>#&gt;           0.5       1.5       2.5       3.5       4.5       5.5       6.5
-#&gt; 1.3 0.9208943 0.7357072 0.6290383 0.6271826 0.6858996 0.7656800 0.8501931
-#&gt; 1.5 0.9552137 0.8499334 0.7728520 0.7501411 0.7749505 0.8279008 0.8930795
-#&gt; 1.7 0.9736623 0.9138939 0.8665932 0.8471834 0.8578133 0.8919610 0.9406180
-#&gt; 2   0.9877275 0.9623320 0.9432543 0.9366532 0.9450048 0.9675653 1.0015334</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-            
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+      
+      <li><a href="#value">Value</a></li>
+          </ul>
 
   </div>
 </div>
