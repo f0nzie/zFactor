@@ -1,12 +1,9 @@
 ^Meta$
-^doc$
 ^.*\.Rproj$
 ^\.Rproj\.user$
-packrat/
 ^README\.Rmd$
 ^README-.*\.png$
 ^cran-comments\.md
-CODE_OF_CONDUCT.md
 ^NEWS\.md$
 LICENSE.md
 scan
@@ -15,3 +12,4 @@ notebooks
 _pkgdown.yaml
 ^\.travis\.yml$
 ^codecov\.yml$
+^doc$
