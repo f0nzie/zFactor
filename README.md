@@ -1,50 +1,80 @@
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/zFactor)](https://cran.r-project.org/package=zFactor) [![Travis-CI Build Status](https://travis-ci.org/f0nzie/zFactor.svg?branch=master)](https://travis-ci.org/f0nzie/zFactor) [![codecov](https://codecov.io/gh/f0nzie/zFactor/branch/master/graph/badge.svg)](https://codecov.io/gh/f0nzie/zFactor)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/zFactor)](https://cran.r-project.org/package=zFactor)
+[![Travis-CI Build
+Status](https://travis-ci.org/f0nzie/zFactor.svg?branch=master)](https://travis-ci.org/f0nzie/zFactor)
+[![codecov](https://codecov.io/gh/f0nzie/zFactor/branch/master/graph/badge.svg)](https://codecov.io/gh/f0nzie/zFactor)
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-zFactor
-=======
 
-Computational tools for chemical, petrochemical and petroleum engineers. Calculates the error measures or deviation between different correlations for gas compressibility compared to the original Standing-Katz chart.
+# zFactor
 
-Motivation
-----------
+Computational tools for chemical, petrochemical and petroleum engineers.
+Calculates the error measures or deviation between different
+correlations for gas compressibility compared to the original
+Standing-Katz chart.
 
-For the development of vertical lift performance (VLP) curves and other petroleum engineering calculations, it is necessary to calculate properties of hydrocarbons in mixtures, liquid and gaseous phases. **Compressibility** is one of these hydrocarbon properties. It is important to count with the apropriate correlation and know its range of applicability in order to calculate other properties dependant of `z`.
+## Motivation
 
-There are several compressibility correlations. In this package, few of them, or the most used in the industry, are being evaluated. There have been extensive studies on compressibility correlations. This evaluation is different in the sense that provides a graphical view of the range of applicability as well statistical measures of the errors, besides that the work has been written fully in `R` providing the analysis and results for peer review and reproducibility purposes. All the code, functions, notes, datasets are available via GitHub.
+For the development of vertical lift performance (VLP) curves and other
+petroleum engineering calculations, it is necessary to calculate
+properties of hydrocarbons in mixtures, liquid and gaseous phases.
+**Compressibility** is one of these hydrocarbon properties. It is
+important to count with the apropriate correlation and know its range of
+applicability in order to calculate other properties dependant of `z`.
 
-This analysis focus on sweet hydrocarbon gases. Compressibility correlations for sour gases are little bit more complicated since they show significant deviations from the curves in the Standing-Katz charts. Effects of CO2, H2S and N2 have to be accounted for. In a future release of `zFactor` correlations for *sour hydrocarbons gases* will possibly be covered.
+There are several compressibility correlations. In this package, few of
+them, or the most used in the industry, are being evaluated. There have
+been extensive studies on compressibility correlations. This evaluation
+is different in the sense that provides a graphical view of the range of
+applicability as well statistical measures of the errors, besides that
+the work has been written fully in `R` providing the analysis and
+results for peer review and reproducibility purposes. All the code,
+functions, notes, datasets are available via GitHub.
 
-Correlations used in this study
--------------------------------
+This analysis focus on sweet hydrocarbon gases. Compressibility
+correlations for sour gases are little bit more complicated since they
+show significant deviations from the curves in the Standing-Katz charts.
+Effects of CO2, H2S and N2 have to be accounted for. In a future release
+of `zFactor` correlations for *sour hydrocarbons gases* will possibly be
+covered.
 
-The correlations that are implemented in R for the package **zFactor** are:
+## Correlations used in this study
 
--   Beggs and Brill (BB) `[@Azizi2010]`
+The correlations that are implemented in R for the package **zFactor**
+are:
 
--   Hall and Yarborough (HY) `[@Hall1973]`
+  - Beggs and Brill (BB) `[@Azizi2010]`
 
--   Dranchuk and Abou-Kassem (DAK) `[@Dranchuk1975]`
+  - Hall and Yarborough (HY) `[@Hall1973]`
 
--   Dranchuk, Purvis and Robinson (DPR) `[@Dranchuk1973]`
+  - Dranchuk and Abou-Kassem (DAK) `[@Dranchuk1975]`
 
--   A correlation by Shell Oil Company (SH) `[@Kumar2004]`, `[@bahadori]`, `[@Almeida2014]`, `[@Al-Anazi2011]`, `[@Azizi2010]`, `[@Mohamadi-Baghmolaei2015]`. The Shell correlation was found cited in two books and several papers (including the equation and constants), but the original paper or authors could not be identified.
+  - Dranchuk, Purvis and Robinson (DPR) `[@Dranchuk1973]`
 
--   A correlation developed with Artificial Neural Networks (Ann10) by Kamyab et al. `[@Kamyab2010]`
+  - A correlation by Shell Oil Company (SH) `[@Kumar2004]`,
+    `[@bahadori]`, `[@Almeida2014]`, `[@Al-Anazi2011]`, `[@Azizi2010]`,
+    `[@Mohamadi-Baghmolaei2015]`. The Shell correlation was found cited
+    in two books and several papers (including the equation and
+    constants), but the original paper or authors could not be
+    identified.
 
--   An explicit correlation by *I. Papp* `[@Papp1979]` mentioned in the comparative analysis paper by Gabor Takacs `[@Takacs1989]`. Papp's paper is not available in English.
+  - A correlation developed with Artificial Neural Networks (Ann10) by
+    Kamyab et al. `[@Kamyab2010]`
 
-Versions
---------
+  - An explicit correlation by *I. Papp* `[@Papp1979]` mentioned in the
+    comparative analysis paper by Gabor Takacs `[@Takacs1989]`. Papp’s
+    paper is not available in English.
 
--   In CRAN: `v 0.1.7`
--   In GitHub `development versions`
+## Versions
 
-Installation
-------------
+  - In CRAN: `v 0.1.7`
+  - In GitHub `development versions`
 
-I recommend installing from GitHub using `devtools`, that way you get the latest and greatest version. CRAN release cycles allows updates every one to two months.
+## Installation
+
+I recommend installing from GitHub using `devtools`, that way you get
+the latest and greatest version. CRAN release cycles allows updates
+every one to two months.
 
 You can install the latest version of `zFactor` from GitHub with:
 
@@ -59,8 +89,7 @@ Or, if your prefer, from `CRAN`:
 install.packages("zFactor")
 ```
 
-Usage
------
+## Usage
 
 ``` r
 library(zFactor)
@@ -134,17 +163,21 @@ z.Ann10(ppr, tpr)
 #> 1.8 0.9758251 0.9330673 0.9033038 0.8900081 0.8983954 0.9253309 0.9638663
 ```
 
-Range of Applicability
-----------------------
+## Range of Applicability
 
-How to interpret the colors? We use the [Mean Absolute Percentage Error](https://en.wikipedia.org/wiki/Mean_absolute_percentage_error) or `MAPE` to visualize how close the correlation follow the experimental values of the Standing-Katz chart.
+How to interpret the colors? We use the [Mean Absolute Percentage
+Error](https://en.wikipedia.org/wiki/Mean_absolute_percentage_error) or
+`MAPE` to visualize how close the correlation follow the experimental
+values of the Standing-Katz chart.
 
--   `Blue`: the MAPE is zero or near zero
--   `Yellow`: the MAPE is around 10 percent.
--   `Red`: the MAPE has reached 25%.
--   `Grey`: the mean absolute percentage error is above or way above 25%.
+  - `Blue`: the MAPE is zero or near zero
+  - `Yellow`: the MAPE is around 10 percent.
+  - `Red`: the MAPE has reached 25%.
+  - `Grey`: the mean absolute percentage error is above or way above
+    25%.
 
-You can see for yourself which correlation is more stable at different ranges of pseudo-reduce pressures and temperatures.
+You can see for yourself which correlation is more stable at different
+ranges of pseudo-reduce pressures and temperatures.
 
 #### Beggs-Brill
 
@@ -153,7 +186,7 @@ library(zFactor)
 zFactor:::z.plot.range("BB",  interval = "fine")
 ```
 
-![](man/figures/README-unnamed-chunk-5-1.png)
+![](man/figures/README-unnamed-chunk-5-1.png)<!-- -->
 
 #### Hall-Yarborough
 
@@ -161,13 +194,13 @@ zFactor:::z.plot.range("BB",  interval = "fine")
 zFactor:::z.plot.range("HY",  interval = "fine")
 ```
 
-![](man/figures/README-unnamed-chunk-6-1.png)
+![](man/figures/README-unnamed-chunk-6-1.png)<!-- -->
 
 ``` r
 zFactor:::z.plot.range("HY",  interval = "coarse")
 ```
 
-![](man/figures/README-unnamed-chunk-6-2.png)
+![](man/figures/README-unnamed-chunk-6-2.png)<!-- -->
 
 #### Dranchuk-AbouKassem
 
@@ -175,7 +208,7 @@ zFactor:::z.plot.range("HY",  interval = "coarse")
 zFactor:::z.plot.range("DAK", interval = "fine")
 ```
 
-![](man/figures/README-unnamed-chunk-7-1.png)
+![](man/figures/README-unnamed-chunk-7-1.png)<!-- -->
 
 #### Dranchuk-Purvis-Robinson
 
@@ -183,7 +216,7 @@ zFactor:::z.plot.range("DAK", interval = "fine")
 zFactor:::z.plot.range("DPR", interval = "fine")
 ```
 
-![](man/figures/README-unnamed-chunk-8-1.png)
+![](man/figures/README-unnamed-chunk-8-1.png)<!-- -->
 
 #### Shell (Shell Oil Company)
 
@@ -191,7 +224,7 @@ zFactor:::z.plot.range("DPR", interval = "fine")
 zFactor:::z.plot.range("SH",  interval = "fine")
 ```
 
-![](man/figures/README-unnamed-chunk-9-1.png)
+![](man/figures/README-unnamed-chunk-9-1.png)<!-- -->
 
 #### Ann10 (Neural Network, 10 neurons)
 
@@ -199,7 +232,7 @@ zFactor:::z.plot.range("SH",  interval = "fine")
 zFactor:::z.plot.range("N10", interval = "fine")
 ```
 
-![](man/figures/README-unnamed-chunk-10-1.png)
+![](man/figures/README-unnamed-chunk-10-1.png)<!-- -->
 
 #### Papp (explicit)
 
@@ -207,10 +240,9 @@ zFactor:::z.plot.range("N10", interval = "fine")
 zFactor:::z.plot.range("PP",  interval = "fine")
 ```
 
-![](man/figures/README-unnamed-chunk-11-1.png)
+![](man/figures/README-unnamed-chunk-11-1.png)<!-- -->
 
-Comparative Analysis
---------------------
+## Comparative Analysis
 
 The comparative analysis shows tables with different error measurements:
 
@@ -223,20 +255,30 @@ The comparative analysis shows tables with different error measurements:
     MAE:   Mean Absolute Error
     MAAPE: Mean Arc-tangent Absolute Percentage Error
 
-> MAAPE was proposed by `[@Kim2016]`. Other authors consulted for the error measures are `[@Makridakis1993]`, `[@Chen2017]`, `[@Kobayashi2000]`, `[@Myttenaere2016]`, `[@Syntetos2013]`, and `[@Armstrong1992]`.
+> MAAPE was proposed by `[@Kim2016]`. Other authors consulted for the
+> error measures are `[@Makridakis1993]`, `[@Chen2017]`,
+> `[@Kobayashi2000]`, `[@Myttenaere2016]`, `[@Syntetos2013]`, and
+> `[@Armstrong1992]`.
 
-What you can do with `zFactor`
-------------------------------
+## What you can do with `zFactor`
 
--   Find `z` with any of the correlations provided
--   Get values from the Standing-Katz chart at any of the isotherms limited by the pseudo-reduced pressures (`Ppr`) digitized
--   Find what isotherms or pseudo-reduced temperatures (`Tpr`) are available from the Standing and Katz chart
--   Find what pseudo-reduced pressure points are available
--   Plot any of the Standing-Katz isotherms to view `z` in graphical form
--   Plot a tile chart to show the range of applicability of the correlations. In essence, get an idea of the accuracy by the location of the desired point at Tpr and Ppr
--   Get a statistics table when comparing any of the correlations to the Standing-Katz chart
--   Get a matrix of `z` values calculated from any correlation where the rows are the pseudo-reduced temperatures and the columns the pseudo-reduced pressures
--   Plot one or multiple isotherms
+  - Find `z` with any of the correlations provided
+  - Get values from the Standing-Katz chart at any of the isotherms
+    limited by the pseudo-reduced pressures (`Ppr`) digitized
+  - Find what isotherms or pseudo-reduced temperatures (`Tpr`) are
+    available from the Standing and Katz chart
+  - Find what pseudo-reduced pressure points are available
+  - Plot any of the Standing-Katz isotherms to view `z` in graphical
+    form
+  - Plot a tile chart to show the range of applicability of the
+    correlations. In essence, get an idea of the accuracy by the
+    location of the desired point at Tpr and Ppr
+  - Get a statistics table when comparing any of the correlations to the
+    Standing-Katz chart
+  - Get a matrix of `z` values calculated from any correlation where the
+    rows are the pseudo-reduced temperatures and the columns the
+    pseudo-reduced pressures
+  - Plot one or multiple isotherms
 
 ### Plotting a specific isotherm of SK chart
 
@@ -245,13 +287,13 @@ library(zFactor)
 getStandingKatzCurve(tpr = 1.3, toView = FALSE, toSave = FALSE)
 ```
 
-![](man/figures/README-unnamed-chunk-12-1.png)
+![](man/figures/README-unnamed-chunk-12-1.png)<!-- -->
 
 ``` r
 getStandingKatzCurve(tpr = 1.05, pprRange = "lp", toView = FALSE, toSave = FALSE)
 ```
 
-![](man/figures/README-unnamed-chunk-12-2.png)
+![](man/figures/README-unnamed-chunk-12-2.png)<!-- -->
 
 ### Ploting all the `Tpr` curves of Standing-Katz chart using `lapply`, `getStandingKatzData` and `data.table::rbindlist`:
 
@@ -272,7 +314,7 @@ ggplot(all_tpr_df, aes(x=Ppr, y=z, group=Tpr, color=Tpr)) +
     geom_point()
 ```
 
-![](man/figures/README-unnamed-chunk-13-1.png)
+![](man/figures/README-unnamed-chunk-13-1.png)<!-- -->
 
 ### Build a table of statistical errors between a correlation and SK chart
 
@@ -298,27 +340,27 @@ smry_tpr_ppr <- summarise(grouped,
           )
 as.tibble(smry_tpr_ppr)
 #> # A tibble: 112 x 9
-#> # Groups:   Tpr [?]
-#>      Tpr   Ppr         RMSE        MPE       MAPE          MSE
-#>    <chr> <dbl>        <dbl>      <dbl>      <dbl>        <dbl>
-#>  1  1.05   0.5 0.0009756528  0.1176903  0.1176903 9.518984e-07
-#>  2  1.05   1.5 0.0319670358 12.6351920 12.6351920 1.021891e-03
-#>  3  1.05   2.5 0.0444731970 12.9659466 12.9659466 1.977865e-03
-#>  4  1.05   3.5 0.0361451067  7.6741203  7.6741203 1.306469e-03
-#>  5  1.05   4.5 0.0271306123  4.5368917  4.5368917 7.360701e-04
-#>  6  1.05   5.5 0.0137256422  1.8879838  1.8879838 1.883933e-04
-#>  7  1.05   6.5 0.0080944856  0.9567950  0.9567950 6.552070e-05
-#>  8   1.1   0.5 0.0026367700  0.3087553  0.3087553 6.952556e-06
-#>  9   1.1   1.5 0.0169389191  3.9762721  3.9762721 2.869270e-04
-#> 10   1.1   2.5 0.0190546763  4.8485181  4.8485181 3.630807e-04
-#> # ... with 102 more rows, and 3 more variables: RSS <dbl>, MAE <dbl>,
-#> #   RMLSE <dbl>
+#>    Tpr     Ppr     RMSE    MPE   MAPE        MSE        RSS     MAE   RMLSE
+#>    <chr> <dbl>    <dbl>  <dbl>  <dbl>      <dbl>      <dbl>   <dbl>   <dbl>
+#>  1 1.05    0.5 0.000976  0.118  0.118    9.52e-7    9.52e-7 9.76e-4 5.33e-4
+#>  2 1.05    1.5 0.0320   12.6   12.6      1.02e-3    1.02e-3 3.20e-2 2.52e-2
+#>  3 1.05    2.5 0.0445   13.0   13.0      1.98e-3    1.98e-3 4.45e-2 3.26e-2
+#>  4 1.05    3.5 0.0361    7.67   7.67     1.31e-3    1.31e-3 3.61e-2 2.43e-2
+#>  5 1.05    4.5 0.0271    4.54   4.54     7.36e-4    7.36e-4 2.71e-2 1.68e-2
+#>  6 1.05    5.5 0.0137    1.89   1.89     1.88e-4    1.88e-4 1.37e-2 7.92e-3
+#>  7 1.05    6.5 0.00809   0.957  0.957    6.55e-5    6.55e-5 8.09e-3 4.38e-3
+#>  8 1.1     0.5 0.00264   0.309  0.309    6.95e-6    6.95e-6 2.64e-3 1.42e-3
+#>  9 1.1     1.5 0.0169    3.98   3.98     2.87e-4    2.87e-4 1.69e-2 1.18e-2
+#> 10 1.1     2.5 0.0191    4.85   4.85     3.63e-4    3.63e-4 1.91e-2 1.36e-2
+#> # … with 102 more rows
 ```
 
-Summary of MAPE statistics
---------------------------
+## Summary of MAPE statistics
 
-This function shows a statistical summary of the Mean Absolute Percentage Error of all the correlations. We are taking the mean, maximum error, minimum eroor, the median and the mode in the whole range of each opf the correlations.
+This function shows a statistical summary of the Mean Absolute
+Percentage Error of all the correlations. We are taking the mean,
+maximum error, minimum eroor, the median and the mode in the whole range
+of each opf the correlations.
 
 ``` r
 library(zFactor)
@@ -337,73 +379,145 @@ stats_of_z.stats()
 #> Mode   0.419773370  0.559623816
 ```
 
-Vignettes
----------
+## Vignettes
 
-The vignettes contain examples on the use and analysis of the various correlations.
+The vignettes contain examples on the use and analysis of the various
+correlations.
 
--   StandingKatz\_chart.Rmd
--   Beggs-Brill.Rmd
--   Hall-Yarborough.Rmd
--   Dranchuk-AbouKassem.Rmd
--   Dranchuk-Purvis-Robinson.Rmd
--   shell.Rmd
--   ANN.Rmd
--   Papp.Rmd
+  - StandingKatz\_chart.Rmd
+  - Beggs-Brill.Rmd
+  - Hall-Yarborough.Rmd
+  - Dranchuk-AbouKassem.Rmd
+  - Dranchuk-Purvis-Robinson.Rmd
+  - shell.Rmd
+  - ANN.Rmd
+  - Papp.Rmd
 
-Tests
------
+## Tests
 
 There are unit tests for the correlations under tests/testthat.
 
-How the Standing-Katz chart was constructed
--------------------------------------------
+## How the Standing-Katz chart was constructed
 
-The Standing-Katz (SK) chart data has been read directly from a scanned figure of the original plot drawn by Standing and Katz in 1951. The software used to digitize the data is `graphClick` for the operating system `osX` by Apple. This software has been tested and qualified by scolars working on a similar task of digitizing data. `[@Rakap2016]`
+The Standing-Katz (SK) chart data has been read directly from a scanned
+figure of the original plot drawn by Standing and Katz in 1951. The
+software used to digitize the data is `graphClick` for the operating
+system `osX` by Apple. This software has been tested and qualified by
+scolars working on a similar task of digitizing data. `[@Rakap2016]`
 
-Each one of the SK chart pseudo-reduce temperature curves has been digitized. There are some curves where more points were taken to describe the curvature better. Other curves are almost linear and few points were necessary to define the curve.
+Each one of the SK chart pseudo-reduce temperature curves has been
+digitized. There are some curves where more points were taken to
+describe the curvature better. Other curves are almost linear and few
+points were necessary to define the curve.
 
-References
-----------
+## References
 
-The following books and papers were consulted during the development of this package:
+The following books and papers were consulted during the development of
+this package:
 
-\[1\] B. D. Al-Anazi, G. Pazuki, M. Nikookar, et al. "The prediction of the compressibility factor of sour and natural gas by an artificial neural network system". In: *Petroleum Science and Technology* 29.4 (2011), pp. 325-336. DOI: 10.1080/10916460903330080. &lt;URL: <http://doi.org/10.1080/10916460903330080>&gt;.
+\[1\] B. D. Al-Anazi, G. Pazuki, M. Nikookar, et al. “The prediction of
+the compressibility factor of sour and natural gas by an artificial
+neural network system”. In: *Petroleum Science and Technology* 29.4
+(2011), pp. 325-336. DOI: 10.1080/10916460903330080. \<URL:
+<http://doi.org/10.1080/10916460903330080>\>.
 
-\[2\] J. C. de Almeida, J. A. VelÃÂ¡squez and R. Barbieri. "A Methodology for Calculating the Natural Gas Compressibility Factor for a Distribution Network". In: *Petroleum Science and Technology* 32.21 (2014), pp. 2616-2624. DOI: 10.1080/10916466.2012.755194. eprint: <http://dx.doi.org/10.1080/10916466.2012.755194>. &lt;URL: <http://dx.doi.org/10.1080/10916466.2012.755194>&gt;.
+\[2\] J. C. de Almeida, J. A. Velásquez, and R. Barbieri. “A Methodology
+for Calculating the Natural Gas Compressibility Factor for a
+Distribution Network”. In: *Petroleum Science and Technology* 32.21
+(2014), pp. 2616-2624. DOI: 10.1080/10916466.2012.755194. eprint:
+<http://dx.doi.org/10.1080/10916466.2012.755194>. \<URL:
+<http://dx.doi.org/10.1080/10916466.2012.755194>\>.
 
-\[3\] J. Armstrong and F. Collopy. "Error measures for generalizing about forecasting methods: Empirical comparisons". In: *International Journal of Forecasting* 8.1 (Jun. 1992), pp. 69-80. DOI: 10.1016/0169-2070(92)90008-w. &lt;URL: <https://doi.org/10.1016/0169-2070(92)90008-W>&gt;.
+\[3\] J. Armstrong and F. Collopy. “Error measures for generalizing
+about forecasting methods: Empirical comparisons”. In: *International
+Journal of Forecasting* 8.1 (Jun. 1992), pp. 69-80. DOI:
+10.1016/0169-2070(92)90008-w. \<URL:
+<https://doi.org/10.1016/0169-2070(92)90008-W>\>.
 
-\[4\] I. M. Azizi N. Behbahani R. "An efficient correlation for calculating compressibility factor of natural gases". In: *Journal of Natural Gas Chemistry* Volume 19.Issue 6, 2010, (2010), pp. 642-645. DOI: 10.1016/S1003-9953(09)60081-5. &lt;URL: <http://doi.org/10.1016/S1003-9953(09)60081-5>&gt;.
+\[4\] I. M. Azizi N. Behbahani R. “An efficient correlation for
+calculating compressibility factor of natural gases”. In: *Journal of
+Natural Gas Chemistry* Volume 19.Issue 6, 2010, (2010), pp. 642-645.
+DOI: 10.1016/S1003-9953(09)60081-5. \<URL:
+<http://doi.org/10.1016/S1003-9953(09)60081-5>\>.
 
-\[5\] A. Bahadori. *Fluid Phase Behavior for Conventional and Unconventional Oil and Gas Reservoirs*. ISBN 978-0-12-803437-8. Houston, Texas: Gulf Publishing, 2016. &lt;URL: <https://books.google.com/books?id=BwXeDAAAQBAJ>&gt;.
+\[5\] A. Bahadori. *Fluid Phase Behavior for Conventional and
+Unconventional Oil and Gas Reservoirs*. ISBN 978-0-12-803437-8. Houston,
+Texas: Gulf Publishing, 2016. \<URL:
+<https://books.google.com/books?id=BwXeDAAAQBAJ>\>.
 
-\[6\] C. Chen, J. Twycross and J. M. Garibaldi. "A new accuracy measure based on bounded relative error for time series forecasting". In: *PLOS ONE* 12.3 (Mar. 2017). Ed. by Z. Gao, p. e0174202. DOI: 10.1371/journal.pone.0174202. &lt;URL: <http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0174202>&gt;.
+\[6\] C. Chen, J. Twycross, and J. M. Garibaldi. “A new accuracy measure
+based on bounded relative error for time series forecasting”. In: *PLOS
+ONE* 12.3 (Mar. 2017). Ed. by Z. Gao, p. e0174202. DOI:
+10.1371/journal.pone.0174202. \<URL:
+<http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0174202>\>.
 
-\[7\] P. M. Dranchuk and H. Abou-Kassem. "Calculation of Z Factors For Natural Gases Using Equations of State". In: *Journal of Canadian Petroleum Technology* (Jul. 1975). DOI: 10.2118/75-03-03. &lt;URL: <https://doi.org/10.2118/75-03-03>&gt;.
+\[7\] P. M. Dranchuk and H. Abou-Kassem. “Calculation of Z Factors For
+Natural Gases Using Equations of State”. In: *Journal of Canadian
+Petroleum Technology* (Jul. 1975). DOI: 10.2118/75-03-03. \<URL:
+<https://doi.org/10.2118/75-03-03>\>.
 
-\[8\] P. M. Dranchuk, R. Purvis, D. Robinson, et al. "Computer calculation of natural gas compressibility factors using the Standing and Katz correlation". In: *Annual Technical Meeting*. Ed. by unknown. Petroleum Society of Canada. 1973. DOI: 10.2118/73-112. &lt;URL: <http://doi.org/10.2118/73-112>&gt;.
+\[8\] P. M. Dranchuk, R. Purvis, D. Robinson, et al. “Computer
+calculation of natural gas compressibility factors using the Standing
+and Katz correlation”. In: *Annual Technical Meeting*. Ed. by unknown.
+Petroleum Society of Canada. 1973. DOI: 10.2118/73-112. \<URL:
+<http://doi.org/10.2118/73-112>\>.
 
-\[9\] K. R. Hall and L. Yarborough. "A new equation of state for Z-factor calculations". In: *Oil and Gas journal* 71.7 (1973), pp. 82-92.
+\[9\] K. R. Hall and L. Yarborough. “A new equation of state for
+Z-factor calculations”. In: *Oil and Gas journal* 71.7 (1973),
+pp. 82-92.
 
-\[10\] M. Kamyab, J. H. Sampaio, F. Qanbari, et al. "Using artificial neural networks to estimate the z-factor for natural hydrocarbon gases". In: *Journal of Petroleum Science and Engineering* 73.3 (2010), pp. 248-257. DOI: 10.1016/j.petrol.2010.07.006. &lt;URL: <http://doi.org/10.1016/j.petrol.2010.07.006>&gt;.
+\[10\] M. Kamyab, J. H. Sampaio, F. Qanbari, et al. “Using artificial
+neural networks to estimate the z-factor for natural hydrocarbon gases”.
+In: *Journal of Petroleum Science and Engineering* 73.3 (2010),
+pp. 248-257. DOI: 10.1016/j.petrol.2010.07.006. \<URL:
+<http://doi.org/10.1016/j.petrol.2010.07.006>\>.
 
-\[11\] S. Kim and H. Kim. "A new metric of absolute percentage error for intermittent demand forecasts". In: *International Journal of Forecasting* 32.3 (Jul. 2016), pp. 669-679. DOI: 10.1016/j.ijforecast.2015.12.003. &lt;URL: <https://doi.org/10.1016/j.ijforecast.2015.12.003>&gt;.
+\[11\] S. Kim and H. Kim. “A new metric of absolute percentage error for
+intermittent demand forecasts”. In: *International Journal of
+Forecasting* 32.3 (Jul. 2016), pp. 669-679. DOI:
+10.1016/j.ijforecast.2015.12.003. \<URL:
+<https://doi.org/10.1016/j.ijforecast.2015.12.003>\>.
 
-\[12\] K. Kobayashi and M. U. Salam. "Comparing Simulated and Measured Values Using Mean Squared Deviation and its Components". In: *Agronomy Journal* 92.2 (2000), p. 345. DOI: 10.1007/s100870050043. &lt;URL: <https://www.researchgate.net/publication/243112181_Comparing_Simulated_and_Measured_Values_Using_Mean_Squared_Deviation_and_Its_Components>&gt;.
+\[12\] K. Kobayashi and M. U. Salam. “Comparing Simulated and Measured
+Values Using Mean Squared Deviation and its Components”. In: *Agronomy
+Journal* 92.2 (2000), p. 345. DOI: 10.1007/s100870050043. \<URL:
+<https://www.researchgate.net/publication/243112181_Comparing_Simulated_and_Measured_Values_Using_Mean_Squared_Deviation_and_Its_Components>\>.
 
-\[13\] N. Kumar. "Compressibility factors for natural and sour reservoir gases by correlations and cubic equations of state". MA Thesis. Texas Tech University, 2004. &lt;URL: <https://ttu-ir.tdl.org/ttu-ir/handle/2346/1370>&gt;.
+\[13\] N. Kumar. “Compressibility factors for natural and sour reservoir
+gases by correlations and cubic equations of state”. MA Thesis. Texas
+Tech University, 2004. \<URL:
+<https://ttu-ir.tdl.org/ttu-ir/handle/2346/1370>\>.
 
-\[14\] S. Makridakis. "Accuracy measures: theoretical and practical concerns". In: *International Journal of Forecasting* 9.4 (Dec. 1993), pp. 527-529. DOI: 10.1016/0169-2070(93)90079-3. &lt;URL: <https://www.sciencedirect.com/science/article/pii/0169207093900793>&gt;.
+\[14\] S. Makridakis. “Accuracy measures: theoretical and practical
+concerns”. In: *International Journal of Forecasting* 9.4 ( Dec. 1993),
+pp. 527-529. DOI: 10.1016/0169-2070(93)90079-3. \<URL:
+<https://www.sciencedirect.com/science/article/pii/0169207093900793>\>.
 
-\[15\] M. Mohamadi-Baghmolaei, R. Azin, S. Osfouri, et al. "Prediction of gas compressibility factor using intelligent models". In: *Natural Gas Industry B* 2.4 (2015), pp. 283-294. DOI: 10.1016/j.ngib.2015.09.001. &lt;URL: <http://doi.org/10.1016/j.ngib.2015.09.001>&gt;.
+\[15\] M. Mohamadi-Baghmolaei, R. Azin, S. Osfouri, et al. “Prediction
+of gas compressibility factor using intelligent models”. In: *Natural
+Gas Industry B* 2.4 (2015), pp. 283-294. DOI:
+10.1016/j.ngib.2015.09.001. \<URL:
+<http://doi.org/10.1016/j.ngib.2015.09.001>\>.
 
-\[16\] A. de Myttenaere, B. Golden, B. L. Grand, et al. "Mean Absolute Percentage Error for regression models". In: *Neurocomputing* 192 (Jun. 2016), pp. 38-48. DOI: 10.1016/j.neucom.2015.12.114. &lt;URL: <https://doi.org/10.1016/j.neucom.2015.12.114>&gt;.
+\[16\] A. de Myttenaere, B. Golden, B. L. Grand, et al. “Mean Absolute
+Percentage Error for regression models”. In: *Neurocomputing* 192
+(Jun. 2016), pp. 38-48. DOI: 10.1016/j.neucom.2015.12.114. \<URL:
+<https://doi.org/10.1016/j.neucom.2015.12.114>\>.
 
-\[17\] I. Papp. "Uj modszer foldgazok elteresi tenyezojenek szamitasara". In: *Koolaj es Foldgaz* (Nov. 1979), pp. 345-47.
+\[17\] I. Papp. “Uj modszer foldgazok elteresi tenyezojenek
+szamitasara”. In: *Koolaj es Foldgaz* (Nov. 1979), pp. 345-47.
 
-\[18\] S. Rakap, S. Rakap, D. Evran, et al. "Comparative evaluation of the reliability and validity of three data extraction programs: UnGraph, GraphClick, and DigitizeIt". In: *Computers in Human Behavior* 55 (2016), pp. 159-166. DOI: 10.1016/j.chb.2015.09.008. &lt;URL: <http://doi.org/10.1016/j.chb.2015.09.008>&gt;.
+\[18\] S. Rakap, S. Rakap, D. Evran, et al. “Comparative evaluation of
+the reliability and validity of three data extraction programs: UnGraph,
+GraphClick, and DigitizeIt”. In: *Computers in Human Behavior* 55
+(2016), pp. 159-166. DOI: 10.1016/j.chb.2015.09.008. \<URL:
+<http://doi.org/10.1016/j.chb.2015.09.008>\>.
 
-\[19\] A. Syntetos, D. Lengu and M. Z. Babai. "A note on the demand distributions of spare parts". In: *International Journal of Production Research* 51.21 (Nov. 2013), pp. 6356-6358. DOI: 10.1080/00207543.2013.798050.
+\[19\] A. Syntetos, D. Lengu, and M. Z. Babai. “A note on the demand
+distributions of spare parts”. In: *International Journal of Production
+Research* 51.21 (Nov. 2013), pp. 6356-6358. DOI:
+10.1080/00207543.2013.798050.
 
-\[20\] G. Takacs. "Comparing Methods for Calculating z Factor". In: *Oil and Gas Journal* (May. 1989). DOI: Not Available. &lt;URL: <https://www.researchgate.net/publication/236510717_Comparing_methods_for_calculating_Z-factor>&gt;.
+\[20\] G. Takacs. “Comparing Methods for Calculating z Factor”. In: *Oil
+and Gas Journal* (May. 1989). \<URL:
+<https://www.researchgate.net/publication/236510717_Comparing_methods_for_calculating_Z-factor>\>.
