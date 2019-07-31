@@ -50,7 +50,7 @@ names(result)      # name of each dataframe within the list
 For `Tpr = 1.05`:
 ```{r}
 library(tibble)
-as.tibble(result[["1.05"]])
+as_tibble(result[["1.05"]])
 ```
 
 And, for `Tpr = 1.1`:
@@ -102,7 +102,7 @@ Similarly, to what we did with `getStandingKatzCurve`, we could extract a datafr
 
 ```{r}
 library(tibble)
-as.tibble(all_tpr2[["1.5"]])
+as_tibble(all_tpr2[["1.5"]])
 ```
 
 ## Plotting multiple `Tpr` curves
@@ -254,7 +254,7 @@ By performing a summary of the tidy dataset we can learn a lot more of the data 
 
 ```{r}
 library(tibble)
-as.tibble(hi_tpr_df)
+as_tibble(hi_tpr_df)
 ```
 
 

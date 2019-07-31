@@ -57,7 +57,7 @@ RMSE = sqrt(mean((z.chart - z.calc)^2))
 
 ```{r}
 z_hy  <- z.stats("HY")
-sum_tpr <- as.tibble(z.stats("HY"))
+sum_tpr <- as_tibble(z.stats("HY"))
 
 hy <- ggplot(z_hy, aes(x = Tpr, y = RMSE, col = Tpr)) +
            geom_point()  + theme(legend.position="none") + 
@@ -81,7 +81,7 @@ MPE  = sum((z.calc - z.chart) / z.chart) * 100 / n(),
 ```
 
 ```{r}
-# sum_tpr <- as.tibble(z.stats("HY"))
+# sum_tpr <- as_tibble(z.stats("HY"))
 hy <- ggplot(z_hy, aes(x = Tpr, y = MPE, col = Tpr)) +
            geom_point()  + theme(legend.position="none") + 
     ggtitle("HY  - Mean Percentage error")
@@ -102,7 +102,7 @@ MAPE = sum(abs((z.calc - z.chart) / z.chart)) * 100 / n()
 
 
 ```{r}
-# sum_tpr <- as.tibble(z.stats("HY"))
+# sum_tpr <- as_tibble(z.stats("HY"))
 
 hy <- ggplot(z_hy, aes(x = Tpr, y = MAPE, col = Tpr)) +
            geom_point()  + theme(legend.position="none") + 
@@ -122,7 +122,7 @@ MSE  = sum((z.calc - z.chart)^2) / n()
 
 
 ```{r}
-sum_tpr <- as.tibble(z.stats("HY"))
+sum_tpr <- as_tibble(z.stats("HY"))
 hy <- ggplot(sum_tpr, aes(x = Tpr, y = MSE, col = Tpr)) +
            geom_point()  + theme(legend.position="none") + 
     ggtitle("HY - Mean Squared Error")
@@ -141,7 +141,7 @@ RSS  = sum((z.calc - z.chart)^2)
 ```
 
 ```{r}
-# sum_tpr <- as.tibble(z.stats("HY"))
+# sum_tpr <- as_tibble(z.stats("HY"))
 
 hy <- ggplot(z_hy, aes(x = Tpr, y = RSS, col = Tpr)) +
            geom_point()  + theme(legend.position="none") + 
@@ -161,7 +161,7 @@ MAE  = sum(abs(z.calc - z.chart)) / n()
 ```
 
 ```{r}
-# sum_tpr <- as.tibble(z.stats("HY"))
+# sum_tpr <- as_tibble(z.stats("HY"))
 
 hy <- ggplot(z_hy, aes(x = Tpr, y = MAE, col = Tpr)) +
            geom_point()  + theme(legend.position="none") + 
@@ -207,7 +207,7 @@ boxplot(z_bb$RMSE,  horizontal = TRUE, main = "BB", xlab = "RMSE")
 
 
 ```{r}
-sum_tpr <- as.tibble(z.stats("HY"))
+sum_tpr <- as_tibble(z.stats("HY"))
 hy <- ggplot(sum_tpr, aes(x = Tpr, y = RMSE, col = Tpr)) +
            geom_point() + ylim(0, 0.4) + theme(legend.position="none") + 
     ggtitle("Hall-Yarborough")
@@ -215,7 +215,7 @@ hy
 ```
 
 ```{r}
-sum_tpr <- as.tibble(z.stats("DAK"))
+sum_tpr <- as_tibble(z.stats("DAK"))
 dak <- ggplot(sum_tpr, aes(x = Tpr, y = RMSE, col = Tpr)) +
            geom_point() + ylim(0, 0.4) + theme(legend.position="none") +
     ggtitle("Dranchuk-AbouKassem")
@@ -223,7 +223,7 @@ dak
 ```
 
 ```{r}
-sum_tpr <- as.tibble(z.stats("SH"))
+sum_tpr <- as_tibble(z.stats("SH"))
 sh <- ggplot(sum_tpr, aes(x = Tpr, y = RMSE, col = Tpr)) +
            geom_point() + ylim(0, 0.4) + theme(legend.position="none") +
     ggtitle("Shell")
@@ -231,7 +231,7 @@ sh
 ```
 
 ```{r}
-sum_tpr <- as.tibble(z.stats("N10"))
+sum_tpr <- as_tibble(z.stats("N10"))
 n10 <- ggplot(sum_tpr, aes(x = Tpr, y = RMSE, col = Tpr)) +
            geom_point() + ylim(0, 0.4) + theme(legend.position="none") +
     ggtitle("Neural-Network-10")
@@ -239,7 +239,7 @@ n10
 ```
 
 ```{r}
-sum_tpr <- as.tibble(z.stats("PP"))
+sum_tpr <- as_tibble(z.stats("PP"))
 pp <- ggplot(sum_tpr, aes(x = Tpr, y = RMSE, col = Tpr)) +
            geom_point() + ylim(0, 0.4) + theme(legend.position="none") +
     ggtitle("Papp")
@@ -251,7 +251,7 @@ pp
 
 
 ```{r}
-sum_tpr <- as.tibble(z.stats("HY"))
+sum_tpr <- as_tibble(z.stats("HY"))
 sum_tpr
 ```
 

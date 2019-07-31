@@ -10,7 +10,7 @@ tpr <- 2.0
 z.calc <- z.Papay(pres.pr = ppr, temp.pr = tpr)
 
 # get a z value from the SK chart at the same Ppr and Tpr
-z.chart <- getStandingKatzMatrix(tpr_vector = tpr, 
+z.chart <- getStandingKatzMatrix(tpr_vector = tpr,
                       pprRange = "lp")[1, as.character(ppr)]
 
 # calculate the APE
@@ -29,7 +29,7 @@ tpr <- 1.1
 z.calc <- z.Papay(pres.pr = ppr, temp.pr = tpr)
 
 # From the Standing-Katz chart we obtain a digitized point:
-z.chart <- getStandingKatzMatrix(tpr_vector = tpr, 
+z.chart <- getStandingKatzMatrix(tpr_vector = tpr,
                       pprRange = "lp")[1, as.character(ppr)]
 
 # calculate the APE (Average Percentage Error)
@@ -42,8 +42,8 @@ df
 
 ## ------------------------------------------------------------------------
 # test with vector extracted from paper
-ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
-tpr <- c(1.05, 1.1, 1.7, 2) 
+ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5)
+tpr <- c(1.05, 1.1, 1.7, 2)
 
 # calculate using the correlation
 z.calc <- z.Papay(ppr, tpr)
@@ -56,7 +56,7 @@ ape <- abs((z.calc - z.chart) / z.chart) * 100
 cat("z.correlation \n"); print(z.calc)
 cat("\n z.chart \n"); print(z.chart)
 cat("\n APE \n"); print(ape)
- 
+
 
 ## ------------------------------------------------------------------------
 sum_t_ape <- summary(t(ape))
@@ -65,15 +65,15 @@ sum_t_ape
 ## ------------------------------------------------------------------------
 library(zFactor)
 # enter vectors for Tpr and Ppr
-tpr2 <- c(1.2, 1.3, 1.5, 2.0, 3.0) 
-ppr2 <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5) 
+tpr2 <- c(1.2, 1.3, 1.5, 2.0, 3.0)
+ppr2 <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5)
 
 # get z values from the SK chart
 z.chart <- getStandingKatzMatrix(ppr_vector = ppr2, tpr_vector = tpr2, pprRange = "lp")
 
 # We do the same with the HY correlation:
 # calculate z values at lower values of Tpr
-z.calc <- z.Papay(pres.pr = ppr2, temp.pr = tpr2) 
+z.calc <- z.Papay(pres.pr = ppr2, temp.pr = tpr2)
 ape <- abs((z.calc - z.chart) / z.chart) * 100
 
 # calculate the APE
@@ -85,31 +85,31 @@ cat("\n APE \n"); print(ape)
 sum_t_ape <- summary(t(ape))
 sum_t_ape
  # Hall-Yarborough
- #      1.2               1.3              1.5               2         
- # Min.   :0.05224   Min.   :0.1105   Min.   :0.1021   Min.   :0.0809  
- # 1st Qu.:0.09039   1st Qu.:0.2080   1st Qu.:0.1623   1st Qu.:0.1814  
- # Median :0.28057   Median :0.3181   Median :0.1892   Median :0.1975  
- # Mean   :0.30122   Mean   :0.3899   Mean   :0.2597   Mean   :0.2284  
- # 3rd Qu.:0.51710   3rd Qu.:0.5355   3rd Qu.:0.3533   3rd Qu.:0.2627  
- # Max.   :0.57098   Max.   :0.8131   Max.   :0.5162   Max.   :0.4338  
- #       3          
- # Min.   :0.09128  
- # 1st Qu.:0.17466  
- # Median :0.35252  
- # Mean   :0.34820  
- # 3rd Qu.:0.52184  
- # Max.   :0.59923  
+ #      1.2               1.3              1.5               2
+ # Min.   :0.05224   Min.   :0.1105   Min.   :0.1021   Min.   :0.0809
+ # 1st Qu.:0.09039   1st Qu.:0.2080   1st Qu.:0.1623   1st Qu.:0.1814
+ # Median :0.28057   Median :0.3181   Median :0.1892   Median :0.1975
+ # Mean   :0.30122   Mean   :0.3899   Mean   :0.2597   Mean   :0.2284
+ # 3rd Qu.:0.51710   3rd Qu.:0.5355   3rd Qu.:0.3533   3rd Qu.:0.2627
+ # Max.   :0.57098   Max.   :0.8131   Max.   :0.5162   Max.   :0.4338
+ #       3
+ # Min.   :0.09128
+ # 1st Qu.:0.17466
+ # Median :0.35252
+ # Mean   :0.34820
+ # 3rd Qu.:0.52184
+ # Max.   :0.59923
 
 ## ------------------------------------------------------------------------
 library(zFactor)
 library(tibble)
 library(ggplot2)
 
-tpr2 <- c(1.05, 1.1, 1.2, 1.3) 
-ppr2 <- c(0.5, 1.0, 1.5, 2, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5) 
+tpr2 <- c(1.05, 1.1, 1.2, 1.3)
+ppr2 <- c(0.5, 1.0, 1.5, 2, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 5.5, 6.0, 6.5)
 
 sk_dak_2 <- createTidyFromMatrix(ppr2, tpr2, correlation = "PP")
-as.tibble(sk_dak_2)
+as_tibble(sk_dak_2)
 
 p <- ggplot(sk_dak_2, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
     geom_line() +
@@ -137,9 +137,9 @@ library(tibble)
 
 # get all `lp` Tpr curves
 tpr_all <- getStandingKatzTpr(pprRange = "lp")
-ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5) 
+ppr <- c(0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5)
 sk_corr_all <- createTidyFromMatrix(ppr, tpr_all, correlation = "PP")
-as.tibble(sk_corr_all)
+as_tibble(sk_corr_all)
 
 p <- ggplot(sk_corr_all, aes(x=Ppr, y=z.calc, group=Tpr, color=Tpr)) +
     geom_line() +
@@ -157,21 +157,21 @@ print(p)
 library(dplyr)
 grouped <- group_by(sk_corr_all, Tpr, Ppr)
 
-smry_tpr_ppr <- summarise(grouped, 
-          RMSE= sqrt(mean((z.chart-z.calc)^2)), 
+smry_tpr_ppr <- summarise(grouped,
+          RMSE= sqrt(mean((z.chart-z.calc)^2)),
           MPE = sum((z.calc - z.chart) / z.chart) * 100 / n(),
-          MAPE = sum(abs((z.calc - z.chart) / z.chart)) * 100 / n(), 
-          MSE = sum((z.calc - z.chart)^2) / n(), 
+          MAPE = sum(abs((z.calc - z.chart) / z.chart)) * 100 / n(),
+          MSE = sum((z.calc - z.chart)^2) / n(),
           RSS = sum((z.calc - z.chart)^2),
           MAE = sum(abs(z.calc - z.chart)) / n(),
           RMLSE = sqrt(1/n()*sum((log(z.calc +1)-log(z.chart +1))^2))
           )
 
-ggplot(smry_tpr_ppr, aes(Ppr, Tpr)) + 
+ggplot(smry_tpr_ppr, aes(Ppr, Tpr)) +
     geom_tile(data=smry_tpr_ppr, aes(fill=MAPE), color="white") +
     scale_fill_gradient2(low="blue", high="red", mid="yellow", na.value = "pink",
-                         midpoint=12.5, limit=c(0, 25), name="MAPE") + 
-    theme(axis.text.x = element_text(angle=45, vjust=1, size=11, hjust=1)) + 
+                         midpoint=12.5, limit=c(0, 25), name="MAPE") +
+    theme(axis.text.x = element_text(angle=45, vjust=1, size=11, hjust=1)) +
     coord_equal() +
     ggtitle("Papay", subtitle = "PP")
 
@@ -184,9 +184,9 @@ sk_corr_all %>%
     geom_point(size = 3) +
     geom_line(aes(x = z.chart, y = z.chart), color = "black") +
     facet_grid(. ~ Tpr, scales = "free") +
-    geom_errorbar(aes(ymin=z.calc-abs(dif), ymax=z.calc+abs(dif)), 
+    geom_errorbar(aes(ymin=z.calc-abs(dif), ymax=z.calc+abs(dif)),
                   position=position_dodge(0.5))
 
 ## ------------------------------------------------------------------------
-as.tibble(smry_tpr_ppr)
+as_tibble(smry_tpr_ppr)
 
