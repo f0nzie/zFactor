@@ -46,6 +46,3 @@ importFrom(graphics,lines)
 importFrom(graphics,mtext)
 importFrom(graphics,plot)
 importFrom(stats,quantile)
-
-import(tidyr)
-import(tibble)
