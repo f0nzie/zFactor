@@ -1,3 +1,7 @@
+## zFactor 0.1.9.9000
+* Accepted by CRAN on 20190801.
+* TODO: add DOI for supporting paper.
+
 ## zFactor 0.1.9
 * 20190731
 * Released to CRAN
