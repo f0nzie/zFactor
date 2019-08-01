@@ -1,6 +1,11 @@
+## zFactor 0.1.9.9000
+* Accepted by CRAN on 20190801.
+* TODO: add DOI for supporting paper.
+
 ## zFactor 0.1.9
 * 20190731
-* Release to CRAN
+* Released to CRAN
+* tested with `Travis-CI` and `rhub`
 * change all as.tibble to `as_tibble`
 * fix bibliography for Papps
 * remove .Rprofile from rsuite
