@@ -1,3 +1,12 @@
+## zFactor 0.1.9
+* 20190731
+* Release to CRAN
+* change all as.tibble to `as_tibble`
+* fix bibliography for Papps
+* remove .Rprofile from rsuite
+* Build vignettes creating a `doc/` folder with `devtools::build_vignettes()`
+* Install package with vignettes creating a `inst/doc/` folder with `devtools::install(build_vignettes = TRUE)`
+
 ## 20190529 0.1.8.9000
 * zFactor now part of rsuite project
 * found problem building vignettes from zfactor-rsuite
@@ -116,7 +125,7 @@
 * to be released to CRAN.
 * CRAN found a problen in an URL in Shell.html file.
 * Fixed problem by changing to a faster link. Previous link was loading a PDF from a website.
-* remove bibliography.bib from inst/doc and letting devtools::build_vignettes() doing it instead. Necessary to add file vignettes/.install_extras with one line calling bibliography.bib. That way the file gets copied to inst/doc
+* remove bibliography.bib from inst/doc and letting devtools::build_vignettes() doing it instead. Necessary to add file `vignettes/.install_extras` with one line calling `bibliography.bib`. That way the file gets copied to inst/doc
 
 ## 20170702, 0.1.5
 * to be released to CRAN. Problem with HY.rda
