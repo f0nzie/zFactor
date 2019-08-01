@@ -9,29 +9,36 @@
 * Build vignettes creating a `doc/` folder with `devtools::build_vignettes()`
 * Install package with vignettes creating a `inst/doc/` folder with `devtools::install(build_vignettes = TRUE)`
 
-## 20190529 0.1.8.9000
+## v0.1.8.9000
+* 20190529
 * zFactor now part of rsuite project
 * found problem building vignettes from zfactor-rsuite
 * will release to master to make things easier
 
-## 20190325 0.1.8
+##  v0.1.8
+* 20190325
 * release to CRAN
 
-## 20190324 0.1.7.9003
+
+## v0.1.7.9003
+* 20190324
 * moving out vignettes, problem with symbolic links (bibliography)
 * add function n() to importFrom in stats.R
 * 
 
-## 20171028 0.1.7.9002
+## v0.1.7.9002
+* 20171028
 *
 
-## 20171024 0.1.7.9001
+## v0.1.7.9001
+* 20171024
 * comment two lines in .travis.yml
 * Try not to use sciencedirect long links to prevent errors in knitcitations. shorten the URLs with doi links. 
 * add statistical papers for citation. file ./inst/doc/error_stats.bib
 * add error reference to README
 
-## 20171023 0.1.7.9000
+## v0.1.7.9000
+* 20171023
 * add title to VignetteIndexEntry in statistics.Rmd. Preventing link to work in GitHub pages.
 * edit bibliography.bib with JabRef application. ./vignettes/bibliography.bib is a symbolic link of same file under ./inst/doc
 * Takacs was added entry for local PDF file in bibliography.bib
