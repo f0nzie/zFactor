@@ -1,9 +1,11 @@
 ## zFactor 0.1.9
 * 20190731
-* Release to CRAN
+* Released to CRAN
+* Tested with Travis and rhub. All tests passed.
 * change all as.tibble to `as_tibble`
-* fix bibliography for Papps
+* fix bibliography for Papps (DOI unrecognized)
 * remove .Rprofile from rsuite
+* README now accessing bibliography from `doc/` folder
 * Build vignettes creating a `doc/` folder with `devtools::build_vignettes()`
 * Install package with vignettes creating a `inst/doc/` folder with `devtools::install(build_vignettes = TRUE)`
 
